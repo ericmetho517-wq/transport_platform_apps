@@ -21,8 +21,16 @@ interface SectorProfile {
   title: string;
   report: string;
   pages: number[];
+  yearEnd?: number;
   metrics: Record<string, number>;
   prices?: Record<string, { start: number; end: number }>;
+  sectors?: Record<string, {
+    title: string;
+    report: string;
+    page: number;
+    metrics: Record<string, number>;
+    prices?: Record<string, { start: number; end: number }>;
+  }>;
   changeBars?: Array<{ label: string; value: number; layer: string }>;
   landUse?: Array<{ category: string; year: number; area: number }>;
   statusShares?: { existing: number; underConstruction: number };
@@ -189,8 +197,17 @@ function renderPriceColumns(summary: DashboardSummary): void {
   if (!container) return;
   const labels: Record<string, string> = { urban: "الأراضي العمرانية", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية" };
   const colors: Record<string, string> = { urban: "#ffbc25", agricultural: "#72e800", industrial: "#e6e6e6" };
-  container.innerHTML = ["urban", "industrial", "agricultural"].map((key) => {
-    const item = summary.prices[key] || { start: 0, end: 0 };
+  const available = ["urban", "industrial", "agricultural"].filter((key) => {
+    const item = summary.prices[key];
+    return Boolean(item && (item.start > 0 || item.end > 0));
+  });
+  container.style.setProperty("--price-columns", String(Math.max(available.length, 1)));
+  if (!available.length) {
+    container.innerHTML = '<div class="no-data price-no-data">لا توجد قيم أسعار موثقة لهذا القطاع في ملفات التقارير الحالية. اختر «كل القطاعات» أو قطاعًا آخر من قائمة الخريطة.</div>';
+    return;
+  }
+  container.innerHTML = available.map((key) => {
+    const item = summary.prices[key];
     const difference = Math.max(item.end - item.start, 0);
     return `<article class="price-column" data-price-kind="${key}" style="--accent:${colors[key]}"><header><span>فرق أسعار ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>أسعار ${labels[key]} ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>أسعار ${labels[key]} ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div><button type="button">عرض السلسلة على الرسم</button></article>`;
   }).join("");
@@ -200,7 +217,15 @@ function renderLineChart(summary: DashboardSummary, visible: Set<string>): void 
   const container = document.querySelector<HTMLElement>("#line-chart");
   if (!container) return;
   const width = 1000, height = 300, left = 70, right = 30, top = 22, bottom = 45;
-  const keys = ["urban", "agricultural", "industrial"].filter((key) => visible.has(key));
+  const keys = ["urban", "agricultural", "industrial"].filter((key) => visible.has(key) && summary.prices[key] && (summary.prices[key].start > 0 || summary.prices[key].end > 0));
+  document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((button) => {
+    const pair = summary.prices[button.dataset.series || ""];
+    button.hidden = !(pair && (pair.start > 0 || pair.end > 0));
+  });
+  if (!keys.length) {
+    container.innerHTML = '<div class="no-data">لا توجد سلسلة أسعار موثقة للقطاع المحدد.</div>';
+    return;
+  }
   const all = keys.flatMap((key) => summary.priceSeries[key as keyof typeof summary.priceSeries] as number[]);
   const max = Math.max(...all, 1);
   const x = (index: number) => left + index * (width - left - right) / Math.max(summary.priceSeries.years.length - 1, 1);
@@ -447,10 +472,15 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
       const areaKm2 = (layer: LayerName) => { const value = rawArea(layer); return value > 1_000_000 ? value / 1_000_000 : value; };
       const rawLength = chosen("axis").reduce((sum: number, feature: { properties?: Record<string, unknown> }) => sum + numeric(feature.properties || {}, ["طول_المحور_كم", "length", "Shape_Length", "SHAPE_Length"]), 0);
       const axisKm = rawLength > 5_000 ? rawLength / 1_000 : rawLength;
-      if (chosen("study").length) setMetric("studyAreaKm2", areaKm2("study"));
-      if (chosen("axis").length) setMetric("axisLengthKm", axisKm);
-      if (chosen("urban").length) setMetric("urbanChangeKm2", areaKm2("urban"));
-      if (chosen("agricultural").length) {
+      const reportSector = selected === "all" ? undefined : summary.profile?.sectors?.[selected];
+      const reportMetrics = selected === "all" ? summary.metrics : reportSector?.metrics;
+      if (reportMetrics) Object.entries(reportMetrics).forEach(([name, value]) => setMetric(name, value));
+      else {
+        if (chosen("study").length) setMetric("studyAreaKm2", areaKm2("study"));
+        if (chosen("axis").length) setMetric("axisLengthKm", axisKm);
+        if (chosen("urban").length) setMetric("urbanChangeKm2", areaKm2("urban"));
+      }
+      if (!reportMetrics && chosen("agricultural").length) {
         const agriculturalKm2 = areaKm2("agricultural");
         setMetric("agriculturalChangeKm2", agriculturalKm2);
         setMetric("agriculturalAreaFeddan", agriculturalKm2 / .0042);
@@ -471,6 +501,15 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
       if (comparison) {
         if (selected === "all") renderComparison(summary);
         else comparison.innerHTML = `<div class="no-data">لا تتوفر مقارنة زمنية منفصلة موثقة لـ ${esc(sectorLabel(selected))} في ملف التصدير الحالي؛ الخريطة والبطاقات تعرض بيانات القطاع المختار فقط.</div>`;
+      }
+      const dashboardRoot = document.querySelector<HTMLElement>(".interactive-dashboard");
+      if (dashboardRoot?.dataset.mode === "price") {
+        dashboardRoot.dispatchEvent(new CustomEvent("dashboard-sector-price", { detail: {
+          metrics: reportMetrics || {},
+          prices: selected === "all" ? summary.prices : (reportSector?.prices || {}),
+          yearEnd: summary.profile?.yearEnd || summary.yearEnd,
+          sectorTitle: selected === "all" ? summary.profile?.title : reportSector?.title,
+        } }));
       }
     };
     sectorSelect.addEventListener("change", updateSector);
@@ -544,7 +583,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         summary.metrics = { ...summary.metrics, ...profile.metrics };
         summary.prices = { ...summary.prices, ...(profile.prices || {}) };
         summary.landUse = profile.landUse?.length ? profile.landUse : summary.landUse;
-        summary.yearEnd = group === "cairo-suez-road" ? 2024 : 2023;
+        summary.yearEnd = profile.yearEnd ?? (group === "cairo-suez-road" ? 2024 : 2023);
         summary.priceSeries.years = Array.from({ length: summary.yearEnd - summary.yearStart + 1 }, (_, index) => summary.yearStart + index);
         (["urban", "agricultural", "industrial"] as const).forEach((key) => {
           const pair = summary.prices[key] || { start: 0, end: 0 };
@@ -565,21 +604,51 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     if (activeYear) activeYear.textContent = String(summary.yearEnd);
 
     if (root.dataset.mode === "price") {
-      renderPriceColumns(summary);
+      let activePriceSummary = summary;
       const visible = new Set(["urban", "agricultural", "industrial"]);
-      renderLineChart(summary, visible);
+      const renderActivePrices = () => {
+        renderPriceColumns(activePriceSummary);
+        renderLineChart(activePriceSummary, visible);
+      };
+      renderActivePrices();
+      root.addEventListener("dashboard-sector-price", ((event: CustomEvent<{ metrics: Record<string, number>; prices: Record<string, { start: number; end: number }>; yearEnd: number; sectorTitle?: string }>) => {
+        const years = Array.from({ length: event.detail.yearEnd - summary.yearStart + 1 }, (_, index) => summary.yearStart + index);
+        const prices = event.detail.prices;
+        activePriceSummary = {
+          ...summary,
+          metrics: { ...summary.metrics, ...event.detail.metrics },
+          prices,
+          yearEnd: event.detail.yearEnd,
+          priceSeries: {
+            years,
+            urban: years.map((_, index) => { const pair = prices.urban || { start: 0, end: 0 }; return Math.round(pair.start + (pair.end - pair.start) * index / Math.max(years.length - 1, 1)); }),
+            agricultural: years.map((_, index) => { const pair = prices.agricultural || { start: 0, end: 0 }; return Math.round(pair.start + (pair.end - pair.start) * index / Math.max(years.length - 1, 1)); }),
+            industrial: years.map((_, index) => { const pair = prices.industrial || { start: 0, end: 0 }; return Math.round(pair.start + (pair.end - pair.start) * index / Math.max(years.length - 1, 1)); }),
+          },
+        };
+        Object.entries(activePriceSummary.metrics).forEach(([name, value]) => setMetric(name, value));
+        if (activeYear) activeYear.textContent = String(activePriceSummary.yearEnd);
+        visible.clear();
+        (["urban", "agricultural", "industrial"] as const).forEach((key) => {
+          const pair = prices[key];
+          if (pair && (pair.start > 0 || pair.end > 0)) visible.add(key);
+        });
+        renderActivePrices();
+      }) as EventListener);
       document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((button) => button.addEventListener("click", () => {
         const key = button.dataset.series || "";
         button.classList.toggle("active");
         if (button.classList.contains("active")) visible.add(key); else visible.delete(key);
-        renderLineChart(summary, visible);
+        renderLineChart(activePriceSummary, visible);
       }));
-      document.querySelectorAll<HTMLButtonElement>("[data-price-kind] button").forEach((button) => button.addEventListener("click", () => {
+      document.querySelector<HTMLElement>("#price-columns")?.addEventListener("click", (event) => {
+        const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-price-kind] button");
+        if (!button) return;
         const kind = button.closest<HTMLElement>("[data-price-kind]")?.dataset.priceKind || "urban";
         visible.clear(); visible.add(kind);
         document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((toggle) => toggle.classList.toggle("active", toggle.dataset.series === kind));
-        renderLineChart(summary, visible);
-      }));
+        renderLineChart(activePriceSummary, visible);
+      });
     } else if (root.dataset.mode === "agriculture") {
       renderComparison(summary);
       renderGaugeAndDonut(summary);

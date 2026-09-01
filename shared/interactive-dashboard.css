@@ -15,7 +15,8 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 @keyframes pulse { 50% { box-shadow: 0 0 0 7px #61e31508; } }
 
 .price-layout { min-height: calc(100vh - 79px); display: grid; grid-template-columns: minmax(350px, 39%) minmax(560px, 61%); direction: ltr; }
-.price-columns { display: grid; grid-template-columns: repeat(3, 1fr); direction: ltr; border-inline-end: 2px solid #3c3c3c; background: #262626; }
+.price-columns { display: grid; grid-template-columns: repeat(var(--price-columns, 3), minmax(0, 1fr)); direction: ltr; border-inline-end: 2px solid #3c3c3c; background: #262626; }
+.price-no-data { grid-column: 1 / -1; min-height: 420px; align-content: center; line-height: 1.8; }
 .price-column { min-width: 0; display: grid; grid-template-rows: 1.08fr 1fr 1fr auto; border-inline-end: 1px solid #3e3e3e; text-align: center; direction: rtl; }
 .price-column header { padding: 20px 9px; display: grid; align-content: center; gap: 10px; border-top: 5px solid var(--accent); background: #212121; }
 .price-column header span { color: var(--accent); font-size: 13px; font-weight: 800; }

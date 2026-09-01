@@ -59,6 +59,8 @@ const replacements: Array<[string, string]> = [
   ["فرق أسعار الأراضي العمرانية", "Urban land price difference"],
   ["فرق أسعار الأراضي الزراعية", "Agricultural land price difference"],
   ["فرق أسعار الأراضي الصناعية", "Industrial land price difference"],
+  ["لا توجد قيم أسعار موثقة لهذا القطاع في ملفات التقارير الحالية. اختر «كل القطاعات» أو قطاعًا آخر من قائمة الخريطة.", "No documented price values are available for this sector in the current report files. Select All sectors or another map sector."],
+  ["لا توجد سلسلة أسعار موثقة للقطاع المحدد.", "No documented price series is available for the selected sector."],
   ["مساحة منطقة الدراسة (كم²)", "Study area (km²)"],
   ["مساحة منطقة الدراسة", "Study area"],
   ["طول محور الدراسة (كم)", "Corridor length (km)"],
