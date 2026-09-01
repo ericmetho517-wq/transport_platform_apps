@@ -158,7 +158,7 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     const range = document.querySelector<HTMLInputElement>("#compare-range");
     if (range) { range.value = "50"; range.dispatchEvent(new Event("input")); }
     document.querySelectorAll<HTMLElement>("[data-evidence-report]").forEach((figure) => { figure.hidden = Boolean(report) && figure.dataset.evidenceReport !== report; });
-    const sectorSelect = document.querySelector<HTMLSelectElement>("#map-sector-filter");
+    const sectorSelect = document.querySelector<HTMLSelectElement>(".map-sector-select");
     if (sectorSelect && Array.from(sectorSelect.options).some((option) => option.value === sector)) {
       sectorSelect.value = sector;
       sectorSelect.dispatchEvent(new Event("change"));

@@ -4,7 +4,16 @@
     "report": "(9).pdf",
     "pages": [54],
     "yearEnd": 2024,
-    "metrics": { "studyAreaKm2": 25126, "axisLengthKm": 1175, "urbanChangeKm2": 850.04, "industrialChangeKm2": 67.4, "agriculturalAreaFeddan": 1512791 },
+    "metrics": { "studyAreaKm2": 25126, "axisLengthKm": 1175, "urbanChangeKm2": 850.04, "industrialChangeKm2": 67.4, "agriculturalAreaFeddan": 1512791, "jobOpportunities": 17130, "urbanChangePercent": 100 },
+    "statusShares": { "existing": 90, "underConstruction": 10 },
+    "changeBars": [
+      { "label": "إسكان اجتماعي شباب", "value": 1.7, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 16.8, "layer": "urban" },
+      { "label": "إسكان مخطط اقتصادي", "value": 14.1, "layer": "urban" }, { "label": "ترفيهي", "value": 0.6, "layer": "urban" },
+      { "label": "تعليمي", "value": 1.4, "layer": "urban" }, { "label": "حكومي", "value": 0.1, "layer": "urban" },
+      { "label": "خدمات", "value": 46.8, "layer": "urban" }, { "label": "ديني", "value": 0, "layer": "urban" },
+      { "label": "صناعي", "value": 16, "layer": "industrial" }, { "label": "قوات مسلحة", "value": 1.4, "layer": "urban" },
+      { "label": "كمبوند", "value": 2.7, "layer": "urban" }, { "label": "مخازن", "value": 2.1, "layer": "industrial" }
+    ],
     "prices": {
       "urban": { "start": 718831802, "end": 3069414895 },
       "industrial": { "start": 32836568, "end": 161913991 },
@@ -15,56 +24,72 @@
         "title": "قطاع أسيوط",
         "report": "(4).pdf",
         "page": 58,
-        "metrics": { "studyAreaKm2": 2211, "axisLengthKm": 112.7, "urbanChangeKm2": 42.33, "industrialChangeKm2": 9.4, "agriculturalAreaFeddan": 124374 },
+        "metrics": { "studyAreaKm2": 2211, "axisLengthKm": 112.7, "urbanChangeKm2": 42.33, "industrialChangeKm2": 9.4, "agriculturalAreaFeddan": 124374, "jobOpportunities": 264, "urbanChangePercent": 100 },
+        "statusShares": { "existing": 84, "underConstruction": 16 },
+        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 0.6, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 0.2, "layer": "urban" }, { "label": "تعليمي", "value": 0.3, "layer": "urban" }, { "label": "خدمات", "value": 0.2, "layer": "urban" }, { "label": "صناعي", "value": 2.2, "layer": "industrial" }, { "label": "مخازن", "value": 0.5, "layer": "industrial" }],
         "prices": { "urban": { "start": 44308805, "end": 165740272 }, "industrial": { "start": 4763731, "end": 19678099 }, "agricultural": { "start": 29279448, "end": 119584572 } }
       },
       "3": {
         "title": "قطاع الجيزة",
         "report": "(7).pdf",
         "page": 47,
-        "metrics": { "studyAreaKm2": 525, "axisLengthKm": 26.5, "urbanChangeKm2": 62.07, "industrialChangeKm2": 2.2, "agriculturalAreaFeddan": 338 },
+        "metrics": { "studyAreaKm2": 525, "axisLengthKm": 26.5, "urbanChangeKm2": 62.07, "industrialChangeKm2": 2.2, "agriculturalAreaFeddan": 338, "jobOpportunities": 3689, "urbanChangePercent": 100 },
+        "statusShares": { "existing": 71, "underConstruction": 29 },
+        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 1.9, "layer": "urban" }, { "label": "إسكان مخطط اقتصادي", "value": 13.6, "layer": "urban" }, { "label": "ترفيهي", "value": 0.1, "layer": "urban" }, { "label": "تعليمي", "value": 0.7, "layer": "urban" }, { "label": "حكومي", "value": 0, "layer": "urban" }, { "label": "خدمات", "value": 0.9, "layer": "urban" }, { "label": "صناعي", "value": 1, "layer": "industrial" }, { "label": "قوات مسلحة", "value": 1, "layer": "urban" }, { "label": "كمبوند", "value": 1.2, "layer": "urban" }, { "label": "مخازن", "value": 0.6, "layer": "industrial" }],
         "prices": { "urban": { "start": 78441001, "end": 608288166 }, "industrial": { "start": 210302, "end": 11068506 }, "agricultural": { "start": 21065, "end": 140436 } }
       },
       "4": {
         "title": "قطاع المنيا",
         "report": "(5).pdf",
         "page": 58,
-        "metrics": { "studyAreaKm2": 2766, "axisLengthKm": 138.5, "urbanChangeKm2": 59.38, "industrialChangeKm2": 3.8, "agriculturalAreaFeddan": 331595 },
+        "metrics": { "studyAreaKm2": 2766, "axisLengthKm": 138.5, "urbanChangeKm2": 59.38, "industrialChangeKm2": 3.8, "agriculturalAreaFeddan": 331595, "jobOpportunities": 240, "urbanChangePercent": 100 },
+        "statusShares": { "existing": 94, "underConstruction": 6 },
+        "changeBars": [{ "label": "إسكان عشوائي", "value": 1.1, "layer": "urban" }, { "label": "إسكان مخطط اقتصادي", "value": 0.2, "layer": "urban" }, { "label": "خدمات", "value": 0.1, "layer": "urban" }, { "label": "صناعي", "value": 1.5, "layer": "industrial" }],
         "prices": { "urban": { "start": 38493245, "end": 128922337 }, "industrial": { "start": 1909786, "end": 9548931 }, "agricultural": { "start": 36699622, "end": 190075193 } }
       },
       "6": {
         "title": "قطاع الفيوم",
         "report": "(6).pdf",
         "page": 60,
-        "metrics": { "studyAreaKm2": 1765, "axisLengthKm": 89.6, "urbanChangeKm2": 122.83, "industrialChangeKm2": 24.1, "agriculturalAreaFeddan": 227960 },
+        "metrics": { "studyAreaKm2": 1765, "axisLengthKm": 89.6, "urbanChangeKm2": 122.83, "industrialChangeKm2": 24.1, "agriculturalAreaFeddan": 227960, "jobOpportunities": 1021, "urbanChangePercent": 100 },
+        "statusShares": { "existing": 80, "underConstruction": 20 },
+        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 0.2, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 3.6, "layer": "urban" }, { "label": "خدمات", "value": 0.2, "layer": "urban" }, { "label": "صناعي", "value": 2.7, "layer": "industrial" }, { "label": "كمبوند", "value": 1.5, "layer": "urban" }, { "label": "مخازن", "value": 0.2, "layer": "industrial" }],
         "prices": { "urban": { "start": 97358869, "end": 285013841 }, "industrial": { "start": 12063818, "end": 60319091 }, "agricultural": { "start": 69128339, "end": 211587158 } }
       },
       "7": {
         "title": "قطاع أبو سمبل",
         "report": ".pdf",
         "page": 73,
-        "metrics": { "studyAreaKm2": 5575, "axisLengthKm": 281.8, "urbanChangeKm2": 45.39, "industrialChangeKm2": 4.2, "agriculturalAreaFeddan": 117383 },
+        "metrics": { "studyAreaKm2": 5575, "axisLengthKm": 281.8, "urbanChangeKm2": 45.39, "industrialChangeKm2": 4.2, "agriculturalAreaFeddan": 117383, "jobOpportunities": 230, "urbanChangePercent": 100 },
+        "statusShares": { "existing": 100, "underConstruction": 0 },
+        "changeBars": [{ "label": "إسكان عشوائي", "value": 0.7, "layer": "urban" }, { "label": "خدمات", "value": 0.6, "layer": "urban" }, { "label": "صناعي", "value": 0.2, "layer": "industrial" }],
         "prices": { "urban": { "start": 46371754, "end": 211925578 }, "industrial": { "start": 2090212, "end": 8360848 }, "agricultural": { "start": 415792, "end": 2070031 } }
       },
       "8": {
         "title": "قطاع سوهاج",
         "report": "(2).pdf",
         "page": 28,
-        "metrics": { "studyAreaKm2": 2540, "axisLengthKm": 130, "urbanChangeKm2": 0.03, "industrialChangeKm2": 1.1, "agriculturalAreaFeddan": 246 },
+        "metrics": { "studyAreaKm2": 2540, "axisLengthKm": 130, "urbanChangeKm2": 0.03, "industrialChangeKm2": 1.1, "agriculturalAreaFeddan": 246, "jobOpportunities": 0, "urbanChangePercent": 100 },
+        "statusShares": { "existing": 100, "underConstruction": 0 },
+        "changeBars": [{ "label": "إسكان عشوائي", "value": 0, "layer": "urban" }, { "label": "صناعي", "value": 1.1, "layer": "industrial" }],
         "prices": { "urban": { "start": 8827, "end": 26481 }, "industrial": { "start": 549060, "end": 2196242 }, "agricultural": { "start": 3837, "end": 38370 } }
       },
       "11": {
         "title": "قطاع قنا",
         "report": "(3).pdf",
         "page": 59,
-        "metrics": { "studyAreaKm2": 2615, "axisLengthKm": 133.3, "urbanChangeKm2": 164.41, "industrialChangeKm2": 11.3, "agriculturalAreaFeddan": 235900 },
+        "metrics": { "studyAreaKm2": 2615, "axisLengthKm": 133.3, "urbanChangeKm2": 164.41, "industrialChangeKm2": 11.3, "agriculturalAreaFeddan": 235900, "jobOpportunities": 771, "urbanChangePercent": 100 },
+        "statusShares": { "existing": 83, "underConstruction": 17 },
+        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 0.6, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 2.6, "layer": "urban" }, { "label": "إسكان مخطط اقتصادي", "value": 0.3, "layer": "urban" }, { "label": "تعليمي", "value": 0.3, "layer": "urban" }, { "label": "خدمات", "value": 0.2, "layer": "urban" }, { "label": "صناعي", "value": 0.4, "layer": "industrial" }, { "label": "مخازن", "value": 0.5, "layer": "industrial" }],
         "prices": { "urban": { "start": 189704525, "end": 669942033 }, "industrial": { "start": 5660392, "end": 28385208 }, "agricultural": { "start": 100469395, "end": 297411681 } }
       },
       "12": {
         "title": "قطاع الأقصر",
         "report": "(1).pdf",
         "page": 58,
-        "metrics": { "studyAreaKm2": 2240, "axisLengthKm": 118.5, "urbanChangeKm2": 115.6, "industrialChangeKm2": 2.2, "agriculturalAreaFeddan": 190160 },
+        "metrics": { "studyAreaKm2": 2240, "axisLengthKm": 118.5, "urbanChangeKm2": 115.6, "industrialChangeKm2": 2.2, "agriculturalAreaFeddan": 190160, "jobOpportunities": 551, "urbanChangePercent": 100 },
+        "statusShares": { "existing": 100, "underConstruction": 0 },
+        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 0, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 1.2, "layer": "urban" }, { "label": "خدمات", "value": 0.4, "layer": "urban" }, { "label": "صناعي", "value": 1.6, "layer": "industrial" }],
         "prices": { "urban": { "start": 119963520, "end": 640388560 }, "industrial": { "start": 1102391, "end": 4409562 }, "agricultural": { "start": 63782059, "end": 197009971 } }
       }
     }

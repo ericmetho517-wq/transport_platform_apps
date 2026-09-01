@@ -39,6 +39,14 @@ for (const app of priceDashboards) {
 const western = profiles["western-upper-egypt"];
 if (!western || western.yearEnd !== 2024) failures.push("western-upper-egypt: missing 2024 report profile");
 if (Object.keys(western?.sectors || {}).length < 8) failures.push("western-upper-egypt: sector report profiles are incomplete");
+for (const [sector, profile] of Object.entries(western?.sectors || {})) {
+  if (!Number.isFinite(profile.metrics?.jobOpportunities)) failures.push(`western-upper-egypt sector ${sector}: missing report job count`);
+  if (!profile.statusShares || profile.statusShares.existing + profile.statusShares.underConstruction !== 100) failures.push(`western-upper-egypt sector ${sector}: invalid status shares`);
+  if (!profile.changeBars?.length) failures.push(`western-upper-egypt sector ${sector}: missing urban pattern chart`);
+}
+const runtimeSource = fs.readFileSync(path.join(root, "shared", "interactive-dashboard.ts"), "utf8");
+if (!runtimeSource.includes('mapMarkup("land-2014"') || !runtimeSource.includes('mapMarkup("land-current"')) failures.push("urban dashboard: missing interactive 2014/current map pair");
+if (!runtimeSource.includes('mapMarkup("price-2014"') || !runtimeSource.includes('mapMarkup("price-current"')) failures.push("western price dashboard: missing report-matched map pair");
 
 if (dashboards.length !== 50) failures.push(`expected 50 dashboards, found ${dashboards.length}`);
 if (failures.length) {

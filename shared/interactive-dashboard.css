@@ -27,6 +27,8 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .price-column > button { margin: 8px; padding: 9px 6px; border: 1px solid #4e4e4e; border-radius: 3px; background: #303030; color: #ccc; cursor: pointer; font-size: 11px; }
 .price-column > button:hover { border-color: var(--accent); color: var(--accent); }
 .price-workspace { min-width: 0; display: grid; grid-template-rows: auto minmax(280px, 46vh) minmax(280px, 1fr); direction: rtl; }
+.western-price-dashboard .price-workspace { grid-template-rows: auto minmax(560px, 1fr); }
+.price-temporal-map-pair { min-height: 560px; }
 .dashboard-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .dashboard-kpis article { min-height: 72px; padding: 8px 12px; display: grid; place-items: center; gap: 2px; background: #f6f3ed; color: #111; text-align: center; border-inline-end: 1px solid #d2d2d2; }
 .dashboard-kpis article.blue { background: #4f82e9; color: #fff; }
@@ -37,11 +39,11 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .gis-map { position: relative; min-height: 270px; overflow: hidden; background: #1f2933; isolation: isolate; }
 .gis-map svg { display: block; width: 100%; height: 100%; min-height: 270px; touch-action: none; cursor: grab; }
 .gis-map svg:active { cursor: grabbing; }
-#map-viewport { transform-origin: 0 0; }
+.map-viewport { transform-origin: 0 0; }
 .satellite-tile { opacity: .96; filter: saturate(1.08) contrast(1.04) brightness(.9); }
-#map-content path { cursor: pointer; transition: opacity .15s, filter .15s; }
-#map-content path[hidden] { display: none; }
-#map-content path:hover { filter: brightness(1.35) drop-shadow(0 0 4px #fff); opacity: 1; }
+.map-content path { cursor: pointer; transition: opacity .15s, filter .15s; }
+.map-content path[hidden] { display: none; }
+.map-content path:hover { filter: brightness(1.35) drop-shadow(0 0 4px #fff); opacity: 1; }
 .map-study path { fill: #00c8ff12; stroke: #fff; stroke-width: 3; filter: drop-shadow(0 0 2px #007acb); }
 .map-axis path { fill: none; stroke: #ff25df; stroke-width: 5; stroke-linecap: round; filter: drop-shadow(0 0 2px #fff); }
 .map-urban path { fill: #ff4b22a8; stroke: #fff36a; stroke-width: .75; }
@@ -114,6 +116,15 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .change-bars b { font-size: 10px; }
 .change-bars span { min-height: 28px; font-size: 9px; writing-mode: vertical-rl; }
 .land-center { display: grid; grid-template-rows: auto minmax(280px, 48vh) minmax(180px, 1fr); }
+.temporal-map-pair { min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; background: #353535; direction: ltr; }
+.temporal-map { min-width: 0; min-height: 280px; padding-top: 42px; }
+.temporal-map .temporal-year { position: absolute; z-index: 4; inset: 0 0 auto; height: 42px; display: grid; place-items: center; background: #292929; color: #fff; font-size: 22px; font-weight: 800; border-bottom: 2px solid #444; }
+.temporal-map .map-status, .temporal-map .map-layer-toggles, .temporal-map .map-wheel-hint { display: none !important; }
+.temporal-map[data-dashboard-sync="false"] .map-sector-filter { display: none !important; }
+.temporal-map[data-dashboard-sync="true"] .map-sector-filter { top: 50px; }
+.temporal-map .map-controls { top: 54px; }
+.temporal-map .map-scale { max-width: calc(100% - 18px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.temporal-map[data-map-instance$="2014"] .map-urban path, .temporal-map[data-map-instance$="2014"] .map-agricultural path, .temporal-map[data-map-instance$="2014"] .map-industrial path { opacity: .42; filter: saturate(.55); }
 .comparison-card { padding: 8px 12px; }
 .comparison-card select { padding: 5px 8px; border: 1px solid #555; background: #333; color: #fff; font-size: 10px; }
 .comparison-row { display: grid; grid-template-columns: 42px 1fr 72px; gap: 8px; align-items: center; margin: 9px 0; direction: ltr; }
@@ -190,6 +201,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
   .land-layout { grid-template-columns: 1fr; }
   .land-left { min-height: 620px; }
   .land-center { grid-template-rows: auto 420px 320px; }
+  .temporal-map-pair { grid-template-columns: 1fr; overflow: auto; }
   .land-right { grid-column: auto; grid-template-columns: 1fr; min-height: 600px; }
   .agriculture-layout { grid-template-columns: 1fr; }
   .agriculture-center { grid-template-rows: auto 420px 320px; }

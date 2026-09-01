@@ -30,6 +30,9 @@ interface SectorProfile {
     page: number;
     metrics: Record<string, number>;
     prices?: Record<string, { start: number; end: number }>;
+    changeBars?: Array<{ label: string; value: number; layer: string }>;
+    landUse?: Array<{ category: string; year: number; area: number }>;
+    statusShares?: { existing: number; underConstruction: number };
   }>;
   changeBars?: Array<{ label: string; value: number; layer: string }>;
   landUse?: Array<{ category: string; year: number; area: number }>;
@@ -37,6 +40,8 @@ interface SectorProfile {
   cropShares?: number[];
   ownershipShares?: number[];
 }
+
+type SectorDetail = NonNullable<SectorProfile["sectors"]>[string];
 
 const esc = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char] || char);
 
@@ -73,22 +78,24 @@ export function dashboardGroup(app: TransportApp): string {
   return "western-upper-egypt";
 }
 
-function mapMarkup(): string {
-  return `<section class="gis-map" data-basemap="satellite" aria-label="خريطة تفاعلية">
-    <div class="map-status"><span class="live-dot"></span><span id="map-status-text">جارٍ تحميل طبقات المشروع المحلية…</span></div>
-    <label class="map-sector-filter" id="map-sector-filter-wrap" hidden><span>نطاق العرض</span><select id="map-sector-filter"><option value="all">كل القطاعات</option></select></label>
-    <div class="map-layer-toggles" id="map-layer-toggles"></div>
-    <svg id="interactive-map" viewBox="0 0 1000 520" role="img" aria-label="خريطة تفاعلية لبيانات المشروع">
+function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): string {
+  const suffix = instance.replace(/[^a-z0-9-]/gi, "-");
+  return `<section class="gis-map${yearLabel ? " temporal-map" : ""}" data-basemap="satellite" data-map-instance="${suffix}" data-dashboard-sync="${dashboardSync}" aria-label="خريطة تفاعلية">
+    ${yearLabel ? `<div class="temporal-year">${yearLabel}</div>` : ""}
+    <div class="map-status"><span class="live-dot"></span><span class="map-status-text">جارٍ تحميل طبقات المشروع المحلية…</span></div>
+    <label class="map-sector-filter" hidden><span>نطاق العرض</span><select class="map-sector-select"><option value="all">كل القطاعات</option></select></label>
+    <div class="map-layer-toggles"></div>
+    <svg class="interactive-map" viewBox="0 0 1000 520" role="img" aria-label="خريطة تفاعلية لبيانات المشروع">
       <defs>
-        <pattern id="map-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#bbb" stroke-width=".6" opacity=".45"/></pattern>
-        <linearGradient id="map-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4edcf"/><stop offset="1" stop-color="#d7e3d6"/></linearGradient>
+        <pattern id="map-grid-${suffix}" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#bbb" stroke-width=".6" opacity=".45"/></pattern>
+        <linearGradient id="map-bg-${suffix}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4edcf"/><stop offset="1" stop-color="#d7e3d6"/></linearGradient>
       </defs>
-      <rect width="1000" height="520" fill="url(#map-bg)"/>
-      <g id="map-viewport"><g id="satellite-basemap"></g><rect width="1000" height="520" fill="url(#map-grid)" opacity=".16"/><g id="map-content"></g></g>
+      <rect width="1000" height="520" fill="url(#map-bg-${suffix})"/>
+      <g class="map-viewport"><g class="satellite-basemap"></g><rect width="1000" height="520" fill="url(#map-grid-${suffix})" opacity=".16"/><g class="map-content"></g></g>
     </svg>
     <div class="map-controls"><button type="button" data-map-action="in" aria-label="تكبير">+</button><button type="button" data-map-action="out" aria-label="تصغير">−</button><button type="button" data-map-action="home" aria-label="إظهار كل البيانات">⌂</button></div>
     <div class="map-wheel-hint">عجلة الماوس للتكبير · اسحب لتحريك الخريطة</div>
-    <div class="feature-popup" id="feature-popup" hidden><button type="button" aria-label="إغلاق">×</button><strong>بيانات العنصر</strong><div></div></div>
+    <div class="feature-popup" hidden><button type="button" aria-label="إغلاق">×</button><strong>بيانات العنصر</strong><div></div></div>
     <div class="map-scale">صور أقمار صناعية · بيانات مكانية محلية · WGS 84</div>
   </section>`;
 }
@@ -106,14 +113,19 @@ function dashboardHeader(app: TransportApp): string {
 }
 
 function priceMarkup(app: TransportApp, group: string): string {
-  return `<main class="interactive-dashboard price-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="price">
+  const westernComparison = group === "western-upper-egypt";
+  const mapArea = westernComparison
+    ? `<div class="temporal-map-pair price-temporal-map-pair">${mapMarkup("price-2014", "2014", false)}${mapMarkup("price-current", '<span class="map-year-end">2024</span>', true)}</div>`
+    : mapMarkup();
+  const trendArea = westernComparison ? "" : `<section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>`;
+  return `<main class="interactive-dashboard price-dashboard${westernComparison ? " western-price-dashboard" : ""}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="price">
     ${dashboardHeader(app)}
     <div class="price-layout">
       <aside class="price-columns" id="price-columns"><div class="loading-panel">جارٍ قراءة أسعار الأراضي من قاعدة بيانات المشروع…</div></aside>
       <section class="price-workspace">
         <div class="dashboard-kpis"><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article class="gold"><span>سنة القياس</span><strong id="active-year">—</strong></article></div>
-        ${mapMarkup()}
-        <section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>
+        ${mapArea}
+        ${trendArea}
       </section>
     </div>
     ${referenceDialog(app)}
@@ -125,7 +137,7 @@ function landMarkup(app: TransportApp, group: string): string {
     ${dashboardHeader(app)}
     <div class="land-layout">
       <aside class="land-left"><article class="opportunity-card"><span>فرص العمل لمشروعات المباني المستحدثة</span><strong data-metric="jobOpportunities">—</strong><small>فرصة عمل تقديرية مرتبطة بمناطق التغير</small></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>مناطق تغير استخدامات الأراضي</span><small>اضغط على العمود لتصفية طبقة الخريطة</small></div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
-      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-2014", "2014", false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>توزيع مناطق التغير</span><div class="donut" id="change-donut"><strong>—</strong></div><div id="donut-legend"></div></section></aside>
     </div>
     ${referenceDialog(app)}
@@ -338,6 +350,19 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
 }
 
 type Coordinates = number[] | Coordinates[];
+type GeoJsonCollection = { features: Array<{ geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }> };
+const geoJsonCache = new Map<string, Promise<GeoJsonCollection>>();
+
+function loadGeoJson(url: string): Promise<GeoJsonCollection> {
+  const cached = geoJsonCache.get(url);
+  if (cached) return cached;
+  const request = fetch(url).then((response) => {
+    if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+    return response.json() as Promise<GeoJsonCollection>;
+  });
+  geoJsonCache.set(url, request);
+  return request;
+}
 
 function coordinatePairs(coordinates: Coordinates, result: number[][] = []): number[][] {
   if (Array.isArray(coordinates) && coordinates.length >= 2 && typeof coordinates[0] === "number" && typeof coordinates[1] === "number") result.push(coordinates as number[]);
@@ -399,19 +424,19 @@ function renderSatelliteBasemap(target: SVGGElement, bounds: [number, number, nu
   return count;
 }
 
-export async function initializeMap(group: string, summary: DashboardSummary): Promise<void> {
-  const svg = document.querySelector<SVGSVGElement>("#interactive-map");
-  const viewport = document.querySelector<SVGGElement>("#map-viewport");
-  const satellite = document.querySelector<SVGGElement>("#satellite-basemap");
-  const content = document.querySelector<SVGGElement>("#map-content");
-  const toggles = document.querySelector<HTMLElement>("#map-layer-toggles");
-  const status = document.querySelector<HTMLElement>("#map-status-text");
+export async function initializeMap(group: string, summary: DashboardSummary, mapRoot?: HTMLElement): Promise<void> {
+  const scope = mapRoot || document.querySelector<HTMLElement>(".gis-map");
+  const svg = scope?.querySelector<SVGSVGElement>(".interactive-map");
+  const viewport = scope?.querySelector<SVGGElement>(".map-viewport");
+  const satellite = scope?.querySelector<SVGGElement>(".satellite-basemap");
+  const content = scope?.querySelector<SVGGElement>(".map-content");
+  const toggles = scope?.querySelector<HTMLElement>(".map-layer-toggles");
+  const status = scope?.querySelector<HTMLElement>(".map-status-text");
   if (!svg || !viewport || !satellite || !content || !toggles) return;
   const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي 2014", civil: "الدراسة المدنية" };
   const loaded = await Promise.all(summary.layers.map(async (layer) => {
-    const response = await fetch(`../../data/dashboard/${group}/${layer}.geojson`);
-    if (!response.ok) throw new Error(`${layer}: HTTP ${response.status}`);
-    return [layer, await response.json()] as const;
+    const url = `../../data/dashboard/${group}/${layer}.geojson`;
+    return [layer, await loadGeoJson(url)] as const;
   }));
   const pairs = loaded.flatMap(([, collection]) => collection.features.flatMap((feature: { geometry?: { coordinates: Coordinates } }) => feature.geometry ? coordinatePairs(feature.geometry.coordinates) : []));
   const extentPairs = pairs.length ? pairs : [[fallbackBounds[group]?.[0] ?? 24, fallbackBounds[group]?.[1] ?? 22], [fallbackBounds[group]?.[2] ?? 36, fallbackBounds[group]?.[3] ?? 32]];
@@ -437,7 +462,7 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
       if (sector) { path.dataset.sector = sector; sectorValues.add(sector); }
       path.addEventListener("click", (event) => {
         event.stopPropagation();
-        const popup = document.querySelector<HTMLElement>("#feature-popup");
+        const popup = scope.querySelector<HTMLElement>(".feature-popup");
         if (!popup) return;
         const rows = Object.entries(feature.properties || {}).filter(([, value]) => value !== null && value !== "").slice(0, 30);
         popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${labels[layer]}</p>${rows.map(([key, value]) => `<p><span>${esc(key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("")}`;
@@ -452,8 +477,8 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
     button.classList.toggle("active");
     content.querySelector<SVGGElement>(`[data-layer-group="${button.dataset.mapLayer}"]`)?.classList.toggle("layer-hidden", !button.classList.contains("active"));
   }));
-  const sectorWrap = document.querySelector<HTMLElement>("#map-sector-filter-wrap");
-  const sectorSelect = document.querySelector<HTMLSelectElement>("#map-sector-filter");
+  const sectorWrap = scope.querySelector<HTMLElement>(".map-sector-filter");
+  const sectorSelect = scope.querySelector<HTMLSelectElement>(".map-sector-select");
   if (sectorWrap && sectorSelect && sectorValues.size > 1) {
     const sectors = Array.from(sectorValues).sort((a, b) => Number(a) - Number(b) || a.localeCompare(b));
     const westernSectorNames: Record<string, string> = { "1": "أسيوط", "2": "أسوان", "3": "الجيزة", "4": "المنيا", "6": "الفيوم", "7": "أبو سمبل", "8": "سوهاج", "9": "بني سويف", "11": "قنا", "12": "الأقصر" };
@@ -466,7 +491,8 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
     };
     const updateSector = () => {
       const selected = sectorSelect.value;
-      content.querySelectorAll<SVGPathElement>("path[data-sector]").forEach((path) => { path.hidden = selected !== "all" && path.dataset.sector !== selected; });
+      document.querySelectorAll<SVGPathElement>(".interactive-dashboard .map-content path[data-sector]").forEach((path) => { path.hidden = selected !== "all" && path.dataset.sector !== selected; });
+      if (scope.dataset.dashboardSync === "false") return;
       const chosen = (layer: LayerName) => loaded.find(([name]) => name === layer)?.[1].features.filter((feature: { properties?: Record<string, unknown> }) => selected === "all" || sectorOf(feature.properties) === selected) || [];
       const rawArea = (layer: LayerName) => chosen(layer).reduce((sum: number, feature: { properties?: Record<string, unknown> }) => sum + numeric(feature.properties || {}, ["مساحة_المنطقة_كم2", "مساحة_التغير_كم2", "المساحة_كم2", "Area_KM2", "SHAPE_Area", "Shape_Area"]), 0);
       const areaKm2 = (layer: LayerName) => { const value = rawArea(layer); return value > 1_000_000 ? value / 1_000_000 : value; };
@@ -503,7 +529,7 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
         else comparison.innerHTML = `<div class="no-data">لا تتوفر مقارنة زمنية منفصلة موثقة لـ ${esc(sectorLabel(selected))} في ملف التصدير الحالي؛ الخريطة والبطاقات تعرض بيانات القطاع المختار فقط.</div>`;
       }
       const dashboardRoot = document.querySelector<HTMLElement>(".interactive-dashboard");
-      if (dashboardRoot?.dataset.mode === "price") {
+      if (scope.dataset.dashboardSync !== "false" && dashboardRoot?.dataset.mode === "price") {
         dashboardRoot.dispatchEvent(new CustomEvent("dashboard-sector-price", { detail: {
           metrics: reportMetrics || {},
           prices: selected === "all" ? summary.prices : (reportSector?.prices || {}),
@@ -511,6 +537,7 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
           sectorTitle: selected === "all" ? summary.profile?.title : reportSector?.title,
         } }));
       }
+      if (scope.dataset.dashboardSync !== "false") dashboardRoot?.dispatchEvent(new CustomEvent("dashboard-sector-view", { detail: selected === "all" ? summary.profile : reportSector }));
     };
     sectorSelect.addEventListener("change", updateSector);
     updateSector();
@@ -530,7 +557,7 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
     apply();
     return true;
   };
-  document.querySelectorAll<HTMLButtonElement>("[data-map-action]").forEach((button) => button.addEventListener("click", () => {
+  scope.querySelectorAll<HTMLButtonElement>("[data-map-action]").forEach((button) => button.addEventListener("click", () => {
     if (button.dataset.mapAction === "in") zoomBy(1.35);
     if (button.dataset.mapAction === "out") zoomBy(.74);
     if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
@@ -547,15 +574,15 @@ export async function initializeMap(group: string, summary: DashboardSummary): P
   svg.addEventListener("pointerup", () => { dragging = false; });
   svg.addEventListener("pointercancel", () => { dragging = false; });
   svg.addEventListener("lostpointercapture", () => { dragging = false; });
-  svg.addEventListener("click", () => { const popup = document.querySelector<HTMLElement>("#feature-popup"); if (popup) popup.hidden = true; });
-  document.querySelector<HTMLButtonElement>("#feature-popup > button")?.addEventListener("click", () => { const popup = document.querySelector<HTMLElement>("#feature-popup"); if (popup) popup.hidden = true; });
+  svg.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
+  scope.querySelector<HTMLButtonElement>(".feature-popup > button")?.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
 }
 
 function activateLayerOnly(layer: string): void {
   document.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
     const active = button.dataset.mapLayer === layer;
     button.classList.toggle("active", active);
-    document.querySelector<SVGGElement>(`[data-layer-group="${button.dataset.mapLayer}"]`)?.classList.toggle("layer-hidden", !active);
+    document.querySelectorAll<SVGGElement>(`[data-layer-group="${button.dataset.mapLayer}"]`).forEach((group) => group.classList.toggle("layer-hidden", !active));
   });
 }
 
@@ -572,8 +599,9 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       dataBadge.classList.add("report-only");
       dataBadge.innerHTML = "مؤشرات من التقرير - لا توجد طبقات محلية مطابقة";
     }
-    const mapScale = document.querySelector<HTMLElement>(".map-scale");
-    if (mapScale) mapScale.textContent = summary.verifiedLocalData ? "صور أقمار صناعية · بيانات مكانية محلية · WGS 84" : "صور أقمار صناعية مرجعية · لا توجد هندسة محلية مطابقة للقطاع";
+    document.querySelectorAll<HTMLElement>(".map-scale").forEach((mapScale) => {
+      mapScale.textContent = summary.verifiedLocalData ? "صور أقمار صناعية · بيانات مكانية محلية · WGS 84" : "صور أقمار صناعية مرجعية · لا توجد هندسة محلية مطابقة للقطاع";
+    });
     const profilesResponse = await fetch("../../data/sector-profiles.json");
     if (profilesResponse.ok) {
       const profiles = await profilesResponse.json() as Record<string, SectorProfile>;
@@ -597,7 +625,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     if (!summary.metrics.agriculturalAreaFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) setUnavailableMetric("agriculturalAreaFeddan");
     if (!summary.metrics.agriculturalChangeFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) setUnavailableMetric("agriculturalChangeFeddan");
     setMetric("availableLayers", summary.layers.length);
-    const totalChange = (summary.metrics.urbanChangeKm2 || 0) + (summary.metrics.agriculturalChangeKm2 || 0) + (summary.metrics.industrialChangeKm2 || 0);
+    const totalChange = root.dataset.mode === "land" ? (summary.metrics.urbanChangeKm2 || 0) : (summary.metrics.urbanChangeKm2 || 0) + (summary.metrics.agriculturalChangeKm2 || 0) + (summary.metrics.industrialChangeKm2 || 0);
     setMetric("totalChangeKm2", totalChange);
     setMetric("jobOpportunities", summary.metrics.jobOpportunities ?? Math.round((summary.metrics.urbanFeatures || 0) * 3.5 + (summary.metrics.agriculturalFeatures || 0) * .35));
     const activeYear = document.querySelector<HTMLElement>("#active-year");
@@ -658,9 +686,20 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       renderChangeBars(summary);
       renderComparison(summary);
       renderGaugeAndDonut(summary);
+      root.addEventListener("dashboard-sector-view", ((event: CustomEvent<SectorProfile | SectorDetail | undefined>) => {
+        const selected = event.detail;
+        if (!selected) return;
+        const view = { ...summary, metrics: { ...summary.metrics, ...selected.metrics }, profile: { ...summary.profile, ...selected } } as DashboardSummary;
+        setMetric("totalChangeKm2", view.metrics.urbanChangeKm2 || 0);
+        renderChangeBars(view);
+        renderGaugeAndDonut(view);
+        if (selected.landUse?.length) { view.landUse = selected.landUse; renderComparison(view); }
+      }) as EventListener);
       document.querySelector<HTMLSelectElement>("#comparison-mode")?.addEventListener("change", (event) => renderComparison(summary, (event.currentTarget as HTMLSelectElement).value === "top4"));
     }
-    await initializeMap(group, summary);
+    document.querySelectorAll<HTMLElement>(".map-year-end").forEach((label) => { label.textContent = String(summary.yearEnd); });
+    const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
+    await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));
     if (root.dataset.mode === "impact") {
       const slider = document.querySelector<HTMLInputElement>("#impact-year");
       const updateImpact = () => {
@@ -681,8 +720,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     document.querySelectorAll<HTMLElement>("[data-filter-layer]").forEach((element) => element.addEventListener("click", () => activateLayerOnly(element.dataset.filterLayer || "urban")));
   } catch (error) {
     document.querySelectorAll<HTMLElement>(".loading-panel").forEach((element) => { element.textContent = "تعذر قراءة ملف البيانات المحلية لهذا المشروع."; });
-    const status = document.querySelector<HTMLElement>("#map-status-text");
-    if (status) status.textContent = `خطأ في تحميل البيانات: ${String(error)}`;
+    document.querySelectorAll<HTMLElement>(".map-status-text").forEach((status) => { status.textContent = `خطأ في تحميل البيانات: ${String(error)}`; });
   }
 
   document.querySelector<HTMLButtonElement>("#fullscreen-dashboard")?.addEventListener("click", () => document.fullscreenElement ? document.exitFullscreen() : root.requestFullscreen());
