@@ -1,0 +1,160 @@
+{
+  "slug": "regional-ring-road",
+  "projectTitle": "القوس الشرقي للطريق الدائري الإقليمي",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\الاقليمي\\DataBase_Schema.gdb",
+  "verifiedLocalData": true,
+  "yearStart": 2014,
+  "yearEnd": 2023,
+  "metrics": {
+    "studyAreaKm2": 1256.28,
+    "axisLengthKm": 200.79,
+    "urbanChangeKm2": 140244421.91,
+    "agriculturalChangeKm2": 7.14,
+    "industrialChangeKm2": 0,
+    "urbanFeatures": 128,
+    "agriculturalFeatures": 264,
+    "industrialFeatures": 0
+  },
+  "prices": {
+    "urban": {
+      "start": 2810616339.81,
+      "end": 15225722842.56
+    },
+    "agricultural": {
+      "start": 1318691168.22,
+      "end": 7191091789.81
+    },
+    "industrial": {
+      "start": 1318691168.22,
+      "end": 7191091789.81
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "urban": [
+      2810616339.81,
+      4190072617.89,
+      5569528895.97,
+      6948985174.06,
+      8328441452.14,
+      9707897730.23,
+      11087354008.31,
+      12466810286.39,
+      13846266564.48,
+      15225722842.56
+    ],
+    "agricultural": [
+      1318691168.22,
+      1971180126.18,
+      2623669084.13,
+      3276158042.09,
+      3928647000.04,
+      4581135957.99,
+      5233624915.95,
+      5886113873.9,
+      6538602831.85,
+      7191091789.81
+    ],
+    "industrial": [
+      1318691168.22,
+      1971180126.18,
+      2623669084.13,
+      3276158042.09,
+      3928647000.04,
+      4581135957.99,
+      5233624915.95,
+      5886113873.9,
+      6538602831.85,
+      7191091789.81
+    ]
+  },
+  "landUse": [
+    {
+      "category": "2",
+      "year": 2014,
+      "area": 1041.088
+    },
+    {
+      "category": "غير مصنف",
+      "year": 2014,
+      "area": 140.546
+    },
+    {
+      "category": "3",
+      "year": 2014,
+      "area": 43.292
+    },
+    {
+      "category": "1",
+      "year": 2014,
+      "area": 20.797
+    },
+    {
+      "category": "5",
+      "year": 2014,
+      "area": 3.032
+    },
+    {
+      "category": "4",
+      "year": 2014,
+      "area": 1.864
+    },
+    {
+      "category": "2",
+      "year": 2023,
+      "area": 888.234
+    },
+    {
+      "category": "غير مصنف",
+      "year": 2023,
+      "area": 147.082
+    },
+    {
+      "category": "3",
+      "year": 2023,
+      "area": 141.162
+    },
+    {
+      "category": "4",
+      "year": 2023,
+      "area": 31.602
+    },
+    {
+      "category": "1",
+      "year": 2023,
+      "area": 29.065
+    },
+    {
+      "category": "5",
+      "year": 2023,
+      "area": 18.069
+    }
+  ],
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural"
+  ],
+  "layerCounts": {
+    "axis": 3,
+    "study": 1,
+    "urban": 128,
+    "agricultural": 264,
+    "industrial": 0,
+    "old": 234,
+    "latest": 299,
+    "civil": 0
+  }
+}

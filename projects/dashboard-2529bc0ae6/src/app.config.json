@@ -1,0 +1,30 @@
+{
+  "id": "2529bc0ae66a4f5f8e692c383d1d24ae",
+  "slug": "dashboard-2529bc0ae6",
+  "title": "لوحة مؤشرات أسعار الأراضى",
+  "alternateTitles": [],
+  "category": "محور كلابشة",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://www.arcgis.com/apps/dashboards/2529bc0ae66a4f5f8e692c383d1d24ae",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/c87406ac90cc9ed5.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 321,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/3b684f1406ce4b139ac0a69254570ddb"
+      ],
+      "sourceItemIds": [
+        "3b684f1406ce4b139ac0a69254570ddb"
+      ],
+      "projectGroup": "kalabsha",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء ٩١٣ 6 - 2 مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع: تم بناء مجموعة من مؤشرات الأداء التفاعلية (Interactive Dashboard) مدمجة بالإحصائيات الإقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ القرار في حصر وتلخيص المعلومات والنتائ والإحصائيات العددية (مساحات – فرص عمل - ..) ويتضح ذلك بالشكل رقم (٤٣٣). شكل (335) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار ا",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "kalabsha"
+}

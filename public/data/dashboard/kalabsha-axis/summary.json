@@ -1,0 +1,129 @@
+{
+  "slug": "kalabsha-axis",
+  "projectTitle": "محور كلابشة",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
+  "verifiedLocalData": true,
+  "yearStart": 2014,
+  "yearEnd": 2023,
+  "metrics": {
+    "studyAreaKm2": 460.53,
+    "axisLengthKm": 23.04,
+    "urbanChangeKm2": 0,
+    "agriculturalChangeKm2": 8.77,
+    "industrialChangeKm2": 0,
+    "urbanFeatures": 0,
+    "agriculturalFeatures": 537,
+    "industrialFeatures": 0
+  },
+  "prices": {
+    "urban": {
+      "start": 20723578.65,
+      "end": 73637394.68
+    },
+    "agricultural": {
+      "start": 163024.92,
+      "end": 1179676.44
+    },
+    "industrial": {
+      "start": 20723578.65,
+      "end": 73637394.68
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "urban": [
+      20723578.65,
+      26602891.54,
+      32482204.44,
+      38361517.33,
+      44240830.22,
+      50120143.11,
+      55999456.0,
+      61878768.9,
+      67758081.79,
+      73637394.68
+    ],
+    "agricultural": [
+      163024.92,
+      275986.2,
+      388947.48,
+      501908.76,
+      614870.04,
+      727831.32,
+      840792.6,
+      953753.88,
+      1066715.16,
+      1179676.44
+    ],
+    "industrial": [
+      20723578.65,
+      26602891.54,
+      32482204.44,
+      38361517.33,
+      44240830.22,
+      50120143.11,
+      55999456.0,
+      61878768.9,
+      67758081.79,
+      73637394.68
+    ]
+  },
+  "landUse": [
+    {
+      "category": "2",
+      "year": 2014,
+      "area": 339.5
+    },
+    {
+      "category": "غير مصنف",
+      "year": 2014,
+      "area": 93.264
+    },
+    {
+      "category": "3",
+      "year": 2014,
+      "area": 19.959
+    },
+    {
+      "category": "2",
+      "year": 2023,
+      "area": 332.869
+    },
+    {
+      "category": "غير مصنف",
+      "year": 2023,
+      "area": 99.895
+    },
+    {
+      "category": "3",
+      "year": 2023,
+      "area": 19.968
+    }
+  ],
+  "layers": [
+    "study",
+    "axis",
+    "agricultural"
+  ],
+  "layerCounts": {
+    "axis": 1,
+    "study": 1,
+    "urban": 0,
+    "agricultural": 537,
+    "industrial": 0,
+    "old": 373,
+    "latest": 391,
+    "civil": 0
+  }
+}

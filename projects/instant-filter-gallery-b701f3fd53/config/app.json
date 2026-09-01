@@ -1,0 +1,30 @@
+{
+  "id": "b701f3fd532740c1b97dd7fc0e40ea2b",
+  "slug": "instant-filter-gallery-b701f3fd53",
+  "title": "وصلة طريق السويس من الطريق الدائري",
+  "alternateTitles": [],
+  "category": "وصلة طريق السويس من الطريق الدائري",
+  "type": "Instant Filter Gallery",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=b701f3fd532740c1b97dd7fc0e40ea2b",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/f3630f544c74c33f.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 166,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=b701f3fd532740c1b97dd7fc0e40ea2b"
+      ],
+      "sourceItemIds": [
+        "b701f3fd532740c1b97dd7fc0e40ea2b"
+      ],
+      "projectGroup": "suez-link",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 164 6 – التطبيقات المكانية لمنطقةالدراسة: 6 - 1 المنصة الرقميةللتطبيقات المكانية (Data & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة ( Data Hub) ت",
+      "matchType": "exact-item-id"
+    }
+  ],
+  "reportReferenceGroup": "suez-link"
+}

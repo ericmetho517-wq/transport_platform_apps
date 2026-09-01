@@ -1,0 +1,623 @@
+import type { TransportApp } from "./project-runtime";
+
+type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil";
+
+interface DashboardSummary {
+  slug: string;
+  projectTitle: string;
+  verifiedLocalData: boolean;
+  yearStart: number;
+  yearEnd: number;
+  metrics: Record<string, number>;
+  prices: Record<string, { start: number; end: number }>;
+  priceSeries: { years: number[]; urban: number[]; agricultural: number[]; industrial: number[] };
+  landUse: Array<{ category: string; year: number; area: number }>;
+  layers: LayerName[];
+  layerCounts?: Record<string, number>;
+  profile?: SectorProfile;
+}
+
+interface SectorProfile {
+  title: string;
+  report: string;
+  pages: number[];
+  metrics: Record<string, number>;
+  prices?: Record<string, { start: number; end: number }>;
+  changeBars?: Array<{ label: string; value: number; layer: string }>;
+  landUse?: Array<{ category: string; year: number; area: number }>;
+  statusShares?: { existing: number; underConstruction: number };
+  cropShares?: number[];
+  ownershipShares?: number[];
+}
+
+const esc = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char] || char);
+
+const isPriceDashboard = (app: TransportApp) => /سعر|أسعار|اسعار|price/i.test(app.title);
+const isAgriculturalDashboard = (app: TransportApp) => /زراعي|زراعية|agricultural/i.test(app.title);
+const civilDashboardSlugs = new Set(["dashboard-4b68db62a1", "dashboard-48c0447e11", "dashboard-890d333abf", "dashboard-489e365131", "dashboard-37e01603d0", "dashboard-ba98b53679"]);
+const impactDashboardSlugs = new Set(["dashboard-35c11a505b", "dashboard-83f3738705", "dashboard-676c18c4b7", "dashboard-4138cfe326", "dashboard-f0a5bc623c"]);
+const isCivilDashboard = (app: TransportApp) => civilDashboardSlugs.has(app.slug) || /civil study/i.test(app.title);
+const isImpactDashboard = (app: TransportApp) => impactDashboardSlugs.has(app.slug) || /developmental impact|economic and developmental impact/i.test(app.title);
+
+export function dashboardGroup(app: TransportApp): string {
+  const groupAliases: Record<string, string> = {
+    dabaa: "dabaa-axis",
+    dahshur: "dahshur-south-link",
+    kalabsha: "kalabsha-axis",
+    "qena-luxor": "qena-luxor-road",
+    qus: "qus-axis",
+    "regional-ring": "regional-ring-road",
+    "suez-free": "cairo-suez-road",
+    "suez-link": "suez-ring-link",
+    "western-upper-egypt": "western-upper-egypt",
+  };
+  if (app.reportReferenceGroup) return groupAliases[app.reportReferenceGroup] || app.reportReferenceGroup;
+  const text = `${app.category} ${app.title}`.toLowerCase();
+  if (/الصعيد الغربي|western upper/.test(text)) return "western-upper-egypt";
+  if (/دهشور|dahshur/.test(text)) return "dahshur-south-link";
+  if (/الإقليمي|الاقليمي|regional|الروبيكي|الروبيكى/.test(text)) return "regional-ring-road";
+  if (/كلابشة|kalabsha/.test(text)) return "kalabsha-axis";
+  if (/قنا|qena|luxor|الأقصر|الاقصر/.test(text)) return "qena-luxor-road";
+  if (/قوص|قوس|qus/.test(text)) return "qus-axis";
+  if (/الضبعة|دبعة|dabaa/.test(text)) return "dabaa-axis";
+  if (/وصلة.*السويس|suez road link/.test(text)) return "suez-ring-link";
+  if (/القاهرة.*السويس|cairo.suez|السويس الحر/.test(text)) return "cairo-suez-road";
+  return "western-upper-egypt";
+}
+
+function mapMarkup(): string {
+  return `<section class="gis-map" data-basemap="satellite" aria-label="خريطة تفاعلية">
+    <div class="map-status"><span class="live-dot"></span><span id="map-status-text">جارٍ تحميل طبقات المشروع المحلية…</span></div>
+    <label class="map-sector-filter" id="map-sector-filter-wrap" hidden><span>نطاق العرض</span><select id="map-sector-filter"><option value="all">كل القطاعات</option></select></label>
+    <div class="map-layer-toggles" id="map-layer-toggles"></div>
+    <svg id="interactive-map" viewBox="0 0 1000 520" role="img" aria-label="خريطة تفاعلية لبيانات المشروع">
+      <defs>
+        <pattern id="map-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#bbb" stroke-width=".6" opacity=".45"/></pattern>
+        <linearGradient id="map-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4edcf"/><stop offset="1" stop-color="#d7e3d6"/></linearGradient>
+      </defs>
+      <rect width="1000" height="520" fill="url(#map-bg)"/>
+      <g id="map-viewport"><g id="satellite-basemap"></g><rect width="1000" height="520" fill="url(#map-grid)" opacity=".16"/><g id="map-content"></g></g>
+    </svg>
+    <div class="map-controls"><button type="button" data-map-action="in" aria-label="تكبير">+</button><button type="button" data-map-action="out" aria-label="تصغير">−</button><button type="button" data-map-action="home" aria-label="إظهار كل البيانات">⌂</button></div>
+    <div class="map-wheel-hint">عجلة الماوس للتكبير · اسحب لتحريك الخريطة</div>
+    <div class="feature-popup" id="feature-popup" hidden><button type="button" aria-label="إغلاق">×</button><strong>بيانات العنصر</strong><div></div></div>
+    <div class="map-scale">صور أقمار صناعية · بيانات مكانية محلية · WGS 84</div>
+  </section>`;
+}
+
+export const renderSectorMapMarkup = mapMarkup;
+
+function referenceDialog(app: TransportApp): string {
+  const references = app.reportReferences || [];
+  if (!references.length) return "";
+  return `<dialog id="reference-dialog" class="reference-dialog"><button class="dialog-close" type="button">×</button><h3>مرجع التصميم من التقرير</h3><div class="dialog-images">${references.map((item) => `<figure><img src="${esc(item.imagePath)}" alt="مرجع ${esc(app.title)}"/><figcaption>${esc(item.reportName)} · صفحة ${item.page}</figcaption></figure>`).join("")}</div></dialog>`;
+}
+
+function dashboardHeader(app: TransportApp): string {
+  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><span class="data-badge"><i></i>بيانات محلية مترابطة</span>${app.reportReferences?.length ? '<button id="open-reference" type="button">مرجع التصميم</button>' : ""}<button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
+}
+
+function priceMarkup(app: TransportApp, group: string): string {
+  return `<main class="interactive-dashboard price-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="price">
+    ${dashboardHeader(app)}
+    <div class="price-layout">
+      <aside class="price-columns" id="price-columns"><div class="loading-panel">جارٍ قراءة أسعار الأراضي من قاعدة بيانات المشروع…</div></aside>
+      <section class="price-workspace">
+        <div class="dashboard-kpis"><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article class="gold"><span>سنة القياس</span><strong id="active-year">—</strong></article></div>
+        ${mapMarkup()}
+        <section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>
+      </section>
+    </div>
+    ${referenceDialog(app)}
+  </main>`;
+}
+
+function landMarkup(app: TransportApp, group: string): string {
+  return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
+    ${dashboardHeader(app)}
+    <div class="land-layout">
+      <aside class="land-left"><article class="opportunity-card"><span>فرص العمل لمشروعات المباني المستحدثة</span><strong data-metric="jobOpportunities">—</strong><small>فرصة عمل تقديرية مرتبطة بمناطق التغير</small></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>مناطق تغير استخدامات الأراضي</span><small>اضغط على العمود لتصفية طبقة الخريطة</small></div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
+      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+      <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>توزيع مناطق التغير</span><div class="donut" id="change-donut"><strong>—</strong></div><div id="donut-legend"></div></section></aside>
+    </div>
+    ${referenceDialog(app)}
+  </main>`;
+}
+
+function agriculturalMarkup(app: TransportApp, group: string): string {
+  const rawChangeData = group === "western-upper-egypt";
+  const agriculturalAreaLabel = rawChangeData ? "مساحة التغير الزراعي المحصورة (فدان)" : "إجمالي مساحة الأراضي الزراعية (فدان)";
+  const urbanAreaLabel = rawChangeData ? "مساحة التغير العمراني المحصورة (كم²)" : "إجمالي مساحة الأراضي العمرانية (كم²)";
+  return `<main class="interactive-dashboard agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
+    ${dashboardHeader(app)}
+    <div class="agriculture-layout">
+      <aside class="agriculture-side"><section class="dark-card agriculture-stat"><span>${agriculturalAreaLabel}</span><strong data-metric="agriculturalAreaFeddan">—</strong></section><section class="dark-card agriculture-stat"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></section><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section></aside>
+      <section class="agriculture-center"><div class="dashboard-kpis agriculture-kpis"><article class="gold"><span>${urbanAreaLabel}</span><strong data-metric="urbanChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي بين عامي <bdi>2014</bdi> و<bdi>2023</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+      <aside class="agriculture-right"><section class="dark-card gauge-card"><span>نسبة التغير العمراني بمنطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div></section><section class="dark-card agriculture-change"><span>إجمالي مساحة التغير بالأراضي الزراعية (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></section><section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section></aside>
+    </div>
+    ${referenceDialog(app)}
+  </main>`;
+}
+
+function civilMarkup(app: TransportApp, group: string): string {
+  return `<main class="interactive-dashboard civil-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="civil">
+    ${dashboardHeader(app)}
+    <div class="specialized-layout">
+      <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>عناصر الرفع المدني المسجلة</span><strong data-metric="civilFeatures">—</strong></article></section>
+      <section class="specialized-body"><aside class="dark-card civil-panel"><h2>مؤشرات الدراسة المدنية</h2><p>تعرض هذه اللوحة عناصر الرفع والحصر المدني الخاصة بهذا القطاع فقط، مع إمكانية تشغيل وإيقاف الطبقات وفحص خصائص كل عنصر من الخريطة.</p><div class="civil-facts"><span>طبقات المشروع المتاحة <b data-metric="availableLayers">—</b></span><span>العناصر العمرانية <b data-metric="urbanFeatures">—</b></span><span>العناصر الزراعية <b data-metric="agriculturalFeatures">—</b></span></div></aside>${mapMarkup()}</section>
+    </div>${referenceDialog(app)}
+  </main>`;
+}
+
+function impactMarkup(app: TransportApp, group: string): string {
+  return `<main class="interactive-dashboard impact-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="impact">
+    ${dashboardHeader(app)}
+    <div class="specialized-layout">
+      <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول المحور (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>نطاق الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>مساحة التغير العمراني (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article></section>
+      <section class="specialized-body impact-body"><aside class="dark-card impact-controls"><h2>سيناريو الأثر التنموي حتى 2053</h2><label for="impact-year">سنة العرض <strong id="impact-year-label">2024</strong></label><input id="impact-year" type="range" min="2024" max="2053" value="2024" step="1"/><div class="impact-results"><span>مؤشر التطور الزمني <b id="impact-progress">0٪</b></span><span>المساحة العمرانية التقديرية* <b id="impact-area">—</b></span><span>فرص العمل المرتبطة بالقطاع <b data-metric="jobOpportunities">—</b></span></div><small>* محاكاة خطية تفاعلية للعرض وليست قيمة تقريرية جديدة؛ القيم الأصلية المعتمدة معروضة في البطاقات والمراجع.</small></aside>${mapMarkup()}</section>
+    </div>${referenceDialog(app)}
+  </main>`;
+}
+
+export function renderInteractiveDashboard(app: TransportApp): string {
+  const group = dashboardGroup(app);
+  if (isCivilDashboard(app)) return civilMarkup(app, group);
+  if (isImpactDashboard(app)) return impactMarkup(app, group);
+  return isPriceDashboard(app) ? priceMarkup(app, group) : isAgriculturalDashboard(app) ? agriculturalMarkup(app, group) : landMarkup(app, group);
+}
+
+const formatNumber = (value: number, digits = 1) => new Intl.NumberFormat(document.documentElement.lang === "en" ? "en-US" : "ar-EG", { maximumFractionDigits: digits }).format(value || 0);
+
+function formatMoney(value: number): string {
+  if (!value) return "لا توجد قيمة مسجلة";
+  if (value >= 1_000_000_000_000) return `${formatNumber(value / 1_000_000_000_000, 2)} تريليون ج.م`;
+  if (value >= 1_000_000_000) return `${formatNumber(value / 1_000_000_000, 2)} مليار ج.م`;
+  if (value >= 1_000_000) return `${formatNumber(value / 1_000_000, 2)} مليون ج.م`;
+  return `${formatNumber(value, 0)} ج.م`;
+}
+
+function setMetric(name: string, value: number): void {
+  document.querySelectorAll<HTMLElement>(`[data-metric="${name}"]`).forEach((element) => { element.textContent = formatNumber(value, 2); });
+}
+
+function setUnavailableMetric(name: string): void {
+  document.querySelectorAll<HTMLElement>(`[data-metric="${name}"]`).forEach((element) => { element.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; });
+}
+
+function renderPriceColumns(summary: DashboardSummary): void {
+  const container = document.querySelector<HTMLElement>("#price-columns");
+  if (!container) return;
+  const labels: Record<string, string> = { urban: "الأراضي العمرانية", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية" };
+  const colors: Record<string, string> = { urban: "#ffbc25", agricultural: "#72e800", industrial: "#e6e6e6" };
+  container.innerHTML = ["urban", "industrial", "agricultural"].map((key) => {
+    const item = summary.prices[key] || { start: 0, end: 0 };
+    const difference = Math.max(item.end - item.start, 0);
+    return `<article class="price-column" data-price-kind="${key}" style="--accent:${colors[key]}"><header><span>فرق أسعار ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>أسعار ${labels[key]} ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>أسعار ${labels[key]} ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div><button type="button">عرض السلسلة على الرسم</button></article>`;
+  }).join("");
+}
+
+function renderLineChart(summary: DashboardSummary, visible: Set<string>): void {
+  const container = document.querySelector<HTMLElement>("#line-chart");
+  if (!container) return;
+  const width = 1000, height = 300, left = 70, right = 30, top = 22, bottom = 45;
+  const keys = ["urban", "agricultural", "industrial"].filter((key) => visible.has(key));
+  const all = keys.flatMap((key) => summary.priceSeries[key as keyof typeof summary.priceSeries] as number[]);
+  const max = Math.max(...all, 1);
+  const x = (index: number) => left + index * (width - left - right) / Math.max(summary.priceSeries.years.length - 1, 1);
+  const y = (value: number) => top + (max - value) * (height - top - bottom) / max;
+  const colors: Record<string, string> = { urban: "#ffb400", agricultural: "#6be500", industrial: "#e4e4e4" };
+  const labels: Record<string, string> = { urban: "العمرانية", agricultural: "الزراعية", industrial: "الصناعية" };
+  const grid = Array.from({ length: 5 }, (_, index) => {
+    const yy = top + index * (height - top - bottom) / 4;
+    const value = max * (4 - index) / 4;
+    return `<line x1="${left}" y1="${yy}" x2="${width - right}" y2="${yy}"/><text x="${left - 10}" y="${yy + 4}">${formatNumber(value, 0)}</text>`;
+  }).join("");
+  const lines = keys.map((key) => {
+    const vals = summary.priceSeries[key as "urban" | "agricultural" | "industrial"];
+    const points = vals.map((value, index) => `${x(index)},${y(value)}`).join(" ");
+    const dots = vals.map((value, index) => `<circle data-chart-kind="${key}" data-chart-year="${summary.priceSeries.years[index]}" data-chart-value="${value}" cx="${x(index)}" cy="${y(value)}" r="6"><title>${labels[key]} · ${summary.priceSeries.years[index]} · ${formatMoney(value)}</title></circle>`).join("");
+    return `<polyline points="${points}" stroke="${colors[key]}"/><g fill="${colors[key]}">${dots}</g>`;
+  }).join("");
+  const years = summary.priceSeries.years.map((year, index) => `<text x="${x(index)}" y="${height - 12}" class="year-label">${year}</text>`).join("");
+  container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" aria-label="الرسم البياني التفاعلي لأسعار الأراضي"><g class="chart-grid">${grid}</g>${lines}<g class="chart-years">${years}</g></svg>`;
+  container.querySelectorAll<SVGCircleElement>("circle[data-chart-year]").forEach((dot) => dot.addEventListener("click", () => {
+    const label = document.querySelector<HTMLElement>("#chart-year-label");
+    const activeYear = document.querySelector<HTMLElement>("#active-year");
+    const key = dot.dataset.chartKind || "urban";
+    if (label) label.textContent = `${labels[key]} · ${dot.dataset.chartYear} · ${formatMoney(Number(dot.dataset.chartValue))}`;
+    if (activeYear) activeYear.textContent = dot.dataset.chartYear || "";
+    container.querySelectorAll("circle").forEach((item) => item.classList.toggle("selected", item === dot));
+  }));
+}
+
+function renderChangeBars(summary: DashboardSummary): void {
+  const container = document.querySelector<HTMLElement>("#change-bars");
+  if (!container) return;
+  const data = summary.profile?.changeBars?.length ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, item.layer === "industrial" ? "#00a3d7" : "#ff9e00"] as [string, string, number, string]) : [
+    ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ff9e00"],
+    ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
+    ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
+  ] as Array<[string, string, number, string]>;
+  const max = Math.max(...data.map((item) => item[2]), 1);
+  container.innerHTML = data.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color}"><i></i><b>${formatNumber(value, 2)}</b><span>${label}</span></button>`).join("");
+}
+
+function renderComparison(summary: DashboardSummary, topOnly = false): void {
+  const container = document.querySelector<HTMLElement>("#comparison-chart");
+  if (!container) return;
+  const years = Array.from(new Set(summary.landUse.map((item) => item.year))).sort();
+  let categories = Array.from(new Set(summary.landUse.map((item) => item.category)));
+  if (topOnly) {
+    const totals = categories.map((category) => [category, summary.landUse.filter((item) => item.category === category).reduce((sum, item) => sum + item.area, 0)] as const).sort((a, b) => b[1] - a[1]);
+    categories = totals.slice(0, 4).map((item) => item[0]);
+  }
+  const colors = ["#47d900", "#c8cd5b", "#ffb000", "#00a5ce", "#ef5757", "#7f72d8", "#b88350", "#d8d8d8"];
+  const maxTotal = Math.max(...years.map((year) => summary.landUse.filter((item) => item.year === year && categories.includes(item.category)).reduce((sum, item) => sum + item.area, 0)), 1);
+  const rows = years.map((year) => {
+    const total = summary.landUse.filter((item) => item.year === year && categories.includes(item.category)).reduce((sum, item) => sum + item.area, 0);
+    const segments = categories.map((category, index) => {
+      const value = summary.landUse.find((item) => item.year === year && item.category === category)?.area || 0;
+      return `<i style="width:${value / maxTotal * 100}%;background:${colors[index % colors.length]}" title="${esc(category)} · ${formatNumber(value, 2)} كم²"></i>`;
+    }).join("");
+    return `<div class="comparison-row"><b>${year}</b><div>${segments}</div><span>${formatNumber(total, 1)} كم²</span></div>`;
+  }).join("");
+  const legend = categories.map((category, index) => `<span><i style="background:${colors[index % colors.length]}"></i>${esc(category)}</span>`).join("");
+  container.innerHTML = summary.landUse.length ? `${rows}<div class="comparison-legend">${legend}</div>` : '<div class="no-data">لا توجد طبقة مقارنة مسجلة لهذا المشروع؛ الخريطة ما زالت تعرض الطبقات المتاحة.</div>';
+}
+
+function renderGaugeAndDonut(summary: DashboardSummary): void {
+  const study = summary.metrics.studyAreaKm2 || 1;
+  const urban = summary.metrics.urbanChangeKm2 || 0;
+  const agri = summary.metrics.agriculturalChangeKm2 || 0;
+  const industrial = summary.metrics.industrialChangeKm2 || 0;
+  const total = urban + agri + industrial;
+  const percent = Math.min(summary.profile?.metrics.urbanChangePercent ?? urban / study * 100, 100);
+  const gauge = document.querySelector<HTMLElement>("#urban-gauge");
+  if (gauge) {
+    gauge.style.setProperty("--gauge", `${percent * 1.8}deg`);
+    const label = gauge.querySelector("strong");
+    if (label) label.textContent = `${formatNumber(percent, 1)}٪`;
+  }
+  const donut = document.querySelector<HTMLElement>("#change-donut");
+  if (donut) {
+    const profileShares = summary.profile?.statusShares;
+    const urbanShare = profileShares ? profileShares.existing : total ? urban / total * 100 : 0;
+    const agriShare = profileShares ? profileShares.underConstruction : total ? agri / total * 100 : 0;
+    donut.style.background = `conic-gradient(#ff9e00 0 ${urbanShare}%, #84db24 ${urbanShare}% ${urbanShare + agriShare}%, #00a6d8 ${urbanShare + agriShare}% 100%)`;
+    const label = donut.querySelector("strong");
+    if (label) label.textContent = `${formatNumber(total, 1)} كم²`;
+  }
+  const legend = document.querySelector<HTMLElement>("#donut-legend");
+  if (legend) legend.innerHTML = summary.profile?.statusShares
+    ? `<span><i style="background:#ff9e00"></i>قائمة ${formatNumber(summary.profile.statusShares.existing, 0)}٪</span><span><i style="background:#84db24"></i>تحت الإنشاء ${formatNumber(summary.profile.statusShares.underConstruction, 0)}٪</span>`
+    : `<button data-filter-layer="urban"><i style="background:#ff9e00"></i>عمراني ${formatNumber(urban, 1)}</button><button data-filter-layer="agricultural"><i style="background:#84db24"></i>زراعي ${formatNumber(agri, 1)}</button><button data-filter-layer="industrial"><i style="background:#00a6d8"></i>صناعي ${formatNumber(industrial, 1)}</button>`;
+}
+
+function renderAgricultureIndicators(summary: DashboardSummary): void {
+  const profile = summary.profile;
+  const cropShares = profile?.cropShares || [];
+  const crop = document.querySelector<HTMLElement>("#crop-donut");
+  const cropColors = ["#42d80b", "#d5e500", "#ff9818", "#00c9d8"];
+  if (crop && cropShares.length) {
+    let cursor = 0;
+    crop.style.background = `conic-gradient(${cropShares.map((value, index) => { const start = cursor; cursor += value; return `${cropColors[index % cropColors.length]} ${start}% ${cursor}%`; }).join(",")})`;
+  } else if (crop) { const label = crop.querySelector("strong"); if (label) label.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; }
+  const cropLegend = document.querySelector<HTMLElement>("#crop-legend");
+  if (cropLegend) cropLegend.innerHTML = cropShares.map((value, index) => `<span><i style="background:${cropColors[index % cropColors.length]}"></i>فئة ${index + 1}: ${formatNumber(value, 0)}٪</span>`).join("");
+  const ownership = profile?.ownershipShares || [];
+  const ownershipDonut = document.querySelector<HTMLElement>("#ownership-donut");
+  if (ownershipDonut && ownership.length) ownershipDonut.style.background = `conic-gradient(#ffc126 0 ${ownership[0]}%, #ff8b19 ${ownership[0]}% 100%)`;
+  else if (ownershipDonut) { const label = ownershipDonut.querySelector("strong"); if (label) label.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; }
+  const ownershipLegend = document.querySelector<HTMLElement>("#ownership-legend");
+  if (ownershipLegend && ownership.length) ownershipLegend.innerHTML = `<span><i style="background:#ffc126"></i>إيجار ${formatNumber(ownership[0], 0)}٪</span><span><i style="background:#ff8b19"></i>تمليك ${formatNumber(ownership[1], 0)}٪</span>`;
+}
+
+type Coordinates = number[] | Coordinates[];
+
+function coordinatePairs(coordinates: Coordinates, result: number[][] = []): number[][] {
+  if (Array.isArray(coordinates) && coordinates.length >= 2 && typeof coordinates[0] === "number" && typeof coordinates[1] === "number") result.push(coordinates as number[]);
+  else if (Array.isArray(coordinates)) coordinates.forEach((item) => coordinatePairs(item as Coordinates, result));
+  return result;
+}
+
+function geometryPath(geometry: { type: string; coordinates: Coordinates }, project: (pair: number[]) => [number, number]): string {
+  const line = (pairs: number[][], close = false) => pairs.map((pair, index) => `${index ? "L" : "M"}${project(pair).join(" ")}`).join(" ") + (close ? " Z" : "");
+  if (geometry.type === "Point") { const [x, y] = project(geometry.coordinates as number[]); return `M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0-8 0`; }
+  if (geometry.type === "LineString") return line(geometry.coordinates as number[][]);
+  if (geometry.type === "MultiLineString") return (geometry.coordinates as number[][][]).map((part) => line(part)).join(" ");
+  if (geometry.type === "Polygon") return (geometry.coordinates as number[][][]).map((ring) => line(ring, true)).join(" ");
+  if (geometry.type === "MultiPolygon") return (geometry.coordinates as number[][][][]).flatMap((polygon) => polygon.map((ring) => line(ring, true))).join(" ");
+  return "";
+}
+
+const fallbackBounds: Record<string, [number, number, number, number]> = {
+  "cairo-suez-road": [31.2, 29.82, 32.7, 30.3],
+  "dabaa-axis": [29.45, 29.82, 31.25, 30.5],
+  "dahshur-south-link": [30.7, 29.8, 31.2, 30.15],
+  "kalabsha-axis": [32.62, 24.4, 33.04, 24.75],
+  "qena-luxor-road": [31.75, 25.75, 32.8, 26.35],
+  "qus-axis": [32.6, 25.8, 33, 26.06],
+  "regional-ring-road": [31.15, 29.52, 31.98, 30.55],
+  "suez-ring-link": [31.3, 29.82, 32.7, 30.3],
+  "western-upper-egypt": [30.2, 22.05, 33.2, 30.15],
+};
+
+function tileX(lon: number, zoom: number): number { return Math.floor((lon + 180) / 360 * 2 ** zoom); }
+function tileY(lat: number, zoom: number): number {
+  const radians = Math.max(Math.min(lat, 85.0511), -85.0511) * Math.PI / 180;
+  return Math.floor((1 - Math.asinh(Math.tan(radians)) / Math.PI) / 2 * 2 ** zoom);
+}
+function tileLon(x: number, zoom: number): number { return x / 2 ** zoom * 360 - 180; }
+function tileLat(y: number, zoom: number): number { return Math.atan(Math.sinh(Math.PI * (1 - 2 * y / 2 ** zoom))) * 180 / Math.PI; }
+
+function renderSatelliteBasemap(target: SVGGElement, bounds: [number, number, number, number], project: (pair: number[]) => [number, number]): number {
+  const [minX, minY, maxX, maxY] = bounds;
+  let zoom = Math.max(7, Math.min(15, Math.floor(Math.log2(360 / Math.max(maxX - minX, .0001) * 2.4))));
+  let minTileX = tileX(minX, zoom), maxTileX = tileX(maxX, zoom), minTileY = tileY(maxY, zoom), maxTileY = tileY(minY, zoom);
+  while ((maxTileX - minTileX + 1) * (maxTileY - minTileY + 1) > 48 && zoom > 7) {
+    zoom -= 1;
+    minTileX = tileX(minX, zoom); maxTileX = tileX(maxX, zoom); minTileY = tileY(maxY, zoom); maxTileY = tileY(minY, zoom);
+  }
+  target.innerHTML = "";
+  let count = 0;
+  for (let x = minTileX; x <= maxTileX; x += 1) for (let y = minTileY; y <= maxTileY; y += 1) {
+    const [left, top] = project([tileLon(x, zoom), tileLat(y, zoom)]);
+    const [right, bottom] = project([tileLon(x + 1, zoom), tileLat(y + 1, zoom)]);
+    const image = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    image.setAttribute("x", String(left)); image.setAttribute("y", String(top));
+    image.setAttribute("width", String(right - left + .5)); image.setAttribute("height", String(bottom - top + .5));
+    image.setAttribute("preserveAspectRatio", "none");
+    image.setAttribute("href", `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${zoom}/${y}/${x}`);
+    image.classList.add("satellite-tile");
+    target.appendChild(image); count += 1;
+  }
+  return count;
+}
+
+export async function initializeMap(group: string, summary: DashboardSummary): Promise<void> {
+  const svg = document.querySelector<SVGSVGElement>("#interactive-map");
+  const viewport = document.querySelector<SVGGElement>("#map-viewport");
+  const satellite = document.querySelector<SVGGElement>("#satellite-basemap");
+  const content = document.querySelector<SVGGElement>("#map-content");
+  const toggles = document.querySelector<HTMLElement>("#map-layer-toggles");
+  const status = document.querySelector<HTMLElement>("#map-status-text");
+  if (!svg || !viewport || !satellite || !content || !toggles) return;
+  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي 2014", civil: "الدراسة المدنية" };
+  const loaded = await Promise.all(summary.layers.map(async (layer) => {
+    const response = await fetch(`../../data/dashboard/${group}/${layer}.geojson`);
+    if (!response.ok) throw new Error(`${layer}: HTTP ${response.status}`);
+    return [layer, await response.json()] as const;
+  }));
+  const pairs = loaded.flatMap(([, collection]) => collection.features.flatMap((feature: { geometry?: { coordinates: Coordinates } }) => feature.geometry ? coordinatePairs(feature.geometry.coordinates) : []));
+  const extentPairs = pairs.length ? pairs : [[fallbackBounds[group]?.[0] ?? 24, fallbackBounds[group]?.[1] ?? 22], [fallbackBounds[group]?.[2] ?? 36, fallbackBounds[group]?.[3] ?? 32]];
+  const xs = extentPairs.map((pair) => pair[0]), ys = extentPairs.map((pair) => pair[1]);
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  const width = Math.max(maxX - minX, .00001), height = Math.max(maxY - minY, .00001);
+  const scale = Math.min(900 / width, 430 / height);
+  const project = (pair: number[]): [number, number] => [50 + (pair[0] - minX) * scale + (900 - width * scale) / 2, 35 + (maxY - pair[1]) * scale + (430 - height * scale) / 2];
+  const tileCount = renderSatelliteBasemap(satellite, [minX, minY, maxX, maxY], project);
+  content.innerHTML = "";
+  const sectorValues = new Set<string>();
+  const sectorOf = (properties: Record<string, unknown> = {}) => String(properties["اسم_القطاع"] ?? properties["sector"] ?? properties["Sector"] ?? "").trim();
+  loaded.forEach(([layer, collection]) => {
+    const groupElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    groupElement.dataset.layerGroup = layer;
+    groupElement.classList.add(`map-${layer}`);
+    collection.features.forEach((feature: { geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }) => {
+      if (!feature.geometry) return;
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", geometryPath(feature.geometry, project));
+      path.setAttribute("vector-effect", "non-scaling-stroke");
+      const sector = sectorOf(feature.properties);
+      if (sector) { path.dataset.sector = sector; sectorValues.add(sector); }
+      path.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const popup = document.querySelector<HTMLElement>("#feature-popup");
+        if (!popup) return;
+        const rows = Object.entries(feature.properties || {}).filter(([, value]) => value !== null && value !== "").slice(0, 30);
+        popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${labels[layer]}</p>${rows.map(([key, value]) => `<p><span>${esc(key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("")}`;
+        popup.hidden = false;
+      });
+      groupElement.appendChild(path);
+    });
+    content.appendChild(groupElement);
+  });
+  toggles.innerHTML = summary.layers.map((layer) => `<button type="button" class="active" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${summary.layerCounts?.[layer] ?? summary.metrics[`${layer}Features`] ?? ""}</b></button>`).join("");
+  toggles.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => button.addEventListener("click", () => {
+    button.classList.toggle("active");
+    content.querySelector<SVGGElement>(`[data-layer-group="${button.dataset.mapLayer}"]`)?.classList.toggle("layer-hidden", !button.classList.contains("active"));
+  }));
+  const sectorWrap = document.querySelector<HTMLElement>("#map-sector-filter-wrap");
+  const sectorSelect = document.querySelector<HTMLSelectElement>("#map-sector-filter");
+  if (sectorWrap && sectorSelect && sectorValues.size > 1) {
+    const sectors = Array.from(sectorValues).sort((a, b) => Number(a) - Number(b) || a.localeCompare(b));
+    const westernSectorNames: Record<string, string> = { "1": "أسيوط", "2": "أسوان", "3": "الجيزة", "4": "المنيا", "6": "الفيوم", "7": "أبو سمبل", "8": "سوهاج", "9": "بني سويف", "11": "قنا", "12": "الأقصر" };
+    const sectorLabel = (sector: string) => group === "western-upper-egypt" && westernSectorNames[sector] ? `${westernSectorNames[sector]} - قطاع ${sector}` : `قطاع ${sector}`;
+    sectorSelect.innerHTML = `<option value="all">كل القطاعات (${sectors.length})</option>${sectors.map((sector) => `<option value="${esc(sector)}">${esc(sectorLabel(sector))}</option>`).join("")}`;
+    sectorWrap.hidden = false;
+    const numeric = (properties: Record<string, unknown>, keys: string[]) => {
+      for (const key of keys) { const value = Number(properties[key]); if (Number.isFinite(value) && value > 0) return value; }
+      return 0;
+    };
+    const updateSector = () => {
+      const selected = sectorSelect.value;
+      content.querySelectorAll<SVGPathElement>("path[data-sector]").forEach((path) => { path.hidden = selected !== "all" && path.dataset.sector !== selected; });
+      const chosen = (layer: LayerName) => loaded.find(([name]) => name === layer)?.[1].features.filter((feature: { properties?: Record<string, unknown> }) => selected === "all" || sectorOf(feature.properties) === selected) || [];
+      const rawArea = (layer: LayerName) => chosen(layer).reduce((sum: number, feature: { properties?: Record<string, unknown> }) => sum + numeric(feature.properties || {}, ["مساحة_المنطقة_كم2", "مساحة_التغير_كم2", "المساحة_كم2", "Area_KM2", "SHAPE_Area", "Shape_Area"]), 0);
+      const areaKm2 = (layer: LayerName) => { const value = rawArea(layer); return value > 1_000_000 ? value / 1_000_000 : value; };
+      const rawLength = chosen("axis").reduce((sum: number, feature: { properties?: Record<string, unknown> }) => sum + numeric(feature.properties || {}, ["طول_المحور_كم", "length", "Shape_Length", "SHAPE_Length"]), 0);
+      const axisKm = rawLength > 5_000 ? rawLength / 1_000 : rawLength;
+      if (chosen("study").length) setMetric("studyAreaKm2", areaKm2("study"));
+      if (chosen("axis").length) setMetric("axisLengthKm", axisKm);
+      if (chosen("urban").length) setMetric("urbanChangeKm2", areaKm2("urban"));
+      if (chosen("agricultural").length) {
+        const agriculturalKm2 = areaKm2("agricultural");
+        setMetric("agriculturalChangeKm2", agriculturalKm2);
+        setMetric("agriculturalAreaFeddan", agriculturalKm2 / .0042);
+        setMetric("agriculturalChangeFeddan", agriculturalKm2 / .0042);
+      }
+      setMetric("urbanFeatures", chosen("urban").length);
+      setMetric("agriculturalFeatures", chosen("agricultural").length);
+      setMetric("industrialFeatures", chosen("industrial").length);
+      const gauge = document.querySelector<HTMLElement>("#urban-gauge");
+      const studyArea = areaKm2("study"), urbanArea = areaKm2("urban");
+      if (gauge && studyArea > 0) {
+        const percent = Math.min(urbanArea / studyArea * 100, 100);
+        gauge.style.setProperty("--gauge", `${percent * 1.8}deg`);
+        const gaugeLabel = gauge.querySelector("strong");
+        if (gaugeLabel) gaugeLabel.textContent = `${formatNumber(percent, 2)}٪`;
+      }
+      const comparison = document.querySelector<HTMLElement>("#comparison-chart");
+      if (comparison) {
+        if (selected === "all") renderComparison(summary);
+        else comparison.innerHTML = `<div class="no-data">لا تتوفر مقارنة زمنية منفصلة موثقة لـ ${esc(sectorLabel(selected))} في ملف التصدير الحالي؛ الخريطة والبطاقات تعرض بيانات القطاع المختار فقط.</div>`;
+      }
+    };
+    sectorSelect.addEventListener("change", updateSector);
+    updateSector();
+  }
+  const locale = document.documentElement.lang === "en" ? "en-US" : "ar-EG";
+  if (status) status.textContent = pairs.length ? `${pairs.length.toLocaleString(locale)} نقطة هندسية · ${summary.layers.length} طبقات متاحة · ${tileCount} صورة قمر صناعي` : `لا توجد هندسة مكانية في قاعدة المشروع الحالية · ${tileCount} صورة قمر صناعي مرجعية`;
+
+  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0;
+  const apply = () => viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
+  const zoomBy = (factor: number, centerX = 500, centerY = 260) => {
+    const nextZoom = Math.min(Math.max(zoom * factor, .7), 8);
+    if (Math.abs(nextZoom - zoom) < .0001) return false;
+    const ratio = nextZoom / zoom;
+    tx = centerX - (centerX - tx) * ratio;
+    ty = centerY - (centerY - ty) * ratio;
+    zoom = nextZoom;
+    apply();
+    return true;
+  };
+  document.querySelectorAll<HTMLButtonElement>("[data-map-action]").forEach((button) => button.addEventListener("click", () => {
+    if (button.dataset.mapAction === "in") zoomBy(1.35);
+    if (button.dataset.mapAction === "out") zoomBy(.74);
+    if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
+  }));
+  svg.addEventListener("wheel", (event) => {
+    const bounds = svg.getBoundingClientRect();
+    const centerX = (event.clientX - bounds.left) * 1000 / Math.max(bounds.width, 1);
+    const centerY = (event.clientY - bounds.top) * 520 / Math.max(bounds.height, 1);
+    const factor = Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
+    if (zoomBy(factor, centerX, centerY)) event.preventDefault();
+  }, { passive: false });
+  svg.addEventListener("pointerdown", (event) => { dragging = true; lastX = event.clientX; lastY = event.clientY; svg.setPointerCapture(event.pointerId); });
+  svg.addEventListener("pointermove", (event) => { if (!dragging) return; tx += (event.clientX - lastX) * 1000 / svg.clientWidth; ty += (event.clientY - lastY) * 520 / svg.clientHeight; lastX = event.clientX; lastY = event.clientY; apply(); });
+  svg.addEventListener("pointerup", () => { dragging = false; });
+  svg.addEventListener("pointercancel", () => { dragging = false; });
+  svg.addEventListener("lostpointercapture", () => { dragging = false; });
+  svg.addEventListener("click", () => { const popup = document.querySelector<HTMLElement>("#feature-popup"); if (popup) popup.hidden = true; });
+  document.querySelector<HTMLButtonElement>("#feature-popup > button")?.addEventListener("click", () => { const popup = document.querySelector<HTMLElement>("#feature-popup"); if (popup) popup.hidden = true; });
+}
+
+function activateLayerOnly(layer: string): void {
+  document.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
+    const active = button.dataset.mapLayer === layer;
+    button.classList.toggle("active", active);
+    document.querySelector<SVGGElement>(`[data-layer-group="${button.dataset.mapLayer}"]`)?.classList.toggle("layer-hidden", !active);
+  });
+}
+
+export async function initInteractiveDashboard(app: TransportApp): Promise<void> {
+  const root = document.querySelector<HTMLElement>(".interactive-dashboard");
+  if (!root) return;
+  const group = root.dataset.dashboardGroup || dashboardGroup(app);
+  try {
+    const response = await fetch(`../../data/dashboard/${group}/summary.json`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const summary = await response.json() as DashboardSummary;
+    const dataBadge = document.querySelector<HTMLElement>(".data-badge");
+    if (dataBadge && !summary.verifiedLocalData) {
+      dataBadge.classList.add("report-only");
+      dataBadge.innerHTML = "مؤشرات من التقرير - لا توجد طبقات محلية مطابقة";
+    }
+    const mapScale = document.querySelector<HTMLElement>(".map-scale");
+    if (mapScale) mapScale.textContent = summary.verifiedLocalData ? "صور أقمار صناعية · بيانات مكانية محلية · WGS 84" : "صور أقمار صناعية مرجعية · لا توجد هندسة محلية مطابقة للقطاع";
+    const profilesResponse = await fetch("../../data/sector-profiles.json");
+    if (profilesResponse.ok) {
+      const profiles = await profilesResponse.json() as Record<string, SectorProfile>;
+      const profile = profiles[group];
+      if (profile) {
+        summary.profile = profile;
+        summary.metrics = { ...summary.metrics, ...profile.metrics };
+        summary.prices = { ...summary.prices, ...(profile.prices || {}) };
+        summary.landUse = profile.landUse?.length ? profile.landUse : summary.landUse;
+        summary.yearEnd = group === "cairo-suez-road" ? 2024 : 2023;
+        summary.priceSeries.years = Array.from({ length: summary.yearEnd - summary.yearStart + 1 }, (_, index) => summary.yearStart + index);
+        (["urban", "agricultural", "industrial"] as const).forEach((key) => {
+          const pair = summary.prices[key] || { start: 0, end: 0 };
+          summary.priceSeries[key] = summary.priceSeries.years.map((_, index, years) => Math.round(pair.start + (pair.end - pair.start) * index / Math.max(years.length - 1, 1)));
+        });
+      }
+    }
+    Object.entries(summary.metrics).forEach(([name, value]) => setMetric(name, value));
+    setMetric("civilFeatures", summary.layerCounts?.civil || 0);
+    if (!summary.metrics.agriculturalWorkersThousands) setUnavailableMetric("agriculturalWorkersThousands");
+    if (!summary.metrics.agriculturalAreaFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) setUnavailableMetric("agriculturalAreaFeddan");
+    if (!summary.metrics.agriculturalChangeFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) setUnavailableMetric("agriculturalChangeFeddan");
+    setMetric("availableLayers", summary.layers.length);
+    const totalChange = (summary.metrics.urbanChangeKm2 || 0) + (summary.metrics.agriculturalChangeKm2 || 0) + (summary.metrics.industrialChangeKm2 || 0);
+    setMetric("totalChangeKm2", totalChange);
+    setMetric("jobOpportunities", summary.metrics.jobOpportunities ?? Math.round((summary.metrics.urbanFeatures || 0) * 3.5 + (summary.metrics.agriculturalFeatures || 0) * .35));
+    const activeYear = document.querySelector<HTMLElement>("#active-year");
+    if (activeYear) activeYear.textContent = String(summary.yearEnd);
+
+    if (root.dataset.mode === "price") {
+      renderPriceColumns(summary);
+      const visible = new Set(["urban", "agricultural", "industrial"]);
+      renderLineChart(summary, visible);
+      document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((button) => button.addEventListener("click", () => {
+        const key = button.dataset.series || "";
+        button.classList.toggle("active");
+        if (button.classList.contains("active")) visible.add(key); else visible.delete(key);
+        renderLineChart(summary, visible);
+      }));
+      document.querySelectorAll<HTMLButtonElement>("[data-price-kind] button").forEach((button) => button.addEventListener("click", () => {
+        const kind = button.closest<HTMLElement>("[data-price-kind]")?.dataset.priceKind || "urban";
+        visible.clear(); visible.add(kind);
+        document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((toggle) => toggle.classList.toggle("active", toggle.dataset.series === kind));
+        renderLineChart(summary, visible);
+      }));
+    } else if (root.dataset.mode === "agriculture") {
+      renderComparison(summary);
+      renderGaugeAndDonut(summary);
+      renderAgricultureIndicators(summary);
+      document.querySelector<HTMLSelectElement>("#comparison-mode")?.addEventListener("change", (event) => renderComparison(summary, (event.currentTarget as HTMLSelectElement).value === "top4"));
+    } else if (root.dataset.mode === "land") {
+      renderChangeBars(summary);
+      renderComparison(summary);
+      renderGaugeAndDonut(summary);
+      document.querySelector<HTMLSelectElement>("#comparison-mode")?.addEventListener("change", (event) => renderComparison(summary, (event.currentTarget as HTMLSelectElement).value === "top4"));
+    }
+    await initializeMap(group, summary);
+    if (root.dataset.mode === "impact") {
+      const slider = document.querySelector<HTMLInputElement>("#impact-year");
+      const updateImpact = () => {
+        const year = Number(slider?.value || 2024);
+        const progress = Math.round((year - 2024) / 29 * 100);
+        const base = summary.metrics.urbanChangeKm2 || 0;
+        const projected = base * (1 + progress / 100);
+        const label = document.querySelector<HTMLElement>("#impact-year-label");
+        const progressLabel = document.querySelector<HTMLElement>("#impact-progress");
+        const area = document.querySelector<HTMLElement>("#impact-area");
+        if (label) label.textContent = String(year);
+        if (progressLabel) progressLabel.textContent = `${formatNumber(progress, 0)}٪`;
+        if (area) area.textContent = `${formatNumber(projected, 1)} كم²`;
+      };
+      slider?.addEventListener("input", updateImpact);
+      updateImpact();
+    }
+    document.querySelectorAll<HTMLElement>("[data-filter-layer]").forEach((element) => element.addEventListener("click", () => activateLayerOnly(element.dataset.filterLayer || "urban")));
+  } catch (error) {
+    document.querySelectorAll<HTMLElement>(".loading-panel").forEach((element) => { element.textContent = "تعذر قراءة ملف البيانات المحلية لهذا المشروع."; });
+    const status = document.querySelector<HTMLElement>("#map-status-text");
+    if (status) status.textContent = `خطأ في تحميل البيانات: ${String(error)}`;
+  }
+
+  document.querySelector<HTMLButtonElement>("#fullscreen-dashboard")?.addEventListener("click", () => document.fullscreenElement ? document.exitFullscreen() : root.requestFullscreen());
+  const dialog = document.querySelector<HTMLDialogElement>("#reference-dialog");
+  document.querySelector<HTMLButtonElement>("#open-reference")?.addEventListener("click", () => dialog?.showModal());
+  dialog?.querySelector<HTMLButtonElement>(".dialog-close")?.addEventListener("click", () => dialog.close());
+}

@@ -1,0 +1,30 @@
+{
+  "id": "64753ea652e2481ea0efeeb4c8c52ed0",
+  "slug": "dashboard-64753ea652",
+  "title": "Agricultural and Urban Land Dashboard",
+  "alternateTitles": [],
+  "category": "Kalabsha axis",
+  "type": "Dashboard",
+  "language": "en",
+  "direction": "ltr",
+  "sourceUrl": "https://transport-p-a.maps.arcgis.com/apps/dashboards/64753ea652e2481ea0efeeb4c8c52ed0",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/11c8de8770795ae1.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 322,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/2e90425b8b0846e38acdbc2c5f70d011"
+      ],
+      "sourceItemIds": [
+        "2e90425b8b0846e38acdbc2c5f70d011"
+      ],
+      "projectGroup": "kalabsha",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 20 6 - 3 مؤشرات أداء تفاعليةInteractive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي (العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرونة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ويتضح ذلك بالشكل رقم (٥٣٣). شكل (335) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الأراضي https:",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "kalabsha"
+}

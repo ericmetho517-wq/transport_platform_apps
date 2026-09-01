@@ -1,0 +1,75 @@
+{
+  "slug": "western-upper-egypt",
+  "projectTitle": "محور الصعيد الغربي",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
+  "verifiedLocalData": true,
+  "priceDataStatus": "No verified price fields were found in the exported sector layers; zero values mean unavailable, not zero land price",
+  "yearStart": 2014,
+  "yearEnd": 2024,
+  "metrics": {
+    "studyAreaKm2": 23141.64,
+    "axisLengthKm": 1182.66,
+    "urbanChangeKm2": 36.22,
+    "agriculturalChangeKm2": 852.69,
+    "industrialChangeKm2": 0,
+    "urbanFeatures": 646,
+    "agriculturalFeatures": 2874,
+    "industrialFeatures": 0
+  },
+  "prices": {
+    "urban": {
+      "start": 0,
+      "end": 0
+    },
+    "agricultural": {
+      "start": 0,
+      "end": 0
+    },
+    "industrial": {
+      "start": 0,
+      "end": 0
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "urban": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ],
+    "agricultural": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ],
+    "industrial": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ]
+  },
+  "landUse": [],
+  "landUseDataStatus": "The exported 2014 layer does not contain a complete area series comparable with 2024; the chart is intentionally unavailable",
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural"
+  ],
+  "layerCounts": {
+    "axis": 10,
+    "study": 10,
+    "urban": 646,
+    "agricultural": 2874,
+    "industrial": 0,
+    "old": 33335,
+    "latest": 34444,
+    "civil": 0
+  }
+}

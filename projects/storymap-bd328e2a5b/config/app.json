@@ -1,0 +1,45 @@
+{
+  "id": "bd328e2a5b8a4d9985bdba2eae711a07",
+  "slug": "storymap-bd328e2a5b",
+  "title": "تطور الاراضي المحيطة بمحور قوص",
+  "alternateTitles": [],
+  "category": "محور قوص",
+  "type": "StoryMap",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://storymaps.arcgis.com/stories/bd328e2a5b8a4d9985bdba2eae711a07",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/a6c6efc4b5491ea9.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 270,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/b4b143f41db841fa901adf3a9dd8677b"
+      ],
+      "sourceItemIds": [
+        "b4b143f41db841fa901adf3a9dd8677b"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 268 ٦ - ٥ محتوى مكاني لتصفح أعمال ومرفقات المشروع (Story Map : ) وكذلك تم تصميم صفحات ويب متسلسلة ( Story Map) تستعرض حجم الأعمال على كل محور وأمثلة ونماذج من الدراسات والأعمال المنفذة خلال الدراسات الإستشارية لكل محور. إلى جانب نماذج إستمارات الإستبيان الإلكترونية المستخدمة خلال المشروع، وعينات من الخرائط التفصيلية المنتجة لمنطقة الدراسة بكل محور ويتضح ذلك من الشكل رقم ( 278 ،279 .) شكل278) يوضحمحتوى مكاني لتصفح أعمال وم",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/4aa00361f42c5530.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 270,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/b4b143f41db841fa901adf3a9dd8677b"
+      ],
+      "sourceItemIds": [
+        "b4b143f41db841fa901adf3a9dd8677b"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 268 ٦ - ٥ محتوى مكاني لتصفح أعمال ومرفقات المشروع (Story Map : ) وكذلك تم تصميم صفحات ويب متسلسلة ( Story Map) تستعرض حجم الأعمال على كل محور وأمثلة ونماذج من الدراسات والأعمال المنفذة خلال الدراسات الإستشارية لكل محور. إلى جانب نماذج إستمارات الإستبيان الإلكترونية المستخدمة خلال المشروع، وعينات من الخرائط التفصيلية المنتجة لمنطقة الدراسة بكل محور ويتضح ذلك من الشكل رقم ( 278 ،279 .) شكل278) يوضحمحتوى مكاني لتصفح أعمال وم",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "qus"
+}

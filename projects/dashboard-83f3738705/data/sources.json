@@ -1,0 +1,20 @@
+{
+  "applicationId": "83f37387052845fb90f1d04f6088277f",
+  "sourceDataRoot": "C:\\Geoinformatics for Information Systems\\وزارة النقل",
+  "availableTopLevelDataFolders": [
+    "الاسماعيلية",
+    "الاقليمي",
+    "السويس",
+    "الضبعة",
+    "الطريق الدولي الساحلي",
+    "خط المترو الثالث",
+    "خط سكه حديد كفر داود السادات",
+    "دهشور",
+    "طريق الصعيد الغربي",
+    "قنا",
+    "قوس",
+    "كلابشة"
+  ],
+  "arcgisMigration": "Run npm run migrate:arcgis to populate item metadata and configuration.",
+  "copiedDataFiles": []
+}

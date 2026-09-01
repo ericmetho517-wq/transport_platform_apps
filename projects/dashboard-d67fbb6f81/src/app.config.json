@@ -1,0 +1,157 @@
+{
+  "id": "d67fbb6f810a42cca3621b59aff94cd8",
+  "slug": "dashboard-d67fbb6f81",
+  "title": "Land Prices Indicators",
+  "alternateTitles": [],
+  "category": "التطبيقات محور الصعيد الغربي باللغة الانجليزية",
+  "type": "Dashboard",
+  "language": "en",
+  "direction": "ltr",
+  "sourceUrl": "https://www.arcgis.com/apps/dashboards/d67fbb6f810a42cca3621b59aff94cd8",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/e87aa37ea02f6d10.jpg",
+      "reportName": "(1).pdf",
+      "page": 58,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 53 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائياتالاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 62 .) شكل62 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي e",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/910627958f5fc16c.png",
+      "reportName": "(2).pdf",
+      "page": 28,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 23 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائياتالاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 15 .) شكل15 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي h",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/ce88efb745956c1e.png",
+      "reportName": "(3).pdf",
+      "page": 59,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 54 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 63 .) شكل63 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي ",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/ac4542d8aacde128.jpg",
+      "reportName": "(4).pdf",
+      "page": 58,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 53 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائياتالاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 61 .) شكل61 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي e",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/e053b5c559930cb6.png",
+      "reportName": "(5).pdf",
+      "page": 58,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 53 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 61 .) شكل61 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي ",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/ca6ce367a0732666.jpg",
+      "reportName": "(6).pdf",
+      "page": 60,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 55 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 65 .) شكل65 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي ",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/ea0424cb950179de.jpg",
+      "reportName": "(7).pdf",
+      "page": 47,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 42 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 41 .) شكل41 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي ",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/d9918eb223a13836.jpg",
+      "reportName": "(9).pdf",
+      "page": 54,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 49 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 59 .) شكل59 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي ",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/7bf2b9a57d5bd9ea.png",
+      "reportName": ".pdf",
+      "page": 73,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "sourceItemIds": [
+        "188137c2535448f5bd52e6d0347a57ea"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 68 ب- مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائياتالاقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ ي القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 82 .) شكل82 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي e",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "western-upper-egypt"
+}

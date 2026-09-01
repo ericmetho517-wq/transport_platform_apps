@@ -1,0 +1,30 @@
+{
+  "id": "1d894feec2724517af8c09e13ac9146a",
+  "slug": "instant-filter-gallery-1d894feec2",
+  "title": "محور قوص",
+  "alternateTitles": [],
+  "category": "محور قوص",
+  "type": "Instant Filter Gallery",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=1d894feec2724517af8c09e13ac9146a",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/f83cdb4c51dc6ced.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 266,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=1d894feec2724517af8c09e13ac9146a"
+      ],
+      "sourceItemIds": [
+        "1d894feec2724517af8c09e13ac9146a"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 264 6 – التطبيقات المكانية لمنطقة الدراسة ٦ - 1 المنصة الرقمية للتطبيقاتالمكانية (Data & Application Hub) : تم تصميم وبناء مجموعة من التطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة ( Data Hub) ",
+      "matchType": "exact-item-id"
+    }
+  ],
+  "reportReferenceGroup": "qus"
+}

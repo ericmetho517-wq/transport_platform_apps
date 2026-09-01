@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "Study_Area",
+"xy_coordinate_resolution": 1e-09,
+"z_coordinate_resolution": 0.0001,
+"features": [
+{"type":"Feature","properties":{"اسم_المحور":"محور كلبشة","اسم_المحافظة":"محافظة أسوان","مساحة_المنطقة_كم2":460.5334631874058,"GlobalID":"{E68EA142-DB91-4A47-AEB8-D2D7CA6ED7FA}","SHAPE_Length":0.81596038979931085,"SHAPE_Area":0.041079535853213181},"geometry":{"type":"Polygon","coordinates":[[[32.718042322,24.664987902],[32.727058729,24.484616514],[32.957137379,24.491802062],[32.718042322,24.664987902]]]}}
+]
+}

@@ -1,0 +1,202 @@
+{
+  "generatedAt": "2026-09-01T10:21:01.478Z",
+  "applications": 78,
+  "groups": {
+    "cairo-suez-road": {
+      "layers": {},
+      "verifiedLocalData": false,
+      "source": "Report profile only; no sector-matched local geodatabase was identified"
+    },
+    "dabaa-axis": {
+      "layers": {
+        "study": {
+          "features": 1,
+          "coordinatePairs": 131,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 3,
+          "coordinatePairs": 143,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 94,
+          "coordinatePairs": 686,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 745,
+          "coordinatePairs": 6194,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb"
+    },
+    "dahshur-south-link": {
+      "layers": {
+        "axis": {
+          "features": 1,
+          "coordinatePairs": 23,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 98,
+          "coordinatePairs": 750,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 114,
+          "coordinatePairs": 607,
+          "invalidCoordinates": 0
+        },
+        "civil": {
+          "features": 29,
+          "coordinatePairs": 4192,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb"
+    },
+    "kalabsha-axis": {
+      "layers": {
+        "study": {
+          "features": 1,
+          "coordinatePairs": 4,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 1,
+          "coordinatePairs": 2,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 537,
+          "coordinatePairs": 2148,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb"
+    },
+    "qena-luxor-road": {
+      "layers": {
+        "baseline": {
+          "features": 755,
+          "coordinatePairs": 16128,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\قنا\\Database13022024.gdb"
+    },
+    "qus-axis": {
+      "layers": {
+        "study": {
+          "features": 1,
+          "coordinatePairs": 49,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 1,
+          "coordinatePairs": 20,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 263,
+          "coordinatePairs": 1126,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 687,
+          "coordinatePairs": 3661,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb"
+    },
+    "regional-ring-road": {
+      "layers": {
+        "study": {
+          "features": 1,
+          "coordinatePairs": 197,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 3,
+          "coordinatePairs": 202,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 128,
+          "coordinatePairs": 1539,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 264,
+          "coordinatePairs": 1301,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\الاقليمي\\DataBase_Schema.gdb"
+    },
+    "suez-ring-link": {
+      "layers": {
+        "study": {
+          "features": 2,
+          "coordinatePairs": 179,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 2,
+          "coordinatePairs": 79,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 213,
+          "coordinatePairs": 1725,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 18,
+          "coordinatePairs": 158,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\السويس\\السويس\\New File Geodatabase.gdb"
+    },
+    "western-upper-egypt": {
+      "layers": {
+        "study": {
+          "features": 10,
+          "coordinatePairs": 1340,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 10,
+          "coordinatePairs": 790,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 646,
+          "coordinatePairs": 3758,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 2874,
+          "coordinatePairs": 50041,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\طريق الصعيد الغربي\\New File Geodatabase.gdb"
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "result": "PASSED"
+}

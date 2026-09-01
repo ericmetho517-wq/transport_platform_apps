@@ -1,0 +1,17 @@
+[
+  {
+    "imagePath": "../../references/6125096393c93006.jpg",
+    "reportName": "Final Report 3-2024.pdf",
+    "page": 169,
+    "sourceUrls": [
+      "https://transport-p-a.maps.arcgis.com/apps/webappviewer/index.html?id=ab67de8780784fb0a2564eede83b2f6e"
+    ],
+    "sourceItemIds": [
+      "ab67de8780784fb0a2564eede83b2f6e"
+    ],
+    "projectGroup": "suez-link",
+    "referenceKind": "webviewer",
+    "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 167 6 - ٤ تطبيق ويب تفاعلي لإستعراض منطقة الدراسة (Web App Builder :) تم تصميم وبناء تطبيق من نوعية (ويب) يخدم أكثر من مستخدم في إستعراض وتصفح عناصر ومكونات الخريطة التفصيلية الرقمية المنتجة لمنطقة الدراسة، والتعرف على مفتاح الخريطة (تكويد ألوان المعالم المختلفة من أراضي عمران وأراضي زراعية وأراضي فضاء ..) مع إمكانية إجراء القياسات على الخريطة، وتنفيذ المقارنات بوظيفة ( Swipe) لتقييم حجم التغير بالمنطقة بين عامي (2014 – 2",
+    "matchType": "project-and-application-type"
+  }
+]

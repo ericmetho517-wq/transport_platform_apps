@@ -1,0 +1,33 @@
+{
+  "id": "ebc7f46747f0416490742d8e85130c9a",
+  "slug": "web-viewer-ebc7f46747",
+  "title": "منطقة الدراسة القوس الشرقى للدائرى الأقليمى و خط الروبيكى",
+  "alternateTitles": [
+    "Web App Study Area: Eastern Arc of the Regional Ring Road and the Rubiki Line"
+  ],
+  "category": "القوس الشرقى للدائرى الأقليمى و خط الروبيكى باللغة الانجليزية",
+  "type": "Web AppViewer",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://transport-p-a.maps.arcgis.com/apps/webappviewer/index.html?id=ebc7f46747f0416490742d8e85130c9a",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/de52cbeaa0f5a09c.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 69,
+      "sourceUrls": [
+        "https://transport",
+        "https://transport-p-a.maps.arcgis.com/apps/webappviewer/index.html?id=06db13f389c74cdea94f60899b09df3a"
+      ],
+      "sourceItemIds": [
+        "06db13f389c74cdea94f60899b09df3a"
+      ],
+      "projectGroup": "regional-ring",
+      "referenceKind": "webviewer",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 67 ٦ - ٤ تطبيق ويب تفاعلي لاستعراض منطقة الدراسة (Web App Builder) : تم تصميم وبناء تطبيق من نوعية (ويب) يخدم أكثر من مستخدم فياستعراض وتصفح عناصر ومكونات الخريطة التفصيلية الرقمية المنتجة لمنطقة الدراسة، والتعرف على مفتاح الخريطة (تكويد ألوان المعالم المختلفة من أراضي عمران وأراضي زراعية وأراضي فضاء..) مع إمكانية إجراء القياسات على الخريطة، وتنفيذ المقارنات بوظيفة ( Swipe) لتقييم حجم التغير بالمنطقة بين عامي ( 2014 – 202",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "regional-ring"
+}

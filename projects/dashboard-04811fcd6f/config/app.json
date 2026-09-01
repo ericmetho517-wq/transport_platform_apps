@@ -1,0 +1,30 @@
+{
+  "id": "04811fcd6f2d44518c3a44dd90cf20ca",
+  "slug": "dashboard-04811fcd6f",
+  "title": "لوحة مؤشرات أسعار الأراضى",
+  "alternateTitles": [],
+  "category": "القوس الشرقى للدائرى الأقليمى و خط الروبيكى باللغة العربية",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://www.arcgis.com/apps/dashboards/04811fcd6f2d44518c3a44dd90cf20ca",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/a8ea4e9b05d4ca4f.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 67,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/cc36ae11af8f42c48081e72a8dfb4feb"
+      ],
+      "sourceItemIds": [
+        "cc36ae11af8f42c48081e72a8dfb4feb"
+      ],
+      "projectGroup": "regional-ring",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 65 ٦ - ٢ مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع: تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الإقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..)، ويتضح ذلك بالشكل رقم ( 66) . شكل٦٦) يوضح مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "regional-ring"
+}

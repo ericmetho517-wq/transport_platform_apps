@@ -1,0 +1,61 @@
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = fileURLToPath(new URL("..", import.meta.url));
+const apps = JSON.parse(readFileSync(join(root, "registry", "apps.json"), "utf8"));
+const profiles = JSON.parse(readFileSync(join(root, "public", "data", "sector-profiles.json"), "utf8"));
+const aliases = {
+  dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis",
+  "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road",
+  "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt",
+};
+const expectedCounts = { Dashboard: 50, Experience: 10, StoryMap: 9, "Web AppViewer": 5, "Instant Filter Gallery": 4 };
+const errors = [];
+const warnings = [];
+const counts = {};
+const sectors = {};
+const specializedDashboards = new Set(["dashboard-4b68db62a1", "dashboard-48c0447e11", "dashboard-890d333abf", "dashboard-489e365131", "dashboard-37e01603d0", "dashboard-ba98b53679", "dashboard-35c11a505b", "dashboard-83f3738705", "dashboard-676c18c4b7", "dashboard-4138cfe326", "dashboard-f0a5bc623c"]);
+
+for (const app of apps) {
+  counts[app.type] = (counts[app.type] || 0) + 1;
+  const sector = app.reportReferenceGroup;
+  const dataGroup = aliases[sector];
+  sectors[sector] = (sectors[sector] || 0) + 1;
+  if (!dataGroup) errors.push(`${app.slug}: unknown sector group ${sector}`);
+  if (!existsSync(join(root, "projects", app.slug, "index.html"))) errors.push(`${app.slug}: missing project entrypoint`);
+  if (!existsSync(join(root, "public", "data", "dashboard", dataGroup || "", "summary.json"))) errors.push(`${app.slug}: missing sector summary ${dataGroup}`);
+  for (const ref of app.reportReferences || []) {
+    if (ref.projectGroup !== sector) errors.push(`${app.slug}: cross-sector reference ${ref.projectGroup} != ${sector}`);
+    const image = ref.imagePath?.replace(/^\.\.\/\.\.\//, "");
+    if (image && !existsSync(join(root, "public", image))) errors.push(`${app.slug}: missing report reference ${image}`);
+  }
+  if (specializedDashboards.has(app.slug) && (app.reportReferences || []).some((ref) => ref.referenceKind === "landuse-dashboard")) errors.push(`${app.slug}: specialized dashboard must not use a generic land-use screenshot as its design reference`);
+  if (!app.reportReferences?.length) warnings.push(`${app.slug}: no embedded report screenshot; runtime remains data-driven`);
+}
+
+for (const [type, expected] of Object.entries(expectedCounts)) {
+  if (counts[type] !== expected) errors.push(`${type}: expected ${expected}, found ${counts[type] || 0}`);
+}
+for (const group of Object.values(aliases)) {
+  if (!["dabaa-axis", "western-upper-egypt"].includes(group) && !profiles[group]) errors.push(`${group}: missing authoritative report profile`);
+}
+
+const suezFree = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "cairo-suez-road", "summary.json"), "utf8"));
+if (suezFree.layers.length) errors.push("cairo-suez-road: spatial layers must stay empty until a sector-matched geodatabase is identified");
+if (suezFree.verifiedLocalData) errors.push("cairo-suez-road: must not claim the Suez-link geodatabase as verified local data");
+
+const report = {
+  generatedAt: new Date().toISOString(), applications: apps.length, counts, sectors,
+  checks: {
+    projectEntrypoints: apps.length,
+    sectorSummaries: new Set(apps.map((app) => aliases[app.reportReferenceGroup])).size,
+    reportProfiles: Object.keys(profiles).length,
+    crossSectorReferences: errors.filter((item) => item.includes("cross-sector")).length,
+  },
+  errors, warnings,
+  result: errors.length ? "FAILED" : "PASSED",
+};
+writeFileSync(join(root, "registry", "sector-audit.json"), JSON.stringify(report, null, 2) + "\n", "utf8");
+console.log(JSON.stringify(report, null, 2));
+if (errors.length) process.exitCode = 1;

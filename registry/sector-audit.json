@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-09-01T10:21:00.566Z",
+  "applications": 78,
+  "counts": {
+    "Dashboard": 50,
+    "Experience": 10,
+    "StoryMap": 9,
+    "Instant Filter Gallery": 4,
+    "Web AppViewer": 5
+  },
+  "sectors": {
+    "western-upper-egypt": 9,
+    "dahshur": 9,
+    "regional-ring": 13,
+    "kalabsha": 7,
+    "qena-luxor": 7,
+    "suez-link": 10,
+    "suez-free": 13,
+    "qus": 6,
+    "dabaa": 4
+  },
+  "checks": {
+    "projectEntrypoints": 78,
+    "sectorSummaries": 9,
+    "reportProfiles": 7,
+    "crossSectorReferences": 0
+  },
+  "errors": [],
+  "warnings": [
+    "dashboard-4b68db62a1: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-48c0447e11: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-890d333abf: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-35c11a505b: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-489e365131: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-83f3738705: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-676c18c4b7: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-37e01603d0: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-ba98b53679: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-4138cfe326: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-f0a5bc623c: no embedded report screenshot; runtime remains data-driven",
+    "experience-d72fea4308: no embedded report screenshot; runtime remains data-driven",
+    "storymap-3bc68f337f: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-594d7c7ff4: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-c1e29f0123: no embedded report screenshot; runtime remains data-driven"
+  ],
+  "result": "PASSED"
+}

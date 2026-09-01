@@ -1,0 +1,135 @@
+{
+  "slug": "qus-axis",
+  "projectTitle": "محور قوص",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb",
+  "verifiedLocalData": true,
+  "yearStart": 2014,
+  "yearEnd": 2023,
+  "metrics": {
+    "studyAreaKm2": 186.16,
+    "axisLengthKm": 18.72,
+    "urbanChangeKm2": 0.52,
+    "agriculturalChangeKm2": 7.1,
+    "industrialChangeKm2": 0,
+    "urbanFeatures": 263,
+    "agriculturalFeatures": 687,
+    "industrialFeatures": 0
+  },
+  "prices": {
+    "urban": {
+      "start": 21241701.96,
+      "end": 86041124.87
+    },
+    "agricultural": {
+      "start": 41954628.74,
+      "end": 54307637.48
+    },
+    "industrial": {
+      "start": 21241701.96,
+      "end": 86041124.87
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "urban": [
+      21241701.96,
+      28441637.84,
+      35641573.72,
+      42841509.59,
+      50041445.47,
+      57241381.35,
+      64441317.23,
+      71641253.11,
+      78841188.99,
+      86041124.87
+    ],
+    "agricultural": [
+      41954628.74,
+      43327185.27,
+      44699741.8,
+      46072298.32,
+      47444854.85,
+      48817411.38,
+      50189967.9,
+      51562524.43,
+      52935080.96,
+      54307637.48
+    ],
+    "industrial": [
+      21241701.96,
+      28441637.84,
+      35641573.72,
+      42841509.59,
+      50041445.47,
+      57241381.35,
+      64441317.23,
+      71641253.11,
+      78841188.99,
+      86041124.87
+    ]
+  },
+  "landUse": [
+    {
+      "category": "غير مصنف",
+      "year": 2014,
+      "area": 128.802
+    },
+    {
+      "category": "2",
+      "year": 2014,
+      "area": 35.918
+    },
+    {
+      "category": "3",
+      "year": 2014,
+      "area": 25.477
+    },
+    {
+      "category": "غير مصنف",
+      "year": 2023,
+      "area": 136.897
+    },
+    {
+      "category": "3",
+      "year": 2023,
+      "area": 26.072
+    },
+    {
+      "category": "2",
+      "year": 2023,
+      "area": 24.577
+    },
+    {
+      "category": "4",
+      "year": 2023,
+      "area": 2.415
+    }
+  ],
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural"
+  ],
+  "layerCounts": {
+    "axis": 1,
+    "study": 1,
+    "urban": 263,
+    "agricultural": 687,
+    "industrial": 0,
+    "old": 1153,
+    "latest": 1270,
+    "civil": 0
+  }
+}

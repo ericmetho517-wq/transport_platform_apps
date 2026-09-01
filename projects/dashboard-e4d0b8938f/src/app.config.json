@@ -1,0 +1,30 @@
+{
+  "id": "e4d0b8938f7948b8ae2630f119bc2b77",
+  "slug": "dashboard-e4d0b8938f",
+  "title": "Urban Land Indicators Dashboard",
+  "alternateTitles": [],
+  "category": "Suez Road link from the Ring Road",
+  "type": "Dashboard",
+  "language": "en",
+  "direction": "ltr",
+  "sourceUrl": "https://www.arcgis.com/apps/dashboards/e4d0b8938f7948b8ae2630f119bc2b77",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/25618d1a4022ca30.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 168,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/85be400b84fe4c50be597182bfbf207d"
+      ],
+      "sourceItemIds": [
+        "85be400b84fe4c50be597182bfbf207d"
+      ],
+      "projectGroup": "suez-link",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 166 6 - ٣ مؤشرات أداء تفاعلية (Interactive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي ( العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرون ة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ويتضح ذلك من الشكل رقم ( 170) . شكل0) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الأراضي h",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "suez-link"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "67afc365717a4e57bc896300b8938411",
+  "slug": "web-viewer-67afc36571",
+  "title": "تطبيق منطقة الدراسة محور قوص",
+  "alternateTitles": [],
+  "category": "محور قوص",
+  "type": "Web AppViewer",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://transport-p-a.maps.arcgis.com/apps/webappviewer/index.html?id=67afc365717a4e57bc896300b8938411",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/51d74b83b4c3ab56.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 269,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/webappviewer/index.html?id=67afc365717a4e57bc896300b8938411"
+      ],
+      "sourceItemIds": [
+        "67afc365717a4e57bc896300b8938411"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "webviewer",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 267 ٦ - ٤ تطبيق ويب تفاعلي لاستعراض منطقة الدراسة (Web App Builder :) تم تصميم وبناء تطبيق من نوعية (ويب) يخدم أكثر من مستخدم في إستعراض وتصفح عناصر ومكونات الخريطة التفصيلية الرقمية المنتجة لمنطقة الدراسة، والتعرف على مفتاح الخريطة (تكويد ألوان المعالم المختلفة من أراضي عمران وأراضي زراعية وأراضي فضاء ..) مع إمكانية إجراء القياسات على الخريطة، وتنفيذ المقارنات بوظيفة ( Swipe) لتقييم حجم التغير بالمنطقة بين عامي ( 2014 – ",
+      "matchType": "exact-item-id"
+    }
+  ],
+  "reportReferenceGroup": "qus"
+}

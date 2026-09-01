@@ -1,0 +1,90 @@
+{
+  "id": "83aeb3c15402424d85f63f682ee63b59",
+  "slug": "experience-83aeb3c154",
+  "title": "لوحة مؤشرات أنماط و أسعار الأراضى",
+  "alternateTitles": [],
+  "category": "محور قوص",
+  "type": "Experience",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://experience.arcgis.com/experience/83aeb3c15402424d85f63f682ee63b59",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/f83cdb4c51dc6ced.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 266,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=1d894feec2724517af8c09e13ac9146a"
+      ],
+      "sourceItemIds": [
+        "1d894feec2724517af8c09e13ac9146a"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 264 6 – التطبيقات المكانية لمنطقة الدراسة ٦ - 1 المنصة الرقمية للتطبيقاتالمكانية (Data & Application Hub) : تم تصميم وبناء مجموعة من التطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة ( Data Hub) ",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/88a54800fb0255a3.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 267,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/58fefdb551da441698ce9b40d9fccf80"
+      ],
+      "sourceItemIds": [
+        "58fefdb551da441698ce9b40d9fccf80"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 265 ٦ - ٢ مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع: تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الإقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل - ..) ويتضح ذلك من الشكل رقم ( 275) . شكل275) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أ",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/159756654a6e9b97.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 268,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/5a3aaa3b3a2647cc9280e4ee6ff5c1f6"
+      ],
+      "sourceItemIds": [
+        "5a3aaa3b3a2647cc9280e4ee6ff5c1f6"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 266 ٦ - ٣ مؤشرات أداء تفاعلية (Interactive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي (العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرونة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ويتضح ذلك من الشكل رقم ( 276) . شكل276) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الأراضي h",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/a6c6efc4b5491ea9.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 270,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/b4b143f41db841fa901adf3a9dd8677b"
+      ],
+      "sourceItemIds": [
+        "b4b143f41db841fa901adf3a9dd8677b"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 268 ٦ - ٥ محتوى مكاني لتصفح أعمال ومرفقات المشروع (Story Map : ) وكذلك تم تصميم صفحات ويب متسلسلة ( Story Map) تستعرض حجم الأعمال على كل محور وأمثلة ونماذج من الدراسات والأعمال المنفذة خلال الدراسات الإستشارية لكل محور. إلى جانب نماذج إستمارات الإستبيان الإلكترونية المستخدمة خلال المشروع، وعينات من الخرائط التفصيلية المنتجة لمنطقة الدراسة بكل محور ويتضح ذلك من الشكل رقم ( 278 ،279 .) شكل278) يوضحمحتوى مكاني لتصفح أعمال وم",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/4aa00361f42c5530.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 270,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/b4b143f41db841fa901adf3a9dd8677b"
+      ],
+      "sourceItemIds": [
+        "b4b143f41db841fa901adf3a9dd8677b"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 268 ٦ - ٥ محتوى مكاني لتصفح أعمال ومرفقات المشروع (Story Map : ) وكذلك تم تصميم صفحات ويب متسلسلة ( Story Map) تستعرض حجم الأعمال على كل محور وأمثلة ونماذج من الدراسات والأعمال المنفذة خلال الدراسات الإستشارية لكل محور. إلى جانب نماذج إستمارات الإستبيان الإلكترونية المستخدمة خلال المشروع، وعينات من الخرائط التفصيلية المنتجة لمنطقة الدراسة بكل محور ويتضح ذلك من الشكل رقم ( 278 ،279 .) شكل278) يوضحمحتوى مكاني لتصفح أعمال وم",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "qus"
+}

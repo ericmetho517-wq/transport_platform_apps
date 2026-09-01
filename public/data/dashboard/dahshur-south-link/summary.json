@@ -1,0 +1,140 @@
+{
+  "slug": "dahshur-south-link",
+  "projectTitle": "وصلة دهشور الجنوبية",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb",
+  "verifiedLocalData": true,
+  "yearStart": 2014,
+  "yearEnd": 2023,
+  "metrics": {
+    "studyAreaKm2": 0,
+    "axisLengthKm": 35.13,
+    "urbanChangeKm2": 35.45,
+    "agriculturalChangeKm2": 8.79,
+    "industrialChangeKm2": 0,
+    "urbanFeatures": 98,
+    "agriculturalFeatures": 114,
+    "industrialFeatures": 0
+  },
+  "prices": {
+    "urban": {
+      "start": 370754870.41,
+      "end": 7793345339.97
+    },
+    "agricultural": {
+      "start": 370754870.41,
+      "end": 7793345339.97
+    },
+    "industrial": {
+      "start": 370754870.41,
+      "end": 7793345339.97
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "urban": [
+      370754870.41,
+      1195487144.81,
+      2020219419.21,
+      2844951693.6,
+      3669683968.0,
+      4494416242.39,
+      5319148516.79,
+      6143880791.18,
+      6968613065.58,
+      7793345339.97
+    ],
+    "agricultural": [
+      370754870.41,
+      1195487144.81,
+      2020219419.21,
+      2844951693.6,
+      3669683968.0,
+      4494416242.39,
+      5319148516.79,
+      6143880791.18,
+      6968613065.58,
+      7793345339.97
+    ],
+    "industrial": [
+      370754870.41,
+      1195487144.81,
+      2020219419.21,
+      2844951693.6,
+      3669683968.0,
+      4494416242.39,
+      5319148516.79,
+      6143880791.18,
+      6968613065.58,
+      7793345339.97
+    ]
+  },
+  "landUse": [
+    {
+      "category": "2",
+      "year": 2014,
+      "area": 242.107
+    },
+    {
+      "category": "3",
+      "year": 2014,
+      "area": 63.236
+    },
+    {
+      "category": "1",
+      "year": 2014,
+      "area": 28.184
+    },
+    {
+      "category": "غير مصنف",
+      "year": 2014,
+      "area": 25.431
+    },
+    {
+      "category": "2",
+      "year": 2023,
+      "area": 191.482
+    },
+    {
+      "category": "3",
+      "year": 2023,
+      "area": 92.623
+    },
+    {
+      "category": "1",
+      "year": 2023,
+      "area": 38.642
+    },
+    {
+      "category": "غير مصنف",
+      "year": 2023,
+      "area": 35.117
+    }
+  ],
+  "layers": [
+    "axis",
+    "urban",
+    "agricultural",
+    "civil"
+  ],
+  "layerCounts": {
+    "axis": 1,
+    "study": 0,
+    "urban": 98,
+    "agricultural": 114,
+    "industrial": 0,
+    "old": 196,
+    "latest": 262,
+    "civil": 29
+  }
+}

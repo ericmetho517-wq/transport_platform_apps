@@ -1,0 +1,90 @@
+{
+  "id": "e197a279771940309212170a74ede75d",
+  "slug": "experience-e197a27977",
+  "title": "لوحة مؤشرات أنماط و أسعار الأراضى",
+  "alternateTitles": [],
+  "category": "محور كلابشة",
+  "type": "Experience",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://experience.arcgis.com/experience/e197a279771940309212170a74ede75d",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/53f4b53ffca20bbb.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 320,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=f07b900e648349b5b71fb1655615dcf9"
+      ],
+      "sourceItemIds": [
+        "f07b900e648349b5b71fb1655615dcf9"
+      ],
+      "projectGroup": "kalabsha",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 8 6 – التطبيقات المكانية لمنطقة الدراسة 6 - 1 المنصة الرقمية للتطبيقاتالمكانية (Data & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة (Data Hub) تسمح",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/c87406ac90cc9ed5.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 321,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/3b684f1406ce4b139ac0a69254570ddb"
+      ],
+      "sourceItemIds": [
+        "3b684f1406ce4b139ac0a69254570ddb"
+      ],
+      "projectGroup": "kalabsha",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء ٩١٣ 6 - 2 مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع: تم بناء مجموعة من مؤشرات الأداء التفاعلية (Interactive Dashboard) مدمجة بالإحصائيات الإقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ القرار في حصر وتلخيص المعلومات والنتائ والإحصائيات العددية (مساحات – فرص عمل - ..) ويتضح ذلك بالشكل رقم (٤٣٣). شكل (335) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار ا",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/11c8de8770795ae1.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 322,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/2e90425b8b0846e38acdbc2c5f70d011"
+      ],
+      "sourceItemIds": [
+        "2e90425b8b0846e38acdbc2c5f70d011"
+      ],
+      "projectGroup": "kalabsha",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 20 6 - 3 مؤشرات أداء تفاعليةInteractive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي (العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرونة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ويتضح ذلك بالشكل رقم (٥٣٣). شكل (335) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الأراضي https:",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/8381f11498ed3d14.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 324,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/3c8f04f4d0f94198928d81848c5795eb"
+      ],
+      "sourceItemIds": [
+        "3c8f04f4d0f94198928d81848c5795eb"
+      ],
+      "projectGroup": "kalabsha",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 22 6 - 5 محتوى مكاني لتصفح أعمال ومرفقات المشروعStory Map :) وكذلك تمتصميم صفحات ويب متسلسلة (Story Map) تستعرض حجم الأعمال على كل محور وأمثلة ونماذج من الدراسات والأعمال المنفذة خلال الدراسات الإستشارية لكل محور. إلى جانب نماذج إستمارات الإستبيان الإلكترونية المستخدمة خلال المشروع، وعينات من الخرائط التفصيلية المنتجة لمنطقة الدراسة بكل محور ويتضح ذلك بالشكل رقم (7 ،8 . ) شكل٧) يوضح محتوى مكاني لتصفح أعمال ومرفقات المشروع",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/48a387a1edda2287.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 324,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/3c8f04f4d0f94198928d81848c5795eb"
+      ],
+      "sourceItemIds": [
+        "3c8f04f4d0f94198928d81848c5795eb"
+      ],
+      "projectGroup": "kalabsha",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 22 6 - 5 محتوى مكاني لتصفح أعمال ومرفقات المشروعStory Map :) وكذلك تمتصميم صفحات ويب متسلسلة (Story Map) تستعرض حجم الأعمال على كل محور وأمثلة ونماذج من الدراسات والأعمال المنفذة خلال الدراسات الإستشارية لكل محور. إلى جانب نماذج إستمارات الإستبيان الإلكترونية المستخدمة خلال المشروع، وعينات من الخرائط التفصيلية المنتجة لمنطقة الدراسة بكل محور ويتضح ذلك بالشكل رقم (7 ،8 . ) شكل٧) يوضح محتوى مكاني لتصفح أعمال ومرفقات المشروع",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "kalabsha"
+}

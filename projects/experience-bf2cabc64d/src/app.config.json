@@ -1,0 +1,90 @@
+{
+  "id": "bf2cabc64d70477f840305b8409b8f51",
+  "slug": "experience-bf2cabc64d",
+  "title": "لوحة مؤشرات أنماط و أسعار الأراضى",
+  "alternateTitles": [],
+  "category": "طريق قنا الاقصر",
+  "type": "Experience",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://experience.arcgis.com/experience/bf2cabc64d70477f840305b8409b8f51",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/7a01b257aeb6e1e9.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 213,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=6d5e9f5f3985464197b7a06bfdb947b0"
+      ],
+      "sourceItemIds": [
+        "6d5e9f5f3985464197b7a06bfdb947b0"
+      ],
+      "projectGroup": "qena-luxor",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 211 6 – التطبيقات المكانية لمنطقة الدراسة ٦ - 1 المنصة الرقمية للتطبيقات المكانيةData & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيلية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة (Data Hub) تسم",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/dd6ce4fe6ace8d4e.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 214,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/048f4e4237124929bc8395ba40ec3d0f"
+      ],
+      "sourceItemIds": [
+        "048f4e4237124929bc8395ba40ec3d0f"
+      ],
+      "projectGroup": "qena-luxor",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 212 ٦ - ٢ مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع: تم بناء مجموعة من مؤشرات الأداء التفاعلية (Interactive Dashboard) مدمجة بالإحصائيات الإقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل -..) ويتضح ذلك من الشكل رقم (218) . شكل218) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعا",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/5e6387a9b7c937e8.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 215,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/0c7d78be88004cc3ab9f364dc5bb8255"
+      ],
+      "sourceItemIds": [
+        "0c7d78be88004cc3ab9f364dc5bb8255"
+      ],
+      "projectGroup": "qena-luxor",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 213 ٦ - ٣ مؤشرات أداء تفاعلية (Interactive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي (العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرونة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ويتضح ذلك من الشكل رقم (219) . شكل219) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الأراضي ht",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/285cb6000ca6b83f.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 217,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/e98ec507f55a48be8889c0135e7e56c5"
+      ],
+      "sourceItemIds": [
+        "e98ec507f55a48be8889c0135e7e56c5"
+      ],
+      "projectGroup": "qena-luxor",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 215 ٦ - ٥ محتوى مكاني لتصفح أعمال ومرفقات المشروع (Story Map :) وكذلك تمتصميم صفحات ويب متسلسلة (Story Map) تستعرض حجم الأعمال على كل محور وأمثلة ونماذج من الدراسات والأعمال المنفذة خلال الدراسات الإستشارية لكل محور. إلى جانب نماذج إستمارات الإستبيان الإلكترونية المستخدمة خلال المشروع، وعينات من الخرائط التفصيلية المنتجة لمنطقة الدراسة بكل محور ويتضح ذلك من الشكل رقم (221 ،222 .) شكل221) يوضحمحتوى مكاني لتصفح أعمال ومرفقا",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/9f33b15388961ffb.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 217,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/e98ec507f55a48be8889c0135e7e56c5"
+      ],
+      "sourceItemIds": [
+        "e98ec507f55a48be8889c0135e7e56c5"
+      ],
+      "projectGroup": "qena-luxor",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 215 ٦ - ٥ محتوى مكاني لتصفح أعمال ومرفقات المشروع (Story Map :) وكذلك تمتصميم صفحات ويب متسلسلة (Story Map) تستعرض حجم الأعمال على كل محور وأمثلة ونماذج من الدراسات والأعمال المنفذة خلال الدراسات الإستشارية لكل محور. إلى جانب نماذج إستمارات الإستبيان الإلكترونية المستخدمة خلال المشروع، وعينات من الخرائط التفصيلية المنتجة لمنطقة الدراسة بكل محور ويتضح ذلك من الشكل رقم (221 ،222 .) شكل221) يوضحمحتوى مكاني لتصفح أعمال ومرفقا",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "qena-luxor"
+}

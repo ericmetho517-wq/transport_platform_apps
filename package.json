@@ -1,0 +1,23 @@
+{
+  "name": "transport-platform-78-apps",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:vercel": "npm run verify:structure && npm run verify:sectors && npm run verify:data && vite build",
+    "preview": "vite preview",
+    "verify:structure": "node tools/verify-structure.mjs",
+    "verify:sectors": "node tools/verify-sector-integrity.mjs",
+    "verify:data": "node tools/verify-data-integrity.mjs",
+    "migrate:arcgis": "node tools/migrate-arcgis.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "ab7611e2f4384ac69d1da597a5c4d426",
+  "slug": "dashboard-ab7611e2f4",
+  "title": "لوحة مؤشرات الأراضى العمرانية",
+  "alternateTitles": [],
+  "category": "القوس الشرقى للدائرى الأقليمى و خط الروبيكى باللغة العربية",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://www.arcgis.com/apps/dashboards/ab7611e2f4384ac69d1da597a5c4d426",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/7c2c4a0905edbff7.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 68,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/d1387e8c8a0041b5aba78df48c39b182"
+      ],
+      "sourceItemIds": [
+        "d1387e8c8a0041b5aba78df48c39b182"
+      ],
+      "projectGroup": "regional-ring",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 66 ٦ - ٣ مؤشرات أداء تفاعلية (Interactive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي (العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرونة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ، ويتضح ذلك بالشكل رقم ( 67) . شكل٧٦) يوضح مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الراضي http",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "regional-ring"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "ea34620f1eb644428a96ede09e8ea09a",
+  "slug": "dashboard-ea34620f1e",
+  "title": "Agricultural and Urban Land Indicators Dashboard",
+  "alternateTitles": [],
+  "category": "Qena Luxor Road",
+  "type": "Dashboard",
+  "language": "en",
+  "direction": "ltr",
+  "sourceUrl": "https://transport-p-a.maps.arcgis.com/apps/dashboards/ea34620f1eb644428a96ede09e8ea09a",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/5e6387a9b7c937e8.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 215,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/0c7d78be88004cc3ab9f364dc5bb8255"
+      ],
+      "sourceItemIds": [
+        "0c7d78be88004cc3ab9f364dc5bb8255"
+      ],
+      "projectGroup": "qena-luxor",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 213 ٦ - ٣ مؤشرات أداء تفاعلية (Interactive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي (العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرونة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ويتضح ذلك من الشكل رقم (219) . شكل219) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الأراضي ht",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "qena-luxor"
+}

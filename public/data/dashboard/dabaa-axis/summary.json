@@ -1,0 +1,140 @@
+{
+  "slug": "dabaa-axis",
+  "projectTitle": "محور الضبعة",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb",
+  "verifiedLocalData": true,
+  "yearStart": 2014,
+  "yearEnd": 2023,
+  "metrics": {
+    "studyAreaKm2": 4452.15,
+    "axisLengthKm": 235.07,
+    "urbanChangeKm2": 27.73,
+    "agriculturalChangeKm2": 155.34,
+    "industrialChangeKm2": 0,
+    "urbanFeatures": 94,
+    "agriculturalFeatures": 745,
+    "industrialFeatures": 0
+  },
+  "prices": {
+    "urban": {
+      "start": 662.77,
+      "end": 9893.62
+    },
+    "agricultural": {
+      "start": 3361652.14,
+      "end": 13443019.69
+    },
+    "industrial": {
+      "start": 0,
+      "end": 0
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "urban": [
+      662.77,
+      1688.42,
+      2714.07,
+      3739.72,
+      4765.37,
+      5791.02,
+      6816.67,
+      7842.32,
+      8867.97,
+      9893.62
+    ],
+    "agricultural": [
+      3361652.14,
+      4481804.09,
+      5601956.04,
+      6722107.99,
+      7842259.94,
+      8962411.89,
+      10082563.84,
+      11202715.79,
+      12322867.74,
+      13443019.69
+    ],
+    "industrial": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "landUse": [
+    {
+      "category": "Vscant Lands",
+      "year": 2014,
+      "area": 3138.716
+    },
+    {
+      "category": "Agriculture",
+      "year": 2014,
+      "area": 1044.027
+    },
+    {
+      "category": "Urban",
+      "year": 2014,
+      "area": 264.099
+    },
+    {
+      "category": "Water Bodies ",
+      "year": 2014,
+      "area": 5.213
+    },
+    {
+      "category": "Vscant Lands",
+      "year": 2023,
+      "area": 2529.551
+    },
+    {
+      "category": "Agriculture",
+      "year": 2023,
+      "area": 1622.772
+    },
+    {
+      "category": "Urban",
+      "year": 2023,
+      "area": 272.052
+    },
+    {
+      "category": "Water Bodies ",
+      "year": 2023,
+      "area": 5.213
+    }
+  ],
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural"
+  ],
+  "layerCounts": {
+    "axis": 3,
+    "study": 1,
+    "urban": 94,
+    "agricultural": 745,
+    "industrial": 0,
+    "old": 1790,
+    "latest": 3866,
+    "civil": 0
+  }
+}

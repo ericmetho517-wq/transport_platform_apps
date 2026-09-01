@@ -1,0 +1,122 @@
+{
+  "slug": "qena-luxor-road",
+  "projectTitle": "طريق قنا الأقصر",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\قنا\\Database13022024.gdb",
+  "verifiedLocalData": true,
+  "yearStart": 2014,
+  "yearEnd": 2023,
+  "metrics": {
+    "studyAreaKm2": 0,
+    "axisLengthKm": 0.0,
+    "urbanChangeKm2": 0,
+    "agriculturalChangeKm2": 0,
+    "industrialChangeKm2": 0,
+    "urbanFeatures": 0,
+    "agriculturalFeatures": 0,
+    "industrialFeatures": 0
+  },
+  "prices": {
+    "urban": {
+      "start": 0,
+      "end": 0
+    },
+    "agricultural": {
+      "start": 0,
+      "end": 0
+    },
+    "industrial": {
+      "start": 0,
+      "end": 0
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "urban": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "agricultural": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "industrial": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "landUse": [
+    {
+      "category": "3",
+      "year": 2014,
+      "area": 0.0
+    },
+    {
+      "category": "8",
+      "year": 2014,
+      "area": 0.0
+    },
+    {
+      "category": "غير مصنف",
+      "year": 2014,
+      "area": 0.0
+    },
+    {
+      "category": "1",
+      "year": 2014,
+      "area": 0.0
+    },
+    {
+      "category": "2",
+      "year": 2014,
+      "area": 0.0
+    }
+  ],
+  "layers": [
+    "baseline"
+  ],
+  "layerCounts": {
+    "axis": 0,
+    "study": 0,
+    "urban": 0,
+    "agricultural": 0,
+    "industrial": 0,
+    "old": 755,
+    "latest": 0,
+    "civil": 0
+  }
+}

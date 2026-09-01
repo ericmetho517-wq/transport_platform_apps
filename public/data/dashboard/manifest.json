@@ -1,0 +1,74 @@
+{
+  "western-upper-egypt": {
+    "summary": "data/dashboard/western-upper-egypt/summary.json",
+    "layers": [
+      "study",
+      "axis",
+      "urban",
+      "agricultural"
+    ]
+  },
+  "dahshur-south-link": {
+    "summary": "data/dashboard/dahshur-south-link/summary.json",
+    "layers": [
+      "axis",
+      "urban",
+      "agricultural",
+      "civil"
+    ]
+  },
+  "regional-ring-road": {
+    "summary": "data/dashboard/regional-ring-road/summary.json",
+    "layers": [
+      "study",
+      "axis",
+      "urban",
+      "agricultural"
+    ]
+  },
+  "kalabsha-axis": {
+    "summary": "data/dashboard/kalabsha-axis/summary.json",
+    "layers": [
+      "study",
+      "axis",
+      "agricultural"
+    ]
+  },
+  "qena-luxor-road": {
+    "summary": "data/dashboard/qena-luxor-road/summary.json",
+    "layers": [
+      "baseline"
+    ]
+  },
+  "qus-axis": {
+    "summary": "data/dashboard/qus-axis/summary.json",
+    "layers": [
+      "study",
+      "axis",
+      "urban",
+      "agricultural"
+    ]
+  },
+  "suez-ring-link": {
+    "summary": "data/dashboard/suez-ring-link/summary.json",
+    "layers": [
+      "study",
+      "axis",
+      "urban",
+      "agricultural"
+    ]
+  },
+  "cairo-suez-road": {
+    "summary": "data/dashboard/cairo-suez-road/summary.json",
+    "layers": []
+  },
+  "dabaa-axis": {
+    "summary": "data/dashboard/dabaa-axis/summary.json",
+    "layers": [
+      "study",
+      "axis",
+      "urban",
+      "agricultural"
+    ]
+  }
+}

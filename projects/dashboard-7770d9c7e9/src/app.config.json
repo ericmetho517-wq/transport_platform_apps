@@ -1,0 +1,30 @@
+{
+  "id": "7770d9c7e9e948af8549667ab86a8c51",
+  "slug": "dashboard-7770d9c7e9",
+  "title": "لوحة مؤشرات أسعار الأراضى",
+  "alternateTitles": [],
+  "category": "وصلة طريق السويس من الطريق الدائري",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://www.arcgis.com/apps/dashboards/7770d9c7e9e948af8549667ab86a8c51",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/a908292467520ed1.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 167,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/7770d9c7e9e948af8549667ab86a8c51"
+      ],
+      "sourceItemIds": [
+        "7770d9c7e9e948af8549667ab86a8c51"
+      ],
+      "projectGroup": "suez-link",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 165 6 - 2 مؤشرات أداء تفاعلية Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع: تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الإقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل - ..) ويتضح ذلك من الشكل رقم ( 169) . شكل169) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسع",
+      "matchType": "exact-item-id"
+    }
+  ],
+  "reportReferenceGroup": "suez-link"
+}

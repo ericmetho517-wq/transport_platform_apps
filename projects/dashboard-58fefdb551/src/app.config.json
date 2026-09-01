@@ -1,0 +1,30 @@
+{
+  "id": "58fefdb551da441698ce9b40d9fccf80",
+  "slug": "dashboard-58fefdb551",
+  "title": "لوحة مؤشرات الاسعار الأراضى",
+  "alternateTitles": [],
+  "category": "محور قوص",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://www.arcgis.com/apps/dashboards/58fefdb551da441698ce9b40d9fccf80",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/88a54800fb0255a3.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 267,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/58fefdb551da441698ce9b40d9fccf80"
+      ],
+      "sourceItemIds": [
+        "58fefdb551da441698ce9b40d9fccf80"
+      ],
+      "projectGroup": "qus",
+      "referenceKind": "price-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 265 ٦ - ٢ مؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أسعار الأراضي بمنطقة المشروع: تم بناء مجموعة من مؤشرات الأداء التفاعلية ( Interactive Dashboard) مدمجة بالإحصائيات الإقتصادية عن تغير الأسعار مع الزمن بالمنطقة والتي تخدم مستوى متخذ القرار في حصر وتلخيص المعلومات والنتائج والإحصائيات العددية (مساحات – فرص عمل - ..) ويتضح ذلك من الشكل رقم ( 275) . شكل275) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغير أ",
+      "matchType": "exact-item-id"
+    }
+  ],
+  "reportReferenceGroup": "qus"
+}

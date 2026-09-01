@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "Axis_Road",
+"xy_coordinate_resolution": 1e-09,
+"z_coordinate_resolution": 0.0001,
+"features": [
+{"type":"Feature","properties":{"اسم_المحور":"محور كلبشة","اسم_المحافظة":"محافظة أسوان","طول_المحور_كم":23.039190569406131,"GlobalID":"{5AC340CC-8289-4CB3-A816-AAFF18221A29}","SHAPE_Length":0.2274126138015457},"geometry":{"type":"LineString","coordinates":[[32.722553846,24.574802819,0.0],[32.949273256,24.581795322,0.0]]}}
+]
+}

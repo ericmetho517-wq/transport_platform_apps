@@ -1,0 +1,32 @@
+{
+  "id": "0edd4664ca75418e868cf4ba1054a5ce",
+  "slug": "instant-filter-gallery-0edd4664ca",
+  "title": "الدائري الإقليمي والروبيكي",
+  "alternateTitles": [
+    "Regional Ring Road and Al-Rubiki"
+  ],
+  "category": "القوس الشرقى للدائرى الأقليمى و خط الروبيكى باللغة الانجليزية",
+  "type": "Instant Filter Gallery",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=0edd4664ca75418e868cf4ba1054a5ce",
+  "status": "generated-from-registry",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/5e0eb97ba7b73a17.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 66,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=0edd4664ca75418e868cf4ba1054a5ce"
+      ],
+      "sourceItemIds": [
+        "0edd4664ca75418e868cf4ba1054a5ce"
+      ],
+      "projectGroup": "regional-ring",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 64 6 – التطبيقات المكانية لمنطقةالدراسة: ٦ - 1 المنصة الرقمية للتطبيقات المكانيةData & Application Hub) : تم تصميم وبناء مجموعة من التطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة ( Data Hub) تس",
+      "matchType": "exact-item-id"
+    }
+  ],
+  "reportReferenceGroup": "regional-ring"
+}
