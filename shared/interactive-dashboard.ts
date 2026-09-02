@@ -146,6 +146,25 @@ function landMarkup(app: TransportApp, group: string): string {
 
 function agriculturalMarkup(app: TransportApp, group: string): string {
   const rawChangeData = group === "western-upper-egypt";
+  if (rawChangeData) {
+    return `<main class="interactive-dashboard agriculture-dashboard western-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
+      ${dashboardHeader(app)}
+      <div class="western-agriculture-kpis dashboard-kpis">
+        <article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article>
+        <article><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalWorkers">—</strong></article>
+        <article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article>
+        <article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>
+        <article class="gold"><span>عدد العمالة الصناعية</span><strong data-metric="industrialWorkers">—</strong></article>
+        <article class="orange"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article>
+      </div>
+      <div class="agriculture-layout">
+        <aside class="agriculture-side western-agriculture-side"><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section></aside>
+        <section class="agriculture-center western-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2024</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+        <aside class="agriculture-right western-agriculture-right"><section class="dark-card gauge-card"><span>نسبة التغير بالأراضي الزراعية</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة التغير بالأراضي الصناعية</span><div class="gauge" id="industrial-gauge"><i></i><strong>—</strong></div></section></aside>
+      </div>
+      ${referenceDialog(app)}
+    </main>`;
+  }
   const agriculturalAreaLabel = rawChangeData ? "مساحة التغير الزراعي المحصورة (فدان)" : "إجمالي مساحة الأراضي الزراعية (فدان)";
   const urbanAreaLabel = rawChangeData ? "مساحة التغير العمراني المحصورة (كم²)" : "إجمالي مساحة الأراضي العمرانية (كم²)";
   return `<main class="interactive-dashboard agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
@@ -340,13 +359,22 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
     crop.style.background = `conic-gradient(${cropShares.map((value, index) => { const start = cursor; cursor += value; return `${cropColors[index % cropColors.length]} ${start}% ${cursor}%`; }).join(",")})`;
   } else if (crop) { const label = crop.querySelector("strong"); if (label) label.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; }
   const cropLegend = document.querySelector<HTMLElement>("#crop-legend");
-  if (cropLegend) cropLegend.innerHTML = cropShares.map((value, index) => `<span><i style="background:${cropColors[index % cropColors.length]}"></i>فئة ${index + 1}: ${formatNumber(value, 0)}٪</span>`).join("");
+  const cropLabels = ["محاصيل موسمية", "خضروات", "فاكهة", "أخرى"];
+  if (cropLegend) cropLegend.innerHTML = cropShares.map((value, index) => `<span><i style="background:${cropColors[index % cropColors.length]}"></i>${cropLabels[index]}: ${formatNumber(value, 0)}٪</span>`).join("");
   const ownership = profile?.ownershipShares || [];
   const ownershipDonut = document.querySelector<HTMLElement>("#ownership-donut");
   if (ownershipDonut && ownership.length) ownershipDonut.style.background = `conic-gradient(#ffc126 0 ${ownership[0]}%, #ff8b19 ${ownership[0]}% 100%)`;
   else if (ownershipDonut) { const label = ownershipDonut.querySelector("strong"); if (label) label.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; }
   const ownershipLegend = document.querySelector<HTMLElement>("#ownership-legend");
-  if (ownershipLegend && ownership.length) ownershipLegend.innerHTML = `<span><i style="background:#ffc126"></i>إيجار ${formatNumber(ownership[0], 0)}٪</span><span><i style="background:#ff8b19"></i>تمليك ${formatNumber(ownership[1], 0)}٪</span>`;
+  if (ownershipLegend && ownership.length) ownershipLegend.innerHTML = `<span><i style="background:#ffc126"></i>ملك ${formatNumber(ownership[0], 0)}٪</span><span><i style="background:#ff8b19"></i>إيجار ${formatNumber(ownership[1], 0)}٪</span>`;
+  (["agricultural", "industrial"] as const).forEach((kind) => {
+    const gauge = document.querySelector<HTMLElement>(`#${kind}-gauge`);
+    if (!gauge) return;
+    const percent = Math.min(summary.profile?.metrics[`${kind}ChangePercent`] ?? 0, 100);
+    gauge.style.setProperty("--gauge", `${percent * 1.8}deg`);
+    const label = gauge.querySelector("strong");
+    if (label) label.textContent = `${formatNumber(percent, 1)}٪`;
+  });
 }
 
 type Coordinates = number[] | Coordinates[];

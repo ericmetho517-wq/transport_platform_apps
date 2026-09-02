@@ -159,6 +159,13 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .agriculture-side { display: grid; grid-template-rows: 120px 120px 1fr; border-inline-end: 2px solid #3d3d3d; }
 .agriculture-center { display: grid; grid-template-rows: auto minmax(300px, 52vh) minmax(190px, 1fr); }
 .agriculture-right { display: grid; grid-template-rows: 1fr 150px 1fr; border-inline-start: 2px solid #3d3d3d; }
+.western-agriculture-kpis { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.western-agriculture-kpis article.lime { background:#050505; color:#8bff00; }
+.western-agriculture-kpis article.orange { background:#f3a51c; color:#111; }
+.western-agriculture-dashboard .agriculture-layout { min-height:calc(100vh - 170px); grid-template-columns:minmax(230px,22%) minmax(560px,58%) minmax(220px,20%); }
+.western-agriculture-side { grid-template-rows:1fr 1fr; }
+.western-agriculture-center { grid-template-rows:minmax(390px,58vh) minmax(210px,1fr); }
+.western-agriculture-right { grid-template-rows:1fr 1fr; }
 .agriculture-stat, .agriculture-change { padding: 15px; display: grid; place-items: center; align-content: center; gap: 6px; text-align: center; }
 .agriculture-stat span, .agriculture-change span, .crop-card > span, .ownership-card > span { color: #c7ff2d; font-size: 12px; font-weight: 800; }
 .agriculture-stat strong, .agriculture-change strong { color: #8bff00; font-size: clamp(31px, 4vw, 58px); line-height: 1; }
@@ -184,6 +191,8 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
   .land-right { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; min-height: 330px; border: 0; border-top: 2px solid #444; }
   .agriculture-layout { grid-template-columns: minmax(210px, 1fr) minmax(520px, 2fr); }
   .agriculture-right { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); min-height: 300px; }
+  .western-agriculture-kpis { grid-template-columns:repeat(3,1fr); }
+  .western-agriculture-right { grid-template-columns:repeat(2,1fr); }
 }
 
 .specialized-layout{padding:12px;display:grid;gap:12px}.specialized-kpis{max-width:1180px;margin:auto;width:100%}.specialized-body{display:grid;grid-template-columns:minmax(250px,320px) minmax(0,1fr);gap:12px;min-height:610px}.specialized-body .gis-map{min-height:610px}.civil-panel,.impact-controls{padding:24px;display:flex;flex-direction:column;gap:20px}.civil-panel h2,.impact-controls h2{margin:0;color:#ffc329;font-size:1.45rem}.civil-panel p{line-height:1.9;color:#e5e5e5}.civil-facts,.impact-results{display:grid;gap:12px}.civil-facts span,.impact-results span{border:1px solid #555;background:#202020;padding:14px;display:flex;justify-content:space-between;gap:10px}.civil-facts b,.impact-results b{color:#ffc329}.impact-controls label{display:flex;justify-content:space-between}.impact-controls input{accent-color:#ffc329;width:100%}.impact-controls small{line-height:1.7;color:#bbb}.impact-body{grid-template-columns:minmax(280px,360px) minmax(0,1fr)}

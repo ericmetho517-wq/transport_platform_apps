@@ -38,6 +38,19 @@ for (const app of priceDashboards) {
 
 const western = profiles["western-upper-egypt"];
 if (!western || western.yearEnd !== 2024) failures.push("western-upper-egypt: missing 2024 report profile");
+const expectedWesternMetrics = {
+  jobOpportunities: 50458,
+  agriculturalAreaFeddan: 1512791,
+  agriculturalWorkers: 206235,
+  industrialWorkers: 75459,
+  industrialChangeKm2: 67.4,
+};
+for (const [metric, expected] of Object.entries(expectedWesternMetrics)) {
+  if (western?.metrics?.[metric] !== expected) failures.push(`western-upper-egypt: ${metric} must match the documented video value ${expected}`);
+}
+if (western?.cropShares?.reduce((sum, value) => sum + value, 0) !== 100) failures.push("western-upper-egypt: crop shares must be complete");
+if (western?.ownershipShares?.reduce((sum, value) => sum + value, 0) !== 100) failures.push("western-upper-egypt: ownership shares must be complete");
+if (![2014, 2024].every((year) => western?.landUse?.some((item) => item.year === year))) failures.push("western-upper-egypt: overall 2014/2024 land-use comparison is required");
 const expectedWesternSectors = ["1", "2", "3", "4", "6", "7", "8", "9", "11", "12"];
 const westernSectors = western?.sectors || {};
 if (Object.keys(westernSectors).length !== expectedWesternSectors.length || expectedWesternSectors.some((sector) => !westernSectors[sector])) failures.push("western-upper-egypt: all 10 mapped sector profiles are required");

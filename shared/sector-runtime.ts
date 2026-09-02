@@ -28,10 +28,10 @@ const westernStoryReports: Array<Pick<StoryEntry, "key" | "label" | "sector" | "
   { key: "sohag", label: "سوهاج", sector: "8", report: "(2).pdf" },
   { key: "assiut", label: "أسيوط", sector: "1", report: "(4).pdf" },
   { key: "minya", label: "المنيا", sector: "4", report: "(5).pdf" },
-  { key: "beni-suef", label: "بني سويف", sector: "9", report: "" },
+  { key: "beni-suef", label: "بني سويف", sector: "9", report: "(9).pdf" },
   { key: "fayoum", label: "الفيوم", sector: "6", report: "(6).pdf" },
   { key: "giza", label: "الجيزة", sector: "3", report: "(7).pdf" },
-  { key: "aswan", label: "أسوان", sector: "2", report: "" },
+  { key: "aswan", label: "أسوان", sector: "2", report: "(9).pdf" },
 ];
 
 function storyEntries(app: TransportApp): StoryEntry[] {
@@ -41,7 +41,7 @@ function storyEntries(app: TransportApp): StoryEntry[] {
   }
   return westernStoryReports.map((item) => {
     const matching = item.report ? references.filter((reference) => reference.reportName === item.report) : [];
-    return { ...item, hero: matching[0]?.imagePath || "", compare: matching[1]?.imagePath || "" };
+    return { ...item, hero: matching[0]?.imagePath || "", compare: matching[1]?.imagePath || matching[0]?.imagePath || "" };
   });
 }
 
@@ -63,7 +63,8 @@ function storyHeader(app: TransportApp, entries: StoryEntry[]): string {
   const dashboard = relatedDashboard(app);
   const isWestern = dashboardGroup(app) === "western-upper-egypt";
   const collectionHero = entries.find((entry) => entry.hero)?.hero || "";
-  return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><b>وزارة النقل</b><span>الهيئة العامة لتخطيط مشروعات النقل</span></a><strong>${esc(app.title)}</strong></div>${isWestern ? `<nav class="story-sector-tabs" aria-label="قطاعات محور الصعيد الغربي"><button class="active" data-story-key="all" data-story-sector="all" data-story-title="${esc(app.title)}" data-story-report="" data-story-hero="${esc(collectionHero)}" data-story-compare="">محور الصعيد الغربي</button>${entries.map((entry) => `<button data-story-key="${entry.key}" data-story-sector="${entry.sector}" data-story-title="${esc(entry.label)}" data-story-report="${esc(entry.report)}" data-story-hero="${esc(entry.hero)}" data-story-compare="${esc(entry.compare)}">${esc(entry.label)}</button>`).join("")}</nav>` : ""}<nav class="story-chapter-tabs"><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">الخرائط والتطورات</a><a href="#story-evidence">مرفقات المشروع</a>${dashboard ? `<a class="story-dashboard-link" href="../${dashboard}/index.html">لوحة المؤشرات</a>` : ""}</nav></header>`;
+  const collectionCompare = entries.find((entry) => entry.compare)?.compare || "";
+  return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><b>وزارة النقل</b><span>الهيئة العامة لتخطيط مشروعات النقل</span></a><strong>${esc(app.title)}</strong></div>${isWestern ? `<nav class="story-sector-tabs" aria-label="قطاعات محور الصعيد الغربي"><button class="active" data-story-key="all" data-story-sector="all" data-story-title="${esc(app.title)}" data-story-report="" data-story-hero="${esc(collectionHero)}" data-story-compare="${esc(collectionCompare)}">محور الصعيد الغربي</button>${entries.map((entry) => `<button data-story-key="${entry.key}" data-story-sector="${entry.sector}" data-story-title="${esc(entry.label)}" data-story-report="${esc(entry.report)}" data-story-hero="${esc(entry.hero)}" data-story-compare="${esc(entry.compare)}">${esc(entry.label)}</button>`).join("")}</nav>` : ""}<nav class="story-chapter-tabs"><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">الخرائط والتطورات</a><a href="#story-evidence">مرفقات المشروع</a>${dashboard ? `<a class="story-dashboard-link" href="../${dashboard}/index.html">لوحة المؤشرات</a>` : ""}</nav></header>`;
 }
 
 function experienceMarkup(app: TransportApp): string {
@@ -79,12 +80,11 @@ function storyMarkup(app: TransportApp): string {
   const entries = storyEntries(app);
   const firstAvailable = entries.find((entry) => entry.hero) || entries[0];
   const isWestern = dashboardGroup(app) === "western-upper-egypt";
-  const initialCompare = isWestern ? "" : firstAvailable?.compare || "";
+  const initialCompare = firstAvailable?.compare || "";
   return `<main class="sector-app story-runtime" dir="${app.direction}" data-sector-group="${dashboardGroup(app)}">${storyHeader(app, entries)}
     <section id="story-intro" class="story-sector-hero" ${firstAvailable?.hero ? `style="--story-image:url('${esc(firstAvailable.hero)}')"` : ""}><div><span>قصة مكانية تفاعلية</span><h1 id="story-active-title">${esc(app.title)}</h1><p id="story-active-subtitle">تطور استخدامات الأراضي المحيطة بالمحور قبل وبعد الإنشاء</p><button data-story-scroll>ابدأ التصفح ↓</button></div></section>
-    ${isWestern ? `<section class="story-collection"><div class="section-heading"><span>قطاعات المشروع</span><h2>اختر القطاع لعرض قصته وبياناته</h2><p>كل بطاقة مرتبطة بطبقات القطاع الفعلية وصور تقريره، إن كانت متاحة.</p></div><div class="story-sector-cards">${entries.map((entry) => `<button data-story-card="${entry.key}" class="${entry.hero ? "has-reference" : "data-only"}" ${entry.hero ? `style="--card-image:url('${esc(entry.hero)}')"` : ""}><span>${esc(entry.label)}</span><small>${entry.hero ? "قصة وخرائط تفاعلية" : "بيانات مكانية متاحة"}</small></button>`).join("")}</div></section>` : ""}
     <section id="story-map" class="story-chapter"><div><b>01</b><h2>منطقة الدراسة ومسار المحور</h2><p>خريطة قمر صناعي تفاعلية تعرض حدود الدراسة ومسار الطريق ومناطق التغير العمراني والزراعي للقطاع المحدد فقط. استخدم أزرار التكبير واسحب الخريطة، وانقر على أي عنصر لعرض بياناته الوصفية.</p><div class="story-data-note" id="story-data-note">يتم عرض البيانات المحلية المراجعة للقطاع.</div></div>${renderSectorMapMarkup()}</section>
-    <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى 2023</h2><p>حرّك الفاصل يمينًا ويسارًا للمقارنة بين جانبي الصورة الأصلية الواردة في تقرير القطاع.</p></div><div class="story-compare" id="story-compare" ${initialCompare ? `style="--compare-image:url('${esc(initialCompare)}')"` : "hidden"}><div class="compare-before"><span>2014</span></div><div class="compare-after" id="compare-overlay"><div class="compare-after-image"></div><span>2023</span></div><i id="compare-handle">↔</i><input id="compare-range" type="range" min="0" max="100" value="50" aria-label="نسبة المقارنة بين عامي 2014 و2023"/></div><div class="story-compare-missing" id="story-compare-missing" ${initialCompare ? "hidden" : ""}>${isWestern ? "اختر أحد قطاعات المحور من الشريط العلوي لعرض المقارنة الزمنية الموثقة الخاصة به." : "لا توجد صورة مقارنة زمنية موثقة لهذا القطاع داخل ملفات التقارير الحالية؛ الخريطة بالأعلى تعرض بياناته المكانية المتاحة دون إضافة صورة افتراضية."}</div></section>
+    <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى ${isWestern ? "2024" : "2023"}</h2><p>حرّك الفاصل يمينًا ويسارًا للمقارنة بين جانبي الصورة الأصلية الواردة في تقرير القطاع.</p></div><div class="story-compare" id="story-compare" ${initialCompare ? `style="--compare-image:url('${esc(initialCompare)}')"` : "hidden"}><div class="compare-before"><span>2014</span></div><div class="compare-after" id="compare-overlay"><div class="compare-after-image"></div><span>${isWestern ? "2024" : "2023"}</span></div><i id="compare-handle">↔</i><input id="compare-range" type="range" min="0" max="100" value="50" aria-label="نسبة المقارنة الزمنية لاستخدامات الأراضي"/></div><div class="story-compare-missing" id="story-compare-missing" ${initialCompare ? "hidden" : ""}>${isWestern ? "اختر أحد قطاعات المحور من الشريط العلوي لعرض المقارنة الزمنية الموثقة الخاصة به." : "لا توجد صورة مقارنة زمنية موثقة لهذا القطاع داخل ملفات التقارير الحالية؛ الخريطة بالأعلى تعرض بياناته المكانية المتاحة دون إضافة صورة افتراضية."}</div></section>
     <section id="story-evidence" class="story-evidence-section"><div class="section-heading"><span>03</span><h2>أعمال ومرفقات القطاع</h2><p>الصور الأصلية المستخرجة من تقرير القطاع دون استبدالها بصور عامة.</p></div>${evidence(app)}</section>
   </main>`;
 }

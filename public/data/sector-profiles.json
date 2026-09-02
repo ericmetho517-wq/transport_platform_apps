@@ -4,8 +4,20 @@
     "report": "(9).pdf",
     "pages": [54],
     "yearEnd": 2024,
-    "metrics": { "studyAreaKm2": 25126, "axisLengthKm": 1175, "urbanChangeKm2": 850.04, "industrialChangeKm2": 67.4, "agriculturalAreaFeddan": 1512791, "jobOpportunities": 17130, "urbanChangePercent": 100 },
+    "metrics": { "studyAreaKm2": 25126, "axisLengthKm": 1175, "urbanChangeKm2": 850.04, "industrialChangeKm2": 67.4, "agriculturalAreaFeddan": 1512791, "agriculturalWorkers": 206235, "industrialWorkers": 75459, "jobOpportunities": 50458, "urbanChangePercent": 100, "agriculturalChangePercent": 100, "industrialChangePercent": 100 },
     "statusShares": { "existing": 90, "underConstruction": 10 },
+    "cropShares": [93, 5, 2],
+    "ownershipShares": [93, 7],
+    "landUse": [
+      { "category": "أراضي فضاء", "year": 2014, "area": 19116 },
+      { "category": "الأراضي الزراعية", "year": 2014, "area": 4878 },
+      { "category": "الأراضي الصناعية", "year": 2014, "area": 51.1 },
+      { "category": "الأراضي العمرانية", "year": 2014, "area": 752.15 },
+      { "category": "أراضي فضاء", "year": 2024, "area": 17248 },
+      { "category": "الأراضي الزراعية", "year": 2024, "area": 6605 },
+      { "category": "الأراضي الصناعية", "year": 2024, "area": 67.4 },
+      { "category": "الأراضي العمرانية", "year": 2024, "area": 850.04 }
+    ],
     "changeBars": [
       { "label": "إسكان اجتماعي شباب", "value": 1.7, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 16.8, "layer": "urban" },
       { "label": "إسكان مخطط اقتصادي", "value": 14.1, "layer": "urban" }, { "label": "ترفيهي", "value": 0.6, "layer": "urban" },
