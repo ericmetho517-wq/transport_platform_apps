@@ -81,7 +81,7 @@ export function dashboardGroup(app: TransportApp): string {
 function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): string {
   const suffix = instance.replace(/[^a-z0-9-]/gi, "-");
   return `<section class="gis-map${yearLabel ? " temporal-map" : ""}" data-basemap="satellite" data-map-instance="${suffix}" data-dashboard-sync="${dashboardSync}" aria-label="خريطة تفاعلية">
-    ${yearLabel ? `<div class="temporal-year">${yearLabel}</div>` : ""}
+    ${yearLabel ? `<div class="temporal-year">${yearLabel}<small>عرض تفاعلي مترابط</small></div>` : ""}
     <div class="map-status"><span class="live-dot"></span><span class="map-status-text">جارٍ تحميل طبقات المشروع المحلية…</span></div>
     <label class="map-sector-filter" hidden><span>نطاق العرض</span><select class="map-sector-select"><option value="all">كل القطاعات</option></select></label>
     <div class="map-layer-toggles"></div>
@@ -115,7 +115,7 @@ function dashboardHeader(app: TransportApp): string {
 function priceMarkup(app: TransportApp, group: string): string {
   const westernComparison = group === "western-upper-egypt";
   const mapArea = westernComparison
-    ? `<div class="temporal-map-pair price-temporal-map-pair">${mapMarkup("price-2014", "2014", false)}${mapMarkup("price-current", '<span class="map-year-end">2024</span>', true)}</div>`
+    ? `<div class="temporal-map-pair price-temporal-map-pair">${mapMarkup("price-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("price-current", '<span class="map-year-end">2024</span>', true)}</div>`
     : mapMarkup();
   const trendArea = westernComparison ? "" : `<section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>`;
   return `<main class="interactive-dashboard price-dashboard${westernComparison ? " western-price-dashboard" : ""}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="price">
@@ -137,7 +137,7 @@ function landMarkup(app: TransportApp, group: string): string {
     ${dashboardHeader(app)}
     <div class="land-layout">
       <aside class="land-left"><article class="opportunity-card"><span>فرص العمل لمشروعات المباني المستحدثة</span><strong data-metric="jobOpportunities">—</strong><small>فرصة عمل تقديرية مرتبطة بمناطق التغير</small></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>مناطق تغير استخدامات الأراضي</span><small>اضغط على العمود لتصفية طبقة الخريطة</small></div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
-      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-2014", "2014", false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>توزيع مناطق التغير</span><div class="donut" id="change-donut"><strong>—</strong></div><div id="donut-legend"></div></section></aside>
     </div>
     ${referenceDialog(app)}
@@ -454,12 +454,13 @@ function renderSatelliteBasemap(target: SVGGElement, bounds: [number, number, nu
 
 export async function initializeMap(group: string, summary: DashboardSummary, mapRoot?: HTMLElement): Promise<void> {
   const scope = mapRoot || document.querySelector<HTMLElement>(".gis-map");
-  const svg = scope?.querySelector<SVGSVGElement>(".interactive-map");
-  const viewport = scope?.querySelector<SVGGElement>(".map-viewport");
-  const satellite = scope?.querySelector<SVGGElement>(".satellite-basemap");
-  const content = scope?.querySelector<SVGGElement>(".map-content");
-  const toggles = scope?.querySelector<HTMLElement>(".map-layer-toggles");
-  const status = scope?.querySelector<HTMLElement>(".map-status-text");
+  if (!scope) return;
+  const svg = scope.querySelector<SVGSVGElement>(".interactive-map");
+  const viewport = scope.querySelector<SVGGElement>(".map-viewport");
+  const satellite = scope.querySelector<SVGGElement>(".satellite-basemap");
+  const content = scope.querySelector<SVGGElement>(".map-content");
+  const toggles = scope.querySelector<HTMLElement>(".map-layer-toggles");
+  const status = scope.querySelector<HTMLElement>(".map-status-text");
   if (!svg || !viewport || !satellite || !content || !toggles) return;
   const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي 2014", civil: "الدراسة المدنية" };
   const loaded = await Promise.all(summary.layers.map(async (layer) => {
@@ -470,10 +471,23 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const extentPairs = pairs.length ? pairs : [[fallbackBounds[group]?.[0] ?? 24, fallbackBounds[group]?.[1] ?? 22], [fallbackBounds[group]?.[2] ?? 36, fallbackBounds[group]?.[3] ?? 32]];
   const xs = extentPairs.map((pair) => pair[0]), ys = extentPairs.map((pair) => pair[1]);
   const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
-  const width = Math.max(maxX - minX, .00001), height = Math.max(maxY - minY, .00001);
+  let viewMinX = minX, viewMaxX = maxX, viewMinY = minY, viewMaxY = maxY;
+  const rawWidth = Math.max(maxX - minX, .00001), rawHeight = Math.max(maxY - minY, .00001);
+  const latitudeFactor = Math.max(Math.cos(((minY + maxY) / 2) * Math.PI / 180), .35);
+  const targetAspect = 900 / 430;
+  if (rawWidth * latitudeFactor / rawHeight < targetAspect) {
+    const requiredWidth = rawHeight * targetAspect / latitudeFactor;
+    const padding = (requiredWidth - rawWidth) / 2;
+    viewMinX -= padding; viewMaxX += padding;
+  } else {
+    const requiredHeight = rawWidth * latitudeFactor / targetAspect;
+    const padding = (requiredHeight - rawHeight) / 2;
+    viewMinY -= padding; viewMaxY += padding;
+  }
+  const width = Math.max(viewMaxX - viewMinX, .00001), height = Math.max(viewMaxY - viewMinY, .00001);
   const scale = Math.min(900 / width, 430 / height);
-  const project = (pair: number[]): [number, number] => [50 + (pair[0] - minX) * scale + (900 - width * scale) / 2, 35 + (maxY - pair[1]) * scale + (430 - height * scale) / 2];
-  const tileCount = renderSatelliteBasemap(satellite, [minX, minY, maxX, maxY], project);
+  const project = (pair: number[]): [number, number] => [50 + (pair[0] - viewMinX) * scale + (900 - width * scale) / 2, 35 + (viewMaxY - pair[1]) * scale + (430 - height * scale) / 2];
+  const tileCount = renderSatelliteBasemap(satellite, [viewMinX, viewMinY, viewMaxX, viewMaxY], project);
   content.innerHTML = "";
   const sectorValues = new Set<string>();
   const sectorOf = (properties: Record<string, unknown> = {}) => String(properties["اسم_القطاع"] ?? properties["sector"] ?? properties["Sector"] ?? "").trim();
@@ -486,6 +500,12 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", geometryPath(feature.geometry, project));
       path.setAttribute("vector-effect", "non-scaling-stroke");
+      const representative = Object.entries(feature.properties || {}).find(([, value]) => value !== null && value !== "")?.[1];
+      path.setAttribute("tabindex", "0");
+      path.setAttribute("aria-label", `${labels[layer]}${representative ? `: ${String(representative)}` : ""}`);
+      const tooltip = document.createElementNS("http://www.w3.org/2000/svg", "title");
+      tooltip.textContent = `${labels[layer]}${representative ? ` · ${String(representative)}` : ""}`;
+      path.appendChild(tooltip);
       const sector = sectorOf(feature.properties);
       if (sector) { path.dataset.sector = sector; sectorValues.add(sector); }
       path.addEventListener("click", (event) => {
@@ -502,8 +522,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   });
   toggles.innerHTML = summary.layers.map((layer) => `<button type="button" class="active" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${summary.layerCounts?.[layer] ?? summary.metrics[`${layer}Features`] ?? ""}</b></button>`).join("");
   toggles.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => button.addEventListener("click", () => {
-    button.classList.toggle("active");
-    content.querySelector<SVGGElement>(`[data-layer-group="${button.dataset.mapLayer}"]`)?.classList.toggle("layer-hidden", !button.classList.contains("active"));
+    const active = !button.classList.contains("active");
+    document.querySelectorAll<HTMLButtonElement>(`[data-map-layer="${button.dataset.mapLayer}"]`).forEach((peer) => peer.classList.toggle("active", active));
+    document.querySelectorAll<SVGGElement>(`[data-layer-group="${button.dataset.mapLayer}"]`).forEach((groupElement) => groupElement.classList.toggle("layer-hidden", !active));
   }));
   const sectorWrap = scope.querySelector<HTMLElement>(".map-sector-filter");
   const sectorSelect = scope.querySelector<HTMLSelectElement>(".map-sector-select");
@@ -519,7 +540,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     };
     const updateSector = () => {
       const selected = sectorSelect.value;
-      document.querySelectorAll<SVGPathElement>(".interactive-dashboard .map-content path[data-sector]").forEach((path) => { path.hidden = selected !== "all" && path.dataset.sector !== selected; });
+      document.querySelectorAll<SVGPathElement>(".interactive-dashboard .map-content path[data-sector]").forEach((path) => { path.toggleAttribute("hidden", selected !== "all" && path.dataset.sector !== selected); });
       if (scope.dataset.dashboardSync === "false") return;
       const chosen = (layer: LayerName) => loaded.find(([name]) => name === layer)?.[1].features.filter((feature: { properties?: Record<string, unknown> }) => selected === "all" || sectorOf(feature.properties) === selected) || [];
       const rawArea = (layer: LayerName) => chosen(layer).reduce((sum: number, feature: { properties?: Record<string, unknown> }) => sum + numeric(feature.properties || {}, ["مساحة_المنطقة_كم2", "مساحة_التغير_كم2", "المساحة_كم2", "Area_KM2", "SHAPE_Area", "Shape_Area"]), 0);
@@ -575,10 +596,19 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (status) status.textContent = pairs.length ? `${pairs.length.toLocaleString(locale)} نقطة هندسية · ${summary.layers.length} طبقات متاحة · ${tileCount} صورة قمر صناعي` : `لا توجد هندسة مكانية في قاعدة المشروع الحالية · ${tileCount} صورة قمر صناعي مرجعية`;
 
   let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0;
-  const apply = () => viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
+  const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
+  const mapInstance = scope.dataset.mapInstance || "primary";
+  const apply = (broadcast = true) => {
+    viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
+    if (broadcast && linkedPair) linkedPair.dispatchEvent(new CustomEvent("linked-map-view", { detail: { source: mapInstance, zoom, tx, ty } }));
+  };
+  linkedPair?.addEventListener("linked-map-view", ((event: CustomEvent<{ source: string; zoom: number; tx: number; ty: number }>) => {
+    if (event.detail.source === mapInstance) return;
+    zoom = event.detail.zoom; tx = event.detail.tx; ty = event.detail.ty; apply(false);
+  }) as EventListener);
   const fitSector = (sector: string) => {
     if (sector === "all") { zoom = 1; tx = 0; ty = 0; apply(); return; }
-    const paths = Array.from(content.querySelectorAll<SVGGraphicsElement>(`path[data-sector="${CSS.escape(sector)}"]`)).filter((path) => !path.hidden);
+    const paths = Array.from(content.querySelectorAll<SVGGraphicsElement>(`path[data-sector="${CSS.escape(sector)}"]`)).filter((path) => !path.hasAttribute("hidden"));
     if (!paths.length) return;
     const boxes = paths.map((path) => path.getBBox()).filter((box) => box.width > 0 || box.height > 0);
     if (!boxes.length) return;
@@ -745,6 +775,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       }) as EventListener);
       document.querySelector<HTMLSelectElement>("#comparison-mode")?.addEventListener("change", (event) => renderComparison(summary, (event.currentTarget as HTMLSelectElement).value === "top4"));
     }
+    document.querySelectorAll<HTMLElement>(".map-year-start").forEach((label) => { label.textContent = String(summary.yearStart); });
     document.querySelectorAll<HTMLElement>(".map-year-end").forEach((label) => { label.textContent = String(summary.yearEnd); });
     const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
     await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));

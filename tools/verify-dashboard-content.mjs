@@ -68,9 +68,10 @@ for (const kind of ["urban", "agricultural", "industrial"]) {
   }
 }
 const runtimeSource = fs.readFileSync(path.join(root, "shared", "interactive-dashboard.ts"), "utf8");
-if (!runtimeSource.includes('mapMarkup("land-2014"') || !runtimeSource.includes('mapMarkup("land-current"')) failures.push("urban dashboard: missing interactive 2014/current map pair");
-if (!runtimeSource.includes('mapMarkup("price-2014"') || !runtimeSource.includes('mapMarkup("price-current"')) failures.push("western price dashboard: missing report-matched map pair");
+if (!runtimeSource.includes('mapMarkup("land-baseline"') || !runtimeSource.includes('mapMarkup("land-current"')) failures.push("urban dashboard: missing interactive baseline/current map pair");
+if (!runtimeSource.includes('mapMarkup("price-baseline"') || !runtimeSource.includes('mapMarkup("price-current"')) failures.push("western price dashboard: missing report-matched map pair");
 if (!runtimeSource.includes('"dashboard-map-sector"') || !runtimeSource.includes("fitSector")) failures.push("dashboard maps: sector auto-fit interaction is missing");
+if (!runtimeSource.includes('"linked-map-view"') || !runtimeSource.includes("map-year-start")) failures.push("temporal maps: synchronized navigation and data-driven year labels are required");
 
 if (dashboards.length !== 50) failures.push(`expected 50 dashboards, found ${dashboards.length}`);
 if (failures.length) {

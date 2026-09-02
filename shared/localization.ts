@@ -137,6 +137,7 @@ const replacements: Array<[string, string]> = [
   ["صورة قمر صناعي", "satellite tile"],
   ["قمر صناعي", "Satellite imagery"],
   ["عجلة الماوس للتكبير · اسحب لتحريك الخريطة", "Mouse wheel to zoom · drag to pan"],
+  ["عرض تفاعلي مترابط", "Linked interactive view"],
   ["إظهار كل البيانات", "Show all data"],
   ["تكبير", "Zoom in"],
   ["تصغير", "Zoom out"],
