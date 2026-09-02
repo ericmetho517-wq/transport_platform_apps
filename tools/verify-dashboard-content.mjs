@@ -38,15 +38,26 @@ for (const app of priceDashboards) {
 
 const western = profiles["western-upper-egypt"];
 if (!western || western.yearEnd !== 2024) failures.push("western-upper-egypt: missing 2024 report profile");
-if (Object.keys(western?.sectors || {}).length < 8) failures.push("western-upper-egypt: sector report profiles are incomplete");
+const expectedWesternSectors = ["1", "2", "3", "4", "6", "7", "8", "9", "11", "12"];
+const westernSectors = western?.sectors || {};
+if (Object.keys(westernSectors).length !== expectedWesternSectors.length || expectedWesternSectors.some((sector) => !westernSectors[sector])) failures.push("western-upper-egypt: all 10 mapped sector profiles are required");
 for (const [sector, profile] of Object.entries(western?.sectors || {})) {
   if (!Number.isFinite(profile.metrics?.jobOpportunities)) failures.push(`western-upper-egypt sector ${sector}: missing report job count`);
   if (!profile.statusShares || profile.statusShares.existing + profile.statusShares.underConstruction !== 100) failures.push(`western-upper-egypt sector ${sector}: invalid status shares`);
   if (!profile.changeBars?.length) failures.push(`western-upper-egypt sector ${sector}: missing urban pattern chart`);
+  if (![2014, 2024].every((year) => profile.landUse?.some((item) => item.year === year))) failures.push(`western-upper-egypt sector ${sector}: missing 2014/2024 land-use comparison`);
+  if (!["urban", "agricultural", "industrial"].every((kind) => profile.prices?.[kind]?.start >= 0 && profile.prices?.[kind]?.end > profile.prices?.[kind]?.start)) failures.push(`western-upper-egypt sector ${sector}: incomplete price indicators`);
+}
+for (const kind of ["urban", "agricultural", "industrial"]) {
+  for (const edge of ["start", "end"]) {
+    const sectorTotal = Object.values(westernSectors).reduce((sum, sector) => sum + sector.prices[kind][edge], 0);
+    if (sectorTotal !== western.prices[kind][edge]) failures.push(`western-upper-egypt: ${kind} ${edge} sector values do not match report total`);
+  }
 }
 const runtimeSource = fs.readFileSync(path.join(root, "shared", "interactive-dashboard.ts"), "utf8");
 if (!runtimeSource.includes('mapMarkup("land-2014"') || !runtimeSource.includes('mapMarkup("land-current"')) failures.push("urban dashboard: missing interactive 2014/current map pair");
 if (!runtimeSource.includes('mapMarkup("price-2014"') || !runtimeSource.includes('mapMarkup("price-current"')) failures.push("western price dashboard: missing report-matched map pair");
+if (!runtimeSource.includes('"dashboard-map-sector"') || !runtimeSource.includes("fitSector")) failures.push("dashboard maps: sector auto-fit interaction is missing");
 
 if (dashboards.length !== 50) failures.push(`expected 50 dashboards, found ${dashboards.length}`);
 if (failures.length) {

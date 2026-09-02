@@ -152,7 +152,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
     ${dashboardHeader(app)}
     <div class="agriculture-layout">
       <aside class="agriculture-side"><section class="dark-card agriculture-stat"><span>${agriculturalAreaLabel}</span><strong data-metric="agriculturalAreaFeddan">—</strong></section><section class="dark-card agriculture-stat"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></section><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section></aside>
-      <section class="agriculture-center"><div class="dashboard-kpis agriculture-kpis"><article class="gold"><span>${urbanAreaLabel}</span><strong data-metric="urbanChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي بين عامي <bdi>2014</bdi> و<bdi>2023</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+      <section class="agriculture-center"><div class="dashboard-kpis agriculture-kpis"><article class="gold"><span>${urbanAreaLabel}</span><strong data-metric="urbanChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2024</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="agriculture-right"><section class="dark-card gauge-card"><span>نسبة التغير العمراني بمنطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div></section><section class="dark-card agriculture-change"><span>إجمالي مساحة التغير بالأراضي الزراعية (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></section><section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section></aside>
     </div>
     ${referenceDialog(app)}
@@ -538,6 +538,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         } }));
       }
       if (scope.dataset.dashboardSync !== "false") dashboardRoot?.dispatchEvent(new CustomEvent("dashboard-sector-view", { detail: selected === "all" ? summary.profile : reportSector }));
+      if (scope.dataset.dashboardSync !== "false") dashboardRoot?.dispatchEvent(new CustomEvent("dashboard-map-sector", { detail: selected }));
     };
     sectorSelect.addEventListener("change", updateSector);
     updateSector();
@@ -547,6 +548,23 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
 
   let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0;
   const apply = () => viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
+  const fitSector = (sector: string) => {
+    if (sector === "all") { zoom = 1; tx = 0; ty = 0; apply(); return; }
+    const paths = Array.from(content.querySelectorAll<SVGGraphicsElement>(`path[data-sector="${CSS.escape(sector)}"]`)).filter((path) => !path.hidden);
+    if (!paths.length) return;
+    const boxes = paths.map((path) => path.getBBox()).filter((box) => box.width > 0 || box.height > 0);
+    if (!boxes.length) return;
+    const minBoxX = Math.min(...boxes.map((box) => box.x));
+    const minBoxY = Math.min(...boxes.map((box) => box.y));
+    const maxBoxX = Math.max(...boxes.map((box) => box.x + box.width));
+    const maxBoxY = Math.max(...boxes.map((box) => box.y + box.height));
+    const boxWidth = Math.max(maxBoxX - minBoxX, 1);
+    const boxHeight = Math.max(maxBoxY - minBoxY, 1);
+    zoom = Math.min(8, Math.max(1, Math.min(840 / boxWidth, 390 / boxHeight)));
+    tx = 500 - (minBoxX + boxWidth / 2) * zoom;
+    ty = 260 - (minBoxY + boxHeight / 2) * zoom;
+    apply();
+  };
   const zoomBy = (factor: number, centerX = 500, centerY = 260) => {
     const nextZoom = Math.min(Math.max(zoom * factor, .7), 8);
     if (Math.abs(nextZoom - zoom) < .0001) return false;
@@ -563,19 +581,21 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
   }));
   svg.addEventListener("wheel", (event) => {
+    event.preventDefault();
     const bounds = svg.getBoundingClientRect();
     const centerX = (event.clientX - bounds.left) * 1000 / Math.max(bounds.width, 1);
     const centerY = (event.clientY - bounds.top) * 520 / Math.max(bounds.height, 1);
     const factor = Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
-    if (zoomBy(factor, centerX, centerY)) event.preventDefault();
+    zoomBy(factor, centerX, centerY);
   }, { passive: false });
   svg.addEventListener("pointerdown", (event) => { dragging = true; lastX = event.clientX; lastY = event.clientY; svg.setPointerCapture(event.pointerId); });
-  svg.addEventListener("pointermove", (event) => { if (!dragging) return; tx += (event.clientX - lastX) * 1000 / svg.clientWidth; ty += (event.clientY - lastY) * 520 / svg.clientHeight; lastX = event.clientX; lastY = event.clientY; apply(); });
+  svg.addEventListener("pointermove", (event) => { if (!dragging) return; tx += (event.clientX - lastX) * 1000 / Math.max(svg.clientWidth, 1); ty += (event.clientY - lastY) * 520 / Math.max(svg.clientHeight, 1); lastX = event.clientX; lastY = event.clientY; apply(); });
   svg.addEventListener("pointerup", () => { dragging = false; });
   svg.addEventListener("pointercancel", () => { dragging = false; });
   svg.addEventListener("lostpointercapture", () => { dragging = false; });
   svg.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   scope.querySelector<HTMLButtonElement>(".feature-popup > button")?.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
+  document.querySelector<HTMLElement>(".interactive-dashboard")?.addEventListener("dashboard-map-sector", ((event: CustomEvent<string>) => fitSector(event.detail)) as EventListener);
 }
 
 function activateLayerOnly(layer: string): void {
