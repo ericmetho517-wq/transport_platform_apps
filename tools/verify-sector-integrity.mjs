@@ -42,8 +42,11 @@ for (const group of Object.values(aliases)) {
 }
 
 const suezFree = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "cairo-suez-road", "summary.json"), "utf8"));
-if (suezFree.layers.length) errors.push("cairo-suez-road: spatial layers must stay empty until a sector-matched geodatabase is identified");
-if (suezFree.verifiedLocalData) errors.push("cairo-suez-road: must not claim the Suez-link geodatabase as verified local data");
+const suezLink = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "suez-ring-link", "summary.json"), "utf8"));
+if (!suezFree.verifiedLocalData || suezFree.layers.length !== 4) errors.push("cairo-suez-road: split local spatial layers are incomplete");
+if (!suezLink.verifiedLocalData || suezLink.layers.length !== 4) errors.push("suez-ring-link: split local spatial layers are incomplete");
+if ((suezFree.layerCounts.urban || 0) + (suezLink.layerCounts.urban || 0) !== 213) errors.push("Suez split: urban features were lost or duplicated");
+if ((suezFree.layerCounts.agricultural || 0) + (suezLink.layerCounts.agricultural || 0) !== 18) errors.push("Suez split: agricultural features were lost or duplicated");
 
 const report = {
   generatedAt: new Date().toISOString(), applications: apps.length, counts, sectors,

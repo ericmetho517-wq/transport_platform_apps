@@ -1,32 +1,32 @@
 {
   "slug": "cairo-suez-road",
-  "projectTitle": "طريق القاهرة السويس الصحراوي",
-  "source": "Report profile only; no sector-matched local geodatabase was identified",
-  "verifiedLocalData": false,
+  "projectTitle": "طريق القاهرة - السويس الصحراوي (السويس الحر)",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\السويس\\السويس\\New File Geodatabase.gdb",
+  "verifiedLocalData": true,
   "yearStart": 2014,
   "yearEnd": 2024,
   "metrics": {
-    "studyAreaKm2": 154.31,
-    "axisLengthKm": 17.57,
-    "urbanChangeKm2": 81.08,
-    "agriculturalChangeKm2": 7.4,
+    "studyAreaKm2": 1408.2445078989276,
+    "axisLengthKm": 96.96945953665688,
+    "urbanChangeKm2": 56.56168164494071,
+    "agriculturalChangeKm2": 7.372376912819605,
     "industrialChangeKm2": 0,
-    "urbanFeatures": 213,
-    "agriculturalFeatures": 18,
+    "urbanFeatures": 140,
+    "agriculturalFeatures": 15,
     "industrialFeatures": 0
   },
   "prices": {
     "urban": {
-      "start": 3880280857.88,
-      "end": 14877884124.21
+      "start": 0,
+      "end": 0
     },
     "agricultural": {
-      "start": 3880280857.88,
-      "end": 14877884124.21
+      "start": 0,
+      "end": 0
     },
     "industrial": {
-      "start": 3880280857.88,
-      "end": 14877884124.21
+      "start": 0,
+      "end": 0
     }
   },
   "priceSeries": {
@@ -44,136 +44,60 @@
       2024
     ],
     "urban": [
-      3880280857.88,
-      4980041184.52,
-      6079801511.15,
-      7179561837.78,
-      8279322164.42,
-      9379082491.05,
-      10478842817.68,
-      11578603144.31,
-      12678363470.95,
-      13778123797.58,
-      14877884124.21
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ],
     "agricultural": [
-      3880280857.88,
-      4980041184.52,
-      6079801511.15,
-      7179561837.78,
-      8279322164.42,
-      9379082491.05,
-      10478842817.68,
-      11578603144.31,
-      12678363470.95,
-      13778123797.58,
-      14877884124.21
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ],
     "industrial": [
-      3880280857.88,
-      4980041184.52,
-      6079801511.15,
-      7179561837.78,
-      8279322164.42,
-      9379082491.05,
-      10478842817.68,
-      11578603144.31,
-      12678363470.95,
-      13778123797.58,
-      14877884124.21
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ]
   },
-  "landUse": [
-    {
-      "category": "2",
-      "year": 2014,
-      "area": 3.078
-    },
-    {
-      "category": "3",
-      "year": 2014,
-      "area": 0.0
-    },
-    {
-      "category": "1",
-      "year": 2014,
-      "area": 0.0
-    },
-    {
-      "category": "12",
-      "year": 2014,
-      "area": 0.0
-    },
-    {
-      "category": "6",
-      "year": 2014,
-      "area": 0.0
-    },
-    {
-      "category": "غير مصنف",
-      "year": 2014,
-      "area": 0.0
-    },
-    {
-      "category": "5",
-      "year": 2014,
-      "area": 0.0
-    },
-    {
-      "category": "4",
-      "year": 2014,
-      "area": 0.0
-    },
-    {
-      "category": "2",
-      "year": 2024,
-      "area": 3.078
-    },
-    {
-      "category": "3",
-      "year": 2024,
-      "area": 0.0
-    },
-    {
-      "category": "5",
-      "year": 2024,
-      "area": 0.0
-    },
-    {
-      "category": "1",
-      "year": 2024,
-      "area": 0.0
-    },
-    {
-      "category": "12",
-      "year": 2024,
-      "area": 0.0
-    },
-    {
-      "category": "6",
-      "year": 2024,
-      "area": 0.0
-    },
-    {
-      "category": "غير مصنف",
-      "year": 2024,
-      "area": 0.0
-    },
-    {
-      "category": "4",
-      "year": 2024,
-      "area": 0.0
-    }
+  "landUse": [],
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural"
   ],
-  "layers": [],
   "layerCounts": {
-    "axis": 2,
-    "study": 2,
-    "urban": 213,
-    "agricultural": 18,
+    "axis": 1,
+    "study": 1,
+    "urban": 140,
+    "agricultural": 15,
     "industrial": 0,
-    "old": 849,
-    "latest": 849,
+    "old": 0,
+    "latest": 0,
     "civil": 0
   }
 }

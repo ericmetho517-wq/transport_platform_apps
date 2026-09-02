@@ -129,9 +129,8 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .temporal-map[data-dashboard-sync="true"] .map-sector-filter { top: 50px; }
 .temporal-map .map-controls { top: 54px; }
 .temporal-map .map-scale { max-width: calc(100% - 18px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.temporal-map[data-map-instance*="baseline"] .map-urban path, .temporal-map[data-map-instance*="baseline"] .map-agricultural path, .temporal-map[data-map-instance*="baseline"] .map-industrial path { opacity: .22; filter: saturate(.45); }
-.temporal-map[data-map-instance*="baseline"] .map-baseline path { opacity:.95; }
-.temporal-map[data-map-instance*="current"] .map-baseline path { opacity:.2; }
+.temporal-map[data-map-instance*="baseline"] .map-urban path, .temporal-map[data-map-instance*="baseline"] .map-agricultural path, .temporal-map[data-map-instance*="baseline"] .map-industrial path,
+.temporal-map[data-map-instance*="baseline"] .map-baseline path, .temporal-map[data-map-instance*="current"] .map-baseline path { opacity: 1; filter: none; }
 .comparison-card { padding: 8px 12px; }
 .comparison-card select { padding: 5px 8px; border: 1px solid #555; background: #333; color: #fff; font-size: 10px; }
 #comparison-chart { width:100%; min-height:155px; display:block; padding:8px 2px 2px; box-sizing:border-box; }

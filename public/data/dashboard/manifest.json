@@ -60,7 +60,12 @@
   },
   "cairo-suez-road": {
     "summary": "data/dashboard/cairo-suez-road/summary.json",
-    "layers": []
+    "layers": [
+      "study",
+      "axis",
+      "urban",
+      "agricultural"
+    ]
   },
   "dabaa-axis": {
     "summary": "data/dashboard/dabaa-axis/summary.json",

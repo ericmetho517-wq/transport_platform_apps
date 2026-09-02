@@ -476,10 +476,19 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const status = scope.querySelector<HTMLElement>(".map-status-text");
   if (!svg || !viewport || !satellite || !content || !toggles) return;
   const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي 2014", civil: "الدراسة المدنية" };
-  const loaded = await Promise.all(summary.layers.map(async (layer) => {
+  const layerResults = await Promise.all(summary.layers.map(async (layer) => {
     const url = `../../data/dashboard/${group}/${layer}.geojson`;
-    return [layer, await loadGeoJson(url)] as const;
+    try {
+      return { layer, collection: await loadGeoJson(url) } as const;
+    } catch (error) {
+      console.error(`Unable to load map layer ${group}/${layer}`, error);
+      return { layer, error } as const;
+    }
   }));
+  const loaded = layerResults
+    .filter((result): result is { layer: LayerName; collection: GeoJsonCollection } => "collection" in result)
+    .map(({ layer, collection }) => [layer, collection] as const);
+  const failedLayers = layerResults.filter((result) => "error" in result).map(({ layer }) => layer);
   const pairs = loaded.flatMap(([, collection]) => collection.features.flatMap((feature: { geometry?: { coordinates: Coordinates } }) => feature.geometry ? coordinatePairs(feature.geometry.coordinates) : []));
   const extentPairs = pairs.length ? pairs : [[fallbackBounds[group]?.[0] ?? 24, fallbackBounds[group]?.[1] ?? 22], [fallbackBounds[group]?.[2] ?? 36, fallbackBounds[group]?.[3] ?? 32]];
   const xs = extentPairs.map((pair) => pair[0]), ys = extentPairs.map((pair) => pair[1]);
@@ -510,8 +519,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     groupElement.classList.add(`map-${layer}`);
     collection.features.forEach((feature: { geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }) => {
       if (!feature.geometry) return;
+      const pathData = geometryPath(feature.geometry, project);
+      if (!pathData) return;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      path.setAttribute("d", geometryPath(feature.geometry, project));
+      path.setAttribute("d", pathData);
       path.setAttribute("vector-effect", "non-scaling-stroke");
       const representative = Object.entries(feature.properties || {}).find(([, value]) => value !== null && value !== "")?.[1];
       path.setAttribute("tabindex", "0");
@@ -525,7 +536,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         event.stopPropagation();
         const popup = scope.querySelector<HTMLElement>(".feature-popup");
         if (!popup) return;
-        const rows = Object.entries(feature.properties || {}).filter(([, value]) => value !== null && value !== "").slice(0, 30);
+        const rows = Object.entries(feature.properties || {}).filter(([, value]) => value !== null && value !== "");
         popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${labels[layer]}</p>${rows.map(([key, value]) => `<p><span>${esc(key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("")}`;
         popup.hidden = false;
       });
@@ -533,7 +544,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     });
     content.appendChild(groupElement);
   });
-  toggles.innerHTML = summary.layers.map((layer) => `<button type="button" class="active" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${summary.layerCounts?.[layer] ?? summary.metrics[`${layer}Features`] ?? ""}</b></button>`).join("");
+  const renderableCount = (collection: GeoJsonCollection) => collection.features.filter((feature) => feature.geometry && coordinatePairs(feature.geometry.coordinates).length).length;
+  toggles.innerHTML = loaded.map(([layer, collection]) => `<button type="button" class="active" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${renderableCount(collection).toLocaleString(document.documentElement.lang === "en" ? "en-US" : "ar-EG")}</b></button>`).join("");
   toggles.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => button.addEventListener("click", () => {
     const active = !button.classList.contains("active");
     document.querySelectorAll<HTMLButtonElement>(`[data-map-layer="${button.dataset.mapLayer}"]`).forEach((peer) => peer.classList.toggle("active", active));
@@ -606,7 +618,18 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     updateSector();
   }
   const locale = document.documentElement.lang === "en" ? "en-US" : "ar-EG";
-  if (status) status.textContent = pairs.length ? `${pairs.length.toLocaleString(locale)} نقطة هندسية · ${summary.layers.length} طبقات متاحة · ${tileCount} صورة قمر صناعي` : `لا توجد هندسة مكانية في قاعدة المشروع الحالية · ${tileCount} صورة قمر صناعي مرجعية`;
+  if (status) {
+    const featureCount = loaded.reduce((sum, [, collection]) => sum + renderableCount(collection), 0);
+    const isEnglish = document.documentElement.lang === "en";
+    const failureNote = failedLayers.length ? (isEnglish ? ` · ${failedLayers.length} failed` : ` · تعذر تحميل ${failedLayers.length}`) : "";
+    status.textContent = pairs.length
+      ? (isEnglish
+        ? `${featureCount.toLocaleString(locale)} features · ${pairs.length.toLocaleString(locale)} coordinate pairs · ${loaded.length} layers${failureNote}`
+        : `${featureCount.toLocaleString(locale)} معلم · ${pairs.length.toLocaleString(locale)} نقطة هندسية · ${loaded.length.toLocaleString(locale)} طبقات${failureNote}`)
+      : (isEnglish
+        ? `No matching local geometry · ${tileCount} reference satellite tiles${failureNote}`
+        : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
+  }
 
   let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
