@@ -49,7 +49,7 @@
       38361517.33,
       44240830.22,
       50120143.11,
-      55999456.0,
+      55999456,
       61878768.9,
       67758081.79,
       73637394.68
@@ -73,7 +73,7 @@
       38361517.33,
       44240830.22,
       50120143.11,
-      55999456.0,
+      55999456,
       61878768.9,
       67758081.79,
       73637394.68
@@ -114,7 +114,9 @@
   "layers": [
     "study",
     "axis",
-    "agricultural"
+    "agricultural",
+    "landcover-start",
+    "landcover-end"
   ],
   "layerCounts": {
     "axis": 1,
@@ -124,6 +126,12 @@
     "industrial": 0,
     "old": 373,
     "latest": 391,
-    "civil": 0
+    "civil": 0,
+    "landcover-start": 3,
+    "landcover-end": 3
+  },
+  "sourceLayerCounts": {
+    "landcover-start": 373,
+    "landcover-end": 391
   }
 }

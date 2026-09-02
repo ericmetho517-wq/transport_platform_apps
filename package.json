@@ -15,6 +15,8 @@
     "verify:sectors": "node tools/verify-sector-integrity.mjs",
     "verify:data": "node tools/verify-data-integrity.mjs",
     "verify:dashboards": "node tools/verify-dashboard-content.mjs",
+    "export:landcover": "node tools/export-landcover-symbology.mjs",
+    "audit:geodatabases": "node tools/audit-geodatabases.mjs",
     "migrate:arcgis": "node tools/migrate-arcgis.mjs"
   },
   "devDependencies": {

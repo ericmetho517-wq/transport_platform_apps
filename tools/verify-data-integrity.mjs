@@ -26,7 +26,7 @@ for (const group of readdirSync(dataRoot)) {
   const declaredLayers = summary.layers || [];
   const geoJsonFiles = readdirSync(folder).filter((name) => name.endsWith(".geojson"));
   const undeclaredLayerFiles = geoJsonFiles.filter((name) => !declaredLayers.includes(name.replace(/\.geojson$/, "")));
-  const result = { layers: {}, verifiedLocalData: summary.verifiedLocalData, source: summary.source, undeclaredLayerFiles, totals: { features: 0, coordinatePairs: 0, renderableFeatures: 0 } };
+  const result = { layers: {}, verifiedLocalData: summary.verifiedLocalData, source: summary.source, undeclaredLayerFiles, totals: { features: 0, sourceFeatures: 0, coordinatePairs: 0, renderableFeatures: 0 } };
   for (const layer of summary.layers || []) {
     const layerPath = join(folder, `${layer}.geojson`);
     if (!existsSync(layerPath)) { errors.push(`${group}/${layer}: file missing`); continue; }
@@ -37,12 +37,16 @@ for (const group of readdirSync(dataRoot)) {
     const invalid = pairs.filter(([x, y]) => !Number.isFinite(x) || !Number.isFinite(y) || x < -180 || x > 180 || y < -90 || y > 90).length;
     const renderableFeatures = collection.features.filter((feature) => feature.geometry && coordinatePairs(feature.geometry.coordinates).length).length;
     const emptyGeometry = collection.features.length - renderableFeatures;
+    const representedSourceFeatures = collection.features.reduce((sum, feature) => sum + Number(feature.properties?.source_feature_count || 0), 0) || collection.features.length;
     if (invalid) errors.push(`${group}/${layer}: ${invalid} invalid WGS84 coordinate pairs`);
     const expected = summary.layerCounts?.[layer] ?? (layer === "baseline" ? summary.layerCounts?.old : undefined);
     if (expected !== undefined && expected !== collection.features.length) errors.push(`${group}/${layer}: summary count ${expected} != file count ${collection.features.length}`);
+    const expectedSource = summary.sourceLayerCounts?.[layer];
+    if (expectedSource !== undefined && expectedSource !== representedSourceFeatures) errors.push(`${group}/${layer}: source count ${expectedSource} != represented source features ${representedSourceFeatures}`);
     if (emptyGeometry) warnings.push(`${group}/${layer}: ${emptyGeometry} source records have empty geometry and are excluded from rendering`);
-    result.layers[layer] = { features: collection.features.length, renderableFeatures, coordinatePairs: pairs.length, invalidCoordinates: invalid };
+    result.layers[layer] = { features: collection.features.length, representedSourceFeatures, renderableFeatures, coordinatePairs: pairs.length, invalidCoordinates: invalid };
     result.totals.features += collection.features.length;
+    result.totals.sourceFeatures += representedSourceFeatures;
     result.totals.renderableFeatures += renderableFeatures;
     result.totals.coordinatePairs += pairs.length;
   }
@@ -69,7 +73,7 @@ for (const app of apps) {
   }
 }
 
-const totals = Object.values(groups).reduce((sum, group) => ({ features: sum.features + group.totals.features, renderableFeatures: sum.renderableFeatures + group.totals.renderableFeatures, coordinatePairs: sum.coordinatePairs + group.totals.coordinatePairs }), { features: 0, renderableFeatures: 0, coordinatePairs: 0 });
+const totals = Object.values(groups).reduce((sum, group) => ({ features: sum.features + group.totals.features, sourceFeatures: sum.sourceFeatures + group.totals.sourceFeatures, renderableFeatures: sum.renderableFeatures + group.totals.renderableFeatures, coordinatePairs: sum.coordinatePairs + group.totals.coordinatePairs }), { features: 0, sourceFeatures: 0, renderableFeatures: 0, coordinatePairs: 0 });
 const report = { generatedAt: new Date().toISOString(), applications: apps.length, totals, applicationCoverage, groups, errors, warnings, result: errors.length ? "FAILED" : "PASSED" };
 writeFileSync(join(root, "registry", "data-integrity-audit.json"), JSON.stringify(report, null, 2) + "\n", "utf8");
 console.log(JSON.stringify({ applications: report.applications, dataGroups: Object.keys(groups).length, errors: errors.length, warnings: warnings.length, result: report.result }, null, 2));

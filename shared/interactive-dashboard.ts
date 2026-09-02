@@ -1,6 +1,6 @@
 import type { TransportApp } from "./project-runtime";
 
-type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil";
+type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil" | "landcover-start" | "landcover-end";
 
 interface DashboardSummary {
   slug: string;
@@ -475,8 +475,17 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const toggles = scope.querySelector<HTMLElement>(".map-layer-toggles");
   const status = scope.querySelector<HTMLElement>(".map-status-text");
   if (!svg || !viewport || !satellite || !content || !toggles) return;
-  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي 2014", civil: "الدراسة المدنية" };
-  const layerResults = await Promise.all(summary.layers.map(async (layer) => {
+  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}` };
+  const mapInstance = scope.dataset.mapInstance || "primary";
+  const temporalLayers: LayerName[] = ["landcover-start", "landcover-end"];
+  const regularLayers = summary.layers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && summary.layers.includes("landcover-start")));
+  const viewerMode = Boolean(scope.closest(".viewer-runtime"));
+  const requestedLayers = mapInstance.includes("baseline")
+    ? summary.layers.filter((layer) => ["study", "axis", "landcover-start"].includes(layer))
+    : mapInstance.includes("current")
+      ? summary.layers.filter((layer) => ["study", "axis", "landcover-end"].includes(layer))
+      : viewerMode ? summary.layers : [...regularLayers, ...(summary.layers.includes("landcover-end") ? ["landcover-end" as LayerName] : summary.layers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])];
+  const layerResults = await Promise.all(requestedLayers.map(async (layer) => {
     const url = `../../data/dashboard/${group}/${layer}.geojson`;
     try {
       return { layer, collection: await loadGeoJson(url) } as const;
@@ -489,10 +498,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     .filter((result): result is { layer: LayerName; collection: GeoJsonCollection } => "collection" in result)
     .map(({ layer, collection }) => [layer, collection] as const);
   const failedLayers = layerResults.filter((result) => "error" in result).map(({ layer }) => layer);
-  const pairs = loaded.flatMap(([, collection]) => collection.features.flatMap((feature: { geometry?: { coordinates: Coordinates } }) => feature.geometry ? coordinatePairs(feature.geometry.coordinates) : []));
-  const extentPairs = pairs.length ? pairs : [[fallbackBounds[group]?.[0] ?? 24, fallbackBounds[group]?.[1] ?? 22], [fallbackBounds[group]?.[2] ?? 36, fallbackBounds[group]?.[3] ?? 32]];
-  const xs = extentPairs.map((pair) => pair[0]), ys = extentPairs.map((pair) => pair[1]);
-  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  let pairCount = 0, minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  const scanCoordinates = (value: Coordinates): void => {
+    if (Array.isArray(value) && value.length >= 2 && typeof value[0] === "number" && typeof value[1] === "number") {
+      pairCount += 1; minX = Math.min(minX, value[0]); maxX = Math.max(maxX, value[0]); minY = Math.min(minY, value[1]); maxY = Math.max(maxY, value[1]);
+    } else if (Array.isArray(value)) value.forEach((item) => scanCoordinates(item as Coordinates));
+  };
+  loaded.forEach(([, collection]) => collection.features.forEach((feature) => { if (feature.geometry) scanCoordinates(feature.geometry.coordinates); }));
+  if (!pairCount) {
+    [minX, minY, maxX, maxY] = fallbackBounds[group] || [24, 22, 36, 32];
+  }
   let viewMinX = minX, viewMaxX = maxX, viewMinY = minY, viewMaxY = maxY;
   const rawWidth = Math.max(maxX - minX, .00001), rawHeight = Math.max(maxY - minY, .00001);
   const latitudeFactor = Math.max(Math.cos(((minY + maxY) / 2) * Math.PI / 180), .35);
@@ -524,6 +539,32 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
       path.setAttribute("vector-effect", "non-scaling-stroke");
+      if (layer === "landcover-start" || layer === "landcover-end") {
+        const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
+        const normalized = String(rawValue).trim().toLowerCase();
+        const numericCode = Number(rawValue);
+        const inferredCode = Number.isFinite(numericCode) ? numericCode
+          : /agri|زراع/.test(normalized) ? 0
+            : /industr|factor|مصنع|صناع/.test(normalized) ? 1
+              : /vacant|vscant|vecant|فضاء|فارغ/.test(normalized) ? 2
+                : /urban|build|residen|عمران|مبان|سكن/.test(normalized) ? 3
+                  : /facilit|service|خدم/.test(normalized) ? 4
+                    : /military|government|حكوم|عسكر/.test(normalized) ? 5
+                      : /water|مياه|مائي/.test(normalized) ? 8
+                        : /road|طريق/.test(normalized) ? 12 : 99;
+        const palette: Record<number, [string, string]> = {
+          0: ["#45c51a", "#d7ff91"], 1: ["#6657d9", "#dad5ff"], 2: ["#cfe566", "#f4ffc0"],
+          3: ["#e4a313", "#ffe18a"], 4: ["#ef6c35", "#ffd1b8"], 5: ["#b17ad1", "#f3d5ff"],
+          6: ["#21b7a8", "#b8fff4"], 7: ["#74826d", "#dce8d7"], 8: ["#22a9e0", "#c8f2ff"],
+          9: ["#c7ad72", "#fff0c3"], 10: ["#d94f70", "#ffd0dc"], 11: ["#b89158", "#f7e5bd"],
+          12: ["#5d82c9", "#dce8ff"], 13: ["#8f5aae", "#eddbf8"], 99: ["#9aa5ad", "#eef3f6"],
+        };
+        const [fill, stroke] = palette[inferredCode] || palette[99];
+        path.dataset.landuseCode = String(inferredCode);
+        path.style.fill = `${fill}d9`;
+        path.style.stroke = stroke;
+        path.style.strokeWidth = "1.1";
+      }
       const representative = Object.entries(feature.properties || {}).find(([, value]) => value !== null && value !== "")?.[1];
       path.setAttribute("tabindex", "0");
       path.setAttribute("aria-label", `${labels[layer]}${representative ? `: ${String(representative)}` : ""}`);
@@ -537,7 +578,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         const popup = scope.querySelector<HTMLElement>(".feature-popup");
         if (!popup) return;
         const rows = Object.entries(feature.properties || {}).filter(([, value]) => value !== null && value !== "");
-        popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${labels[layer]}</p>${rows.map(([key, value]) => `<p><span>${esc(key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("")}`;
+        const aggregateFieldLabels: Record<string, string> = { landuse_value: "استخدام الأرض", landuse_code: "كود استخدام الأرض", landuse_label: "وصف الاستخدام", source_feature_count: "عدد المعالم الأصلية", area_km2: "المساحة (كم²)", sector: "القطاع" };
+        popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${labels[layer]}</p>${rows.map(([key, value]) => `<p><span>${esc(aggregateFieldLabels[key] || key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("")}`;
         popup.hidden = false;
       });
       groupElement.appendChild(path);
@@ -545,7 +587,20 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     content.appendChild(groupElement);
   });
   const renderableCount = (collection: GeoJsonCollection) => collection.features.filter((feature) => feature.geometry && coordinatePairs(feature.geometry.coordinates).length).length;
-  toggles.innerHTML = loaded.map(([layer, collection]) => `<button type="button" class="active" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${renderableCount(collection).toLocaleString(document.documentElement.lang === "en" ? "en-US" : "ar-EG")}</b></button>`).join("");
+  const sourceCount = (layer: LayerName, collection: GeoJsonCollection) => temporalLayers.includes(layer)
+    ? collection.features.reduce((sum, feature) => sum + Number(feature.properties?.source_feature_count || 0), 0)
+    : renderableCount(collection);
+  const startsHidden = !mapInstance.includes("baseline") && !mapInstance.includes("current") && loaded.some(([layer]) => layer === "landcover-end");
+  if (startsHidden) content.querySelector<SVGGElement>('[data-layer-group="landcover-start"]')?.classList.add("layer-hidden");
+  toggles.innerHTML = loaded.map(([layer, collection]) => {
+    const active = !(startsHidden && layer === "landcover-start");
+    return `<button type="button" class="${active ? "active" : ""}" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${sourceCount(layer, collection).toLocaleString(document.documentElement.lang === "en" ? "en-US" : "ar-EG")}</b></button>`;
+  }).join("");
+  scope.querySelector(".landuse-legend")?.remove();
+  if (loaded.some(([layer]) => temporalLayers.includes(layer))) {
+    const expanded = mapInstance.includes("baseline") || mapInstance.includes("current") ? "" : " open";
+    scope.insertAdjacentHTML("beforeend", `<details class="landuse-legend"${expanded}><summary>مفتاح استخدامات الأراضي</summary><div><span style="--swatch:#45c51a">زراعي</span><span style="--swatch:#6657d9">صناعي</span><span style="--swatch:#cfe566">أراضٍ فضاء</span><span style="--swatch:#e4a313">عمراني</span><span style="--swatch:#ef6c35">خدمات ومرافق</span><span style="--swatch:#b17ad1">نقل ومرافق عامة</span><span style="--swatch:#21b7a8">ترفيهي وسياحي</span><span style="--swatch:#74826d">مقابر</span><span style="--swatch:#22a9e0">مسطحات مائية</span><span style="--swatch:#c7ad72">جزر</span><span style="--swatch:#d94f70">طرق</span><span style="--swatch:#5d82c9">تعليمي</span><span style="--swatch:#8f5aae">حكومي</span><span style="--swatch:#9aa5ad">غير مصنف</span></div></details>`);
+  }
   toggles.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => button.addEventListener("click", () => {
     const active = !button.classList.contains("active");
     document.querySelectorAll<HTMLButtonElement>(`[data-map-layer="${button.dataset.mapLayer}"]`).forEach((peer) => peer.classList.toggle("active", active));
@@ -619,13 +674,13 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   }
   const locale = document.documentElement.lang === "en" ? "en-US" : "ar-EG";
   if (status) {
-    const featureCount = loaded.reduce((sum, [, collection]) => sum + renderableCount(collection), 0);
+    const featureCount = loaded.reduce((sum, [layer, collection]) => sum + sourceCount(layer, collection), 0);
     const isEnglish = document.documentElement.lang === "en";
     const failureNote = failedLayers.length ? (isEnglish ? ` · ${failedLayers.length} failed` : ` · تعذر تحميل ${failedLayers.length}`) : "";
-    status.textContent = pairs.length
+    status.textContent = pairCount
       ? (isEnglish
-        ? `${featureCount.toLocaleString(locale)} features · ${pairs.length.toLocaleString(locale)} coordinate pairs · ${loaded.length} layers${failureNote}`
-        : `${featureCount.toLocaleString(locale)} معلم · ${pairs.length.toLocaleString(locale)} نقطة هندسية · ${loaded.length.toLocaleString(locale)} طبقات${failureNote}`)
+        ? `${featureCount.toLocaleString(locale)} features · ${pairCount.toLocaleString(locale)} coordinate pairs · ${loaded.length} layers${failureNote}`
+        : `${featureCount.toLocaleString(locale)} معلم · ${pairCount.toLocaleString(locale)} نقطة هندسية · ${loaded.length.toLocaleString(locale)} طبقات${failureNote}`)
       : (isEnglish
         ? `No matching local geometry · ${tileCount} reference satellite tiles${failureNote}`
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
@@ -633,7 +688,6 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
 
   let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
-  const mapInstance = scope.dataset.mapInstance || "primary";
   const apply = (broadcast = true) => {
     viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
     if (broadcast && linkedPair) linkedPair.dispatchEvent(new CustomEvent("linked-map-view", { detail: { source: mapInstance, zoom, tx, ty } }));

@@ -45,13 +45,43 @@
       2024
     ],
     "urban": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ],
     "agricultural": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ],
     "industrial": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ]
   },
   "landUse": [],
@@ -60,7 +90,9 @@
     "study",
     "axis",
     "urban",
-    "agricultural"
+    "agricultural",
+    "landcover-start",
+    "landcover-end"
   ],
   "layerCounts": {
     "axis": 10,
@@ -70,6 +102,12 @@
     "industrial": 0,
     "old": 33335,
     "latest": 34444,
-    "civil": 0
+    "civil": 0,
+    "landcover-start": 129,
+    "landcover-end": 143
+  },
+  "sourceLayerCounts": {
+    "landcover-start": 33335,
+    "landcover-end": 34444
   }
 }

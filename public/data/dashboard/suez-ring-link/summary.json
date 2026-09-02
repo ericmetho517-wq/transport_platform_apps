@@ -88,7 +88,9 @@
     "study",
     "axis",
     "urban",
-    "agricultural"
+    "agricultural",
+    "landcover-start",
+    "landcover-end"
   ],
   "layerCounts": {
     "axis": 1,
@@ -98,6 +100,12 @@
     "industrial": 0,
     "old": 0,
     "latest": 0,
-    "civil": 0
+    "civil": 0,
+    "landcover-start": 8,
+    "landcover-end": 10
+  },
+  "sourceLayerCounts": {
+    "landcover-start": 651,
+    "landcover-end": 651
   }
 }

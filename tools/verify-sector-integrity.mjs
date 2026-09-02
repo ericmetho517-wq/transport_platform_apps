@@ -43,8 +43,9 @@ for (const group of Object.values(aliases)) {
 
 const suezFree = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "cairo-suez-road", "summary.json"), "utf8"));
 const suezLink = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "suez-ring-link", "summary.json"), "utf8"));
-if (!suezFree.verifiedLocalData || suezFree.layers.length !== 4) errors.push("cairo-suez-road: split local spatial layers are incomplete");
-if (!suezLink.verifiedLocalData || suezLink.layers.length !== 4) errors.push("suez-ring-link: split local spatial layers are incomplete");
+const requiredSuezLayers = ["study", "axis", "urban", "agricultural", "landcover-start", "landcover-end"];
+if (!suezFree.verifiedLocalData || requiredSuezLayers.some((layer) => !suezFree.layers.includes(layer))) errors.push("cairo-suez-road: split local spatial layers are incomplete");
+if (!suezLink.verifiedLocalData || requiredSuezLayers.some((layer) => !suezLink.layers.includes(layer))) errors.push("suez-ring-link: split local spatial layers are incomplete");
 if ((suezFree.layerCounts.urban || 0) + (suezLink.layerCounts.urban || 0) !== 213) errors.push("Suez split: urban features were lost or duplicated");
 if ((suezFree.layerCounts.agricultural || 0) + (suezLink.layerCounts.agricultural || 0) !== 18) errors.push("Suez split: agricultural features were lost or duplicated");
 
