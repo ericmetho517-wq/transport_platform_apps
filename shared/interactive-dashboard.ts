@@ -301,24 +301,42 @@ function renderChangeBars(summary: DashboardSummary): void {
 function renderComparison(summary: DashboardSummary, topOnly = false): void {
   const container = document.querySelector<HTMLElement>("#comparison-chart");
   if (!container) return;
+  container.classList.remove("loading-panel");
   const years = Array.from(new Set(summary.landUse.map((item) => item.year))).sort();
   let categories = Array.from(new Set(summary.landUse.map((item) => item.category)));
   if (topOnly) {
     const totals = categories.map((category) => [category, summary.landUse.filter((item) => item.category === category).reduce((sum, item) => sum + item.area, 0)] as const).sort((a, b) => b[1] - a[1]);
     categories = totals.slice(0, 4).map((item) => item[0]);
   }
-  const colors = ["#47d900", "#c8cd5b", "#ffb000", "#00a5ce", "#ef5757", "#7f72d8", "#b88350", "#d8d8d8"];
-  const maxTotal = Math.max(...years.map((year) => summary.landUse.filter((item) => item.year === year && categories.includes(item.category)).reduce((sum, item) => sum + item.area, 0)), 1);
+  const fallbackColors = ["#cde768", "#24c427", "#5a46e8", "#d9a116", "#00a5ce", "#ef5757", "#7f72d8", "#d8d8d8"];
+  const categoryColor = (category: string, index: number) => {
+    if (/فضاء|vacant/i.test(category)) return "#cde768";
+    if (/زراع|agricultur/i.test(category)) return "#24c427";
+    if (/صناع|industr/i.test(category)) return "#5a46e8";
+    if (/عمران|urban/i.test(category)) return "#d9a116";
+    return fallbackColors[index % fallbackColors.length];
+  };
+  const colors = categories.map(categoryColor);
   const rows = years.map((year) => {
     const total = summary.landUse.filter((item) => item.year === year && categories.includes(item.category)).reduce((sum, item) => sum + item.area, 0);
     const segments = categories.map((category, index) => {
       const value = summary.landUse.find((item) => item.year === year && item.category === category)?.area || 0;
-      return `<i style="width:${value / maxTotal * 100}%;background:${colors[index % colors.length]}" title="${esc(category)} · ${formatNumber(value, 2)} كم²"></i>`;
+      return `<i style="width:${total ? value / total * 100 : 0}%;background:${colors[index]}" title="${esc(category)} · ${formatNumber(value, 2)} كم² · ${formatNumber(total ? value / total * 100 : 0, 1)}٪"></i>`;
     }).join("");
     return `<div class="comparison-row"><b>${year}</b><div>${segments}</div><span>${formatNumber(total, 1)} كم²</span></div>`;
   }).join("");
-  const legend = categories.map((category, index) => `<span><i style="background:${colors[index % colors.length]}"></i>${esc(category)}</span>`).join("");
-  container.innerHTML = summary.landUse.length ? `${rows}<div class="comparison-legend">${legend}</div>` : '<div class="no-data">لا توجد طبقة مقارنة مسجلة لهذا المشروع؛ الخريطة ما زالت تعرض الطبقات المتاحة.</div>';
+  const axis = `<div class="comparison-axis"><span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100%</span></div>`;
+  const legend = categories.map((category, index) => `<span><i style="background:${colors[index]}"></i>${esc(category)}</span>`).join("");
+  container.innerHTML = summary.landUse.length ? `${rows}${axis}<div class="comparison-legend">${legend}</div>` : '<div class="no-data">لا توجد طبقة مقارنة مسجلة لهذا المشروع؛ الخريطة ما زالت تعرض الطبقات المتاحة.</div>';
+}
+
+function setGauge(gauge: HTMLElement | null, percent: number): void {
+  if (!gauge) return;
+  const safePercent = Math.min(Math.max(percent, 0), 100);
+  gauge.style.setProperty("--gauge", `${safePercent * 1.8}deg`);
+  if (!gauge.querySelector(".gauge-scale")) gauge.insertAdjacentHTML("afterbegin", '<div class="gauge-scale" aria-hidden="true"><span>0%</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span><span>100%</span></div>');
+  const label = gauge.querySelector("strong");
+  if (label) label.textContent = `${new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 }).format(safePercent)}%`;
 }
 
 function renderGaugeAndDonut(summary: DashboardSummary): void {
@@ -328,24 +346,21 @@ function renderGaugeAndDonut(summary: DashboardSummary): void {
   const industrial = summary.metrics.industrialChangeKm2 || 0;
   const total = urban + agri + industrial;
   const percent = Math.min(summary.profile?.metrics.urbanChangePercent ?? urban / study * 100, 100);
-  const gauge = document.querySelector<HTMLElement>("#urban-gauge");
-  if (gauge) {
-    gauge.style.setProperty("--gauge", `${percent * 1.8}deg`);
-    const label = gauge.querySelector("strong");
-    if (label) label.textContent = `${formatNumber(percent, 1)}٪`;
-  }
+  setGauge(document.querySelector<HTMLElement>("#urban-gauge"), percent);
   const donut = document.querySelector<HTMLElement>("#change-donut");
   if (donut) {
     const profileShares = summary.profile?.statusShares;
     const urbanShare = profileShares ? profileShares.existing : total ? urban / total * 100 : 0;
     const agriShare = profileShares ? profileShares.underConstruction : total ? agri / total * 100 : 0;
-    donut.style.background = `conic-gradient(#ff9e00 0 ${urbanShare}%, #84db24 ${urbanShare}% ${urbanShare + agriShare}%, #00a6d8 ${urbanShare + agriShare}% 100%)`;
+    donut.style.background = profileShares
+      ? `conic-gradient(#d6cc00 0 ${urbanShare}%, #e83a19 ${urbanShare}% 100%)`
+      : `conic-gradient(#ff9e00 0 ${urbanShare}%, #84db24 ${urbanShare}% ${urbanShare + agriShare}%, #00a6d8 ${urbanShare + agriShare}% 100%)`;
     const label = donut.querySelector("strong");
-    if (label) label.textContent = `${formatNumber(total, 1)} كم²`;
+    if (label) label.textContent = profileShares ? "الحالة" : `${formatNumber(total, 1)} كم²`;
   }
   const legend = document.querySelector<HTMLElement>("#donut-legend");
   if (legend) legend.innerHTML = summary.profile?.statusShares
-    ? `<span><i style="background:#ff9e00"></i>قائمة ${formatNumber(summary.profile.statusShares.existing, 0)}٪</span><span><i style="background:#84db24"></i>تحت الإنشاء ${formatNumber(summary.profile.statusShares.underConstruction, 0)}٪</span>`
+    ? `<span><i style="background:#d6cc00"></i>قائم ${formatNumber(summary.profile.statusShares.existing, 0)}٪</span><span><i style="background:#e83a19"></i>تحت الإنشاء ${formatNumber(summary.profile.statusShares.underConstruction, 0)}٪</span>`
     : `<button data-filter-layer="urban"><i style="background:#ff9e00"></i>عمراني ${formatNumber(urban, 1)}</button><button data-filter-layer="agricultural"><i style="background:#84db24"></i>زراعي ${formatNumber(agri, 1)}</button><button data-filter-layer="industrial"><i style="background:#00a6d8"></i>صناعي ${formatNumber(industrial, 1)}</button>`;
 }
 
@@ -371,9 +386,7 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
     const gauge = document.querySelector<HTMLElement>(`#${kind}-gauge`);
     if (!gauge) return;
     const percent = Math.min(summary.profile?.metrics[`${kind}ChangePercent`] ?? 0, 100);
-    gauge.style.setProperty("--gauge", `${percent * 1.8}deg`);
-    const label = gauge.querySelector("strong");
-    if (label) label.textContent = `${formatNumber(percent, 1)}٪`;
+    setGauge(gauge, percent);
   });
 }
 
@@ -759,6 +772,15 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       renderComparison(summary);
       renderGaugeAndDonut(summary);
       renderAgricultureIndicators(summary);
+      root.addEventListener("dashboard-sector-view", ((event: CustomEvent<SectorProfile | SectorDetail | undefined>) => {
+        const selected = event.detail;
+        if (!selected) return;
+        const view = { ...summary, metrics: { ...summary.metrics, ...selected.metrics }, profile: { ...summary.profile, ...selected } } as DashboardSummary;
+        if (selected.landUse?.length) view.landUse = selected.landUse;
+        renderComparison(view);
+        renderGaugeAndDonut(view);
+        renderAgricultureIndicators(view);
+      }) as EventListener);
       document.querySelector<HTMLSelectElement>("#comparison-mode")?.addEventListener("change", (event) => renderComparison(summary, (event.currentTarget as HTMLSelectElement).value === "top4"));
     } else if (root.dataset.mode === "land") {
       renderChangeBars(summary);

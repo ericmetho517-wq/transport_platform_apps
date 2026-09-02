@@ -72,6 +72,7 @@ if (!runtimeSource.includes('mapMarkup("land-baseline"') || !runtimeSource.inclu
 if (!runtimeSource.includes('mapMarkup("price-baseline"') || !runtimeSource.includes('mapMarkup("price-current"')) failures.push("western price dashboard: missing report-matched map pair");
 if (!runtimeSource.includes('"dashboard-map-sector"') || !runtimeSource.includes("fitSector")) failures.push("dashboard maps: sector auto-fit interaction is missing");
 if (!runtimeSource.includes('"linked-map-view"') || !runtimeSource.includes("map-year-start")) failures.push("temporal maps: synchronized navigation and data-driven year labels are required");
+if (!runtimeSource.includes("gauge-scale") || !runtimeSource.includes("comparison-axis")) failures.push("dashboard charts: report-matched gauge scale and full-width comparison axis are required");
 
 if (dashboards.length !== 50) failures.push(`expected 50 dashboards, found ${dashboards.length}`);
 if (failures.length) {
