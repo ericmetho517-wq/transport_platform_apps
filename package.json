@@ -9,13 +9,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:vercel": "npm run verify:structure && npm run verify:sectors && npm run verify:data && npm run verify:dashboards && npm run verify:references && vite build",
+    "build:vercel": "npm run verify:structure && npm run verify:sectors && npm run verify:data && npm run verify:dashboards && npm run verify:references && npm run verify:platform && vite build",
     "preview": "vite preview",
     "verify:structure": "node tools/verify-structure.mjs",
     "verify:sectors": "node tools/verify-sector-integrity.mjs",
     "verify:data": "node tools/verify-data-integrity.mjs",
     "verify:dashboards": "node tools/verify-dashboard-content.mjs",
     "verify:references": "node tools/verify-reference-fidelity.mjs",
+    "verify:platform": "node tools/verify-platform-ui.mjs",
     "export:landcover": "node tools/export-landcover-symbology.mjs",
     "audit:geodatabases": "node tools/audit-geodatabases.mjs",
     "migrate:arcgis": "node tools/migrate-arcgis.mjs"
