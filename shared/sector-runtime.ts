@@ -149,6 +149,15 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
   evidenceModal.querySelectorAll<HTMLElement>("[data-evidence-close]").forEach((element) => element.addEventListener("click", closeEvidence));
   document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !evidenceModal.hidden) closeEvidence(); });
   document.querySelectorAll<HTMLAnchorElement>(".evidence-image-link, .evidence-open-link").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); openEvidence(link); }));
+  const compareBox = document.querySelector<HTMLElement>("#story-compare");
+  if (compareBox?.dataset.compareSrc) {
+    const zoomButton = document.createElement("button");
+    zoomButton.type = "button";
+    zoomButton.className = "compare-zoom-button";
+    zoomButton.textContent = "تكبير الصورة";
+    zoomButton.addEventListener("click", () => { const link = document.createElement("a"); link.href = compareBox.dataset.compareSrc || ""; openEvidence(link); });
+    compareBox.parentElement?.insertBefore(zoomButton, compareBox);
+  }
   const group = root.dataset.sectorGroup || dashboardGroup(app);
   const response = await fetch(`../../data/dashboard/${group}/summary.json`);
   if (!response.ok) return;
