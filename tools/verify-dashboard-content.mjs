@@ -88,12 +88,16 @@ if (!runtimeSource.includes('mapMarkup("land-baseline"') || !runtimeSource.inclu
 if (!runtimeSource.includes('mapMarkup("price-baseline"') || !runtimeSource.includes('mapMarkup("price-current"')) failures.push("western price dashboard: missing report-matched map pair");
 if (!runtimeSource.includes('"dashboard-map-sector"') || !runtimeSource.includes("fitSector")) failures.push("dashboard maps: sector auto-fit interaction is missing");
 if (!runtimeSource.includes('"linked-map-view"') || !runtimeSource.includes("map-year-start")) failures.push("temporal maps: synchronized navigation and data-driven year labels are required");
-if (!runtimeSource.includes("gauge-scale") || !runtimeSource.includes("comparison-axis")) failures.push("dashboard charts: report-matched gauge scale and full-width comparison axis are required");
+if (!runtimeSource.includes("gauge-ticks") || !runtimeSource.includes("gauge-zone-low") || !runtimeSource.includes("comparison-axis")) failures.push("dashboard charts: report-matched SVG gauge and full-width comparison axis are required");
+if (!runtimeSource.includes("deriveLandUseFromLocalLayers") || !runtimeSource.includes('if (!summary.landUse.length)')) failures.push("dashboard charts: local 2014/current land-use layers must populate an otherwise empty comparison");
 if (runtimeSource.includes("open-reference") || runtimeSource.includes("reference-dialog")) failures.push("dashboard chrome: report-reference controls must not appear in the client-facing design");
 if (!runtimeSource.includes('group === "western-upper-egypt" || group === "cairo-suez-road"')) failures.push("dashboard layouts: Western Upper Egypt and Cairo-Suez must use their documented dual-map layouts");
 if (!runtimeSource.includes("dabaaLandMarkup") || runtimeSource.includes("classdark-card")) failures.push("dashboard layouts: Dabaa must use the documented four-KPI dashboard without malformed card markup");
 for (const phrase of ["إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)", "نسبة مساحة التغير العمراني بمنطقة الدراسة لعام 2023", "نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023", "مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023"]) {
   if (!localizationSource.includes(phrase)) failures.push(`English localization: missing Dabaa translation for ${phrase}`);
+}
+for (const phrase of ["نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي", "نسبة مساحة التغير الصناعي بمنطقة الدراسة", "نسبة الحالة العمرانية بمناطق التغير", "ألف عامل"]) {
+  if (!localizationSource.includes(phrase)) failures.push(`English localization: missing report-layout translation for ${phrase}`);
 }
 for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey", "transport", "governorates"]) {
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);

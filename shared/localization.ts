@@ -1,6 +1,18 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي بالمنطقة", "Agricultural land as a share of the total area"],
+  ["نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي", "Agricultural land as a share of total land"],
+  ["نسبة مساحة التغير الصناعي بمنطقة الدراسة", "Industrial change as a share of the study area"],
+  ["نسبة مساحة التغير العمراني بمنطقة الدراسة", "Urban change as a share of the study area"],
+  ["نسبة الحالة العمرانية بمناطق التغير", "Development status within change areas"],
+  ["إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)", "Total changed urban land area (km²)"],
+  ["مناطق التغير العمراني المستحدثة", "Newly developed urban change areas"],
+  ["نسبة ملكية الأراضي الزراعية", "Agricultural land ownership"],
+  ["حكومي وعسكري", "Government and military"],
+  ["استخدامات أخرى", "Other land uses"],
+  ["استخدام أرض", "Land-use class"],
+  ["ألف عامل", "thousand workers"],
   ["إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)", "Total changed agricultural land area (feddans)"],
   ["نسبة مساحة التغير العمراني بمنطقة الدراسة لعام 2023", "Urban change as a share of the study area in 2023"],
   ["نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023", "Agricultural change as a share of the study area in 2023"],

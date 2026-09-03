@@ -291,7 +291,7 @@
     "title": "محور كلابشة",
     "report": "Final Report 3-2024.pdf",
     "pages": [320, 321, 322, 323, 324],
-    "metrics": { "studyAreaKm2": 460.5, "axisLengthKm": 23, "urbanChangeKm2": 20, "agriculturalAreaFeddan": 24672, "agriculturalWorkersThousands": 39, "urbanChangePercent": 8.1, "agriculturalSharePercent": 22.1 },
+    "metrics": { "studyAreaKm2": 460.5, "axisLengthKm": 23, "urbanChangeKm2": 20, "agriculturalAreaFeddan": 24672, "agriculturalWorkersThousands": 39, "urbanChangePercent": 8.1, "industrialChangePercent": 8.1, "agriculturalSharePercent": 22.1 },
     "prices": {
       "urban": { "start": 3800000000, "end": 12000000000 },
       "agricultural": { "start": 3500000000, "end": 15000000000 }

@@ -89,7 +89,7 @@ function storyMarkup(app: TransportApp): string {
     <section id="story-intro" class="story-sector-hero" ${firstAvailable?.hero ? `style="--story-image:url('${esc(firstAvailable.hero)}')"` : ""}><div><span>قصة مكانية تفاعلية</span><h1 id="story-active-title">${esc(app.title)}</h1><p id="story-active-subtitle">تطور استخدامات الأراضي المحيطة بالمحور قبل وبعد الإنشاء</p><button data-story-scroll>ابدأ التصفح ↓</button></div></section>
     ${isWestern ? `<section class="story-collection"><div class="section-heading"><span>قطاعات المحور</span><h2>اختر القطاع لعرض القصة والخرائط والمقارنة الخاصة به</h2><p>كل صورة ومقارنة مرتبطة بالقطاع والتقرير الأصلي الظاهر في مراجع المشروع.</p></div><div class="story-sector-cards">${entries.map((entry) => `<button data-story-card="${entry.key}" class="${entry.hero ? "" : "data-only"}" ${entry.hero ? `style="--card-image:url('${esc(entry.hero)}')"` : ""}><span>${esc(entry.label)}</span><small>${entry.report ? `${esc(entry.report)} · بيانات القطاع ${esc(entry.sector)}` : "بيانات مكانية محلية"}</small></button>`).join("")}</div></section>` : ""}
     <section id="story-map" class="story-chapter"><div><b>01</b><h2>منطقة الدراسة ومسار المحور</h2><p>خريطة قمر صناعي تفاعلية تعرض حدود الدراسة ومسار الطريق ومناطق التغير العمراني والزراعي للقطاع المحدد فقط. استخدم أزرار التكبير واسحب الخريطة، وانقر على أي عنصر لعرض بياناته الوصفية.</p><div class="story-data-note" id="story-data-note">يتم عرض البيانات المحلية المراجعة للقطاع.</div></div>${renderSectorMapMarkup()}</section>
-    <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى ${isWestern ? "2024" : "2023"}</h2><p>حرّك الفاصل يمينًا ويسارًا للمقارنة بين جانبي الصورة الأصلية الواردة في تقرير القطاع.</p></div><div class="story-compare" id="story-compare" ${initialCompare ? `style="--compare-image:url('${esc(initialCompare)}')"` : "hidden"}><div class="compare-before"><span>2014</span></div><div class="compare-after" id="compare-overlay"><div class="compare-after-image"></div><span>${isWestern ? "2024" : "2023"}</span></div><i id="compare-handle">↔</i><input id="compare-range" type="range" min="0" max="100" value="50" aria-label="نسبة المقارنة الزمنية لاستخدامات الأراضي"/></div><div class="story-compare-missing" id="story-compare-missing" ${initialCompare ? "hidden" : ""}>${isWestern ? "اختر أحد قطاعات المحور من الشريط العلوي لعرض المقارنة الزمنية الموثقة الخاصة به." : "لا توجد صورة مقارنة زمنية موثقة لهذا القطاع داخل ملفات التقارير الحالية؛ الخريطة بالأعلى تعرض بياناته المكانية المتاحة دون إضافة صورة افتراضية."}</div></section>
+    <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى ${isWestern ? "2024" : "2023"}</h2><p>حرّك الفاصل يمينًا ويسارًا للمقارنة بين جانبي الصورة الأصلية الواردة في تقرير القطاع.</p></div><div class="story-compare" id="story-compare" ${initialCompare ? `data-compare-src="${esc(initialCompare)}" style="--compare-image:url('${esc(initialCompare)}')"` : "hidden"}><div class="compare-before"><span>2014</span></div><div class="compare-after" id="compare-overlay"><div class="compare-after-image"></div><span>${isWestern ? "2024" : "2023"}</span></div><i id="compare-handle">↔</i><input id="compare-range" type="range" min="0" max="100" value="50" aria-label="نسبة المقارنة الزمنية لاستخدامات الأراضي"/></div><div class="story-compare-missing" id="story-compare-missing" ${initialCompare ? "hidden" : ""}>${isWestern ? "اختر أحد قطاعات المحور من الشريط العلوي لعرض المقارنة الزمنية الموثقة الخاصة به." : "لا توجد صورة مقارنة زمنية موثقة لهذا القطاع داخل ملفات التقارير الحالية؛ الخريطة بالأعلى تعرض بياناته المكانية المتاحة دون إضافة صورة افتراضية."}</div></section>
     <section id="story-evidence" class="story-evidence-section"><div class="section-heading"><span>03</span><h2>أعمال ومرفقات القطاع</h2><p>الصور الأصلية المستخرجة من تقرير القطاع دون استبدالها بصور عامة.</p></div>${evidence(app)}</section>
   </main>`;
 }
@@ -150,6 +150,19 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     button.hidden = !available;
   });
 
+  const fitStoryComparison = (source?: string) => {
+    const compareBox = document.querySelector<HTMLElement>("#story-compare");
+    if (!compareBox || !source) return;
+    compareBox.dataset.compareSrc = source;
+    const sourceImage = new Image();
+    sourceImage.addEventListener("load", () => {
+      compareBox.style.aspectRatio = `${sourceImage.naturalWidth} / ${sourceImage.naturalHeight}`;
+      compareBox.style.maxWidth = `${sourceImage.naturalWidth}px`;
+      document.querySelector<HTMLInputElement>("#compare-range")?.dispatchEvent(new Event("input"));
+    });
+    sourceImage.src = source;
+  };
+
   const activateStory = (button: HTMLButtonElement) => {
     document.querySelectorAll<HTMLButtonElement>("[data-story-key]").forEach((item) => item.classList.toggle("active", item === button));
     const title = button.dataset.storyTitle || app.title;
@@ -165,7 +178,10 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     const dataNote = document.querySelector<HTMLElement>("#story-data-note");
     if (activeTitle) activeTitle.textContent = title;
     if (heroSection && hero) heroSection.style.setProperty("--story-image", `url('${hero}')`);
-    if (compareBox && compare) compareBox.style.setProperty("--compare-image", `url('${compare}')`);
+    if (compareBox && compare) {
+      compareBox.style.setProperty("--compare-image", `url('${compare}')`);
+      fitStoryComparison(compare);
+    }
     compareBox?.toggleAttribute("hidden", !compare);
     compareMissing?.toggleAttribute("hidden", Boolean(compare));
     if (compareMissing && !compare) compareMissing.textContent = sector === "all" ? "اختر أحد قطاعات المحور من الشريط العلوي لعرض المقارنة الزمنية الموثقة الخاصة به." : "لا توجد صورة مقارنة زمنية موثقة لهذا القطاع داخل ملفات التقارير الحالية؛ الخريطة بالأعلى تعرض بياناته المكانية المتاحة دون إضافة صورة افتراضية.";
@@ -224,6 +240,11 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     if (handle) handle.style.left = `${range.value}%`;
     if (compare && afterImage) afterImage.style.width = `${compare.clientWidth}px`;
   });
+  const compareBox = document.querySelector<HTMLElement>("#story-compare");
+  if (compareBox) {
+    new ResizeObserver(() => range?.dispatchEvent(new Event("input"))).observe(compareBox);
+    fitStoryComparison(compareBox.dataset.compareSrc);
+  }
   range?.dispatchEvent(new Event("input"));
   document.querySelector<HTMLButtonElement>("[data-story-scroll]")?.addEventListener("click", () => document.querySelector(".story-chapter")?.scrollIntoView({ behavior: "smooth" }));
   document.querySelectorAll<HTMLButtonElement>("[data-view-layer], [data-gallery-layer]").forEach((button) => button.addEventListener("click", () => selectOnly(button.dataset.viewLayer || button.dataset.galleryLayer || "study")));
