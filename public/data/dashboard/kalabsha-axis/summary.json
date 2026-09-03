@@ -116,7 +116,9 @@
     "axis",
     "agricultural",
     "landcover-start",
-    "landcover-end"
+    "landcover-end",
+    "governorates",
+    "water"
   ],
   "layerCounts": {
     "axis": 1,
@@ -128,10 +130,14 @@
     "latest": 391,
     "civil": 0,
     "landcover-start": 3,
-    "landcover-end": 3
+    "landcover-end": 3,
+    "governorates": 1,
+    "water": 1
   },
   "sourceLayerCounts": {
     "landcover-start": 373,
-    "landcover-end": 391
+    "landcover-end": 391,
+    "governorates": 1,
+    "water": 1
   }
 }

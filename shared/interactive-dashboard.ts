@@ -1,6 +1,6 @@
 import type { TransportApp } from "./project-runtime";
 
-type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil" | "landcover-start" | "landcover-end";
+type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil" | "landcover-start" | "landcover-end" | "buildings" | "parcels" | "landmarks" | "water" | "field-survey" | "transport" | "governorates";
 
 interface DashboardSummary {
   slug: string;
@@ -46,7 +46,6 @@ type SectorDetail = NonNullable<SectorProfile["sectors"]>[string];
 const esc = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char] || char);
 
 const isPriceDashboard = (app: TransportApp) => /سعر|أسعار|اسعار|price/i.test(app.title);
-const isAgriculturalDashboard = (app: TransportApp) => /زراعي|زراعية|agricultural/i.test(app.title);
 const civilDashboardSlugs = new Set(["dashboard-4b68db62a1", "dashboard-48c0447e11", "dashboard-890d333abf", "dashboard-489e365131", "dashboard-37e01603d0", "dashboard-ba98b53679"]);
 const impactDashboardSlugs = new Set(["dashboard-35c11a505b", "dashboard-83f3738705", "dashboard-676c18c4b7", "dashboard-4138cfe326", "dashboard-f0a5bc623c"]);
 const isCivilDashboard = (app: TransportApp) => civilDashboardSlugs.has(app.slug) || /civil study/i.test(app.title);
@@ -102,18 +101,12 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
 
 export const renderSectorMapMarkup = mapMarkup;
 
-function referenceDialog(app: TransportApp): string {
-  const references = app.reportReferences || [];
-  if (!references.length) return "";
-  return `<dialog id="reference-dialog" class="reference-dialog"><button class="dialog-close" type="button">×</button><h3>مرجع التصميم من التقرير</h3><div class="dialog-images">${references.map((item) => `<figure><img src="${esc(item.imagePath)}" alt="مرجع ${esc(app.title)}"/><figcaption>${esc(item.reportName)} · صفحة ${item.page}</figcaption></figure>`).join("")}</div></dialog>`;
-}
-
 function dashboardHeader(app: TransportApp): string {
-  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><span class="data-badge"><i></i>بيانات محلية مترابطة</span>${app.reportReferences?.length ? '<button id="open-reference" type="button">مرجع التصميم</button>' : ""}<button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
+  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
 }
 
 function priceMarkup(app: TransportApp, group: string): string {
-  const westernComparison = group === "western-upper-egypt";
+  const westernComparison = group === "western-upper-egypt" || group === "cairo-suez-road";
   const mapArea = westernComparison
     ? `<div class="temporal-map-pair price-temporal-map-pair">${mapMarkup("price-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("price-current", '<span class="map-year-end">2024</span>', true)}</div>`
     : mapMarkup();
@@ -128,7 +121,6 @@ function priceMarkup(app: TransportApp, group: string): string {
         ${trendArea}
       </section>
     </div>
-    ${referenceDialog(app)}
   </main>`;
 }
 
@@ -140,7 +132,6 @@ function landMarkup(app: TransportApp, group: string): string {
       <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>توزيع مناطق التغير</span><div class="donut" id="change-donut"><strong>—</strong></div><div id="donut-legend"></div></section></aside>
     </div>
-    ${referenceDialog(app)}
   </main>`;
 }
 
@@ -162,7 +153,6 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
         <section class="agriculture-center western-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2024</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
         <aside class="agriculture-right western-agriculture-right"><section class="dark-card gauge-card"><span>نسبة التغير بالأراضي الزراعية</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة التغير بالأراضي الصناعية</span><div class="gauge" id="industrial-gauge"><i></i><strong>—</strong></div></section></aside>
       </div>
-      ${referenceDialog(app)}
     </main>`;
   }
   const agriculturalAreaLabel = rawChangeData ? "مساحة التغير الزراعي المحصورة (فدان)" : "إجمالي مساحة الأراضي الزراعية (فدان)";
@@ -174,7 +164,6 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
       <section class="agriculture-center"><div class="dashboard-kpis agriculture-kpis"><article class="gold"><span>${urbanAreaLabel}</span><strong data-metric="urbanChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2024</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="agriculture-right"><section class="dark-card gauge-card"><span>نسبة التغير العمراني بمنطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div></section><section class="dark-card agriculture-change"><span>إجمالي مساحة التغير بالأراضي الزراعية (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></section><section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section></aside>
     </div>
-    ${referenceDialog(app)}
   </main>`;
 }
 
@@ -184,7 +173,7 @@ function civilMarkup(app: TransportApp, group: string): string {
     <div class="specialized-layout">
       <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>عناصر الرفع المدني المسجلة</span><strong data-metric="civilFeatures">—</strong></article></section>
       <section class="specialized-body"><aside class="dark-card civil-panel"><h2>مؤشرات الدراسة المدنية</h2><p>تعرض هذه اللوحة عناصر الرفع والحصر المدني الخاصة بهذا القطاع فقط، مع إمكانية تشغيل وإيقاف الطبقات وفحص خصائص كل عنصر من الخريطة.</p><div class="civil-facts"><span>طبقات المشروع المتاحة <b data-metric="availableLayers">—</b></span><span>العناصر العمرانية <b data-metric="urbanFeatures">—</b></span><span>العناصر الزراعية <b data-metric="agriculturalFeatures">—</b></span></div></aside>${mapMarkup()}</section>
-    </div>${referenceDialog(app)}
+    </div>
   </main>`;
 }
 
@@ -194,7 +183,7 @@ function impactMarkup(app: TransportApp, group: string): string {
     <div class="specialized-layout">
       <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول المحور (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>نطاق الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>مساحة التغير العمراني (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article></section>
       <section class="specialized-body impact-body"><aside class="dark-card impact-controls"><h2>سيناريو الأثر التنموي حتى 2053</h2><label for="impact-year">سنة العرض <strong id="impact-year-label">2024</strong></label><input id="impact-year" type="range" min="2024" max="2053" value="2024" step="1"/><div class="impact-results"><span>مؤشر التطور الزمني <b id="impact-progress">0٪</b></span><span>المساحة العمرانية التقديرية* <b id="impact-area">—</b></span><span>فرص العمل المرتبطة بالقطاع <b data-metric="jobOpportunities">—</b></span></div><small>* محاكاة خطية تفاعلية للعرض وليست قيمة تقريرية جديدة؛ القيم الأصلية المعتمدة معروضة في البطاقات والمراجع.</small></aside>${mapMarkup()}</section>
-    </div>${referenceDialog(app)}
+    </div>
   </main>`;
 }
 
@@ -202,7 +191,8 @@ export function renderInteractiveDashboard(app: TransportApp): string {
   const group = dashboardGroup(app);
   if (isCivilDashboard(app)) return civilMarkup(app, group);
   if (isImpactDashboard(app)) return impactMarkup(app, group);
-  return isPriceDashboard(app) ? priceMarkup(app, group) : isAgriculturalDashboard(app) ? agriculturalMarkup(app, group) : landMarkup(app, group);
+  if (isPriceDashboard(app)) return priceMarkup(app, group);
+  return group === "western-upper-egypt" || group === "cairo-suez-road" ? landMarkup(app, group) : agriculturalMarkup(app, group);
 }
 
 const formatNumber = (value: number, digits = 1) => new Intl.NumberFormat(document.documentElement.lang === "en" ? "en-US" : "ar-EG", { maximumFractionDigits: digits }).format(value || 0);
@@ -414,6 +404,7 @@ function coordinatePairs(coordinates: Coordinates, result: number[][] = []): num
 function geometryPath(geometry: { type: string; coordinates: Coordinates }, project: (pair: number[]) => [number, number]): string {
   const line = (pairs: number[][], close = false) => pairs.map((pair, index) => `${index ? "L" : "M"}${project(pair).join(" ")}`).join(" ") + (close ? " Z" : "");
   if (geometry.type === "Point") { const [x, y] = project(geometry.coordinates as number[]); return `M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0-8 0`; }
+  if (geometry.type === "MultiPoint") return (geometry.coordinates as number[][]).map((pair) => { const [x, y] = project(pair); return `M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0-8 0`; }).join(" ");
   if (geometry.type === "LineString") return line(geometry.coordinates as number[][]);
   if (geometry.type === "MultiLineString") return (geometry.coordinates as number[][][]).map((part) => line(part)).join(" ");
   if (geometry.type === "Polygon") return (geometry.coordinates as number[][][]).map((ring) => line(ring, true)).join(" ");
@@ -475,7 +466,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const toggles = scope.querySelector<HTMLElement>(".map-layer-toggles");
   const status = scope.querySelector<HTMLElement>(".map-status-text");
   if (!svg || !viewport || !satellite || !content || !toggles) return;
-  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}` };
+  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}`, buildings: "المباني", parcels: "قطع الأراضي", landmarks: "المعالم والخدمات", water: "المسطحات المائية", "field-survey": "الرفع الميداني", transport: "شبكة النقل", governorates: "حدود المحافظات" };
   const mapInstance = scope.dataset.mapInstance || "primary";
   const temporalLayers: LayerName[] = ["landcover-start", "landcover-end"];
   const regularLayers = summary.layers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && summary.layers.includes("landcover-start")));
@@ -587,9 +578,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     content.appendChild(groupElement);
   });
   const renderableCount = (collection: GeoJsonCollection) => collection.features.filter((feature) => feature.geometry && coordinatePairs(feature.geometry.coordinates).length).length;
-  const sourceCount = (layer: LayerName, collection: GeoJsonCollection) => temporalLayers.includes(layer)
-    ? collection.features.reduce((sum, feature) => sum + Number(feature.properties?.source_feature_count || 0), 0)
-    : renderableCount(collection);
+  const sourceCount = (_layer: LayerName, collection: GeoJsonCollection) => collection.features.reduce((sum, feature) => {
+    if (!feature.geometry || !coordinatePairs(feature.geometry.coordinates).length) return sum;
+    return sum + Math.max(1, Number(feature.properties?.source_feature_count || 1));
+  }, 0);
   const startsHidden = !mapInstance.includes("baseline") && !mapInstance.includes("current") && loaded.some(([layer]) => layer === "landcover-end");
   if (startsHidden) content.querySelector<SVGGElement>('[data-layer-group="landcover-start"]')?.classList.add("layer-hidden");
   toggles.innerHTML = loaded.map(([layer, collection]) => {
@@ -902,7 +894,4 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
   }
 
   document.querySelector<HTMLButtonElement>("#fullscreen-dashboard")?.addEventListener("click", () => document.fullscreenElement ? document.exitFullscreen() : root.requestFullscreen());
-  const dialog = document.querySelector<HTMLDialogElement>("#reference-dialog");
-  document.querySelector<HTMLButtonElement>("#open-reference")?.addEventListener("click", () => dialog?.showModal());
-  dialog?.querySelector<HTMLButtonElement>(".dialog-close")?.addEventListener("click", () => dialog.close());
 }

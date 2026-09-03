@@ -73,6 +73,11 @@ if (!runtimeSource.includes('mapMarkup("price-baseline"') || !runtimeSource.incl
 if (!runtimeSource.includes('"dashboard-map-sector"') || !runtimeSource.includes("fitSector")) failures.push("dashboard maps: sector auto-fit interaction is missing");
 if (!runtimeSource.includes('"linked-map-view"') || !runtimeSource.includes("map-year-start")) failures.push("temporal maps: synchronized navigation and data-driven year labels are required");
 if (!runtimeSource.includes("gauge-scale") || !runtimeSource.includes("comparison-axis")) failures.push("dashboard charts: report-matched gauge scale and full-width comparison axis are required");
+if (runtimeSource.includes("open-reference") || runtimeSource.includes("reference-dialog")) failures.push("dashboard chrome: report-reference controls must not appear in the client-facing design");
+if (!runtimeSource.includes('group === "western-upper-egypt" || group === "cairo-suez-road"')) failures.push("dashboard layouts: Western Upper Egypt and Cairo-Suez must use their documented dual-map layouts");
+for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey", "transport", "governorates"]) {
+  if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
+}
 
 if (dashboards.length !== 50) failures.push(`expected 50 dashboards, found ${dashboards.length}`);
 if (failures.length) {

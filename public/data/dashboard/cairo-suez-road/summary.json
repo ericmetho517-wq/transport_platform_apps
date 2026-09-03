@@ -90,7 +90,8 @@
     "urban",
     "agricultural",
     "landcover-start",
-    "landcover-end"
+    "landcover-end",
+    "field-survey"
   ],
   "layerCounts": {
     "axis": 1,
@@ -102,10 +103,12 @@
     "latest": 0,
     "civil": 0,
     "landcover-start": 11,
-    "landcover-end": 11
+    "landcover-end": 11,
+    "field-survey": 343
   },
   "sourceLayerCounts": {
     "landcover-start": 198,
-    "landcover-end": 198
+    "landcover-end": 198,
+    "field-survey": 343
   }
 }

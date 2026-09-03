@@ -60,6 +60,15 @@ const report = {
   errors, warnings,
   result: errors.length ? "FAILED" : "PASSED",
 };
+const sectorRuntime = readFileSync(join(root, "shared", "sector-runtime.ts"), "utf8");
+for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey", "transport", "governorates"]) {
+  if (!sectorRuntime.includes(`data-view-layer="${layer}"`)) errors.push(`web viewer: full-feature layer ${layer} is not exposed`);
+  if (!sectorRuntime.includes(`data-gallery-layer="${layer}"`)) errors.push(`filter gallery: full-feature layer ${layer} is not exposed`);
+}
+if (!sectorRuntime.includes("application-gallery-card")) errors.push("filter gallery: report-matched application cards are missing");
+if (!sectorRuntime.includes("data-story-card")) errors.push("story maps: sector collection navigation is missing");
+report.errors = errors;
+report.result = errors.length ? "FAILED" : "PASSED";
 writeFileSync(join(root, "registry", "sector-audit.json"), JSON.stringify(report, null, 2) + "\n", "utf8");
 console.log(JSON.stringify(report, null, 2));
 if (errors.length) process.exitCode = 1;

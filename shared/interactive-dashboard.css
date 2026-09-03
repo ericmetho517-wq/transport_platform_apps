@@ -52,6 +52,13 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-baseline path { fill: #f1ce55c9; stroke: #fff5b8; stroke-width: 1.15; }
 .map-landcover-start path,.map-landcover-end path { fill: #9aa5add9; stroke: #eef3f6; stroke-width: 1.1; fill-rule: evenodd; }
 .map-civil path { fill: #8b5cf6c9; stroke: #fff; stroke-width: 1.4; }
+.map-buildings path { fill:#f06b3bc7; stroke:#ffe0b8; stroke-width:.8; }
+.map-parcels path { fill:#ffd64a25; stroke:#ffd64a; stroke-width:1; }
+.map-landmarks path { fill:#ff2f55; stroke:#fff; stroke-width:1.4; }
+.map-water path { fill:#18aee5cf; stroke:#d8f7ff; stroke-width:1.2; }
+.map-field-survey path { fill:#ffcf25; stroke:#151515; stroke-width:1.2; }
+.map-transport path { fill:none; stroke:#00e4ff; stroke-width:3.2; filter:drop-shadow(0 0 2px #001b2c); }
+.map-governorates path { fill:none; stroke:#fff; stroke-width:2.5; stroke-dasharray:9 5; }
 .layer-hidden { display: none; }
 .map-status { position: absolute; top: 8px; inset-inline-end: 9px; z-index: 3; display: flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 7px; background: #052f58eb; color: #fff; font-size: 10px; box-shadow:0 4px 15px #0006; }
 .map-layer-toggles { position: absolute; z-index: 3; top: 40px; inset-inline-end: 9px; display: grid; gap: 4px; max-width: 190px; }
@@ -72,6 +79,13 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-layer-toggles button.active[data-map-layer="landcover-start"] i { background: linear-gradient(135deg,#45c51a 0 25%,#cfe566 25% 50%,#6657d9 50% 75%,#e4a313 75%); }
 .map-layer-toggles button.active[data-map-layer="landcover-end"] i { background: linear-gradient(135deg,#45c51a 0 25%,#cfe566 25% 50%,#6657d9 50% 75%,#e4a313 75%); }
 .map-layer-toggles button.active[data-map-layer="civil"] i { background: #8b5cf6; }
+.map-layer-toggles button.active[data-map-layer="buildings"] i { background:#f06b3b; }
+.map-layer-toggles button.active[data-map-layer="parcels"] i { background:#ffd64a; }
+.map-layer-toggles button.active[data-map-layer="landmarks"] i { background:#ff2f55; }
+.map-layer-toggles button.active[data-map-layer="water"] i { background:#18aee5; }
+.map-layer-toggles button.active[data-map-layer="field-survey"] i { background:#ffcf25; }
+.map-layer-toggles button.active[data-map-layer="transport"] i { background:#00e4ff; }
+.map-layer-toggles button.active[data-map-layer="governorates"] i { background:#fff; }
 .landuse-legend { position:absolute; z-index:4; bottom:34px; inset-inline-start:8px; width:min(360px,calc(100% - 16px)); padding:6px 8px; border:1px solid #ffffff55; border-radius:6px; background:#061b2bed; color:#fff; font-size:9px; box-shadow:0 4px 15px #0008; }
 .landuse-legend summary { cursor:pointer; font-weight:800; }
 .landuse-legend div { display:flex; flex-wrap:wrap; gap:5px 10px; padding-top:7px; }
@@ -173,7 +187,6 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 #donut-legend button:hover { color: #fff; background: #333; }
 #donut-legend i { width: 8px; height: 8px; border-radius: 50%; }
 
-.reference-dialog { width: min(1100px, 92vw); max-height: 88vh; padding: 18px; border: 1px solid #666; border-radius: 5px; background: #202020; color: #fff; }
 .agriculture-layout { min-height: calc(100vh - 79px); display: grid; grid-template-columns: minmax(210px, 24%) minmax(520px, 56%) minmax(190px, 20%); direction: ltr; }
 .agriculture-side, .agriculture-center, .agriculture-right { min-width: 0; direction: rtl; }
 .agriculture-side { display: grid; grid-template-rows: 120px 120px 1fr; border-inline-end: 2px solid #3d3d3d; }
@@ -196,13 +209,6 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 #crop-legend, #ownership-legend { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; }
 #crop-legend span, #ownership-legend span { display: flex; align-items: center; gap: 4px; color: #bbb; font-size: 8px; }
 #crop-legend i, #ownership-legend i { width: 8px; height: 8px; border-radius: 50%; }
-.reference-dialog::backdrop { background: #000c; }
-.reference-dialog h3 { margin: 0 0 14px; }
-.dialog-close { position: sticky; float: left; top: 0; padding: 2px 10px; border: 0; background: #444; color: #fff; font-size: 22px; cursor: pointer; }
-.dialog-images { display: flex; gap: 14px; overflow: auto; scroll-snap-type: x mandatory; }
-.dialog-images figure { min-width: min(900px, 84vw); margin: 0; scroll-snap-align: start; }
-.dialog-images img { display: block; width: 100%; max-height: 72vh; object-fit: contain; background: #111; }
-.dialog-images figcaption { padding: 8px; color: #bbb; font-size: 11px; text-align: center; }
 
 @media (max-width: 1050px) {
   .price-layout { grid-template-columns: 1fr; }

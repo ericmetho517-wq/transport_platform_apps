@@ -7,7 +7,9 @@
       "urban",
       "agricultural",
       "landcover-start",
-      "landcover-end"
+      "landcover-end",
+      "water",
+      "field-survey"
     ]
   },
   "dahshur-south-link": {
@@ -18,7 +20,11 @@
       "agricultural",
       "civil",
       "landcover-start",
-      "landcover-end"
+      "landcover-end",
+      "governorates",
+      "buildings",
+      "landmarks",
+      "parcels"
     ]
   },
   "regional-ring-road": {
@@ -29,7 +35,12 @@
       "urban",
       "agricultural",
       "landcover-start",
-      "landcover-end"
+      "landcover-end",
+      "transport",
+      "buildings",
+      "landmarks",
+      "parcels",
+      "water"
     ]
   },
   "kalabsha-axis": {
@@ -39,7 +50,9 @@
       "axis",
       "agricultural",
       "landcover-start",
-      "landcover-end"
+      "landcover-end",
+      "governorates",
+      "water"
     ]
   },
   "qena-luxor-road": {
@@ -57,7 +70,9 @@
       "urban",
       "agricultural",
       "landcover-start",
-      "landcover-end"
+      "landcover-end",
+      "buildings",
+      "water"
     ]
   },
   "suez-ring-link": {
@@ -68,7 +83,8 @@
       "urban",
       "agricultural",
       "landcover-start",
-      "landcover-end"
+      "landcover-end",
+      "field-survey"
     ]
   },
   "cairo-suez-road": {
@@ -79,7 +95,8 @@
       "urban",
       "agricultural",
       "landcover-start",
-      "landcover-end"
+      "landcover-end",
+      "field-survey"
     ]
   },
   "dabaa-axis": {
@@ -90,7 +107,8 @@
       "urban",
       "agricultural",
       "landcover-start",
-      "landcover-end"
+      "landcover-end",
+      "field-survey"
     ]
   }
 }

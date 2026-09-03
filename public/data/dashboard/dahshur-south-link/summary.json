@@ -127,7 +127,11 @@
     "agricultural",
     "civil",
     "landcover-start",
-    "landcover-end"
+    "landcover-end",
+    "governorates",
+    "buildings",
+    "landmarks",
+    "parcels"
   ],
   "layerCounts": {
     "axis": 1,
@@ -139,10 +143,18 @@
     "latest": 262,
     "civil": 29,
     "landcover-start": 4,
-    "landcover-end": 4
+    "landcover-end": 4,
+    "governorates": 1,
+    "buildings": 1,
+    "landmarks": 112,
+    "parcels": 1051
   },
   "sourceLayerCounts": {
     "landcover-start": 196,
-    "landcover-end": 262
+    "landcover-end": 262,
+    "governorates": 1,
+    "buildings": 19035,
+    "landmarks": 112,
+    "parcels": 1051
   }
 }

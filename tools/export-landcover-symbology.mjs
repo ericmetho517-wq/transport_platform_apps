@@ -24,6 +24,30 @@ const sources = {
   "dabaa-axis": { gdb: "الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb", start: "Land_Use2014", end: "Land_Use2023" },
 };
 const suezSource = { gdb: "السويس\\السويس\\New File Geodatabase.gdb", start: "Land_Cover2014", end: "Land_Cover2024" };
+const thematicSources = {
+  "western-upper-egypt": {
+    gdb: "طريق الصعيد الغربي\\New File Geodatabase.gdb",
+    water: ["Water_Changes"],
+    "field-survey": ["Abo_Simple", "Asiot", "Aswan", "Bni_Sweif", "Fayoum", "Giza", "Luxor", "Minia", "Qena"],
+  },
+  "dahshur-south-link": {
+    gdb: "دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb",
+    governorates: ["Governorates"], buildings: ["Building"], landmarks: ["Landmarks"], parcels: ["Parcel"],
+  },
+  "regional-ring-road": {
+    gdb: "الاقليمي\\DataBase_Schema.gdb",
+    transport: ["Eklimy_Road", "Robeky_Road", "LRT_Road"], buildings: ["Building"], landmarks: ["Landmarks"], parcels: ["Parcel"], water: ["Water_Containment"],
+  },
+  "kalabsha-axis": {
+    gdb: "كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb", governorates: ["Governorates"], water: ["Water_Containment"],
+  },
+  "qus-axis": {
+    gdb: "قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb", buildings: ["Building"], water: ["Water_Containment"],
+  },
+  "dabaa-axis": {
+    gdb: "الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb", "field-survey": ["Field_Points"],
+  },
+};
 const categoryFields = ["استخدام_الأرض", "land_use", "Land_Use", "LAND_USE", "نوع_الاستخدام", "LU_CODE"];
 const labelFields = ["وصف_الاستخدام", "land_use", "Land_Use", "نوع_المسطح"];
 const sectorFields = ["اسم_القطاع", "sector", "Sector"];
@@ -89,6 +113,44 @@ function aggregate(collection) {
   };
 }
 
+function geometryParts(geometry) {
+  if (!geometry) return null;
+  if (geometry.type === "Point") return { family: "point", parts: [geometry.coordinates] };
+  if (geometry.type === "MultiPoint") return { family: "point", parts: geometry.coordinates };
+  if (geometry.type === "LineString") return { family: "line", parts: [geometry.coordinates] };
+  if (geometry.type === "MultiLineString") return { family: "line", parts: geometry.coordinates };
+  if (geometry.type === "Polygon") return { family: "polygon", parts: [geometry.coordinates] };
+  if (geometry.type === "MultiPolygon") return { family: "polygon", parts: geometry.coordinates };
+  return null;
+}
+
+function prepareThematic(collections) {
+  const features = collections.flatMap(({ layer, collection }) => (collection.features || []).filter((feature) => feature.geometry).map((feature) => ({ ...feature, properties: { source_layer: layer, source_feature_count: 1, ...(feature.properties || {}) } })));
+  if (features.length <= 1500) return { type: "FeatureCollection", features };
+  const groups = new Map();
+  for (const feature of features) {
+    const parsed = geometryParts(feature.geometry);
+    if (!parsed) continue;
+    const layer = feature.properties.source_layer;
+    const key = `${layer}|${parsed.family}`;
+    if (!groups.has(key)) groups.set(key, { layer, family: parsed.family, parts: [], count: 0 });
+    const target = groups.get(key);
+    target.parts.push(...parsed.parts);
+    target.count += 1;
+  }
+  return {
+    type: "FeatureCollection",
+    features: Array.from(groups.values()).map((item) => ({
+      type: "Feature",
+      properties: { source_layer: item.layer, source_feature_count: item.count, display_mode: "all geometries grouped for browser performance" },
+      geometry: {
+        type: item.family === "point" ? "MultiPoint" : item.family === "line" ? "MultiLineString" : "MultiPolygon",
+        coordinates: item.parts,
+      },
+    })),
+  };
+}
+
 function exportRaw(gdbRelative, layer, key) {
   const output = join(tempRoot, `${key}-${layer}.geojson`);
   const run = spawnSync(ogr2ogr, ["-f", "GeoJSON", output, join(ministryRoot, gdbRelative), layer, "-t_srs", "EPSG:4326", "-simplify", "8", "-lco", "COORDINATE_PRECISION=6"], {
@@ -113,6 +175,21 @@ function writeLayer(group, layerName, collection, sourceCount) {
   summary.sourceLayerCounts[layerName] = sourceCount;
   writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + "\n", "utf8");
   console.log(`${group}/${layerName}: ${sourceCount} source features -> ${aggregated.features.length} categorized map features`);
+}
+
+function writePreparedLayer(group, layerName, collection, sourceCount) {
+  const folder = join(outputRoot, group);
+  mkdirSync(folder, { recursive: true });
+  writeFileSync(join(folder, `${layerName}.geojson`), JSON.stringify(collection), "utf8");
+  const summaryPath = join(folder, "summary.json");
+  const summary = JSON.parse(readFileSync(summaryPath, "utf8"));
+  if (!summary.layers.includes(layerName)) summary.layers.push(layerName);
+  summary.layerCounts ||= {};
+  summary.sourceLayerCounts ||= {};
+  summary.layerCounts[layerName] = collection.features.length;
+  summary.sourceLayerCounts[layerName] = sourceCount;
+  writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + "\n", "utf8");
+  console.log(`${group}/${layerName}: ${sourceCount} source features -> ${collection.features.length} browser features`);
 }
 
 for (const [group, source] of Object.entries(sources)) {
@@ -142,6 +219,28 @@ for (const [period, layer] of [["start", suezSource.start], ["end", suezSource.e
   }
   for (const group of suezGroups) writeLayer(group, `landcover-${period}`, split[group], split[group].features.length);
 }
+
+for (const [group, source] of Object.entries(thematicSources)) {
+  for (const [targetLayer, sourceLayers] of Object.entries(source)) {
+    if (targetLayer === "gdb") continue;
+    const collections = sourceLayers.map((layer) => ({ layer, collection: exportRaw(source.gdb, layer, `${group}-${targetLayer}`) }));
+    const sourceCount = collections.reduce((sum, item) => sum + item.collection.features.length, 0);
+    writePreparedLayer(group, targetLayer, prepareThematic(collections), sourceCount);
+  }
+}
+
+const suezSurvey = exportRaw(suezSource.gdb, "survey", "suez-survey");
+const surveySplit = Object.fromEntries(suezGroups.map((group) => [group, { type: "FeatureCollection", features: [] }]));
+for (const feature of suezSurvey.features) {
+  const [x, y] = featureCenter(feature);
+  const nearest = suezGroups.toSorted((a, b) => {
+    const da = (x - studyCenters[a][0]) ** 2 + (y - studyCenters[a][1]) ** 2;
+    const db = (x - studyCenters[b][0]) ** 2 + (y - studyCenters[b][1]) ** 2;
+    return da - db;
+  })[0];
+  surveySplit[nearest].features.push(feature);
+}
+for (const group of suezGroups) writePreparedLayer(group, "field-survey", prepareThematic([{ layer: "survey", collection: surveySplit[group] }]), surveySplit[group].features.length);
 
 const manifestPath = join(outputRoot, "manifest.json");
 const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));

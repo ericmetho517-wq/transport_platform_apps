@@ -147,7 +147,12 @@
     "urban",
     "agricultural",
     "landcover-start",
-    "landcover-end"
+    "landcover-end",
+    "transport",
+    "buildings",
+    "landmarks",
+    "parcels",
+    "water"
   ],
   "layerCounts": {
     "axis": 3,
@@ -159,10 +164,20 @@
     "latest": 299,
     "civil": 0,
     "landcover-start": 9,
-    "landcover-end": 10
+    "landcover-end": 10,
+    "transport": 6,
+    "buildings": 1,
+    "landmarks": 195,
+    "parcels": 932,
+    "water": 7
   },
   "sourceLayerCounts": {
     "landcover-start": 234,
-    "landcover-end": 299
+    "landcover-end": 299,
+    "transport": 6,
+    "buildings": 32162,
+    "landmarks": 195,
+    "parcels": 932,
+    "water": 7
   }
 }
