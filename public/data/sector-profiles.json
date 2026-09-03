@@ -215,6 +215,39 @@
     ],
     "statusShares": { "existing": 53, "underConstruction": 47 }
   },
+  "dabaa-axis": {
+    "title": "محور الضبعة",
+    "report": "Nakl_Dabaa_30Dec2023.pptx",
+    "pages": [4, 5, 6, 9, 10, 13, 14],
+    "yearEnd": 2023,
+    "metrics": {
+      "studyAreaKm2": 4452,
+      "axisLengthKm": 150,
+      "urbanChangeKm2": 27.7,
+      "agriculturalChangeKm2": 826.9,
+      "agriculturalAreaFeddan": 196887,
+      "urbanChangePercent": 10,
+      "agriculturalChangePercent": 48
+    },
+    "prices": {
+      "urban": { "start": 18610000000, "end": 281960000000 },
+      "agricultural": { "start": 2780000000, "end": 3990000000 },
+      "industrial": { "start": 1040000000, "end": 4080000000 }
+    },
+    "priceLabels": {
+      "urban": "الأراضي العمرانية",
+      "agricultural": "الأراضي الزراعية - إيجار",
+      "industrial": "الأراضي الزراعية - تمليك"
+    },
+    "landUse": [
+      { "category": "الأراضي الزراعية", "year": 2014, "area": 1044 },
+      { "category": "الأراضي العمرانية", "year": 2014, "area": 264 },
+      { "category": "أراضٍ فضاء", "year": 2014, "area": 3139 },
+      { "category": "الأراضي الزراعية", "year": 2023, "area": 1636 },
+      { "category": "الأراضي العمرانية", "year": 2023, "area": 272 },
+      { "category": "أراضٍ فضاء", "year": 2023, "area": 2530 }
+    ]
+  },
   "qena-luxor-road": {
     "title": "محور قنا",
     "report": "Final Report 3-2024.pdf",

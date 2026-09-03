@@ -9,6 +9,18 @@
   "direction": "ltr",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/594d7c7ff43e4e0f9fb3a2a65d1d8e62",
   "status": "generated-from-registry",
-  "reportReferences": [],
+  "reportReferences": [
+    {
+      "imagePath": "../../references/dabaa/price-dashboard.png",
+      "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+      "page": 14,
+      "sourceUrls": [],
+      "sourceItemIds": [],
+      "projectGroup": "dabaa",
+      "referenceKind": "price-dashboard",
+      "caption": "لوحة مؤشرات تغير أسعار الأراضي بمحور الضبعة بالقيم الأصلية.",
+      "matchType": "project-and-application-type"
+    }
+  ],
   "reportReferenceGroup": "dabaa"
 }

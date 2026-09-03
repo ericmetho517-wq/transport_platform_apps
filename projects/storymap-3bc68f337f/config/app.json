@@ -9,6 +9,62 @@
   "direction": "ltr",
   "sourceUrl": "https://storymaps.arcgis.com/stories/3bc68f337ff0461896d3c1b2b218add9",
   "status": "generated-from-registry",
-  "reportReferences": [],
+  "reportReferences": [
+    {
+      "imagePath": "../../references/dabaa/project-overview.png",
+      "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+      "page": 4,
+      "sourceUrls": [],
+      "sourceItemIds": [],
+      "projectGroup": "dabaa",
+      "referenceKind": "story-hero",
+      "caption": "نطاق ومكونات مشروع محور الضبعة.",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/dabaa/landuse-2014.png",
+      "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+      "page": 5,
+      "sourceUrls": [],
+      "sourceItemIds": [],
+      "projectGroup": "dabaa",
+      "referenceKind": "story-map",
+      "caption": "خريطة استخدامات الأراضي لعام 2014.",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/dabaa/landuse-2023.png",
+      "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+      "page": 6,
+      "sourceUrls": [],
+      "sourceItemIds": [],
+      "projectGroup": "dabaa",
+      "referenceKind": "story-map",
+      "caption": "خريطة استخدامات الأراضي لعام 2023.",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/dabaa/urban-change-comparison.png",
+      "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+      "page": 9,
+      "sourceUrls": [],
+      "sourceItemIds": [],
+      "projectGroup": "dabaa",
+      "referenceKind": "story-comparison",
+      "caption": "مقارنة التغير العمراني بين عامي 2014 و2023.",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/dabaa/landuse-change-comparison.png",
+      "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+      "page": 10,
+      "sourceUrls": [],
+      "sourceItemIds": [],
+      "projectGroup": "dabaa",
+      "referenceKind": "story-comparison",
+      "caption": "مقارنة تغير استخدامات الأراضي بين عامي 2014 و2023.",
+      "matchType": "project-and-application-type"
+    }
+  ],
   "reportReferenceGroup": "dabaa"
 }

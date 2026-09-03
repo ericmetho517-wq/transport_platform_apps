@@ -22,6 +22,9 @@ body:has(.sector-app) { margin: 0; background: #f4f2eb; color: #183c31; }
 .hero-orbit i { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #f4c849; box-shadow: 0 0 0 7px #f4c84922; }
 .hero-orbit i:nth-child(1) { top: 14%; left: 47%; }.hero-orbit i:nth-child(2) { bottom: 18%; right: 15%; }.hero-orbit i:nth-child(3) { bottom: 27%; left: 12%; }
 .hero-orbit strong { display: grid; place-items: center; width: 130px; aspect-ratio: 1; border-radius: 50%; background: #fff; color: #00654d; font-size: 38px; }
+.experience-reference-preview { position: relative; margin: 0; min-height: 330px; overflow: hidden; border: 3px solid #ffffffc9; border-radius: 10px; background: #0a3028; box-shadow: 0 18px 38px #001d1766; }
+.experience-reference-preview img { display: block; width: 100%; height: 100%; min-height: 330px; object-fit: contain; background: #fff; }
+.experience-reference-preview figcaption { position: absolute; inset-inline-end: 10px; bottom: 10px; padding: 6px 9px; border-radius: 4px; background: #003d31e6; color: #fff; font-size: 10px; }
 .experience-tiles { margin: -42px auto 20px; position: relative; z-index: 2; max-width: 1100px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .experience-tiles button { min-height: 130px; padding: 20px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 15px; border: 0; border-radius: 10px; background: #fff; color: #173b30; box-shadow: 0 12px 35px #003f3120; text-align: start; cursor: pointer; }
 .experience-tiles b { color: #d9a70d; font-size: 26px; }.experience-tiles span { font-weight: 800; }

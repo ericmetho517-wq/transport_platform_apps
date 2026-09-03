@@ -1,0 +1,1416 @@
+{
+  "generatedAt": "2026-09-03T00:42:23.004Z",
+  "applications": 78,
+  "fidelityCounts": {
+    "sector-and-application-type-reference": 46,
+    "exact-item-reference": 21,
+    "source-reference-unavailable": 11
+  },
+  "typeCoverage": {
+    "Dashboard": {
+      "applications": 50,
+      "withReferences": 39
+    },
+    "Experience": {
+      "applications": 10,
+      "withReferences": 10
+    },
+    "StoryMap": {
+      "applications": 9,
+      "withReferences": 9
+    },
+    "Instant Filter Gallery": {
+      "applications": 4,
+      "withReferences": 4
+    },
+    "Web AppViewer": {
+      "applications": 5,
+      "withReferences": 5
+    }
+  },
+  "errors": [],
+  "result": "PASSED",
+  "applicationsAudit": [
+    {
+      "slug": "dashboard-5c855c890c",
+      "title": "لوحة مؤشرات الأراضى العمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "western-upper-egypt",
+      "referenceCount": 9,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        59,
+        29,
+        60,
+        61,
+        48,
+        55,
+        74
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-49446055c2",
+      "title": "لوحة مؤشرات أسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "western-upper-egypt",
+      "referenceCount": 9,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        58,
+        28,
+        59,
+        60,
+        47,
+        54,
+        73
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-4236f7c912",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "western-upper-egypt",
+      "referenceCount": 9,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        59,
+        29,
+        60,
+        61,
+        48,
+        55,
+        74
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-74d4e16588",
+      "title": "محور الصعيد الغربي (الجيزة / ابوسمبل)",
+      "type": "Experience",
+      "language": "ar",
+      "sector": "western-upper-egypt",
+      "referenceCount": 36,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        57,
+        58,
+        59,
+        61,
+        28,
+        29,
+        31,
+        60,
+        62,
+        63,
+        47,
+        48,
+        50,
+        54,
+        55,
+        73,
+        74,
+        76
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-92d2a80d7f",
+      "title": "طريق الصعيد الغربي",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "western-upper-egypt",
+      "referenceCount": 17,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        61,
+        31,
+        62,
+        63,
+        50,
+        57,
+        76
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-afdd8591d3",
+      "title": "Agricultural and Industrial Land Indicators",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "western-upper-egypt",
+      "referenceCount": 9,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        59,
+        29,
+        60,
+        61,
+        48,
+        55,
+        74
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-0ee06a442c",
+      "title": "Urban Land Indicators",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "western-upper-egypt",
+      "referenceCount": 9,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        59,
+        29,
+        60,
+        61,
+        48,
+        55,
+        74
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-d67fbb6f81",
+      "title": "Land Prices Indicators",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "western-upper-egypt",
+      "referenceCount": 9,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        58,
+        28,
+        59,
+        60,
+        47,
+        54,
+        73
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-94a3416b3f",
+      "title": "Upper Egypt Western Desert Axis (Giza / Abu Simbel)",
+      "type": "Experience",
+      "language": "en",
+      "sector": "western-upper-egypt",
+      "referenceCount": 36,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf",
+        "(3).pdf",
+        "(4).pdf",
+        "(5).pdf",
+        "(6).pdf",
+        "(7).pdf",
+        "(9).pdf",
+        ".pdf"
+      ],
+      "pages": [
+        57,
+        58,
+        59,
+        61,
+        28,
+        29,
+        31,
+        60,
+        62,
+        63,
+        47,
+        48,
+        50,
+        54,
+        55,
+        73,
+        74,
+        76
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-687e564801",
+      "title": "لوحة مؤشرات أسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "dahshur",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        124
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-97daea1db8",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "dahshur",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        125
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-4b68db62a1",
+      "title": "لوحة مؤشرات الدراسة المدنية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "dahshur",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-1cb1e42f43",
+      "title": "لوحة مؤشرات الأراضى العمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "dahshur",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        125
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-7159ef844c",
+      "title": "لوحة مؤشرات أنماط و انواع الأراضى",
+      "type": "Experience",
+      "language": "ar",
+      "sector": "dahshur",
+      "referenceCount": 5,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        123,
+        124,
+        125,
+        127
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-e380a6020d",
+      "title": "لوحة مؤشرات أسعار و دراسات الأراضى",
+      "type": "Experience",
+      "language": "ar",
+      "sector": "dahshur",
+      "referenceCount": 5,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        123,
+        124,
+        125,
+        127
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-b99ee8d8fc",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        68
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-48c0447e11",
+      "title": "لوحة مؤشرات الدراسة المدنية الاقليمي",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-ab7611e2f4",
+      "title": "لوحة مؤشرات الأراضى العمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        68
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-04811fcd6f",
+      "title": "لوحة مؤشرات أسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        67
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-3678b8faa7",
+      "title": "منطقة الدراسة القوس الشرقى للدائرى الأقليمى و خط الروبيكى",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 2,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        70
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-25159b2e5e",
+      "title": "The Regional Ring Road, the Robeki Railway",
+      "type": "StoryMap",
+      "language": "en",
+      "sector": "regional-ring",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        70
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-890d333abf",
+      "title": "لوحة مؤشرات الدراسة المدنية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-7521032f62",
+      "title": "لوحة مؤشرات الأراضى العمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        68
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-0edd4664ca",
+      "title": "الدائري الإقليمي والروبيكي",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        66
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-cd53f6fcfe",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        68
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-ebc7f46747",
+      "title": "منطقة الدراسة القوس الشرقى للدائرى الأقليمى و خط الروبيكى",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        69
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-35c11a505b",
+      "title": "قياس الأثر التنموي في نطاق التأثير التنموي المباشر للقوس الشرقي للطريق الدائري خلال الـ 30 سنة القادمة",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-7a7fb61082",
+      "title": "لوحة مؤشرات أسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "regional-ring",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        67
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-2529bc0ae6",
+      "title": "لوحة مؤشرات أسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "kalabsha",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        321
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-989c5ff2f9",
+      "title": "لوحة مؤشرات الأراضى الزراعية والعمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "kalabsha",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        322
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-3c8f04f4d0",
+      "title": "تطور الاراضي المحيطة بمحور كلابشة",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "kalabsha",
+      "referenceCount": 2,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        324
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-e197a27977",
+      "title": "لوحة مؤشرات أنماط و أسعار الأراضى",
+      "type": "Experience",
+      "language": "ar",
+      "sector": "kalabsha",
+      "referenceCount": 5,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        320,
+        321,
+        322,
+        324
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-61f7685c76",
+      "title": "منطقة دراسة محور كلابشة",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "kalabsha",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        323
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-e98ec507f5",
+      "title": "تطور الاراضي المحيطة بطريق قنا الأقصر",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "qena-luxor",
+      "referenceCount": 2,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        217
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-048f4e4237",
+      "title": "لوحة مؤشرات الاسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "qena-luxor",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        214
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-0c7d78be88",
+      "title": "لوحة مؤشرات الأراضى الزراعية والعمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "qena-luxor",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        215
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-43915f9815",
+      "title": "منطقة الدراسة محور قنا",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "qena-luxor",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        216
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-bf2cabc64d",
+      "title": "لوحة مؤشرات أنماط و أسعار الأراضى",
+      "type": "Experience",
+      "language": "ar",
+      "sector": "qena-luxor",
+      "referenceCount": 5,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        213,
+        214,
+        215,
+        217
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-cab219aeed",
+      "title": "تطور الاراضي المحيطة بوصلة طريق السويس من الطريق الدائري",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "suez-link",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        170
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-b701f3fd53",
+      "title": "وصلة طريق السويس من الطريق الدائري",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "suez-link",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        166
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-82083bf028",
+      "title": "السويس",
+      "type": "Experience",
+      "language": "ar",
+      "sector": "suez-link",
+      "referenceCount": 5,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        166,
+        167,
+        168,
+        170
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-489e365131",
+      "title": "لوحة مؤشرات الدراسة المدنية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "suez-link",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-85be400b84",
+      "title": "لوحة مؤشرات الأراضى العمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "suez-link",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        168
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-7770d9c7e9",
+      "title": "لوحة مؤشرات أسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "suez-link",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        167
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-fbc26aaa19",
+      "title": "منطقة الدراسة وصلة طريق السويس من الطريق الدائري الاوسطي",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "suez-link",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        169
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-4b4547b902",
+      "title": "لوحة مؤشرات أسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        58
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-8a75afd782",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        59
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-686d8234e8",
+      "title": "لوحة مؤشرات الأراضى العمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        59
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-739c03527e",
+      "title": "طريق القاهرة - السويس الصحراوي - (السويس الحر)",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 2,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        61
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-784ee521a7",
+      "title": "طريق القاهرة - السويس الصحراوي - (السويس الحر)",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        57
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-83f3738705",
+      "title": "قياس الأثر التنموي في نطاق التأثير التنموي المباشر طريق السويس الحر خلال الـ 30 سنة القادمة",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-676c18c4b7",
+      "title": "قياس الأثر الاقتصادي والتنموي طريق القاهرة - السويس الصحراوي - (السويس الحر) (2014-2024)",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-7aa0262a12",
+      "title": "طريق السويس",
+      "type": "Experience",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 5,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        57,
+        58,
+        59,
+        61
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-bd328e2a5b",
+      "title": "تطور الاراضي المحيطة بمحور قوص",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "qus",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        270
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-58fefdb551",
+      "title": "لوحة مؤشرات الاسعار الأراضى",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "qus",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        267
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-5a3aaa3b3a",
+      "title": "لوحة مؤشرات الأراضى الزراعية والعمرانية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "qus",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        268
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-67afc36571",
+      "title": "تطبيق منطقة الدراسة محور قوص",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "qus",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        269
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-83aeb3c154",
+      "title": "لوحة مؤشرات أنماط و أسعار الأراضى",
+      "type": "Experience",
+      "language": "ar",
+      "sector": "qus",
+      "referenceCount": 5,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        266,
+        267,
+        268,
+        270
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-1d894feec2",
+      "title": "محور قوص",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "qus",
+      "referenceCount": 1,
+      "fidelity": "exact-item-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        266
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-7639a80123",
+      "title": "Urban Land Indicators Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "dahshur",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        125
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-37e01603d0",
+      "title": "Civil Study Indicators Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "dahshur",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-d70ee6875c",
+      "title": "Agricultural and Industrial Land Indicators Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "dahshur",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        125
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-64753ea652",
+      "title": "Agricultural and Urban Land Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "kalabsha",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        322
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-135390893b",
+      "title": "Land Prices Indicators Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "kalabsha",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        321
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-16f68d2844",
+      "title": "Land Prices Indicators Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "qena-luxor",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        214
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-ea34620f1e",
+      "title": "Agricultural and Urban Land Indicators Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "qena-luxor",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        215
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-ba98b53679",
+      "title": "Civil Study Indicators Dashboard – Suez",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "suez-link",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-e4d0b8938f",
+      "title": "Urban Land Indicators Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "suez-link",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        168
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-7167069cd9",
+      "title": "Land Price Indicators Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "suez-link",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        167
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-f67c953d51",
+      "title": "Urban Land Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "suez-free",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        59
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-88ff5b990d",
+      "title": "Land Prices Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "suez-free",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        58
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-8f14badaa6",
+      "title": "Agricultural and Industrial Land Dashboard",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "suez-free",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        59
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-4138cfe326",
+      "title": "Measuring Developmental Impact Within the Direct Developmental Influence of the Cairo–Suez Desert Road (Suez Free Zone) Over the Next 30 Years (2024–2053)",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "suez-free",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-f0a5bc623c",
+      "title": "Assessment of the Economic and Developmental Impact of the Cairo–Suez Desert Road – (Suez Free Zone) (2014-2024)",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "suez-free",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "experience-d72fea4308",
+      "title": "Dabaa axis",
+      "type": "Experience",
+      "language": "en",
+      "sector": "dabaa",
+      "referenceCount": 4,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Nakl_Dabaa_30Dec2023.pptx"
+      ],
+      "pages": [
+        4,
+        10,
+        13,
+        14
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-3bc68f337f",
+      "title": "Development of the lands surrounding the Dabaa axis",
+      "type": "StoryMap",
+      "language": "en",
+      "sector": "dabaa",
+      "referenceCount": 5,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Nakl_Dabaa_30Dec2023.pptx"
+      ],
+      "pages": [
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-594d7c7ff4",
+      "title": "Land Price Indicators Dashboard – El Dabaa Axis",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "dabaa",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Nakl_Dabaa_30Dec2023.pptx"
+      ],
+      "pages": [
+        14
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-c1e29f0123",
+      "title": "Agricultural and Urban Land Indicators – El Dabaa Axis",
+      "type": "Dashboard",
+      "language": "en",
+      "sector": "dabaa",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Nakl_Dabaa_30Dec2023.pptx"
+      ],
+      "pages": [
+        13,
+        10
+      ],
+      "missingImages": []
+    }
+  ]
+}

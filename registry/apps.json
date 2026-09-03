@@ -4761,7 +4761,52 @@
     "direction": "ltr",
     "sourceUrl": "https://experience.arcgis.com/experience/d72fea4308364482b9bc50f213df9169",
     "status": "generated-from-registry",
-    "reportReferences": [],
+    "reportReferences": [
+      {
+        "imagePath": "../../references/dabaa/project-overview.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 4,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "experience-hero",
+        "caption": "واجهة المشروع ومكونات الدراسة لمحور الضبعة.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/landuse-change-comparison.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 10,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "experience-map",
+        "caption": "المقارنة المكانية لاستخدامات الأراضي.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/landuse-dashboard.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 13,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "experience-dashboard",
+        "caption": "لوحة مؤشرات استخدامات الأراضي المرتبطة بالتجربة.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/price-dashboard.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 14,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "experience-dashboard",
+        "caption": "لوحة مؤشرات أسعار الأراضي المرتبطة بالتجربة.",
+        "matchType": "project-and-application-type"
+      }
+    ],
     "reportReferenceGroup": "dabaa"
   },
   {
@@ -4775,7 +4820,63 @@
     "direction": "ltr",
     "sourceUrl": "https://storymaps.arcgis.com/stories/3bc68f337ff0461896d3c1b2b218add9",
     "status": "generated-from-registry",
-    "reportReferences": [],
+    "reportReferences": [
+      {
+        "imagePath": "../../references/dabaa/project-overview.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 4,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-hero",
+        "caption": "نطاق ومكونات مشروع محور الضبعة.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/landuse-2014.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 5,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-map",
+        "caption": "خريطة استخدامات الأراضي لعام 2014.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/landuse-2023.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 6,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-map",
+        "caption": "خريطة استخدامات الأراضي لعام 2023.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/urban-change-comparison.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 9,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-comparison",
+        "caption": "مقارنة التغير العمراني بين عامي 2014 و2023.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/landuse-change-comparison.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 10,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-comparison",
+        "caption": "مقارنة تغير استخدامات الأراضي بين عامي 2014 و2023.",
+        "matchType": "project-and-application-type"
+      }
+    ],
     "reportReferenceGroup": "dabaa"
   },
   {
@@ -4789,7 +4890,19 @@
     "direction": "ltr",
     "sourceUrl": "https://www.arcgis.com/apps/dashboards/594d7c7ff43e4e0f9fb3a2a65d1d8e62",
     "status": "generated-from-registry",
-    "reportReferences": [],
+    "reportReferences": [
+      {
+        "imagePath": "../../references/dabaa/price-dashboard.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 14,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "price-dashboard",
+        "caption": "لوحة مؤشرات تغير أسعار الأراضي بمحور الضبعة بالقيم الأصلية.",
+        "matchType": "project-and-application-type"
+      }
+    ],
     "reportReferenceGroup": "dabaa"
   },
   {
@@ -4803,7 +4916,30 @@
     "direction": "ltr",
     "sourceUrl": "https://www.arcgis.com/apps/dashboards/c1e29f0123aa40eda6791f0b3a81f62b",
     "status": "generated-from-registry",
-    "reportReferences": [],
+    "reportReferences": [
+      {
+        "imagePath": "../../references/dabaa/landuse-dashboard.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 13,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "landuse-dashboard",
+        "caption": "لوحة مؤشرات تغير استخدامات الأراضي بمحور الضبعة بالقيم والتوزيع الأصليين.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/landuse-change-comparison.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 10,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "landuse-comparison",
+        "caption": "مقارنة خرائط وتصنيفات استخدامات الأراضي لعامي 2014 و2023.",
+        "matchType": "project-and-application-type"
+      }
+    ],
     "reportReferenceGroup": "dabaa"
   }
 ]

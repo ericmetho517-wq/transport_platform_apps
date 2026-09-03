@@ -9,6 +9,29 @@
   "direction": "ltr",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/c1e29f0123aa40eda6791f0b3a81f62b",
   "status": "generated-from-registry",
-  "reportReferences": [],
+  "reportReferences": [
+    {
+      "imagePath": "../../references/dabaa/landuse-dashboard.png",
+      "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+      "page": 13,
+      "sourceUrls": [],
+      "sourceItemIds": [],
+      "projectGroup": "dabaa",
+      "referenceKind": "landuse-dashboard",
+      "caption": "لوحة مؤشرات تغير استخدامات الأراضي بمحور الضبعة بالقيم والتوزيع الأصليين.",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/dabaa/landuse-change-comparison.png",
+      "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+      "page": 10,
+      "sourceUrls": [],
+      "sourceItemIds": [],
+      "projectGroup": "dabaa",
+      "referenceKind": "landuse-comparison",
+      "caption": "مقارنة خرائط وتصنيفات استخدامات الأراضي لعامي 2014 و2023.",
+      "matchType": "project-and-application-type"
+    }
+  ],
   "reportReferenceGroup": "dabaa"
 }

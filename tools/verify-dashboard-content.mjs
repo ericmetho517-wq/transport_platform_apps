@@ -67,7 +67,23 @@ for (const kind of ["urban", "agricultural", "industrial"]) {
     if (sectorTotal !== western.prices[kind][edge]) failures.push(`western-upper-egypt: ${kind} ${edge} sector values do not match report total`);
   }
 }
+const dabaa = profiles["dabaa-axis"];
+const expectedDabaaMetrics = {
+  studyAreaKm2: 4452,
+  axisLengthKm: 150,
+  urbanChangeKm2: 27.7,
+  agriculturalAreaFeddan: 196887,
+  urbanChangePercent: 10,
+  agriculturalChangePercent: 48,
+};
+if (!dabaa || dabaa.yearEnd !== 2023) failures.push("dabaa-axis: missing authoritative 2023 presentation profile");
+for (const [metric, expected] of Object.entries(expectedDabaaMetrics)) {
+  if (dabaa?.metrics?.[metric] !== expected) failures.push(`dabaa-axis: ${metric} must match the presentation value ${expected}`);
+}
+if (![2014, 2023].every((year) => dabaa?.landUse?.some((item) => item.year === year))) failures.push("dabaa-axis: 2014/2023 land-use comparison is required");
+if (!dashboards.filter((app) => app.reportReferenceGroup === "dabaa").every((app) => app.reportReferences?.length)) failures.push("dabaa-axis: each dashboard must be linked to its matching presentation slide");
 const runtimeSource = fs.readFileSync(path.join(root, "shared", "interactive-dashboard.ts"), "utf8");
+const localizationSource = fs.readFileSync(path.join(root, "shared", "localization.ts"), "utf8");
 if (!runtimeSource.includes('mapMarkup("land-baseline"') || !runtimeSource.includes('mapMarkup("land-current"')) failures.push("urban dashboard: missing interactive baseline/current map pair");
 if (!runtimeSource.includes('mapMarkup("price-baseline"') || !runtimeSource.includes('mapMarkup("price-current"')) failures.push("western price dashboard: missing report-matched map pair");
 if (!runtimeSource.includes('"dashboard-map-sector"') || !runtimeSource.includes("fitSector")) failures.push("dashboard maps: sector auto-fit interaction is missing");
@@ -75,6 +91,10 @@ if (!runtimeSource.includes('"linked-map-view"') || !runtimeSource.includes("map
 if (!runtimeSource.includes("gauge-scale") || !runtimeSource.includes("comparison-axis")) failures.push("dashboard charts: report-matched gauge scale and full-width comparison axis are required");
 if (runtimeSource.includes("open-reference") || runtimeSource.includes("reference-dialog")) failures.push("dashboard chrome: report-reference controls must not appear in the client-facing design");
 if (!runtimeSource.includes('group === "western-upper-egypt" || group === "cairo-suez-road"')) failures.push("dashboard layouts: Western Upper Egypt and Cairo-Suez must use their documented dual-map layouts");
+if (!runtimeSource.includes("dabaaLandMarkup") || runtimeSource.includes("classdark-card")) failures.push("dashboard layouts: Dabaa must use the documented four-KPI dashboard without malformed card markup");
+for (const phrase of ["إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)", "نسبة مساحة التغير العمراني بمنطقة الدراسة لعام 2023", "نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023", "مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023"]) {
+  if (!localizationSource.includes(phrase)) failures.push(`English localization: missing Dabaa translation for ${phrase}`);
+}
 for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey", "transport", "governorates"]) {
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }

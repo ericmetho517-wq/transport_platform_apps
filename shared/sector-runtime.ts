@@ -29,16 +29,18 @@ const westernStoryReports: Array<Pick<StoryEntry, "key" | "label" | "sector" | "
   { key: "sohag", label: "سوهاج", sector: "8", report: "(2).pdf" },
   { key: "assiut", label: "أسيوط", sector: "1", report: "(4).pdf" },
   { key: "minya", label: "المنيا", sector: "4", report: "(5).pdf" },
-  { key: "beni-suef", label: "بني سويف", sector: "9", report: "(9).pdf" },
+  { key: "beni-suef", label: "بني سويف", sector: "9", report: "" },
   { key: "fayoum", label: "الفيوم", sector: "6", report: "(6).pdf" },
   { key: "giza", label: "الجيزة", sector: "3", report: "(7).pdf" },
-  { key: "aswan", label: "أسوان", sector: "2", report: "(9).pdf" },
+  { key: "aswan", label: "أسوان", sector: "2", report: "" },
 ];
 
 function storyEntries(app: TransportApp): StoryEntry[] {
-  const references = (app.reportReferences || []).filter((reference) => reference.referenceKind === "story");
+  const references = (app.reportReferences || []).filter((reference) => reference.referenceKind.startsWith("story"));
   if (dashboardGroup(app) !== "western-upper-egypt") {
-    return [{ key: "project", label: app.title, sector: "all", report: references[0]?.reportName || "", hero: references[0]?.imagePath || "", compare: references[1]?.imagePath || "" }];
+    const hero = references.find((reference) => reference.referenceKind === "story-hero") || references[0];
+    const comparison = references.find((reference) => reference.referenceKind === "story-comparison") || references[1];
+    return [{ key: "project", label: app.title, sector: "all", report: hero?.reportName || "", hero: hero?.imagePath || "", compare: comparison?.imagePath || "" }];
   }
   return westernStoryReports.map((item) => {
     const matching = item.report ? references.filter((reference) => reference.reportName === item.report) : [];
@@ -69,8 +71,9 @@ function storyHeader(app: TransportApp, entries: StoryEntry[]): string {
 }
 
 function experienceMarkup(app: TransportApp): string {
+  const preview = app.reportReferences?.find((reference) => reference.referenceKind.includes("hero"))?.imagePath || app.reportReferences?.[0]?.imagePath || "";
   return `<main class="sector-app experience-runtime" dir="${app.direction}" data-sector-group="${dashboardGroup(app)}">${header(app)}
-    <section class="sector-section active" data-panel="overview"><div class="experience-hero"><div><span>منصة التطبيقات المكانية المتكاملة</span><h1>${esc(app.title)}</h1><p>استعراض بيانات القطاع، الخرائط الرقمية، المؤشرات الاقتصادية، الدراسة الميدانية ومرفقات المشروع من واجهة واحدة.</p><button data-open-section="map">استعراض خريطة القطاع</button></div><div class="hero-orbit"><i></i><i></i><i></i><strong>GIS</strong></div></div><div class="experience-tiles"><button data-open-section="map"><b>01</b><span>منطقة الدراسة والطبقات</span></button><button data-open-section="indicators"><b>02</b><span>مؤشرات الأسعار واستخدامات الأراضي</span></button><button data-open-section="evidence"><b>03</b><span>الدراسة الميدانية ومرفقات المشروع</span></button></div></section>
+    <section class="sector-section active" data-panel="overview"><div class="experience-hero"><div><span>منصة التطبيقات المكانية المتكاملة</span><h1>${esc(app.title)}</h1><p>استعراض بيانات القطاع، الخرائط الرقمية، المؤشرات الاقتصادية، الدراسة الميدانية ومرفقات المشروع من واجهة واحدة.</p><button data-open-section="map">استعراض خريطة القطاع</button></div>${preview ? `<figure class="experience-reference-preview"><img src="${esc(preview)}" alt="مرجع واجهة المشروع"/><figcaption>${esc(app.reportReferences?.[0]?.reportName || "")}</figcaption></figure>` : '<div class="hero-orbit"><i></i><i></i><i></i><strong>GIS</strong></div>'}</div><div class="experience-tiles"><button data-open-section="map"><b>01</b><span>منطقة الدراسة والطبقات</span></button><button data-open-section="indicators"><b>02</b><span>مؤشرات الأسعار واستخدامات الأراضي</span></button><button data-open-section="evidence"><b>03</b><span>الدراسة الميدانية ومرفقات المشروع</span></button></div></section>
     <section class="sector-section" data-panel="map"><div class="section-heading"><h2>الخريطة التفاعلية للقطاع</h2><p>طبقات قاعدة البيانات المحلية الخاصة بهذا القطاع فقط.</p></div>${renderSectorMapMarkup()}</section>
     <section class="sector-section" data-panel="indicators"><div class="section-heading"><h2>مؤشرات القطاع</h2><p>القيم المراجعة من التقرير وطبقات قاعدة البيانات.</p></div><div class="sector-kpis" id="sector-kpis"></div><div class="sector-bars" id="sector-bars"></div></section>
     <section class="sector-section" data-panel="evidence"><div class="section-heading"><h2>أعمال ومرفقات المشروع</h2><p>المراجع المرتبطة بالقطاع من تقارير وزارة النقل.</p></div>${evidence(app)}</section>

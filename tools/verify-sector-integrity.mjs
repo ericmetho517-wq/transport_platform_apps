@@ -38,7 +38,7 @@ for (const [type, expected] of Object.entries(expectedCounts)) {
   if (counts[type] !== expected) errors.push(`${type}: expected ${expected}, found ${counts[type] || 0}`);
 }
 for (const group of Object.values(aliases)) {
-  if (!["dabaa-axis", "western-upper-egypt"].includes(group) && !profiles[group]) errors.push(`${group}: missing authoritative report profile`);
+  if (!profiles[group]) errors.push(`${group}: missing authoritative report profile`);
 }
 
 const suezFree = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "cairo-suez-road", "summary.json"), "utf8"));
@@ -67,6 +67,7 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
 }
 if (!sectorRuntime.includes("application-gallery-card")) errors.push("filter gallery: report-matched application cards are missing");
 if (!sectorRuntime.includes("data-story-card")) errors.push("story maps: sector collection navigation is missing");
+if (sectorRuntime.includes('{ key: "beni-suef", label: "بني سويف", sector: "9", report: "(9).pdf" }') || sectorRuntime.includes('{ key: "aswan", label: "أسوان", sector: "2", report: "(9).pdf" }')) errors.push("story maps: the overall Western Upper Egypt summary must not be assigned to Beni Suef or Aswan as a sector report");
 report.errors = errors;
 report.result = errors.length ? "FAILED" : "PASSED";
 writeFileSync(join(root, "registry", "sector-audit.json"), JSON.stringify(report, null, 2) + "\n", "utf8");

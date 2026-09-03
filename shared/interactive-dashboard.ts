@@ -24,6 +24,7 @@ interface SectorProfile {
   yearEnd?: number;
   metrics: Record<string, number>;
   prices?: Record<string, { start: number; end: number }>;
+  priceLabels?: Record<string, string>;
   sectors?: Record<string, {
     title: string;
     report: string;
@@ -124,6 +125,17 @@ function priceMarkup(app: TransportApp, group: string): string {
   </main>`;
 }
 
+function dabaaLandMarkup(app: TransportApp, group: string): string {
+  return `<main class="interactive-dashboard dabaa-land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
+    ${dashboardHeader(app)}
+    <div class="dabaa-land-layout">
+      <section class="dashboard-kpis dabaa-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="lime"><span>إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="gold"><span>إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article></section>
+      <section class="dabaa-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+      <aside class="dabaa-gauges"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني بمنطقة الدراسة لعام 2023</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section></aside>
+    </div>
+  </main>`;
+}
+
 function landMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
     ${dashboardHeader(app)}
@@ -192,6 +204,7 @@ export function renderInteractiveDashboard(app: TransportApp): string {
   if (isCivilDashboard(app)) return civilMarkup(app, group);
   if (isImpactDashboard(app)) return impactMarkup(app, group);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
+  if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
   return group === "western-upper-egypt" || group === "cairo-suez-road" ? landMarkup(app, group) : agriculturalMarkup(app, group);
 }
 
@@ -216,7 +229,7 @@ function setUnavailableMetric(name: string): void {
 function renderPriceColumns(summary: DashboardSummary): void {
   const container = document.querySelector<HTMLElement>("#price-columns");
   if (!container) return;
-  const labels: Record<string, string> = { urban: "الأراضي العمرانية", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية" };
+  const labels: Record<string, string> = { urban: "الأراضي العمرانية", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية", ...(summary.profile?.priceLabels || {}) };
   const colors: Record<string, string> = { urban: "#ffbc25", agricultural: "#72e800", industrial: "#e6e6e6" };
   const available = ["urban", "industrial", "agricultural"].filter((key) => {
     const item = summary.prices[key];
@@ -249,14 +262,16 @@ function renderLineChart(summary: DashboardSummary, visible: Set<string>): void 
   }
   const all = keys.flatMap((key) => summary.priceSeries[key as keyof typeof summary.priceSeries] as number[]);
   const max = Math.max(...all, 1);
+  const scale = max >= 1_000_000_000 ? 1_000_000_000 : max >= 1_000_000 ? 1_000_000 : 1;
+  const scaleLabel = scale === 1_000_000_000 ? (document.documentElement.lang === "en" ? "EGP billion" : "مليار ج.م") : scale === 1_000_000 ? (document.documentElement.lang === "en" ? "EGP million" : "مليون ج.م") : (document.documentElement.lang === "en" ? "EGP" : "ج.م");
   const x = (index: number) => left + index * (width - left - right) / Math.max(summary.priceSeries.years.length - 1, 1);
   const y = (value: number) => top + (max - value) * (height - top - bottom) / max;
   const colors: Record<string, string> = { urban: "#ffb400", agricultural: "#6be500", industrial: "#e4e4e4" };
-  const labels: Record<string, string> = { urban: "العمرانية", agricultural: "الزراعية", industrial: "الصناعية" };
+  const labels: Record<string, string> = { urban: "العمرانية", agricultural: "الزراعية", industrial: "الصناعية", ...(summary.profile?.priceLabels || {}) };
   const grid = Array.from({ length: 5 }, (_, index) => {
     const yy = top + index * (height - top - bottom) / 4;
     const value = max * (4 - index) / 4;
-    return `<line x1="${left}" y1="${yy}" x2="${width - right}" y2="${yy}"/><text x="${left - 10}" y="${yy + 4}">${formatNumber(value, 0)}</text>`;
+    return `<line x1="${left}" y1="${yy}" x2="${width - right}" y2="${yy}"/><text x="${left - 10}" y="${yy + 4}">${formatNumber(value / scale, scale === 1 ? 0 : 1)}</text>`;
   }).join("");
   const lines = keys.map((key) => {
     const vals = summary.priceSeries[key as "urban" | "agricultural" | "industrial"];
@@ -265,7 +280,7 @@ function renderLineChart(summary: DashboardSummary, visible: Set<string>): void 
     return `<polyline points="${points}" stroke="${colors[key]}"/><g fill="${colors[key]}">${dots}</g>`;
   }).join("");
   const years = summary.priceSeries.years.map((year, index) => `<text x="${x(index)}" y="${height - 12}" class="year-label">${year}</text>`).join("");
-  container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" aria-label="الرسم البياني التفاعلي لأسعار الأراضي"><g class="chart-grid">${grid}</g>${lines}<g class="chart-years">${years}</g></svg>`;
+  container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" aria-label="الرسم البياني التفاعلي لأسعار الأراضي"><text class="chart-unit" x="${left}" y="14">${scaleLabel}</text><g class="chart-grid">${grid}</g>${lines}<g class="chart-years">${years}</g></svg>`;
   container.querySelectorAll<SVGCircleElement>("circle[data-chart-year]").forEach((dot) => dot.addEventListener("click", () => {
     const label = document.querySelector<HTMLElement>("#chart-year-label");
     const activeYear = document.querySelector<HTMLElement>("#active-year");

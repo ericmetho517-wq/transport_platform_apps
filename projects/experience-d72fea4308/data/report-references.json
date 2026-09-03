@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "imagePath": "../../references/dabaa/project-overview.png",
+    "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+    "page": 4,
+    "sourceUrls": [],
+    "sourceItemIds": [],
+    "projectGroup": "dabaa",
+    "referenceKind": "experience-hero",
+    "caption": "واجهة المشروع ومكونات الدراسة لمحور الضبعة.",
+    "matchType": "project-and-application-type"
+  },
+  {
+    "imagePath": "../../references/dabaa/landuse-change-comparison.png",
+    "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+    "page": 10,
+    "sourceUrls": [],
+    "sourceItemIds": [],
+    "projectGroup": "dabaa",
+    "referenceKind": "experience-map",
+    "caption": "المقارنة المكانية لاستخدامات الأراضي.",
+    "matchType": "project-and-application-type"
+  },
+  {
+    "imagePath": "../../references/dabaa/landuse-dashboard.png",
+    "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+    "page": 13,
+    "sourceUrls": [],
+    "sourceItemIds": [],
+    "projectGroup": "dabaa",
+    "referenceKind": "experience-dashboard",
+    "caption": "لوحة مؤشرات استخدامات الأراضي المرتبطة بالتجربة.",
+    "matchType": "project-and-application-type"
+  },
+  {
+    "imagePath": "../../references/dabaa/price-dashboard.png",
+    "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+    "page": 14,
+    "sourceUrls": [],
+    "sourceItemIds": [],
+    "projectGroup": "dabaa",
+    "referenceKind": "experience-dashboard",
+    "caption": "لوحة مؤشرات أسعار الأراضي المرتبطة بالتجربة.",
+    "matchType": "project-and-application-type"
+  }
+]

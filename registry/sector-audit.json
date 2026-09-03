@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T00:01:46.381Z",
+  "generatedAt": "2026-09-03T00:42:20.018Z",
   "applications": 78,
   "counts": {
     "Dashboard": 50,
@@ -22,7 +22,7 @@
   "checks": {
     "projectEntrypoints": 78,
     "sectorSummaries": 9,
-    "reportProfiles": 8,
+    "reportProfiles": 9,
     "crossSectorReferences": 0
   },
   "errors": [],
@@ -37,11 +37,7 @@
     "dashboard-37e01603d0: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ba98b53679: no embedded report screenshot; runtime remains data-driven",
     "dashboard-4138cfe326: no embedded report screenshot; runtime remains data-driven",
-    "dashboard-f0a5bc623c: no embedded report screenshot; runtime remains data-driven",
-    "experience-d72fea4308: no embedded report screenshot; runtime remains data-driven",
-    "storymap-3bc68f337f: no embedded report screenshot; runtime remains data-driven",
-    "dashboard-594d7c7ff4: no embedded report screenshot; runtime remains data-driven",
-    "dashboard-c1e29f0123: no embedded report screenshot; runtime remains data-driven"
+    "dashboard-f0a5bc623c: no embedded report screenshot; runtime remains data-driven"
   ],
   "result": "PASSED"
 }

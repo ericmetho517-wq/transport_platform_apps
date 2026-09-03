@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "imagePath": "../../references/dabaa/price-dashboard.png",
+    "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+    "page": 14,
+    "sourceUrls": [],
+    "sourceItemIds": [],
+    "projectGroup": "dabaa",
+    "referenceKind": "price-dashboard",
+    "caption": "لوحة مؤشرات تغير أسعار الأراضي بمحور الضبعة بالقيم الأصلية.",
+    "matchType": "project-and-application-type"
+  }
+]

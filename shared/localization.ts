@@ -1,6 +1,13 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)", "Total changed agricultural land area (feddans)"],
+  ["نسبة مساحة التغير العمراني بمنطقة الدراسة لعام 2023", "Urban change as a share of the study area in 2023"],
+  ["نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023", "Agricultural change as a share of the study area in 2023"],
+  ["مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023", "Land-use area comparison: 2014–2023"],
+  ["الأراضي الزراعية - إيجار", "Agricultural land – lease"],
+  ["الأراضي الزراعية - تمليك", "Agricultural land – ownership"],
+  ["مرجع واجهة المشروع", "Project interface reference"],
   ["التطبيقات محور الصعيد الغربي باللغة الانجليزية", "Western Upper Egypt Axis applications"],
   ["التطبيقات محور الصعيد الغربي باللغة العربية", "Western Upper Egypt Axis applications"],
   ["القوس الشرقى للدائرى الأقليمى و خط الروبيكى باللغة الانجليزية", "Regional Ring Road eastern arc and Robeki railway"],
