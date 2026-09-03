@@ -10,7 +10,7 @@ function header(app: TransportApp, compact = false): string {
 
 function evidence(app: TransportApp): string {
   const references = app.reportReferences || [];
-  return `<div class="sector-evidence">${references.length ? references.map((reference) => `<figure data-evidence-report="${esc(reference.reportName)}"><img src="${esc(reference.imagePath)}" alt="${esc(reference.referenceKind)}" loading="lazy"/><figcaption>${esc(reference.reportName)} - صفحة ${reference.page}</figcaption></figure>`).join("") : '<div class="empty-evidence">لا توجد صور تقرير لهذا القطاع؛ يتم عرض البيانات المحلية المتاحة فقط.</div>'}</div>`;
+  return `<div class="sector-evidence">${references.length ? references.map((reference) => `<figure data-evidence-report="${esc(reference.reportName)}"><a class="evidence-image-link" href="${esc(reference.imagePath)}" target="_blank" rel="noopener" aria-label="فتح الصورة بالحجم الأصلي"><img src="${esc(reference.imagePath)}" alt="${esc(reference.referenceKind)}" loading="lazy"/></a><figcaption>${esc(reference.reportName)} - صفحة ${reference.page}<a class="evidence-open-link" href="${esc(reference.imagePath)}" target="_blank" rel="noopener">فتح الصورة ↗</a></figcaption></figure>`).join("") : '<div class="empty-evidence">لا توجد صور تقرير لهذا القطاع؛ يتم عرض البيانات المحلية المتاحة فقط.</div>'}</div>`;
 }
 
 interface StoryEntry {
