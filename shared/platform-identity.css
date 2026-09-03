@@ -39,6 +39,10 @@
 .platform-shell .brand > span:last-child b { font-size: 16px; }
 .platform-shell .brand small { direction: ltr; color: #71869a; font-size: 9px; letter-spacing: .045em; }
 .platform-shell .brand-mark { position: relative; width: 48px; height: 48px; overflow: hidden; border: 0; border-radius: 15px; color: #fff; background: linear-gradient(145deg, #169ee9, #064989 75%); box-shadow: 0 10px 22px #075dab32; }
+.platform-shell .brand { position: relative; }
+.platform-shell .brand::before { content: ""; display: block; width: 58px; height: 58px; flex: 0 0 58px; background: url('/branding/mot-logo.svg') center/contain no-repeat; order: -1; }
+.platform-shell .brand-mark { width: 150px; height: 58px; border-radius: 10px; background: #075dab url('/branding/company-logo.svg') center/contain no-repeat; }
+.platform-shell .brand-mark i, .platform-shell .brand-mark b { display: none; }
 .platform-shell .brand-mark::after { content: ""; position: absolute; inset: auto -12px -17px; height: 30px; border: 2px solid #ffffff47; border-radius: 50%; transform: rotate(-12deg); }
 .platform-shell .brand-mark i { position: absolute; top: 8px; right: 9px; width: 7px; height: 7px; border-radius: 50%; background: #80d6ff; box-shadow: -20px 18px 0 #fff; }
 .platform-shell .brand-mark b { position: relative; z-index: 2; font-size: 11px; letter-spacing: .06em; }
