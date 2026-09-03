@@ -47,9 +47,11 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-content path:hover,.map-content path:focus { filter: brightness(1.35) drop-shadow(0 0 5px #fff); opacity: 1; outline:none; }
 .map-study path { fill: #00c8ff18; stroke: #fff; stroke-width: 4; filter: drop-shadow(0 0 3px #007acb); }
 .map-axis path { fill: none; stroke: #ff1edc; stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 0 3px #fff); }
-.map-urban path { fill: #ff4b22d4; stroke: #fff06a; stroke-width: 1.25; }
-.map-agricultural path { fill: #52df08c9; stroke: #e6ffb8; stroke-width: 1.2; }
-.map-industrial path { fill: #00bce8d4; stroke: #e8fbff; stroke-width: 1.25; }
+.map-urban path { fill: #ff4b22d4; stroke: #fff5d6; stroke-width: 1.7; }
+.map-agricultural path { fill: #52df08c9; stroke: #f2ffd9; stroke-width: 1.6; }
+.map-industrial path { fill: #00bce8d4; stroke: #e8fbff; stroke-width: 1.7; }
+.map-content path[data-geometry="Point"], .map-content path[data-geometry="MultiPoint"] { stroke-width: 1.4; vector-effect:non-scaling-stroke; }
+.map-content path[data-geometry="Point"] { filter: drop-shadow(0 1px 2px #00131dcc); }
 .map-baseline path { fill: #f1ce55c9; stroke: #fff5b8; stroke-width: 1.15; }
 .map-landcover-start path,.map-landcover-end path { fill: #9aa5add9; stroke: #eef3f6; stroke-width: 1.1; fill-rule: evenodd; }
 .map-civil path { fill: #8b5cf6c9; stroke: #fff; stroke-width: 1.4; }

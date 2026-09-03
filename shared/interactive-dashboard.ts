@@ -631,6 +631,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       if (!pathData) return;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
+      path.dataset.geometry = feature.geometry.type;
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
