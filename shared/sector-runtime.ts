@@ -129,6 +129,26 @@ function selectOnly(layer: string): void {
 export async function initSectorApplication(app: TransportApp): Promise<void> {
   const root = document.querySelector<HTMLElement>(".sector-app");
   if (!root) return;
+  // Keep report images inside the current StoryMap page with an accessible lightbox.
+  const evidenceModal = document.createElement("div");
+  evidenceModal.className = "evidence-modal";
+  evidenceModal.hidden = true;
+  evidenceModal.innerHTML = `<div class="evidence-modal-backdrop" data-evidence-close></div><div class="evidence-modal-dialog" role="dialog" aria-modal="true" aria-label="Image preview"><button class="evidence-modal-close" type="button" data-evidence-close aria-label="Close">×</button><img class="evidence-modal-image" alt=""/><p class="evidence-modal-caption"></p></div>`;
+  document.body.appendChild(evidenceModal);
+  const closeEvidence = () => { evidenceModal.hidden = true; document.body.classList.remove("evidence-modal-open"); };
+  const openEvidence = (link: HTMLAnchorElement) => {
+    const image = evidenceModal.querySelector<HTMLImageElement>(".evidence-modal-image");
+    if (!image) return;
+    image.src = link.getAttribute("href") || "";
+    image.alt = link.closest("figure")?.querySelector("img")?.alt || "";
+    const caption = evidenceModal.querySelector<HTMLElement>(".evidence-modal-caption");
+    if (caption) caption.textContent = link.closest("figure")?.querySelector("figcaption")?.textContent || "";
+    evidenceModal.hidden = false;
+    document.body.classList.add("evidence-modal-open");
+  };
+  evidenceModal.querySelectorAll<HTMLElement>("[data-evidence-close]").forEach((element) => element.addEventListener("click", closeEvidence));
+  document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !evidenceModal.hidden) closeEvidence(); });
+  document.querySelectorAll<HTMLAnchorElement>(".evidence-image-link, .evidence-open-link").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); openEvidence(link); }));
   const group = root.dataset.sectorGroup || dashboardGroup(app);
   const response = await fetch(`../../data/dashboard/${group}/summary.json`);
   if (!response.ok) return;
