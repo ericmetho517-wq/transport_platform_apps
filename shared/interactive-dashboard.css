@@ -176,6 +176,16 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .comparison-row > div { width:100%; height: 42px; display: flex; background: #363636; overflow: hidden; box-shadow:inset 0 0 0 1px #ffffff12; }
 .comparison-row i { height: 100%; min-width: 1px; transition: filter .15s; cursor:pointer; }
 .comparison-row i:hover { filter: brightness(1.4); }
+/* Unified orange visual identity for dashboard controls and map symbology. */
+.interactive-dashboard .dashboard-kpis article.blue { background:#f28a00; color:#111; }
+.interactive-dashboard .map-study path { stroke:#ffb21a; filter:drop-shadow(0 0 3px #f28a00); }
+.interactive-dashboard .map-industrial path { fill:#f28a00d4; stroke:#ffe0a3; }
+.interactive-dashboard .map-controls button { background:#b85e00ed; }
+.interactive-dashboard .map-controls button:hover { background:#f28a00; }
+.interactive-dashboard .map-status, .interactive-dashboard .map-sector-filter, .interactive-dashboard .map-change-filter { background:#4a2608ed; }
+.interactive-dashboard .map-layer-toggles button.active[data-map-layer="industrial"] i { background:#f28a00; }
+.interactive-dashboard .temporal-map .temporal-year { border-bottom-color:#f28a00; }
+.interactive-dashboard .temporal-map .temporal-year small { background:#b85e00; }
 .comparison-row b { color:#fff; font-size:12px; }.comparison-row span { color:#ddd; font-size:10px; white-space:nowrap; }
 .comparison-axis { margin:0 101px 7px 57px; display:flex; justify-content:space-between; direction:ltr; color:#aeb5bb; font-size:8px; }
 .comparison-legend { display: flex; gap: 12px; flex-wrap: wrap; justify-content:center; padding-top: 9px; border-top: 1px solid #444; direction: rtl; }

@@ -330,7 +330,7 @@ function renderLineChart(summary: DashboardSummary, visible: Set<string>): void 
 function renderChangeBars(summary: DashboardSummary): void {
   const container = document.querySelector<HTMLElement>("#change-bars");
   if (!container) return;
-  const data = summary.profile?.changeBars?.length ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, item.layer === "industrial" ? "#00a3d7" : "#ff9e00"] as [string, string, number, string]) : [
+  const data = summary.profile?.changeBars?.length ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, "#f28a00"] as [string, string, number, string]) : [
     ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ff9e00"],
     ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
     ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
