@@ -84,7 +84,7 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
     ${yearLabel ? `<div class="temporal-year">${yearLabel}<small>عرض تفاعلي مترابط</small></div>` : ""}
     <div class="map-status"><span class="live-dot"></span><span class="map-status-text">جارٍ تحميل طبقات المشروع المحلية…</span></div>
     <label class="map-sector-filter" hidden><span>نطاق العرض</span><select class="map-sector-select"><option value="all">كل القطاعات</option></select></label>
-    <div class="map-layer-toggles"></div>
+    <div class="map-layer-toggles"></div><label class="map-change-filter"><span>Change status</span><select class="map-change-select"><option value="all">All features</option><option value="changed">Changed</option><option value="unchanged">Unchanged</option></select></label>
     <svg class="interactive-map" viewBox="0 0 1000 520" role="img" aria-label="خريطة تفاعلية لبيانات المشروع">
       <defs>
         <pattern id="map-grid-${suffix}" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#bbb" stroke-width=".6" opacity=".45"/></pattern>
@@ -766,6 +766,23 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     };
     sectorSelect.addEventListener("change", updateSector);
     updateSector();
+  }
+  const changeSelect = scope.querySelector<HTMLSelectElement>(".map-change-select");
+  if (changeSelect) {
+    const changedLayers = new Set<LayerName>(["urban", "agricultural", "industrial"]);
+    const applyChangeFilter = () => {
+      const mode = changeSelect.value;
+      loaded.forEach(([layer]) => {
+        const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
+        if (!groupElement) return;
+        const isChanged = changedLayers.has(layer);
+        groupElement.classList.toggle("change-hidden", (mode === "changed" && !isChanged) || (mode === "unchanged" && isChanged));
+      });
+      scope.dataset.changeStatus = mode;
+      scope.dispatchEvent(new CustomEvent("map-change-status", { detail: mode }));
+    };
+    changeSelect.addEventListener("change", applyChangeFilter);
+    applyChangeFilter();
   }
   const locale = document.documentElement.lang === "en" ? "en-US" : "ar-EG";
   if (status) {

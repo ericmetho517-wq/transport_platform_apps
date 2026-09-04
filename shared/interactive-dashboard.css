@@ -44,6 +44,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .satellite-tile { opacity: 1; filter: saturate(1.12) contrast(1.08) brightness(.92); }
 .map-content path { cursor: pointer; paint-order: stroke fill markers; transition: opacity .15s, filter .15s; }
 .map-content path[hidden] { display: none; }
+.map-content .change-hidden { display: none; }
 .map-content path:hover,.map-content path:focus { filter: brightness(1.35) drop-shadow(0 0 5px #fff); opacity: 1; outline:none; }
 .map-study path { fill: #00c8ff18; stroke: #fff; stroke-width: 4; filter: drop-shadow(0 0 3px #007acb); }
 .map-axis path { fill: none; stroke: #ff1edc; stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 0 3px #fff); }
@@ -68,6 +69,8 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-sector-filter { position: absolute; z-index: 4; top: 9px; left: 50%; translate: -50% 0; display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 7px; background: #052f58ed; color: #fff; font-size: 10px; box-shadow: 0 4px 15px #0006; }
 .map-sector-filter[hidden] { display: none; }
 .map-sector-filter select { min-width: 130px; padding: 5px 24px 5px 8px; border: 1px solid #ffffff55; border-radius: 5px; background: #fff; color: #082d4f; font-weight: 700; }
+.map-change-filter { position:absolute; z-index:4; top:9px; inset-inline-start:9px; display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:7px; background:#052f58ed; color:#fff; font-size:10px; box-shadow:0 4px 15px #0006; }
+.map-change-filter select { min-width:120px; padding:5px 24px 5px 8px; border:1px solid #ffffff55; border-radius:5px; background:#fff; color:#082d4f; font-weight:700; }
 .map-sector-filter span { white-space: nowrap; }
 .map-layer-toggles button { display: grid; grid-template-columns: 11px 1fr auto; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid #ffffff66; border-radius: 6px; background: #071d31f2; color: #dce9f3; text-align: start; cursor: pointer; font-size: 10px; box-shadow:0 3px 10px #0007; }
 .map-layer-toggles button i { width: 9px; height: 9px; border-radius: 2px; background: #777; }
