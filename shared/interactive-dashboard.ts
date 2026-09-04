@@ -632,6 +632,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
       path.dataset.geometry = feature.geometry.type;
+      const statusEntry = Object.entries(feature.properties || {}).find(([key]) => /status|change|حالة|تغير/i.test(key));
+      if (statusEntry) {
+        const statusText = String(statusEntry[1]).toLowerCase();
+        path.dataset.changeStatus = /unchanged|no.?change|لم.?يتغير|غير.?متغير|قائم|existing|0/.test(statusText) ? "unchanged" : "changed";
+      } else path.dataset.changeStatus = "unknown";
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
@@ -769,14 +774,15 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   }
   const changeSelect = scope.querySelector<HTMLSelectElement>(".map-change-select");
   if (changeSelect) {
-    const changedLayers = new Set<LayerName>(["urban", "agricultural", "industrial"]);
     const applyChangeFilter = () => {
       const mode = changeSelect.value;
       loaded.forEach(([layer]) => {
         const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
         if (!groupElement) return;
-        const isChanged = changedLayers.has(layer);
-        groupElement.classList.toggle("change-hidden", (mode === "changed" && !isChanged) || (mode === "unchanged" && isChanged));
+        groupElement.querySelectorAll<SVGPathElement>("path").forEach((path) => {
+          const status = path.dataset.changeStatus || "unknown";
+          path.classList.toggle("change-hidden", mode !== "all" && status !== "unknown" && status !== mode);
+        });
       });
       scope.dataset.changeStatus = mode;
       scope.dispatchEvent(new CustomEvent("map-change-status", { detail: mode }));
