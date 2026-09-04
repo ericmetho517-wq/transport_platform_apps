@@ -847,6 +847,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
   }));
   svg.addEventListener("wheel", (event) => {
+    const nextZoom = zoom * Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
+    // At the minimum zoom, let the browser scroll the dashboard normally.
+    if (event.deltaY > 0 && zoom <= .71 && nextZoom <= zoom) return;
     event.preventDefault();
     const bounds = svg.getBoundingClientRect();
     const centerX = (event.clientX - bounds.left) * 1000 / Math.max(bounds.width, 1);
@@ -1015,8 +1018,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     comparisonChart?.addEventListener("click", (event) => {
       const segment = (event.target as HTMLElement).closest<HTMLElement>(".comparison-row i");
       if (!segment) return;
-      const color = segment.style.background.toLowerCase();
-      const layer = color.includes("24c427") ? "agricultural" : color.includes("5a46e8") ? "industrial" : color.includes("d9a116") || color.includes("ff9e") ? "urban" : "landcover-end";
+      const color = getComputedStyle(segment).backgroundColor.toLowerCase();
+      const layer = color.includes("36, 196, 39") ? "agricultural" : color.includes("90, 70, 232") ? "industrial" : color.includes("217, 161, 22") || color.includes("255, 158") ? "urban" : "landcover-end";
       activateLayerOnly(layer);
       document.querySelectorAll<HTMLElement>("[data-filter-layer]").forEach((item) => item.classList.toggle("active", item.dataset.filterLayer === layer));
     });
