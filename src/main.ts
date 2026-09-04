@@ -2,6 +2,13 @@ import apps from "../registry/apps.json";
 import type { TransportApp } from "../shared/project-runtime";
 
 const registry = apps as TransportApp[];
+const axisOptions = [
+  ["western-upper-egypt", "محور الصعيد الغربي / Western Upper Egypt"], ["regional-ring-road", "الدائري الإقليمي / Regional Ring Road"],
+  ["kalabsha-axis", "محور كلابشة / Kalabsha Axis"], ["qena-luxor-road", "طريق قنا الأقصر / Qena–Luxor Road"],
+  ["qus-axis", "محور قوص / Qus Axis"], ["cairo-suez-road", "طريق القاهرة السويس / Cairo–Suez Road"],
+  ["suez-ring-link", "وصلة السويس / Suez Ring Link"], ["dabaa-axis", "محور الضبعة / Dabaa Axis"],
+] as const;
+const axisOf = (app: TransportApp): string => app.reportReferences?.[0]?.projectGroup || "western-upper-egypt";
 const root = document.querySelector<HTMLDivElement>("#app");
 if (!root) throw new Error("Missing #app root");
 
@@ -50,6 +57,7 @@ root.innerHTML = `<div class="platform-shell" dir="rtl">
         <label class="search-control"><span>بحث</span><input id="app-search" placeholder="ابحث بالعنوان أو القطاع"/></label>
         <label><span>نوع التطبيق</span><select id="type-filter"><option value="all">جميع أنواع التطبيقات</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${typeLabels[type] || type}</option>`).join("")}</select></label>
         <label><span>اللغة / Language</span><select id="language-filter"><option value="all">الكل / All</option><option value="ar">العربية</option><option value="en">English</option></select></label>
+        <label><span>المحور / Axis</span><select id="axis-filter"><option value="all">كل المحاور / All axes</option>${axisOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join("")}</select></label>
       </div></div>
       <div class="catalog-toolbar"><div class="quick-filters" aria-label="تصفية سريعة"><button class="active" data-quick-type="all">الكل</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${typeLabels[type] || type}<b>${counts.get(type)}</b></button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">مسح الفلاتر</button></div>
       <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>اختر أي بطاقة لفتح التطبيق في صفحة مستقلة</span></div>
@@ -65,6 +73,7 @@ const grid = document.querySelector<HTMLDivElement>("#app-grid")!;
 const search = document.querySelector<HTMLInputElement>("#app-search")!;
 const typeFilter = document.querySelector<HTMLSelectElement>("#type-filter")!;
 const languageFilter = document.querySelector<HTMLSelectElement>("#language-filter")!;
+const axisFilter = document.querySelector<HTMLSelectElement>("#axis-filter")!;
 const summary = document.querySelector<HTMLParagraphElement>("#filter-summary")!;
 const clearFilters = document.querySelector<HTMLButtonElement>("#clear-filters")!;
 const quickFilters = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-quick-type]"));
@@ -82,9 +91,11 @@ const render = () => {
   const query = search.value.trim().toLocaleLowerCase();
   const type = typeFilter.value;
   const language = languageFilter.value;
+  const axis = axisFilter.value;
   const visible = registry.filter((app) =>
     (type === "all" || app.type === type)
     && (language === "all" || app.language === language)
+    && (axis === "all" || axisOf(app) === axis)
     && `${app.title} ${app.category}`.toLocaleLowerCase().includes(query));
   summary.textContent = `عرض ${visible.length.toLocaleString("ar-EG")} من ${registry.length.toLocaleString("ar-EG")} تطبيق`;
   clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || language !== "all"));
@@ -96,6 +107,7 @@ const render = () => {
 search.addEventListener("input", render);
 typeFilter.addEventListener("change", render);
 languageFilter.addEventListener("change", render);
+axisFilter.addEventListener("change", render);
 quickFilters.forEach((button) => button.addEventListener("click", () => {
   typeFilter.value = button.dataset.quickType || "all";
   render();
@@ -105,6 +117,7 @@ const resetFilters = () => {
   search.value = "";
   typeFilter.value = "all";
   languageFilter.value = "all";
+  axisFilter.value = "all";
   render();
 };
 clearFilters.addEventListener("click", resetFilters);
