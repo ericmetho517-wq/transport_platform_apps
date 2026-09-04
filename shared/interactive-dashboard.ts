@@ -103,7 +103,7 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
 export const renderSectorMapMarkup = mapMarkup;
 
 function dashboardHeader(app: TransportApp): string {
-  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
+  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تم التغيير</option><option value="unchanged">لم يتغير</option></select></label><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
 }
 
 function priceMarkup(app: TransportApp, group: string): string {
@@ -991,6 +991,20 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     document.querySelectorAll<HTMLElement>(".map-year-end").forEach((label) => { label.textContent = String(summary.yearEnd); });
     const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
     await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));
+    const dashboardChangeFilter = document.querySelector<HTMLSelectElement>("#dashboard-change-filter");
+    if (dashboardChangeFilter) {
+      const syncChangeStatus = () => {
+        const mode = dashboardChangeFilter.value;
+        mapRoots.forEach((map) => { const select = map.querySelector<HTMLSelectElement>(".map-change-select"); if (select && select.value !== mode) { select.value = mode; select.dispatchEvent(new Event("change")); } });
+        const basePercent = Math.min(summary.profile?.metrics?.urbanChangePercent ?? ((summary.metrics.urbanChangeKm2 || 0) / Math.max(summary.metrics.studyAreaKm2 || 1, 1) * 100), 100);
+        const gauge = root.querySelector<HTMLElement>("#urban-gauge");
+        if (gauge) setGauge(gauge, mode === "all" ? 100 : mode === "changed" ? basePercent : Math.max(0, 100 - basePercent));
+        root.dataset.changeStatus = mode;
+      };
+      dashboardChangeFilter.addEventListener("change", syncChangeStatus);
+      root.addEventListener("map-change-status", ((event: CustomEvent<string>) => { if (dashboardChangeFilter.value !== event.detail) { dashboardChangeFilter.value = event.detail; syncChangeStatus(); } }) as EventListener);
+      syncChangeStatus();
+    }
     const comparisonChart = document.querySelector<HTMLElement>("#comparison-chart");
     comparisonChart?.addEventListener("click", (event) => {
       const segment = (event.target as HTMLElement).closest<HTMLElement>(".comparison-row i");
