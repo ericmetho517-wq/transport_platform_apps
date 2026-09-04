@@ -103,7 +103,7 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
 export const renderSectorMapMarkup = mapMarkup;
 
 function dashboardHeader(app: TransportApp): string {
-  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تم التغيير</option><option value="unchanged">لم يتغير</option></select></label><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
+  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label><label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تم التغيير</option><option value="unchanged">لم يتغير</option></select></label><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
 }
 
 function priceMarkup(app: TransportApp, group: string): string {
@@ -632,7 +632,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
       path.dataset.geometry = feature.geometry.type;
-      const statusEntry = Object.entries(feature.properties || {}).find(([key]) => /status|change|حالة|تغير/i.test(key));
+      const statusEntry = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /status|change_status|حالة[_ ]?التغير/i.test(key));
       if (statusEntry) {
         const statusText = String(statusEntry[1]).toLowerCase();
         path.dataset.changeStatus = /unchanged|no.?change|لم.?يتغير|غير.?متغير|قائم|existing|0/.test(statusText) ? "unchanged" : "changed";
@@ -1000,6 +1000,13 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     document.querySelectorAll<HTMLElement>(".map-year-end").forEach((label) => { label.textContent = String(summary.yearEnd); });
     const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
     await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));
+    const dashboardSectorFilter = document.querySelector<HTMLSelectElement>("#dashboard-sector-filter");
+    const sourceSectorSelect = mapRoots.map((map) => map.querySelector<HTMLSelectElement>(".map-sector-select")).find((select) => select && select.options.length > 1);
+    if (dashboardSectorFilter && sourceSectorSelect) {
+      dashboardSectorFilter.innerHTML = sourceSectorSelect.innerHTML;
+      dashboardSectorFilter.addEventListener("change", () => mapRoots.forEach((map) => { const select = map.querySelector<HTMLSelectElement>(".map-sector-select"); if (select && select.value !== dashboardSectorFilter.value) { select.value = dashboardSectorFilter.value; select.dispatchEvent(new Event("change")); } }));
+      mapRoots.forEach((map) => map.addEventListener("change", (event) => { if ((event.target as HTMLElement).matches?.(".map-sector-select") && dashboardSectorFilter.value !== (event.target as HTMLSelectElement).value) dashboardSectorFilter.value = (event.target as HTMLSelectElement).value; }));
+    } else if (dashboardSectorFilter) dashboardSectorFilter.closest("label")?.setAttribute("hidden", "true");
     const dashboardChangeFilter = document.querySelector<HTMLSelectElement>("#dashboard-change-filter");
     if (dashboardChangeFilter) {
       const syncChangeStatus = () => {
