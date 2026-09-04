@@ -1,5 +1,6 @@
 import apps from "../registry/apps.json";
 import type { TransportApp } from "../shared/project-runtime";
+import { dashboardGroup } from "../shared/interactive-dashboard";
 
 const registry = apps as TransportApp[];
 const axisOptions = [
@@ -8,7 +9,7 @@ const axisOptions = [
   ["qus-axis", "محور قوص / Qus Axis"], ["cairo-suez-road", "طريق القاهرة السويس / Cairo–Suez Road"],
   ["suez-ring-link", "وصلة السويس / Suez Ring Link"], ["dabaa-axis", "محور الضبعة / Dabaa Axis"],
 ] as const;
-const axisOf = (app: TransportApp): string => app.reportReferences?.[0]?.projectGroup || "western-upper-egypt";
+const axisOf = (app: TransportApp): string => app.reportReferences?.[0]?.projectGroup || dashboardGroup(app);
 const root = document.querySelector<HTMLDivElement>("#app");
 if (!root) throw new Error("Missing #app root");
 
