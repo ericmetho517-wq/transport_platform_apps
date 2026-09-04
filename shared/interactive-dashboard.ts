@@ -798,7 +798,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
   }
 
-  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0;
+  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const apply = (broadcast = true) => {
     viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
@@ -849,7 +849,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     zoomBy(factor, centerX, centerY);
   }, { passive: false });
   svg.addEventListener("pointerdown", (event) => { dragging = true; lastX = event.clientX; lastY = event.clientY; svg.setPointerCapture(event.pointerId); });
-  svg.addEventListener("pointermove", (event) => { if (!dragging) return; tx += (event.clientX - lastX) * 1000 / Math.max(svg.clientWidth, 1); ty += (event.clientY - lastY) * 520 / Math.max(svg.clientHeight, 1); lastX = event.clientX; lastY = event.clientY; apply(); });
+  svg.addEventListener("pointermove", (event) => { if (!dragging) return; tx += (event.clientX - lastX) * 1000 / Math.max(svg.clientWidth, 1); ty += (event.clientY - lastY) * 520 / Math.max(svg.clientHeight, 1); lastX = event.clientX; lastY = event.clientY; if (!panFrame) panFrame = requestAnimationFrame(() => { panFrame = 0; apply(); }); });
   svg.addEventListener("pointerup", () => { dragging = false; });
   svg.addEventListener("pointercancel", () => { dragging = false; });
   svg.addEventListener("lostpointercapture", () => { dragging = false; });
@@ -991,6 +991,15 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     document.querySelectorAll<HTMLElement>(".map-year-end").forEach((label) => { label.textContent = String(summary.yearEnd); });
     const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
     await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));
+    const comparisonChart = document.querySelector<HTMLElement>("#comparison-chart");
+    comparisonChart?.addEventListener("click", (event) => {
+      const segment = (event.target as HTMLElement).closest<HTMLElement>(".comparison-row i");
+      if (!segment) return;
+      const color = segment.style.background.toLowerCase();
+      const layer = color.includes("24c427") ? "agricultural" : color.includes("5a46e8") ? "industrial" : color.includes("d9a116") || color.includes("ff9e") ? "urban" : "landcover-end";
+      activateLayerOnly(layer);
+      document.querySelectorAll<HTMLElement>("[data-filter-layer]").forEach((item) => item.classList.toggle("active", item.dataset.filterLayer === layer));
+    });
     if (root.dataset.mode === "impact") {
       const slider = document.querySelector<HTMLInputElement>("#impact-year");
       const updateImpact = () => {
