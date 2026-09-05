@@ -77,7 +77,8 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-change-filter { position:absolute; z-index:4; top:9px; inset-inline-start:9px; display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:7px; background:#052f58ed; color:#fff; font-size:10px; box-shadow:0 4px 15px #0006; }
 .map-change-filter select { min-width:120px; padding:5px 24px 5px 8px; border:1px solid #ffffff55; border-radius:5px; background:#fff; color:#082d4f; font-weight:700; }
 .interactive-dashboard .map-status, .interactive-dashboard .map-scale, .interactive-dashboard .map-wheel-hint,
-.interactive-dashboard .temporal-map .map-status { display:none !important; }
+.interactive-dashboard .temporal-map .map-status,
+.interactive-dashboard .map-layer-toggles { display:none !important; }
 .map-sector-filter span { white-space: nowrap; }
 .map-layer-toggles button { display: grid; grid-template-columns: 11px 1fr auto; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid #ffffff66; border-radius: 6px; background: #071d31f2; color: #dce9f3; text-align: start; cursor: pointer; font-size: 10px; box-shadow:0 3px 10px #0007; }
 .map-layer-toggles button i { width: 9px; height: 9px; border-radius: 2px; background: #777; }
