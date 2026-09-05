@@ -776,11 +776,18 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (changeSelect) {
     const applyChangeFilter = () => {
       const mode = changeSelect.value;
+      const explicitChangeLayers = new Set<LayerName>(["urban", "agricultural", "industrial"]);
+      const hasExplicitChangeLayers = loaded.some(([layer]) => explicitChangeLayers.has(layer));
       loaded.forEach(([layer]) => {
         const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
         if (!groupElement) return;
         groupElement.querySelectorAll<SVGPathElement>("path").forEach((path) => {
-          const status = path.dataset.changeStatus || "unknown";
+          let status = path.dataset.changeStatus || "unknown";
+          if (status === "unknown") {
+            if (hasExplicitChangeLayers) status = explicitChangeLayers.has(layer) ? "changed" : "unknown";
+            else if (layer === "landcover-end" || layer === "baseline") status = "changed";
+            else if (layer === "landcover-start") status = "unchanged";
+          }
           path.classList.toggle("change-hidden", mode !== "all" && status !== "unknown" && status !== mode);
         });
       });
