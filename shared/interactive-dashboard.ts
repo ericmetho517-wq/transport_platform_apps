@@ -867,12 +867,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   svg.addEventListener("wheel", (event) => {
     // Vertical wheel movement should scroll the dashboard page. Hold Ctrl/Alt
     // when zooming the map with the wheel so a map never traps page scrolling.
-    if (!event.ctrlKey && !event.altKey) {
-      event.preventDefault();
-      const scroller = document.scrollingElement || document.documentElement;
-      scroller.scrollTop += event.deltaY;
-      return;
-    }
+    if (!event.ctrlKey && !event.altKey) return;
     const nextZoom = zoom * Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     // At the minimum zoom, let the browser scroll the dashboard normally.
     if (event.deltaY > 0 && zoom <= .71 && nextZoom <= zoom) return;
