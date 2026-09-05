@@ -639,6 +639,15 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         const statusText = String(statusEntry[1]).toLowerCase();
         path.dataset.changeStatus = /unchanged|no.?change|لم.?يتغير|غير.?متغير|غير متغير|قائم|existing|بدون.?تغير|0/.test(statusText) ? "unchanged" : /changed|change|متغير|تغير|under.?construction|new|مستحدث/.test(statusText) ? "changed" : "unknown";
       } else path.dataset.changeStatus = "unknown";
+      // Some source exports store the status in the land-use nature/type
+      // field rather than a column named status/change.
+      if (path.dataset.changeStatus === "unknown") {
+        const nature = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /nature|development|طبيعة|نوع.*المنطقة/i.test(key))?.[1];
+        if (nature !== undefined) {
+          const natureText = String(nature).toLowerCase();
+          path.dataset.changeStatus = /existing|قائم|مستقر|بدون.?تغير|لم.?يتغير|غير.?متغير/.test(natureText) ? "unchanged" : /new|under.?construction|مستحدث|تحت.?الإنشاء|متغير|تغير/.test(natureText) ? "changed" : "unknown";
+        }
+      }
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
