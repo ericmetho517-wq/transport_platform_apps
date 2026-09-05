@@ -621,14 +621,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   content.innerHTML = "";
   const sectorValues = new Set<string>();
   const sectorOf = (properties: Record<string, unknown> = {}) => String(properties["اسم_القطاع"] ?? properties["sector"] ?? properties["Sector"] ?? "").trim();
-  loaded.forEach(([layer, collection]) => {
+  for (const [layer, collection] of loaded) {
     const groupElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
     groupElement.dataset.layerGroup = layer;
     groupElement.classList.add(`map-${layer}`);
-    collection.features.forEach((feature: { geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }) => {
-      if (!feature.geometry) return;
+    for (const [featureIndex, feature] of collection.features.entries()) {
+      // Yield between batches so a large layer cannot block scrolling/input.
+      if (featureIndex > 0 && featureIndex % 100 === 0) await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+      if (!feature.geometry) continue;
       const pathData = geometryPath(feature.geometry, project);
-      if (!pathData) return;
+      if (!pathData) continue;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
       path.dataset.geometry = feature.geometry.type;
@@ -682,9 +684,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         popup.hidden = false;
       });
       groupElement.appendChild(path);
-    });
+    }
     content.appendChild(groupElement);
-  });
+  }
   const renderableCount = (collection: GeoJsonCollection) => collection.features.filter((feature) => feature.geometry && coordinatePairs(feature.geometry.coordinates).length).length;
   const sourceCount = (_layer: LayerName, collection: GeoJsonCollection) => collection.features.reduce((sum, feature) => {
     if (!feature.geometry || !coordinatePairs(feature.geometry.coordinates).length) return sum;
@@ -858,7 +860,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     // when zooming the map with the wheel so a map never traps page scrolling.
     if (!event.ctrlKey && !event.altKey) {
       event.preventDefault();
-      window.scrollBy({ top: event.deltaY, left: 0, behavior: "auto" });
+      const scroller = document.scrollingElement || document.documentElement;
+      scroller.scrollTop += event.deltaY;
       return;
     }
     const nextZoom = zoom * Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
