@@ -854,6 +854,13 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
   }));
   svg.addEventListener("wheel", (event) => {
+    // Vertical wheel movement should scroll the dashboard page. Hold Ctrl/Alt
+    // when zooming the map with the wheel so a map never traps page scrolling.
+    if (!event.ctrlKey && !event.altKey) {
+      event.preventDefault();
+      window.scrollBy({ top: event.deltaY, left: 0, behavior: "auto" });
+      return;
+    }
     const nextZoom = zoom * Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     // At the minimum zoom, let the browser scroll the dashboard normally.
     if (event.deltaY > 0 && zoom <= .71 && nextZoom <= zoom) return;
