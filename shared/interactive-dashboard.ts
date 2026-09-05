@@ -94,7 +94,7 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
       <g class="map-viewport"><g class="satellite-basemap"></g><rect width="1000" height="520" fill="url(#map-grid-${suffix})" opacity=".16"/><g class="map-content"></g></g>
     </svg>
     <div class="map-controls"><button type="button" data-map-action="in" aria-label="تكبير">+</button><button type="button" data-map-action="out" aria-label="تصغير">−</button><button type="button" data-map-action="home" aria-label="إظهار كل البيانات">⌂</button></div>
-    <div class="map-wheel-hint">مرّر بالماوس للصفحة · Ctrl/Shift + عجلة للتكبير · اسحب لتحريك الخريطة</div>
+    <div class="map-wheel-hint">عجلة الماوس للتكبير · اسحب لتحريك الخريطة</div>
     <div class="feature-popup" hidden><button type="button" aria-label="إغلاق">×</button><strong>بيانات العنصر</strong><div></div></div>
     <div class="map-scale">صور أقمار صناعية · بيانات مكانية محلية · WGS 84</div>
   </section>`;
@@ -854,12 +854,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
   }));
   svg.addEventListener("wheel", (event) => {
-    // Keep normal wheel scrolling on the page; use Ctrl/Shift for map zoom.
-    if (!event.ctrlKey && !event.shiftKey) return;
     const nextZoom = zoom * Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     // At the minimum zoom, let the browser scroll the dashboard normally.
     if (event.deltaY > 0 && zoom <= .71 && nextZoom <= zoom) return;
-    event.preventDefault();
     const bounds = svg.getBoundingClientRect();
     const centerX = (event.clientX - bounds.left) * 1000 / Math.max(bounds.width, 1);
     const centerY = (event.clientY - bounds.top) * 520 / Math.max(bounds.height, 1);
