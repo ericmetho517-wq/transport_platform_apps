@@ -881,6 +881,11 @@ function activateLayerOnly(layer: string): void {
   });
 }
 
+function activateLanduseCode(code: string): void {
+  document.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => path.classList.toggle("layer-hidden", path.dataset.landuseCode !== code));
+  document.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => group.classList.remove("layer-hidden"));
+}
+
 export async function initInteractiveDashboard(app: TransportApp): Promise<void> {
   const root = document.querySelector<HTMLElement>(".interactive-dashboard");
   if (!root) return;
@@ -1032,8 +1037,9 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const segment = (event.target as HTMLElement).closest<HTMLElement>(".comparison-row i");
       if (!segment) return;
       const color = getComputedStyle(segment).backgroundColor.toLowerCase();
-      const layer = color.includes("36, 196, 39") ? "agricultural" : color.includes("90, 70, 232") ? "industrial" : color.includes("217, 161, 22") || color.includes("255, 158") ? "urban" : "landcover-end";
-      activateLayerOnly(layer);
+      const landuseCode = color.includes("205, 231, 104") ? "2" : color.includes("36, 196, 39") ? "0" : color.includes("90, 70, 232") ? "1" : color.includes("217, 161, 22") || color.includes("255, 158") ? "3" : "";
+      const layer = landuseCode ? "landcover-end" : color.includes("36, 196, 39") ? "agricultural" : color.includes("90, 70, 232") ? "industrial" : "urban";
+      if (landuseCode && document.querySelector(`[data-landuse-code="${landuseCode}"]`)) activateLanduseCode(landuseCode); else activateLayerOnly(layer);
       document.querySelectorAll<HTMLElement>("[data-filter-layer]").forEach((item) => item.classList.toggle("active", item.dataset.filterLayer === layer));
     });
     if (root.dataset.mode === "impact") {
