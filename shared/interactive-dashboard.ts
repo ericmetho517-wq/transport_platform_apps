@@ -632,10 +632,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
       path.dataset.geometry = feature.geometry.type;
-      const statusEntry = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /status|change_status|حالة[_ ]?التغير/i.test(key));
+      const statusEntry = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /status|change[_ ]?(status|state|type)|حالة.*تغير/i.test(key));
       if (statusEntry) {
         const statusText = String(statusEntry[1]).toLowerCase();
-        path.dataset.changeStatus = /unchanged|no.?change|لم.?يتغير|غير.?متغير|قائم|existing|0/.test(statusText) ? "unchanged" : "changed";
+        path.dataset.changeStatus = /unchanged|no.?change|لم.?يتغير|غير.?متغير|غير متغير|قائم|existing|بدون.?تغير|0/.test(statusText) ? "unchanged" : /changed|change|متغير|تغير|under.?construction|new|مستحدث/.test(statusText) ? "changed" : "unknown";
       } else path.dataset.changeStatus = "unknown";
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
