@@ -811,7 +811,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
   }
 
-  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0;
+  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const apply = (broadcast = true) => {
     viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
@@ -857,11 +857,15 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const nextZoom = zoom * Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     // At the minimum zoom, let the browser scroll the dashboard normally.
     if (event.deltaY > 0 && zoom <= .71 && nextZoom <= zoom) return;
-    const bounds = svg.getBoundingClientRect();
-    const centerX = (event.clientX - bounds.left) * 1000 / Math.max(bounds.width, 1);
-    const centerY = (event.clientY - bounds.top) * 520 / Math.max(bounds.height, 1);
     const factor = Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
-    zoomBy(factor, centerX, centerY);
+    if (zoomFrame) return;
+    zoomFrame = requestAnimationFrame(() => {
+      zoomFrame = 0;
+      const bounds = svg.getBoundingClientRect();
+      const centerX = (event.clientX - bounds.left) * 1000 / Math.max(bounds.width, 1);
+      const centerY = (event.clientY - bounds.top) * 520 / Math.max(bounds.height, 1);
+      zoomBy(factor, centerX, centerY);
+    });
   }, { passive: false });
   svg.addEventListener("pointerdown", (event) => { dragging = true; lastX = event.clientX; lastY = event.clientY; svg.setPointerCapture(event.pointerId); });
   svg.addEventListener("pointermove", (event) => { if (!dragging) return; tx += (event.clientX - lastX) * 1000 / Math.max(svg.clientWidth, 1); ty += (event.clientY - lastY) * 520 / Math.max(svg.clientHeight, 1); lastX = event.clientX; lastY = event.clientY; if (!panFrame) panFrame = requestAnimationFrame(() => { panFrame = 0; apply(); }); });
