@@ -648,6 +648,14 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           path.dataset.changeStatus = /existing|قائم|مستقر|بدون.?تغير|لم.?يتغير|غير.?متغير/.test(natureText) ? "unchanged" : /new|under.?construction|مستحدث|تحت.?الإنشاء|متغير|تغير/.test(natureText) ? "changed" : "unknown";
         }
       }
+      // Use Unicode escapes for Arabic source keys/values so classification is
+      // independent of the file's text encoding.
+      const arabicNature = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /\u0637\u0628\u064a\u0639\u0629|\u0646\u0648\u0639.*\u0627\u0644\u0645\u0646\u0637\u0642\u0629/i.test(key))?.[1];
+      if (arabicNature !== undefined) {
+        const value = String(arabicNature).toLowerCase();
+        if (/\u0642\u0627\u0626\u0645\u0629?|existing|\u0645\u0633\u062a\u0642\u0631/.test(value)) path.dataset.changeStatus = "unchanged";
+        else if (/\u062a\u062d\u062a\s*\u0627\u0644\u0627\u0646\u0634\u0627\u0621|\u0645\u0633\u062a\u062d\u062f\u062b|under.?construction|new/.test(value)) path.dataset.changeStatus = "changed";
+      }
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
