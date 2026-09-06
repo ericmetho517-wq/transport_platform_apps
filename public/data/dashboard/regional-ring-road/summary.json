@@ -164,7 +164,7 @@
     "latest": 299,
     "civil": 0,
     "landcover-start": 9,
-    "landcover-end": 10,
+    "landcover-end": 299,
     "transport": 6,
     "buildings": 1,
     "landmarks": 195,

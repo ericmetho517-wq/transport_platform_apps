@@ -130,7 +130,7 @@
     "latest": 391,
     "civil": 0,
     "landcover-start": 3,
-    "landcover-end": 3,
+    "landcover-end": 255,
     "governorates": 1,
     "water": 1
   },

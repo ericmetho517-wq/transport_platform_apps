@@ -103,7 +103,7 @@
     "latest": 0,
     "civil": 0,
     "landcover-start": 8,
-    "landcover-end": 10,
+    "landcover-end": 16,
     "field-survey": 283
   },
   "sourceLayerCounts": {

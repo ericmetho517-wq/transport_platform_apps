@@ -15,15 +15,15 @@ rmSync(tempRoot, { recursive: true, force: true });
 mkdirSync(tempRoot, { recursive: true });
 
 const sources = {
-  "western-upper-egypt": { gdb: "طريق الصعيد الغربي\\New File Geodatabase.gdb", start: "Land_Cover2014", end: "Land_Cover2024" },
+  "western-upper-egypt": { gdb: "طريق الصعيد الغربي\\New File Geodatabase.gdb", start: "Land_Cover2014", end: "Land_Cover2024", statusCodes: { "1": "changed", "2": "unchanged" } },
   "dahshur-south-link": { gdb: "دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
   "regional-ring-road": { gdb: "الاقليمي\\DataBase_Schema.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
-  "kalabsha-axis": { gdb: "كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
+  "kalabsha-axis": { gdb: "كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb", start: "Land_Cover2014", end: "Land_Cover2023", statusCodes: { "1": "changed", "2": "unchanged" } },
   "qena-luxor-road": { gdb: "قنا\\Database13022024.gdb", start: "Land_Cover2014" },
-  "qus-axis": { gdb: "قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
+  "qus-axis": { gdb: "قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb", start: "Land_Cover2014", end: "Land_Cover2023", statusCodes: { "0": "changed", "1": "unchanged" } },
   "dabaa-axis": { gdb: "الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb", start: "Land_Use2014", end: "Land_Use2023" },
 };
-const suezSource = { gdb: "السويس\\السويس\\New File Geodatabase.gdb", start: "Land_Cover2014", end: "Land_Cover2024" };
+const suezSource = { gdb: "السويس\\السويس\\New File Geodatabase.gdb", start: "Land_Cover2014", end: "Land_Cover2024", statusCodes: { "1": "changed", "2": "unchanged" } };
 const thematicSources = {
   "western-upper-egypt": {
     gdb: "طريق الصعيد الغربي\\New File Geodatabase.gdb",
@@ -52,6 +52,8 @@ const categoryFields = ["استخدام_الأرض", "land_use", "Land_Use", "LA
 const labelFields = ["وصف_الاستخدام", "land_use", "Land_Use", "نوع_المسطح"];
 const sectorFields = ["اسم_القطاع", "sector", "Sector"];
 const areaFields = ["مساحة_كم2", "مساحة_كم", "Area_KM2", "Area_KM", "SHAPE_Area", "Shape_Area"];
+const changeStatusFields = ["حالة_التغير", "حاله_التغير", "حالة التغير", "change_status", "Change_Status", "CHANGE_STATUS"];
+const changePercentFields = ["نسبة_التغير", "نسبه_التغير", "نسبة التغير", "change_percent", "Change_Percent", "CHANGE_PERCENT"];
 
 function first(properties, fields) {
   for (const field of fields) if (properties[field] !== undefined && properties[field] !== null && properties[field] !== "") return properties[field];
@@ -79,7 +81,7 @@ function featureCenter(feature) {
   return [(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2];
 }
 
-function aggregate(collection) {
+function aggregate(collection, statusCodes = {}) {
   const grouped = new Map();
   for (const feature of collection.features || []) {
     const polygons = polygonsOf(feature.geometry);
@@ -88,8 +90,10 @@ function aggregate(collection) {
     const value = first(properties, categoryFields) ?? "unclassified";
     const label = first(properties, labelFields);
     const sector = first(properties, sectorFields);
-    const key = `${String(value).trim().toLowerCase()}|${String(label ?? "").trim().toLowerCase()}|${String(sector ?? "")}`;
-    if (!grouped.has(key)) grouped.set(key, { value, label, sector, polygons: [], count: 0, area: 0 });
+    const changeStatus = first(properties, changeStatusFields);
+    const changePercent = first(properties, changePercentFields);
+    const key = `${String(value).trim().toLowerCase()}|${String(label ?? "").trim().toLowerCase()}|${String(sector ?? "")}|${String(changeStatus ?? "").trim().toLowerCase()}|${String(changePercent ?? "")}`;
+    if (!grouped.has(key)) grouped.set(key, { value, label, sector, changeStatus, changePercent, polygons: [], count: 0, area: 0 });
     const target = grouped.get(key);
     target.polygons.push(...polygons);
     target.count += 1;
@@ -107,6 +111,9 @@ function aggregate(collection) {
         source_feature_count: item.count,
         area_km2: Number(item.area.toFixed(6)),
         ...(item.sector !== null ? { sector: String(item.sector) } : {}),
+        ...(item.changeStatus !== null ? { change_status: String(item.changeStatus) } : {}),
+        ...(item.changeStatus !== null ? { change_status_key: statusCodes[String(item.changeStatus)] || (/^تغير$/i.test(String(item.changeStatus).trim()) ? "changed" : /^لم يتغير$/i.test(String(item.changeStatus).trim()) ? "unchanged" : null) } : {}),
+        ...(item.changePercent !== null && Number.isFinite(Number(item.changePercent)) ? { change_percent: Number(item.changePercent) } : {}),
       },
       geometry: { type: "MultiPolygon", coordinates: item.polygons },
     })),
@@ -161,16 +168,16 @@ function exportRaw(gdbRelative, layer, key) {
   return JSON.parse(readFileSync(output, "utf8"));
 }
 
-function writeLayer(group, layerName, collection, sourceCount) {
+function writeLayer(group, layerName, collection, sourceCount, statusCodes = {}) {
   const folder = join(outputRoot, group);
   mkdirSync(folder, { recursive: true });
-  writeFileSync(join(folder, `${layerName}.geojson`), JSON.stringify(aggregate(collection)), "utf8");
+  writeFileSync(join(folder, `${layerName}.geojson`), JSON.stringify(aggregate(collection, statusCodes)), "utf8");
   const summaryPath = join(folder, "summary.json");
   const summary = JSON.parse(readFileSync(summaryPath, "utf8"));
   if (!summary.layers.includes(layerName)) summary.layers.push(layerName);
   summary.layerCounts ||= {};
   summary.sourceLayerCounts ||= {};
-  const aggregated = aggregate(collection);
+  const aggregated = aggregate(collection, statusCodes);
   summary.layerCounts[layerName] = aggregated.features.length;
   summary.sourceLayerCounts[layerName] = sourceCount;
   writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + "\n", "utf8");
@@ -196,7 +203,7 @@ for (const [group, source] of Object.entries(sources)) {
   for (const [period, layer] of [["start", source.start], ["end", source.end]]) {
     if (!layer) continue;
     const raw = exportRaw(source.gdb, layer, group);
-    writeLayer(group, `landcover-${period}`, raw, raw.features.length);
+    writeLayer(group, `landcover-${period}`, raw, raw.features.length, source.statusCodes);
   }
 }
 
@@ -217,7 +224,7 @@ for (const [period, layer] of [["start", suezSource.start], ["end", suezSource.e
     })[0];
     split[nearest].features.push(feature);
   }
-  for (const group of suezGroups) writeLayer(group, `landcover-${period}`, split[group], split[group].features.length);
+  for (const group of suezGroups) writeLayer(group, `landcover-${period}`, split[group], split[group].features.length, suezSource.statusCodes);
 }
 
 for (const [group, source] of Object.entries(thematicSources)) {

@@ -669,6 +669,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         if (/\u0644\u0627?\s*\u062a\u063a\u064a\u064a\u0631|\u0642\u0627\u0626\u0645|unchanged|existing|0/.test(value)) path.dataset.changeStatus = "unchanged";
         else if (/\u062a\u063a\u064a\u0631|\u0645\u0633\u062a\u062d\u062f\u062b|\u062a\u062d\u062a\s*\u0627\u0644\u0627\u0646\u0634\u0627\u0621|changed|new/.test(value)) path.dataset.changeStatus = "changed";
       }
+      const exactStatus = feature.properties?.change_status_key;
+      if (exactStatus === "changed" || exactStatus === "unchanged") path.dataset.changeStatus = exactStatus;
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
@@ -808,19 +810,13 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (changeSelect) {
     const applyChangeFilter = () => {
       const mode = changeSelect.value;
-      const explicitChangeLayers = new Set<LayerName>(["urban", "agricultural", "industrial"]);
-      const hasExplicitChangeLayers = loaded.some(([layer]) => explicitChangeLayers.has(layer));
+      const contextLayers = new Set<LayerName>(["study", "axis", "governorates", "transport"]);
       loaded.forEach(([layer]) => {
         const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
         if (!groupElement) return;
         groupElement.querySelectorAll<SVGPathElement>("path").forEach((path) => {
-          let status = path.dataset.changeStatus || "unknown";
-          if (status === "unknown") {
-            if (hasExplicitChangeLayers) status = explicitChangeLayers.has(layer) ? "changed" : "unknown";
-            else if (layer === "landcover-end" || layer === "baseline") status = "changed";
-            else if (layer === "landcover-start") status = "unchanged";
-          }
-          path.classList.toggle("change-hidden", mode !== "all" && status !== "unknown" && status !== mode);
+          const status = path.dataset.changeStatus || "unknown";
+          path.classList.toggle("change-hidden", mode !== "all" && !contextLayers.has(layer) && status !== mode);
         });
       });
       scope.dataset.changeStatus = mode;
