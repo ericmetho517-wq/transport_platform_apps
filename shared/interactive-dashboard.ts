@@ -103,7 +103,7 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
 export const renderSectorMapMarkup = mapMarkup;
 
 function dashboardHeader(app: TransportApp): string {
-  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label><label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تم التغيير</option><option value="unchanged">لم يتغير</option></select></label><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
+  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label><label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تغير</option><option value="unchanged">لم يتغير</option></select></label><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
 }
 
 function priceMarkup(app: TransportApp, group: string): string {
@@ -634,43 +634,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
       path.dataset.geometry = feature.geometry.type;
-      const statusEntry = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /status|change[_ ]?(status|state|type)|حالة.*تغير/i.test(key));
-      if (statusEntry) {
-        const statusText = String(statusEntry[1]).toLowerCase();
-        path.dataset.changeStatus = /unchanged|no.?change|لم.?يتغير|غير.?متغير|غير متغير|قائم|existing|بدون.?تغير|0/.test(statusText) ? "unchanged" : /changed|change|متغير|تغير|under.?construction|new|مستحدث/.test(statusText) ? "changed" : "unknown";
-      } else path.dataset.changeStatus = "unknown";
-      // Some source exports store the status in the land-use nature/type
-      // field rather than a column named status/change.
-      if (path.dataset.changeStatus === "unknown") {
-        const nature = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /nature|development|طبيعة|نوع.*المنطقة/i.test(key))?.[1];
-        if (nature !== undefined) {
-          const natureText = String(nature).toLowerCase();
-          path.dataset.changeStatus = /existing|قائم|مستقر|بدون.?تغير|لم.?يتغير|غير.?متغير/.test(natureText) ? "unchanged" : /new|under.?construction|مستحدث|تحت.?الإنشاء|متغير|تغير/.test(natureText) ? "changed" : "unknown";
-        }
-      }
-      // Use Unicode escapes for Arabic source keys/values so classification is
-      // independent of the file's text encoding.
-      const arabicNature = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /\u0637\u0628\u064a\u0639\u0629|\u0646\u0648\u0639.*\u0627\u0644\u0645\u0646\u0637\u0642\u0629/i.test(key))?.[1];
-      if (arabicNature !== undefined) {
-        const value = String(arabicNature).toLowerCase();
-        if (/\u0642\u0627\u0626\u0645\u0629?|existing|\u0645\u0633\u062a\u0642\u0631/.test(value)) path.dataset.changeStatus = "unchanged";
-        else if (/\u062a\u062d\u062a\s*\u0627\u0644\u0627\u0646\u0634\u0627\u0621|\u0645\u0633\u062a\u062d\u062f\u062b|under.?construction|new/.test(value)) path.dataset.changeStatus = "changed";
-      }
-      // Landcover exports may expose the state as a percentage field rather
-      // than a text label. Prefer that database value when it is present.
-      const changePercent = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /change.*percent|percent.*change|\u0646\u0633\u0628\u0629.*\u062a\u063a\u064a\u0631|\u0646\u0633\u0628\u0629.*\u0627\u0644\u062a\u063a\u064a\u0631/i.test(key))?.[1];
-      if (changePercent !== undefined) {
-        const normalizedPercent = Number(String(changePercent).replace(/%/g, "").replace(",", ".").trim());
-        if (Number.isFinite(normalizedPercent)) path.dataset.changeStatus = normalizedPercent === 0 ? "unchanged" : "changed";
-      }
-      const sourceStatus = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /\u062d\u0627\u0644\u0629.*\u062a\u063a\u064a\u0631|status|change[_ ]?(status|state|type)/i.test(key))?.[1];
-      if (sourceStatus !== undefined) {
-        const value = String(sourceStatus).toLowerCase();
-        if (/\u0644\u0627?\s*\u062a\u063a\u064a\u064a\u0631|\u0642\u0627\u0626\u0645|unchanged|existing|0/.test(value)) path.dataset.changeStatus = "unchanged";
-        else if (/\u062a\u063a\u064a\u0631|\u0645\u0633\u062a\u062d\u062f\u062b|\u062a\u062d\u062a\s*\u0627\u0644\u0627\u0646\u0634\u0627\u0621|changed|new/.test(value)) path.dataset.changeStatus = "changed";
-      }
       const exactStatus = feature.properties?.change_status_key;
-      if (exactStatus === "changed" || exactStatus === "unchanged") path.dataset.changeStatus = exactStatus;
+      path.dataset.changeStatus = exactStatus === "changed" || exactStatus === "unchanged" ? exactStatus : "unknown";
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
