@@ -656,6 +656,19 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         if (/\u0642\u0627\u0626\u0645\u0629?|existing|\u0645\u0633\u062a\u0642\u0631/.test(value)) path.dataset.changeStatus = "unchanged";
         else if (/\u062a\u062d\u062a\s*\u0627\u0644\u0627\u0646\u0634\u0627\u0621|\u0645\u0633\u062a\u062d\u062f\u062b|under.?construction|new/.test(value)) path.dataset.changeStatus = "changed";
       }
+      // Landcover exports may expose the state as a percentage field rather
+      // than a text label. Prefer that database value when it is present.
+      const changePercent = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /change.*percent|percent.*change|\u0646\u0633\u0628\u0629.*\u062a\u063a\u064a\u0631|\u0646\u0633\u0628\u0629.*\u0627\u0644\u062a\u063a\u064a\u0631/i.test(key))?.[1];
+      if (changePercent !== undefined) {
+        const normalizedPercent = Number(String(changePercent).replace(/%/g, "").replace(",", ".").trim());
+        if (Number.isFinite(normalizedPercent)) path.dataset.changeStatus = normalizedPercent === 0 ? "unchanged" : "changed";
+      }
+      const sourceStatus = Object.entries(feature.properties || {}).find(([key, value]) => value !== null && value !== "" && /\u062d\u0627\u0644\u0629.*\u062a\u063a\u064a\u0631|status|change[_ ]?(status|state|type)/i.test(key))?.[1];
+      if (sourceStatus !== undefined) {
+        const value = String(sourceStatus).toLowerCase();
+        if (/\u0644\u0627?\s*\u062a\u063a\u064a\u064a\u0631|\u0642\u0627\u0626\u0645|unchanged|existing|0/.test(value)) path.dataset.changeStatus = "unchanged";
+        else if (/\u062a\u063a\u064a\u0631|\u0645\u0633\u062a\u062d\u062f\u062b|\u062a\u062d\u062a\s*\u0627\u0644\u0627\u0646\u0634\u0627\u0621|changed|new/.test(value)) path.dataset.changeStatus = "changed";
+      }
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
