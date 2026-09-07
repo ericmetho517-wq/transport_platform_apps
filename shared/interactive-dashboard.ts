@@ -534,15 +534,21 @@ function tileY(lat: number, zoom: number): number {
 function tileLon(x: number, zoom: number): number { return x / 2 ** zoom * 360 - 180; }
 function tileLat(y: number, zoom: number): number { return Math.atan(Math.sinh(Math.PI * (1 - 2 * y / 2 ** zoom))) * 180 / Math.PI; }
 
-function renderSatelliteBasemap(target: SVGGElement, bounds: [number, number, number, number], project: (pair: number[]) => [number, number]): number {
+const imageryTiles = {
+  current: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{level}/{row}/{col}",
+  2014: "https://wayback.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/WMTS/1.0.0/default028mm/MapServer/tile/14720/{level}/{row}/{col}",
+  2024: "https://wayback.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/WMTS/1.0.0/default028mm/MapServer/tile/16453/{level}/{row}/{col}",
+} as const;
+
+function renderSatelliteBasemap(target: SVGGElement, bounds: [number, number, number, number], project: (pair: number[]) => [number, number], tileTemplate = imageryTiles.current): number {
   const [minX, minY, maxX, maxY] = bounds;
-  let zoom = Math.max(7, Math.min(15, Math.floor(Math.log2(360 / Math.max(maxX - minX, .0001) * 2.4))));
+  let zoom = Math.max(7, Math.min(19, Math.floor(Math.log2(360 / Math.max(maxX - minX, .0001) * 2.4))));
   let minTileX = tileX(minX, zoom), maxTileX = tileX(maxX, zoom), minTileY = tileY(maxY, zoom), maxTileY = tileY(minY, zoom);
   while ((maxTileX - minTileX + 1) * (maxTileY - minTileY + 1) > 48 && zoom > 7) {
     zoom -= 1;
     minTileX = tileX(minX, zoom); maxTileX = tileX(maxX, zoom); minTileY = tileY(maxY, zoom); maxTileY = tileY(minY, zoom);
   }
-  target.innerHTML = "";
+  const fragment = document.createDocumentFragment();
   let count = 0;
   for (let x = minTileX; x <= maxTileX; x += 1) for (let y = minTileY; y <= maxTileY; y += 1) {
     const [left, top] = project([tileLon(x, zoom), tileLat(y, zoom)]);
@@ -551,10 +557,11 @@ function renderSatelliteBasemap(target: SVGGElement, bounds: [number, number, nu
     image.setAttribute("x", String(left)); image.setAttribute("y", String(top));
     image.setAttribute("width", String(right - left + .5)); image.setAttribute("height", String(bottom - top + .5));
     image.setAttribute("preserveAspectRatio", "none");
-    image.setAttribute("href", `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${zoom}/${y}/${x}`);
+    image.setAttribute("href", tileTemplate.replace("{level}", String(zoom)).replace("{row}", String(y)).replace("{col}", String(x)));
     image.classList.add("satellite-tile");
-    target.appendChild(image); count += 1;
+    fragment.appendChild(image); count += 1;
   }
+  target.replaceChildren(fragment);
   return count;
 }
 
@@ -570,6 +577,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (!svg || !viewport || !satellite || !content || !toggles) return;
   const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}`, buildings: "المباني", parcels: "قطع الأراضي", landmarks: "المعالم والخدمات", water: "المسطحات المائية", "field-survey": "الرفع الميداني", transport: "شبكة النقل", governorates: "حدود المحافظات" };
   const mapInstance = scope.dataset.mapInstance || "primary";
+  const tileTemplate = mapInstance.includes("baseline") ? imageryTiles[2014]
+    : mapInstance.includes("current") ? imageryTiles[2024]
+      : imageryTiles.current;
   const temporalLayers: LayerName[] = ["landcover-start", "landcover-end"];
   const regularLayers = summary.layers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && summary.layers.includes("landcover-start")));
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
@@ -617,7 +627,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const width = Math.max(viewMaxX - viewMinX, .00001), height = Math.max(viewMaxY - viewMinY, .00001);
   const scale = Math.min(900 / width, 430 / height);
   const project = (pair: number[]): [number, number] => [50 + (pair[0] - viewMinX) * scale + (900 - width * scale) / 2, 35 + (viewMaxY - pair[1]) * scale + (430 - height * scale) / 2];
-  const tileCount = renderSatelliteBasemap(satellite, [viewMinX, viewMinY, viewMaxX, viewMaxY], project);
+  const tileCount = renderSatelliteBasemap(satellite, [viewMinX, viewMinY, viewMaxX, viewMaxY], project, tileTemplate);
   content.innerHTML = "";
   const sectorValues = new Set<string>();
   const sectorOf = (properties: Record<string, unknown> = {}) => String(properties["اسم_القطاع"] ?? properties["sector"] ?? properties["Sector"] ?? "").trim();
@@ -811,10 +821,23 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
   }
 
-  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, viewAnimation = 0;
+  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, viewAnimation = 0, basemapRefreshTimer = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
+  const inverseProject = (x: number, y: number): [number, number] => [
+    viewMinX + (x - 50 - (900 - width * scale) / 2) / scale,
+    viewMaxY - (y - 35 - (430 - height * scale) / 2) / scale,
+  ];
+  const refreshBasemap = () => {
+    window.clearTimeout(basemapRefreshTimer);
+    basemapRefreshTimer = window.setTimeout(() => {
+      const [west, north] = inverseProject((0 - tx) / zoom, (0 - ty) / zoom);
+      const [east, south] = inverseProject((1000 - tx) / zoom, (520 - ty) / zoom);
+      renderSatelliteBasemap(satellite, [Math.min(west, east), Math.min(south, north), Math.max(west, east), Math.max(south, north)], project, tileTemplate);
+    }, 110);
+  };
   const apply = (broadcast = true) => {
     viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
+    refreshBasemap();
     if (broadcast && linkedPair) linkedPair.dispatchEvent(new CustomEvent("linked-map-view", { detail: { source: mapInstance, zoom, tx, ty } }));
   };
   linkedPair?.addEventListener("linked-map-view", ((event: CustomEvent<{ source: string; zoom: number; tx: number; ty: number }>) => {
@@ -855,7 +878,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   };
   const zoomBy = (factor: number, centerX = 500, centerY = 260) => {
     const minimumZoom = .02;
-    const nextZoom = Math.min(Math.max(zoom * factor, minimumZoom), 8);
+    const maximumZoom = 4096;
+    const nextZoom = Math.min(Math.max(zoom * factor, minimumZoom), maximumZoom);
     if (Math.abs(nextZoom - zoom) < .0001) return false;
     const ratio = nextZoom / zoom;
     tx = centerX - (centerX - tx) * ratio;
@@ -876,7 +900,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   svg.addEventListener("wheel", (event) => {
     // Wheel zooms the map directly. Once either zoom boundary is reached the
     // event is released so the dashboard page continues scrolling normally.
-    if ((event.deltaY > 0 && zoom <= .021) || (event.deltaY < 0 && zoom >= 7.99)) return;
+    if ((event.deltaY > 0 && zoom <= .021) || (event.deltaY < 0 && zoom >= 4095.9)) return;
     event.preventDefault();
     const factor = Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     if (zoomFrame) return;
