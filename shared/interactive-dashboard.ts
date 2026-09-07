@@ -336,7 +336,7 @@ function renderChangeBars(summary: DashboardSummary): void {
     ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
   ] as Array<[string, string, number, string]>;
   const max = Math.max(...data.map((item) => item[2]), 1);
-  container.innerHTML = data.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color}"><i></i><b>${formatNumber(value, 2)}</b><span>${label}</span></button>`).join("");
+  container.innerHTML = data.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${label}">${label}</span></button>`).join("");
 }
 
 function renderComparison(summary: DashboardSummary, topOnly = false): void {
