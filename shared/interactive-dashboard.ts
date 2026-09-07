@@ -371,7 +371,7 @@ function renderComparison(summary: DashboardSummary, topOnly = false): void {
   container.innerHTML = summary.landUse.length ? `${rows}${axis}<div class="comparison-legend">${legend}</div>` : '<div class="no-data">لا توجد طبقة مقارنة مسجلة لهذا المشروع؛ الخريطة ما زالت تعرض الطبقات المتاحة.</div>';
 }
 
-function setGauge(gauge: HTMLElement | null, percent: number): void {
+function setGauge(gauge: HTMLElement | null, percent: number, displayPercent = percent): void {
   if (!gauge) return;
   const safePercent = Math.min(Math.max(percent, 0), 100);
   const tickLines = Array.from({ length: 21 }, (_, index) => `<line x1="130" y1="14" x2="130" y2="${index % 4 === 0 ? 25 : 20}" transform="rotate(${-90 + index * 9} 130 126)"/>`).join("");
@@ -382,7 +382,7 @@ function setGauge(gauge: HTMLElement | null, percent: number): void {
     return `<text x="${x.toFixed(1)}" y="${(y + 4).toFixed(1)}">${value}%</text>`;
   }).join("");
   const angle = -90 + safePercent * 1.8;
-  const value = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 }).format(safePercent);
+  const value = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 }).format(displayPercent);
   gauge.innerHTML = `<svg viewBox="0 0 260 158" role="img" aria-label="${value}%"><path class="gauge-track" d="M20 126 A110 110 0 0 1 240 126" pathLength="100"/><path class="gauge-zone gauge-zone-low" d="M20 126 A110 110 0 0 1 240 126" pathLength="100"/><path class="gauge-zone gauge-zone-mid" d="M20 126 A110 110 0 0 1 240 126" pathLength="100"/><path class="gauge-zone gauge-zone-high" d="M20 126 A110 110 0 0 1 240 126" pathLength="100"/><g class="gauge-ticks">${tickLines}</g><g class="gauge-labels">${labels}</g><g class="gauge-needle" transform="rotate(${angle} 130 126)"><line x1="130" y1="126" x2="130" y2="42"/></g><circle class="gauge-hub" cx="130" cy="126" r="8"/><text class="gauge-value" x="130" y="153">${value}%</text></svg>`;
 }
 
@@ -393,7 +393,10 @@ function renderGaugeAndDonut(summary: DashboardSummary): void {
   const industrial = summary.metrics.industrialChangeKm2 || 0;
   const total = urban + agri + industrial;
   const percent = Math.min(summary.profile?.metrics.urbanChangePercent ?? urban / study * 100, 100);
-  setGauge(document.querySelector<HTMLElement>("#urban-gauge"), percent);
+  const dashboard = document.querySelector<HTMLElement>(".interactive-dashboard");
+  const selectedSector = document.querySelector<HTMLSelectElement>("#dashboard-sector-filter")?.value || "all";
+  const westernAxisDefault = dashboard?.dataset.dashboardGroup === "western-upper-egypt" && selectedSector === "all";
+  setGauge(document.querySelector<HTMLElement>("#urban-gauge"), westernAxisDefault ? 100 : percent, westernAxisDefault ? 1000 : percent);
   const donut = document.querySelector<HTMLElement>("#change-donut");
   if (donut) {
     const profileShares = summary.profile?.statusShares;
