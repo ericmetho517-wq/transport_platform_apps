@@ -18,11 +18,11 @@ const counts = new Map<string, number>();
 registry.forEach((app) => counts.set(app.type, (counts.get(app.type) || 0) + 1));
 
 const typeLabels: Record<string, string> = {
-  Dashboard: "لوحات المؤشرات",
-  Experience: "التجارب التفاعلية",
-  StoryMap: "القصص المكانية",
-  "Web AppViewer": "عارض الخرائط",
-  "Instant Filter Gallery": "معرض التطبيقات",
+  Dashboard: "لوحات ذكاء الأعمال",
+  Experience: "التطبيقات التفاعلية",
+  StoryMap: "القصص الجغرافية",
+  "Web AppViewer": "تطبيقات استعراض الخرائط",
+  "Instant Filter Gallery": "كتالوج التطبيقات",
 };
 
 const typeClass: Record<string, string> = {
@@ -61,8 +61,8 @@ root.innerHTML = `<div class="platform-shell" dir="rtl">
         <label><span>اللغة / Language</span><select id="language-filter"><option value="all">الكل / All</option><option value="ar">العربية</option><option value="en">English</option></select></label>
         <label><span>المحور / Axis</span><select id="axis-filter"><option value="all">كل المحاور / All axes</option>${axisOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join("")}</select></label>
       </div></div>
-      <div class="catalog-toolbar"><div class="quick-filters" aria-label="تصفية سريعة"><button class="active" data-quick-type="all">الكل</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${typeLabels[type] || type}<b>${counts.get(type)}</b></button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">مسح الفلاتر</button></div>
-      <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>اختر أي بطاقة لفتح التطبيق في صفحة مستقلة</span></div>
+      <div class="catalog-toolbar"><div class="quick-filters" aria-label="تصفية سريعة"><button class="active" data-quick-type="all">جميع التطبيقات</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${typeLabels[type] || type}<b>${counts.get(type)}</b></button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">إعادة ضبط الفلاتر</button></div>
+      <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>اختر تطبيقًا لعرض تفاصيله وتشغيله</span></div>
       <div id="app-grid" class="app-grid"></div>
     </section>
   </main>
@@ -98,7 +98,7 @@ const render = () => {
     && (language === "all" || app.language === language)
     && (axis === "all" || axisOf(app) === axis)
     && `${app.title} ${app.category}`.toLocaleLowerCase().includes(query));
-  summary.textContent = `عرض ${visible.length.toLocaleString("ar-EG")} من ${registry.length.toLocaleString("ar-EG")} تطبيق`;
+  summary.textContent = `تم عرض ${visible.length.toLocaleString("ar-EG")} تطبيق من إجمالي ${registry.length.toLocaleString("ar-EG")}`;
   clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || language !== "all" || axis !== "all"));
   quickFilters.forEach((button) => button.classList.toggle("active", button.dataset.quickType === type));
   grid.innerHTML = visible.map((app, index) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html" dir="${app.direction}" style="--card-index:${index % 12}"><span class="card-number">${String(index + 1).padStart(2, "0")}</span><span class="card-type">${typeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${app.title}</h3><p>${app.category}</p><span class="card-language">${app.language === "en" ? "EN" : "ع"}</span><span class="open">${app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${app.direction === "ltr" ? "→" : "←"}</b></span></a>`).join("") || `<div class="empty"><b>لا توجد نتائج مطابقة</b><span>No matching applications</span><button type="button" data-reset-empty>عرض جميع التطبيقات</button></div>`;
