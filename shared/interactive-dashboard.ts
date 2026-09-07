@@ -804,7 +804,12 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
             return;
           }
           const status = path.dataset.changeStatus || "unknown";
-          path.classList.toggle("change-hidden", mode !== "all" && status !== mode);
+          // Empty database values mean that no change was recorded for the
+          // feature. Keep them with the unchanged view instead of making an
+          // entire sector disappear when its status column is blank.
+          const matches = mode === "all" || status === mode || (mode === "unchanged" && status === "unknown");
+          path.classList.toggle("change-hidden", !matches);
+          path.classList.toggle("change-match", mode !== "all" && matches);
         });
       });
       scope.dataset.changeStatus = mode;

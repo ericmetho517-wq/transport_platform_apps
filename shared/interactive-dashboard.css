@@ -52,6 +52,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .gis-map.map-interacting .map-study path { filter:none; animation:none; }
 .map-content path[hidden] { display: none; }
 .map-content .change-hidden { display: none; }
+.map-content path.change-match { opacity:1; stroke-width:2.4!important; filter:brightness(1.18) drop-shadow(0 0 2px #fff7); }
 .map-content path:hover,.map-content path:focus { filter: brightness(1.2); opacity: 1; outline:none; }
 .map-study path { fill: #00c8ff18; stroke: #fff; stroke-width: 4; filter: drop-shadow(0 0 3px #007acb); }
 .map-axis path { fill: none; stroke: #ff1edc; stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 0 3px #fff); }
