@@ -551,8 +551,10 @@ function renderSatelliteBasemap(target: SVGGElement, bounds: [number, number, nu
     zoom -= 1;
     minTileX = tileX(minX, zoom); maxTileX = tileX(maxX, zoom); minTileY = tileY(maxY, zoom); maxTileY = tileY(minY, zoom);
   }
+  const tileSignature = `${tileTemplate}|${zoom}|${minTileX}|${maxTileX}|${minTileY}|${maxTileY}`;
+  const count = (maxTileX - minTileX + 1) * (maxTileY - minTileY + 1);
+  if (target.dataset.tileSignature === tileSignature) return count;
   const fragment = document.createDocumentFragment();
-  let count = 0;
   for (let x = minTileX; x <= maxTileX; x += 1) for (let y = minTileY; y <= maxTileY; y += 1) {
     const [left, top] = project([tileLon(x, zoom), tileLat(y, zoom)]);
     const [right, bottom] = project([tileLon(x + 1, zoom), tileLat(y + 1, zoom)]);
@@ -562,9 +564,10 @@ function renderSatelliteBasemap(target: SVGGElement, bounds: [number, number, nu
     image.setAttribute("preserveAspectRatio", "none");
     image.setAttribute("href", tileTemplate.replace("{level}", String(zoom)).replace("{row}", String(y)).replace("{col}", String(x)));
     image.classList.add("satellite-tile");
-    fragment.appendChild(image); count += 1;
+    fragment.appendChild(image);
   }
   target.replaceChildren(fragment);
+  target.dataset.tileSignature = tileSignature;
   return count;
 }
 
@@ -824,7 +827,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
   }
 
-  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, viewAnimation = 0, basemapRefreshTimer = 0;
+  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const inverseProject = (x: number, y: number): [number, number] => [
     viewMinX + (x - 50 - (900 - width * scale) / 2) / scale,
@@ -836,7 +839,15 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const [west, north] = inverseProject((0 - tx) / zoom, (0 - ty) / zoom);
       const [east, south] = inverseProject((1000 - tx) / zoom, (520 - ty) / zoom);
       renderSatelliteBasemap(satellite, [Math.min(west, east), Math.min(south, north), Math.max(west, east), Math.max(south, north)], project, tileTemplate);
-    }, 110);
+    }, 180);
+  };
+  const beginInteraction = () => {
+    window.clearTimeout(interactionTimer);
+    scope.classList.add("map-interacting");
+  };
+  const endInteraction = (delay = 0) => {
+    window.clearTimeout(interactionTimer);
+    interactionTimer = window.setTimeout(() => scope.classList.remove("map-interacting"), delay);
   };
   const apply = (broadcast = true) => {
     viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
@@ -905,6 +916,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     // event is released so the dashboard page continues scrolling normally.
     if ((event.deltaY > 0 && zoom <= .021) || (event.deltaY < 0 && zoom >= 4095.9)) return;
     event.preventDefault();
+    beginInteraction();
+    endInteraction(220);
     const factor = Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     if (zoomFrame) return;
     zoomFrame = requestAnimationFrame(() => {
@@ -915,11 +928,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       zoomBy(factor, centerX, centerY);
     });
   }, { passive: false });
-  svg.addEventListener("pointerdown", (event) => { dragging = true; lastX = event.clientX; lastY = event.clientY; svg.setPointerCapture(event.pointerId); });
+  svg.addEventListener("pointerdown", (event) => { dragging = true; beginInteraction(); lastX = event.clientX; lastY = event.clientY; svg.setPointerCapture(event.pointerId); });
   svg.addEventListener("pointermove", (event) => { if (!dragging) return; tx += (event.clientX - lastX) * 1000 / Math.max(svg.clientWidth, 1); ty += (event.clientY - lastY) * 520 / Math.max(svg.clientHeight, 1); lastX = event.clientX; lastY = event.clientY; if (!panFrame) panFrame = requestAnimationFrame(() => { panFrame = 0; apply(); }); });
-  svg.addEventListener("pointerup", () => { dragging = false; });
-  svg.addEventListener("pointercancel", () => { dragging = false; });
-  svg.addEventListener("lostpointercapture", () => { dragging = false; });
+  svg.addEventListener("pointerup", () => { dragging = false; endInteraction(120); });
+  svg.addEventListener("pointercancel", () => { dragging = false; endInteraction(120); });
+  svg.addEventListener("lostpointercapture", () => { dragging = false; endInteraction(120); });
   svg.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   scope.querySelector<HTMLButtonElement>(".feature-popup > button")?.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   document.querySelector<HTMLElement>(".interactive-dashboard")?.addEventListener("dashboard-map-sector", ((event: CustomEvent<string>) => fitSector(event.detail)) as EventListener);
