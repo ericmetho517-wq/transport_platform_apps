@@ -835,7 +835,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     apply();
   };
   const zoomBy = (factor: number, centerX = 500, centerY = 260) => {
-    const minimumZoom = .08;
+    const minimumZoom = .02;
     const nextZoom = Math.min(Math.max(zoom * factor, minimumZoom), 8);
     if (Math.abs(nextZoom - zoom) < .0001) return false;
     const ratio = nextZoom / zoom;
@@ -851,13 +851,13 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   };
   scope.querySelectorAll<HTMLButtonElement>("[data-map-action]").forEach((button) => button.addEventListener("click", () => {
     if (button.dataset.mapAction === "in") zoomBy(1.35);
-    if (button.dataset.mapAction === "out") zoomBy(.6);
+    if (button.dataset.mapAction === "out") zoomBy(.5);
     if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
   }));
   svg.addEventListener("wheel", (event) => {
     // Wheel zooms the map directly. Once either zoom boundary is reached the
     // event is released so the dashboard page continues scrolling normally.
-    if ((event.deltaY > 0 && zoom <= .081) || (event.deltaY < 0 && zoom >= 7.99)) return;
+    if ((event.deltaY > 0 && zoom <= .021) || (event.deltaY < 0 && zoom >= 7.99)) return;
     event.preventDefault();
     const factor = Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     if (zoomFrame) return;
