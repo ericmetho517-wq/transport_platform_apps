@@ -1,12 +1,16 @@
 :root { color-scheme: dark; }
 body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f3; overflow-x: hidden; }
 .interactive-dashboard { min-height: 100vh; background: #1b1b1b; color: #f3f3f3; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
-.interactive-head { min-height: 76px; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 18px; background: #272727; border-bottom: 3px solid #393939; }
+.interactive-head { min-height: 96px; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: #272727; border-bottom: 3px solid #393939; }
 .interactive-head > div:first-child { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 12px; }
-.interactive-head h1 { grid-column: 1 / -1; margin: 5px 0 0; font-size: clamp(16px, 1.8vw, 25px); line-height: 1.2; }
+.interactive-head h1 { grid-column: 1 / -1; max-width: 520px; margin: 5px 0 0; font-size: clamp(16px, 1.8vw, 25px); line-height: 1.2; }
 .interactive-head span { color: #bcbcbc; font-size: 11px; }
 .mot-badge { padding: 6px 10px; border-radius: 4px; background: #111; color: #ffc126; text-decoration: none; font-size: 12px; font-weight: 800; }
-.dash-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: end; }
+.dash-actions { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); grid-template-areas: "sector change" "badge full"; align-items: center; justify-content: end; gap: 6px 8px; }
+.dash-actions .dashboard-sector-filter { grid-area: sector; }
+.dash-actions .dashboard-change-filter { grid-area: change; }
+.dash-actions .data-badge { grid-area: badge; }
+.dash-actions #fullscreen-dashboard { grid-area: full; }
 .dashboard-change-filter { display:flex; align-items:center; gap:7px; padding:6px 9px; border:1px solid #2f6b9c; border-radius:7px; background:#0b2d49; color:#fff; font-size:11px; font-weight:800; }
 .dashboard-change-filter select { min-width:116px; padding:5px 8px; border:1px solid #9fc9e7; border-radius:5px; background:#fff; color:#123b5e; font-weight:800; }
 .dashboard-sector-filter { display:flex; align-items:center; gap:7px; padding:6px 9px; border:1px solid #2f6b9c; border-radius:7px; background:#0b2d49; color:#fff; font-size:11px; font-weight:800; }
@@ -295,7 +299,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 @media (max-width:920px){.specialized-body,.impact-body{grid-template-columns:1fr}.specialized-body .gis-map{min-height:480px}}
 @media (max-width: 720px) {
   .interactive-head { align-items: flex-start; flex-direction: column; }
-  .dash-actions { justify-content: start; }
+  .dash-actions { width: 100%; justify-content: start; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .price-columns { grid-template-columns: 1fr; min-height: auto; }
   .price-column { grid-template-columns: 1.1fr 1fr 1fr; grid-template-rows: 1fr auto; }
   .price-column header, .price-column > div { min-height: 130px; }
