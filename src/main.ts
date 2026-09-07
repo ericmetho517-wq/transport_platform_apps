@@ -4,12 +4,13 @@ import { dashboardGroup } from "../shared/interactive-dashboard";
 
 const registry = apps as TransportApp[];
 const axisOptions = [
-  ["western-upper-egypt", "محور الصعيد الغربي / Western Upper Egypt"], ["regional-ring-road", "الدائري الإقليمي / Regional Ring Road"],
+  ["western-upper-egypt", "محور الصعيد الغربي / Western Upper Egypt"], ["dahshur-south-link", "وصلة دهشور الجنوبية / Dahshur South Link"],
+  ["regional-ring-road", "الدائري الإقليمي / Regional Ring Road"],
   ["kalabsha-axis", "محور كلابشة / Kalabsha Axis"], ["qena-luxor-road", "طريق قنا الأقصر / Qena–Luxor Road"],
   ["qus-axis", "محور قوص / Qus Axis"], ["cairo-suez-road", "طريق القاهرة السويس / Cairo–Suez Road"],
   ["suez-ring-link", "وصلة السويس / Suez Ring Link"], ["dabaa-axis", "محور الضبعة / Dabaa Axis"],
 ] as const;
-const axisOf = (app: TransportApp): string => app.reportReferences?.[0]?.projectGroup || dashboardGroup(app);
+const axisOf = (app: TransportApp): string => dashboardGroup(app);
 const root = document.querySelector<HTMLDivElement>("#app");
 if (!root) throw new Error("Missing #app root");
 
@@ -99,7 +100,7 @@ const render = () => {
     && (axis === "all" || axisOf(app) === axis)
     && `${app.title} ${app.category}`.toLocaleLowerCase().includes(query));
   summary.textContent = `عرض ${visible.length.toLocaleString("ar-EG")} من ${registry.length.toLocaleString("ar-EG")} تطبيق`;
-  clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || language !== "all"));
+  clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || language !== "all" || axis !== "all"));
   quickFilters.forEach((button) => button.classList.toggle("active", button.dataset.quickType === type));
   grid.innerHTML = visible.map((app, index) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html" dir="${app.direction}" style="--card-index:${index % 12}"><span class="card-number">${String(index + 1).padStart(2, "0")}</span><span class="card-type">${typeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${app.title}</h3><p>${app.category}</p><span class="card-language">${app.language === "en" ? "EN" : "ع"}</span><span class="open">${app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${app.direction === "ltr" ? "→" : "←"}</b></span></a>`).join("") || `<div class="empty"><b>لا توجد نتائج مطابقة</b><span>No matching applications</span><button type="button" data-reset-empty>عرض جميع التطبيقات</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
