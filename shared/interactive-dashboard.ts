@@ -775,13 +775,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (changeSelect) {
     const applyChangeFilter = () => {
       const mode = changeSelect.value;
-      const contextLayers = new Set<LayerName>(["study", "axis", "governorates", "transport"]);
       loaded.forEach(([layer]) => {
         const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
         if (!groupElement) return;
         groupElement.querySelectorAll<SVGPathElement>("path").forEach((path) => {
+          if (layer !== "landcover-end") {
+            path.classList.remove("change-hidden");
+            return;
+          }
           const status = path.dataset.changeStatus || "unknown";
-          path.classList.toggle("change-hidden", mode !== "all" && !contextLayers.has(layer) && status !== mode);
+          path.classList.toggle("change-hidden", mode !== "all" && status !== mode);
         });
       });
       scope.dataset.changeStatus = mode;
