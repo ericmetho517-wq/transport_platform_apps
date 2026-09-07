@@ -835,12 +835,17 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     apply();
   };
   const zoomBy = (factor: number, centerX = 500, centerY = 260) => {
-    const nextZoom = Math.min(Math.max(zoom * factor, .7), 8);
+    const minimumZoom = .25;
+    const nextZoom = Math.min(Math.max(zoom * factor, minimumZoom), 8);
     if (Math.abs(nextZoom - zoom) < .0001) return false;
     const ratio = nextZoom / zoom;
     tx = centerX - (centerX - tx) * ratio;
     ty = centerY - (centerY - ty) * ratio;
     zoom = nextZoom;
+    if (zoom === minimumZoom) {
+      tx = (1000 - 1000 * zoom) / 2;
+      ty = (520 - 520 * zoom) / 2;
+    }
     apply();
     return true;
   };
@@ -850,20 +855,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
   }));
   svg.addEventListener("wheel", (event) => {
-    // Pan through a zoomed map first, then release the wheel to the page at
-    // the north/south boundary. Ctrl/Alt + wheel keeps cursor-centred zoom.
-    if (!event.ctrlKey && !event.altKey) {
-      const minTy = Math.min(0, 520 - 520 * zoom);
-      const nextTy = Math.max(minTy, Math.min(0, ty - Math.max(-140, Math.min(140, event.deltaY)) * .9));
-      if (Math.abs(nextTy - ty) < .01) return;
-      event.preventDefault();
-      ty = nextTy;
-      if (!panFrame) panFrame = requestAnimationFrame(() => { panFrame = 0; apply(); });
-      return;
-    }
-    const nextZoom = zoom * Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
-    // At the minimum zoom, let the browser scroll the dashboard normally.
-    if (event.deltaY > 0 && zoom <= .71 && nextZoom <= zoom) return;
+    // Wheel zooms the map directly. Once either zoom boundary is reached the
+    // event is released so the dashboard page continues scrolling normally.
+    if ((event.deltaY > 0 && zoom <= .251) || (event.deltaY < 0 && zoom >= 7.99)) return;
+    event.preventDefault();
     const factor = Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     if (zoomFrame) return;
     zoomFrame = requestAnimationFrame(() => {
