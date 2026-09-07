@@ -2,9 +2,9 @@
 body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f3; overflow-x: hidden; }
 .interactive-dashboard { min-height: 100vh; background: #1b1b1b; color: #f3f3f3; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
 .interactive-head { min-height: 96px; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: #272727; border-bottom: 3px solid #393939; }
-.interactive-head > div:first-child { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 12px; }
-.interactive-head h1 { grid-column: 1 / -1; max-width: 520px; margin: 5px 0 0; font-size: clamp(16px, 1.8vw, 25px); line-height: 1.2; }
-.interactive-head span { color: #bcbcbc; font-size: 11px; }
+.interactive-head > div:first-child { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 12px; min-width: 0; max-width: min(620px, 48vw); }
+.interactive-head > div:first-child > span { max-width: 330px; color: #bcbcbc; font-size: 11px; line-height: 1.35; text-wrap: balance; }
+.interactive-head h1 { grid-column: 1 / -1; max-width: 520px; margin: 5px 0 0; font-size: clamp(16px, 1.8vw, 25px); line-height: 1.25; text-wrap: balance; }
 .mot-badge { padding: 6px 10px; border-radius: 4px; background: #111; color: #ffc126; text-decoration: none; font-size: 12px; font-weight: 800; }
 .dash-actions { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); grid-template-areas: "sector change" "badge full"; align-items: center; justify-content: end; gap: 6px 8px; }
 .dash-actions .dashboard-sector-filter { grid-area: sector; }
