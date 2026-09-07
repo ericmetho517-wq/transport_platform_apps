@@ -44,7 +44,7 @@ const typeIcon: Record<string, string> = {
 root.innerHTML = `<div class="platform-shell" dir="rtl">
   <header class="platform-header">
     <a class="brand" href="#top" aria-label="العودة إلى بداية المنصة"><span class="brand-mark"><i></i><b>MOT</b></span><span><b>منصة تطبيقات وزارة النقل</b><small>Ministry of Transport Digital Platform</small></span></a>
-    <nav><a href="#applications">التطبيقات</a><a href="#about">عن المنصة</a></nav>
+    <nav><a href="#applications">التطبيقات</a></nav>
     <a class="header-cta" href="#applications">استكشف المنصة <span>←</span></a>
   </header>
   <main id="top">
@@ -65,7 +65,6 @@ root.innerHTML = `<div class="platform-shell" dir="rtl">
       <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>اختر أي بطاقة لفتح التطبيق في صفحة مستقلة</span></div>
       <div id="app-grid" class="app-grid"></div>
     </section>
-    <section id="about" class="about"><div class="about-copy"><span>هوية رقمية موحّدة</span><h2>بيانات النقل وتطبيقاته في مساحة مؤسسية واحدة.</h2><p>وصول مباشر إلى تطبيقات كل قطاع وبياناته المحلية من واجهة واضحة، متجاوبة ومهيأة للعمل على الحاسب والهاتف.</p></div><div class="about-features"><article><b>01</b><span>بحث وتصنيف سريع</span><small>حسب القطاع والنوع واللغة</small></article><article><b>02</b><span>تجربة متجاوبة</span><small>على جميع أحجام الشاشات</small></article><article><b>03</b><span>بيانات مكانية</span><small>خرائط ومؤشرات مترابطة</small></article></div></section>
   </main>
   <footer><span>منصة تطبيقات وزارة النقل</span><span>78 مشروعًا · TypeScript · Open Source</span></footer>
   <button id="back-to-top" class="back-to-top" type="button" aria-label="العودة إلى أعلى الصفحة">↑</button>
