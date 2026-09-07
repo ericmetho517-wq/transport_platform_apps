@@ -850,9 +850,17 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
   }));
   svg.addEventListener("wheel", (event) => {
-    // Vertical wheel movement should scroll the dashboard page. Hold Ctrl/Alt
-    // when zooming the map with the wheel so a map never traps page scrolling.
-    if (!event.ctrlKey && !event.altKey) return;
+    // Pan through a zoomed map first, then release the wheel to the page at
+    // the north/south boundary. Ctrl/Alt + wheel keeps cursor-centred zoom.
+    if (!event.ctrlKey && !event.altKey) {
+      const minTy = Math.min(0, 520 - 520 * zoom);
+      const nextTy = Math.max(minTy, Math.min(0, ty - Math.max(-140, Math.min(140, event.deltaY)) * .9));
+      if (Math.abs(nextTy - ty) < .01) return;
+      event.preventDefault();
+      ty = nextTy;
+      if (!panFrame) panFrame = requestAnimationFrame(() => { panFrame = 0; apply(); });
+      return;
+    }
     const nextZoom = zoom * Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
     // At the minimum zoom, let the browser scroll the dashboard normally.
     if (event.deltaY > 0 && zoom <= .71 && nextZoom <= zoom) return;
