@@ -1014,6 +1014,14 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     document.querySelectorAll<HTMLElement>(".map-year-end").forEach((label) => { label.textContent = String(summary.yearEnd); });
     const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
     await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));
+    const statusTotals = { changed: 0, unchanged: 0 };
+    if (summary.layers.includes("landcover-end")) {
+      const latestLandcover = await loadGeoJson(`../../data/dashboard/${group}/landcover-end.geojson`);
+      latestLandcover.features.forEach((feature) => {
+        const key = feature.properties?.change_status_key;
+        if (key === "changed" || key === "unchanged") statusTotals[key] += Math.max(1, Number(feature.properties?.source_feature_count || 1));
+      });
+    }
     const dashboardSectorFilter = document.querySelector<HTMLSelectElement>("#dashboard-sector-filter");
     const sourceSectorSelect = mapRoots.map((map) => map.querySelector<HTMLSelectElement>(".map-sector-select")).find((select) => select && select.options.length > 1);
     if (dashboardSectorFilter && sourceSectorSelect) {
@@ -1026,9 +1034,10 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const syncChangeStatus = () => {
         const mode = dashboardChangeFilter.value;
         mapRoots.forEach((map) => { const select = map.querySelector<HTMLSelectElement>(".map-change-select"); if (select && select.value !== mode) { select.value = mode; select.dispatchEvent(new Event("change")); } });
-        const basePercent = Math.min(summary.profile?.metrics?.urbanChangePercent ?? ((summary.metrics.urbanChangeKm2 || 0) / Math.max(summary.metrics.studyAreaKm2 || 1, 1) * 100), 100);
+        const classifiedTotal = statusTotals.changed + statusTotals.unchanged;
+        const changedPercent = classifiedTotal ? statusTotals.changed / classifiedTotal * 100 : 0;
         const gauge = root.querySelector<HTMLElement>("#urban-gauge");
-        if (gauge) setGauge(gauge, mode === "all" ? 100 : mode === "changed" ? basePercent : Math.max(0, 100 - basePercent));
+        if (gauge) setGauge(gauge, mode === "all" ? 100 : mode === "changed" ? changedPercent : classifiedTotal ? statusTotals.unchanged / classifiedTotal * 100 : 0);
         root.dataset.changeStatus = mode;
       };
       dashboardChangeFilter.addEventListener("change", syncChangeStatus);
