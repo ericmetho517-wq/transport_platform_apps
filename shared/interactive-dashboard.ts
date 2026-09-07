@@ -719,7 +719,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     };
     const updateSector = () => {
       const selected = sectorSelect.value;
-      document.querySelectorAll<SVGPathElement>(".interactive-dashboard .map-content path[data-sector]").forEach((path) => { path.toggleAttribute("hidden", selected !== "all" && path.dataset.sector !== selected); });
+      scope.querySelectorAll<SVGPathElement>(".map-content path[data-sector]").forEach((path) => {
+        const matches = selected === "all" || path.dataset.sector === selected;
+        path.toggleAttribute("hidden", !matches);
+        path.classList.toggle("sector-highlight", selected !== "all" && matches && Boolean(path.closest('[data-layer-group="study"]')));
+      });
       if (scope.dataset.dashboardSync === "false") return;
       const chosen = (layer: LayerName) => loaded.find(([name]) => name === layer)?.[1].features.filter((feature: { properties?: Record<string, unknown> }) => selected === "all" || sectorOf(feature.properties) === selected) || [];
       const rawArea = (layer: LayerName) => chosen(layer).reduce((sum: number, feature: { properties?: Record<string, unknown> }) => sum + numeric(feature.properties || {}, ["مساحة_المنطقة_كم2", "مساحة_التغير_كم2", "المساحة_كم2", "Area_KM2", "SHAPE_Area", "Shape_Area"]), 0);
@@ -807,7 +811,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
   }
 
-  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0;
+  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, viewAnimation = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const apply = (broadcast = true) => {
     viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
@@ -817,8 +821,23 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (event.detail.source === mapInstance) return;
     zoom = event.detail.zoom; tx = event.detail.tx; ty = event.detail.ty; apply(false);
   }) as EventListener);
+  const animateView = (nextZoom: number, nextTx: number, nextTy: number) => {
+    cancelAnimationFrame(viewAnimation);
+    const startZoom = zoom, startTx = tx, startTy = ty, started = performance.now();
+    const frame = (now: number) => {
+      const progress = Math.min((now - started) / 700, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      zoom = startZoom + (nextZoom - startZoom) * eased;
+      tx = startTx + (nextTx - startTx) * eased;
+      ty = startTy + (nextTy - startTy) * eased;
+      apply(false);
+      if (progress < 1) viewAnimation = requestAnimationFrame(frame);
+      else apply();
+    };
+    viewAnimation = requestAnimationFrame(frame);
+  };
   const fitSector = (sector: string) => {
-    if (sector === "all") { zoom = 1; tx = 0; ty = 0; apply(); return; }
+    if (sector === "all") { animateView(1, 0, 0); return; }
     const paths = Array.from(content.querySelectorAll<SVGGraphicsElement>(`path[data-sector="${CSS.escape(sector)}"]`)).filter((path) => !path.hasAttribute("hidden"));
     if (!paths.length) return;
     const boxes = paths.map((path) => path.getBBox()).filter((box) => box.width > 0 || box.height > 0);
@@ -829,10 +848,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const maxBoxY = Math.max(...boxes.map((box) => box.y + box.height));
     const boxWidth = Math.max(maxBoxX - minBoxX, 1);
     const boxHeight = Math.max(maxBoxY - minBoxY, 1);
-    zoom = Math.min(8, Math.max(1, Math.min(840 / boxWidth, 390 / boxHeight)));
-    tx = 500 - (minBoxX + boxWidth / 2) * zoom;
-    ty = 260 - (minBoxY + boxHeight / 2) * zoom;
-    apply();
+    const nextZoom = Math.min(8, Math.max(1, Math.min(840 / boxWidth, 390 / boxHeight)));
+    const nextTx = 500 - (minBoxX + boxWidth / 2) * nextZoom;
+    const nextTy = 260 - (minBoxY + boxHeight / 2) * nextZoom;
+    animateView(nextZoom, nextTx, nextTy);
   };
   const zoomBy = (factor: number, centerX = 500, centerY = 260) => {
     const minimumZoom = .02;

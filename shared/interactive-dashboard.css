@@ -185,6 +185,19 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 /* Unified orange visual identity for dashboard controls and map symbology. */
 .interactive-dashboard .dashboard-kpis article.blue { background:#f28a00; color:#111; }
 .interactive-dashboard .map-study path { stroke:#ffb21a; filter:drop-shadow(0 0 3px #f28a00); }
+.interactive-dashboard .map-study path.sector-highlight {
+  stroke:#fff200;
+  stroke-width:7;
+  vector-effect:non-scaling-stroke;
+  animation:sector-boundary-pulse 1.15s ease-in-out infinite;
+}
+@keyframes sector-boundary-pulse {
+  0%,100% { opacity:1; filter:drop-shadow(0 0 3px #ffd000); }
+  50% { opacity:.76; filter:drop-shadow(0 0 10px #fff200) drop-shadow(0 0 18px #f28a00); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .interactive-dashboard .map-study path.sector-highlight { animation:none; }
+}
 .interactive-dashboard .map-industrial path { fill:#f28a00d4; stroke:#ffe0a3; }
 .interactive-dashboard .map-controls button { background:#b85e00ed; }
 .interactive-dashboard .map-controls button:hover { background:#f28a00; }
