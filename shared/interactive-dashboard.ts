@@ -110,7 +110,7 @@ function dashboardHeader(app: TransportApp): string {
 function priceMarkup(app: TransportApp, group: string): string {
   const westernComparison = group === "western-upper-egypt" || group === "cairo-suez-road" || group === "ismailia";
   const mapArea = westernComparison
-    ? `<div class="temporal-map-pair price-temporal-map-pair">${mapMarkup("price-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("price-current", '<span class="map-year-end">2024</span>', true)}</div>`
+    ? `<div class="temporal-map-pair price-temporal-map-pair${group === "ismailia" ? " ismailia-temporal-map-pair" : ""}">${mapMarkup("price-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("price-current", '<span class="map-year-end">2024</span>', true)}</div>`
     : mapMarkup();
   const trendArea = westernComparison ? "" : `<section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>`;
   return `<main class="interactive-dashboard price-dashboard${westernComparison ? " western-price-dashboard" : ""}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="price">

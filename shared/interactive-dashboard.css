@@ -172,6 +172,11 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .temporal-map .map-status { display:flex!important; top:auto; bottom:8px; inset-inline-end:8px; max-width:45%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
 .temporal-map .map-layer-toggles { display:grid!important; top:94px; inset-inline-end:8px; max-width:180px; }
 .temporal-map .map-layer-toggles button { padding:4px 6px; font-size:8px; }
+.ismailia-temporal-map-pair .map-layer-toggles { display:none !important; }
+.ismailia-temporal-map-pair .landuse-legend { display:none !important; }
+.ismailia-temporal-map-pair .gis-map { min-height: 360px; overflow:hidden; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .temporal-map-pair .map-layer-toggles { display:none !important; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .temporal-map-pair .landuse-legend { display:none !important; }
 .temporal-map[data-dashboard-sync="false"] .map-sector-filter { display: none !important; }
 .temporal-map[data-dashboard-sync="true"] .map-sector-filter { top: 50px; }
 .temporal-map .map-controls { top: 54px; }
