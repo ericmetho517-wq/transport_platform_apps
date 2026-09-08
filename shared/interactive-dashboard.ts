@@ -342,11 +342,18 @@ function renderLineChart(summary: DashboardSummary, visible: Set<string>): void 
 function renderChangeBars(summary: DashboardSummary): void {
   const container = document.querySelector<HTMLElement>("#change-bars");
   if (!container) return;
-  const data = summary.profile?.changeBars?.length ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, "#f28a00"] as [string, string, number, string]) : [
-    ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ff9e00"],
-    ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
+  const isIsmailia = document.querySelector<HTMLElement>(".interactive-dashboard")?.dataset.dashboardGroup === "ismailia";
+  const data = isIsmailia ? [
     ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
-  ] as Array<[string, string, number, string]>;
+    ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
+    ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ffbf08"],
+  ] as Array<[string, string, number, string]> : summary.profile?.changeBars?.length
+    ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, "#f28a00"] as [string, string, number, string])
+    : [
+      ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ff9e00"],
+      ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
+      ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
+    ] as Array<[string, string, number, string]>;
   const max = Math.max(...data.map((item) => item[2]), 1);
   container.innerHTML = data.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${label}">${label}</span></button>`).join("");
 }
