@@ -543,7 +543,9 @@ function geometryPath(geometry: { type: string; coordinates: Coordinates }, proj
     // A few source polygons contain accidental jumps between distant points.
     // Dropping that ring prevents SVG from drawing giant black triangles over
     // the map while keeping the valid land-use features visible.
-    if (close && pairs.some((pair, index) => index > 0 && (Math.abs(pair[0] - pairs[index - 1][0]) > .15 || Math.abs(pair[1] - pairs[index - 1][1]) > .15))) return "";
+    // Parcel rings should contain short, local edges. A larger jump is a
+    // malformed ring splice that SVG closes as a giant black triangle.
+    if (close && pairs.some((pair, index) => index > 0 && (Math.abs(pair[0] - pairs[index - 1][0]) > .05 || Math.abs(pair[1] - pairs[index - 1][1]) > .05))) return "";
     return pairs.map((pair, index) => `${index ? "L" : "M"}${project(pair).join(" ")}`).join(" ") + (close ? " Z" : "");
   };
   if (geometry.type === "Point") { const [x, y] = project(geometry.coordinates as number[]); return `M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0-8 0`; }

@@ -48,13 +48,14 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .dashboard-kpis strong { font-size: clamp(21px, 2.4vw, 34px); }
 
 .gis-map { position: relative; min-height: 270px; overflow: hidden; background: #0c2132; isolation: isolate; contain: layout paint; }
-.gis-map svg { display: block; width: 100%; height: 100%; min-height: 270px; touch-action: none; cursor: grab; }
+.gis-map svg { display: block; width: 100%; height: 100%; min-height: 270px; touch-action: none; cursor: grab; shape-rendering: optimizeSpeed; }
 .gis-map svg:active { cursor: grabbing; }
-.map-viewport { transform-origin: 0 0; }
+.map-viewport { transform-origin: 0 0; will-change: transform; }
 .satellite-tile { opacity: 1; filter: saturate(1.12) contrast(1.08) brightness(.92); }
 .map-content path { cursor: pointer; paint-order: stroke fill markers; }
 .gis-map.map-interacting .map-content { pointer-events:none; }
 .gis-map.map-interacting .map-study path { filter:none; animation:none; }
+.gis-map.map-interacting .map-content path { filter:none !important; transition:none !important; }
 .map-content path[hidden] { display: none; }
 .map-content .change-hidden { display: none; }
 .map-content path.change-match { opacity:1; stroke-width:2.4!important; filter:brightness(1.18) drop-shadow(0 0 2px #fff7); }
