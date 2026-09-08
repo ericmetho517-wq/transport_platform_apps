@@ -795,6 +795,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const active = !(startsHidden && layer === "landcover-start");
     return `<button type="button" class="${active ? "active" : ""}" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${sourceCount(layer, collection).toLocaleString(document.documentElement.lang === "en" ? "en-US" : "ar-EG")}</b></button>`;
   }).join("");
+  // Keep the layer key out of the dashboard map; symbology is rendered on
+  // the features themselves and the dashboard controls remain uncluttered.
+  toggles.setAttribute("hidden", "true");
   scope.querySelector(".landuse-legend")?.remove();
   if (loaded.some(([layer]) => temporalLayers.includes(layer))) {
     const expanded = mapInstance.includes("baseline") || mapInstance.includes("current") ? "" : " open";

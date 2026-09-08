@@ -89,6 +89,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .interactive-dashboard .map-status, .interactive-dashboard .map-scale, .interactive-dashboard .map-wheel-hint,
 .interactive-dashboard .temporal-map .map-status,
 .interactive-dashboard .map-layer-toggles { display:none !important; }
+.map-layer-toggles[hidden] { display:none !important; }
 .interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles {
   display:grid !important; position:absolute; z-index:5; top:10px; inset-inline-end:10px;
   width:min(285px,calc(100% - 20px)); max-height:calc(100% - 20px); overflow:auto; gap:5px;
