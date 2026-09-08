@@ -637,8 +637,12 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const regularLayers = summary.layers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && summary.layers.includes("landcover-start")));
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
   const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
+  const ismailiaTemporalMap = group === "ismailia" && (mapInstance.includes("baseline") || mapInstance.includes("current"));
+  const ismailiaStartLayers: LayerName[] = ["study", "axis", "landcover-start", "Road_CairoRing"];
   const requestedLayers = focusedPriceMap
     ? (mapInstance.includes("baseline") ? ["study", "axis", "landcover-start"] as LayerName[] : ["study", "axis", "landcover-end"] as LayerName[])
+    : ismailiaTemporalMap
+    ? (mapInstance.includes("baseline") ? ismailiaStartLayers.filter((layer) => summary.layers.includes(layer)) : [...regularLayers, "landcover-end" as LayerName])
     : mapInstance.includes("baseline")
     ? group === "ismailia" ? [...regularLayers, "landcover-start" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-start"].includes(layer))
     : mapInstance.includes("current")
