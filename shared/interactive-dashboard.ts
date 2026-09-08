@@ -282,7 +282,7 @@ function hideUnavailableMetricPanel(name: string): void {
 function ensureAgricultureFallbackCards(): void {
   const side = document.querySelector<HTMLElement>(".agriculture-dashboard:not(.western-agriculture-dashboard) .agriculture-side");
   if (!side || side.querySelector(".agriculture-derived-card")) return;
-  side.insertAdjacentHTML("beforeend", `<section class="dark-card agriculture-stat agriculture-derived-card"><span>\u0639\u062f\u062f \u0627\u0644\u0645\u0639\u0627\u0644\u0645 \u0627\u0644\u0632\u0631\u0627\u0639\u064a\u0629</span><strong data-metric="agriculturalFeatures">—</strong></section><section class="dark-card agriculture-stat agriculture-derived-card"><span>\u0645\u0633\u0627\u062d\u0629 \u0627\u0644\u062a\u063a\u064a\u0631 \u0627\u0644\u0632\u0631\u0627\u0639\u064a (\u0643\u0645\u00b2)</span><strong data-metric="agriculturalChangeKm2">—</strong></section><section class="dark-card agriculture-stat agriculture-derived-card"><span>\u0639\u062f\u062f \u0627\u0644\u0645\u0639\u0627\u0644\u0645 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629</span><strong data-metric="industrialFeatures">—</strong></section>`);
+  side.insertAdjacentHTML("beforeend", `<section class="dark-card agriculture-stat agriculture-derived-card"><span>\u0645\u0633\u0627\u062d\u0629 \u0627\u0644\u062a\u063a\u064a\u0631 \u0627\u0644\u0632\u0631\u0627\u0639\u064a (\u0643\u0645\u00b2)</span><strong data-metric="agriculturalChangeKm2">—</strong></section>`);
 }
 
 function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): void {
