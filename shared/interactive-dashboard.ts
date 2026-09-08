@@ -427,8 +427,9 @@ function renderGaugeAndDonut(summary: DashboardSummary): void {
   const percent = Math.min(summary.profile?.metrics.urbanChangePercent ?? urban / study * 100, 100);
   const dashboard = document.querySelector<HTMLElement>(".interactive-dashboard");
   const selectedSector = document.querySelector<HTMLSelectElement>("#dashboard-sector-filter")?.value || "all";
+  const selectedChange = document.querySelector<HTMLSelectElement>("#dashboard-change-filter")?.value || "all";
   const westernAxisDefault = dashboard?.dataset.dashboardGroup === "western-upper-egypt" && selectedSector === "all";
-  setGauge(document.querySelector<HTMLElement>("#urban-gauge"), westernAxisDefault ? 100 : percent, westernAxisDefault ? 1000 : percent);
+  setGauge(document.querySelector<HTMLElement>("#urban-gauge"), westernAxisDefault || selectedChange === "all" ? 100 : percent, westernAxisDefault ? 1000 : selectedChange === "all" ? 100 : percent);
   const donut = document.querySelector<HTMLElement>("#change-donut");
   if (donut) {
     const profileShares = summary.profile?.statusShares;
@@ -1257,7 +1258,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const gauge = root.querySelector<HTMLElement>("#urban-gauge");
         if (gauge) {
           const urbanGrowth = summary.profile?.metrics.urbanChangePercent ?? ((summary.metrics.urbanChangeKm2 || 0) / Math.max(summary.metrics.studyAreaKm2 || 1, 1) * 100);
-          const value = mode === "all" ? urbanGrowth : mode === "changed" ? changedPercent : classifiedTotal ? statusTotals.unchanged / classifiedTotal * 100 : urbanGrowth;
+          const value = mode === "all" ? 100 : mode === "changed" ? changedPercent : classifiedTotal ? statusTotals.unchanged / classifiedTotal * 100 : urbanGrowth;
           setGauge(gauge, value);
         }
         root.dataset.changeStatus = mode;
