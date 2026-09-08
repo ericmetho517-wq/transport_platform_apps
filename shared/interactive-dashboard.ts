@@ -279,6 +279,12 @@ function hideUnavailableMetricPanel(name: string): void {
   });
 }
 
+function ensureAgricultureFallbackCards(): void {
+  const side = document.querySelector<HTMLElement>(".agriculture-dashboard:not(.western-agriculture-dashboard) .agriculture-side");
+  if (!side || side.querySelector(".agriculture-derived-card")) return;
+  side.insertAdjacentHTML("beforeend", `<section class="dark-card agriculture-stat agriculture-derived-card"><span>\u0639\u062f\u062f \u0627\u0644\u0645\u0639\u0627\u0644\u0645 \u0627\u0644\u0632\u0631\u0627\u0639\u064a\u0629</span><strong data-metric="agriculturalFeatures">—</strong></section><section class="dark-card agriculture-stat agriculture-derived-card"><span>\u0645\u0633\u0627\u062d\u0629 \u0627\u0644\u062a\u063a\u064a\u0631 \u0627\u0644\u0632\u0631\u0627\u0639\u064a (\u0643\u0645\u00b2)</span><strong data-metric="agriculturalChangeKm2">—</strong></section><section class="dark-card agriculture-stat agriculture-derived-card"><span>\u0639\u062f\u062f \u0627\u0644\u0645\u0639\u0627\u0644\u0645 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629</span><strong data-metric="industrialFeatures">—</strong></section>`);
+}
+
 function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): void {
   const container = document.querySelector<HTMLElement>("#price-columns");
   if (!container) return;
@@ -715,6 +721,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
       path.dataset.geometry = feature.geometry.type;
+      if (feature.geometry.type === "LineString" || feature.geometry.type === "MultiLineString") path.style.fill = "none";
       const exactStatus = feature.properties?.change_status_key;
       path.dataset.changeStatus = exactStatus === "changed" || exactStatus === "unchanged" ? exactStatus : "unknown";
       path.setAttribute("vector-effect", "non-scaling-stroke");
@@ -1075,6 +1082,10 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     if (!summary.landUse.length) summary.landUse = await deriveLandUseFromLocalLayers(group, summary);
     Object.entries(summary.metrics).forEach(([name, value]) => setMetric(name, value));
     setMetric("civilFeatures", summary.layerCounts?.civil || 0);
+    ensureAgricultureFallbackCards();
+    Object.entries(summary.metrics).forEach(([name, value]) => setMetric(name, value));
+    setMetric("agriculturalFeatures", summary.layerCounts?.agricultural || 0);
+    setMetric("industrialFeatures", summary.layerCounts?.industrial || 0);
     if (!summary.metrics.agriculturalWorkersThousands) { setUnavailableMetric("agriculturalWorkersThousands"); hideUnavailableMetricPanel("agriculturalWorkersThousands"); }
     if (!summary.metrics.agriculturalAreaFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) { setUnavailableMetric("agriculturalAreaFeddan"); hideUnavailableMetricPanel("agriculturalAreaFeddan"); }
     if (!summary.metrics.agriculturalChangeFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) { setUnavailableMetric("agriculturalChangeFeddan"); hideUnavailableMetricPanel("agriculturalChangeFeddan"); }

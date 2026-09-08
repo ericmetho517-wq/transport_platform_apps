@@ -53,6 +53,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-viewport { transform-origin: 0 0; will-change: transform; }
 .satellite-tile { opacity: 1; filter: saturate(1.12) contrast(1.08) brightness(.92); }
 .map-content path { cursor: pointer; paint-order: stroke fill markers; }
+.map-content path[data-geometry="LineString"], .map-content path[data-geometry="MultiLineString"] { fill:none !important; }
 .gis-map.map-interacting .map-content { pointer-events:none; }
 .gis-map.map-interacting .map-study path { filter:none; animation:none; }
 .gis-map.map-interacting .map-content path { filter:none !important; transition:none !important; }
