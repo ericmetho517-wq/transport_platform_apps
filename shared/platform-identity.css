@@ -129,6 +129,13 @@
 .platform-shell .filter-summary { margin: 0; color: #45657e; font-size: 12px; font-weight: 900; }
 
 .platform-shell .app-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.platform-shell .sector-group { grid-column: 1 / -1; display: grid; gap: 12px; margin-top: 18px; }
+.platform-shell .sector-group:first-child { margin-top: 0; }
+.platform-shell .sector-group-heading { display:flex; align-items:end; justify-content:space-between; gap:16px; padding:14px 18px; border:1px solid #cfe1ee; border-inline-start:5px solid #168de2; border-radius:14px; background:linear-gradient(110deg,#f5faff,#fff); box-shadow:0 6px 20px #0a416c0b; }
+.platform-shell .sector-group-heading span { color:#6f8799; font-size:10px; font-weight:800; }
+.platform-shell .sector-group-heading h3 { margin:4px 0 0; color:#123954; font-size:22px; }
+.platform-shell .sector-group-heading b { color:#168de2; font-size:12px; white-space:nowrap; }
+.platform-shell .sector-group-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
 .platform-shell .app-card { --type-color: #168de2; position: relative; min-height: 260px; padding: 23px; overflow: hidden; border: 1px solid #dbe8f2; border-radius: 18px; color: var(--brand-ink); background: #ffffffed; box-shadow: 0 10px 32px #0a416c0b; opacity: 0; transform: translateY(22px); transition: opacity .5s calc(var(--card-index) * 20ms) ease, transform .5s calc(var(--card-index) * 20ms) ease, border-color .25s ease, box-shadow .25s ease; }
 .platform-shell .app-card.is-visible { opacity: 1; transform: translateY(0); }
 .platform-shell .app-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: linear-gradient(90deg, var(--type-color), color-mix(in srgb, var(--type-color), #fff 50%)); }
@@ -177,6 +184,7 @@
   .platform-shell .catalog-controls { min-width: 100%; }
   .platform-shell .section-title { align-items: stretch; flex-direction: column; }
   .platform-shell .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .platform-shell .sector-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
   .platform-shell .platform-header { height: 72px; padding-inline: 17px; }
@@ -196,6 +204,7 @@
   .platform-shell .catalog-toolbar { top: 68px; }
   .platform-shell .results-row > span { display: none; }
   .platform-shell .app-grid { grid-template-columns: 1fr; }
+  .platform-shell .sector-group-grid { grid-template-columns: 1fr; }
   .platform-shell .about { grid-template-columns: 1fr; padding: 75px 22px; }
   .platform-shell footer { display: grid; gap: 8px; text-align: center; }
 }
