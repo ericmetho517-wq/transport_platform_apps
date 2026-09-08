@@ -282,6 +282,7 @@ function hideUnavailableMetricPanel(name: string): void {
 function ensureAgricultureFallbackCards(): void {
   const side = document.querySelector<HTMLElement>(".agriculture-dashboard:not(.western-agriculture-dashboard) .agriculture-side");
   if (!side || side.querySelector(".agriculture-derived-card")) return;
+  side.insertAdjacentHTML("afterbegin", `<article class="opportunity-card agriculture-derived-card"><span>\u0641\u0631\u0635 \u0627\u0644\u0639\u0645\u0644 \u0644\u0645\u0634\u0631\u0648\u0639\u0627\u062a \u0627\u0644\u0645\u0628\u0627\u0646\u064a \u0627\u0644\u0645\u0633\u062a\u062d\u062f\u062b\u0629</span><strong data-metric="jobOpportunities">—</strong><small>\u0641\u0631\u0635\u0629 \u0639\u0645\u0644 \u062a\u0642\u062f\u064a\u0631\u064a\u0629 \u0645\u0631\u062a\u0628\u0637\u0629 \u0628\u0645\u0646\u0627\u0637\u0642 \u0627\u0644\u062a\u063a\u064a\u0631</small></article><section class="dark-card vertical-chart-card agriculture-derived-card"><div class="card-title"><span>\u0645\u0646\u0627\u0637\u0642 \u062a\u063a\u064a\u0631 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0627\u062a \u0627\u0644\u0623\u0631\u0627\u0636\u064a</span></div><div id="change-bars" class="change-bars loading-panel">\u062c\u0627\u0631\u064d \u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a…</div></section>`);
   side.insertAdjacentHTML("beforeend", `<section class="dark-card agriculture-stat agriculture-derived-card"><span>\u0645\u0633\u0627\u062d\u0629 \u0627\u0644\u062a\u063a\u064a\u0631 \u0627\u0644\u0632\u0631\u0627\u0639\u064a (\u0643\u0645\u00b2)</span><strong data-metric="agriculturalChangeKm2">—</strong></section>`);
 }
 
@@ -1091,6 +1092,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     Object.entries(summary.metrics).forEach(([name, value]) => setMetric(name, value));
     setMetric("civilFeatures", summary.layerCounts?.civil || 0);
     ensureAgricultureFallbackCards();
+    if (root.dataset.mode === "agriculture") renderChangeBars(summary);
     Object.entries(summary.metrics).forEach(([name, value]) => setMetric(name, value));
     setMetric("agriculturalFeatures", summary.layerCounts?.agricultural || 0);
     setMetric("industrialFeatures", summary.layerCounts?.industrial || 0);
@@ -1174,6 +1176,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const view = { ...summary, metrics: { ...summary.metrics, ...selected.metrics }, profile: { ...summary.profile, ...selected } } as DashboardSummary;
         if (selected.landUse?.length) view.landUse = selected.landUse;
         renderComparison(view);
+        renderChangeBars(view);
         renderGaugeAndDonut(view);
         renderAgricultureIndicators(view);
       }) as EventListener);
