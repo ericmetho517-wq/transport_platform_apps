@@ -110,5 +110,9 @@
       "landcover-end",
       "field-survey"
     ]
+  },
+  "ismailia": {
+    "summary": "data/dashboard/ismailia/summary.json",
+    "layers": ["study", "axis", "urban", "agricultural", "industrial", "landcover-start", "landcover-end", "water"]
   }
 }

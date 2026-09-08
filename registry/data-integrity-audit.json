@@ -1,34 +1,34 @@
 {
-  "generatedAt": "2026-09-05T11:11:03.916Z",
-  "applications": 78,
+  "generatedAt": "2026-09-08T09:42:56.837Z",
+  "applications": 81,
   "totals": {
-    "features": 12036,
-    "sourceFeatures": 147498,
-    "renderableFeatures": 12032,
-    "coordinatePairs": 2157272
+    "features": 77021,
+    "sourceFeatures": 211386,
+    "renderableFeatures": 77016,
+    "coordinatePairs": 2853844
   },
   "applicationCoverage": {
     "western-upper-egypt": {
       "applications": 9,
-      "activeFeatures": 3876,
+      "activeFeatures": 3903,
       "activeLayers": 8,
       "verifiedLocalData": true
     },
     "dahshur-south-link": {
       "applications": 9,
-      "activeFeatures": 1415,
+      "activeFeatures": 1572,
       "activeLayers": 10,
       "verifiedLocalData": true
     },
     "regional-ring-road": {
       "applications": 13,
-      "activeFeatures": 1556,
+      "activeFeatures": 1845,
       "activeLayers": 11,
       "verifiedLocalData": true
     },
     "kalabsha-axis": {
       "applications": 7,
-      "activeFeatures": 547,
+      "activeFeatures": 799,
       "activeLayers": 7,
       "verifiedLocalData": true
     },
@@ -40,19 +40,19 @@
     },
     "suez-ring-link": {
       "applications": 10,
-      "activeFeatures": 379,
+      "activeFeatures": 385,
       "activeLayers": 7,
       "verifiedLocalData": true
     },
     "cairo-suez-road": {
       "applications": 13,
-      "activeFeatures": 522,
+      "activeFeatures": 525,
       "activeLayers": 7,
       "verifiedLocalData": true
     },
     "qus-axis": {
       "applications": 6,
-      "activeFeatures": 2095,
+      "activeFeatures": 2458,
       "activeLayers": 8,
       "verifiedLocalData": true
     },
@@ -60,6 +60,12 @@
       "applications": 4,
       "activeFeatures": 886,
       "activeLayers": 7,
+      "verifiedLocalData": true
+    },
+    "ismailia": {
+      "applications": 3,
+      "activeFeatures": 63888,
+      "activeLayers": 8,
       "verifiedLocalData": true
     }
   },
@@ -102,9 +108,9 @@
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 11,
+          "features": 14,
           "representedSourceFeatures": 198,
-          "renderableFeatures": 11,
+          "renderableFeatures": 14,
           "coordinatePairs": 3655,
           "invalidCoordinates": 0
         },
@@ -120,10 +126,10 @@
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\السويس\\السويس\\New File Geodatabase.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 522,
+        "features": 525,
         "sourceFeatures": 896,
         "coordinatePairs": 9199,
-        "renderableFeatures": 522
+        "renderableFeatures": 525
       }
     },
     "dabaa-axis": {
@@ -226,9 +232,9 @@
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 4,
+          "features": 161,
           "representedSourceFeatures": 262,
-          "renderableFeatures": 4,
+          "renderableFeatures": 161,
           "coordinatePairs": 2540,
           "invalidCoordinates": 0
         },
@@ -267,10 +273,79 @@
         "study.geojson"
       ],
       "totals": {
-        "features": 1415,
+        "features": 1572,
         "sourceFeatures": 20899,
         "coordinatePairs": 108703,
-        "renderableFeatures": 1415
+        "renderableFeatures": 1572
+      }
+    },
+    "ismailia": {
+      "layers": {
+        "study": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 3920,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 145,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 8049,
+          "representedSourceFeatures": 8049,
+          "renderableFeatures": 8049,
+          "coordinatePairs": 48875,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 1365,
+          "representedSourceFeatures": 1365,
+          "renderableFeatures": 1365,
+          "coordinatePairs": 18362,
+          "invalidCoordinates": 0
+        },
+        "industrial": {
+          "features": 262,
+          "representedSourceFeatures": 262,
+          "renderableFeatures": 262,
+          "coordinatePairs": 2124,
+          "invalidCoordinates": 0
+        },
+        "landcover-start": {
+          "features": 21514,
+          "representedSourceFeatures": 21514,
+          "renderableFeatures": 21514,
+          "coordinatePairs": 251517,
+          "invalidCoordinates": 0
+        },
+        "landcover-end": {
+          "features": 32605,
+          "representedSourceFeatures": 32605,
+          "renderableFeatures": 32604,
+          "coordinatePairs": 371051,
+          "invalidCoordinates": 0
+        },
+        "water": {
+          "features": 91,
+          "representedSourceFeatures": 91,
+          "renderableFeatures": 91,
+          "coordinatePairs": 578,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات/public/data",
+      "undeclaredLayerFiles": [],
+      "totals": {
+        "features": 63888,
+        "sourceFeatures": 63888,
+        "coordinatePairs": 696572,
+        "renderableFeatures": 63887
       }
     },
     "kalabsha-axis": {
@@ -304,9 +379,9 @@
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 3,
+          "features": 255,
           "representedSourceFeatures": 391,
-          "renderableFeatures": 3,
+          "renderableFeatures": 255,
           "coordinatePairs": 1677,
           "invalidCoordinates": 0
         },
@@ -329,10 +404,10 @@
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 547,
+        "features": 799,
         "sourceFeatures": 1305,
         "coordinatePairs": 5412,
-        "renderableFeatures": 547
+        "renderableFeatures": 799
       }
     },
     "qena-luxor-road": {
@@ -400,9 +475,9 @@
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 5,
+          "features": 368,
           "representedSourceFeatures": 1270,
-          "renderableFeatures": 5,
+          "renderableFeatures": 368,
           "coordinatePairs": 27027,
           "invalidCoordinates": 0
         },
@@ -425,10 +500,10 @@
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 2095,
+        "features": 2458,
         "sourceFeatures": 4510,
         "coordinatePairs": 63002,
-        "renderableFeatures": 2095
+        "renderableFeatures": 2458
       }
     },
     "regional-ring-road": {
@@ -469,9 +544,9 @@
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 10,
+          "features": 299,
           "representedSourceFeatures": 299,
-          "renderableFeatures": 10,
+          "renderableFeatures": 299,
           "coordinatePairs": 10861,
           "invalidCoordinates": 0
         },
@@ -515,10 +590,10 @@
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\الاقليمي\\DataBase_Schema.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 1556,
+        "features": 1845,
         "sourceFeatures": 34231,
         "coordinatePairs": 187211,
-        "renderableFeatures": 1556
+        "renderableFeatures": 1845
       }
     },
     "suez-ring-link": {
@@ -559,9 +634,9 @@
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 10,
+          "features": 16,
           "representedSourceFeatures": 651,
-          "renderableFeatures": 10,
+          "renderableFeatures": 16,
           "coordinatePairs": 7980,
           "invalidCoordinates": 0
         },
@@ -577,10 +652,10 @@
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\السويس\\السويس\\New File Geodatabase.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 379,
+        "features": 385,
         "sourceFeatures": 1663,
         "coordinatePairs": 16839,
-        "renderableFeatures": 379
+        "renderableFeatures": 385
       }
     },
     "western-upper-egypt": {
@@ -621,9 +696,9 @@
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 143,
+          "features": 170,
           "representedSourceFeatures": 34444,
-          "renderableFeatures": 143,
+          "renderableFeatures": 170,
           "coordinatePairs": 772632,
           "invalidCoordinates": 0
         },
@@ -646,15 +721,16 @@
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 3876,
+        "features": 3903,
         "sourceFeatures": 75950,
         "coordinatePairs": 1612452,
-        "renderableFeatures": 3874
+        "renderableFeatures": 3901
       }
     }
   },
   "errors": [],
   "warnings": [
+    "ismailia/landcover-end: 1 source records have empty geometry and are excluded from rendering",
     "qena-luxor-road/baseline: 2 source records have empty geometry and are excluded from rendering",
     "western-upper-egypt/water: 2 source records have empty geometry and are excluded from rendering"
   ],

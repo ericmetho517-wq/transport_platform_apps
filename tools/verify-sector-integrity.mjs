@@ -8,9 +8,9 @@ const profiles = JSON.parse(readFileSync(join(root, "public", "data", "sector-pr
 const aliases = {
   dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis",
   "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road",
-  "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt",
+  "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
 };
-const expectedCounts = { Dashboard: 50, Experience: 10, StoryMap: 9, "Web AppViewer": 5, "Instant Filter Gallery": 4 };
+const expectedCounts = { Dashboard: 53, Experience: 10, StoryMap: 9, "Web AppViewer": 5, "Instant Filter Gallery": 4 };
 const errors = [];
 const warnings = [];
 const counts = {};

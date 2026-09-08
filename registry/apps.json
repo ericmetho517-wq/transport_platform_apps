@@ -4942,4 +4942,43 @@
     ],
     "reportReferenceGroup": "dabaa"
   }
+  ,{
+    "id": "ismailia-urban-2026-dashboard",
+    "slug": "dashboard-ismailia-urban",
+    "title": "لوحة مؤشرات الأراضي العمرانية – الإسماعيلية",
+    "alternateTitles": ["Urban Land Indicators Dashboard – Ismailia"],
+    "category": "تطبيقات محور القاهرة–الإسماعيلية",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات",
+    "status": "generated-from-registry",
+    "reportReferenceGroup": "ismailia"
+  },
+  {
+    "id": "ismailia-prices-2026-dashboard",
+    "slug": "dashboard-ismailia-prices",
+    "title": "لوحة مؤشرات أسعار الأراضي – الإسماعيلية",
+    "alternateTitles": ["Land Price Indicators Dashboard – Ismailia"],
+    "category": "تطبيقات محور القاهرة–الإسماعيلية",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات",
+    "status": "generated-from-registry",
+    "reportReferenceGroup": "ismailia"
+  },
+  {
+    "id": "ismailia-agriculture-2026-dashboard",
+    "slug": "dashboard-ismailia-agriculture",
+    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – الإسماعيلية",
+    "alternateTitles": ["Agricultural and Industrial Land Indicators Dashboard – Ismailia"],
+    "category": "تطبيقات محور القاهرة–الإسماعيلية",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات",
+    "status": "generated-from-registry",
+    "reportReferenceGroup": "ismailia"
+  }
 ]

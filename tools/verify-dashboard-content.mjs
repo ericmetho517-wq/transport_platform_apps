@@ -103,7 +103,7 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }
 
-if (dashboards.length !== 50) failures.push(`expected 50 dashboards, found ${dashboards.length}`);
+if (dashboards.length !== 53) failures.push(`expected 53 dashboards, found ${dashboards.length}`);
 if (failures.length) {
   console.error(`Dashboard content audit failed (${failures.length})`);
   failures.forEach((failure) => console.error(`- ${failure}`));

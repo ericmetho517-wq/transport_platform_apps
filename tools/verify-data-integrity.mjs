@@ -60,7 +60,7 @@ for (const group of readdirSync(dataRoot)) {
 }
 
 const apps = JSON.parse(readFileSync(join(root, "registry", "apps.json"), "utf8"));
-const groupAliases = { dahshur: "dahshur-south-link", "regional-ring": "regional-ring-road", kalabsha: "kalabsha-axis", "qena-luxor": "qena-luxor-road", "suez-link": "suez-ring-link", "suez-free": "cairo-suez-road", qus: "qus-axis", dabaa: "dabaa-axis", "western-upper-egypt": "western-upper-egypt" };
+const groupAliases = { dahshur: "dahshur-south-link", "regional-ring": "regional-ring-road", kalabsha: "kalabsha-axis", "qena-luxor": "qena-luxor-road", "suez-link": "suez-ring-link", "suez-free": "cairo-suez-road", qus: "qus-axis", dabaa: "dabaa-axis", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia" };
 const applicationCoverage = {};
 for (const app of apps) {
   if (app.language === "en" && app.direction !== "ltr") errors.push(`${app.slug}: English app must use LTR`);

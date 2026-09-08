@@ -4,7 +4,7 @@ import { dashboardGroup } from "../shared/interactive-dashboard";
 
 const registry = apps as TransportApp[];
 const axisOptions = [
-  ["western-upper-egypt", "محور الصعيد الغربي / Western Upper Egypt"], ["dahshur-south-link", "وصلة دهشور الجنوبية / Dahshur South Link"],
+  ["western-upper-egypt", "محور الصعيد الغربي / Western Upper Egypt"], ["ismailia", "محور القاهرة–الإسماعيلية / Cairo–Ismailia"], ["dahshur-south-link", "وصلة دهشور الجنوبية / Dahshur South Link"],
   ["regional-ring-road", "الدائري الإقليمي / Regional Ring Road"],
   ["kalabsha-axis", "محور كلابشة / Kalabsha Axis"], ["qena-luxor-road", "طريق قنا الأقصر / Qena–Luxor Road"],
   ["qus-axis", "محور قوص / Qus Axis"], ["cairo-suez-road", "طريق القاهرة السويس / Cairo–Suez Road"],

@@ -1,0 +1,108 @@
+{
+  "slug": "ismailia",
+  "projectTitle": "بيانات محور القاهرة–الإسماعيلية",
+  "source": "C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات/public/data",
+  "verifiedLocalData": true,
+  "yearStart": 2016,
+  "yearEnd": 2026,
+  "metrics": {
+    "studyAreaKm2": 2583.8,
+    "axisLengthKm": 135.1981,
+    "urbanChangeKm2": 61.8573,
+    "agriculturalChangeKm2": 258.1476,
+    "industrialChangeKm2": 19.0231,
+    "urbanFeatures": 8049,
+    "agriculturalFeatures": 1365,
+    "industrialFeatures": 262,
+    "waterFeatures": 91,
+    "agriculturalAreaFeddan": 63799.2,
+    "agriculturalChangeFeddan": 63799.2,
+    "totalChangeKm2": 338.9979,
+    "urbanChangePercent": 14.6,
+    "agriculturalChangePercent": 10.0,
+    "industrialChangePercent": 0.7
+  },
+  "prices": {
+    "urban": { "start": 316830157309.31, "end": 5685790068445.14 },
+    "agricultural": { "start": 95178048321.0, "end": 459736808907.45 },
+    "industrial": { "start": 42635885217.26, "end": 820679604244.9 }
+  },
+  "priceSeries": {
+    "years": [2016, 2026],
+    "urban": [316830157309.31, 5685790068445.14],
+    "agricultural": [95178048321.0, 459736808907.45],
+    "industrial": [42635885217.26, 820679604244.9]
+  },
+  "landUse": [
+    { "category": "أرض فضاء", "year": 2016, "area": 1285.3284 },
+    { "category": "زراعي", "year": 2016, "area": 700.3114 },
+    { "category": "منطقة عسكرية", "year": 2016, "area": 222.5866 },
+    { "category": "حضري / عمراني", "year": 2016, "area": 186.5869 },
+    { "category": "صناعي", "year": 2016, "area": 59.489 },
+    { "category": "خدمات", "year": 2016, "area": 64.8768 },
+    { "category": "طرق", "year": 2016, "area": 36.3364 },
+    { "category": "مياه", "year": 2016, "area": 22.7614 },
+    { "category": "خضراء / غابات", "year": 2016, "area": 5.5461 },
+    { "category": "أرض فضاء", "year": 2026, "area": 949.3279 },
+    { "category": "زراعي", "year": 2026, "area": 941.8428 },
+    { "category": "حضري / عمراني", "year": 2026, "area": 248.2164 },
+    { "category": "منطقة عسكرية", "year": 2026, "area": 220.5634 },
+    { "category": "صناعي", "year": 2026, "area": 78.3558 },
+    { "category": "خدمات", "year": 2026, "area": 77.4238 },
+    { "category": "طرق", "year": 2026, "area": 46.9271 },
+    { "category": "مياه", "year": 2026, "area": 14.6334 },
+    { "category": "خضراء / غابات", "year": 2026, "area": 6.532 }
+  ],
+  "layers": ["study", "axis", "urban", "agricultural", "industrial", "landcover-start", "landcover-end", "water"],
+  "layerCounts": {
+    "study": 1,
+    "axis": 1,
+    "urban": 8049,
+    "agricultural": 1365,
+    "industrial": 262,
+    "landcover-start": 21514,
+    "landcover-end": 32605,
+    "water": 91
+  },
+  "sourceLayerCounts": {
+    "study": 1,
+    "axis": 1,
+    "urban": 8049,
+    "agricultural": 1365,
+    "industrial": 262,
+    "landcover-start": 21514,
+    "landcover-end": 32605,
+    "water": 91
+  },
+  "profile": {
+    "title": "محور القاهرة–الإسماعيلية",
+    "report": "بيانات الإسماعيلية المحلية 2016–2026",
+    "pages": [],
+    "yearEnd": 2026,
+    "metrics": {
+      "studyAreaKm2": 2583.8,
+      "axisLengthKm": 135.1981,
+      "urbanChangeKm2": 61.8573,
+      "agriculturalChangeKm2": 258.1476,
+      "industrialChangeKm2": 19.0231,
+      "urbanFeatures": 8049,
+      "agriculturalFeatures": 1365,
+      "industrialFeatures": 262,
+      "urbanChangePercent": 14.6,
+      "agriculturalChangePercent": 10.0,
+      "industrialChangePercent": 0.7
+    },
+    "changeBars": [
+      { "label": "تغير عمراني", "value": 61.8573, "layer": "urban" },
+      { "label": "تغير زراعي", "value": 258.1476, "layer": "agricultural" },
+      { "label": "تغير صناعي", "value": 19.0231, "layer": "industrial" }
+    ],
+    "statusShares": { "existing": 85.4, "underConstruction": 14.6 },
+    "prices": {
+      "urban": { "start": 316830157309.31, "end": 5685790068445.14 },
+      "agricultural": { "start": 95178048321.0, "end": 459736808907.45 },
+      "industrial": { "start": 42635885217.26, "end": 820679604244.9 }
+    },
+    "landUse": []
+  }
+}

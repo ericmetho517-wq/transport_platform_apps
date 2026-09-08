@@ -51,6 +51,7 @@ const civilDashboardSlugs = new Set(["dashboard-4b68db62a1", "dashboard-48c0447e
 const impactDashboardSlugs = new Set(["dashboard-35c11a505b", "dashboard-83f3738705", "dashboard-676c18c4b7", "dashboard-4138cfe326", "dashboard-f0a5bc623c"]);
 const isCivilDashboard = (app: TransportApp) => civilDashboardSlugs.has(app.slug) || /civil study/i.test(app.title);
 const isImpactDashboard = (app: TransportApp) => impactDashboardSlugs.has(app.slug) || /developmental impact|economic and developmental impact/i.test(app.title);
+const isUrbanDashboard = (app: TransportApp) => /urban|العمرانية|العمراني/i.test(app.title);
 
 export function dashboardGroup(app: TransportApp): string {
   const groupAliases: Record<string, string> = {
@@ -235,6 +236,7 @@ export function renderInteractiveDashboard(app: TransportApp): string {
   if (isCivilDashboard(app)) return civilMarkup(app, group);
   if (isImpactDashboard(app)) return impactMarkup(app, group);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
+  if (isUrbanDashboard(app)) return landMarkup(app, group);
   if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
   if (["regional-ring-road", "dahshur-south-link", "suez-ring-link"].includes(group)) return reportLandMarkup(app, group);
   if (["qena-luxor-road", "qus-axis", "kalabsha-axis"].includes(group)) return southernAgricultureMarkup(app, group);

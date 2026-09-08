@@ -316,5 +316,31 @@
       "industrial": { "start": 12438050007, "end": 29851320018 }
     },
     "statusShares": { "existing": 30, "underConstruction": 70 }
+  },
+  "ismailia": {
+    "title": "محور القاهرة–الإسماعيلية",
+    "report": "بيانات الإسماعيلية المحلية 2016–2026",
+    "pages": [],
+    "yearEnd": 2026,
+    "metrics": {
+      "studyAreaKm2": 2583.8,
+      "axisLengthKm": 135.1981,
+      "urbanChangeKm2": 61.8573,
+      "agriculturalChangeKm2": 258.1476,
+      "industrialChangeKm2": 19.0231,
+      "urbanFeatures": 8049,
+      "agriculturalFeatures": 1365,
+      "industrialFeatures": 262,
+      "urbanChangePercent": 14.6,
+      "agriculturalChangePercent": 10,
+      "industrialChangePercent": 0.7
+    },
+    "prices": {
+      "urban": { "start": 316830157309.31, "end": 5685790068445.14 },
+      "agricultural": { "start": 95178048321, "end": 459736808907.45 },
+      "industrial": { "start": 42635885217.26, "end": 820679604244.9 }
+    },
+    "statusShares": { "existing": 85.4, "underConstruction": 14.6 },
+    "landUse": []
   }
 }
