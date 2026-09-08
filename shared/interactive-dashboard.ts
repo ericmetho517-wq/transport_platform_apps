@@ -108,7 +108,7 @@ function dashboardHeader(app: TransportApp): string {
 }
 
 function priceMarkup(app: TransportApp, group: string): string {
-  const westernComparison = group === "western-upper-egypt" || group === "cairo-suez-road";
+  const westernComparison = group === "western-upper-egypt" || group === "cairo-suez-road" || group === "ismailia";
   const mapArea = westernComparison
     ? `<div class="temporal-map-pair price-temporal-map-pair">${mapMarkup("price-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("price-current", '<span class="map-year-end">2024</span>', true)}</div>`
     : mapMarkup();
@@ -1086,6 +1086,16 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     }
     document.querySelectorAll<HTMLElement>(".map-year-start").forEach((label) => { label.textContent = String(summary.yearStart); });
     document.querySelectorAll<HTMLElement>(".map-year-end").forEach((label) => { label.textContent = String(summary.yearEnd); });
+    if (group === "ismailia" && root.dataset.mode === "agriculture") {
+      const center = root.querySelector<HTMLElement>(".agriculture-center");
+      const singleMap = center?.querySelector<HTMLElement>(".gis-map");
+      if (center && singleMap && !center.querySelector(".ismailia-temporal-map-pair")) {
+        const pair = document.createElement("div");
+        pair.className = "temporal-map-pair ismailia-temporal-map-pair";
+        pair.innerHTML = `${renderSectorMapMarkup("agriculture-baseline", '<span class="map-year-start">2016</span>', false)}${renderSectorMapMarkup("agriculture-current", '<span class="map-year-end">2026</span>', true)}`;
+        singleMap.replaceWith(pair);
+      }
+    }
     const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
     await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));
     const statusTotals = { changed: 0, unchanged: 0 };
