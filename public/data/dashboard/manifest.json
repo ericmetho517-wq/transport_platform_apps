@@ -113,6 +113,6 @@
   },
   "ismailia": {
     "summary": "data/dashboard/ismailia/summary.json",
-    "layers": ["study", "axis", "urban", "agricultural", "industrial", "landcover-start", "landcover-end", "water"]
+    "layers": ["study", "axis", "urban", "agricultural", "industrial", "landcover-start", "landcover-end", "water", "LRT_Line", "lRT_Station", "Metro_Line", "Metro_Station", "Road_CairoRing", "Road_MiddleRing", "Road_RegionalRing", "Transit_GreenLine", "Transit_KafrDawoodSadat", "Transit_LRT", "Transit_Metro1", "Transit_Metro2", "Transit_Metro3", "Transit_Metro4", "Transit_Metro6", "Transit_MonorailCapital", "Transit_MonorailOctober", "Transit_RobikiBelbeis"]
   }
 }

@@ -1,6 +1,6 @@
 import type { TransportApp } from "./project-runtime";
 
-type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil" | "landcover-start" | "landcover-end" | "buildings" | "parcels" | "landmarks" | "water" | "field-survey" | "transport" | "governorates";
+type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil" | "landcover-start" | "landcover-end" | "buildings" | "parcels" | "landmarks" | "water" | "field-survey" | "transport" | "governorates" | "LRT_Line" | "lRT_Station" | "Metro_Line" | "Metro_Station" | "Road_CairoRing" | "Road_MiddleRing" | "Road_RegionalRing" | "Transit_GreenLine" | "Transit_KafrDawoodSadat" | "Transit_LRT" | "Transit_Metro1" | "Transit_Metro2" | "Transit_Metro3" | "Transit_Metro4" | "Transit_Metro6" | "Transit_MonorailCapital" | "Transit_MonorailOctober" | "Transit_RobikiBelbeis";
 
 interface DashboardSummary {
   slug: string;
@@ -584,7 +584,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const toggles = scope.querySelector<HTMLElement>(".map-layer-toggles");
   const status = scope.querySelector<HTMLElement>(".map-status-text");
   if (!svg || !viewport || !satellite || !content || !toggles) return;
-  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}`, buildings: "المباني", parcels: "قطع الأراضي", landmarks: "المعالم والخدمات", water: "المسطحات المائية", "field-survey": "الرفع الميداني", transport: "شبكة النقل", governorates: "حدود المحافظات" };
+  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}`, buildings: "المباني", parcels: "قطع الأراضي", landmarks: "المعالم والخدمات", water: "المسطحات المائية", "field-survey": "الرفع الميداني", transport: "شبكة النقل", governorates: "حدود المحافظات", LRT_Line: "خط القطار الكهربائي الخفيف", lRT_Station: "محطات القطار الكهربائي الخفيف", Metro_Line: "خطوط المترو", Metro_Station: "محطات المترو", Road_CairoRing: "الطريق الدائري حول القاهرة", Road_MiddleRing: "الطريق الدائري الأوسط", Road_RegionalRing: "الدائري الإقليمي", Transit_GreenLine: "الخط الأخضر", Transit_KafrDawoodSadat: "وصلة كفر داوود–السادات", Transit_LRT: "القطار الكهربائي الخفيف", Transit_Metro1: "الخط الأول للمترو", Transit_Metro2: "الخط الثاني للمترو", Transit_Metro3: "الخط الثالث للمترو", Transit_Metro4: "الخط الرابع للمترو", Transit_Metro6: "الخط السادس للمترو", Transit_MonorailCapital: "المونوريل – العاصمة", Transit_MonorailOctober: "المونوريل – أكتوبر", Transit_RobikiBelbeis: "وصلة الروبيكي–بلبيس" };
   const mapInstance = scope.dataset.mapInstance || "primary";
   const tileTemplate = mapInstance.includes("baseline") ? imageryTiles[2014]
     : mapInstance.includes("current") ? imageryTiles[2024]
@@ -593,9 +593,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const regularLayers = summary.layers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && summary.layers.includes("landcover-start")));
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
   const requestedLayers = mapInstance.includes("baseline")
-    ? summary.layers.filter((layer) => ["study", "axis", "landcover-start"].includes(layer))
+    ? group === "ismailia" ? [...regularLayers, "landcover-start" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-start"].includes(layer))
     : mapInstance.includes("current")
-      ? summary.layers.filter((layer) => ["study", "axis", "landcover-end"].includes(layer))
+      ? group === "ismailia" ? [...regularLayers, "landcover-end" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-end"].includes(layer))
       : viewerMode ? summary.layers : [...regularLayers, ...(summary.layers.includes("landcover-end") ? ["landcover-end" as LayerName] : summary.layers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])];
   const layerResults = await Promise.all(requestedLayers.map(async (layer) => {
     const url = `../../data/dashboard/${group}/${layer}.geojson`;

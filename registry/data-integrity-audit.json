@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T10:01:13.071Z",
+  "generatedAt": "2026-09-08T19:18:56.865Z",
   "applications": 81,
   "totals": {
-    "features": 77021,
-    "sourceFeatures": 211386,
-    "renderableFeatures": 77016,
-    "coordinatePairs": 2853844
+    "features": 77095,
+    "sourceFeatures": 211460,
+    "renderableFeatures": 77090,
+    "coordinatePairs": 2861069
   },
   "applicationCoverage": {
     "western-upper-egypt": {
@@ -64,8 +64,8 @@
     },
     "ismailia": {
       "applications": 3,
-      "activeFeatures": 63888,
-      "activeLayers": 8,
+      "activeFeatures": 63962,
+      "activeLayers": 26,
       "verifiedLocalData": true
     }
   },
@@ -336,16 +336,142 @@
           "renderableFeatures": 91,
           "coordinatePairs": 578,
           "invalidCoordinates": 0
+        },
+        "LRT_Line": {
+          "features": 2,
+          "representedSourceFeatures": 2,
+          "renderableFeatures": 2,
+          "coordinatePairs": 232,
+          "invalidCoordinates": 0
+        },
+        "lRT_Station": {
+          "features": 22,
+          "representedSourceFeatures": 22,
+          "renderableFeatures": 22,
+          "coordinatePairs": 22,
+          "invalidCoordinates": 0
+        },
+        "Metro_Line": {
+          "features": 2,
+          "representedSourceFeatures": 2,
+          "renderableFeatures": 2,
+          "coordinatePairs": 145,
+          "invalidCoordinates": 0
+        },
+        "Metro_Station": {
+          "features": 34,
+          "representedSourceFeatures": 34,
+          "renderableFeatures": 34,
+          "coordinatePairs": 34,
+          "invalidCoordinates": 0
+        },
+        "Road_CairoRing": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 1022,
+          "invalidCoordinates": 0
+        },
+        "Road_MiddleRing": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 590,
+          "invalidCoordinates": 0
+        },
+        "Road_RegionalRing": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 812,
+          "invalidCoordinates": 0
+        },
+        "Transit_GreenLine": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 1990,
+          "invalidCoordinates": 0
+        },
+        "Transit_KafrDawoodSadat": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 60,
+          "invalidCoordinates": 0
+        },
+        "Transit_LRT": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 87,
+          "invalidCoordinates": 0
+        },
+        "Transit_Metro1": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 74,
+          "invalidCoordinates": 0
+        },
+        "Transit_Metro2": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 54,
+          "invalidCoordinates": 0
+        },
+        "Transit_Metro3": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 132,
+          "invalidCoordinates": 0
+        },
+        "Transit_Metro4": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 1540,
+          "invalidCoordinates": 0
+        },
+        "Transit_Metro6": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 100,
+          "invalidCoordinates": 0
+        },
+        "Transit_MonorailCapital": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 132,
+          "invalidCoordinates": 0
+        },
+        "Transit_MonorailOctober": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 116,
+          "invalidCoordinates": 0
+        },
+        "Transit_RobikiBelbeis": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 83,
+          "invalidCoordinates": 0
         }
       },
       "verifiedLocalData": true,
       "source": "C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات/public/data",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 63888,
-        "sourceFeatures": 63888,
-        "coordinatePairs": 696572,
-        "renderableFeatures": 63887
+        "features": 63962,
+        "sourceFeatures": 63962,
+        "coordinatePairs": 703797,
+        "renderableFeatures": 63961
       }
     },
     "kalabsha-axis": {
