@@ -889,16 +889,23 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   };
   const endInteraction = (delay = 0) => {
     window.clearTimeout(interactionTimer);
-    interactionTimer = window.setTimeout(() => scope.classList.remove("map-interacting"), delay);
+    interactionTimer = window.setTimeout(() => {
+      scope.classList.remove("map-interacting");
+      refreshBasemap();
+    }, delay);
   };
   const apply = (broadcast = true) => {
     viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
-    refreshBasemap();
+    // Satellite tiles are expensive to rebuild. During wheel/pan interaction
+    // only move the already-rendered SVG; refresh imagery once interaction ends.
+    if (!scope.classList.contains("map-interacting")) refreshBasemap();
     if (broadcast && linkedPair) linkedPair.dispatchEvent(new CustomEvent("linked-map-view", { detail: { source: mapInstance, zoom, tx, ty } }));
   };
   linkedPair?.addEventListener("linked-map-view", ((event: CustomEvent<{ source: string; zoom: number; tx: number; ty: number }>) => {
     if (event.detail.source === mapInstance) return;
+    beginInteraction();
     zoom = event.detail.zoom; tx = event.detail.tx; ty = event.detail.ty; apply(false);
+    endInteraction(220);
   }) as EventListener);
   const animateView = (nextZoom: number, nextTx: number, nextTy: number) => {
     cancelAnimationFrame(viewAnimation);
