@@ -660,7 +660,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       path.dataset.changeStatus = exactStatus === "changed" || exactStatus === "unchanged" ? exactStatus : "unknown";
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
-        const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label ?? "unclassified";
+        const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label
+          ?? feature.properties?.["استخدام_الأرض"] ?? feature.properties?.["وصف_الاستخدام"] ?? "unclassified";
         const normalized = String(rawValue).trim().toLowerCase();
         const numericCode = Number(rawValue);
         const inferredCode = Number.isFinite(numericCode) ? numericCode
