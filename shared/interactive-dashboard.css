@@ -88,6 +88,27 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .interactive-dashboard .map-status, .interactive-dashboard .map-scale, .interactive-dashboard .map-wheel-hint,
 .interactive-dashboard .temporal-map .map-status,
 .interactive-dashboard .map-layer-toggles { display:none !important; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles {
+  display:grid !important; position:absolute; z-index:5; top:10px; inset-inline-end:10px;
+  width:min(285px,calc(100% - 20px)); max-height:calc(100% - 20px); overflow:auto; gap:5px;
+  padding:9px; border:1px solid #ffffff2e; border-radius:20px; background:#080808e8;
+  box-shadow:0 8px 24px #000a; scrollbar-width:thin;
+}
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button {
+  min-height:28px; grid-template-columns:18px 1fr auto; border-color:#ffffff25; border-radius:16px;
+  background:#090909e8; font-size:11px; font-weight:700; direction:rtl; text-align:right;
+}
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button i { width:16px; height:16px; border-radius:8px; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active { border-color:#ffffff45; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button b { font-size:9px; color:#aaa; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="study"] i { background:#ff1717; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="axis"] i { background:#ff1717; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="urban"] i { background:#f6a900; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="agricultural"] i { background:#16c51b; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="industrial"] i { background:#9800c7; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="landcover-start"] i,
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="landcover-end"] i { background:linear-gradient(135deg,#16c51b 0 25%,#fff4ae 25% 50%,#9800c7 50% 75%,#f6a900 75%); }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="water"] i { background:#08afe1; }
 .map-sector-filter span { white-space: nowrap; }
 .map-layer-toggles button { display: grid; grid-template-columns: 11px 1fr auto; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid #ffffff66; border-radius: 6px; background: #071d31f2; color: #dce9f3; text-align: start; cursor: pointer; font-size: 10px; box-shadow:0 3px 10px #0007; }
 .map-layer-toggles button i { width: 9px; height: 9px; border-radius: 2px; background: #777; }

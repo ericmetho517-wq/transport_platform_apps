@@ -732,7 +732,13 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
                     : /military|government|حكوم|عسكر/.test(normalized) ? 5
                       : /water|مياه|مائي/.test(normalized) ? 8
                         : /road|طريق/.test(normalized) ? 12 : 99;
-        const palette: Record<number, [string, string]> = {
+        const palette: Record<number, [string, string]> = group === "ismailia" ? {
+          0: ["#16c51b", "#d9ff9b"], 1: ["#9800c7", "#f2c7ff"], 2: ["#fff4ae", "#fffbd8"],
+          3: ["#f6a900", "#ffe47d"], 4: ["#10b8ad", "#b9fff3"], 5: ["#ff1717", "#ffd1d1"],
+          6: ["#00cdbd", "#bafff5"], 7: ["#a9b8aa", "#e8f0e8"], 8: ["#08afe1", "#bcefff"],
+          9: ["#a5a5a5", "#eeeeee"], 10: ["#777777", "#d9d9d9"], 11: ["#f2f2f2", "#ffffff"],
+          12: ["#777777", "#d5d5d5"], 13: ["#b77b00", "#ffe19a"], 99: ["#9aa5ad", "#eef3f6"],
+        } : {
           0: ["#45c51a", "#d7ff91"], 1: ["#6657d9", "#dad5ff"], 2: ["#cfe566", "#f4ffc0"],
           3: ["#e4a313", "#ffe18a"], 4: ["#ef6c35", "#ffd1b8"], 5: ["#b17ad1", "#f3d5ff"],
           6: ["#21b7a8", "#b8fff4"], 7: ["#74826d", "#dce8d7"], 8: ["#22a9e0", "#c8f2ff"],
