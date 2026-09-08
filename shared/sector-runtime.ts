@@ -151,6 +151,15 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
   document.querySelectorAll<HTMLAnchorElement>(".evidence-image-link, .evidence-open-link").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); openEvidence(link); }));
   const initialCompareBox = document.querySelector<HTMLElement>("#story-compare");
   if (initialCompareBox?.dataset.compareSrc) {
+    initialCompareBox.classList.add("story-reference-compare");
+    const referenceImage = document.createElement("img");
+    referenceImage.id = "story-compare-image";
+    referenceImage.src = initialCompareBox.dataset.compareSrc;
+    referenceImage.alt = "مرجع مقارنة استخدامات الأراضي";
+    referenceImage.loading = "lazy";
+    initialCompareBox.replaceChildren(referenceImage);
+  }
+  if (initialCompareBox?.dataset.compareSrc) {
     const zoomButton = document.createElement("button");
     zoomButton.type = "button";
     zoomButton.className = "compare-zoom-button";
@@ -209,6 +218,8 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     if (heroSection && hero) heroSection.style.setProperty("--story-image", `url('${hero}')`);
     if (compareBox && compare) {
       compareBox.style.setProperty("--compare-image", `url('${compare}')`);
+      const referenceImage = compareBox.querySelector<HTMLImageElement>("#story-compare-image");
+      if (referenceImage) referenceImage.src = compare;
       fitStoryComparison(compare);
     }
     compareBox?.toggleAttribute("hidden", !compare);
