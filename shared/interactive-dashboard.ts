@@ -103,8 +103,13 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
 
 export const renderSectorMapMarkup = mapMarkup;
 
-function dashboardHeader(app: TransportApp): string {
-  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions"><label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label><label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تغير</option><option value="unchanged">لم يتغير</option></select></label><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
+function dashboardHeader(app: TransportApp, group = ""): string {
+  const isIsmailia = group === "ismailia";
+  const landuseFilter = isIsmailia && isPriceDashboard(app)
+    ? `<label class="dashboard-landuse-filter"><span>استخدامات الأراضي</span><select id="dashboard-landuse-filter" class="price-landuse-select"><option value="all">كل الاستخدامات</option><option value="urban">العمراني</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option></select></label>`
+    : "";
+  const sectorFilter = isIsmailia ? "" : `<label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label>`;
+  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions">${sectorFilter}${landuseFilter}<label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تغير</option><option value="unchanged">لم يتغير</option></select></label><span class="data-badge"><i></i>بيانات محلية مترابطة</span><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
 }
 
 function priceMarkup(app: TransportApp, group: string): string {
@@ -116,7 +121,7 @@ function priceMarkup(app: TransportApp, group: string): string {
     : mapMarkup();
   const trendArea = westernComparison ? "" : `<section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>`;
   return `<main class="interactive-dashboard price-dashboard${westernComparison ? " western-price-dashboard" : ""}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="price">
-    ${dashboardHeader(app)}
+    ${dashboardHeader(app, group)}
     <div class="price-layout">
       <aside class="price-columns" id="price-columns"><div class="loading-panel">جارٍ قراءة أسعار الأراضي من قاعدة بيانات المشروع…</div></aside>
       <section class="price-workspace">
@@ -267,7 +272,7 @@ function setUnavailableMetric(name: string): void {
   document.querySelectorAll<HTMLElement>(`[data-metric="${name}"]`).forEach((element) => { element.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; });
 }
 
-function renderPriceColumns(summary: DashboardSummary): void {
+function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): void {
   const container = document.querySelector<HTMLElement>("#price-columns");
   if (!container) return;
   const labels: Record<string, string> = { urban: "الأراضي العمرانية", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية", ...(summary.profile?.priceLabels || {}) };
@@ -284,8 +289,10 @@ function renderPriceColumns(summary: DashboardSummary): void {
   container.innerHTML = available.map((key) => {
     const item = summary.prices[key];
     const difference = Math.max(item.end - item.start, 0);
-    return `<article class="price-column" data-price-kind="${key}" style="--accent:${colors[key]}"><header><span>فرق أسعار ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>أسعار ${labels[key]} ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>أسعار ${labels[key]} ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div><button type="button">عرض السلسلة على الرسم</button></article>`;
+    const selected = selectedKind === "all" || selectedKind === key;
+    return `<article class="price-column${selectedKind !== "all" && selected ? " is-selected" : ""}" data-price-kind="${key}"${selectedKind !== "all" && !selected ? " hidden" : ""} style="--accent:${colors[key]}"><header><span>فرق أسعار ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>أسعار ${labels[key]} ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>أسعار ${labels[key]} ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div><button type="button">عرض السلسلة على الرسم</button></article>`;
   }).join("");
+  container.classList.toggle("price-filtered", selectedKind !== "all");
 }
 
 function renderLineChart(summary: DashboardSummary, visible: Set<string>): void {
@@ -1014,11 +1021,23 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     if (root.dataset.mode === "price") {
       let activePriceSummary = summary;
       const visible = new Set(["urban", "agricultural", "industrial"]);
+      let selectedLanduse = "all";
       const renderActivePrices = () => {
-        renderPriceColumns(activePriceSummary);
+        renderPriceColumns(activePriceSummary, selectedLanduse);
         renderLineChart(activePriceSummary, visible);
       };
       renderActivePrices();
+      root.addEventListener("dashboard-landuse-filter", ((event: CustomEvent<string>) => {
+        selectedLanduse = event.detail || "all";
+        visible.clear();
+        if (selectedLanduse === "all") {
+          ["urban", "agricultural", "industrial"].forEach((key) => visible.add(key));
+        } else {
+          visible.add(selectedLanduse);
+        }
+        document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((toggle) => toggle.classList.toggle("active", selectedLanduse === "all" || toggle.dataset.series === selectedLanduse));
+        renderActivePrices();
+      }) as EventListener);
       root.addEventListener("dashboard-sector-price", ((event: CustomEvent<{ metrics: Record<string, number>; prices: Record<string, { start: number; end: number }>; yearEnd: number; sectorTitle?: string }>) => {
         const years = Array.from({ length: event.detail.yearEnd - summary.yearStart + 1 }, (_, index) => summary.yearStart + index);
         const prices = event.detail.prices;
@@ -1100,6 +1119,30 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     }
     const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
     await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));
+    const priceLanduseSelect = root.querySelector<HTMLSelectElement>("#dashboard-landuse-filter");
+    if (priceLanduseSelect) {
+      const landuseCodes: Record<string, string> = { urban: "3", agricultural: "0", industrial: "1" };
+      const applyPriceLanduseFilter = () => {
+        const selected = priceLanduseSelect.value || "all";
+        mapRoots.forEach((map) => {
+          map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((layerGroup) => {
+            const layer = layerGroup.dataset.layerGroup || "";
+            if (["urban", "agricultural", "industrial"].includes(layer)) {
+              layerGroup.classList.toggle("layer-hidden", selected !== "all" && layer !== selected);
+            }
+            if (layer === "landcover-start" || layer === "landcover-end") {
+              layerGroup.classList.toggle("layer-hidden", false);
+              layerGroup.querySelectorAll<SVGPathElement>("path[data-landuse-code]").forEach((path) => {
+                path.toggleAttribute("hidden", selected !== "all" && path.dataset.landuseCode !== landuseCodes[selected]);
+              });
+            }
+          });
+        });
+        root.dispatchEvent(new CustomEvent("dashboard-landuse-filter", { detail: selected }));
+      };
+      priceLanduseSelect.addEventListener("change", applyPriceLanduseFilter);
+      applyPriceLanduseFilter();
+    }
     const statusTotals = { changed: 0, unchanged: 0 };
     if (summary.layers.includes("landcover-end")) {
       const latestLandcover = await loadGeoJson(`../../data/dashboard/${group}/landcover-end.geojson`);
