@@ -336,9 +336,9 @@
       "industrialChangePercent": 0.7
     },
     "prices": {
-      "urban": { "start": 316830157309.31, "end": 5685790068445.14 },
-      "agricultural": { "start": 95178048321, "end": 459736808907.45 },
-      "industrial": { "start": 42635885217.26, "end": 820679604244.9 }
+      "urban": { "start": 316606478701.80603, "end": 5683827610371.09 },
+      "agricultural": { "start": 94777205283.4583, "end": 456644273464.868 },
+      "industrial": { "start": 35600984498.3984, "end": 760199655768.47 }
     },
     "statusShares": { "existing": 85.4, "underConstruction": 14.6 },
     "landUse": []
