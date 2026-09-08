@@ -290,7 +290,7 @@ function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): vo
     const item = summary.prices[key];
     const difference = Math.max(item.end - item.start, 0);
     const selected = selectedKind === "all" || selectedKind === key;
-    return `<article class="price-column${selectedKind !== "all" && selected ? " is-selected" : ""}" data-price-kind="${key}"${selectedKind !== "all" && !selected ? " hidden" : ""} style="--accent:${colors[key]}"><header><span>فرق أسعار ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>أسعار ${labels[key]} ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>أسعار ${labels[key]} ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div><button type="button">عرض السلسلة على الرسم</button></article>`;
+    return `<article class="price-column${selectedKind !== "all" && selected ? " is-selected" : ""}" data-price-kind="${key}"${selectedKind !== "all" && !selected ? " hidden" : ""} style="--accent:${colors[key]}"><header><span>فرق أسعار ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>أسعار ${labels[key]} ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>أسعار ${labels[key]} ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div></article>`;
   }).join("");
   container.classList.toggle("price-filtered", selectedKind !== "all");
 }
@@ -519,7 +519,13 @@ function coordinatePairs(coordinates: Coordinates, result: number[][] = []): num
 }
 
 function geometryPath(geometry: { type: string; coordinates: Coordinates }, project: (pair: number[]) => [number, number]): string {
-  const line = (pairs: number[][], close = false) => pairs.map((pair, index) => `${index ? "L" : "M"}${project(pair).join(" ")}`).join(" ") + (close ? " Z" : "");
+  const line = (pairs: number[][], close = false) => {
+    // A few source polygons contain accidental jumps between distant points.
+    // Dropping that ring prevents SVG from drawing giant black triangles over
+    // the map while keeping the valid land-use features visible.
+    if (close && pairs.some((pair, index) => index > 0 && (Math.abs(pair[0] - pairs[index - 1][0]) > .15 || Math.abs(pair[1] - pairs[index - 1][1]) > .15))) return "";
+    return pairs.map((pair, index) => `${index ? "L" : "M"}${project(pair).join(" ")}`).join(" ") + (close ? " Z" : "");
+  };
   if (geometry.type === "Point") { const [x, y] = project(geometry.coordinates as number[]); return `M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0-8 0`; }
   if (geometry.type === "MultiPoint") return (geometry.coordinates as number[][]).map((pair) => { const [x, y] = project(pair); return `M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0-8 0`; }).join(" ");
   if (geometry.type === "LineString") return line(geometry.coordinates as number[][]);
@@ -863,7 +869,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const defaultZoom = group === "ismailia" ? 1.18 : 1;
   const defaultTx = (1000 - 1000 * defaultZoom) / 2;
   const defaultTy = (520 - 520 * defaultZoom) / 2;
-  let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
+  let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const inverseProject = (x: number, y: number): [number, number] => [
     viewMinX + (x - 50 - (900 - width * scale) / 2) / scale,
@@ -954,14 +960,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     event.preventDefault();
     beginInteraction();
     endInteraction(220);
-    const factor = Math.exp(-Math.max(-160, Math.min(160, event.deltaY)) * .0022);
+    wheelDelta += Math.max(-120, Math.min(120, event.deltaY));
     if (zoomFrame) return;
     zoomFrame = requestAnimationFrame(() => {
       zoomFrame = 0;
+      const delta = wheelDelta;
+      wheelDelta = 0;
       const bounds = svg.getBoundingClientRect();
       const centerX = (event.clientX - bounds.left) * 1000 / Math.max(bounds.width, 1);
       const centerY = (event.clientY - bounds.top) * 520 / Math.max(bounds.height, 1);
-      zoomBy(factor, centerX, centerY);
+      zoomBy(Math.exp(-Math.max(-180, Math.min(180, delta)) * .0014), centerX, centerY);
     });
   }, { passive: false });
   svg.addEventListener("pointerdown", (event) => { dragging = true; beginInteraction(); lastX = event.clientX; lastY = event.clientY; svg.setPointerCapture(event.pointerId); });
