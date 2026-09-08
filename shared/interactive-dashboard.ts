@@ -685,6 +685,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       // Yield between batches so a large layer cannot block scrolling/input.
       if (featureIndex > 0 && featureIndex % 100 === 0) await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
       if (!feature.geometry) continue;
+      // Exclude source features whose extent is clearly outside a single
+      // land-use parcel; these malformed polygons create giant black fills.
+      if (layer === "landcover-start" || layer === "landcover-end") {
+        const points = coordinatePairs(feature.geometry.coordinates);
+        if (points.length) {
+          const dx = Math.max(...points.map((point) => point[0])) - Math.min(...points.map((point) => point[0]));
+          const dy = Math.max(...points.map((point) => point[1])) - Math.min(...points.map((point) => point[1]));
+          if (dx > .3 || dy > .3) continue;
+        }
+      }
       const pathData = geometryPath(feature.geometry, project);
       if (!pathData) continue;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -721,11 +731,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.style.strokeWidth = "1.1";
       }
       const representative = Object.entries(feature.properties || {}).find(([, value]) => value !== null && value !== "")?.[1];
-      path.setAttribute("tabindex", "0");
       path.setAttribute("aria-label", `${labels[layer]}${representative ? `: ${String(representative)}` : ""}`);
-      const tooltip = document.createElementNS("http://www.w3.org/2000/svg", "title");
-      tooltip.textContent = `${labels[layer]}${representative ? ` · ${String(representative)}` : ""}`;
-      path.appendChild(tooltip);
       const sector = sectorOf(feature.properties);
       if (sector) { path.dataset.sector = sector; sectorValues.add(sector); }
       path.addEventListener("click", (event) => {
