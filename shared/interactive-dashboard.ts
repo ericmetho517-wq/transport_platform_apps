@@ -639,7 +639,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const tileCount = renderSatelliteBasemap(satellite, [viewMinX, viewMinY, viewMaxX, viewMaxY], project, tileTemplate);
   content.innerHTML = "";
   const sectorValues = new Set<string>();
-  const sectorOf = (properties: Record<string, unknown> = {}) => String(properties["اسم_القطاع"] ?? properties["sector"] ?? properties["Sector"] ?? "").trim();
+  // The Ismailia source represents one corridor; numeric sub-sector values in
+  // land-cover attributes (for example 10/17) are internal classifications,
+  // not selectable dashboard sectors.
+  const sectorOf = (properties: Record<string, unknown> = {}) => group === "ismailia" ? "" : String(properties["اسم_القطاع"] ?? properties["sector"] ?? properties["Sector"] ?? "").trim();
   for (const [layer, collection] of loaded) {
     const groupElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
     groupElement.dataset.layerGroup = layer;
