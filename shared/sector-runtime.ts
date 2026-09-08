@@ -157,7 +157,17 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     referenceImage.src = initialCompareBox.dataset.compareSrc;
     referenceImage.alt = "مرجع مقارنة استخدامات الأراضي";
     referenceImage.loading = "lazy";
-    initialCompareBox.replaceChildren(referenceImage);
+    const divider = document.createElement("i");
+    divider.id = "compare-handle";
+    divider.textContent = "↔";
+    const range = document.createElement("input");
+    range.id = "compare-range";
+    range.type = "range";
+    range.min = "0";
+    range.max = "100";
+    range.value = "50";
+    range.setAttribute("aria-label", "اسحب فاصل المقارنة");
+    initialCompareBox.replaceChildren(referenceImage, divider, range);
   }
   if (initialCompareBox?.dataset.compareSrc) {
     const zoomButton = document.createElement("button");
@@ -284,6 +294,7 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     if (overlay) overlay.style.width = `${range.value}%`;
     if (handle) handle.style.left = `${range.value}%`;
     if (compare && afterImage) afterImage.style.width = `${compare.clientWidth}px`;
+    if (compare) compare.style.setProperty("--compare-position", `${range.value}%`);
   });
   const compareBox = document.querySelector<HTMLElement>("#story-compare");
   if (compareBox) {
