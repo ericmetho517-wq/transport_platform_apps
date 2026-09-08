@@ -760,7 +760,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.dataset.landuseCode = String(inferredCode);
         path.style.fill = `${fill}d9`;
         path.style.stroke = stroke;
-        path.style.strokeWidth = "1.1";
+        path.style.strokeWidth = group === "ismailia" ? "0.65" : "1.1";
       }
       const representative = Object.entries(feature.properties || {}).find(([, value]) => value !== null && value !== "")?.[1];
       path.setAttribute("aria-label", `${labels[layer]}${representative ? `: ${String(representative)}` : ""}`);
