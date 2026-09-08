@@ -708,6 +708,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const groupElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
     groupElement.dataset.layerGroup = layer;
     groupElement.classList.add(`map-${layer}`);
+    const aggregateLandcover = group === "ismailia" && (layer === "landcover-start" || layer === "landcover-end") && (mapInstance.includes("baseline") || mapInstance.includes("current"));
+    const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string }>();
     for (const [featureIndex, feature] of collection.features.entries()) {
       // Yield between batches so a large layer cannot block scrolling/input.
       if (featureIndex > 0 && featureIndex % 100 === 0) await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
@@ -771,9 +773,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         };
         const [fill, stroke] = palette[inferredCode] || palette[99];
         path.dataset.landuseCode = String(inferredCode);
-        path.style.fill = `${fill}d9`;
+        path.style.fill = group === "ismailia" ? `${fill}e8` : `${fill}d9`;
         path.style.stroke = stroke;
         path.style.strokeWidth = group === "ismailia" ? "0.65" : "1.1";
+      }
+      if (aggregateLandcover) {
+        const code = path.dataset.landuseCode || "99";
+        const bucket = landcoverBuckets.get(code) || { paths: [], fill: path.style.fill, stroke: path.style.stroke, strokeWidth: path.style.strokeWidth, code };
+        bucket.paths.push(pathData);
+        landcoverBuckets.set(code, bucket);
+        continue;
       }
       const representative = Object.entries(feature.properties || {}).find(([, value]) => value !== null && value !== "")?.[1];
       path.setAttribute("aria-label", `${labels[layer]}${representative ? `: ${String(representative)}` : ""}`);
@@ -788,6 +797,17 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${labels[layer]}</p>${rows.map(([key, value]) => `<p><span>${esc(aggregateFieldLabels[key] || key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("")}`;
         popup.hidden = false;
       });
+      groupElement.appendChild(path);
+    }
+    for (const bucket of landcoverBuckets.values()) {
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", bucket.paths.join(" "));
+      path.dataset.geometry = "MultiPolygon";
+      path.dataset.landuseCode = bucket.code;
+      path.style.fill = bucket.fill;
+      path.style.stroke = "none";
+      path.style.strokeWidth = "0";
+      path.setAttribute("vector-effect", "non-scaling-stroke");
       groupElement.appendChild(path);
     }
     content.appendChild(groupElement);
