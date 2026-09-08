@@ -601,7 +601,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const temporalLayers: LayerName[] = ["landcover-start", "landcover-end"];
   const regularLayers = summary.layers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && summary.layers.includes("landcover-start")));
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
-  const requestedLayers = mapInstance.includes("baseline")
+  const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
+  const requestedLayers = focusedPriceMap
+    ? (mapInstance.includes("baseline") ? ["study", "axis", "landcover-start"] as LayerName[] : ["study", "axis", "landcover-end"] as LayerName[])
+    : mapInstance.includes("baseline")
     ? group === "ismailia" ? [...regularLayers, "landcover-start" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-start"].includes(layer))
     : mapInstance.includes("current")
       ? group === "ismailia" ? [...regularLayers, "landcover-end" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-end"].includes(layer))
@@ -1051,7 +1054,9 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           visible.add(selectedLanduse);
         }
         document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((toggle) => toggle.classList.toggle("active", selectedLanduse === "all" || toggle.dataset.series === selectedLanduse));
-        renderActivePrices();
+        // The cards are filtered in place by the select handler; redraw only
+        // the lightweight chart here instead of rebuilding every card.
+        renderLineChart(activePriceSummary, visible);
       }) as EventListener);
       root.addEventListener("dashboard-sector-price", ((event: CustomEvent<{ metrics: Record<string, number>; prices: Record<string, { start: number; end: number }>; yearEnd: number; sectorTitle?: string }>) => {
         const years = Array.from({ length: event.detail.yearEnd - summary.yearStart + 1 }, (_, index) => summary.yearStart + index);
@@ -1139,6 +1144,12 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const landuseCodes: Record<string, string> = { urban: "3", agricultural: "0", industrial: "1" };
       const applyPriceLanduseFilter = () => {
         const selected = priceLanduseSelect.value || "all";
+        const priceColumns = root.querySelector<HTMLElement>("#price-columns");
+        priceColumns?.classList.toggle("price-filtered", selected !== "all");
+        priceColumns?.querySelectorAll<HTMLElement>("[data-price-kind]").forEach((card) => {
+          card.hidden = selected !== "all" && card.dataset.priceKind !== selected;
+          card.classList.toggle("is-selected", selected !== "all" && card.dataset.priceKind === selected);
+        });
         mapRoots.forEach((map) => {
           map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((layerGroup) => {
             const layer = layerGroup.dataset.layerGroup || "";
