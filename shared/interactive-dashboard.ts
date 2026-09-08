@@ -263,6 +263,7 @@ function formatMoney(value: number): string {
 
 function setMetric(name: string, value: number): void {
   document.querySelectorAll<HTMLElement>(`[data-metric="${name}"]`).forEach((element) => {
+    element.closest<HTMLElement>("article, .dark-card")?.removeAttribute("hidden");
     const scale = Number(element.dataset.metricScale || 1);
     element.textContent = formatNumber(value / (Number.isFinite(scale) && scale > 0 ? scale : 1), 2);
   });
@@ -270,6 +271,12 @@ function setMetric(name: string, value: number): void {
 
 function setUnavailableMetric(name: string): void {
   document.querySelectorAll<HTMLElement>(`[data-metric="${name}"]`).forEach((element) => { element.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; });
+}
+
+function hideUnavailableMetricPanel(name: string): void {
+  document.querySelectorAll<HTMLElement>(`[data-metric="${name}"]`).forEach((element) => {
+    element.closest<HTMLElement>("article, .dark-card")?.setAttribute("hidden", "true");
+  });
 }
 
 function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): void {
@@ -446,15 +453,21 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
   const presentation = cropPresentation[group] || { labels: ["محاصيل موسمية", "خضروات", "فاكهة", "أخرى"], colors: ["#42d80b", "#d5e500", "#ff9818", "#00c9d8"] };
   const cropColors = presentation.colors;
   if (crop && cropShares.length) {
+    crop.closest<HTMLElement>(".crop-card")?.removeAttribute("hidden");
     let cursor = 0;
     crop.style.background = `conic-gradient(${cropShares.map((value, index) => { const start = cursor; cursor += value; return `${cropColors[index % cropColors.length]} ${start}% ${cursor}%`; }).join(",")})`;
   } else if (crop) { const label = crop.querySelector("strong"); if (label) label.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; }
   const cropLegend = document.querySelector<HTMLElement>("#crop-legend");
+  if (crop && !cropShares.length) crop.closest<HTMLElement>(".crop-card")?.setAttribute("hidden", "true");
   const cropLabels = presentation.labels;
   if (cropLegend) cropLegend.innerHTML = cropShares.map((value, index) => `<span><i style="background:${cropColors[index % cropColors.length]}"></i>${cropLabels[index]}: ${formatNumber(value, 0)}٪</span>`).join("");
   const ownership = profile?.ownershipShares || [];
   const ownershipDonut = document.querySelector<HTMLElement>("#ownership-donut");
-  if (ownershipDonut && ownership.length) ownershipDonut.style.background = `conic-gradient(#ffd51d 0 ${ownership[0]}%, #ff8b19 ${ownership[0]}% 100%)`;
+  if (ownershipDonut && !ownership.length) ownershipDonut.closest<HTMLElement>(".ownership-card")?.setAttribute("hidden", "true");
+  if (ownershipDonut && ownership.length) {
+    ownershipDonut.closest<HTMLElement>(".ownership-card")?.removeAttribute("hidden");
+    ownershipDonut.style.background = `conic-gradient(#ffd51d 0 ${ownership[0]}%, #ff8b19 ${ownership[0]}% 100%)`;
+  }
   else if (ownershipDonut) { const label = ownershipDonut.querySelector("strong"); if (label) label.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; }
   const ownershipLegend = document.querySelector<HTMLElement>("#ownership-legend");
   if (ownershipLegend && ownership.length) ownershipLegend.innerHTML = group === "qus-axis"
@@ -1054,9 +1067,9 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     if (!summary.landUse.length) summary.landUse = await deriveLandUseFromLocalLayers(group, summary);
     Object.entries(summary.metrics).forEach(([name, value]) => setMetric(name, value));
     setMetric("civilFeatures", summary.layerCounts?.civil || 0);
-    if (!summary.metrics.agriculturalWorkersThousands) setUnavailableMetric("agriculturalWorkersThousands");
-    if (!summary.metrics.agriculturalAreaFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) setUnavailableMetric("agriculturalAreaFeddan");
-    if (!summary.metrics.agriculturalChangeFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) setUnavailableMetric("agriculturalChangeFeddan");
+    if (!summary.metrics.agriculturalWorkersThousands) { setUnavailableMetric("agriculturalWorkersThousands"); hideUnavailableMetricPanel("agriculturalWorkersThousands"); }
+    if (!summary.metrics.agriculturalAreaFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) { setUnavailableMetric("agriculturalAreaFeddan"); hideUnavailableMetricPanel("agriculturalAreaFeddan"); }
+    if (!summary.metrics.agriculturalChangeFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) { setUnavailableMetric("agriculturalChangeFeddan"); hideUnavailableMetricPanel("agriculturalChangeFeddan"); }
     setMetric("availableLayers", summary.layers.length);
     const totalChange = root.dataset.mode === "land" ? (summary.metrics.urbanChangeKm2 || 0) : (summary.metrics.urbanChangeKm2 || 0) + (summary.metrics.agriculturalChangeKm2 || 0) + (summary.metrics.industrialChangeKm2 || 0);
     setMetric("totalChangeKm2", totalChange);
