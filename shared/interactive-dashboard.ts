@@ -713,7 +713,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         if (points.length) {
           const dx = Math.max(...points.map((point) => point[0])) - Math.min(...points.map((point) => point[0]));
           const dy = Math.max(...points.map((point) => point[1])) - Math.min(...points.map((point) => point[1]));
-          if (dx > .3 || dy > .3) continue;
+          // Land-use parcels are small local polygons. Anything wider than
+          // roughly ten kilometres is a concatenated source artifact and
+          // would render as a large black wedge when SVG closes the ring.
+          if (dx > .1 || dy > .1) continue;
         }
       }
       const pathData = geometryPath(feature.geometry, project);
