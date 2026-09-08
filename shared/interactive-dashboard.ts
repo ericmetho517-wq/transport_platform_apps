@@ -798,6 +798,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   // Keep the layer key out of the dashboard map; symbology is rendered on
   // the features themselves and the dashboard controls remain uncluttered.
   toggles.setAttribute("hidden", "true");
+  toggles.remove();
   scope.querySelector(".landuse-legend")?.remove();
   if (loaded.some(([layer]) => temporalLayers.includes(layer))) {
     const expanded = mapInstance.includes("baseline") || mapInstance.includes("current") ? "" : " open";
