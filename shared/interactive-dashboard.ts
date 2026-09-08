@@ -684,7 +684,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   let viewMinX = minX, viewMaxX = maxX, viewMinY = minY, viewMaxY = maxY;
   const rawWidth = Math.max(maxX - minX, .00001), rawHeight = Math.max(maxY - minY, .00001);
   const latitudeFactor = Math.max(Math.cos(((minY + maxY) / 2) * Math.PI / 180), .35);
-  const targetAspect = 900 / 430;
+  const targetAspect = 1000 / 520;
   if (rawWidth * latitudeFactor / rawHeight < targetAspect) {
     const requiredWidth = rawHeight * targetAspect / latitudeFactor;
     const padding = (requiredWidth - rawWidth) / 2;
@@ -695,8 +695,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     viewMinY -= padding; viewMaxY += padding;
   }
   const width = Math.max(viewMaxX - viewMinX, .00001), height = Math.max(viewMaxY - viewMinY, .00001);
-  const scale = Math.min(900 / width, 430 / height);
-  const project = (pair: number[]): [number, number] => [50 + (pair[0] - viewMinX) * scale + (900 - width * scale) / 2, 35 + (viewMaxY - pair[1]) * scale + (430 - height * scale) / 2];
+  const scale = Math.min(1000 / width, 520 / height);
+  const project = (pair: number[]): [number, number] => [(pair[0] - viewMinX) * scale + (1000 - width * scale) / 2, (viewMaxY - pair[1]) * scale + (520 - height * scale) / 2];
   const tileCount = renderSatelliteBasemap(satellite, [viewMinX, viewMinY, viewMaxX, viewMaxY], project, tileTemplate);
   content.innerHTML = "";
   const sectorValues = new Set<string>();
@@ -730,7 +730,15 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", pathData);
       path.dataset.geometry = feature.geometry.type;
-      if (feature.geometry.type === "LineString" || feature.geometry.type === "MultiLineString") path.style.fill = "none";
+      if (feature.geometry.type === "LineString" || feature.geometry.type === "MultiLineString") {
+        path.style.fill = "none";
+        path.style.stroke = layer === "axis" ? "#ff1edc" : "#10b8ad";
+        path.style.strokeWidth = layer === "axis" ? "6" : "2.4";
+        path.style.strokeLinecap = "round";
+      } else if (feature.geometry.type === "Point" || feature.geometry.type === "MultiPoint") {
+        path.style.fill = "#d8d8d8";
+        path.style.stroke = "#25323a";
+      }
       const exactStatus = feature.properties?.change_status_key;
       path.dataset.changeStatus = exactStatus === "changed" || exactStatus === "unchanged" ? exactStatus : "unknown";
       path.setAttribute("vector-effect", "non-scaling-stroke");
@@ -926,8 +934,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const inverseProject = (x: number, y: number): [number, number] => [
-    viewMinX + (x - 50 - (900 - width * scale) / 2) / scale,
-    viewMaxY - (y - 35 - (430 - height * scale) / 2) / scale,
+    viewMinX + (x - (1000 - width * scale) / 2) / scale,
+    viewMaxY - (y - (520 - height * scale) / 2) / scale,
   ];
   const refreshBasemap = () => {
     window.clearTimeout(basemapRefreshTimer);
