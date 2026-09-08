@@ -625,7 +625,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       pairCount += 1; minX = Math.min(minX, value[0]); maxX = Math.max(maxX, value[0]); minY = Math.min(minY, value[1]); maxY = Math.max(maxY, value[1]);
     } else if (Array.isArray(value)) value.forEach((item) => scanCoordinates(item as Coordinates));
   };
-  loaded.forEach(([, collection]) => collection.features.forEach((feature) => { if (feature.geometry) scanCoordinates(feature.geometry.coordinates); }));
+  // Keep the initial extent focused on the study corridor. Ismailia also
+  // contains reference transport layers covering much of Egypt; including
+  // those in the extent makes the actual study area appear tiny.
+  const extentLayers = group === "ismailia"
+    ? new Set<LayerName>(["study", "axis", "urban", "agricultural", "industrial", "landcover-start", "landcover-end"])
+    : null;
+  loaded.forEach(([layer, collection]) => {
+    if (extentLayers && !extentLayers.has(layer)) return;
+    collection.features.forEach((feature) => { if (feature.geometry) scanCoordinates(feature.geometry.coordinates); });
+  });
   if (!pairCount) {
     [minX, minY, maxX, maxY] = fallbackBounds[group] || [24, 22, 36, 32];
   }
@@ -848,7 +857,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
   }
 
-  let zoom = 1, tx = 0, ty = 0, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
+  const defaultZoom = group === "ismailia" ? 1.18 : 1;
+  const defaultTx = (1000 - 1000 * defaultZoom) / 2;
+  const defaultTy = (520 - 520 * defaultZoom) / 2;
+  let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const inverseProject = (x: number, y: number): [number, number] => [
     viewMinX + (x - 50 - (900 - width * scale) / 2) / scale,
@@ -895,7 +907,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     viewAnimation = requestAnimationFrame(frame);
   };
   const fitSector = (sector: string) => {
-    if (sector === "all") { animateView(1, 0, 0); return; }
+    if (sector === "all") { animateView(defaultZoom, defaultTx, defaultTy); return; }
     const paths = Array.from(content.querySelectorAll<SVGGraphicsElement>(`path[data-sector="${CSS.escape(sector)}"]`)).filter((path) => !path.hasAttribute("hidden"));
     if (!paths.length) return;
     const boxes = paths.map((path) => path.getBBox()).filter((box) => box.width > 0 || box.height > 0);
@@ -930,7 +942,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   scope.querySelectorAll<HTMLButtonElement>("[data-map-action]").forEach((button) => button.addEventListener("click", () => {
     if (button.dataset.mapAction === "in") zoomBy(1.35);
     if (button.dataset.mapAction === "out") zoomBy(.5);
-    if (button.dataset.mapAction === "home") { zoom = 1; tx = 0; ty = 0; apply(); }
+    if (button.dataset.mapAction === "home") { zoom = defaultZoom; tx = defaultTx; ty = defaultTy; apply(); }
   }));
   svg.addEventListener("wheel", (event) => {
     // Wheel zooms the map directly. Once either zoom boundary is reached the
@@ -957,6 +969,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   svg.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   scope.querySelector<HTMLButtonElement>(".feature-popup > button")?.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   document.querySelector<HTMLElement>(".interactive-dashboard")?.addEventListener("dashboard-map-sector", ((event: CustomEvent<string>) => fitSector(event.detail)) as EventListener);
+  // Apply the focused initial view before the user interacts. Paired maps
+  // receive subsequent wheel/pan changes through the linked-map-view event.
+  apply(false);
 }
 
 function activateLayerOnly(layer: string): void {
