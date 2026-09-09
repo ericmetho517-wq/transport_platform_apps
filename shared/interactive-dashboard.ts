@@ -686,9 +686,10 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
   }
   else if (ownershipDonut) { const label = ownershipDonut.querySelector("strong"); if (label) label.textContent = document.documentElement.lang === "en" ? "Not available" : "غير متاح"; }
   const ownershipLegend = document.querySelector<HTMLElement>("#ownership-legend");
+  const ownershipShareDigits = group === "ismailia" ? 1 : 0;
   if (ownershipLegend && ownership.length) ownershipLegend.innerHTML = group === "qus-axis"
-    ? `<span><i style="background:#ffd51d"></i>إيجار ${formatNumber(ownership[0], 0)}٪</span><span><i style="background:#ff8b19"></i>تمليك ${formatNumber(ownership[1], 0)}٪</span>`
-    : `<span><i style="background:#ffd51d"></i>ملك ${formatNumber(ownership[0], 0)}٪</span><span><i style="background:#ff8b19"></i>إيجار ${formatNumber(ownership[1], 0)}٪</span>`;
+    ? `<span><i style="background:#ffd51d"></i>إيجار ${formatNumber(ownership[0], ownershipShareDigits)}٪</span><span><i style="background:#ff8b19"></i>تمليك ${formatNumber(ownership[1], ownershipShareDigits)}٪</span>`
+    : `<span><i style="background:#ffd51d"></i>تمليك ${formatNumber(ownership[0], ownershipShareDigits)}٪</span><span><i style="background:#ff8b19"></i>إيجار ${formatNumber(ownership[1], ownershipShareDigits)}٪</span>`;
   (["agricultural", "industrial"] as const).forEach((kind) => {
     const gauge = document.querySelector<HTMLElement>(`#${kind}-gauge`);
     if (!gauge) return;

@@ -52,6 +52,8 @@ if (western?.cropShares?.reduce((sum, value) => sum + value, 0) !== 100) failure
 if (western?.ownershipShares?.reduce((sum, value) => sum + value, 0) !== 100) failures.push("western-upper-egypt: ownership shares must be complete");
 const ismailiaCropTotal = profiles.ismailia?.cropShares?.reduce((sum, value) => sum + value, 0);
 if (Math.abs((ismailiaCropTotal ?? 0) - 100) > 0.001 || profiles.ismailia?.cropShares?.length !== 3) failures.push("ismailia: crop shares must contain exactly three complete categories");
+const ismailiaOwnershipTotal = profiles.ismailia?.ownershipShares?.reduce((sum, value) => sum + value, 0);
+if (Math.abs((ismailiaOwnershipTotal ?? 0) - 100) > 0.001 || profiles.ismailia?.ownershipShares?.length !== 2) failures.push("ismailia: ownership shares must contain two complete categories");
 if (![2014, 2024].every((year) => western?.landUse?.some((item) => item.year === year))) failures.push("western-upper-egypt: overall 2014/2024 land-use comparison is required");
 const expectedWesternSectors = ["1", "2", "3", "4", "6", "7", "8", "9", "11", "12"];
 const westernSectors = western?.sectors || {};

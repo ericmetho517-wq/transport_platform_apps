@@ -342,6 +342,7 @@
     },
     "statusShares": { "existing": 85.4, "underConstruction": 14.6 },
     "cropShares": [41.7, 40.5, 17.8],
+    "ownershipShares": [75.8, 24.2],
     "landUse": []
   }
 }
