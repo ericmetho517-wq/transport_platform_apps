@@ -371,22 +371,17 @@ function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): vo
     industrial: summary.metrics.industrialChangeKm2 || 0,
   };
   const areaLabels: Record<string, string> = {
-    urban: "إجمالي مساحة أراضي المباني (كم²)",
+    urban: "إجمالي مساحة الأراضي العمرانية (كم²)",
     agricultural: "إجمالي مساحة الأراضي الزراعية (كم²)",
     industrial: "إجمالي مساحة الأراضي الصناعية (كم²)",
-  };
-  const headerBgColors: Record<string, string> = {
-    urban: "#f4b934",
-    agricultural: "#8bc34a",
-    industrial: "#efac28",
   };
   container.innerHTML = available.map((key) => {
     const item = summary.prices[key];
     const difference = Math.max(item.end - item.start, 0);
     const selected = selectedKind === "all" || selectedKind === key;
     const areaVal = areaMetrics[key] || 0;
-    const areaHeader = `<div class="price-column-top-card" style="background:${headerBgColors[key]};color:#fff;padding:12px 6px;text-align:center;display:grid;gap:4px;box-shadow:inset 0 -2px 0 #0002;"><span style="font-size:11px;font-weight:700;color:#ffffff;line-height:1.3;">${areaLabels[key]}</span><strong style="font-size:26px;font-weight:800;color:#ffffff;line-height:1;">${formatNumber(areaVal, 1)}</strong></div>`;
-    return `<article class="price-column${selectedKind !== "all" && selected ? " is-selected" : ""}" data-price-kind="${key}"${selectedKind !== "all" && !selected ? " hidden" : ""} style="--accent:${colors[key]}">${areaHeader}<header><span>فرق أسعار ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>أسعار ${labels[key]} ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>أسعار ${labels[key]} ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div></article>`;
+    const areaHeader = `<div class="price-column-top-card"><span>${areaLabels[key]}</span><strong>${formatNumber(areaVal, 1)}</strong></div>`;
+    return `<article class="price-column${selectedKind !== "all" && selected ? " is-selected" : ""}" data-price-kind="${key}"${selectedKind !== "all" && !selected ? " hidden" : ""} style="--accent:${colors[key]}">${areaHeader}<header><span>فرق سعر ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>سعر ${labels[key]} عام ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>سعر ${labels[key]} عام ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div></article>`;
   }).join("");
   container.classList.toggle("price-filtered", selectedKind !== "all");
 }
