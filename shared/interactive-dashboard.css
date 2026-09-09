@@ -63,10 +63,10 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-content path.change-match { opacity:1; stroke-width:2.4!important; filter:brightness(1.18) drop-shadow(0 0 2px #fff7); }
 .map-content path:hover,.map-content path:focus { filter: brightness(1.2); opacity: 1; outline:none; }
 .map-study path { fill: #00c8ff18; stroke: #fff; stroke-width: 4; filter: drop-shadow(0 0 3px #007acb); }
-.map-axis path { fill: none; stroke: #ff1edc; stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 0 3px #fff); }
-.map-urban path { fill: #ff4b22d4; stroke: #fff5d6; stroke-width: 1.7; }
-.map-agricultural path { fill: #52df08c9; stroke: #f2ffd9; stroke-width: 1.6; }
-.map-industrial path { fill: #00bce8d4; stroke: #e8fbff; stroke-width: 1.7; }
+.map-axis path { fill: none; stroke: #ff1f2d; stroke-width: 5.5; stroke-linecap: round; stroke-linejoin:round; filter: drop-shadow(0 0 2px #fff8); }
+.map-urban path { fill: #f6a900e8; stroke: #ffe47d; stroke-width: .75; }
+.map-agricultural path { fill: #16c51be8; stroke: #d9ff9b; stroke-width: .75; }
+.map-industrial path { fill: #9800c7e8; stroke: #f2c7ff; stroke-width: .75; }
 .map-content path[data-geometry="Point"], .map-content path[data-geometry="MultiPoint"] { stroke-width: 1.4; vector-effect:non-scaling-stroke; }
 .map-content path[data-geometry="Point"] { filter: drop-shadow(0 1px 2px #00131dcc); }
 .map-baseline path { fill: #f1ce55c9; stroke: #fff5b8; stroke-width: 1.15; }
@@ -78,6 +78,15 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-water path { fill:#18aee5cf; stroke:#d8f7ff; stroke-width:1.2; }
 .map-field-survey path { fill:#ffcf25; stroke:#151515; stroke-width:1.2; }
 .map-transport path { fill:none; stroke:#00e4ff; stroke-width:3.2; filter:drop-shadow(0 0 2px #001b2c); }
+.map-Road_CairoRing path { fill:none; stroke:#10b8ad; stroke-width:4.2; stroke-linecap:round; }
+.map-Road_MiddleRing path { fill:none; stroke:#2454a6; stroke-width:4.2; stroke-linecap:round; }
+.map-Road_RegionalRing path { fill:none; stroke:#e510c5; stroke-width:4.2; stroke-linecap:round; }
+.map-LRT_Line path,.map-Metro_Line path,.map-Transit_GreenLine path,.map-Transit_KafrDawoodSadat path,.map-Transit_LRT path,.map-Transit_Metro1 path,.map-Transit_Metro2 path,.map-Transit_Metro3 path,.map-Transit_Metro4 path,.map-Transit_Metro6 path,.map-Transit_MonorailCapital path,.map-Transit_MonorailOctober path,.map-Transit_RobikiBelbeis path { fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:3.8; stroke-dasharray:11 5; }
+.map-LRT_Line path,.map-Transit_GreenLine path,.map-Transit_LRT path { stroke:#4bd35c; }
+.map-Metro_Line path,.map-Transit_Metro4 path { stroke:#f3b525; }
+.map-Transit_KafrDawoodSadat path,.map-Transit_MonorailCapital path,.map-Transit_MonorailOctober path { stroke:#d8d8d8; }
+.map-Transit_Metro1 path { stroke:#f04459; }.map-Transit_Metro2 path { stroke:#7654c8; }.map-Transit_Metro3 path { stroke:#54a8f2; }.map-Transit_Metro6 path { stroke:#a573db; }.map-Transit_RobikiBelbeis path { stroke:#10b8ad; }
+.map-lRT_Station path,.map-Metro_Station path { fill:#f4f4f4; stroke:#263238; stroke-width:1.5; }
 .map-governorates path { fill:none; stroke:#fff; stroke-width:2.5; stroke-dasharray:9 5; }
 .layer-hidden { display: none; }
 .map-status { position: absolute; top: 8px; inset-inline-end: 9px; z-index: 3; display: flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 7px; background: #052f58eb; color: #fff; font-size: 10px; box-shadow:0 4px 15px #0006; }

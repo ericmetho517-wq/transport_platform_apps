@@ -2,6 +2,30 @@ import type { TransportApp } from "./project-runtime";
 
 type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil" | "landcover-start" | "landcover-end" | "buildings" | "parcels" | "landmarks" | "water" | "field-survey" | "transport" | "governorates" | "LRT_Line" | "lRT_Station" | "Metro_Line" | "Metro_Station" | "Road_CairoRing" | "Road_MiddleRing" | "Road_RegionalRing" | "Transit_GreenLine" | "Transit_KafrDawoodSadat" | "Transit_LRT" | "Transit_Metro1" | "Transit_Metro2" | "Transit_Metro3" | "Transit_Metro4" | "Transit_Metro6" | "Transit_MonorailCapital" | "Transit_MonorailOctober" | "Transit_RobikiBelbeis";
 
+// One approved cartographic language for every dashboard map.  Keeping this
+// in the renderer (rather than per-dashboard CSS) means a road or rail layer
+// has exactly the same colour, width, and dash pattern everywhere.
+const lineSymbols: Partial<Record<LayerName, { color: string; width: number; dash?: string }>> = {
+  axis: { color: "#ff1f2d", width: 5.5 },
+  transport: { color: "#10b8ad", width: 3.4 },
+  Road_CairoRing: { color: "#10b8ad", width: 4.2 },
+  Road_MiddleRing: { color: "#2454a6", width: 4.2 },
+  Road_RegionalRing: { color: "#e510c5", width: 4.2 },
+  LRT_Line: { color: "#4bd35c", width: 3.8, dash: "11 5" },
+  Metro_Line: { color: "#f3b525", width: 3.8, dash: "11 5" },
+  Transit_GreenLine: { color: "#4bd35c", width: 3.8, dash: "11 5" },
+  Transit_KafrDawoodSadat: { color: "#d8d8d8", width: 3.8, dash: "11 5" },
+  Transit_LRT: { color: "#4bd35c", width: 3.8, dash: "11 5" },
+  Transit_Metro1: { color: "#f04459", width: 3.8, dash: "11 5" },
+  Transit_Metro2: { color: "#7654c8", width: 3.8, dash: "11 5" },
+  Transit_Metro3: { color: "#54a8f2", width: 3.8, dash: "11 5" },
+  Transit_Metro4: { color: "#f3b525", width: 3.8, dash: "11 5" },
+  Transit_Metro6: { color: "#a573db", width: 3.8, dash: "11 5" },
+  Transit_MonorailCapital: { color: "#d8d8d8", width: 3.8, dash: "11 5" },
+  Transit_MonorailOctober: { color: "#d8d8d8", width: 3.8, dash: "11 5" },
+  Transit_RobikiBelbeis: { color: "#10b8ad", width: 3.8, dash: "11 5" },
+};
+
 interface DashboardSummary {
   slug: string;
   projectTitle: string;
@@ -733,13 +757,17 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       path.setAttribute("d", pathData);
       path.dataset.geometry = feature.geometry.type;
       if (feature.geometry.type === "LineString" || feature.geometry.type === "MultiLineString") {
+        const symbol = lineSymbols[layer] || { color: "#10b8ad", width: 3.2 };
         path.style.fill = "none";
-        path.style.stroke = layer === "axis" ? "#ff1edc" : "#10b8ad";
-        path.style.strokeWidth = layer === "axis" ? "6" : "2.4";
+        path.style.stroke = symbol.color;
+        path.style.strokeWidth = String(symbol.width);
         path.style.strokeLinecap = "round";
+        path.style.strokeLinejoin = "round";
+        if (symbol.dash) path.style.strokeDasharray = symbol.dash;
       } else if (feature.geometry.type === "Point" || feature.geometry.type === "MultiPoint") {
-        path.style.fill = "#d8d8d8";
-        path.style.stroke = "#25323a";
+        path.style.fill = (layer === "lRT_Station" || layer === "Metro_Station") ? "#f4f4f4" : "#d8d8d8";
+        path.style.stroke = "#263238";
+        path.style.strokeWidth = "1.5";
       }
       const exactStatus = feature.properties?.change_status_key;
       path.dataset.changeStatus = exactStatus === "changed" || exactStatus === "unchanged" ? exactStatus : "unknown";
@@ -758,24 +786,18 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
                     : /military|government|حكوم|عسكر/.test(normalized) ? 5
                       : /water|مياه|مائي/.test(normalized) ? 8
                         : /road|طريق/.test(normalized) ? 12 : 99;
-        const palette: Record<number, [string, string]> = group === "ismailia" ? {
+        const palette: Record<number, [string, string]> = {
           0: ["#16c51b", "#d9ff9b"], 1: ["#9800c7", "#f2c7ff"], 2: ["#fff4ae", "#fffbd8"],
           3: ["#f6a900", "#ffe47d"], 4: ["#10b8ad", "#b9fff3"], 5: ["#ff1717", "#ffd1d1"],
           6: ["#00cdbd", "#bafff5"], 7: ["#a9b8aa", "#e8f0e8"], 8: ["#08afe1", "#bcefff"],
           9: ["#a5a5a5", "#eeeeee"], 10: ["#777777", "#d9d9d9"], 11: ["#f2f2f2", "#ffffff"],
           12: ["#777777", "#d5d5d5"], 13: ["#b77b00", "#ffe19a"], 99: ["#9aa5ad", "#eef3f6"],
-        } : {
-          0: ["#45c51a", "#d7ff91"], 1: ["#6657d9", "#dad5ff"], 2: ["#cfe566", "#f4ffc0"],
-          3: ["#e4a313", "#ffe18a"], 4: ["#ef6c35", "#ffd1b8"], 5: ["#b17ad1", "#f3d5ff"],
-          6: ["#21b7a8", "#b8fff4"], 7: ["#74826d", "#dce8d7"], 8: ["#22a9e0", "#c8f2ff"],
-          9: ["#c7ad72", "#fff0c3"], 10: ["#d94f70", "#ffd0dc"], 11: ["#b89158", "#f7e5bd"],
-          12: ["#5d82c9", "#dce8ff"], 13: ["#8f5aae", "#eddbf8"], 99: ["#9aa5ad", "#eef3f6"],
         };
         const [fill, stroke] = palette[inferredCode] || palette[99];
         path.dataset.landuseCode = String(inferredCode);
-        path.style.fill = group === "ismailia" ? `${fill}e8` : `${fill}d9`;
+        path.style.fill = `${fill}e8`;
         path.style.stroke = stroke;
-        path.style.strokeWidth = group === "ismailia" ? "0.65" : "1.1";
+        path.style.strokeWidth = "0.75";
       }
       if (aggregateLandcover) {
         const code = path.dataset.landuseCode || layer;
@@ -808,7 +830,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       // a fraction of the original DOM cost.
       for (let start = 0; start < bucket.paths.length; start += 40) {
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("d", bucket.paths.slice(start, start + 220).join(" "));
+        path.setAttribute("d", bucket.paths.slice(start, start + 40).join(" "));
         path.dataset.geometry = "MultiPolygon";
         if (layer === "landcover-start" || layer === "landcover-end") path.dataset.landuseCode = bucket.code;
         path.style.fill = bucket.fill;
