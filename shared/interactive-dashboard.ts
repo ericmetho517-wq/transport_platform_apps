@@ -239,28 +239,31 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
   if (group === "ismailia") {
     return `<main class="interactive-dashboard agriculture-dashboard ismailia-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
       ${dashboardHeader(app)}
-      <div class="dashboard-kpis agriculture-kpis south-agriculture-kpis ismailia-summary-kpis" style="grid-template-columns: repeat(7, minmax(0,1fr));">
-        <article class="ismailia-jobs-kpi"><span>فرص العمل لمشروعات المباني المستحدثة</span><strong data-metric="jobOpportunities">—</strong><small>فرصة عمل تقديرية مرتبطة بمناطق التغير</small></article>
-        <article style="background:#78ea00;color:#000;"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan" style="color:#000;">—</strong></article>
-        <article style="background:#78ea00;color:#000;"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalFeatures" style="color:#000;">—</strong></article>
-        <article style="background:#4f82e9;color:#fff;"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm" style="color:#fff;">—</strong></article>
-        <article style="background:#ffffff;color:#000;"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2" style="color:#000;">—</strong></article>
-        <article style="background:#808080;color:#fff;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialFeatures" style="color:#fff;">—</strong></article>
-        <article style="background:#9800c7;color:#fff;"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2" style="color:#fff;">—</strong></article>
-      </div>
-      <div class="agriculture-layout ismailia-agri-layout">
-        <aside class="agriculture-side">
+      <div class="ismailia-reference-layout">
+        <aside class="agriculture-side ismailia-left-rail">
+          <article class="ismailia-agri-total"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article>
           <section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section>
           <section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section>
         </aside>
-        <section class="agriculture-center">
-          ${mapMarkup()}
-          <section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2016</bdi> / <bdi class="map-year-end">2026</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section>
+        <section class="ismailia-reference-main">
+          <div class="dashboard-kpis agriculture-kpis south-agriculture-kpis ismailia-summary-kpis">
+            <article style="background:#78ea00;color:#000;"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalFeatures" style="color:#000;">—</strong></article>
+            <article style="background:#4f82e9;color:#fff;"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm" style="color:#fff;">—</strong></article>
+            <article style="background:#ffffff;color:#000;"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2" style="color:#000;">—</strong></article>
+            <article style="background:#808080;color:#fff;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialFeatures" style="color:#fff;">—</strong></article>
+            <article style="background:#9800c7;color:#fff;"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2" style="color:#fff;">—</strong></article>
+          </div>
+          <div class="ismailia-reference-body">
+            <section class="agriculture-center">
+              ${mapMarkup()}
+              <section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2016</bdi> / <bdi class="map-year-end">2026</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section>
+            </section>
+            <aside class="agriculture-right ismailia-agri-right">
+              <section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section>
+              <section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><i></i><strong>—</strong></div></section>
+            </aside>
+          </div>
         </section>
-        <aside class="agriculture-right ismailia-agri-right">
-          <section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section>
-          <section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><i></i><strong>—</strong></div></section>
-        </aside>
       </div>
     </main>`;
   }
@@ -657,6 +660,7 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
   const crop = document.querySelector<HTMLElement>("#crop-donut");
   const group = document.querySelector<HTMLElement>(".interactive-dashboard")?.dataset.dashboardGroup || "";
   const cropPresentation: Record<string, { labels: string[]; colors: string[] }> = {
+    "ismailia": { labels: ["خضروات", "فواكه", "حبوب"], colors: ["#f7f200", "#ff4b16", "#159bd3"] },
     "qena-luxor-road": { labels: ["خضروات", "فاكهة", "محاصيل موسمية", "أخرى"], colors: ["#ff9818", "#d5e500", "#42d80b", "#00c9d8"] },
     "qus-axis": { labels: ["خضروات", "محاصيل موسمية"], colors: ["#42d80b", "#ff5a10"] },
     "kalabsha-axis": { labels: ["خضروات", "فاكهة", "محاصيل موسمية"], colors: ["#42d80b", "#d5e500", "#ff5a10"] },
@@ -671,7 +675,8 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
   const cropLegend = document.querySelector<HTMLElement>("#crop-legend");
   if (crop && !cropShares.length) crop.closest<HTMLElement>(".crop-card")?.setAttribute("hidden", "true");
   const cropLabels = presentation.labels;
-  if (cropLegend) cropLegend.innerHTML = cropShares.map((value, index) => `<span><i style="background:${cropColors[index % cropColors.length]}"></i>${cropLabels[index]}: ${formatNumber(value, 0)}٪</span>`).join("");
+  const cropShareDigits = group === "ismailia" ? 1 : 0;
+  if (cropLegend) cropLegend.innerHTML = cropShares.map((value, index) => `<span><i style="background:${cropColors[index % cropColors.length]}"></i>${cropLabels[index]}: ${formatNumber(value, cropShareDigits)}٪</span>`).join("");
   const ownership = profile?.ownershipShares || [];
   const ownershipDonut = document.querySelector<HTMLElement>("#ownership-donut");
   if (ownershipDonut && !ownership.length) ownershipDonut.closest<HTMLElement>(".ownership-card")?.setAttribute("hidden", "true");
