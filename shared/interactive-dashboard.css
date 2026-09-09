@@ -336,6 +336,8 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .ismailia-reference-body .agriculture-center { display:grid; grid-template-rows:minmax(360px,58vh) minmax(210px,1fr); }
 .ismailia-reference-body .agriculture-center > .gis-map { min-height:360px; }
 .ismailia-agri-right { display: grid; grid-template-rows: 1fr 1fr; border-inline-start: 2px solid #3d3d3d; max-height: calc(100vh - 79px); overflow: hidden; }
+.ismailia-agri-right.single-gauge { grid-template-rows:1fr; }
+.ismailia-agri-right .gauge-card[hidden] { display:none; }
 .ismailia-agri-right .gauge-card { padding: 8px 10px; gap: 4px; }
 .ismailia-agri-right .gauge-card > span { font-size: 13px; font-weight: 800; }
 .ismailia-agri-right .gauge { width: min(230px, 96%); }

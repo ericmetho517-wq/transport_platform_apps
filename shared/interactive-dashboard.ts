@@ -129,8 +129,14 @@ export const renderSectorMapMarkup = mapMarkup;
 
 function dashboardHeader(app: TransportApp, group = ""): string {
   const isIsmailia = group === "ismailia";
-  const landuseFilter = isIsmailia && isPriceDashboard(app)
-    ? `<label class="dashboard-landuse-filter"><span>استخدامات الأراضي</span><select id="dashboard-landuse-filter" class="price-landuse-select"><option value="all">كل الاستخدامات</option><option value="urban">العمراني</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option></select></label>`
+  const isAgricultureAndIndustry = /الزراعية.*الصناعية|agricultural.*industrial/i.test(app.title);
+  const landuseOptions = isPriceDashboard(app)
+    ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`
+    : isAgricultureAndIndustry
+      ? `<option value="all">الزراعة والصناعة</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`
+      : "";
+  const landuseFilter = isIsmailia && landuseOptions
+    ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
     : "";
   const sectorFilter = isIsmailia ? "" : `<label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label>`;
   return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions">${sectorFilter}${landuseFilter}<label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تغير</option><option value="unchanged">لم يتغير</option></select></label><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
@@ -238,7 +244,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
   const urbanAreaLabel = rawChangeData ? "مساحة التغير العمراني المحصورة (كم²)" : "إجمالي مساحة الأراضي العمرانية (كم²)";
   if (group === "ismailia") {
     return `<main class="interactive-dashboard agriculture-dashboard ismailia-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
-      ${dashboardHeader(app)}
+      ${dashboardHeader(app, group)}
       <div class="ismailia-reference-layout">
         <aside class="agriculture-side ismailia-left-rail">
           <article class="ismailia-agri-total"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article>
@@ -1522,11 +1528,11 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     }
     const mapRoots = Array.from(root.querySelectorAll<HTMLElement>(".gis-map"));
     await Promise.all(mapRoots.map((map) => initializeMap(group, summary, map)));
-    const priceLanduseSelect = root.querySelector<HTMLSelectElement>("#dashboard-landuse-filter");
-    if (priceLanduseSelect) {
+    const landuseSelect = root.querySelector<HTMLSelectElement>("#dashboard-landuse-filter");
+    if (landuseSelect) {
       const landuseCodes: Record<string, string> = { urban: "3", agricultural: "0", industrial: "1" };
-      const applyPriceLanduseFilter = () => {
-        const selected = priceLanduseSelect.value || "all";
+      const applyLanduseFilter = () => {
+        const selected = landuseSelect.value || "all";
         const priceColumns = root.querySelector<HTMLElement>("#price-columns");
         priceColumns?.classList.toggle("price-filtered", selected !== "all");
         priceColumns?.querySelectorAll<HTMLElement>("[data-price-kind]").forEach((card) => {
@@ -1547,10 +1553,17 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
             }
           });
         });
+        const gaugeRail = root.querySelector<HTMLElement>(".ismailia-agri-right");
+        (["agricultural", "industrial"] as const).forEach((kind) => {
+          const gaugeCard = root.querySelector<HTMLElement>(`#${kind}-gauge`)?.closest<HTMLElement>(".gauge-card");
+          if (gaugeCard) gaugeCard.hidden = selected !== "all" && selected !== kind;
+        });
+        gaugeRail?.classList.toggle("single-gauge", selected === "agricultural" || selected === "industrial");
+        root.dataset.landuseFilter = selected;
         root.dispatchEvent(new CustomEvent("dashboard-landuse-filter", { detail: selected }));
       };
-      priceLanduseSelect.addEventListener("change", applyPriceLanduseFilter);
-      applyPriceLanduseFilter();
+      landuseSelect.addEventListener("change", applyLanduseFilter);
+      applyLanduseFilter();
     }
     const statusTotals = { changed: 0, unchanged: 0 };
     const statusAreas = {
