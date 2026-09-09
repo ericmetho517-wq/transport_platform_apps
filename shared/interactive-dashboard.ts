@@ -800,15 +800,25 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       groupElement.appendChild(path);
     }
     for (const bucket of landcoverBuckets.values()) {
-      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      path.setAttribute("d", bucket.paths.join(" "));
-      path.dataset.geometry = "MultiPolygon";
-      if (layer === "landcover-start" || layer === "landcover-end") path.dataset.landuseCode = bucket.code;
-      path.style.fill = bucket.fill;
-      path.style.stroke = "none";
-      path.style.strokeWidth = "0";
-      path.setAttribute("vector-effect", "non-scaling-stroke");
-      groupElement.appendChild(path);
+      // Keep paths in compact batches instead of one enormous compound path:
+      // this preserves every polygon's fill while still avoiding tens of
+      // thousands of DOM nodes during pan and zoom.
+      // A small batch avoids SVG's even-odd fill cancellation across distant
+      // parcels (which can make valid features look missing), while retaining
+      // a fraction of the original DOM cost.
+      for (let start = 0; start < bucket.paths.length; start += 40) {
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", bucket.paths.slice(start, start + 220).join(" "));
+        path.dataset.geometry = "MultiPolygon";
+        if (layer === "landcover-start" || layer === "landcover-end") path.dataset.landuseCode = bucket.code;
+        path.style.fill = bucket.fill;
+        path.style.stroke = "none";
+        path.style.strokeWidth = "0";
+        path.setAttribute("fill-rule", "evenodd");
+        path.setAttribute("clip-rule", "evenodd");
+        path.setAttribute("vector-effect", "non-scaling-stroke");
+        groupElement.appendChild(path);
+      }
     }
     content.appendChild(groupElement);
   }
