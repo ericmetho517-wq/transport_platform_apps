@@ -708,11 +708,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const groupElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
     groupElement.dataset.layerGroup = layer;
     groupElement.classList.add(`map-${layer}`);
-    const aggregateLandcover = group === "ismailia" && (layer === "landcover-start" || layer === "landcover-end") && (mapInstance.includes("baseline") || mapInstance.includes("current"));
+    const aggregateLandcover = group === "ismailia" && ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer) && (mapInstance.includes("baseline") || mapInstance.includes("current"));
     const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string }>();
     for (const [featureIndex, feature] of collection.features.entries()) {
       // Yield between batches so a large layer cannot block scrolling/input.
-      if (featureIndex > 0 && featureIndex % 100 === 0) await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+      if (featureIndex > 0 && featureIndex % (aggregateLandcover ? 900 : 180) === 0) await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
       if (!feature.geometry) continue;
       // Exclude source features whose extent is clearly outside a single
       // land-use parcel; these malformed polygons create giant black fills.
@@ -778,7 +778,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.style.strokeWidth = group === "ismailia" ? "0.65" : "1.1";
       }
       if (aggregateLandcover) {
-        const code = path.dataset.landuseCode || "99";
+        const code = path.dataset.landuseCode || layer;
         const bucket = landcoverBuckets.get(code) || { paths: [], fill: path.style.fill, stroke: path.style.stroke, strokeWidth: path.style.strokeWidth, code };
         bucket.paths.push(pathData);
         landcoverBuckets.set(code, bucket);
@@ -803,7 +803,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", bucket.paths.join(" "));
       path.dataset.geometry = "MultiPolygon";
-      path.dataset.landuseCode = bucket.code;
+      if (layer === "landcover-start" || layer === "landcover-end") path.dataset.landuseCode = bucket.code;
       path.style.fill = bucket.fill;
       path.style.stroke = "none";
       path.style.strokeWidth = "0";
