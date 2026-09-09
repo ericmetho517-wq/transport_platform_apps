@@ -239,21 +239,21 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
   if (group === "ismailia") {
     return `<main class="interactive-dashboard agriculture-dashboard ismailia-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
       ${dashboardHeader(app)}
+      <div class="dashboard-kpis agriculture-kpis south-agriculture-kpis ismailia-summary-kpis" style="grid-template-columns: repeat(7, minmax(0,1fr));">
+        <article class="ismailia-jobs-kpi"><span>فرص العمل لمشروعات المباني المستحدثة</span><strong data-metric="jobOpportunities">—</strong><small>فرصة عمل تقديرية مرتبطة بمناطق التغير</small></article>
+        <article style="background:#78ea00;color:#000;"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan" style="color:#000;">—</strong></article>
+        <article style="background:#78ea00;color:#000;"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalFeatures" style="color:#000;">—</strong></article>
+        <article style="background:#4f82e9;color:#fff;"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm" style="color:#fff;">—</strong></article>
+        <article style="background:#ffffff;color:#000;"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2" style="color:#000;">—</strong></article>
+        <article style="background:#808080;color:#fff;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialFeatures" style="color:#fff;">—</strong></article>
+        <article style="background:#9800c7;color:#fff;"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2" style="color:#fff;">—</strong></article>
+      </div>
       <div class="agriculture-layout ismailia-agri-layout">
         <aside class="agriculture-side">
           <section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section>
           <section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section>
         </aside>
         <section class="agriculture-center">
-          <div class="dashboard-kpis agriculture-kpis south-agriculture-kpis ismailia-summary-kpis" style="grid-template-columns: repeat(7, minmax(0,1fr));">
-            <article class="ismailia-jobs-kpi"><span>فرص العمل لمشروعات المباني المستحدثة</span><strong data-metric="jobOpportunities">—</strong><small>فرصة عمل تقديرية مرتبطة بمناطق التغير</small></article>
-            <article style="background:#78ea00;color:#000;"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan" style="color:#000;">—</strong></article>
-            <article style="background:#78ea00;color:#000;"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalFeatures" style="color:#000;">—</strong></article>
-            <article style="background:#4f82e9;color:#fff;"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm" style="color:#fff;">—</strong></article>
-            <article style="background:#ffffff;color:#000;"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2" style="color:#000;">—</strong></article>
-            <article style="background:#808080;color:#fff;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialFeatures" style="color:#fff;">—</strong></article>
-            <article style="background:#808080;color:#fff;"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2" style="color:#fff;">—</strong></article>
-          </div>
           ${mapMarkup()}
           <section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2016</bdi> / <bdi class="map-year-end">2026</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section>
         </section>
