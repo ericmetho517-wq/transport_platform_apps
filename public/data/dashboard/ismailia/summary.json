@@ -8,7 +8,7 @@
   "metrics": {
     "studyAreaKm2": 2583.8,
     "axisLengthKm": 135.1981,
-    "urbanChangeKm2": 61.8573,
+    "urbanChangeKm2": 61.3,
     "agriculturalChangeKm2": 258.1476,
     "industrialChangeKm2": 19.0231,
     "urbanFeatures": 8049,
@@ -17,7 +17,7 @@
     "waterFeatures": 91,
     "agriculturalAreaFeddan": 63799.2,
     "agriculturalChangeFeddan": 63799.2,
-    "totalChangeKm2": 338.9979,
+    "totalChangeKm2": 61.3,
     "urbanChangePercent": 14.6,
     "agriculturalChangePercent": 10.0,
     "industrialChangePercent": 0.7
@@ -118,7 +118,7 @@
     "metrics": {
       "studyAreaKm2": 2583.8,
       "axisLengthKm": 135.1981,
-      "urbanChangeKm2": 61.8573,
+      "urbanChangeKm2": 61.3,
       "agriculturalChangeKm2": 258.1476,
       "industrialChangeKm2": 19.0231,
       "urbanFeatures": 8049,
@@ -129,7 +129,7 @@
       "industrialChangePercent": 0.7
     },
     "changeBars": [
-      { "label": "تغير عمراني", "value": 61.8573, "layer": "urban" },
+      { "label": "تغير عمراني", "value": 61.3, "layer": "urban" },
       { "label": "تغير زراعي", "value": 258.1476, "layer": "agricultural" },
       { "label": "تغير صناعي", "value": 19.0231, "layer": "industrial" }
     ],

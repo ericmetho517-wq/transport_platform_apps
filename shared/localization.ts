@@ -103,7 +103,7 @@ const replacements: Array<[string, string]> = [
   ["مقارنة مساحات استخدامات الأراضي", "Land-use area comparison"],
   ["نسبة مساحة التغير العمراني من منطقة الدراسة", "Urban change as a share of the study area"],
   ["نسبة التغير العمراني بمنطقة الدراسة", "Urban change within the study area"],
-  ["فرص العمل لمشروعات المباني المستحدثة", "Jobs associated with newly developed buildings"],
+  ["فرص العمل للأراضي العمرانية المستحدثة", "Jobs associated with newly developed urban land"],
   ["فرصة عمل تقديرية مرتبطة بمناطق التغير", "Estimated jobs associated with change areas"],
   ["مناطق تغير استخدامات الأراضي", "Land-use change areas"],
   ["التغير السنوي لأسعار الأراضي", "Annual land-price change"],
