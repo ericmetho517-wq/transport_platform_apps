@@ -6,24 +6,24 @@ type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "b
 // in the renderer (rather than per-dashboard CSS) means a road or rail layer
 // has exactly the same colour, width, and dash pattern everywhere.
 const lineSymbols: Partial<Record<LayerName, { color: string; width: number; dash?: string }>> = {
-  axis: { color: "#ff1f2d", width: 5.5 },
+  axis: { color: "#e60000", width: 5.5 },
   transport: { color: "#10b8ad", width: 3.4 },
-  Road_CairoRing: { color: "#10b8ad", width: 4.2 },
+  Road_CairoRing: { color: "#e60000", width: 5.0 },
   Road_MiddleRing: { color: "#2454a6", width: 4.2 },
   Road_RegionalRing: { color: "#e510c5", width: 4.2 },
-  LRT_Line: { color: "#4bd35c", width: 3.8, dash: "11 5" },
-  Metro_Line: { color: "#f3b525", width: 3.8, dash: "11 5" },
+  LRT_Line: { color: "#ff0000", width: 4.5 },
+  Metro_Line: { color: "#ff0000", width: 4.5 },
   Transit_GreenLine: { color: "#4bd35c", width: 3.8, dash: "11 5" },
-  Transit_KafrDawoodSadat: { color: "#d8d8d8", width: 3.8, dash: "11 5" },
-  Transit_LRT: { color: "#4bd35c", width: 3.8, dash: "11 5" },
-  Transit_Metro1: { color: "#f04459", width: 3.8, dash: "11 5" },
-  Transit_Metro2: { color: "#7654c8", width: 3.8, dash: "11 5" },
-  Transit_Metro3: { color: "#54a8f2", width: 3.8, dash: "11 5" },
-  Transit_Metro4: { color: "#f3b525", width: 3.8, dash: "11 5" },
-  Transit_Metro6: { color: "#a573db", width: 3.8, dash: "11 5" },
-  Transit_MonorailCapital: { color: "#d8d8d8", width: 3.8, dash: "11 5" },
-  Transit_MonorailOctober: { color: "#d8d8d8", width: 3.8, dash: "11 5" },
-  Transit_RobikiBelbeis: { color: "#10b8ad", width: 3.8, dash: "11 5" },
+  Transit_KafrDawoodSadat: { color: "#808080", width: 3.8, dash: "11 5" },
+  Transit_LRT: { color: "#ff0000", width: 4.5 },
+  Transit_Metro1: { color: "#ff0000", width: 4.5 },
+  Transit_Metro2: { color: "#7654c8", width: 3.8 },
+  Transit_Metro3: { color: "#54a8f2", width: 3.8 },
+  Transit_Metro4: { color: "#f3b525", width: 3.8 },
+  Transit_Metro6: { color: "#a573db", width: 3.8 },
+  Transit_MonorailCapital: { color: "#ffa500", width: 4.0 },
+  Transit_MonorailOctober: { color: "#ffa500", width: 4.0 },
+  Transit_RobikiBelbeis: { color: "#000000", width: 4.0, dash: "8 4" },
 };
 
 interface DashboardSummary {
@@ -869,10 +869,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
                         : /road|طريق/.test(normalized) ? 12 : 99;
         const palette: Record<number, [string, string]> = {
           0: ["#16c51b", "#d9ff9b"], 1: ["#9800c7", "#f2c7ff"], 2: ["#fff4ae", "#fffbd8"],
-          3: ["#f6a900", "#ffe47d"], 4: ["#10b8ad", "#b9fff3"], 5: ["#ff1717", "#ffd1d1"],
+          3: ["#f6a900", "#ffe47d"], 4: ["#00b8e5", "#bcefff"], 5: ["#ff1717", "#ffd1d1"],
           6: ["#00cdbd", "#bafff5"], 7: ["#a9b8aa", "#e8f0e8"], 8: ["#08afe1", "#bcefff"],
           9: ["#a5a5a5", "#eeeeee"], 10: ["#777777", "#d9d9d9"], 11: ["#f2f2f2", "#ffffff"],
-          12: ["#777777", "#d5d5d5"], 13: ["#b77b00", "#ffe19a"], 99: ["#9aa5ad", "#eef3f6"],
+          12: ["#d94f70", "#ffe4eb"], 13: ["#b77b00", "#ffe19a"], 99: ["#9aa5ad", "#eef3f6"],
         };
         const [fill, stroke] = palette[inferredCode] || palette[99];
         path.dataset.landuseCode = String(inferredCode);

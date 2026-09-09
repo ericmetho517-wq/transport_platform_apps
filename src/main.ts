@@ -78,6 +78,32 @@ const summary = document.querySelector<HTMLParagraphElement>("#filter-summary")!
 const clearFilters = document.querySelector<HTMLButtonElement>("#clear-filters")!;
 const quickFilters = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-quick-type]"));
 
+// Keep the catalog state shareable. Example: `?axis=ismailia` opens the
+// platform already filtered to the Cairo–Ismailia corridor.
+const restoreFiltersFromUrl = () => {
+  const params = new URLSearchParams(window.location.search);
+  const selectValue = (select: HTMLSelectElement, value: string | null) => {
+    if (value && Array.from(select.options).some((option) => option.value === value)) select.value = value;
+  };
+  search.value = params.get("q") || "";
+  selectValue(typeFilter, params.get("type"));
+  selectValue(languageFilter, params.get("lang"));
+  selectValue(axisFilter, params.get("axis"));
+};
+
+const syncFiltersToUrl = () => {
+  const url = new URL(window.location.href);
+  const set = (name: string, value: string, fallback = "all") => {
+    if (!value || value === fallback) url.searchParams.delete(name);
+    else url.searchParams.set(name, value);
+  };
+  set("q", search.value.trim(), "");
+  set("type", typeFilter.value);
+  set("lang", languageFilter.value);
+  set("axis", axisFilter.value);
+  window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+};
+
 let cardObserver: IntersectionObserver | undefined;
 if ("IntersectionObserver" in window) {
   cardObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
@@ -106,6 +132,7 @@ const render = () => {
   let cardIndex = 0;
   grid.innerHTML = groups.map(([, label, items]) => `<section class="sector-group" aria-label="${label}"><div class="sector-group-heading"><div><span>قطاع / Sector</span><h3>${label}</h3></div><b>${items.length} تطبيق</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html" dir="${app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${typeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${app.title}</h3><p>${app.category}</p><span class="card-language">${app.language === "en" ? "EN" : "ع"}</span><span class="open">${app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${app.direction === "ltr" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`).join("") || `<div class="empty"><b>لا توجد نتائج مطابقة</b><span>No matching applications</span><button type="button" data-reset-empty>عرض جميع التطبيقات</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
+  syncFiltersToUrl();
 };
 
 search.addEventListener("input", render);
@@ -129,6 +156,8 @@ grid.addEventListener("click", (event) => {
   if ((event.target as HTMLElement).closest("[data-reset-empty]")) resetFilters();
 });
 
+window.addEventListener("popstate", () => { restoreFiltersFromUrl(); render(); });
+
 const platformHeader = document.querySelector<HTMLElement>(".platform-header")!;
 const backToTop = document.querySelector<HTMLButtonElement>("#back-to-top")!;
 const updateScrollState = () => {
@@ -149,4 +178,5 @@ networkArt?.addEventListener("pointerleave", () => {
   networkArt.style.setProperty("--pointer-y", "0px");
 });
 
+restoreFiltersFromUrl();
 render();
