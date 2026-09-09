@@ -169,10 +169,13 @@ function dabaaLandMarkup(app: TransportApp, group: string): string {
 }
 
 function landMarkup(app: TransportApp, group: string): string {
+  const changeBarsHint = group === "ismailia"
+    ? ""
+    : "اضغط على العمود لتصفية طبقة الخريطة";
   return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
     ${dashboardHeader(app)}
     <div class="land-layout">
-      <aside class="land-left"><article class="opportunity-card"><span>فرص العمل لمشروعات المباني المستحدثة</span><strong data-metric="jobOpportunities">—</strong><small>فرصة عمل تقديرية مرتبطة بمناطق التغير</small></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>مناطق تغير استخدامات الأراضي</span><small>اضغط على العمود لتصفية طبقة الخريطة</small></div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
+      <aside class="land-left"><article class="opportunity-card"><span>فرص العمل لمشروعات المباني المستحدثة</span><strong data-metric="jobOpportunities">—</strong></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>مناطق تغير استخدامات الأراضي</span>${changeBarsHint ? `<small>${changeBarsHint}</small>` : ""}</div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
       <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>توزيع مناطق التغير</span><div class="donut" id="change-donut"><strong>—</strong></div><div id="donut-legend"></div></section></aside>
     </div>
@@ -233,6 +236,27 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
   const mixedLandData = /industrial|الصناعية/i.test(app.title);
   const agriculturalAreaLabel = rawChangeData ? "مساحة التغير الزراعي المحصورة (فدان)" : "إجمالي مساحة الأراضي الزراعية (فدان)";
   const urbanAreaLabel = rawChangeData ? "مساحة التغير العمراني المحصورة (كم²)" : "إجمالي مساحة الأراضي العمرانية (كم²)";
+  if (group === "ismailia") {
+    return `<main class="interactive-dashboard agriculture-dashboard ismailia-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
+      ${dashboardHeader(app)}
+      <div class="agriculture-layout ismailia-agri-layout">
+        <section class="agriculture-center">
+          <div class="dashboard-kpis agriculture-kpis">
+            <article class="lime"><span>مساحة التغير الزراعي (كم²)</span><strong data-metric="agriculturalChangeKm2">—</strong></article>
+            <article class="orange"><span>مساحة التغير الصناعي (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article>
+            <article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>
+          </div>
+          ${mapMarkup()}
+          <section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2016</bdi> / <bdi class="map-year-end">2026</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section>
+        </section>
+        <aside class="agriculture-right ismailia-agri-right">
+          <section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section>
+          <section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><i></i><strong>—</strong></div></section>
+          <section class="dark-card donut-card"><span>توزيع مناطق التغير</span><div class="donut" id="change-donut"><strong>—</strong></div><div id="donut-legend"></div></section>
+        </aside>
+      </div>
+    </main>`;
+  }
   return `<main class="interactive-dashboard agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app)}
     <div class="agriculture-layout">
@@ -394,12 +418,79 @@ function renderChangeBars(summary: DashboardSummary): void {
     ] as Array<[string, string, number, string]>;
   const max = Math.max(...data.map((item) => item[2]), 1);
   container.innerHTML = data.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${label}">${label}</span></button>`).join("");
+  if (isIsmailia) void renderIsmailiaUseDescriptionBars(container);
+}
+
+/**
+ * Use the original `وصف_الاستخدام` values from the land-use layer itself.
+ * This deliberately does not combine the separate urban, agricultural, and
+ * industrial change layers: the chart is a detailed land-use presentation.
+ */
+async function renderIsmailiaUseDescriptionBars(container: HTMLElement): Promise<void> {
+  const requestId = String(Number(container.dataset.useDescriptionRequest || "0") + 1);
+  container.dataset.useDescriptionRequest = requestId;
+  try {
+    const collection = await loadGeoJson("/data/dashboard/ismailia/landcover-end.geojson");
+    if (container.dataset.useDescriptionRequest !== requestId) return;
+    const values = new Map<string, number>();
+    collection.features.forEach((feature) => {
+      const properties = feature.properties || {};
+      const label = String(properties["وصف_الاستخدام"] || "غير مصنف").trim() || "غير مصنف";
+      const rawArea = Number(properties["مساحة_كم2"] ?? 0);
+      const area = Number.isFinite(rawArea) ? rawArea : 0;
+      if (area <= 0) return;
+      values.set(label, (values.get(label) || 0) + area);
+    });
+    // Keep this compact, like the reference chart: show the seven principal
+    // land-use descriptions rather than hundreds of very small individual uses.
+    const data = Array.from(values, ([label, value]) => ({ label, value }))
+      .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label, "ar"))
+      .slice(0, 7);
+    if (!data.length) return;
+    const max = Math.max(...data.map((item) => item.value), 1);
+    container.innerHTML = data.map(({ label, value }) => `<button type="button" data-filter-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:#f28a00"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
+  } catch {
+    // The three high-level bars rendered synchronously above remain a useful
+    // fallback if a local GeoJSON file cannot be read.
+  }
 }
 
 function renderComparison(summary: DashboardSummary, topOnly = false): void {
   const container = document.querySelector<HTMLElement>("#comparison-chart");
   if (!container) return;
   container.classList.remove("loading-panel");
+  const isIsmailia = document.querySelector<HTMLElement>(".interactive-dashboard")?.dataset.dashboardGroup === "ismailia";
+  if (isIsmailia) {
+    const categories = [
+      { label: "أرض فضاء", codes: ["2"], color: "#fff4ae", matches: /فضاء|فارغ/i },
+      { label: "الزراعة", codes: ["0"], color: "#16c51b", matches: /زراع/i },
+      { label: "أخرى", codes: ["5", "6", "7", "8", "9", "10", "11", "12", "13", "99"], color: "#bdbdbd", matches: /./i },
+      { label: "العمران", codes: ["3"], color: "#f6a900", matches: /عمران|حضري|سكن/i },
+      { label: "الصناعة", codes: ["1"], color: "#9800c7", matches: /صناع|مصنع/i },
+      { label: "أنماط الخدمات", codes: ["4"], color: "#10b8ad", matches: /خدم/i },
+    ];
+    const years = Array.from(new Set(summary.landUse.map((item) => item.year))).sort();
+    const classify = (category: string) => categories.find((item) => item.label !== "أخرى" && item.matches.test(category)) || categories[2];
+    const rows = years.map((year) => {
+      const values = new Map(categories.map((item) => [item.label, 0]));
+      summary.landUse.filter((item) => item.year === year).forEach((item) => {
+        const pattern = classify(item.category);
+        values.set(pattern.label, (values.get(pattern.label) || 0) + item.area);
+      });
+      const total = Array.from(values.values()).reduce((sum, value) => sum + value, 0);
+      const layer = year === summary.yearStart ? "landcover-start" : "landcover-end";
+      const segments = categories.map((pattern) => {
+        const value = values.get(pattern.label) || 0;
+        const percent = total ? value / total * 100 : 0;
+        return `<i data-landuse-codes="${pattern.codes.join(",")}" data-landuse-layer="${layer}" data-landuse-year="${year}" style="width:${percent}%;background:${pattern.color}" title="${pattern.label} · ${formatNumber(value, 2)} كم² · ${formatNumber(percent, 1)}٪"><b>${percent >= 6 ? `${formatNumber(percent, 0)}٪` : ""}</b></i>`;
+      }).join("");
+      return `<div class="comparison-row"><b>${year}</b><div>${segments}</div><span>${formatNumber(total, 1)} كم²</span></div>`;
+    }).join("");
+    const axis = `<div class="comparison-axis"><span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100%</span></div>`;
+    const legend = categories.map((pattern) => `<span><i style="background:${pattern.color}"></i>${pattern.label}</span>`).join("");
+    container.innerHTML = `${rows}${axis}<div class="comparison-legend">${legend}</div>`;
+    return;
+  }
   const years = Array.from(new Set(summary.landUse.map((item) => item.year))).sort();
   let categories = Array.from(new Set(summary.landUse.map((item) => item.category)));
   if (topOnly) {
@@ -508,7 +599,8 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
   (["agricultural", "industrial"] as const).forEach((kind) => {
     const gauge = document.querySelector<HTMLElement>(`#${kind}-gauge`);
     if (!gauge) return;
-    const percent = Math.min(summary.profile?.metrics[`${kind}ChangePercent`] ?? 0, 100);
+    const selectedChange = document.querySelector<HTMLSelectElement>("#dashboard-change-filter")?.value || "all";
+    const percent = selectedChange === "all" ? 100 : Math.min(summary.profile?.metrics[`${kind}ChangePercent`] ?? summary.metrics[`${kind}ChangePercent`] ?? 10, 100);
     setGauge(gauge, percent);
   });
   setGauge(document.querySelector<HTMLElement>("#agricultural-share-gauge"), Math.min(profile?.metrics.agriculturalSharePercent ?? 0, 100));
@@ -577,7 +669,7 @@ function geometryPath(geometry: { type: string; coordinates: Coordinates }, proj
     // the map while keeping the valid land-use features visible.
     // Parcel rings should contain short, local edges. A larger jump is a
     // malformed ring splice that SVG closes as a giant black triangle.
-    if (close && pairs.some((pair, index) => index > 0 && (Math.abs(pair[0] - pairs[index - 1][0]) > .05 || Math.abs(pair[1] - pairs[index - 1][1]) > .05))) return "";
+    if (close && pairs.some((pair, index) => index > 0 && (Math.abs(pair[0] - pairs[index - 1][0]) > .5 || Math.abs(pair[1] - pairs[index - 1][1]) > .5))) return "";
     return pairs.map((pair, index) => `${index ? "L" : "M"}${project(pair).join(" ")}`).join(" ") + (close ? " Z" : "");
   };
   if (geometry.type === "Point") { const [x, y] = project(geometry.coordinates as number[]); return `M${x - 4} ${y}a4 4 0 1 0 8 0a4 4 0 1 0-8 0`; }
@@ -664,9 +756,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
   const ismailiaTemporalMap = group === "ismailia" && (mapInstance.includes("baseline") || mapInstance.includes("current"));
   const ismailiaStartLayers: LayerName[] = ["study", "axis", "landcover-start", "Road_CairoRing"];
-  const requestedLayers = focusedPriceMap
-    ? (mapInstance.includes("baseline") ? ["study", "axis", "landcover-start"] as LayerName[] : ["study", "axis", "landcover-end"] as LayerName[])
-    : ismailiaTemporalMap
+  const requestedLayers = ismailiaTemporalMap
     ? (mapInstance.includes("baseline") ? ismailiaStartLayers.filter((layer) => summary.layers.includes(layer)) : [...regularLayers, "landcover-end" as LayerName])
     : mapInstance.includes("baseline")
     ? group === "ismailia" ? [...regularLayers, "landcover-start" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-start"].includes(layer))
@@ -733,24 +823,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     groupElement.dataset.layerGroup = layer;
     groupElement.classList.add(`map-${layer}`);
     const aggregateLandcover = group === "ismailia" && ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer) && (mapInstance.includes("baseline") || mapInstance.includes("current"));
-    const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string }>();
+    const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string; status: string; features: Array<{ geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }> }>();
     for (const [featureIndex, feature] of collection.features.entries()) {
       // Yield between batches so a large layer cannot block scrolling/input.
       if (featureIndex > 0 && featureIndex % (aggregateLandcover ? 900 : 180) === 0) await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
       if (!feature.geometry) continue;
-      // Exclude source features whose extent is clearly outside a single
-      // land-use parcel; these malformed polygons create giant black fills.
-      if (layer === "landcover-start" || layer === "landcover-end") {
-        const points = coordinatePairs(feature.geometry.coordinates);
-        if (points.length) {
-          const dx = Math.max(...points.map((point) => point[0])) - Math.min(...points.map((point) => point[0]));
-          const dy = Math.max(...points.map((point) => point[1])) - Math.min(...points.map((point) => point[1]));
-          // Land-use parcels are small local polygons. Anything wider than
-          // roughly ten kilometres is a concatenated source artifact and
-          // would render as a large black wedge when SVG closes the ring.
-          if (dx > .1 || dy > .1) continue;
-        }
-      }
       const pathData = geometryPath(feature.geometry, project);
       if (!pathData) continue;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -769,8 +846,12 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.style.stroke = "#263238";
         path.style.strokeWidth = "1.5";
       }
-      const exactStatus = feature.properties?.change_status_key;
-      path.dataset.changeStatus = exactStatus === "changed" || exactStatus === "unchanged" ? exactStatus : "unknown";
+      const rawStatusVal = String(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"] ?? "").trim().toLowerCase();
+      // In the Ismailia data field «حالة التغير»: 1 = changed, 2 = unchanged.
+      const exactStatus = rawStatusVal === "1" || rawStatusVal === "changed" || /تغير|متغير|غير/i.test(rawStatusVal) ? "changed"
+        : rawStatusVal === "2" || rawStatusVal === "unchanged" || /ثابت|لم|بدون/i.test(rawStatusVal) ? "unchanged"
+        : "unknown";
+      path.dataset.changeStatus = exactStatus;
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label
@@ -799,46 +880,71 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.style.stroke = stroke;
         path.style.strokeWidth = "0.75";
       }
-      if (aggregateLandcover) {
-        const code = path.dataset.landuseCode || layer;
-        const bucket = landcoverBuckets.get(code) || { paths: [], fill: path.style.fill, stroke: path.style.stroke, strokeWidth: path.style.strokeWidth, code };
-        bucket.paths.push(pathData);
-        landcoverBuckets.set(code, bucket);
-        continue;
-      }
-      const representative = Object.entries(feature.properties || {}).find(([, value]) => value !== null && value !== "")?.[1];
-      path.setAttribute("aria-label", `${labels[layer]}${representative ? `: ${String(representative)}` : ""}`);
-      const sector = sectorOf(feature.properties);
-      if (sector) { path.dataset.sector = sector; sectorValues.add(sector); }
-      path.addEventListener("click", (event) => {
-        event.stopPropagation();
-        const popup = scope.querySelector<HTMLElement>(".feature-popup");
-        if (!popup) return;
-        const rows = Object.entries(feature.properties || {}).filter(([, value]) => value !== null && value !== "");
-        const aggregateFieldLabels: Record<string, string> = { landuse_value: "استخدام الأرض", landuse_code: "كود استخدام الأرض", landuse_label: "وصف الاستخدام", source_feature_count: "عدد المعالم الأصلية", area_km2: "المساحة (كم²)", sector: "القطاع" };
-        popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${labels[layer]}</p>${rows.map(([key, value]) => `<p><span>${esc(aggregateFieldLabels[key] || key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("")}`;
-        popup.hidden = false;
-      });
-      groupElement.appendChild(path);
+      const code = path.dataset.landuseCode || layer;
+      const status = path.dataset.changeStatus || "unknown";
+      const key = `${code}_${status}`;
+      const bucket = landcoverBuckets.get(key) || { paths: [], fill: path.style.fill, stroke: path.style.stroke, strokeWidth: path.style.strokeWidth, code, status, features: [] };
+      bucket.paths.push(pathData);
+      bucket.features.push(feature);
+      landcoverBuckets.set(key, bucket);
     }
+    const landuseNames: Record<string, string> = {
+      "0": "أراضي زراعية", "1": "أراضي صناعية", "2": "أراضي فضاء", "3": "أراضي عمرانية",
+      "4": "خدمات ومرافق", "5": "حكومي وعسكري", "6": "ترفيهي وسياحي", "7": "غير مصنف",
+      "8": "مسطحات مائية", "9": "نقل ومرافق عامة", "10": "مقابر", "11": "تعليمي",
+      "12": "طرق", "13": "استخدامات أخرى", "99": "غير مصنف"
+    };
     for (const bucket of landcoverBuckets.values()) {
-      // Keep paths in compact batches instead of one enormous compound path:
-      // this preserves every polygon's fill while still avoiding tens of
-      // thousands of DOM nodes during pan and zoom.
-      // A small batch avoids SVG's even-odd fill cancellation across distant
-      // parcels (which can make valid features look missing), while retaining
-      // a fraction of the original DOM cost.
-      for (let start = 0; start < bucket.paths.length; start += 40) {
+      for (let start = 0; start < bucket.paths.length; start += 350) {
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("d", bucket.paths.slice(start, start + 40).join(" "));
+        path.setAttribute("d", bucket.paths.slice(start, start + 350).join(" "));
         path.dataset.geometry = "MultiPolygon";
         if (layer === "landcover-start" || layer === "landcover-end") path.dataset.landuseCode = bucket.code;
+        path.dataset.changeStatus = bucket.status;
         path.style.fill = bucket.fill;
-        path.style.stroke = "none";
-        path.style.strokeWidth = "0";
-        path.setAttribute("fill-rule", "evenodd");
-        path.setAttribute("clip-rule", "evenodd");
+        path.style.stroke = "rgba(255,255,255,0.45)";
+        path.style.strokeWidth = "0.75";
+        path.setAttribute("fill-rule", "nonzero");
+        path.setAttribute("clip-rule", "nonzero");
         path.setAttribute("vector-effect", "non-scaling-stroke");
+        path.style.pointerEvents = "all";
+        path.style.cursor = "pointer";
+
+        const bucketFeatures = bucket.features.slice(start, start + 350);
+        const showPopup = (event: Event) => {
+          event.stopPropagation();
+          scope.querySelectorAll<SVGPathElement>(".map-content path").forEach((p) => p.classList.remove("feature-selected"));
+          path.classList.add("feature-selected");
+          const popup = scope.querySelector<HTMLElement>(".feature-popup");
+          if (!popup) return;
+
+          let targetProperties: Record<string, unknown> | null = null;
+          if (event instanceof MouseEvent) {
+            const rect = svg.getBoundingClientRect();
+            const mouseX = (event.clientX - rect.left) * 1000 / rect.width;
+            const mouseY = (event.clientY - rect.top) * 520 / rect.height;
+            const [localX, localY] = [(mouseX - tx) / zoom, (mouseY - ty) / zoom];
+            for (const feat of bucketFeatures) {
+              if (!feat.geometry) continue;
+              const featPathData = geometryPath(feat.geometry, project);
+              if (!featPathData) continue;
+              const tempPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+              tempPath.setAttribute("d", featPathData);
+              const point = svg.createSVGPoint();
+              point.x = localX; point.y = localY;
+              if (tempPath.isPointInFill(point)) { targetProperties = feat.properties || null; break; }
+            }
+          }
+          if (!targetProperties && bucketFeatures.length) targetProperties = bucketFeatures[0].properties || null;
+          const rows = Object.entries(targetProperties || {}).filter(([, value]) => value !== null && value !== "");
+          const aggregateFieldLabels: Record<string, string> = { landuse_value: "استخدام الأرض", landuse_code: "كود استخدام الأرض", landuse_label: "وصف الاستخدام", source_feature_count: "عدد المعالم الأصلية", area_km2: "المساحة (كم²)", sector: "القطاع" };
+          const landuseTitle = landuseNames[bucket.code] || labels[layer];
+          popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${esc(labels[layer])}</p><p><span>نوع الاستخدام</span><b>${esc(landuseTitle)}</b></p>` + (rows.length ? rows.map(([key, value]) => `<p><span>${esc(aggregateFieldLabels[key] || key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("") : "");
+          popup.hidden = false;
+          popup.style.display = "block";
+        };
+        path.addEventListener("pointerdown", showPopup);
+        path.addEventListener("click", showPopup);
         groupElement.appendChild(path);
       }
     }
@@ -849,10 +955,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (!feature.geometry || !coordinatePairs(feature.geometry.coordinates).length) return sum;
     return sum + Math.max(1, Number(feature.properties?.source_feature_count || 1));
   }, 0);
-  const startsHidden = !mapInstance.includes("baseline") && !mapInstance.includes("current") && loaded.some(([layer]) => layer === "landcover-end");
+  // A temporal pair must never paint the two survey years over one another.
+  // The overlap made valid parcels look like missing or fragmented features.
+  const isBaselineMap = mapInstance.includes("baseline");
+  const isCurrentMap = mapInstance.includes("current");
+  const startsHidden = (isCurrentMap || (!isBaselineMap && !isCurrentMap)) && loaded.some(([layer]) => layer === "landcover-end");
+  const endsHidden = isBaselineMap;
   if (startsHidden) content.querySelector<SVGGElement>('[data-layer-group="landcover-start"]')?.classList.add("layer-hidden");
+  if (endsHidden) content.querySelector<SVGGElement>('[data-layer-group="landcover-end"]')?.classList.add("layer-hidden");
   toggles.innerHTML = loaded.map(([layer, collection]) => {
-    const active = !(startsHidden && layer === "landcover-start");
+    const active = !((startsHidden && layer === "landcover-start") || (endsHidden && layer === "landcover-end"));
     return `<button type="button" class="${active ? "active" : ""}" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${sourceCount(layer, collection).toLocaleString(document.documentElement.lang === "en" ? "en-US" : "ar-EG")}</b></button>`;
   }).join("");
   // Keep the layer key out of the dashboard map; symbology is rendered on
@@ -1093,11 +1205,38 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       zoomBy(Math.exp(-Math.max(-180, Math.min(180, delta)) * .0014), centerX, centerY);
     });
   }, { passive: false });
-  svg.addEventListener("pointerdown", (event) => { dragging = true; beginInteraction(); lastX = event.clientX; lastY = event.clientY; svg.setPointerCapture(event.pointerId); });
-  svg.addEventListener("pointermove", (event) => { if (!dragging) return; tx += (event.clientX - lastX) * 1000 / Math.max(svg.clientWidth, 1); ty += (event.clientY - lastY) * 520 / Math.max(svg.clientHeight, 1); lastX = event.clientX; lastY = event.clientY; if (!panFrame) panFrame = requestAnimationFrame(() => { panFrame = 0; apply(); }); });
-  svg.addEventListener("pointerup", () => { dragging = false; endInteraction(120); });
-  svg.addEventListener("pointercancel", () => { dragging = false; endInteraction(120); });
-  svg.addEventListener("lostpointercapture", () => { dragging = false; endInteraction(120); });
+  svg.addEventListener("pointerdown", (event) => {
+    dragging = true;
+    scope.classList.add("map-interacting");
+    window.clearTimeout(interactionTimer);
+    lastX = event.clientX;
+    lastY = event.clientY;
+    svg.setPointerCapture(event.pointerId);
+  });
+  svg.addEventListener("pointermove", (event) => {
+    if (!dragging) return;
+    const dx = event.clientX - lastX;
+    const dy = event.clientY - lastY;
+    lastX = event.clientX;
+    lastY = event.clientY;
+    tx += dx * 1000 / Math.max(svg.clientWidth, 1);
+    ty += dy * 520 / Math.max(svg.clientHeight, 1);
+    if (!panFrame) {
+      panFrame = requestAnimationFrame(() => {
+        panFrame = 0;
+        viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
+        if (linkedPair) linkedPair.dispatchEvent(new CustomEvent("linked-map-view", { detail: { source: mapInstance, zoom, tx, ty } }));
+      });
+    }
+  });
+  const finishDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    endInteraction(120);
+  };
+  svg.addEventListener("pointerup", finishDrag);
+  svg.addEventListener("pointercancel", finishDrag);
+  svg.addEventListener("lostpointercapture", finishDrag);
   svg.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   scope.querySelector<HTMLButtonElement>(".feature-popup > button")?.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   document.querySelector<HTMLElement>(".interactive-dashboard")?.addEventListener("dashboard-map-sector", ((event: CustomEvent<string>) => fitSector(event.detail)) as EventListener);
@@ -1117,6 +1256,21 @@ function activateLayerOnly(layer: string): void {
 function activateLanduseCode(code: string): void {
   document.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => path.classList.toggle("layer-hidden", path.dataset.landuseCode !== code));
   document.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => group.classList.remove("layer-hidden"));
+}
+
+function activateLandusePatterns(codes: string[], layer: "landcover-start" | "landcover-end"): void {
+  const accepted = new Set(codes);
+  activateLayerOnly(layer);
+  document.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => {
+    const activeLayer = group.dataset.layerGroup === layer;
+    group.classList.toggle("layer-hidden", !activeLayer);
+    group.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => {
+      path.toggleAttribute("hidden", !activeLayer || !accepted.has(path.dataset.landuseCode || ""));
+    });
+  });
+  document.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
+    if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) button.classList.toggle("active", button.dataset.mapLayer === layer);
+  });
 }
 
 export async function initInteractiveDashboard(app: TransportApp): Promise<void> {
@@ -1305,11 +1459,24 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       applyPriceLanduseFilter();
     }
     const statusTotals = { changed: 0, unchanged: 0 };
+    const statusAreas = {
+      agricultural: { changed: 0, unchanged: 0 },
+      industrial: { changed: 0, unchanged: 0 },
+    };
     if (summary.layers.includes("landcover-end")) {
       const latestLandcover = await loadGeoJson(`../../data/dashboard/${group}/landcover-end.geojson`);
       latestLandcover.features.forEach((feature) => {
-        const key = feature.properties?.change_status_key;
-        if (key === "changed" || key === "unchanged") statusTotals[key] += Math.max(1, Number(feature.properties?.source_feature_count || 1));
+        const rawStatus = String(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"] ?? "").trim().toLowerCase();
+        const key = rawStatus === "1" || rawStatus === "changed" || /تغير|متغير|غير/i.test(rawStatus) ? "changed"
+          : rawStatus === "2" || rawStatus === "unchanged" || /ثابت|لم|بدون/i.test(rawStatus) ? "unchanged"
+          : null;
+        if (key === "changed" || key === "unchanged") {
+          statusTotals[key] += Math.max(1, Number(feature.properties?.source_feature_count || 1));
+          const landuseCode = String(feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.["استخدام_الأرض"] ?? "");
+          const kind = landuseCode === "0" ? "agricultural" : landuseCode === "1" ? "industrial" : null;
+          const area = Number(feature.properties?.["مساحة_كم2"] ?? feature.properties?.area_km2 ?? 0);
+          if (kind && Number.isFinite(area)) statusAreas[kind][key] += area;
+        }
       });
     }
     const dashboardSectorFilter = document.querySelector<HTMLSelectElement>("#dashboard-sector-filter");
@@ -1324,14 +1491,16 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const syncChangeStatus = () => {
         const mode = dashboardChangeFilter.value;
         mapRoots.forEach((map) => { const select = map.querySelector<HTMLSelectElement>(".map-change-select"); if (select && select.value !== mode) { select.value = mode; select.dispatchEvent(new Event("change")); } });
-        const classifiedTotal = statusTotals.changed + statusTotals.unchanged;
-        const changedPercent = classifiedTotal ? statusTotals.changed / classifiedTotal * 100 : 0;
-        const gauge = root.querySelector<HTMLElement>("#urban-gauge");
-        if (gauge) {
-          const urbanGrowth = summary.profile?.metrics.urbanChangePercent ?? ((summary.metrics.urbanChangeKm2 || 0) / Math.max(summary.metrics.studyAreaKm2 || 1, 1) * 100);
-          const value = mode === "all" ? 100 : mode === "changed" ? changedPercent : classifiedTotal ? statusTotals.unchanged / classifiedTotal * 100 : urbanGrowth;
+        (["agricultural", "industrial"] as const).forEach((kind) => {
+          const gauge = root.querySelector<HTMLElement>(`#${kind}-gauge`);
+          if (!gauge) return;
+          // Each gauge is a status split within its own land-use category,
+          // so «changed» + «unchanged» is always 100% for agricultural and
+          // industrial land separately.
+          const total = statusAreas[kind].changed + statusAreas[kind].unchanged;
+          const value = mode === "all" ? 100 : total ? statusAreas[kind][mode] / total * 100 : 0;
           setGauge(gauge, value);
-        }
+        });
         root.dataset.changeStatus = mode;
       };
       dashboardChangeFilter.addEventListener("change", syncChangeStatus);
@@ -1342,6 +1511,13 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     comparisonChart?.addEventListener("click", (event) => {
       const segment = (event.target as HTMLElement).closest<HTMLElement>(".comparison-row i");
       if (!segment) return;
+      const patternCodes = segment.dataset.landuseCodes?.split(",").filter(Boolean);
+      const patternLayer = segment.dataset.landuseLayer as "landcover-start" | "landcover-end" | undefined;
+      if (patternCodes?.length && patternLayer) {
+        activateLandusePatterns(patternCodes, patternLayer);
+        comparisonChart.querySelectorAll<HTMLElement>(".comparison-row i").forEach((item) => item.classList.toggle("active", item === segment));
+        return;
+      }
       const color = getComputedStyle(segment).backgroundColor.toLowerCase();
       const landuseCode = color.includes("205, 231, 104") ? "2" : color.includes("36, 196, 39") ? "0" : color.includes("90, 70, 232") ? "1" : color.includes("217, 161, 22") || color.includes("255, 158") ? "3" : "";
       const layer = landuseCode ? "landcover-end" : color.includes("36, 196, 39") ? "agricultural" : color.includes("90, 70, 232") ? "industrial" : "urban";

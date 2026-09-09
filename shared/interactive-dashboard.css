@@ -55,13 +55,14 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .satellite-tile { opacity: 1; filter: saturate(1.12) contrast(1.08) brightness(.92); }
 .map-content path { cursor: pointer; paint-order: stroke fill markers; }
 .map-content path[data-geometry="LineString"], .map-content path[data-geometry="MultiLineString"] { fill:none !important; }
-.gis-map.map-interacting .map-content { pointer-events:none; }
-.gis-map.map-interacting .map-study path { filter:none; animation:none; }
-.gis-map.map-interacting .map-content path { filter:none !important; transition:none !important; }
+.gis-map.map-interacting .map-content { pointer-events:none !important; will-change:transform; }
+.gis-map.map-interacting .map-study path { filter:none !important; animation:none !important; }
+.gis-map.map-interacting .map-content path { filter:none !important; transition:none !important; stroke-width: 0.5px !important; }
 .map-content path[hidden] { display: none; }
 .map-content .change-hidden { display: none; }
 .map-content path.change-match { opacity:1; stroke-width:2.4!important; filter:brightness(1.18) drop-shadow(0 0 2px #fff7); }
-.map-content path:hover,.map-content path:focus { filter: brightness(1.2); opacity: 1; outline:none; }
+.map-content path:hover,.map-content path:focus { filter: brightness(1.35) drop-shadow(0 0 3px #fff); opacity: 1; outline:none; }
+.map-content path.feature-selected { stroke: #fff200 !important; stroke-width: 2.5px !important; stroke-opacity: 1 !important; filter: brightness(1.4) drop-shadow(0 0 6px #fff200) !important; vector-effect: non-scaling-stroke; }
 .map-study path { fill: #00c8ff18; stroke: #fff; stroke-width: 4; filter: drop-shadow(0 0 3px #007acb); }
 .map-axis path { fill: none; stroke: #ff1f2d; stroke-width: 5.5; stroke-linecap: round; stroke-linejoin:round; filter: drop-shadow(0 0 2px #fff8); }
 .map-urban path { fill: #f6a900e8; stroke: #ffe47d; stroke-width: .75; }
@@ -153,13 +154,14 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-controls button:hover { background: #168de2; color: #fff; }
 .map-wheel-hint { position: absolute; z-index: 3; top: 10px; left: 50%; translate: -50% 0; padding: 6px 10px; border: 1px solid #ffffff38; border-radius: 5px; background: #061b2bd9; color: #fff; font-size: 9px; pointer-events: none; opacity: .86; }
 .map-scale { position: absolute; z-index: 3; bottom: 7px; inset-inline-start: 8px; padding: 5px 8px; border-radius:5px; background: #061b2bd9; color: #fff; font-size: 9px; }
-.feature-popup { position: absolute; z-index: 7; bottom: 12px; inset-inline-end: 12px; width: min(380px, calc(100% - 24px)); max-height: 76%; overflow: auto; padding: 15px; border: 1px solid #8fc8f0; border-radius: 7px; background: #071b2bf7; box-shadow: 0 12px 38px #000c; color: #fff; }
-.feature-popup > button { position: absolute; top: 5px; inset-inline-end: 6px; border: 0; background: transparent; color: #fff; font-size: 20px; cursor: pointer; }
-.feature-popup strong { display: block; margin-bottom: 8px; color: #ffc126; }
-.feature-popup p { margin: 0; padding: 7px 0; display: grid; grid-template-columns: minmax(100px,.9fr) 1.2fr; gap: 10px; border-top: 1px solid #ffffff24; font-size: 11px; }
-.feature-popup p span { color: #aaa; }
-.feature-popup p b { overflow-wrap: anywhere; }
-.feature-popup .popup-layer { display: block; color: #75df37; border: 0; }
+.feature-popup { position: absolute; z-index: 99; bottom: 12px; inset-inline-end: 12px; width: min(270px, calc(100% - 24px)); max-height: 75%; overflow: auto; padding: 10px 14px; border: 2px solid #ffc126; border-radius: 10px; background: #071928f8; box-shadow: 0 10px 30px #000c, 0 0 12px #ffc12644; color: #fff; font-size: 11px; }
+.feature-popup > button { position: absolute; top: 4px; inset-inline-end: 6px; border: 0; background: transparent; color: #ffc126; font-size: 18px; font-weight: 800; cursor: pointer; line-height: 1; }
+.feature-popup > button:hover { color: #fff; }
+.feature-popup strong { display: block; margin-bottom: 6px; color: #ffc126; font-size: 13px; border-bottom: 1px dashed #ffc12666; padding-bottom: 4px; }
+.feature-popup p { margin: 0; padding: 6px 0; display: grid; grid-template-columns: minmax(85px,.9fr) 1.2fr; gap: 8px; border-top: 1px solid #ffffff24; font-size: 11px; }
+.feature-popup p span { color: #b0c4de; font-weight: 700; }
+.feature-popup p b { color: #ffffff; font-weight: 800; overflow-wrap: anywhere; }
+.feature-popup .popup-layer { display: block; color: #45c51a; border: 0; font-size: 11px; font-weight: 800; }
 .english-ui { direction:ltr; }
 .english-ui .price-column,.english-ui .price-workspace,.english-ui .land-left,.english-ui .land-center,.english-ui .land-right,.english-ui .agriculture-side,.english-ui .agriculture-center,.english-ui .agriculture-right { direction:ltr; }
 .english-ui .interactive-head,.english-ui .dashboard-kpis,.english-ui .card-title,.english-ui .feature-popup { text-align:left; }
@@ -207,7 +209,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .interactive-dashboard[data-dashboard-group="ismailia"] .change-bars b { font-size: 12px; }
 .interactive-dashboard[data-dashboard-group="ismailia"] .change-bars span { font-size: 11px; line-height: 15px; }
 .land-center { display: grid; grid-template-rows: auto minmax(280px, 48vh) minmax(180px, 1fr); }
-.temporal-map-pair { min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; background: #353535; direction: ltr; }
+.temporal-map-pair { min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; background: #353535; direction: rtl; }
 .temporal-map { min-width: 0; min-height: 280px; padding-top: 42px; }
 .temporal-map .temporal-year { position: absolute; z-index: 6; inset: 0 0 auto; height: 42px; display: flex; align-items:center; justify-content:center; gap:10px; background: #17293a; color: #fff; font-size: 22px; font-weight: 800; border-bottom: 2px solid #4f82e9; }
 .temporal-map .temporal-year small { padding:3px 7px; border-radius:10px; background:#0d68ad; color:#dff3ff; font-size:8px; font-weight:700; }
@@ -232,8 +234,9 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 #comparison-chart { width:100%; min-height:155px; display:block; padding:8px 2px 2px; box-sizing:border-box; }
 .comparison-row { display: grid; grid-template-columns: 48px minmax(0,1fr) 92px; gap: 9px; align-items: center; margin: 13px 0; direction: ltr; }
 .comparison-row > div { width:100%; height: 42px; display: flex; background: #363636; overflow: hidden; box-shadow:inset 0 0 0 1px #ffffff12; }
-.comparison-row i { height: 100%; min-width: 1px; transition: filter .15s; cursor:pointer; }
-.comparison-row i:hover { filter: brightness(1.4); }
+.comparison-row i { height: 100%; min-width: 1px; display:grid; place-items:center; transition: filter .15s, box-shadow .15s; cursor:pointer; }
+.comparison-row i b { color:#fff; font-size:10px; text-shadow:0 1px 3px #0009; pointer-events:none; }
+.comparison-row i:hover, .comparison-row i.active { filter:brightness(1.16); box-shadow:inset 0 0 0 2px #fff; }
 /* Unified orange visual identity for dashboard controls and map symbology. */
 .interactive-dashboard .dashboard-kpis article.blue { background:#f28a00; color:#111; }
 .interactive-dashboard .map-study path { stroke:#ffb21a; filter:drop-shadow(0 0 3px #f28a00); }
@@ -302,9 +305,14 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .highlight-stat { background:#78ea00; color:#111; }
 .highlight-stat span,.highlight-stat strong { color:#111; }
 .agriculture-side, .agriculture-center, .agriculture-right { min-width: 0; direction: rtl; }
-.agriculture-side { display: grid; grid-template-rows: 120px 120px 1fr; border-inline-end: 2px solid #3d3d3d; }
-.agriculture-center { display: grid; grid-template-rows: auto minmax(300px, 52vh) minmax(190px, 1fr); }
-.agriculture-right { display: grid; grid-template-rows: 1fr 150px 1fr; border-inline-start: 2px solid #3d3d3d; }
+.ismailia-agri-layout { min-height: calc(100vh - 79px); max-height: calc(100vh - 79px); display: grid; grid-template-columns: minmax(560px, 78%) minmax(220px, 22%); direction: ltr; overflow: hidden; }
+.ismailia-agri-right { display: grid; grid-template-rows: 1fr 1fr 1.1fr; border-inline-start: 2px solid #3d3d3d; max-height: calc(100vh - 79px); overflow: hidden; }
+.ismailia-agri-right .gauge-card { padding: 8px 10px; gap: 4px; }
+.ismailia-agri-right .gauge-card > span { font-size: 13px; font-weight: 800; }
+.ismailia-agri-right .gauge { width: min(230px, 96%); }
+.ismailia-agri-right .donut-card { padding: 6px 10px; gap: 6px; }
+.ismailia-agri-right .donut-card > span { font-size: 13px; font-weight: 800; }
+.ismailia-agri-right .donut { width: min(150px, 80%); }
 .western-agriculture-kpis { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 .western-agriculture-kpis article.lime { background:#050505; color:#8bff00; }
 .western-agriculture-kpis article.orange { background:#f3a51c; color:#111; }
