@@ -27,28 +27,28 @@ const lineSymbols: Partial<Record<LayerName, { color: string; width: number; das
 };
 
 const ismailiaLanduseSymbols: Record<number, [string, string]> = {
-  0: ["#16c51b", "#d9ff9b"],  // زراعة
-  1: ["#9800c7", "#f2c7ff"],  // صناعة
-  2: ["#fff6bd", "#fffbd8"],  // أرض فضاء
-  3: ["#f6a900", "#ffe47d"],  // عمران
-  4: ["#ff1717", "#ffd1d1"],  // أراضي القوات المسلحة
-  5: ["#20b8b3", "#c5fffb"],  // خدمات
-  6: ["#b7c4b0", "#eff5ec"],  // مناطق ترفيهية
+  0: ["#28c51b", "#28c51b"],  // الأراضي الزراعية
+  1: ["#a100c2", "#a100c2"],  // المناطق الصناعية
+  2: ["#ffffbe", "#e4e4a3"],  // أراضي الفضاء
+  3: ["#ffaa00", "#e59600"],  // الأراضي العمرانية
+  4: ["#ff1308", "#dc0d05"],  // أراضي القوات المسلحة
+  5: ["#78e75f", "#61ca4b"],  // أراضي خدمات
+  6: ["#aebda6", "#93a28b"],  // المناطق الترفيهية
   7: ["#858585", "#e1e1e1"],  // مقابر
-  8: ["#10afe1", "#c7f3ff"],  // مسطحات مائية
+  8: ["#18b2dc", "#078fb5"],  // مسطحات مائية
   9: ["#555555", "#d6d6d6"],  // حرم الطريق
   10: ["#555555", "#d6d6d6"], // طرق وحرم طريق
-  11: ["#e5e5e5", "#ffffff"], // ديني
-  12: ["#2e5791", "#c8dcff"], // تعليمي
-  13: ["#b87500", "#ffe0a0"], // حكومي
-  14: ["#10c9ba", "#c5fff8"], // سياحي
+  11: ["#dedede", "#c7c7c7"], // ديني
+  12: ["#2f5c96", "#244a7a"], // الأراضي التعليمية
+  13: ["#bd7900", "#9c6300"], // الأراضي الحكومية
+  14: ["#13cabb", "#0ba99d"], // الأراضي السياحية
   15: ["#62cf49", "#d8ffce"], // مساحات خضراء
   99: ["#9aa5ad", "#eef3f6"],
 };
 
 const ismailiaLanduseNames: Record<string, string> = {
-  "0": "الزراعة", "1": "الصناعة", "2": "أرض فضاء", "3": "العمران",
-  "4": "أراضي القوات المسلحة", "5": "أراضي الخدمات", "6": "المناطق الترفيهية",
+  "0": "الأراضي الزراعية", "1": "المناطق الصناعية", "2": "أراضي الفضاء", "3": "الأراضي العمرانية",
+  "4": "أراضي القوات المسلحة", "5": "أراضي خدمات", "6": "المناطق الترفيهية",
   "7": "المقابر", "8": "مسطحات مائية", "9": "حرم الطريق", "10": "حرم الطريق",
   "11": "ديني", "12": "الأراضي التعليمية", "13": "الأراضي الحكومية",
   "14": "الأراضي السياحية", "15": "مساحات خضراء", "99": "غير مصنف",
@@ -997,7 +997,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         const palette = group === "ismailia" ? ismailiaLanduseSymbols : defaultPalette;
         const [fill, stroke] = palette[inferredCode] || palette[99];
         path.dataset.landuseCode = String(inferredCode);
-        path.style.fill = `${fill}e8`;
+        path.style.fill = group === "ismailia" ? fill : `${fill}e8`;
         path.style.stroke = stroke;
         path.style.strokeWidth = "0.75";
       }
@@ -1109,7 +1109,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (loaded.some(([layer]) => temporalLayers.includes(layer))) {
     const expanded = mapInstance.includes("baseline") || mapInstance.includes("current") ? "" : " open";
     const legendItems = group === "ismailia"
-      ? [[3, "العمران"], [0, "الزراعة"], [1, "الصناعة"], [2, "أرض فضاء"], [4, "أراضي القوات المسلحة"], [10, "حرم الطريق"], [5, "أراضي الخدمات"], [6, "المناطق الترفيهية"], [8, "مسطحات مائية"], [7, "المقابر"], [11, "ديني"], [12, "الأراضي التعليمية"], [13, "الأراضي الحكومية"], [14, "الأراضي السياحية"], [15, "مساحات خضراء"]]
+      ? [[0, "الأراضي الزراعية"], [1, "المناطق الصناعية"], [2, "أراضي الفضاء"], [3, "الأراضي العمرانية"], [4, "أراضي القوات المسلحة"], [5, "أراضي خدمات"], [6, "المناطق الترفيهية"], [7, "المقابر"], [8, "مسطحات مائية"], [11, "ديني"], [12, "الأراضي التعليمية"], [13, "الأراضي الحكومية"], [14, "الأراضي السياحية"]]
         .map(([code, label]) => `<span style="--swatch:${ismailiaLanduseSymbols[Number(code)][0]}">${label}</span>`).join("")
       : `<span style="--swatch:#45c51a">زراعي</span><span style="--swatch:#6657d9">صناعي</span><span style="--swatch:#cfe566">أراضٍ فضاء</span><span style="--swatch:#e4a313">عمراني</span><span style="--swatch:#ef6c35">خدمات ومرافق</span><span style="--swatch:#b17ad1">نقل ومرافق عامة</span><span style="--swatch:#21b7a8">ترفيهي وسياحي</span><span style="--swatch:#74826d">مقابر</span><span style="--swatch:#22a9e0">مسطحات مائية</span><span style="--swatch:#c7ad72">جزر</span><span style="--swatch:#d94f70">طرق</span><span style="--swatch:#5d82c9">تعليمي</span><span style="--swatch:#8f5aae">حكومي</span><span style="--swatch:#9aa5ad">غير مصنف</span>`;
     scope.insertAdjacentHTML("beforeend", `<details class="landuse-legend"${expanded}><summary>مفتاح استخدامات الأراضي</summary><div>${legendItems}</div></details>`);
