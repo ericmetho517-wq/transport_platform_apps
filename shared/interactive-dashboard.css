@@ -169,14 +169,14 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-layer-toggles button.active[data-map-layer="Road_MiddleRing"] i { background:#2454a6; }
 .map-layer-toggles button.active[data-map-layer="Road_RegionalRing"] i { background:#e510c5; }
 .map-layer-toggles button.active[data-map-layer="Transit_Metro1"] i,
-.map-layer-toggles button.active[data-map-layer="Metro_Line"] i { background:repeating-linear-gradient(90deg,#2995df 0 4px,#0000 4px 7px); }
+.map-layer-toggles button.active[data-map-layer="Metro_Line"] i { background:#2995df; }
 .map-layer-toggles button.active[data-map-layer="LRT_Line"] i,
-.map-layer-toggles button.active[data-map-layer="Transit_LRT"] i { background:repeating-linear-gradient(90deg,#43c94f 0 4px,#0000 4px 7px); }
-.map-layer-toggles button.active[data-map-layer="Transit_Metro3"] i { background:repeating-linear-gradient(90deg,#2b7fd1 0 4px,#0000 4px 7px); }
-.map-layer-toggles button.active[data-map-layer="Transit_Metro4"] i { background:repeating-linear-gradient(90deg,#f3b525 0 4px,#0000 4px 7px); }
+.map-layer-toggles button.active[data-map-layer="Transit_LRT"] i { background:#43c94f; }
+.map-layer-toggles button.active[data-map-layer="Transit_Metro3"] i { background:#2b7fd1; }
+.map-layer-toggles button.active[data-map-layer="Transit_Metro4"] i { background:#f3b525; }
 .map-layer-toggles button.active[data-map-layer="Transit_MonorailCapital"] i,
-.map-layer-toggles button.active[data-map-layer="Transit_MonorailOctober"] i { background:repeating-linear-gradient(90deg,#c8c8c8 0 4px,#0000 4px 7px); }
-.map-layer-toggles button.active[data-map-layer="Transit_RobikiBelbeis"] i { background:repeating-linear-gradient(90deg,#000000 0 4px,#0000 4px 7px); }
+.map-layer-toggles button.active[data-map-layer="Transit_MonorailOctober"] i { background:#9b9b9b; }
+.map-layer-toggles button.active[data-map-layer="Transit_RobikiBelbeis"] i { background:#111111; }
 .landuse-legend { position:absolute; z-index:4; bottom:34px; inset-inline-start:8px; width:min(360px,calc(100% - 16px)); padding:6px 8px; border:1px solid #ffffff55; border-radius:6px; background:#061b2bed; color:#fff; font-size:9px; box-shadow:0 4px 15px #0008; }
 .landuse-legend summary { cursor:pointer; font-weight:800; }
 .landuse-legend div { display:flex; flex-wrap:wrap; gap:5px 10px; padding-top:7px; }

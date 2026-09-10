@@ -6,24 +6,24 @@ type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "b
 // in the renderer (rather than per-dashboard CSS) means a road or rail layer
 // has exactly the same colour, width, and dash pattern everywhere.
 const lineSymbols: Partial<Record<LayerName, { color: string; width: number; dash?: string }>> = {
-  axis: { color: "#ed1c24", width: 5.5 },
-  transport: { color: "#18b8ad", width: 3.4 },
-  Road_CairoRing: { color: "#18b8ad", width: 4.2 },
-  Road_MiddleRing: { color: "#174f86", width: 4.0 },
-  Road_RegionalRing: { color: "#e510c5", width: 4.0 },
-  LRT_Line: { color: "#43c94f", width: 4.0, dash: "11 5" },
-  Metro_Line: { color: "#2995df", width: 4.0, dash: "11 5" },
+  axis: { color: "#ed1c24", width: 3.0 },
+  transport: { color: "#18b8ad", width: 2.4 },
+  Road_CairoRing: { color: "#18b8ad", width: 2.4 },
+  Road_MiddleRing: { color: "#174f86", width: 2.4 },
+  Road_RegionalRing: { color: "#e510c5", width: 2.4 },
+  LRT_Line: { color: "#43c94f", width: 2.4 },
+  Metro_Line: { color: "#2b7fd1", width: 2.4 },
   Transit_GreenLine: { color: "#4bd35c", width: 3.8, dash: "11 5" },
   Transit_KafrDawoodSadat: { color: "#808080", width: 3.8, dash: "11 5" },
-  Transit_LRT: { color: "#43c94f", width: 4.0, dash: "11 5" },
-  Transit_Metro1: { color: "#2995df", width: 4.0, dash: "11 5" },
+  Transit_LRT: { color: "#43c94f", width: 2.4 },
+  Transit_Metro1: { color: "#2995df", width: 2.4 },
   Transit_Metro2: { color: "#7654c8", width: 3.8 },
-  Transit_Metro3: { color: "#2b7fd1", width: 3.8, dash: "11 5" },
-  Transit_Metro4: { color: "#f3b525", width: 3.8, dash: "11 5" },
+  Transit_Metro3: { color: "#2b7fd1", width: 2.4 },
+  Transit_Metro4: { color: "#f3b525", width: 2.4 },
   Transit_Metro6: { color: "#a573db", width: 3.8 },
-  Transit_MonorailCapital: { color: "#c8c8c8", width: 4.0, dash: "11 5" },
-  Transit_MonorailOctober: { color: "#c8c8c8", width: 4.0, dash: "11 5" },
-  Transit_RobikiBelbeis: { color: "#000000", width: 4.0, dash: "8 4" },
+  Transit_MonorailCapital: { color: "#9b9b9b", width: 2.4 },
+  Transit_MonorailOctober: { color: "#9b9b9b", width: 2.4 },
+  Transit_RobikiBelbeis: { color: "#111111", width: 2.4 },
 };
 
 const ismailiaLanduseSymbols: Record<number, [string, string]> = {
@@ -868,8 +868,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
   const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
   const ismailiaTemporalMap = group === "ismailia" && (mapInstance.includes("baseline") || mapInstance.includes("current"));
-  const ismailiaStartLayers: LayerName[] = ["study", "axis", "landcover-start", "Road_CairoRing"];
-  const ismailiaEndLayers: LayerName[] = ["study", "axis", "landcover-end", "Road_CairoRing", "Road_MiddleRing", "Road_RegionalRing", "Transit_Metro1", "Transit_Metro3", "Transit_Metro4", "Transit_LRT", "Transit_MonorailCapital", "Transit_RobikiBelbeis"];
+  const ismailiaStartLayers: LayerName[] = ["study", "landcover-start", "Road_CairoRing", "axis"];
+  const ismailiaEndLayers: LayerName[] = ["study", "landcover-end", "Road_CairoRing", "Road_MiddleRing", "Road_RegionalRing", "Transit_Metro1", "Transit_Metro3", "Transit_Metro4", "Transit_LRT", "Transit_MonorailCapital", "Transit_RobikiBelbeis", "axis", "Metro_Station", "lRT_Station"];
   const requestedLayers = ismailiaTemporalMap
     ? (mapInstance.includes("baseline") ? ismailiaStartLayers.filter((layer) => summary.layers.includes(layer)) : ismailiaEndLayers.filter((layer) => summary.layers.includes(layer)))
     : mapInstance.includes("baseline")
@@ -943,7 +943,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     groupElement.dataset.layerGroup = layer;
     groupElement.classList.add(`map-${layer}`);
     const aggregateLandcover = group === "ismailia" && ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer) && (mapInstance.includes("baseline") || mapInstance.includes("current"));
-    const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string; status: string; features: Array<{ geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }> }>();
+    const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string; status: string; geometry: string; features: Array<{ geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }> }>();
     for (const [featureIndex, feature] of collection.features.entries()) {
       // Yield between batches so a large layer cannot block scrolling/input.
       if (featureIndex > 0 && featureIndex % (aggregateLandcover ? 900 : 180) === 0) await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
@@ -962,9 +962,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.style.strokeLinejoin = "round";
         if (symbol.dash) path.style.strokeDasharray = symbol.dash;
       } else if (feature.geometry.type === "Point" || feature.geometry.type === "MultiPoint") {
-        path.style.fill = (layer === "lRT_Station" || layer === "Metro_Station") ? "#f4f4f4" : "#d8d8d8";
-        path.style.stroke = "#263238";
-        path.style.strokeWidth = "1.5";
+        path.style.fill = layer === "lRT_Station" ? "#43c94f" : layer === "Metro_Station" ? "#2b7fd1" : "#d8d8d8";
+        path.style.stroke = layer === "lRT_Station" || layer === "Metro_Station" ? "#ffffff" : "#263238";
+        path.style.strokeWidth = layer === "lRT_Station" || layer === "Metro_Station" ? "0.9" : "1.5";
       }
       const rawStatusVal = String(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"] ?? "").trim().toLowerCase();
       // In the Ismailia data field «حالة التغير»: 1 = changed, 2 = unchanged.
@@ -1003,8 +1003,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       }
       const code = path.dataset.landuseCode || layer;
       const status = path.dataset.changeStatus || "unknown";
-      const key = `${code}_${status}`;
-      const bucket = landcoverBuckets.get(key) || { paths: [], fill: path.style.fill, stroke: path.style.stroke, strokeWidth: path.style.strokeWidth, code, status, features: [] };
+      const key = `${code}_${status}_${feature.geometry.type}`;
+      const bucket = landcoverBuckets.get(key) || { paths: [], fill: path.style.fill, stroke: path.style.stroke, strokeWidth: path.style.strokeWidth, code, status, geometry: feature.geometry.type, features: [] };
       bucket.paths.push(pathData);
       bucket.features.push(feature);
       landcoverBuckets.set(key, bucket);
@@ -1020,12 +1020,20 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       for (let start = 0; start < bucket.paths.length; start += 350) {
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
         path.setAttribute("d", bucket.paths.slice(start, start + 350).join(" "));
-        path.dataset.geometry = "MultiPolygon";
+        const bucketIsLine = bucket.geometry === "LineString" || bucket.geometry === "MultiLineString";
+        const bucketIsPoint = bucket.geometry === "Point" || bucket.geometry === "MultiPoint";
+        path.dataset.geometry = bucketIsLine ? "MultiLineString" : bucketIsPoint ? "MultiPoint" : "MultiPolygon";
         if (layer === "landcover-start" || layer === "landcover-end") path.dataset.landuseCode = bucket.code;
         path.dataset.changeStatus = bucket.status;
         path.style.fill = bucket.fill;
-        path.style.stroke = "rgba(255,255,255,0.45)";
-        path.style.strokeWidth = "0.75";
+        path.style.stroke = bucketIsLine || bucketIsPoint ? bucket.stroke : "rgba(255,255,255,0.45)";
+        path.style.strokeWidth = bucketIsLine || bucketIsPoint ? bucket.strokeWidth : "0.75";
+        if (bucketIsLine) {
+          path.style.strokeLinecap = "round";
+          path.style.strokeLinejoin = "round";
+          const symbol = lineSymbols[layer];
+          if (symbol?.dash) path.style.strokeDasharray = symbol.dash;
+        }
         path.setAttribute("fill-rule", "nonzero");
         path.setAttribute("clip-rule", "nonzero");
         path.setAttribute("vector-effect", "non-scaling-stroke");
