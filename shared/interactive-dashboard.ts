@@ -6,24 +6,52 @@ type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "b
 // in the renderer (rather than per-dashboard CSS) means a road or rail layer
 // has exactly the same colour, width, and dash pattern everywhere.
 const lineSymbols: Partial<Record<LayerName, { color: string; width: number; dash?: string }>> = {
-  axis: { color: "#e60000", width: 5.5 },
-  transport: { color: "#10b8ad", width: 3.4 },
-  Road_CairoRing: { color: "#e60000", width: 5.0 },
-  Road_MiddleRing: { color: "#2454a6", width: 4.2 },
-  Road_RegionalRing: { color: "#e510c5", width: 4.2 },
-  LRT_Line: { color: "#ff0000", width: 4.5 },
-  Metro_Line: { color: "#ff0000", width: 4.5 },
+  axis: { color: "#ed1c24", width: 5.5 },
+  transport: { color: "#18b8ad", width: 3.4 },
+  Road_CairoRing: { color: "#18b8ad", width: 4.2 },
+  Road_MiddleRing: { color: "#174f86", width: 4.0 },
+  Road_RegionalRing: { color: "#e510c5", width: 4.0 },
+  LRT_Line: { color: "#43c94f", width: 4.0, dash: "11 5" },
+  Metro_Line: { color: "#2995df", width: 4.0, dash: "11 5" },
   Transit_GreenLine: { color: "#4bd35c", width: 3.8, dash: "11 5" },
   Transit_KafrDawoodSadat: { color: "#808080", width: 3.8, dash: "11 5" },
-  Transit_LRT: { color: "#ff0000", width: 4.5 },
-  Transit_Metro1: { color: "#ff0000", width: 4.5 },
+  Transit_LRT: { color: "#43c94f", width: 4.0, dash: "11 5" },
+  Transit_Metro1: { color: "#2995df", width: 4.0, dash: "11 5" },
   Transit_Metro2: { color: "#7654c8", width: 3.8 },
-  Transit_Metro3: { color: "#54a8f2", width: 3.8 },
-  Transit_Metro4: { color: "#f3b525", width: 3.8 },
+  Transit_Metro3: { color: "#2b7fd1", width: 3.8, dash: "11 5" },
+  Transit_Metro4: { color: "#f3b525", width: 3.8, dash: "11 5" },
   Transit_Metro6: { color: "#a573db", width: 3.8 },
-  Transit_MonorailCapital: { color: "#ffa500", width: 4.0 },
-  Transit_MonorailOctober: { color: "#ffa500", width: 4.0 },
+  Transit_MonorailCapital: { color: "#c8c8c8", width: 4.0, dash: "11 5" },
+  Transit_MonorailOctober: { color: "#c8c8c8", width: 4.0, dash: "11 5" },
   Transit_RobikiBelbeis: { color: "#000000", width: 4.0, dash: "8 4" },
+};
+
+const ismailiaLanduseSymbols: Record<number, [string, string]> = {
+  0: ["#16c51b", "#d9ff9b"],  // زراعة
+  1: ["#9800c7", "#f2c7ff"],  // صناعة
+  2: ["#fff6bd", "#fffbd8"],  // أرض فضاء
+  3: ["#f6a900", "#ffe47d"],  // عمران
+  4: ["#ff1717", "#ffd1d1"],  // أراضي القوات المسلحة
+  5: ["#20b8b3", "#c5fffb"],  // خدمات
+  6: ["#b7c4b0", "#eff5ec"],  // مناطق ترفيهية
+  7: ["#858585", "#e1e1e1"],  // مقابر
+  8: ["#10afe1", "#c7f3ff"],  // مسطحات مائية
+  9: ["#555555", "#d6d6d6"],  // حرم الطريق
+  10: ["#555555", "#d6d6d6"], // طرق وحرم طريق
+  11: ["#e5e5e5", "#ffffff"], // ديني
+  12: ["#2e5791", "#c8dcff"], // تعليمي
+  13: ["#b87500", "#ffe0a0"], // حكومي
+  14: ["#10c9ba", "#c5fff8"], // سياحي
+  15: ["#62cf49", "#d8ffce"], // مساحات خضراء
+  99: ["#9aa5ad", "#eef3f6"],
+};
+
+const ismailiaLanduseNames: Record<string, string> = {
+  "0": "الزراعة", "1": "الصناعة", "2": "أرض فضاء", "3": "العمران",
+  "4": "أراضي القوات المسلحة", "5": "أراضي الخدمات", "6": "المناطق الترفيهية",
+  "7": "المقابر", "8": "مسطحات مائية", "9": "حرم الطريق", "10": "حرم الطريق",
+  "11": "ديني", "12": "الأراضي التعليمية", "13": "الأراضي الحكومية",
+  "14": "الأراضي السياحية", "15": "مساحات خضراء", "99": "غير مصنف",
 };
 
 interface DashboardSummary {
@@ -841,8 +869,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
   const ismailiaTemporalMap = group === "ismailia" && (mapInstance.includes("baseline") || mapInstance.includes("current"));
   const ismailiaStartLayers: LayerName[] = ["study", "axis", "landcover-start", "Road_CairoRing"];
+  const ismailiaEndLayers: LayerName[] = ["study", "axis", "landcover-end", "Road_CairoRing", "Road_MiddleRing", "Road_RegionalRing", "Transit_Metro1", "Transit_Metro3", "Transit_Metro4", "Transit_LRT", "Transit_MonorailCapital", "Transit_RobikiBelbeis"];
   const requestedLayers = ismailiaTemporalMap
-    ? (mapInstance.includes("baseline") ? ismailiaStartLayers.filter((layer) => summary.layers.includes(layer)) : [...regularLayers, "landcover-end" as LayerName])
+    ? (mapInstance.includes("baseline") ? ismailiaStartLayers.filter((layer) => summary.layers.includes(layer)) : ismailiaEndLayers.filter((layer) => summary.layers.includes(layer)))
     : mapInstance.includes("baseline")
     ? group === "ismailia" ? [...regularLayers, "landcover-start" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-start"].includes(layer))
     : mapInstance.includes("current")
@@ -958,13 +987,14 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
                     : /military|government|حكوم|عسكر/.test(normalized) ? 5
                       : /water|مياه|مائي/.test(normalized) ? 8
                         : /road|طريق/.test(normalized) ? 12 : 99;
-        const palette: Record<number, [string, string]> = {
+        const defaultPalette: Record<number, [string, string]> = {
           0: ["#16c51b", "#d9ff9b"], 1: ["#9800c7", "#f2c7ff"], 2: ["#fff4ae", "#fffbd8"],
           3: ["#f6a900", "#ffe47d"], 4: ["#00b8e5", "#bcefff"], 5: ["#ff1717", "#ffd1d1"],
           6: ["#00cdbd", "#bafff5"], 7: ["#a9b8aa", "#e8f0e8"], 8: ["#08afe1", "#bcefff"],
           9: ["#a5a5a5", "#eeeeee"], 10: ["#777777", "#d9d9d9"], 11: ["#f2f2f2", "#ffffff"],
           12: ["#d94f70", "#ffe4eb"], 13: ["#b77b00", "#ffe19a"], 99: ["#9aa5ad", "#eef3f6"],
         };
+        const palette = group === "ismailia" ? ismailiaLanduseSymbols : defaultPalette;
         const [fill, stroke] = palette[inferredCode] || palette[99];
         path.dataset.landuseCode = String(inferredCode);
         path.style.fill = `${fill}e8`;
@@ -979,12 +1009,13 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       bucket.features.push(feature);
       landcoverBuckets.set(key, bucket);
     }
-    const landuseNames: Record<string, string> = {
+    const defaultLanduseNames: Record<string, string> = {
       "0": "أراضي زراعية", "1": "أراضي صناعية", "2": "أراضي فضاء", "3": "أراضي عمرانية",
       "4": "خدمات ومرافق", "5": "حكومي وعسكري", "6": "ترفيهي وسياحي", "7": "غير مصنف",
       "8": "مسطحات مائية", "9": "نقل ومرافق عامة", "10": "مقابر", "11": "تعليمي",
       "12": "طرق", "13": "استخدامات أخرى", "99": "غير مصنف"
     };
+    const landuseNames = group === "ismailia" ? ismailiaLanduseNames : defaultLanduseNames;
     for (const bucket of landcoverBuckets.values()) {
       for (let start = 0; start < bucket.paths.length; start += 350) {
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -1077,7 +1108,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   scope.querySelector(".landuse-legend")?.remove();
   if (loaded.some(([layer]) => temporalLayers.includes(layer))) {
     const expanded = mapInstance.includes("baseline") || mapInstance.includes("current") ? "" : " open";
-    scope.insertAdjacentHTML("beforeend", `<details class="landuse-legend"${expanded}><summary>مفتاح استخدامات الأراضي</summary><div><span style="--swatch:#45c51a">زراعي</span><span style="--swatch:#6657d9">صناعي</span><span style="--swatch:#cfe566">أراضٍ فضاء</span><span style="--swatch:#e4a313">عمراني</span><span style="--swatch:#ef6c35">خدمات ومرافق</span><span style="--swatch:#b17ad1">نقل ومرافق عامة</span><span style="--swatch:#21b7a8">ترفيهي وسياحي</span><span style="--swatch:#74826d">مقابر</span><span style="--swatch:#22a9e0">مسطحات مائية</span><span style="--swatch:#c7ad72">جزر</span><span style="--swatch:#d94f70">طرق</span><span style="--swatch:#5d82c9">تعليمي</span><span style="--swatch:#8f5aae">حكومي</span><span style="--swatch:#9aa5ad">غير مصنف</span></div></details>`);
+    const legendItems = group === "ismailia"
+      ? [[3, "العمران"], [0, "الزراعة"], [1, "الصناعة"], [2, "أرض فضاء"], [4, "أراضي القوات المسلحة"], [10, "حرم الطريق"], [5, "أراضي الخدمات"], [6, "المناطق الترفيهية"], [8, "مسطحات مائية"], [7, "المقابر"], [11, "ديني"], [12, "الأراضي التعليمية"], [13, "الأراضي الحكومية"], [14, "الأراضي السياحية"], [15, "مساحات خضراء"]]
+        .map(([code, label]) => `<span style="--swatch:${ismailiaLanduseSymbols[Number(code)][0]}">${label}</span>`).join("")
+      : `<span style="--swatch:#45c51a">زراعي</span><span style="--swatch:#6657d9">صناعي</span><span style="--swatch:#cfe566">أراضٍ فضاء</span><span style="--swatch:#e4a313">عمراني</span><span style="--swatch:#ef6c35">خدمات ومرافق</span><span style="--swatch:#b17ad1">نقل ومرافق عامة</span><span style="--swatch:#21b7a8">ترفيهي وسياحي</span><span style="--swatch:#74826d">مقابر</span><span style="--swatch:#22a9e0">مسطحات مائية</span><span style="--swatch:#c7ad72">جزر</span><span style="--swatch:#d94f70">طرق</span><span style="--swatch:#5d82c9">تعليمي</span><span style="--swatch:#8f5aae">حكومي</span><span style="--swatch:#9aa5ad">غير مصنف</span>`;
+    scope.insertAdjacentHTML("beforeend", `<details class="landuse-legend"${expanded}><summary>مفتاح استخدامات الأراضي</summary><div>${legendItems}</div></details>`);
   }
   toggles.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => button.addEventListener("click", () => {
     const active = !button.classList.contains("active");

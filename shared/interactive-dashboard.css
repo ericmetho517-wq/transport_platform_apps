@@ -165,17 +165,17 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-layer-toggles button.active[data-map-layer="field-survey"] i { background:#ffcf25; }
 .map-layer-toggles button.active[data-map-layer="transport"] i { background:#10b8ad; }
 .map-layer-toggles button.active[data-map-layer="governorates"] i { background:#fff; }
-.map-layer-toggles button.active[data-map-layer="Road_CairoRing"] i { background:#e60000; }
+.map-layer-toggles button.active[data-map-layer="Road_CairoRing"] i { background:#18b8ad; }
 .map-layer-toggles button.active[data-map-layer="Road_MiddleRing"] i { background:#2454a6; }
 .map-layer-toggles button.active[data-map-layer="Road_RegionalRing"] i { background:#e510c5; }
 .map-layer-toggles button.active[data-map-layer="Transit_Metro1"] i,
-.map-layer-toggles button.active[data-map-layer="Metro_Line"] i,
+.map-layer-toggles button.active[data-map-layer="Metro_Line"] i { background:repeating-linear-gradient(90deg,#2995df 0 4px,#0000 4px 7px); }
 .map-layer-toggles button.active[data-map-layer="LRT_Line"] i,
-.map-layer-toggles button.active[data-map-layer="Transit_LRT"] i { background:repeating-linear-gradient(90deg,#ff0000 0 4px,#0000 4px 7px); }
-.map-layer-toggles button.active[data-map-layer="Transit_Metro3"] i { background:repeating-linear-gradient(90deg,#54a8f2 0 4px,#0000 4px 7px); }
+.map-layer-toggles button.active[data-map-layer="Transit_LRT"] i { background:repeating-linear-gradient(90deg,#43c94f 0 4px,#0000 4px 7px); }
+.map-layer-toggles button.active[data-map-layer="Transit_Metro3"] i { background:repeating-linear-gradient(90deg,#2b7fd1 0 4px,#0000 4px 7px); }
 .map-layer-toggles button.active[data-map-layer="Transit_Metro4"] i { background:repeating-linear-gradient(90deg,#f3b525 0 4px,#0000 4px 7px); }
 .map-layer-toggles button.active[data-map-layer="Transit_MonorailCapital"] i,
-.map-layer-toggles button.active[data-map-layer="Transit_MonorailOctober"] i { background:repeating-linear-gradient(90deg,#ffa500 0 4px,#0000 4px 7px); }
+.map-layer-toggles button.active[data-map-layer="Transit_MonorailOctober"] i { background:repeating-linear-gradient(90deg,#c8c8c8 0 4px,#0000 4px 7px); }
 .map-layer-toggles button.active[data-map-layer="Transit_RobikiBelbeis"] i { background:repeating-linear-gradient(90deg,#000000 0 4px,#0000 4px 7px); }
 .landuse-legend { position:absolute; z-index:4; bottom:34px; inset-inline-start:8px; width:min(360px,calc(100% - 16px)); padding:6px 8px; border:1px solid #ffffff55; border-radius:6px; background:#061b2bed; color:#fff; font-size:9px; box-shadow:0 4px 15px #0008; }
 .landuse-legend summary { cursor:pointer; font-weight:800; }
@@ -274,6 +274,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 /* Unified orange visual identity for dashboard controls and map symbology. */
 .interactive-dashboard .dashboard-kpis article.blue { background:#f28a00; color:#111; }
 .interactive-dashboard .map-study path { stroke:#ffb21a; filter:drop-shadow(0 0 3px #f28a00); }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-study path { fill:transparent; stroke:#303030; stroke-width:1.2; filter:none; }
 .interactive-dashboard .map-study path.sector-highlight {
   stroke:#fff200;
   stroke-width:7;
