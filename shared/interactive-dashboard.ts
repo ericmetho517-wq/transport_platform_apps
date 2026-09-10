@@ -151,18 +151,11 @@ function priceMarkup(app: TransportApp, group: string): string {
     ? `<div class="temporal-map-pair price-temporal-map-pair${group === "ismailia" ? " ismailia-temporal-map-pair" : ""}">${mapMarkup("price-baseline", `<span class="map-year-start">${priceStartYear}</span>`, false)}${mapMarkup("price-current", `<span class="map-year-end">${priceEndYear}</span>`, true)}</div>`
     : mapMarkup();
   const trendArea = westernComparison ? "" : `<section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>`;
-  const ismailiaSummary = isIsmailia ? `<div class="dashboard-kpis ismailia-price-summary">
-    <article class="area-total"><span>إجمالي مساحة الأراضي العمرانية (كم²)</span><strong data-price-area="urban">—</strong></article>
-    <article class="area-total"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-price-area="industrial">—</strong></article>
-    <article class="area-total"><span>إجمالي مساحة الأراضي الزراعية (كم²)</span><strong data-price-area="agricultural">—</strong></article>
-    <article class="gold"><span>سنة القياس</span><strong id="active-year">—</strong></article>
-    <article class="axis-total"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article>
-    <article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>
-  </div>` : "";
-  const workspaceSummary = isIsmailia ? "" : `<div class="dashboard-kpis"><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article class="gold"><span>سنة القياس</span><strong id="active-year">—</strong></article></div>`;
+  const workspaceSummary = isIsmailia
+    ? `<div class="dashboard-kpis ismailia-map-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article></div>`
+    : `<div class="dashboard-kpis"><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article class="gold"><span>سنة القياس</span><strong id="active-year">—</strong></article></div>`;
   return `<main class="interactive-dashboard price-dashboard${westernComparison ? " western-price-dashboard" : ""}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="price">
     ${dashboardHeader(app, group)}
-    ${ismailiaSummary}
     <div class="price-layout">
       <aside class="price-columns" id="price-columns"><div class="loading-panel">جارٍ قراءة أسعار الأراضي من قاعدة بيانات المشروع…</div></aside>
       <section class="price-workspace">
@@ -367,7 +360,7 @@ function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): vo
   const container = document.querySelector<HTMLElement>("#price-columns");
   if (!container) return;
   const labels: Record<string, string> = { urban: "الأراضي العمرانية", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية", ...(summary.profile?.priceLabels || {}) };
-  const colors: Record<string, string> = { urban: "#ffbc25", agricultural: "#72e800", industrial: "#e6e6e6" };
+  const colors: Record<string, string> = { urban: "#ffbc25", agricultural: "#72e800", industrial: "#c334ef" };
   const available = ["urban", "industrial", "agricultural"].filter((key) => {
     const item = summary.prices[key];
     return Boolean(item && (item.start > 0 || item.end > 0));
@@ -387,17 +380,12 @@ function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): vo
     agricultural: "إجمالي مساحة الأراضي الزراعية (كم²)",
     industrial: "إجمالي مساحة الأراضي الصناعية (كم²)",
   };
-  const isIsmailia = document.querySelector<HTMLElement>(".interactive-dashboard")?.dataset.dashboardGroup === "ismailia";
-  Object.entries(areaMetrics).forEach(([key, value]) => {
-    const total = document.querySelector<HTMLElement>(`[data-price-area="${key}"]`);
-    if (total) total.textContent = formatNumber(value, 1);
-  });
   container.innerHTML = available.map((key) => {
     const item = summary.prices[key];
     const difference = Math.max(item.end - item.start, 0);
     const selected = selectedKind === "all" || selectedKind === key;
     const areaVal = areaMetrics[key] || 0;
-    const areaHeader = isIsmailia ? "" : `<div class="price-column-top-card"><span>${areaLabels[key]}</span><strong>${formatNumber(areaVal, 1)}</strong></div>`;
+    const areaHeader = `<div class="price-column-top-card price-area-${key}"><span>${areaLabels[key]}</span><strong>${formatNumber(areaVal, 1)}</strong></div>`;
     return `<article class="price-column${selectedKind !== "all" && selected ? " is-selected" : ""}" data-price-kind="${key}"${selectedKind !== "all" && !selected ? " hidden" : ""} style="--accent:${colors[key]}">${areaHeader}<header><span>فرق سعر ${labels[key]}</span><strong>${formatMoney(difference)}</strong></header><div><span>سعر ${labels[key]} عام ${summary.yearEnd}</span><b>${formatMoney(item.end)}</b></div><div><span>سعر ${labels[key]} عام ${summary.yearStart}</span><b>${formatMoney(item.start)}</b></div></article>`;
   }).join("");
   container.classList.toggle("price-filtered", selectedKind !== "all");
