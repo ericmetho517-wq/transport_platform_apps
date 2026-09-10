@@ -933,6 +933,12 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   featureSelection.setAttribute("vector-effect", "non-scaling-stroke");
   featureSelection.setAttribute("hidden", "true");
   content.appendChild(featureSelection);
+  const featureHover = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  featureHover.classList.add("map-feature-hover");
+  featureHover.setAttribute("fill-rule", "evenodd");
+  featureHover.setAttribute("vector-effect", "non-scaling-stroke");
+  featureHover.setAttribute("hidden", "true");
+  content.appendChild(featureHover);
   const sectorValues = new Set<string>();
   // The Ismailia source represents one corridor; numeric sub-sector values in
   // land-cover attributes (for example 10/17) are internal classifications,
@@ -1037,10 +1043,53 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.setAttribute("fill-rule", "nonzero");
         path.setAttribute("clip-rule", "nonzero");
         path.setAttribute("vector-effect", "non-scaling-stroke");
+        path.dataset.aggregate = "true";
         path.style.pointerEvents = "all";
         path.style.cursor = "pointer";
 
         const bucketFeatures = bucket.features.slice(start, start + 350);
+        const bucketFeaturePaths = bucket.paths.slice(start, start + 350);
+        const bucketFeatureHits = bucketFeatures.map((feature, index) => {
+          const projected = feature.geometry ? coordinatePairs(feature.geometry.coordinates).map(project) : [];
+          return {
+            feature,
+            pathData: bucketFeaturePaths[index] || "",
+            minX: projected.length ? Math.min(...projected.map(([x]) => x)) : Infinity,
+            maxX: projected.length ? Math.max(...projected.map(([x]) => x)) : -Infinity,
+            minY: projected.length ? Math.min(...projected.map(([, y]) => y)) : Infinity,
+            maxY: projected.length ? Math.max(...projected.map(([, y]) => y)) : -Infinity,
+          };
+        });
+        const hitTestFeature = (event: MouseEvent) => {
+          const rect = svg.getBoundingClientRect();
+          const mouseX = (event.clientX - rect.left) * 1000 / Math.max(rect.width, 1);
+          const mouseY = (event.clientY - rect.top) * 520 / Math.max(rect.height, 1);
+          const [localX, localY] = [(mouseX - tx) / zoom, (mouseY - ty) / zoom];
+          const tolerance = bucketIsLine || bucketIsPoint ? 7 / zoom : 0;
+          const point = svg.createSVGPoint();
+          point.x = localX; point.y = localY;
+          for (let index = bucketFeatureHits.length - 1; index >= 0; index -= 1) {
+            const candidate = bucketFeatureHits[index];
+            if (!candidate.pathData || localX < candidate.minX - tolerance || localX > candidate.maxX + tolerance || localY < candidate.minY - tolerance || localY > candidate.maxY + tolerance) continue;
+            const tempPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            tempPath.setAttribute("d", candidate.pathData);
+            if (bucketIsLine) tempPath.setAttribute("stroke-width", String(14 / zoom));
+            if ((bucketIsLine ? tempPath.isPointInStroke(point) : tempPath.isPointInFill(point))) return candidate;
+          }
+          return null;
+        };
+        path.addEventListener("pointermove", (event) => {
+          const target = hitTestFeature(event);
+          if (!target) {
+            featureHover.setAttribute("hidden", "true");
+            return;
+          }
+          featureHover.setAttribute("d", target.pathData);
+          featureHover.dataset.geometry = bucketIsLine ? "MultiLineString" : bucketIsPoint ? "MultiPoint" : "MultiPolygon";
+          featureHover.removeAttribute("hidden");
+          content.appendChild(featureHover);
+        });
+        path.addEventListener("pointerleave", () => featureHover.setAttribute("hidden", "true"));
         const showPopup = (event: Event) => {
           event.stopPropagation();
           scope.querySelectorAll<SVGPathElement>(".map-content path").forEach((p) => p.classList.remove("feature-selected"));
@@ -1050,24 +1099,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           let targetProperties: Record<string, unknown> | null = null;
           let targetPathData = "";
           if (event instanceof MouseEvent) {
-            const rect = svg.getBoundingClientRect();
-            const mouseX = (event.clientX - rect.left) * 1000 / rect.width;
-            const mouseY = (event.clientY - rect.top) * 520 / rect.height;
-            const [localX, localY] = [(mouseX - tx) / zoom, (mouseY - ty) / zoom];
-            for (const feat of bucketFeatures) {
-              if (!feat.geometry) continue;
-              const featPathData = geometryPath(feat.geometry, project);
-              if (!featPathData) continue;
-              const tempPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-              tempPath.setAttribute("d", featPathData);
-              const point = svg.createSVGPoint();
-              point.x = localX; point.y = localY;
-              if (tempPath.isPointInFill(point)) {
-                targetProperties = feat.properties || null;
-                targetPathData = featPathData;
-                break;
-              }
-            }
+            const target = hitTestFeature(event);
+            targetProperties = target?.feature.properties || null;
+            targetPathData = target?.pathData || "";
           }
           if (!targetProperties && bucketFeatures.length) {
             targetProperties = bucketFeatures[0].properties || null;

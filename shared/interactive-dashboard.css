@@ -75,8 +75,11 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .map-content path[hidden] { display: none; }
 .map-content .change-hidden { display: none; }
 .map-content path.change-match { opacity:1; stroke-width:2.4!important; filter:brightness(1.18) drop-shadow(0 0 2px #fff7); }
-.map-content path:hover,.map-content path:focus { filter: brightness(1.35) drop-shadow(0 0 3px #fff); opacity: 1; outline:none; }
+.map-content path:not([data-aggregate="true"]):hover,.map-content path:not([data-aggregate="true"]):focus { filter: brightness(1.35) drop-shadow(0 0 3px #fff); opacity: 1; outline:none; }
 .map-content path.feature-selected { stroke: #fff200 !important; stroke-width: 2.5px !important; stroke-opacity: 1 !important; filter: brightness(1.4) drop-shadow(0 0 6px #fff200) !important; vector-effect: non-scaling-stroke; }
+.map-content path.map-feature-hover { display:block; fill:#fff2002e !important; stroke:#fff200 !important; stroke-width:2px !important; stroke-opacity:1 !important; filter:brightness(1.18) drop-shadow(0 0 4px #fff200) !important; pointer-events:none !important; }
+.map-content path.map-feature-hover[data-geometry="MultiLineString"] { fill:none !important; stroke-width:4px !important; }
+.map-content path.map-feature-hover[hidden] { display:none; }
 .map-content path.map-feature-selection { display:block; fill:#fff20038 !important; stroke:#fff200 !important; stroke-width:3px !important; stroke-opacity:1 !important; filter:drop-shadow(0 0 5px #fff200) !important; pointer-events:none !important; }
 .map-content path.map-feature-selection[hidden] { display:none; }
 .map-study path { fill: #00c8ff18; stroke: #fff; stroke-width: 4; filter: drop-shadow(0 0 3px #007acb); }
