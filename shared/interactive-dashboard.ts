@@ -189,10 +189,11 @@ function landMarkup(app: TransportApp, group: string): string {
   const changeBarsHint = group === "ismailia"
     ? ""
     : "اضغط على العمود لتصفية طبقة الخريطة";
+  const changeBarsTitle = group === "ismailia" ? "مساحات أراضي الخدمات (كم²)" : "مناطق تغير استخدامات الأراضي";
   return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
     ${dashboardHeader(app)}
     <div class="land-layout">
-      <aside class="land-left"><article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="jobOpportunities">—</strong></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>مناطق تغير استخدامات الأراضي</span>${changeBarsHint ? `<small>${changeBarsHint}</small>` : ""}</div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
+      <aside class="land-left"><article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="jobOpportunities">—</strong></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>${changeBarsTitle}</span>${changeBarsHint ? `<small>${changeBarsHint}</small>` : ""}</div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
       <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>مكونات استخدامات الأراضي</span><div class="donut" id="change-donut"><strong>مكونات الأراضي</strong></div><div id="donut-legend"></div></section></aside>
     </div>
@@ -477,48 +478,33 @@ async function renderIsmailiaUseDescriptionBars(container: HTMLElement): Promise
   try {
     const collection = await loadGeoJson("/data/dashboard/ismailia/landcover-end.geojson");
     if (container.dataset.useDescriptionRequest !== requestId) return;
-    const values = new Map<string, number>();
+    const serviceCategories = [
+      { label: "خدمي", matches: /خدم|مرافق|محطة|سنترال|مستشفى|صحي|علاج|سوق|تجار/i },
+      { label: "تعليمي", matches: /تعليم|مدرس|جامعة|جامعه|معهد|حضانة/i },
+      { label: "حكومي", matches: /حكوم|إدار|وزارة|محافظة|قسم شرطة|شرطة|مطافئ|بريد/i },
+      { label: "ديني", matches: /ديني|مسجد|جامع|كنيس/i },
+      { label: "سياحي", matches: /سياح|فندق|منتجع|متحف|أثري/i },
+      { label: "ترفيهي", matches: /ترفيه|رياض|ملعب|نادي|نادى|مركز شباب|حديقة|حديقه/i },
+      { label: "مقابر", matches: /مقابر|مقبرة|جبان/i },
+    ];
+    const values = new Map(serviceCategories.map(({ label }) => [label, 0]));
     collection.features.forEach((feature) => {
       const properties = feature.properties || {};
       const rawLabel = String(properties["وصف_الاستخدام"] || "").trim();
       const rawPattern = String(properties["نمط_العمران"] || "").trim();
-      let label = rawLabel || "غير مصنف";
-
-      if (/مسجد|جامع|كنيسة|ديني/i.test(rawLabel) || /ديني/i.test(rawPattern)) {
-        label = "مسجد / ديني";
-      } else if (/مدرسة|جامعة|تعليم|معهد/i.test(rawLabel) || /تعليم/i.test(rawPattern)) {
-        label = "تعليمي";
-      } else if (/مستشفى|مركز صحي|صحي|علاج/i.test(rawLabel) || /صحي/i.test(rawPattern)) {
-        label = "صحي / طبي";
-      } else if (/ملعب|نادي|رياض|مركز شباب/i.test(rawLabel) || /رياض/i.test(rawPattern)) {
-        label = "ملعب / رياضي";
-      } else if (/حكوم|إداري|مبنى حكومي/i.test(rawLabel) || /حكوم/i.test(rawPattern)) {
-        label = "حكومي / إداري";
-      } else if (/خدم|مرافق|محطة/i.test(rawLabel) || /خدم/i.test(rawPattern)) {
-        label = "خدمي";
-      } else if (/سكني|إسكان|منزل|عمارة/i.test(rawLabel) || /إسكان|سكني/i.test(rawPattern)) {
-        label = "سكني";
-      } else if (/مصنع|صناعي|ورشة|مخزن|شرك/i.test(rawLabel) || /صناعي/i.test(rawPattern)) {
-        label = "صناعي / مصنع";
-      } else if (/عسكري|قوات مسلحة|جيش/i.test(rawLabel) || /قوات  مسلحة|عسكري/i.test(rawPattern)) {
-        label = "منطقة عسكرية";
-      } else if (/زراع|صوب|مزرع/i.test(rawLabel)) {
-        label = "أرض زراعية";
-      } else if (/فضاء|فارغ/i.test(rawLabel)) {
-        label = "أرض فضاء";
-      } else if (/طريق|شارع|محور/i.test(rawLabel)) {
-        label = "طريق";
-      }
+      const text = `${rawPattern} ${rawLabel}`;
+      // Match the specific service types before the broad "خدمي" bucket.
+      const specific = serviceCategories.slice(1).find(({ matches }) => matches.test(text));
+      const category = specific || (serviceCategories[0].matches.test(text) ? serviceCategories[0] : null);
+      if (!category) return;
 
       const rawArea = Number(properties["مساحة_كم2"] ?? 0);
       const area = Number.isFinite(rawArea) ? rawArea : 0;
       if (area <= 0) return;
-      values.set(label, (values.get(label) || 0) + area);
+      values.set(category.label, (values.get(category.label) || 0) + area);
     });
 
-    const data = Array.from(values, ([label, value]) => ({ label, value }))
-      .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label, "ar"))
-      .slice(0, 9);
+    const data = serviceCategories.map(({ label }) => ({ label, value: values.get(label) || 0 }));
     if (!data.length) return;
     const max = Math.max(...data.map((item) => item.value), 1);
     container.innerHTML = data.map(({ label, value }) => `<button type="button" data-filter-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:#f28a00"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
