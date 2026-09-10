@@ -1048,17 +1048,27 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.style.cursor = "pointer";
 
         const bucketFeatures = bucket.features.slice(start, start + 350);
-        const bucketFeaturePaths = bucket.paths.slice(start, start + 350);
-        const bucketFeatureHits = bucketFeatures.map((feature, index) => {
-          const projected = feature.geometry ? coordinatePairs(feature.geometry.coordinates).map(project) : [];
-          return {
-            feature,
-            pathData: bucketFeaturePaths[index] || "",
-            minX: projected.length ? Math.min(...projected.map(([x]) => x)) : Infinity,
-            maxX: projected.length ? Math.max(...projected.map(([x]) => x)) : -Infinity,
-            minY: projected.length ? Math.min(...projected.map(([, y]) => y)) : Infinity,
-            maxY: projected.length ? Math.max(...projected.map(([, y]) => y)) : -Infinity,
-          };
+        const bucketFeatureHits = bucketFeatures.flatMap((feature) => {
+          if (!feature.geometry) return [];
+          const geometry = feature.geometry;
+          const hitGeometries: Array<{ type: string; coordinates: Coordinates }> = group === "ismailia" && geometry.type === "Polygon"
+            ? (geometry.coordinates as number[][][]).map((ring) => ({ type: "Polygon", coordinates: [ring] }))
+            : group === "ismailia" && geometry.type === "MultiPolygon"
+              ? (geometry.coordinates as number[][][][]).map((polygon) => ({ type: "Polygon", coordinates: polygon }))
+              : group === "ismailia" && geometry.type === "MultiLineString"
+                ? (geometry.coordinates as number[][][]).map((line) => ({ type: "LineString", coordinates: line }))
+                : [geometry];
+          return hitGeometries.map((hitGeometry) => {
+            const projected = coordinatePairs(hitGeometry.coordinates).map(project);
+            return {
+              feature,
+              pathData: geometryPath(hitGeometry, project),
+              minX: projected.length ? Math.min(...projected.map(([x]) => x)) : Infinity,
+              maxX: projected.length ? Math.max(...projected.map(([x]) => x)) : -Infinity,
+              minY: projected.length ? Math.min(...projected.map(([, y]) => y)) : Infinity,
+              maxY: projected.length ? Math.max(...projected.map(([, y]) => y)) : -Infinity,
+            };
+          });
         });
         const hitTestFeature = (event: MouseEvent) => {
           const rect = svg.getBoundingClientRect();
