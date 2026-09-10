@@ -924,6 +924,12 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const project = (pair: number[]): [number, number] => [(pair[0] - viewMinX) * scale + (1000 - width * scale) / 2, (viewMaxY - pair[1]) * scale + (520 - height * scale) / 2];
   const tileCount = renderSatelliteBasemap(satellite, [viewMinX, viewMinY, viewMaxX, viewMaxY], project, tileTemplate);
   content.innerHTML = "";
+  const featureSelection = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  featureSelection.classList.add("map-feature-selection");
+  featureSelection.setAttribute("fill-rule", "evenodd");
+  featureSelection.setAttribute("vector-effect", "non-scaling-stroke");
+  featureSelection.setAttribute("hidden", "true");
+  content.appendChild(featureSelection);
   const sectorValues = new Set<string>();
   // The Ismailia source represents one corridor; numeric sub-sector values in
   // land-cover attributes (for example 10/17) are internal classifications,
@@ -1025,11 +1031,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         const showPopup = (event: Event) => {
           event.stopPropagation();
           scope.querySelectorAll<SVGPathElement>(".map-content path").forEach((p) => p.classList.remove("feature-selected"));
-          path.classList.add("feature-selected");
           const popup = scope.querySelector<HTMLElement>(".feature-popup");
           if (!popup) return;
 
           let targetProperties: Record<string, unknown> | null = null;
+          let targetPathData = "";
           if (event instanceof MouseEvent) {
             const rect = svg.getBoundingClientRect();
             const mouseX = (event.clientX - rect.left) * 1000 / rect.width;
@@ -1043,10 +1049,22 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
               tempPath.setAttribute("d", featPathData);
               const point = svg.createSVGPoint();
               point.x = localX; point.y = localY;
-              if (tempPath.isPointInFill(point)) { targetProperties = feat.properties || null; break; }
+              if (tempPath.isPointInFill(point)) {
+                targetProperties = feat.properties || null;
+                targetPathData = featPathData;
+                break;
+              }
             }
           }
-          if (!targetProperties && bucketFeatures.length) targetProperties = bucketFeatures[0].properties || null;
+          if (!targetProperties && bucketFeatures.length) {
+            targetProperties = bucketFeatures[0].properties || null;
+            targetPathData = bucketFeatures[0].geometry ? geometryPath(bucketFeatures[0].geometry, project) : "";
+          }
+          if (targetPathData) {
+            featureSelection.setAttribute("d", targetPathData);
+            featureSelection.removeAttribute("hidden");
+            content.appendChild(featureSelection);
+          }
           const rows = Object.entries(targetProperties || {}).filter(([, value]) => value !== null && value !== "");
           const aggregateFieldLabels: Record<string, string> = { landuse_value: "استخدام الأرض", landuse_code: "كود استخدام الأرض", landuse_label: "وصف الاستخدام", source_feature_count: "عدد المعالم الأصلية", area_km2: "المساحة (كم²)", sector: "القطاع" };
           const landuseTitle = landuseNames[bucket.code] || labels[layer];
@@ -1166,6 +1184,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (changeSelect) {
     const applyChangeFilter = () => {
       const mode = changeSelect.value;
+      featureSelection.setAttribute("hidden", "true");
       loaded.forEach(([layer]) => {
         const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
         if (!groupElement) return;
@@ -1348,7 +1367,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   svg.addEventListener("pointerup", finishDrag);
   svg.addEventListener("pointercancel", finishDrag);
   svg.addEventListener("lostpointercapture", finishDrag);
-  svg.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
+  svg.addEventListener("click", () => {
+    const popup = scope.querySelector<HTMLElement>(".feature-popup");
+    if (popup) popup.hidden = true;
+    featureSelection.setAttribute("hidden", "true");
+  });
   scope.querySelector<HTMLButtonElement>(".feature-popup > button")?.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   document.querySelector<HTMLElement>(".interactive-dashboard")?.addEventListener("dashboard-map-sector", ((event: CustomEvent<string>) => fitSector(event.detail)) as EventListener);
   // Apply the focused initial view before the user interacts. Paired maps
