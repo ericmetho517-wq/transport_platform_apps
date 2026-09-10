@@ -268,7 +268,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
             <article style="background:#78ea00;color:#000;"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalFeatures" style="color:#000;">—</strong></article>
             <article style="background:#4f82e9;color:#fff;"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm" style="color:#fff;">—</strong></article>
             <article style="background:#ffffff;color:#000;"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2" style="color:#000;">—</strong></article>
-            <article style="background:#808080;color:#fff;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialFeatures" style="color:#fff;">—</strong></article>
+            <article style="background:#9800c7;color:#fff;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialFeatures" style="color:#fff;">—</strong></article>
             <article style="background:#9800c7;color:#fff;"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2" style="color:#fff;">—</strong></article>
           </div>
           <div class="ismailia-reference-body">
