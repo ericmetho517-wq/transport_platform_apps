@@ -52,8 +52,11 @@ const typeIcon: Record<string, string> = {
 const platformParams = new URLSearchParams(window.location.search);
 const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "en" : "ar";
 const displayTypeLabels = platformLanguage === "en" ? englishTypeLabels : typeLabels;
-const totalApplications = registry.length;
-const countOf = (type: string) => counts.get(type) || 0;
+const modeRegistry = registry.filter((app) => app.language === platformLanguage);
+const modeCounts = new Map<string, number>();
+modeRegistry.forEach((app) => modeCounts.set(app.type, (modeCounts.get(app.type) || 0) + 1));
+const totalApplications = modeRegistry.length;
+const countOf = (type: string) => modeCounts.get(type) || 0;
 document.documentElement.lang = platformLanguage;
 document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
@@ -73,7 +76,7 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
       <div class="section-title"><div><span class="section-kicker">دليل التطبيقات</span><h2>استعرض جميع المشروعات</h2><p>${platformLanguage === "en" ? "Search by title or sector, then filter results by type and language." : "ابحث بالعنوان أو القطاع، ثم صفِّ النتائج حسب النوع واللغة."}</p></div><div class="catalog-controls">
         <label class="search-control"><span>${platformLanguage === "en" ? "Search" : "بحث"}</span><input id="app-search" placeholder="${platformLanguage === "en" ? "Search by title or sector" : "ابحث بالعنوان أو القطاع"}"/></label>
         <label><span>نوع التطبيق</span><select id="type-filter"><option value="all">جميع أنواع التطبيقات</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${displayTypeLabels[type] || type}</option>`).join("")}</select></label>
-        <label><span>اللغة / Language</span><select id="language-filter"><option value="all">الكل / All</option><option value="ar">العربية</option><option value="en">English</option></select></label>
+        <label><span>${platformLanguage === "en" ? "Language" : "اللغة"}</span><select id="language-filter"><option value="${platformLanguage}">${platformLanguage === "en" ? "English" : "العربية"}</option></select></label>
         <label><span>المحور / Axis</span><select id="axis-filter"><option value="all">كل المحاور / All axes</option>${axisOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join("")}</select></label>
       </div></div>
       <div class="catalog-stats" aria-label="${platformLanguage === "en" ? "Application counts" : "إحصائيات التطبيقات"}">
@@ -142,7 +145,7 @@ const syncFiltersToUrl = () => {
   };
   set("q", search.value.trim(), "");
   set("type", typeFilter.value);
-  set("lang", languageFilter.value);
+  set("lang", languageFilter.value, platformLanguage);
   set("axis", axisFilter.value);
   window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
 };
@@ -162,14 +165,15 @@ const render = () => {
   const language = languageFilter.value;
   const axis = axisFilter.value;
   const visible = registry.filter((app) =>
-    (type === "all" || app.type === type)
+    app.language === platformLanguage
+    && (type === "all" || app.type === type)
     && (language === "all" || app.language === language)
     && (axis === "all" || axisOf(app) === axis)
     && `${app.title} ${app.category}`.toLocaleLowerCase().includes(query));
   summary.textContent = platformLanguage === "en"
     ? (visible.length ? "Applications matching your search and filter selections" : "No matching applications")
     : (visible.length ? "التطبيقات المطابقة لاختيارات البحث والتصفية" : "لا توجد تطبيقات مطابقة");
-  clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || language !== "all" || axis !== "all"));
+  clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || language !== platformLanguage || axis !== "all"));
   quickFilters.forEach((button) => button.classList.toggle("active", button.dataset.quickType === type));
   const groups = axisOptions.map(([value, label]) => [value, label, visible.filter((app) => axisOf(app) === value)] as const).filter(([, , items]) => items.length);
   const uncategorized = visible.filter((app) => !axisOptions.some(([value]) => axisOf(app) === value));
@@ -192,7 +196,7 @@ quickFilters.forEach((button) => button.addEventListener("click", () => {
 const resetFilters = () => {
   search.value = "";
   typeFilter.value = "all";
-  languageFilter.value = "all";
+  languageFilter.value = platformLanguage;
   axisFilter.value = "all";
   render();
 };
