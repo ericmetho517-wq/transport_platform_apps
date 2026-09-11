@@ -50,7 +50,7 @@ function mapPanel(app: TransportApp): string {
 
 function shell(app: TransportApp, content: string): string {
   return `<div class="app-shell" dir="${app.direction}">
-    <header class="topbar"><a class="brand" href="../../index.html"><span class="brand-mark">MOT</span><span>Ministry of Transport Platform</span></a><div class="top-actions"><span class="type-pill">${esc(app.type)}</span><button id="theme-toggle" aria-label="Toggle theme">◐</button></div></header>
+    <header class="topbar"><a class="brand" href="../../index.html"><span class="brand-mark">MOT</span><span>Ministry of Transport Platform</span></a><div class="top-actions"><span class="type-pill">${esc(app.type)}</span><button id="language-toggle" type="button" aria-label="Switch language">${app.language === "en" ? "العربية" : "English"}</button><button id="theme-toggle" aria-label="Toggle theme">◐</button></div></header>
     <div class="titlebar"><div><p>${esc(app.category)}</p><h1>${esc(app.title)}</h1></div><a class="source-link" href="${esc(app.sourceUrl)}" target="_blank" rel="noreferrer">Original reference ↗</a></div>
     ${content}
     <footer>Open-source TypeScript implementation · ArcGIS SDK not used</footer>
@@ -104,14 +104,33 @@ function viewer(app: TransportApp, filters = false): string {
 }
 
 export function renderProject(app: TransportApp): void {
-  document.documentElement.lang = app.language;
-  document.documentElement.dir = app.direction;
-  document.title = app.title;
+  const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
+  const activeLanguage: "ar" | "en" = requestedLanguage === "en" || requestedLanguage === "ar" ? requestedLanguage : app.language;
+  const activeApp: TransportApp = { ...app, language: activeLanguage, direction: activeLanguage === "en" ? "ltr" : "rtl" };
+  document.documentElement.lang = activeApp.language;
+  document.documentElement.dir = activeApp.direction;
+  document.title = activeApp.title;
   const root = document.querySelector<HTMLDivElement>("#app");
   if (!root) throw new Error("Missing #app root");
-  root.innerHTML = app.type === "Dashboard" ? renderInteractiveDashboard(app) : renderSectorApplication(app);
-  enableApplicationLocalization(app, root);
-  if (app.type === "Dashboard") void initInteractiveDashboard(app); else void initSectorApplication(app);
+  root.innerHTML = activeApp.type === "Dashboard" ? renderInteractiveDashboard(activeApp) : renderSectorApplication(activeApp);
+  enableApplicationLocalization(activeApp, root);
+  if (activeApp.type === "Dashboard") void initInteractiveDashboard(activeApp); else void initSectorApplication(activeApp);
+  if (!root.querySelector("#language-toggle")) {
+    const languageHost = root.querySelector<HTMLElement>(".dash-actions, .sector-header, .top-actions");
+    if (languageHost) {
+      const languageButton = document.createElement("button");
+      languageButton.id = "language-toggle";
+      languageButton.type = "button";
+      languageButton.setAttribute("aria-label", "Switch language");
+      languageButton.textContent = activeApp.language === "en" ? "العربية" : "English";
+      languageHost.appendChild(languageButton);
+    }
+  }
+  document.querySelector<HTMLButtonElement>("#language-toggle")?.addEventListener("click", () => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("lang", activeApp.language === "en" ? "ar" : "en");
+    window.location.search = params.toString();
+  });
   document.querySelector<HTMLButtonElement>("#theme-toggle")?.addEventListener("click", () => document.body.classList.toggle("dark"));
   const search = document.querySelector<HTMLInputElement>("#search");
   const select = document.querySelector<HTMLSelectElement>("#land-filter");
