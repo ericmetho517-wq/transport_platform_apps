@@ -109,6 +109,10 @@
 
 .platform-shell .catalog { max-width: 1540px; padding: 72px clamp(20px, 5vw, 76px) 105px; }
 .platform-shell .section-title { align-items: end; margin-bottom: 25px; }
+.platform-shell .catalog-stats { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; margin:0 0 24px; }
+.platform-shell .catalog-stats article { min-height:92px; display:grid; place-items:center; align-content:center; gap:7px; padding:14px 10px; border:1px solid #cfe1ee; border-radius:14px; background:#fff; box-shadow:0 8px 22px #0a416c0b; text-align:center; }
+.platform-shell .catalog-stats strong { color:var(--brand-blue); font-size:30px; line-height:1; }
+.platform-shell .catalog-stats span { color:#5f7890; font-size:10px; font-weight:800; }
 .platform-shell .section-kicker, .platform-shell .about-copy > span { display: inline-flex; align-items: center; gap: 8px; color: var(--brand-blue); font-size: 11px; font-weight: 900; letter-spacing: .07em; }
 .platform-shell .section-kicker::before, .platform-shell .about-copy > span::before { content: ""; width: 27px; height: 2px; border-radius: 4px; background: var(--brand-sky); }
 .platform-shell .section-title h2 { margin: 8px 0 6px; color: #092f53; font-size: clamp(34px, 4vw, 54px); letter-spacing: -.025em; }
@@ -184,6 +188,7 @@
   .platform-shell .platform-hero { grid-template-columns: 1fr minmax(310px, .7fr); gap: 30px; }
   .platform-shell .network-art { height: 390px; }
   .platform-shell .catalog-controls { min-width: 100%; }
+  .platform-shell .catalog-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
   .platform-shell .section-title { align-items: stretch; flex-direction: column; }
   .platform-shell .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .platform-shell .sector-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -203,6 +208,7 @@
   .platform-shell .scroll-cue { bottom: 63px; }
   .platform-shell .catalog { padding-inline: 15px; }
   .platform-shell .catalog-controls { grid-template-columns: 1fr; }
+  .platform-shell .catalog-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .platform-shell .catalog-toolbar { top: 68px; }
   .platform-shell .results-row > span { display: none; }
   .platform-shell .app-grid { grid-template-columns: 1fr; }

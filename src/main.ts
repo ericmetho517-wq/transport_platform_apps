@@ -52,6 +52,8 @@ const typeIcon: Record<string, string> = {
 const platformParams = new URLSearchParams(window.location.search);
 const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "en" : "ar";
 const displayTypeLabels = platformLanguage === "en" ? englishTypeLabels : typeLabels;
+const totalApplications = registry.length;
+const countOf = (type: string) => counts.get(type) || 0;
 document.documentElement.lang = platformLanguage;
 document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
@@ -74,6 +76,14 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
         <label><span>اللغة / Language</span><select id="language-filter"><option value="all">الكل / All</option><option value="ar">العربية</option><option value="en">English</option></select></label>
         <label><span>المحور / Axis</span><select id="axis-filter"><option value="all">كل المحاور / All axes</option>${axisOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join("")}</select></label>
       </div></div>
+      <div class="catalog-stats" aria-label="${platformLanguage === "en" ? "Application counts" : "إحصائيات التطبيقات"}">
+        <article><strong>${totalApplications}</strong><span>${platformLanguage === "en" ? "Total applications" : "إجمالي التطبيقات"}</span></article>
+        <article><strong>${countOf("Dashboard")}</strong><span>${platformLanguage === "en" ? "Indicator dashboards" : "لوحات المؤشرات"}</span></article>
+        <article><strong>${countOf("Experience")}</strong><span>${platformLanguage === "en" ? "Interactive applications" : "التطبيقات التفاعلية"}</span></article>
+        <article><strong>${countOf("StoryMap")}</strong><span>${platformLanguage === "en" ? "Geographic stories" : "القصص الجغرافية"}</span></article>
+        <article><strong>${countOf("Web AppViewer")}</strong><span>${platformLanguage === "en" ? "Map viewers" : "عارضات الخرائط"}</span></article>
+        <article><strong>${countOf("Instant Filter Gallery")}</strong><span>${platformLanguage === "en" ? "Application galleries" : "معارض التطبيقات"}</span></article>
+      </div>
       <div class="catalog-toolbar"><div class="quick-filters" aria-label="تصفية سريعة"><button class="active" data-quick-type="all">جميع التطبيقات</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${displayTypeLabels[type] || type}</button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">إعادة ضبط الفلاتر</button></div>
       <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>اختر تطبيقًا لعرض تفاصيله وتشغيله</span></div>
       <div id="app-grid" class="app-grid"></div>
