@@ -59,19 +59,19 @@ document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
 root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ? "ltr" : "rtl"}">
   <header class="platform-header">
-    <a class="brand" href="#top" aria-label="العودة إلى بداية المنصة"><span class="brand-logos"><img src="/Picture1.jpg" alt="شعار وزارة النقل"/><img src="/images.jpg" alt="شعار نظم المعلومات الجغرافية"/></span><span><b>منصة تطبيقات وزارة النقل</b><small>Ministry of Transport Digital Platform</small></span></a>
-    <nav><a href="#applications">التطبيقات</a></nav>
-    <a class="header-cta" href="#applications">استكشف المنصة <span>←</span></a>
+    <a class="brand" href="#top" aria-label="${platformLanguage === "en" ? "Back to platform home" : "العودة إلى بداية المنصة"}"><span class="brand-logos"><img src="/Picture1.jpg" alt="${platformLanguage === "en" ? "Ministry of Transport logo" : "شعار وزارة النقل"}"/><img src="/images.jpg" alt="${platformLanguage === "en" ? "Geographic Information Systems logo" : "شعار نظم المعلومات الجغرافية"}"/></span><span><b>${platformLanguage === "en" ? "Platform Applications Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</b><small>Ministry of Transport Digital Platform</small></span></a>
+    <nav><a href="#applications">${platformLanguage === "en" ? "Applications" : "التطبيقات"}</a></nav>
+    <a class="header-cta" href="#applications">${platformLanguage === "en" ? "Explore the Platform" : "استكشف المنصة"} <span>${platformLanguage === "en" ? "→" : "←"}</span></a>
   </header>
   <main id="top">
     <section class="platform-hero">
-      <div class="hero-copy"><span class="eyebrow"><i></i> منصة جغرافية رقمية مفتوحة المصدر</span><h1>كل مشروعات النقل<br/><em>في منصة واحدة.</em></h1><p>بوابة مؤسسية موحدة لاستعراض لوحات المؤشرات والخرائط التفاعلية والقصص المكانية والبيانات القطاعية بسهولة ووضوح.</p><div class="hero-actions"><a class="primary" href="#applications">استعرض التطبيقات <span>←</span></a><span class="hero-trust">بيانات مكانية موثقة ومترابطة</span></div><div class="hero-tags"><span>خرائط تفاعلية</span><span>بيانات قطاعية</span><span>عربي وEnglish</span></div></div>
-      <div class="network-art" aria-hidden="true"><div class="map-grid"></div><span class="route route-one"></span><span class="route route-two"></span><span class="identity-seal"><small>جمهورية مصر العربية</small><b>وزارة النقل</b><em>بوابة التطبيقات المكانية</em></span><i></i><i></i><i></i><i></i><i></i></div>
-      <a class="scroll-cue" href="#applications" aria-label="انتقل إلى التطبيقات"><span></span>مرّر للاستكشاف</a>
+      <div class="hero-copy"><span class="eyebrow"><i></i> ${platformLanguage === "en" ? "Open-source digital geospatial platform" : "منصة جغرافية رقمية مفتوحة المصدر"}</span><h1>${platformLanguage === "en" ? "All Transport Projects" : "كل مشروعات النقل"}<br/><em>${platformLanguage === "en" ? "in One Platform." : "في منصة واحدة."}</em></h1><p>${platformLanguage === "en" ? "A unified institutional portal for exploring indicator dashboards, interactive maps, geographic stories, and sector data with ease and clarity." : "بوابة مؤسسية موحدة لاستعراض لوحات المؤشرات والخرائط التفاعلية والقصص المكانية والبيانات القطاعية بسهولة ووضوح."}</p><div class="hero-actions"><a class="primary" href="#applications">${platformLanguage === "en" ? "Explore Applications" : "استعرض التطبيقات"} <span>${platformLanguage === "en" ? "→" : "←"}</span></a><span class="hero-trust">${platformLanguage === "en" ? "Verified and connected geospatial data" : "بيانات مكانية موثقة ومترابطة"}</span></div><div class="hero-tags"><span>${platformLanguage === "en" ? "Interactive Maps" : "خرائط تفاعلية"}</span><span>${platformLanguage === "en" ? "Sector Data" : "بيانات قطاعية"}</span><span>${platformLanguage === "en" ? "Arabic and English" : "عربي وEnglish"}</span></div></div>
+      <div class="network-art" aria-hidden="true"><div class="map-grid"></div><span class="route route-one"></span><span class="route route-two"></span><span class="identity-seal"><small>${platformLanguage === "en" ? "Arab Republic of Egypt" : "جمهورية مصر العربية"}</small><b>${platformLanguage === "en" ? "Ministry of Transport" : "وزارة النقل"}</b><em>${platformLanguage === "en" ? "Geospatial Applications Portal" : "بوابة التطبيقات المكانية"}</em></span><i></i><i></i><i></i><i></i><i></i></div>
+      <a class="scroll-cue" href="#applications" aria-label="${platformLanguage === "en" ? "Go to applications" : "انتقل إلى التطبيقات"}"><span></span>${platformLanguage === "en" ? "Scroll to explore" : "مرّر للاستكشاف"}</a>
     </section>
     <section id="applications" class="catalog">
-      <div class="section-title"><div><span class="section-kicker">دليل التطبيقات</span><h2>استعرض جميع المشروعات</h2><p>ابحث بالعنوان أو القطاع، ثم صفِّ النتائج حسب النوع واللغة.</p></div><div class="catalog-controls">
-        <label class="search-control"><span>بحث</span><input id="app-search" placeholder="ابحث بالعنوان أو القطاع"/></label>
+      <div class="section-title"><div><span class="section-kicker">دليل التطبيقات</span><h2>استعرض جميع المشروعات</h2><p>${platformLanguage === "en" ? "Search by title or sector, then filter results by type and language." : "ابحث بالعنوان أو القطاع، ثم صفِّ النتائج حسب النوع واللغة."}</p></div><div class="catalog-controls">
+        <label class="search-control"><span>${platformLanguage === "en" ? "Search" : "بحث"}</span><input id="app-search" placeholder="${platformLanguage === "en" ? "Search by title or sector" : "ابحث بالعنوان أو القطاع"}"/></label>
         <label><span>نوع التطبيق</span><select id="type-filter"><option value="all">جميع أنواع التطبيقات</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${displayTypeLabels[type] || type}</option>`).join("")}</select></label>
         <label><span>اللغة / Language</span><select id="language-filter"><option value="all">الكل / All</option><option value="ar">العربية</option><option value="en">English</option></select></label>
         <label><span>المحور / Axis</span><select id="axis-filter"><option value="all">كل المحاور / All axes</option>${axisOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join("")}</select></label>
@@ -89,8 +89,8 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
       <div id="app-grid" class="app-grid"></div>
     </section>
   </main>
-  <footer><span>منصة تطبيقات وزارة النقل</span><span>منصة جغرافية رقمية مفتوحة المصدر</span></footer>
-  <button id="back-to-top" class="back-to-top" type="button" aria-label="العودة إلى أعلى الصفحة">↑</button>
+  <footer><span>${platformLanguage === "en" ? "Platform Applications Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</span><span>${platformLanguage === "en" ? "Open-source digital geospatial platform" : "منصة جغرافية رقمية مفتوحة المصدر"}</span></footer>
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="${platformLanguage === "en" ? "Back to top" : "العودة إلى أعلى الصفحة"}">↑</button>
 </div>`;
 
 const platformApp: TransportApp = { id: "platform", slug: "platform", title: "منصة تطبيقات وزارة النقل", alternateTitles: ["Ministry of Transport Digital Platform"], category: "منصة التطبيقات", type: "Dashboard", language: platformLanguage, direction: platformLanguage === "en" ? "ltr" : "rtl", sourceUrl: "", status: "local" };
@@ -166,7 +166,9 @@ const render = () => {
     && (language === "all" || app.language === language)
     && (axis === "all" || axisOf(app) === axis)
     && `${app.title} ${app.category}`.toLocaleLowerCase().includes(query));
-  summary.textContent = visible.length ? "التطبيقات المطابقة لاختيارات البحث والتصفية" : "لا توجد تطبيقات مطابقة";
+  summary.textContent = platformLanguage === "en"
+    ? (visible.length ? "Applications matching your search and filter selections" : "No matching applications")
+    : (visible.length ? "التطبيقات المطابقة لاختيارات البحث والتصفية" : "لا توجد تطبيقات مطابقة");
   clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || language !== "all" || axis !== "all"));
   quickFilters.forEach((button) => button.classList.toggle("active", button.dataset.quickType === type));
   const groups = axisOptions.map(([value, label]) => [value, label, visible.filter((app) => axisOf(app) === value)] as const).filter(([, , items]) => items.length);
