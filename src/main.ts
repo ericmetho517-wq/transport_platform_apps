@@ -25,6 +25,13 @@ const typeLabels: Record<string, string> = {
   "Web AppViewer": "تطبيقات استعراض الخرائط",
   "Instant Filter Gallery": "كتالوج التطبيقات",
 };
+const englishTypeLabels: Record<string, string> = {
+  Dashboard: "Operational Indicator Dashboards",
+  Experience: "Interactive Applications",
+  StoryMap: "Geographic Stories",
+  "Web AppViewer": "Map Viewer Applications",
+  "Instant Filter Gallery": "Application Catalog",
+};
 
 const typeClass: Record<string, string> = {
   Dashboard: "dashboard",
@@ -44,6 +51,7 @@ const typeIcon: Record<string, string> = {
 
 const platformParams = new URLSearchParams(window.location.search);
 const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "en" : "ar";
+const displayTypeLabels = platformLanguage === "en" ? englishTypeLabels : typeLabels;
 document.documentElement.lang = platformLanguage;
 document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
@@ -62,11 +70,11 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
     <section id="applications" class="catalog">
       <div class="section-title"><div><span class="section-kicker">دليل التطبيقات</span><h2>استعرض جميع المشروعات</h2><p>ابحث بالعنوان أو القطاع، ثم صفِّ النتائج حسب النوع واللغة.</p></div><div class="catalog-controls">
         <label class="search-control"><span>بحث</span><input id="app-search" placeholder="ابحث بالعنوان أو القطاع"/></label>
-        <label><span>نوع التطبيق</span><select id="type-filter"><option value="all">جميع أنواع التطبيقات</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${typeLabels[type] || type}</option>`).join("")}</select></label>
+        <label><span>نوع التطبيق</span><select id="type-filter"><option value="all">جميع أنواع التطبيقات</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${displayTypeLabels[type] || type}</option>`).join("")}</select></label>
         <label><span>اللغة / Language</span><select id="language-filter"><option value="all">الكل / All</option><option value="ar">العربية</option><option value="en">English</option></select></label>
         <label><span>المحور / Axis</span><select id="axis-filter"><option value="all">كل المحاور / All axes</option>${axisOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join("")}</select></label>
       </div></div>
-      <div class="catalog-toolbar"><div class="quick-filters" aria-label="تصفية سريعة"><button class="active" data-quick-type="all">جميع التطبيقات</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${typeLabels[type] || type}</button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">إعادة ضبط الفلاتر</button></div>
+      <div class="catalog-toolbar"><div class="quick-filters" aria-label="تصفية سريعة"><button class="active" data-quick-type="all">جميع التطبيقات</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${displayTypeLabels[type] || type}</button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">إعادة ضبط الفلاتر</button></div>
       <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>اختر تطبيقًا لعرض تفاصيله وتشغيله</span></div>
       <div id="app-grid" class="app-grid"></div>
     </section>
@@ -155,7 +163,7 @@ const render = () => {
   const uncategorized = visible.filter((app) => !axisOptions.some(([value]) => axisOf(app) === value));
   if (uncategorized.length) groups.push(["other", "تطبيقات مشتركة / Shared applications", uncategorized]);
   let cardIndex = 0;
-  grid.innerHTML = groups.map(([, label, items]) => `<section class="sector-group" aria-label="${label}"><div class="sector-group-heading"><div><span>قطاع / Sector</span><h3>${label}</h3></div><b>${items.length} تطبيق</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${typeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${app.title}</h3><p>${app.category}</p><span class="card-language">${platformLanguage === "en" ? (app.language === "en" ? "EN" : "AR") : app.language === "en" ? "EN" : "ع"}</span><span class="open">${platformLanguage === "en" ? "Open application" : app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${platformLanguage === "en" ? "→" : app.direction === "ltr" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`).join("") || `<div class="empty"><b>لا توجد نتائج مطابقة</b><span>No matching applications</span><button type="button" data-reset-empty>عرض جميع التطبيقات</button></div>`;
+  grid.innerHTML = groups.map(([, label, items]) => { const displayLabel = platformLanguage === "en" ? (label.split(" / ").pop() || label) : label; return `<section class="sector-group" aria-label="${displayLabel}"><div class="sector-group-heading"><div><span>${platformLanguage === "en" ? "Sector" : "قطاع / Sector"}</span><h3>${displayLabel}</h3></div><b>${items.length} ${platformLanguage === "en" ? (items.length === 1 ? "Application" : "Applications") : "تطبيق"}</b></div><div class="sector-group-grid">${items.map((app) => { const title = platformLanguage === "en" ? (app.alternateTitles?.[0] || app.title) : app.title; return `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${title}</h3><p>${platformLanguage === "en" ? (app.language === "en" ? app.category : "Arabic application") : app.category}</p><span class="card-language">${platformLanguage === "en" ? (app.language === "en" ? "EN" : "AR") : app.language === "en" ? "EN" : "ع"}</span><span class="open">${platformLanguage === "en" ? "Open application" : app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${platformLanguage === "en" ? "→" : app.direction === "ltr" ? "→" : "←"}</b></span></a>`; }).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${platformLanguage === "en" ? "No matching applications" : "لا توجد نتائج مطابقة"}</b><span>${platformLanguage === "en" ? "Try changing the filters." : "No matching applications"}</span><button type="button" data-reset-empty>${platformLanguage === "en" ? "View all applications" : "عرض جميع التطبيقات"}</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
   syncFiltersToUrl();
 };
