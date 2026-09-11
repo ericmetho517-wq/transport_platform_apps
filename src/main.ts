@@ -52,11 +52,65 @@ const typeIcon: Record<string, string> = {
 const platformParams = new URLSearchParams(window.location.search);
 const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "en" : "ar";
 const displayTypeLabels = platformLanguage === "en" ? englishTypeLabels : typeLabels;
-const modeRegistry = registry.filter((app) => app.language === platformLanguage);
+// Arabic records are the complete, canonical catalogue. English mode opens the
+// same applications with `lang=en`, preventing a second translated copy of the
+// same application from appearing beside it.
+const modeRegistry = registry.filter((app) => app.language === "ar");
 const modeCounts = new Map<string, number>();
 modeRegistry.forEach((app) => modeCounts.set(app.type, (modeCounts.get(app.type) || 0) + 1));
 const totalApplications = modeRegistry.length;
 const countOf = (type: string) => modeCounts.get(type) || 0;
+const englishAxisLabels: Record<string, string> = {
+  "western-upper-egypt": "Western Upper Egypt",
+  ismailia: "Cairo–Ismailia Axis",
+  "dahshur-south-link": "Dahshur South Link",
+  "regional-ring-road": "Regional Ring Road",
+  "kalabsha-axis": "Kalabsha Axis",
+  "qena-luxor-road": "Qena–Luxor Road",
+  "qus-axis": "Qus Axis",
+  "cairo-suez-road": "Cairo–Suez Road",
+  "suez-ring-link": "Suez Ring Link",
+  "dabaa-axis": "El Dabaa Axis",
+};
+const englishTitles: Record<string, string> = {
+  "لوحة مؤشرات الأراضى العمرانية": "Urban Land Indicators Dashboard",
+  "لوحة مؤشرات الأراضي العمرانية": "Urban Land Indicators Dashboard",
+  "لوحة مؤشرات أسعار الأراضى": "Land Prices Indicators Dashboard",
+  "لوحة مؤشرات أسعار الأراضي": "Land Prices Indicators Dashboard",
+  "لوحة مؤشرات الأراضي الزراعية والصناعية": "Agricultural and Industrial Land Indicators Dashboard",
+  "محور الصعيد الغربي (الجيزة / ابوسمبل)": "Western Upper Egypt Axis (Giza / Abu Simbel)",
+  "طريق الصعيد الغربي": "Western Upper Egypt Road",
+  "لوحة مؤشرات الدراسة المدنية": "Civil Study Indicators Dashboard",
+  "لوحة مؤشرات أنماط و انواع الأراضى": "Land Types and Patterns Indicators Dashboard",
+  "لوحة مؤشرات أسعار و دراسات الأراضى": "Land Prices and Studies Indicators Dashboard",
+  "لوحة مؤشرات الدراسة المدنية الاقليمي": "Regional Civil Study Indicators Dashboard",
+  "منطقة الدراسة القوس الشرقى للدائرى الأقليمى و خط الروبيكى": "Eastern Arc of the Regional Ring Road and Robeki Railway Study Area",
+  "الدائري الإقليمي والروبيكي": "Regional Ring Road and Robeki Railway",
+  "قياس الأثر التنموي في نطاق التأثير التنموي المباشر للقوس الشرقي للطريق الدائري خلال الـ 30 سنة القادمة": "Development Impact Assessment for the Eastern Arc of the Ring Road: Next 30 Years",
+  "لوحة مؤشرات الأراضى الزراعية والعمرانية": "Agricultural and Urban Land Indicators Dashboard",
+  "تطور الاراضي المحيطة بمحور كلابشة": "Land Development Around Kalabsha Axis",
+  "لوحة مؤشرات أنماط و أسعار الأراضى": "Land Types and Prices Indicators Dashboard",
+  "منطقة دراسة محور كلابشة": "Kalabsha Axis Study Area",
+  "تطور الاراضي المحيطة بطريق قنا الأقصر": "Land Development Around Qena–Luxor Road",
+  "لوحة مؤشرات الاسعار الأراضى": "Land Prices Indicators Dashboard",
+  "منطقة الدراسة محور قنا": "Qena Axis Study Area",
+  "تطور الاراضي المحيطة بوصلة طريق السويس من الطريق الدائري": "Land Development Around the Suez Ring Road Link",
+  "وصلة طريق السويس من الطريق الدائري": "Suez Ring Road Link",
+  "السويس": "Suez",
+  "منطقة الدراسة وصلة طريق السويس من الطريق الدائري الاوسطي": "Suez Ring Road Link Study Area",
+  "طريق القاهرة - السويس الصحراوي - (السويس الحر)": "Cairo–Suez Desert Road (Suez Free Zone)",
+  "قياس الأثر التنموي في نطاق التأثير التنموي المباشر طريق السويس الحر خلال الـ 30 سنة القادمة": "Development Impact Assessment for Suez Free Road: Next 30 Years",
+  "قياس الأثر الاقتصادي والتنموي طريق القاهرة - السويس الصحراوي - (السويس الحر) (2014-2024)": "Economic and Development Impact Assessment: Cairo–Suez Desert Road (2014–2024)",
+  "طريق السويس": "Suez Road",
+  "تطور الاراضي المحيطة بمحور قوص": "Land Development Around Qus Axis",
+  "تطبيق منطقة الدراسة محور قوص": "Qus Axis Study Area Application",
+  "محور قوص": "Qus Axis",
+  "لوحة مؤشرات الأراضي العمرانية – الإسماعيلية": "Urban Land Indicators Dashboard – Ismailia",
+  "لوحة مؤشرات أسعار الأراضي – الإسماعيلية": "Land Prices Indicators Dashboard – Ismailia",
+  "لوحة مؤشرات الأراضي الزراعية والصناعية – الإسماعيلية": "Agricultural and Industrial Land Indicators Dashboard – Ismailia",
+  "القصة المكانية التفاعلية – محور القاهرة–الإسماعيلية": "Interactive Geographic Story – Cairo–Ismailia Axis",
+};
+const displayTitle = (app: TransportApp) => platformLanguage === "en" ? (englishTitles[app.title] || app.alternateTitles?.[0] || "Transport Application") : app.title;
 document.documentElement.lang = platformLanguage;
 document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
@@ -164,12 +218,10 @@ const render = () => {
   const type = typeFilter.value;
   const language = languageFilter.value;
   const axis = axisFilter.value;
-  const visible = registry.filter((app) =>
-    app.language === platformLanguage
-    && (type === "all" || app.type === type)
-    && (language === "all" || app.language === language)
+  const visible = modeRegistry.filter((app) =>
+    (type === "all" || app.type === type)
     && (axis === "all" || axisOf(app) === axis)
-    && `${app.title} ${app.category}`.toLocaleLowerCase().includes(query));
+    && `${displayTitle(app)} ${platformLanguage === "en" ? englishAxisLabels[axisOf(app)] || "" : app.category}`.toLocaleLowerCase().includes(query));
   summary.textContent = platformLanguage === "en"
     ? (visible.length ? "Applications matching your search and filter selections" : "No matching applications")
     : (visible.length ? "التطبيقات المطابقة لاختيارات البحث والتصفية" : "لا توجد تطبيقات مطابقة");
@@ -179,7 +231,7 @@ const render = () => {
   const uncategorized = visible.filter((app) => !axisOptions.some(([value]) => axisOf(app) === value));
   if (uncategorized.length) groups.push(["other", "تطبيقات مشتركة / Shared applications", uncategorized]);
   let cardIndex = 0;
-  grid.innerHTML = groups.map(([, label, items]) => { const displayLabel = platformLanguage === "en" ? (label.split(" / ").pop() || label) : label; return `<section class="sector-group" aria-label="${displayLabel}"><div class="sector-group-heading"><div><span>${platformLanguage === "en" ? "Sector" : "قطاع / Sector"}</span><h3>${displayLabel}</h3></div><b>${items.length} ${platformLanguage === "en" ? (items.length === 1 ? "Application" : "Applications") : "تطبيق"}</b></div><div class="sector-group-grid">${items.map((app) => { const title = platformLanguage === "en" ? (app.alternateTitles?.[0] || app.title) : app.title; return `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${title}</h3><p>${platformLanguage === "en" ? (app.language === "en" ? app.category : "Arabic application") : app.category}</p><span class="card-language">${platformLanguage === "en" ? (app.language === "en" ? "EN" : "AR") : app.language === "en" ? "EN" : "ع"}</span><span class="open">${platformLanguage === "en" ? "Open application" : app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${platformLanguage === "en" ? "→" : app.direction === "ltr" ? "→" : "←"}</b></span></a>`; }).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${platformLanguage === "en" ? "No matching applications" : "لا توجد نتائج مطابقة"}</b><span>${platformLanguage === "en" ? "Try changing the filters." : "No matching applications"}</span><button type="button" data-reset-empty>${platformLanguage === "en" ? "View all applications" : "عرض جميع التطبيقات"}</button></div>`;
+  grid.innerHTML = groups.map(([value, label, items]) => { const groupLabel = platformLanguage === "en" ? (englishAxisLabels[value] || label.split(" / ").pop() || label) : label; return `<section class="sector-group" aria-label="${groupLabel}"><div class="sector-group-heading"><div><span>${platformLanguage === "en" ? "Sector" : "قطاع / Sector"}</span><h3>${groupLabel}</h3></div><b>${items.length} ${platformLanguage === "en" ? (items.length === 1 ? "Application" : "Applications") : "تطبيق"}</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${displayTitle(app)}</h3><p>${platformLanguage === "en" ? groupLabel : app.category}</p><span class="card-language">${platformLanguage === "en" ? "EN" : "ع"}</span><span class="open">${platformLanguage === "en" ? "Open application" : "فتح التطبيق"} <b>${platformLanguage === "en" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${platformLanguage === "en" ? "No matching applications" : "لا توجد نتائج مطابقة"}</b><span>${platformLanguage === "en" ? "Try changing the filters." : "No matching applications"}</span><button type="button" data-reset-empty>${platformLanguage === "en" ? "View all applications" : "عرض جميع التطبيقات"}</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
   syncFiltersToUrl();
 };
