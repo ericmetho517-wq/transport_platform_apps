@@ -58,6 +58,7 @@ function relatedDashboard(app: TransportApp): string {
     "cairo-suez-road": { ar: "dashboard-8a75afd782", en: "dashboard-8f14badaa6" },
     "suez-ring-link": { ar: "dashboard-85be400b84", en: "dashboard-e4d0b8938f" },
     "dabaa-axis": { ar: "dashboard-c1e29f0123", en: "dashboard-c1e29f0123" },
+    "ismailia": { ar: "dashboard-ismailia-urban", en: "dashboard-ismailia-urban" },
   };
   return links[dashboardGroup(app)]?.[app.language] || "";
 }

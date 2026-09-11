@@ -495,13 +495,13 @@ async function renderIsmailiaUseDescriptionBars(container: HTMLElement): Promise
     const collection = await loadGeoJson("/data/dashboard/ismailia/landcover-end.geojson");
     if (container.dataset.useDescriptionRequest !== requestId) return;
     const serviceCategories = [
-      { label: "خدمي", matches: /خدم|مرافق|محطة|سنترال|مستشفى|صحي|علاج|سوق|تجار/i },
-      { label: "تعليمي", matches: /تعليم|مدرس|جامعة|جامعه|معهد|حضانة/i },
-      { label: "حكومي", matches: /حكوم|إدار|وزارة|محافظة|قسم شرطة|شرطة|مطافئ|بريد/i },
-      { label: "ديني", matches: /ديني|مسجد|جامع|كنيس/i },
-      { label: "سياحي", matches: /سياح|فندق|منتجع|متحف|أثري/i },
-      { label: "ترفيهي", matches: /ترفيه|رياض|ملعب|نادي|نادى|مركز شباب|حديقة|حديقه/i },
-      { label: "مقابر", matches: /مقابر|مقبرة|جبان/i },
+      { label: "خدمي", code: "5", matches: /خدم|مرافق|محطة|سنترال|مستشفى|صحي|علاج|سوق|تجار/i },
+      { label: "تعليمي", code: "12", matches: /تعليم|مدرس|جامعة|جامعه|معهد|حضانة/i },
+      { label: "حكومي", code: "13", matches: /حكوم|إدار|وزارة|محافظة|قسم شرطة|شرطة|مطافئ|بريد/i },
+      { label: "ديني", code: "11", matches: /ديني|مسجد|جامع|كنيس/i },
+      { label: "سياحي", code: "14", matches: /سياح|فندق|منتجع|متحف|أثري/i },
+      { label: "ترفيهي", code: "6", matches: /ترفيه|رياض|ملعب|نادي|نادى|مركز شباب|حديقة|حديقه/i },
+      { label: "مقابر", code: "7", matches: /مقابر|مقبرة|جبان/i },
     ];
     const values = new Map(serviceCategories.map(({ label }) => [label, 0]));
     collection.features.forEach((feature) => {
@@ -520,10 +520,16 @@ async function renderIsmailiaUseDescriptionBars(container: HTMLElement): Promise
       values.set(category.label, (values.get(category.label) || 0) + area);
     });
 
-    const data = serviceCategories.map(({ label }) => ({ label, value: values.get(label) || 0 }));
+    const data = serviceCategories.map(({ label, code }) => ({ label, code, value: values.get(label) || 0 }));
     if (!data.length) return;
     const max = Math.max(...data.map((item) => item.value), 1);
-    container.innerHTML = data.map(({ label, value }) => `<button type="button" data-filter-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:#f28a00"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
+    const serviceColor = ismailiaLanduseSymbols[5][0];
+    container.innerHTML = data.map(({ label, code, value }) => `<button type="button" data-filter-layer="landcover-end" data-landuse-codes="${code}" data-landuse-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${serviceColor};--bar-border:${serviceColor}"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
+    container.querySelectorAll<HTMLElement>("[data-landuse-codes]").forEach((button) => button.addEventListener("click", () => {
+      const codes = button.dataset.landuseCodes?.split(",").filter(Boolean) || [];
+      const layer = button.dataset.landuseLayer as "landcover-start" | "landcover-end" | undefined;
+      if (codes.length && layer) activateLandusePatterns(codes, layer);
+    }));
   } catch {
     // Fallback stays as three high level bars
   }
@@ -541,7 +547,7 @@ function renderComparison(summary: DashboardSummary, topOnly = false): void {
       { label: "أخرى", codes: ["5", "6", "7", "8", "9", "10", "11", "12", "13", "99"], color: "#bdbdbd", matches: /./i },
       { label: "العمران", codes: ["3"], color: "#f6a900", matches: /عمران|حضري|سكن/i },
       { label: "الصناعة", codes: ["1"], color: "#9800c7", matches: /صناع|مصنع/i },
-      { label: "أنماط الخدمات", codes: ["4"], color: "#10b8ad", matches: /خدم/i },
+      { label: "أنماط الخدمات", codes: ["5", "6", "7", "11", "12", "13", "14"], color: ismailiaLanduseSymbols[5][0], matches: /خدم/i },
     ];
     const years = Array.from(new Set(summary.landUse.map((item) => item.year))).sort();
     const classify = (category: string) => categories.find((item) => item.label !== "أخرى" && item.matches.test(category)) || categories[2];
@@ -645,14 +651,15 @@ function renderGaugeAndDonut(summary: DashboardSummary): void {
       const sShare = landTotal ? (servicesArea / landTotal) * 100 : 0;
       const oShare = landTotal ? (otherArea / landTotal) * 100 : 0;
 
-      donut.style.background = `conic-gradient(#f6a900 0 ${uShare}%, #10b8ad ${uShare}% ${uShare + sShare}%, #bdbdbd ${uShare + sShare}% 100%)`;
+      const serviceColor = dashboard?.dataset.dashboardGroup === "ismailia" ? ismailiaLanduseSymbols[5][0] : "#10b8ad";
+      donut.style.background = `conic-gradient(#f6a900 0 ${uShare}%, ${serviceColor} ${uShare}% ${uShare + sShare}%, #bdbdbd ${uShare + sShare}% 100%)`;
       const label = donut.querySelector("strong");
       if (label) label.textContent = `${formatNumber(landTotal, 1)} كم²`;
 
       const legend = document.querySelector<HTMLElement>("#donut-legend");
       if (legend) {
         legend.innerHTML = `<span><i style="background:#f6a900"></i>عمران ${formatNumber(urbanArea, 1)} كم² (${formatNumber(uShare, 0)}٪)</span>` +
-          `<span><i style="background:#10b8ad"></i>خدمات ${formatNumber(servicesArea, 1)} كم² (${formatNumber(sShare, 0)}٪)</span>` +
+          `<span><i style="background:${serviceColor}"></i>خدمات ${formatNumber(servicesArea, 1)} كم² (${formatNumber(sShare, 0)}٪)</span>` +
           `<span><i style="background:#bdbdbd"></i>أخرى ${formatNumber(otherArea, 1)} كم² (${formatNumber(oShare, 0)}٪)</span>`;
       }
     } else {

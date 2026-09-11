@@ -1,9 +1,9 @@
 :root { color-scheme: dark; }
-body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f3; overflow-x: hidden; }
-.interactive-dashboard { min-height: 100vh; background: #1b1b1b; color: #f3f3f3; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
-.interactive-head { min-height: 76px; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 18px; background: #272727; border-bottom: 3px solid #393939; }
+body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; background: #171717; color: #f3f3f3; overflow-x: hidden; box-sizing: border-box; }
+.interactive-dashboard { min-height: 100vh; display: flex; flex-direction: column; background: #1b1b1b; color: #f3f3f3; font-family: "Segoe UI", Tahoma, Arial, sans-serif; box-sizing: border-box; }
+.interactive-head { flex: 0 0 auto; min-height: 64px; padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #272727; border-bottom: 3px solid #393939; box-sizing: border-box; }
 .interactive-head > div:first-child { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 12px; }
-.interactive-head h1 { grid-column: 1 / -1; margin: 5px 0 0; font-size: clamp(16px, 1.8vw, 25px); line-height: 1.2; }
+.interactive-head h1 { grid-column: 1 / -1; margin: 4px 0 0; font-size: clamp(16px, 1.8vw, 24px); line-height: 1.25; }
 .interactive-head span { color: #bcbcbc; font-size: 11px; }
 .mot-badge { padding: 6px 10px; border-radius: 4px; background: #111; color: #ffc126; text-decoration: none; font-size: 12px; font-weight: 800; }
 .dash-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: end; }
@@ -22,47 +22,47 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .data-badge i, .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #61e315; box-shadow: 0 0 0 4px #61e31522; animation: pulse 2s infinite; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 7px #61e31508; } }
 
-.price-layout { min-height: calc(100vh - 79px); display: grid; grid-template-columns: minmax(350px, 39%) minmax(560px, 61%); direction: ltr; }
-.price-columns { display: grid; grid-template-columns: repeat(var(--price-columns, 3), minmax(0, 1fr)); direction: ltr; border-inline-end: 2px solid #3c3c3c; background: #262626; }
-.price-no-data { grid-column: 1 / -1; min-height: 420px; align-content: center; line-height: 1.8; }
+.price-layout { flex: 1 1 auto; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(330px, 37%) minmax(0, 1fr); direction: ltr; box-sizing: border-box; }
+.price-columns { display: grid; grid-template-columns: repeat(var(--price-columns, 3), minmax(0, 1fr)); direction: ltr; border-inline-end: 2px solid #3c3c3c; background: #262626; overflow-y: auto; scrollbar-width: thin; }
+.price-no-data { grid-column: 1 / -1; min-height: 350px; align-content: center; line-height: 1.8; }
 .price-column { min-width: 0; display: grid; grid-template-rows: auto 1.08fr 1fr 1fr; border-inline-end: 1px solid #3e3e3e; text-align: center; direction: rtl; }
 .price-column[hidden] { display: none !important; }
 .interactive-dashboard [hidden] { display: none !important; }
 .price-columns.price-filtered { grid-template-columns:minmax(280px,480px); place-content:center; place-items:stretch; padding:18px; gap:14px; }
 .price-columns.price-filtered .price-column.is-selected { min-height:0; border:2px solid var(--accent); border-radius:12px; box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent), 0 10px 28px #0008; overflow:hidden; }
-.price-column header { padding: 16px 9px; display: grid; align-content: center; gap: 8px; border-top: 5px solid var(--accent); background: #212121; }
-.price-column header span { color: #ffbc25; font-size: clamp(12px, 1vw, 14px); font-weight: 800; }
-.price-column header strong { color: #ffbc25; font-size: clamp(20px, 2vw, 30px); line-height: 1.2; overflow-wrap: anywhere; }
-.price-column > div { padding: 16px 8px; display: grid; align-content: center; gap: 8px; border-top: 1px solid #3e3e3e; }
-.price-column > div span { font-size: clamp(11px, .9vw, 13px); color: #ddd; }
-.price-column > div b { font-size: clamp(18px, 1.7vw, 25px); line-height: 1.25; overflow-wrap: anywhere; }
-.price-column > .price-column-top-card { min-height:92px; padding:12px 8px; display:grid; place-items:center; align-content:center; gap:5px; border-top:0; color:#111; text-align:center; }
+.price-column header { padding: 14px 8px; display: grid; align-content: center; gap: 6px; border-top: 5px solid var(--accent); background: #212121; }
+.price-column header span { color: #ffbc25; font-size: clamp(11px, 1vw, 13px); font-weight: 800; }
+.price-column header strong { color: #ffbc25; font-size: clamp(18px, 1.8vw, 26px); line-height: 1.2; overflow-wrap: anywhere; }
+.price-column > div { padding: 12px 6px; display: grid; align-content: center; gap: 6px; border-top: 1px solid #3e3e3e; }
+.price-column > div span { font-size: clamp(10px, .9vw, 12px); color: #ddd; }
+.price-column > div b { font-size: clamp(16px, 1.5vw, 23px); line-height: 1.2; overflow-wrap: anywhere; }
+.price-column > .price-column-top-card { min-height:80px; padding:10px 6px; display:grid; place-items:center; align-content:center; gap:4px; border-top:0; color:#111; text-align:center; }
 .price-column > .price-column-top-card.price-area-urban { background:#f4b934; box-shadow:inset 0 -3px 0 #d99b00; }
 .price-column > .price-column-top-card.price-area-agricultural { background:#72e800; box-shadow:inset 0 -3px 0 #46a900; }
 .price-column > .price-column-top-card.price-area-industrial { background:#9800c7; color:#fff; box-shadow:inset 0 -3px 0 #650087; }
-.price-column > .price-column-top-card span { min-height:30px; display:flex; align-items:center; justify-content:center; color:inherit; font-size:clamp(11px,.9vw,13px); font-weight:800; line-height:1.35; }
-.price-column > .price-column-top-card strong { color:inherit; font-size:clamp(25px,2.2vw,34px); font-weight:800; line-height:1; white-space:nowrap; }
-.price-workspace { min-width: 0; display: grid; grid-template-rows: auto minmax(280px, 46vh) minmax(280px, 1fr); direction: rtl; }
-.western-price-dashboard .price-workspace { grid-template-rows: auto minmax(560px, 1fr); }
-.price-dashboard[data-dashboard-group="ismailia"] .price-layout { min-height:calc(100vh - 79px); grid-template-columns:minmax(350px,39%) minmax(560px,61%); }
-.price-dashboard[data-dashboard-group="ismailia"] .price-column { grid-template-rows:120px 1.08fr 1fr 1fr; }
+.price-column > .price-column-top-card span { min-height:26px; display:flex; align-items:center; justify-content:center; color:inherit; font-size:clamp(11px,.9vw,12px); font-weight:800; line-height:1.2; }
+.price-column > .price-column-top-card strong { color:inherit; font-size:clamp(22px,2vw,30px); font-weight:800; line-height:1; white-space:nowrap; }
+.price-workspace { min-width: 0; display: grid; grid-template-rows: auto minmax(320px, 1fr) minmax(220px, auto); direction: rtl; }
+.western-price-dashboard .price-workspace { grid-template-rows: auto minmax(420px, 1fr); }
+.price-dashboard[data-dashboard-group="ismailia"] .price-layout { min-height:calc(100vh - 64px); grid-template-columns:minmax(330px,37%) minmax(0,1fr); }
+.price-dashboard[data-dashboard-group="ismailia"] .price-column { grid-template-rows:96px 1.08fr 1fr 1fr; }
 .price-dashboard[data-dashboard-group="ismailia"] .price-column > .price-column-top-card,
-.price-dashboard[data-dashboard-group="ismailia"] .ismailia-map-kpis > article { width:100%; height:120px; min-height:120px; box-sizing:border-box; }
+.price-dashboard[data-dashboard-group="ismailia"] .ismailia-map-kpis > article { width:100%; height:96px; min-height:96px; box-sizing:border-box; }
 .price-dashboard[data-dashboard-group="ismailia"] .ismailia-map-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
-.price-dashboard[data-dashboard-group="ismailia"] .price-workspace { grid-template-rows:120px minmax(560px,1fr); }
-.price-dashboard[data-dashboard-group="ismailia"] .price-columns.price-filtered .price-column.is-selected { width:100%; height:clamp(430px,56vh,500px); grid-template-rows:120px repeat(3,minmax(0,1fr)); }
-.price-temporal-map-pair { min-height: 560px; }
-.dashboard-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.dashboard-kpis article { min-height: 72px; padding: 8px 12px; display: grid; place-items: center; gap: 2px; background: #f6f3ed; color: #111; text-align: center; border-inline-end: 1px solid #d2d2d2; }
+.price-dashboard[data-dashboard-group="ismailia"] .price-workspace { grid-template-rows:96px minmax(420px,1fr); }
+.price-dashboard[data-dashboard-group="ismailia"] .price-columns.price-filtered .price-column.is-selected { width:100%; height:100%; grid-template-rows:96px repeat(3,minmax(0,1fr)); }
+.price-temporal-map-pair { min-height: 420px; }
+.dashboard-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); flex: 0 0 auto; }
+.dashboard-kpis article { min-height: 60px; padding: 6px 10px; display: grid; place-items: center; gap: 2px; background: #f6f3ed; color: #111; text-align: center; border-inline-end: 1px solid #d2d2d2; }
 .dashboard-kpis article.blue { background: #4f82e9; color: #fff; }
 .dashboard-kpis article.gold { background: #efbd49; }
 .dashboard-kpis article.lime { background: #72e800; color: #111; }
 .interactive-dashboard[data-dashboard-group="ismailia"] .agriculture-kpis article.orange { background:#9800c7; color:#fff; }
-.dashboard-kpis span { font-size: 13px; font-weight: 700; }
-.dashboard-kpis strong { font-size: clamp(21px, 2.4vw, 34px); }
+.dashboard-kpis span { font-size: 12px; font-weight: 700; }
+.dashboard-kpis strong { font-size: clamp(19px, 2vw, 30px); }
 
-.gis-map { position: relative; min-height: 270px; overflow: hidden; background: #0c2132; isolation: isolate; contain: layout paint; }
-.gis-map svg { display: block; width: 100%; height: 100%; min-height: 270px; touch-action: none; cursor: grab; shape-rendering: optimizeSpeed; }
+.gis-map { position: relative; min-height: 300px; height: 100%; overflow: hidden; background: #0c2132; isolation: isolate; contain: layout paint; }
+.gis-map svg { display: block; width: 100%; height: 100%; min-height: 300px; touch-action: none; cursor: grab; shape-rendering: optimizeSpeed; }
 .gis-map svg:active { cursor: grabbing; }
 .map-viewport { transform-origin: 0 0; will-change: transform; }
 .map-content { contain: paint; }
@@ -221,33 +221,33 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .chart-unit { fill: #d7d7d7; font-size: 11px; text-anchor: start; }
 .loading-panel, .no-data { min-height: 120px; display: grid; place-items: center; padding: 20px; color: #aaa; font-size: 12px; text-align: center; }
 
-.land-layout { min-height: calc(100vh - 79px); display: grid; grid-template-columns: minmax(230px, 27%) minmax(490px, 51%) minmax(190px, 22%); direction: ltr; }
-.dabaa-land-layout { min-height: calc(100vh - 79px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(210px, 22%); grid-template-rows: auto 1fr; direction: ltr; }
-.dabaa-kpis { grid-column: 1 / -1; grid-template-columns: repeat(4, minmax(0, 1fr)); direction: rtl; }
-.dabaa-center { min-width: 0; display: grid; grid-template-rows: minmax(420px, 56vh) minmax(250px, auto); direction: rtl; }
-.dabaa-center .map-shell { min-height: 420px; }
+.land-layout { flex: 1 1 auto; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(240px, 27%) minmax(0, 50%) minmax(210px, 23%); direction: ltr; box-sizing: border-box; }
+.dabaa-land-layout { flex: 1 1 auto; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 22%); grid-template-rows: auto minmax(0, 1fr); direction: ltr; box-sizing: border-box; }
+.dabaa-kpis { grid-column: 1 / -1; grid-template-columns: repeat(4, minmax(0, 1fr)); direction: rtl; flex: 0 0 auto; }
+.dabaa-center { min-width: 0; display: grid; grid-template-rows: minmax(360px, 1.4fr) minmax(220px, 1fr); direction: rtl; }
+.dabaa-center .map-shell { min-height: 360px; height: 100%; }
 .dabaa-gauges { display: grid; grid-template-rows: 1fr 1fr; min-width: 0; background: #252525; }
-.dabaa-gauges .gauge-card { min-height: 270px; border-bottom: 1px solid #454545; }
+.dabaa-gauges .gauge-card { min-height: 200px; padding: 10px; }
 .land-left, .land-center, .land-right { min-width: 0; direction: rtl; }
-.land-left { display: grid; grid-template-rows: 155px 1fr; border-inline-end: 2px solid #3d3d3d; }
-.opportunity-card { padding: 12px; display: grid; place-items: center; align-content: center; gap: 5px; background: #070707; text-align: center; }
-.opportunity-card span { color: #ffc126; font-size: 13px; font-weight: 800; }
-.opportunity-card strong { color: #ffc126; font-size: clamp(34px, 4vw, 58px); line-height: 1; }
+.land-left { display: flex; flex-direction: column; border-inline-end: 2px solid #3d3d3d; overflow-y: auto; scrollbar-width: thin; }
+.opportunity-card { padding: 12px; display: grid; place-items: center; align-content: center; gap: 4px; background: #070707; text-align: center; flex: 0 0 auto; }
+.opportunity-card span { color: #ffc126; font-size: 12px; font-weight: 800; }
+.opportunity-card strong { color: #ffc126; font-size: clamp(28px, 3.2vw, 48px); line-height: 1; }
 .opportunity-card small { color: #aaa; font-size: 9px; }
-.vertical-chart-card { padding: 12px; display: grid; grid-template-rows: auto 1fr; }
-.change-bars { min-height: 340px; display: flex; align-items: end; justify-content: flex-start; gap: 5px; padding: 30px 6px 16px; overflow-x: auto; border-inline-start: 1px solid #555; border-bottom: 1px solid #555; }
-.change-bars button { flex: 0 0 46px; min-width: 46px; max-width: 64px; height: 100%; padding: 0; display: grid; grid-template-rows: 1fr auto auto; align-items: end; gap: 5px; border: 0; background: transparent; color: #fff; cursor: pointer; }
+.vertical-chart-card { padding: 12px 10px; display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-height: 280px; }
+.change-bars { min-height: 220px; display: flex; align-items: flex-end; justify-content: space-around; gap: 6px; padding: 16px 4px 8px; overflow-x: auto; border-inline-start: 1px solid #555; border-bottom: 1px solid #555; flex: 1 1 auto; }
+.change-bars button { flex: 1 1 0%; min-width: 42px; max-width: 64px; height: 100%; padding: 0; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; border: 0; background: transparent; color: #fff; cursor: pointer; }
 .change-bars button i { width: 100%; height: var(--height); min-height: 3px; background: var(--bar); border: 2px solid #ffc126; box-shadow: inset 0 0 12px #0003; transition: filter .15s, transform .15s; }
 .change-bars button:hover i { filter: brightness(1.3); transform: translateY(-3px); }
-.change-bars b { font-size: 10px; }
-.change-bars span { width: 100%; min-height: 32px; height: 32px; display: -webkit-box; overflow: hidden; color: #f1f1f1; font-size: 9px; line-height: 16px; text-align: center; direction: rtl; white-space: normal; word-break: normal; overflow-wrap: break-word; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-.interactive-dashboard[data-dashboard-group="ismailia"] .change-bars { gap: 8px; justify-content: space-around; padding-inline: 16px; }
+.change-bars b { font-size: 10px; font-weight: 800; color: #fff; line-height: 1; }
+.change-bars span { width: 100%; height: auto; min-height: auto; font-size: 10px; line-height: 1.25; text-align: center; direction: rtl; white-space: normal; overflow: visible; word-break: break-word; color: #f1f1f1; display: block; margin-top: 2px; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .change-bars { gap: 8px; justify-content: space-around; padding-inline: 12px; }
 .interactive-dashboard[data-dashboard-group="ismailia"] .change-bars button { flex: 1 1 0; max-width: 92px; }
-.interactive-dashboard[data-dashboard-group="ismailia"] .change-bars b { font-size: 12px; }
-.interactive-dashboard[data-dashboard-group="ismailia"] .change-bars span { font-size: 11px; line-height: 15px; }
-.land-center { display: grid; grid-template-rows: auto minmax(280px, 48vh) minmax(180px, 1fr); }
-.temporal-map-pair { min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; background: #353535; direction: rtl; }
-.temporal-map { min-width: 0; min-height: 280px; padding-top: 42px; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .change-bars b { font-size: 11px; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .change-bars span { font-size: 10px; line-height: 1.3; }
+.land-center { display: flex; flex-direction: column; }
+.temporal-map-pair { min-width: 0; min-height: 320px; flex: 1 1 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; background: #353535; direction: rtl; }
+.temporal-map { min-width: 0; min-height: 300px; padding-top: 42px; position: relative; }
 .temporal-map .temporal-year { position: absolute; z-index: 6; inset: 0 0 auto; height: 42px; display: flex; align-items:center; justify-content:center; gap:10px; background: #17293a; color: #fff; font-size: 22px; font-weight: 800; border-bottom: 2px solid #4f82e9; }
 .temporal-map .temporal-year small { padding:3px 7px; border-radius:10px; background:#0d68ad; color:#dff3ff; font-size:8px; font-weight:700; }
 .temporal-map .map-wheel-hint { display: none !important; }
@@ -258,7 +258,7 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .interactive-dashboard[data-dashboard-group="ismailia"] .temporal-map .map-layer-toggles button { min-height:28px; padding:6px 8px; font-size:11px; }
 .interactive-dashboard .map-layer-toggles { display:none !important; }
 .ismailia-temporal-map-pair .landuse-legend { display:none !important; }
-.ismailia-temporal-map-pair .gis-map { min-height: 360px; overflow:hidden; }
+.ismailia-temporal-map-pair .gis-map { min-height: 320px; overflow:hidden; }
 .interactive-dashboard[data-dashboard-group="ismailia"] .temporal-map-pair .landuse-legend { display:none !important; }
 .temporal-map[data-dashboard-sync="false"] .map-sector-filter { display: none !important; }
 .temporal-map[data-dashboard-sync="true"] .map-sector-filter { top: 50px; }
@@ -266,11 +266,11 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .temporal-map .map-scale { max-width: calc(100% - 18px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .temporal-map[data-map-instance*="baseline"] .map-urban path, .temporal-map[data-map-instance*="baseline"] .map-agricultural path, .temporal-map[data-map-instance*="baseline"] .map-industrial path,
 .temporal-map[data-map-instance*="baseline"] .map-baseline path, .temporal-map[data-map-instance*="current"] .map-baseline path { opacity: 1; filter: none; }
-.comparison-card { padding: 8px 12px; }
+.comparison-card { padding: 10px 14px; flex: 0 0 auto; }
 .comparison-card select { padding: 5px 8px; border: 1px solid #555; background: #333; color: #fff; font-size: 10px; }
-#comparison-chart { width:100%; min-height:155px; display:block; padding:8px 2px 2px; box-sizing:border-box; }
-.comparison-row { display: grid; grid-template-columns: 48px minmax(0,1fr) 92px; gap: 9px; align-items: center; margin: 13px 0; direction: ltr; }
-.comparison-row > div { width:100%; height: 42px; display: flex; background: #363636; overflow: hidden; box-shadow:inset 0 0 0 1px #ffffff12; }
+#comparison-chart { width:100%; min-height:160px; display:block; padding:8px 2px 2px; box-sizing:border-box; }
+.comparison-row { display: grid; grid-template-columns: 50px minmax(0,1fr) 100px; gap: 10px; align-items: center; margin: 10px 0; direction: ltr; }
+.comparison-row > div { width:100%; height: 38px; display: flex; background: #363636; overflow: hidden; box-shadow:inset 0 0 0 1px #ffffff12; }
 .comparison-row i { height: 100%; min-width: 1px; display:grid; place-items:center; transition: filter .15s, box-shadow .15s; cursor:pointer; }
 .comparison-row i b { color:#000; font-size:11px; font-weight:700; text-shadow:none; pointer-events:none; }
 .comparison-row i:hover, .comparison-row i.active { filter:brightness(1.16); box-shadow:inset 0 0 0 2px #fff; }
@@ -298,16 +298,16 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .interactive-dashboard .map-layer-toggles button.active[data-map-layer="industrial"] i { background:#f28a00; }
 .interactive-dashboard .temporal-map .temporal-year { border-bottom-color:#f28a00; }
 .interactive-dashboard .temporal-map .temporal-year small { background:#b85e00; }
-.comparison-row b { color:#fff; font-size:12px; }.comparison-row span { color:#ddd; font-size:10px; white-space:nowrap; }
-.comparison-axis { margin:0 101px 7px 57px; display:flex; justify-content:space-between; direction:ltr; color:#aeb5bb; font-size:8px; }
+.comparison-row b { color:#fff; font-size:12px; }.comparison-row span { color:#ddd; font-size:11px; white-space:nowrap; }
+.comparison-axis { margin:0 101px 7px 57px; display:flex; justify-content:space-between; direction:ltr; color:#aeb5bb; font-size:9px; }
 .comparison-legend { display: flex; gap: 12px; flex-wrap: wrap; justify-content:center; padding-top: 9px; border-top: 1px solid #444; direction: rtl; }
-.comparison-legend span { display: flex; align-items: center; gap: 5px; font-size: 9px; color: #c3c3c3; }
+.comparison-legend span { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #c3c3c3; }
 .comparison-legend i { width: 10px; height: 10px; border-radius: 2px; }
-.land-right { display: grid; grid-template-rows: repeat(2, 1fr); border-inline-start: 2px solid #3d3d3d; }
-.gauge-card, .donut-card { padding: 16px 10px; display: grid; place-items: center; align-content: center; gap: 10px; text-align: center; }
-.gauge-card > span, .donut-card > span { font-size: 12px; font-weight: 800; }
+.land-right { display: flex; flex-direction: column; justify-content: space-around; gap: 12px; padding: 12px; border-inline-start: 2px solid #3d3d3d; overflow-y: auto; scrollbar-width: thin; }
+.gauge-card, .donut-card { padding: 12px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; flex: 1 1 auto; }
+.gauge-card > span, .donut-card > span { font-size: 12px; font-weight: 800; line-height: 1.3; }
 .gauge-card small { color: #aaa; font-size: 9px; }
-.gauge { position:relative; width:min(260px,96%); aspect-ratio:260/158; display:grid; place-items:center; direction:ltr; }
+.gauge { position:relative; width:min(240px,94%); aspect-ratio:260/158; display:grid; place-items:center; direction:ltr; }
 .gauge svg { display:block; width:100%; height:auto; overflow:visible; }
 .gauge-track,.gauge-zone { fill:none; stroke-width:34; stroke-linecap:butt; }
 .gauge-track { stroke:#464646; }
@@ -319,99 +319,99 @@ body:has(.interactive-dashboard) { margin: 0; background: #171717; color: #f3f3f
 .gauge-needle line { stroke:#fff; stroke-width:5; stroke-linecap:round; filter:drop-shadow(0 1px 2px #000); }
 .gauge-hub { fill:#f8f8f8; stroke:#252525; stroke-width:4; }
 .gauge-value { fill:#fff; font:700 25px Arial,sans-serif; text-anchor:middle; paint-order:stroke; stroke:#252525; stroke-width:3px; }
-.donut { width: min(170px, 76%); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(#ff9e00 0 33%, #84db24 33% 66%, #00a6d8 66% 100%); box-shadow:0 0 0 1px #ffffff15; }
+.donut { width: min(150px, 72%); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(#ff9e00 0 33%, #84db24 33% 66%, #00a6d8 66% 100%); box-shadow:0 0 0 1px #ffffff15; flex-shrink: 0; }
 .donut::before { content: ""; grid-area: 1 / 1; width: 54%; aspect-ratio: 1; border-radius: 50%; background: #252525; }
 .donut strong { z-index: 1; grid-area: 1 / 1; max-width: 72px; font-size: 11px; }
-#donut-legend { display: grid; gap: 5px; width: 100%; }
-#donut-legend > span { display: grid; grid-template-columns: 9px 1fr; gap: 6px; align-items: center; padding: 5px; color: #bbb; text-align: start; font-size: 9px; }
-#donut-legend button { display: grid; grid-template-columns: 9px 1fr; gap: 6px; align-items: center; padding: 5px; border: 0; background: transparent; color: #bbb; text-align: start; cursor: pointer; font-size: 9px; }
+#donut-legend { display: flex; flex-wrap: wrap; gap: 4px 8px; justify-content: center; width: 100%; margin-top: 6px; }
+#donut-legend > span { display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px; color: #bbb; text-align: start; font-size: 9px; white-space: nowrap; }
+#donut-legend button { display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px; border: 0; background: transparent; color: #bbb; text-align: start; cursor: pointer; font-size: 9px; white-space: nowrap; }
 #donut-legend button:hover { color: #fff; background: #333; }
-#donut-legend i { width: 8px; height: 8px; border-radius: 50%; }
+#donut-legend i { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
-.agriculture-layout { min-height: calc(100vh - 79px); display: grid; grid-template-columns: minmax(210px, 24%) minmax(520px, 56%) minmax(190px, 20%); direction: ltr; }
-.report-land-dashboard .land-center { grid-template-rows:auto minmax(340px,52vh) minmax(190px,1fr); }
-.report-land-dashboard .land-center > .gis-map { min-height:340px; }
-.south-agriculture-kpis { grid-template-columns:repeat(5,minmax(0,1fr)); direction:ltr; }
-.south-agriculture-kpis article { direction:rtl; }
-.south-agriculture-layout { min-height:calc(100vh - 151px); display:grid; grid-template-columns:minmax(220px,24%) minmax(520px,56%) minmax(200px,20%); direction:ltr; }
-.south-agriculture-side,.south-agriculture-center,.south-agriculture-right { min-width:0; direction:rtl; }
-.south-agriculture-side,.south-agriculture-right { display:grid; grid-template-rows:repeat(2,minmax(270px,1fr)); }
-.south-agriculture-center { display:grid; grid-template-rows:minmax(360px,52vh) minmax(210px,1fr); }
-.south-agriculture-center > .gis-map { min-height:360px; }
+.agriculture-layout { height: calc(100vh - 52px); max-height: calc(100vh - 52px); min-height: 0; display: grid; grid-template-columns: minmax(200px, 23%) minmax(0, 57%) minmax(180px, 20%); direction: ltr; box-sizing: border-box; overflow: hidden; }
+.report-land-dashboard .land-center { grid-template-rows:auto minmax(0, 1.5fr) minmax(0, 1fr); height: 100%; min-height: 0; }
+.report-land-dashboard .land-center > .gis-map { min-height:0 !important; height: 100%; }
+.south-agriculture-kpis { grid-template-columns:repeat(5,minmax(0,1fr)); direction:ltr; flex: 0 0 auto; }
+.south-agriculture-kpis article { direction:rtl; min-height: 48px; padding: 4px 6px; }
+.south-agriculture-layout { height:calc(100vh - 52px); max-height:calc(100vh - 52px); min-height:0; display:grid; grid-template-columns:minmax(200px,23%) minmax(0,57%) minmax(180px,20%); direction:ltr; box-sizing: border-box; overflow: hidden; }
+.south-agriculture-side,.south-agriculture-center,.south-agriculture-right { min-width:0; height:100%; min-height:0; direction:rtl; overflow: hidden; }
+.south-agriculture-side,.south-agriculture-right { display:grid; grid-template-rows:repeat(2, minmax(0, 1fr)); }
+.south-agriculture-center { display:grid; grid-template-rows:minmax(0, 1.5fr) minmax(0, 1fr); height:100%; min-height:0; }
+.south-agriculture-center > .gis-map { min-height:0 !important; height: 100%; }
 .south-agriculture-side > section,.south-agriculture-right > section { border-bottom:1px solid #414141; }
 .south-crop-card { grid-row:1/-1; }
 .highlight-stat { background:#78ea00; color:#111; }
 .highlight-stat span,.highlight-stat strong { color:#111; }
-.agriculture-side, .agriculture-center, .agriculture-right { min-width: 0; direction: rtl; }
-.ismailia-agriculture-dashboard { min-height:100vh; }
-.ismailia-reference-layout { min-height:calc(100vh - 79px); display:grid; grid-template-columns:minmax(235px,22%) minmax(0,78%); grid-template-areas:"left-rail dashboard-main"; direction:ltr; }
-.ismailia-left-rail { grid-area:left-rail; min-width:0; display:grid; grid-template-rows:112px minmax(270px,1fr) minmax(270px,1fr); background:#252525; border-inline-end:2px solid #3d3d3d; direction:rtl; }
+.agriculture-side, .agriculture-center, .agriculture-right { min-width: 0; height: 100%; min-height: 0; direction: rtl; overflow: hidden; }
+.ismailia-agriculture-dashboard { height:100vh; max-height:100vh; overflow:hidden; }
+.ismailia-reference-layout { height:calc(100vh - 52px); max-height:calc(100vh - 52px); min-height:0; display:grid; grid-template-columns:minmax(210px,22%) minmax(0,78%); grid-template-areas:"left-rail dashboard-main"; direction:ltr; box-sizing: border-box; overflow: hidden; }
+.ismailia-left-rail { grid-area:left-rail; min-width:0; height:100%; min-height:0; display:grid; grid-template-rows:auto minmax(0,1fr) minmax(0,1fr); background:#252525; border-inline-end:2px solid #3d3d3d; direction:rtl; overflow: hidden; }
 .ismailia-left-rail > * { min-width:0; border-bottom:1px solid #414141; }
-.ismailia-agri-total { padding:8px 10px; display:grid; place-items:center; align-content:center; gap:5px; background:#78ea00; color:#000; text-align:center; }
-.ismailia-agri-total span { font-size:13px; font-weight:800; line-height:1.25; }
-.ismailia-agri-total strong { color:#000; font-size:clamp(31px,3.4vw,52px); line-height:1; white-space:nowrap; }
-.ismailia-reference-main { grid-area:dashboard-main; min-width:0; display:grid; grid-template-rows:auto minmax(0,1fr); direction:rtl; }
-.ismailia-reference-body { min-height:0; display:grid; grid-template-columns:minmax(560px,74%) minmax(220px,26%); direction:ltr; }
-.ismailia-reference-body .agriculture-center { display:grid; grid-template-rows:minmax(360px,58vh) minmax(210px,1fr); }
-.ismailia-reference-body .agriculture-center > .gis-map { min-height:360px; }
-.ismailia-agri-right { display: grid; grid-template-rows: 1fr 1fr; border-inline-start: 2px solid #3d3d3d; max-height: calc(100vh - 79px); overflow: hidden; }
+.ismailia-agri-total { padding:6px 8px; display:grid; place-items:center; align-content:center; gap:4px; background:#78ea00; color:#000; text-align:center; }
+.ismailia-agri-total span { font-size:12px; font-weight:800; line-height:1.2; }
+.ismailia-agri-total strong { color:#000; font-size:clamp(24px,2.5vw,40px); line-height:1; white-space:nowrap; }
+.ismailia-reference-main { grid-area:dashboard-main; min-width:0; height:100%; min-height:0; display:grid; grid-template-rows:auto minmax(0,1fr); direction:rtl; overflow: hidden; }
+.ismailia-reference-body { min-height:0; height:100%; display:grid; grid-template-columns:minmax(0,76%) minmax(180px,24%); direction:ltr; overflow: hidden; }
+.ismailia-reference-body .agriculture-center { display:grid; grid-template-rows:minmax(0,1.5fr) minmax(0,1fr); height:100%; min-height:0; }
+.ismailia-reference-body .agriculture-center > .gis-map { min-height:0 !important; height:100%; }
+.ismailia-agri-right { display: grid; grid-template-rows: 1fr 1fr; border-inline-start: 2px solid #3d3d3d; max-height: 100%; height: 100%; min-height: 0; overflow: hidden; }
 .ismailia-agri-right.single-gauge { grid-template-rows:1fr; }
 .ismailia-agri-right .gauge-card[hidden] { display:none; }
-.ismailia-agri-right .gauge-card { padding: 8px 10px; gap: 4px; }
-.ismailia-agri-right .gauge-card > span { font-size: 13px; font-weight: 800; }
-.ismailia-agri-right .gauge { width: min(230px, 96%); }
-.ismailia-agri-right .donut-card { padding: 6px 10px; gap: 6px; }
-.ismailia-agri-right .donut-card > span { font-size: 13px; font-weight: 800; }
-.ismailia-agri-right .donut { width: min(150px, 80%); }
-.ismailia-summary-kpis { width:100%; min-width:0; grid-template-columns:repeat(5,minmax(0,1fr)); }
-.ismailia-summary-kpis article { min-width:0; min-height:112px; padding:8px 7px; }
-.ismailia-summary-kpis article span { font-size:12px; line-height:1.25; }
-.ismailia-summary-kpis article strong { font-size:clamp(22px,2.2vw,35px); line-height:1; white-space:nowrap; }
+.ismailia-agri-right .gauge-card { padding: 6px 8px; gap: 4px; }
+.ismailia-agri-right .gauge-card > span { font-size: 12px; font-weight: 800; }
+.ismailia-agri-right .gauge { width: min(210px, 94%); }
+.ismailia-agri-right .donut-card { padding: 6px 8px; gap: 4px; }
+.ismailia-agri-right .donut-card > span { font-size: 12px; font-weight: 800; }
+.ismailia-agri-right .donut { width: min(135px, 75%); }
+.ismailia-summary-kpis { width:100%; min-width:0; grid-template-columns:repeat(5,minmax(0,1fr)); flex: 0 0 auto; }
+.ismailia-summary-kpis article { min-width:0; min-height:52px; padding:6px 6px; }
+.ismailia-summary-kpis article span { font-size:11px; line-height:1.2; }
+.ismailia-summary-kpis article strong { font-size:clamp(18px,1.8vw,28px); line-height:1; white-space:nowrap; }
 .ismailia-summary-kpis .ismailia-jobs-kpi { background:#050505; color:#ffc126; }
 .ismailia-summary-kpis .ismailia-jobs-kpi strong { color:#ffc126; }
 .ismailia-summary-kpis .ismailia-jobs-kpi small { color:#d8d8d8; font-size:8px; line-height:1.2; }
-.western-agriculture-kpis { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.western-agriculture-kpis { grid-template-columns: repeat(6, minmax(0, 1fr)); flex: 0 0 auto; }
 .western-agriculture-kpis article.lime { background:#050505; color:#8bff00; }
 .western-agriculture-kpis article.orange { background:#f3a51c; color:#111; }
-.western-agriculture-dashboard .agriculture-layout { min-height:calc(100vh - 170px); grid-template-columns:minmax(230px,22%) minmax(560px,58%) minmax(220px,20%); }
-.western-agriculture-side { grid-template-rows:1fr 1fr; }
-.western-agriculture-center { grid-template-rows:minmax(390px,58vh) minmax(210px,1fr); }
-.western-agriculture-right { grid-template-rows:1fr 1fr; }
-.agriculture-stat, .agriculture-change { padding: 15px; display: grid; place-items: center; align-content: center; gap: 6px; text-align: center; }
-.agriculture-stat span, .agriculture-change span, .crop-card > span, .ownership-card > span { color: #c7ff2d; font-size: 12px; font-weight: 800; }
-.agriculture-stat strong, .agriculture-change strong { color: #8bff00; font-size: clamp(31px, 4vw, 58px); line-height: 1; }
-.crop-card, .ownership-card { padding: 14px; display: grid; place-items: center; align-content: center; gap: 12px; text-align: center; }
-.crop-donut, .ownership-donut { width: min(165px, 72%); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: #444; }
+.western-agriculture-dashboard .agriculture-layout { height:calc(100vh - 52px); max-height:calc(100vh - 52px); min-height:0; grid-template-columns:minmax(210px,22%) minmax(0,58%) minmax(200px,20%); box-sizing: border-box; overflow: hidden; }
+.western-agriculture-side { grid-template-rows:1fr 1fr; height:100%; min-height:0; }
+.western-agriculture-center { grid-template-rows:minmax(0,1.5fr) minmax(0,1fr); height:100%; min-height:0; }
+.western-agriculture-right { grid-template-rows:1fr 1fr; height:100%; min-height:0; }
+.agriculture-stat, .agriculture-change { padding: 10px; display: grid; place-items: center; align-content: center; gap: 4px; text-align: center; }
+.agriculture-stat span, .agriculture-change span, .crop-card > span, .ownership-card > span { color: #c7ff2d; font-size: 11px; font-weight: 800; }
+.agriculture-stat strong, .agriculture-change strong { color: #8bff00; font-size: clamp(24px, 3vw, 44px); line-height: 1; }
+.crop-card, .ownership-card { padding: 10px; display: grid; place-items: center; align-content: center; gap: 8px; text-align: center; }
+.crop-donut, .ownership-donut { width: min(140px, 68%); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: #444; }
 .crop-donut::before, .ownership-donut::before { content: ""; grid-area: 1/1; width: 52%; aspect-ratio: 1; border-radius: 50%; background: #252525; }
 .crop-donut strong, .ownership-donut strong { z-index: 1; grid-area: 1/1; font-size: 10px; }
-#crop-legend, #ownership-legend { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; }
+#crop-legend, #ownership-legend { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
 #crop-legend span, #ownership-legend span { display: flex; align-items: center; gap: 4px; color: #bbb; font-size: 8px; }
 #crop-legend i, #ownership-legend i { width: 8px; height: 8px; border-radius: 50%; }
 
 @media (max-width: 1050px) {
   .price-layout { grid-template-columns: 1fr; }
   .price-dashboard[data-dashboard-group="ismailia"] .price-layout { grid-template-columns:1fr; }
-  .price-columns { min-height: 440px; border: 0; border-bottom: 2px solid #444; }
+  .price-columns { min-height: 250px; border: 0; border-bottom: 2px solid #444; }
   .land-layout { grid-template-columns: 1fr 1.7fr; }
   .dabaa-land-layout { grid-template-columns: 1fr; }
   .dabaa-kpis { grid-column: 1; }
   .dabaa-gauges { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-  .land-right { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; min-height: 330px; border: 0; border-top: 2px solid #444; }
-  .agriculture-layout { grid-template-columns: minmax(210px, 1fr) minmax(520px, 2fr); }
-  .agriculture-right { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); min-height: 300px; }
+  .land-right { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; min-height: 200px; border: 0; border-top: 2px solid #444; }
+  .agriculture-layout { grid-template-columns: minmax(210px, 1fr) minmax(0, 2fr); }
+  .agriculture-right { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); min-height: 200px; }
   .western-agriculture-kpis { grid-template-columns:repeat(3,1fr); }
-  .ismailia-reference-layout { grid-template-columns:minmax(220px,28%) minmax(0,72%); grid-template-areas:"left-rail dashboard-main"; }
+  .ismailia-reference-layout { grid-template-columns:minmax(200px,28%) minmax(0,72%); grid-template-areas:"left-rail dashboard-main"; }
   .ismailia-reference-body { grid-template-columns:1fr; }
-  .ismailia-agri-right { grid-column:1; grid-template-columns:repeat(2,1fr); grid-template-rows:auto; max-height:none; min-height:300px; }
+  .ismailia-agri-right { grid-column:1; grid-template-columns:repeat(2,1fr); grid-template-rows:auto; max-height:none; min-height:200px; }
   .ismailia-summary-kpis { grid-template-columns:repeat(3,1fr); }
   .western-agriculture-right { grid-template-columns:repeat(2,1fr); }
   .south-agriculture-kpis { grid-template-columns:repeat(3,1fr); }
-  .south-agriculture-layout { grid-template-columns:minmax(210px,1fr) minmax(520px,2fr); }
-  .south-agriculture-right { grid-column:1/-1; grid-template-columns:repeat(2,1fr); grid-template-rows:auto; min-height:300px; }
+  .south-agriculture-layout { grid-template-columns:minmax(200px,1fr) minmax(0,2fr); }
+  .south-agriculture-right { grid-column:1/-1; grid-template-columns:repeat(2,1fr); grid-template-rows:auto; min-height:200px; }
 }
 
-.specialized-layout{padding:12px;display:grid;gap:12px}.specialized-kpis{max-width:1180px;margin:auto;width:100%}.specialized-body{display:grid;grid-template-columns:minmax(250px,320px) minmax(0,1fr);gap:12px;min-height:610px}.specialized-body .gis-map{min-height:610px}.civil-panel,.impact-controls{padding:24px;display:flex;flex-direction:column;gap:20px}.civil-panel h2,.impact-controls h2{margin:0;color:#ffc329;font-size:1.45rem}.civil-panel p{line-height:1.9;color:#e5e5e5}.civil-facts,.impact-results{display:grid;gap:12px}.civil-facts span,.impact-results span{border:1px solid #555;background:#202020;padding:14px;display:flex;justify-content:space-between;gap:10px}.civil-facts b,.impact-results b{color:#ffc329}.impact-controls label{display:flex;justify-content:space-between}.impact-controls input{accent-color:#ffc329;width:100%}.impact-controls small{line-height:1.7;color:#bbb}.impact-body{grid-template-columns:minmax(280px,360px) minmax(0,1fr)}
-@media (max-width:920px){.specialized-body,.impact-body{grid-template-columns:1fr}.specialized-body .gis-map{min-height:480px}}
+.specialized-layout{padding:8px;display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px;height:calc(100vh - 52px);max-height:calc(100vh - 52px);min-height:0;box-sizing:border-box;overflow:hidden}.specialized-kpis{max-width:100%;margin:0;width:100%;flex:0 0 auto}.specialized-body{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:8px;min-height:0 !important;height:100%}.specialized-body .gis-map{min-height:0 !important;height:100%}.civil-panel,.impact-controls{padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;scrollbar-width:thin;height:100%;box-sizing:border-box}.civil-panel h2,.impact-controls h2{margin:0;color:#ffc329;font-size:1.2rem}.civil-panel p{line-height:1.6;color:#e5e5e5;font-size:12px}.civil-facts,.impact-results{display:grid;gap:8px}.civil-facts span,.impact-results span{border:1px solid #555;background:#202020;padding:10px;display:flex;justify-content:space-between;gap:8px;font-size:11px}.civil-facts b,.impact-results b{color:#ffc329}.impact-controls label{display:flex;justify-content:space-between}.impact-controls input{accent-color:#ffc329;width:100%}.impact-controls small{line-height:1.5;color:#bbb;font-size:10px}.impact-body{grid-template-columns:minmax(250px,320px) minmax(0,1fr)}
+@media (max-width:920px){.specialized-body,.impact-body{grid-template-columns:1fr}.specialized-body .gis-map{min-height:250px}}
 @media (max-width: 720px) {
   .interactive-head { align-items: flex-start; flex-direction: column; }
   .dash-actions { justify-content: start; }
