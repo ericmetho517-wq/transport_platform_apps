@@ -258,9 +258,32 @@ const replacements: Array<[string, string]> = [
   ["قائمة", "Existing"],
 ];
 
+// Core UI words are also translated individually so dynamically generated
+// dashboards remain fully English even when a phrase is not in the long-form
+// dictionary above.
+const englishWords: Array<[string, string]> = [
+  ["\u0648\u0632\u0627\u0631\u0629 \u0627\u0644\u0646\u0642\u0644", "Ministry of Transport"],
+  ["\u0645\u0646\u0635\u0629", "Platform"], ["\u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a", "Applications"],
+  ["\u0645\u0634\u0631\u0648\u0639\u0627\u062a", "Projects"], ["\u0645\u0634\u0631\u0648\u0639", "Project"],
+  ["\u0627\u0644\u0645\u062d\u0648\u0631", "Axis"], ["\u0627\u0644\u0645\u062d\u0627\u0648\u0631", "Axes"],
+  ["\u0627\u0644\u0642\u0637\u0627\u0639", "Sector"], ["\u0627\u0644\u0642\u0637\u0627\u0639\u0627\u062a", "Sectors"],
+  ["\u0627\u0644\u0623\u0631\u0627\u0636\u064a", "Land"], ["\u0627\u0644\u0623\u0631\u0627\u0636\u064a", "Land"],
+  ["\u0627\u0644\u0639\u0645\u0631\u0627\u0646\u064a\u0629", "Urban"], ["\u0627\u0644\u0632\u0631\u0627\u0639\u064a\u0629", "Agricultural"],
+  ["\u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629", "Industrial"], ["\u0627\u0644\u062e\u0631\u0627\u0626\u0637", "Maps"],
+  ["\u0627\u0644\u062e\u0631\u064a\u0637\u0629", "Map"], ["\u0627\u0644\u062a\u0641\u0627\u0639\u0644\u064a\u0629", "Interactive"],
+  ["\u0627\u0644\u0645\u0624\u0634\u0631\u0627\u062a", "Indicators"], ["\u0644\u0648\u062d\u0629", "Dashboard"],
+  ["\u0627\u0644\u0628\u062d\u062b", "Search"], ["\u0628\u062d\u062b", "Search"],
+  ["\u0627\u0644\u0644\u063a\u0629", "Language"], ["\u0646\u0648\u0639", "Type"], ["\u0627\u0644\u0643\u0644", "All"],
+  ["\u062c\u0645\u064a\u0639", "All"], ["\u0627\u0633\u062a\u0639\u0631\u0636", "Explore"], ["\u0627\u0633\u062a\u0643\u0634\u0641", "Explore"],
+  ["\u0627\u0644\u062e\u062f\u0645\u0627\u062a", "Services"], ["\u0627\u0644\u062a\u063a\u064a\u0631", "Change"],
+  ["\u0627\u0644\u0633\u0646\u0629", "Year"], ["\u0645\u0633\u0627\u062d\u0629", "Area"], ["\u0637\u0648\u0644", "Length"],
+  ["\u0627\u0644\u0645\u064a\u0627\u0647", "Water"], ["\u0627\u0644\u0637\u0631\u0642", "Roads"], ["\u0627\u0644\u0645\u0642\u0627\u0628\u0631", "Cemeteries"],
+];
+
 function translate(value: string): string {
   let result = value;
   for (const [arabic, english] of replacements) result = result.replaceAll(arabic, english);
+  for (const [arabic, english] of englishWords) result = result.replaceAll(arabic, english);
   return result;
 }
 
