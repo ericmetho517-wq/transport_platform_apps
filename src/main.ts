@@ -1,6 +1,7 @@
 import apps from "../registry/apps.json";
 import type { TransportApp } from "../shared/project-runtime";
 import { dashboardGroup } from "../shared/interactive-dashboard";
+import { enableApplicationLocalization } from "../shared/localization";
 
 const registry = apps as TransportApp[];
 const axisOptions = [
@@ -41,6 +42,11 @@ const typeIcon: Record<string, string> = {
   "Instant Filter Gallery": "▥",
 };
 
+const platformParams = new URLSearchParams(window.location.search);
+const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "en" : "ar";
+document.documentElement.lang = platformLanguage;
+document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
+
 root.innerHTML = `<div class="platform-shell" dir="rtl">
   <header class="platform-header">
     <a class="brand" href="#top" aria-label="العودة إلى بداية المنصة"><span class="brand-logos"><img src="/Picture1.jpg" alt="شعار وزارة النقل"/><img src="/images.jpg" alt="شعار نظم المعلومات الجغرافية"/></span><span><b>منصة تطبيقات وزارة النقل</b><small>Ministry of Transport Digital Platform</small></span></a>
@@ -68,6 +74,25 @@ root.innerHTML = `<div class="platform-shell" dir="rtl">
   <footer><span>منصة تطبيقات وزارة النقل</span><span>منصة جغرافية رقمية مفتوحة المصدر</span></footer>
   <button id="back-to-top" class="back-to-top" type="button" aria-label="العودة إلى أعلى الصفحة">↑</button>
 </div>`;
+
+const platformApp: TransportApp = { id: "platform", slug: "platform", title: "منصة تطبيقات وزارة النقل", alternateTitles: ["Ministry of Transport Digital Platform"], category: "منصة التطبيقات", type: "Dashboard", language: platformLanguage, direction: platformLanguage === "en" ? "ltr" : "rtl", sourceUrl: "", status: "local" };
+enableApplicationLocalization(platformApp, root);
+const languageHeader = root.querySelector<HTMLElement>(".platform-header");
+if (languageHeader) {
+  const languageButton = document.createElement("button");
+  languageButton.id = "platform-language-toggle";
+  languageButton.type = "button";
+  languageButton.textContent = platformLanguage === "en" ? "العربية" : "English";
+  languageButton.setAttribute("aria-label", "Switch platform language");
+  languageHeader.appendChild(languageButton);
+  languageButton.addEventListener("click", () => {
+    const next = platformLanguage === "en" ? "ar" : "en";
+    const params = new URLSearchParams(window.location.search);
+    params.set("uiLang", next);
+    params.delete("lang");
+    window.location.search = params.toString();
+  });
+}
 
 const grid = document.querySelector<HTMLDivElement>("#app-grid")!;
 const search = document.querySelector<HTMLInputElement>("#app-search")!;
@@ -130,7 +155,7 @@ const render = () => {
   const uncategorized = visible.filter((app) => !axisOptions.some(([value]) => axisOf(app) === value));
   if (uncategorized.length) groups.push(["other", "تطبيقات مشتركة / Shared applications", uncategorized]);
   let cardIndex = 0;
-  grid.innerHTML = groups.map(([, label, items]) => `<section class="sector-group" aria-label="${label}"><div class="sector-group-heading"><div><span>قطاع / Sector</span><h3>${label}</h3></div><b>${items.length} تطبيق</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html" dir="${app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${typeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${app.title}</h3><p>${app.category}</p><span class="card-language">${app.language === "en" ? "EN" : "ع"}</span><span class="open">${app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${app.direction === "ltr" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`).join("") || `<div class="empty"><b>لا توجد نتائج مطابقة</b><span>No matching applications</span><button type="button" data-reset-empty>عرض جميع التطبيقات</button></div>`;
+  grid.innerHTML = groups.map(([, label, items]) => `<section class="sector-group" aria-label="${label}"><div class="sector-group-heading"><div><span>قطاع / Sector</span><h3>${label}</h3></div><b>${items.length} تطبيق</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${typeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${app.title}</h3><p>${app.category}</p><span class="card-language">${app.language === "en" ? "EN" : "ع"}</span><span class="open">${app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${app.direction === "ltr" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`).join("") || `<div class="empty"><b>لا توجد نتائج مطابقة</b><span>No matching applications</span><button type="button" data-reset-empty>عرض جميع التطبيقات</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
   syncFiltersToUrl();
 };

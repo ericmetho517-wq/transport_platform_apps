@@ -45,6 +45,8 @@
 .platform-shell .platform-header nav a { position: relative; padding: 12px 2px; color: #23445f; font-size: 13px; font-weight: 800; }
 .platform-shell .platform-header nav a::after { content: ""; position: absolute; inset: auto 50% 4px; height: 2px; background: var(--brand-sky); transition: inset .25s ease; }
 .platform-shell .platform-header nav a:hover { color: var(--brand-blue); }
+.platform-shell #platform-language-toggle { margin-inline-start: 16px; padding: 8px 13px; border: 1px solid #bfd7e9; border-radius: 9px; background: #f4faff; color: #0b5b91; font-size: 11px; font-weight: 900; cursor: pointer; }
+.platform-shell #platform-language-toggle:hover { background: #0b67a5; color: #fff; }
 .platform-shell .platform-header nav a:hover::after { inset-inline: 0; }
 .platform-shell .header-cta { padding: 10px 16px; border: 1px solid #b9daef; border-radius: 12px; color: var(--brand-blue); background: #f2f9ff; text-decoration: none; font-size: 12px; font-weight: 900; }
 .platform-shell .header-cta:hover { color: #fff; background: var(--brand-blue); border-color: var(--brand-blue); transform: translateY(-2px); box-shadow: 0 9px 22px #075dab2b; }
