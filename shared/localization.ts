@@ -264,6 +264,14 @@ const replacements: Array<[string, string]> = [
 const englishWords: Array<[string, string]> = [
   // Platform/catalog phrases are kept before single-word replacements so
   // English mode never leaves a mixed Arabic/English label behind.
+  ["منصة جغرافية رقمية مفتوحة المصدر", "Open-source digital geospatial platform"],
+  ["كل مشروعات النقل", "All Transport Projects"], ["في منصة واحدة.", "in One Platform."],
+  ["بوابة مؤسسية موحدة لاستعراض لوحات المؤشرات والخرائط التفاعلية والقصص المكانية والبيانات القطاعية بسهولة ووضوح.", "A unified institutional portal for exploring indicator dashboards, interactive maps, geographic stories, and sector data with ease and clarity."],
+  ["استكشف المنصة", "Explore the Platform"], ["استعرض التطبيقات", "Explore Applications"],
+  ["بيانات مكانية موثقة ومترابطة", "Verified and connected geospatial data"],
+  ["خرائط تفاعلية", "Interactive Maps"], ["بيانات قطاعية", "Sector Data"], ["عربي وEnglish", "Arabic and English"],
+  ["جمهورية مصر العربية", "Arab Republic of Egypt"], ["بوابة التطبيقات المكانية", "Geospatial Applications Portal"],
+  ["مرّر للاستكشاف", "Scroll to explore"],
   ["دليل التطبيقات", "Application Directory"],
   ["استعرض جميع المشروعات", "Explore All Projects"],
   ["ابحث بالعنوان أو القطاع، ثم صفّ النتائج حسب النوع واللغة.", "Search by title or sector, then filter results by type and language."],
