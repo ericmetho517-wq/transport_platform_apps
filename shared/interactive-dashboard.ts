@@ -54,6 +54,20 @@ const ismailiaLanduseNames: Record<string, string> = {
   "14": "الأراضي السياحية", "15": "مساحات خضراء", "99": "غير مصنف",
 };
 
+// These colours and labels are shared by every axis dashboard.  The Ismailia
+// dashboard established the approved cartographic palette; keeping the
+// service matcher here prevents each project from drifting to a different
+// colour when it is rendered in a chart or filter.
+const serviceColor = ismailiaLanduseSymbols[5][0];
+const serviceLabelPattern = /خدم|تعليم|حكوم|دين|سياح|ترفيه|مقابر/i;
+const transportLayerNames: LayerName[] = [
+  "Road_CairoRing", "Road_MiddleRing", "Road_RegionalRing",
+  "Transit_GreenLine", "Transit_KafrDawoodSadat", "Transit_LRT",
+  "Transit_Metro1", "Transit_Metro2", "Transit_Metro3", "Transit_Metro4",
+  "Transit_Metro6", "Transit_MonorailCapital", "Transit_MonorailOctober",
+  "Transit_RobikiBelbeis", "LRT_Line", "lRT_Station", "Metro_Line", "Metro_Station",
+];
+
 interface DashboardSummary {
   slug: string;
   projectTitle: string;
@@ -472,14 +486,14 @@ function renderChangeBars(summary: DashboardSummary): void {
     ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
     ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ffbf08"],
   ] as Array<[string, string, number, string]> : summary.profile?.changeBars?.length
-    ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, "#f28a00"] as [string, string, number, string])
+    ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, serviceLabelPattern.test(item.label) ? serviceColor : "#f28a00"] as [string, string, number, string])
     : [
       ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ff9e00"],
       ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
       ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
     ] as Array<[string, string, number, string]>;
   const max = Math.max(...data.map((item) => item[2]), 1);
-  container.innerHTML = data.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${label}">${label}</span></button>`).join("");
+  container.innerHTML = data.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color};--bar-border:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${label}">${label}</span></button>`).join("");
   if (isIsmailia) void renderIsmailiaUseDescriptionBars(container);
 }
 
@@ -523,7 +537,6 @@ async function renderIsmailiaUseDescriptionBars(container: HTMLElement): Promise
     const data = serviceCategories.map(({ label, code }) => ({ label, code, value: values.get(label) || 0 }));
     if (!data.length) return;
     const max = Math.max(...data.map((item) => item.value), 1);
-    const serviceColor = ismailiaLanduseSymbols[5][0];
     container.innerHTML = data.map(({ label, code, value }) => `<button type="button" data-filter-layer="landcover-end" data-landuse-codes="${code}" data-landuse-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${serviceColor};--bar-border:${serviceColor}"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
     container.querySelectorAll<HTMLElement>("[data-landuse-codes]").forEach((button) => button.addEventListener("click", () => {
       const codes = button.dataset.landuseCodes?.split(",").filter(Boolean) || [];
@@ -579,6 +592,7 @@ function renderComparison(summary: DashboardSummary, topOnly = false): void {
   }
   const fallbackColors = ["#cde768", "#24c427", "#5a46e8", "#d9a116", "#00a5ce", "#ef5757", "#7f72d8", "#d8d8d8"];
   const categoryColor = (category: string, index: number) => {
+    if (serviceLabelPattern.test(category)) return serviceColor;
     if (/فضاء|vacant/i.test(category)) return "#cde768";
     if (/زراع|agricultur/i.test(category)) return "#24c427";
     if (/صناع|industr/i.test(category)) return "#5a46e8";
@@ -651,7 +665,6 @@ function renderGaugeAndDonut(summary: DashboardSummary): void {
       const sShare = landTotal ? (servicesArea / landTotal) * 100 : 0;
       const oShare = landTotal ? (otherArea / landTotal) * 100 : 0;
 
-      const serviceColor = dashboard?.dataset.dashboardGroup === "ismailia" ? ismailiaLanduseSymbols[5][0] : "#10b8ad";
       donut.style.background = `conic-gradient(#f6a900 0 ${uShare}%, ${serviceColor} ${uShare}% ${uShare + sShare}%, #bdbdbd ${uShare + sShare}% 100%)`;
       const label = donut.querySelector("strong");
       if (label) label.textContent = `${formatNumber(landTotal, 1)} كم²`;
@@ -874,15 +887,15 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const regularLayers = summary.layers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && summary.layers.includes("landcover-start")));
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
   const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
-  const ismailiaTemporalMap = group === "ismailia" && (mapInstance.includes("baseline") || mapInstance.includes("current"));
-  const ismailiaStartLayers: LayerName[] = ["study", "landcover-start", "Road_CairoRing", "axis"];
-  const ismailiaEndLayers: LayerName[] = ["study", "landcover-end", "Road_CairoRing", "Road_MiddleRing", "Road_RegionalRing", "Transit_Metro1", "Transit_Metro3", "Transit_Metro4", "Transit_LRT", "Transit_MonorailCapital", "Transit_RobikiBelbeis", "axis", "Metro_Station", "lRT_Station"];
-  const requestedLayers = ismailiaTemporalMap
-    ? (mapInstance.includes("baseline") ? ismailiaStartLayers.filter((layer) => summary.layers.includes(layer)) : ismailiaEndLayers.filter((layer) => summary.layers.includes(layer)))
+  const temporalMap = mapInstance.includes("baseline") || mapInstance.includes("current");
+  const temporalStartLayers: LayerName[] = ["study", "landcover-start", ...transportLayerNames, "axis"];
+  const temporalEndLayers: LayerName[] = ["study", "landcover-end", ...transportLayerNames, "axis"];
+  const requestedLayers = temporalMap
+    ? (mapInstance.includes("baseline") ? temporalStartLayers.filter((layer) => summary.layers.includes(layer)) : temporalEndLayers.filter((layer) => summary.layers.includes(layer)))
     : mapInstance.includes("baseline")
-    ? group === "ismailia" ? [...regularLayers, "landcover-start" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-start"].includes(layer))
+    ? [...regularLayers, ...(summary.layers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])]
     : mapInstance.includes("current")
-      ? group === "ismailia" ? [...regularLayers, "landcover-end" as LayerName] : summary.layers.filter((layer) => ["study", "axis", "landcover-end"].includes(layer))
+      ? [...regularLayers, ...(summary.layers.includes("landcover-end") ? ["landcover-end" as LayerName] : [])]
       : viewerMode ? summary.layers : [...regularLayers, ...(summary.layers.includes("landcover-end") ? ["landcover-end" as LayerName] : summary.layers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])];
   const layerResults = await Promise.all(requestedLayers.map(async (layer) => {
     const url = `../../data/dashboard/${group}/${layer}.geojson`;
@@ -955,7 +968,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const groupElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
     groupElement.dataset.layerGroup = layer;
     groupElement.classList.add(`map-${layer}`);
-    const aggregateLandcover = group === "ismailia" && ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer) && (mapInstance.includes("baseline") || mapInstance.includes("current"));
+    const aggregateLandcover = ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer) && (mapInstance.includes("baseline") || mapInstance.includes("current"));
     const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string; status: string; geometry: string; features: Array<{ geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }> }>();
     for (const [featureIndex, feature] of collection.features.entries()) {
       // Yield between batches so a large layer cannot block scrolling/input.
@@ -1001,16 +1014,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
                       : /water|مياه|مائي/.test(normalized) ? 8
                         : /road|طريق/.test(normalized) ? 12 : 99;
         const defaultPalette: Record<number, [string, string]> = {
-          0: ["#16c51b", "#d9ff9b"], 1: ["#9800c7", "#f2c7ff"], 2: ["#fff4ae", "#fffbd8"],
-          3: ["#f6a900", "#ffe47d"], 4: ["#00b8e5", "#bcefff"], 5: ["#ff1717", "#ffd1d1"],
-          6: ["#00cdbd", "#bafff5"], 7: ["#a9b8aa", "#e8f0e8"], 8: ["#08afe1", "#bcefff"],
-          9: ["#a5a5a5", "#eeeeee"], 10: ["#777777", "#d9d9d9"], 11: ["#f2f2f2", "#ffffff"],
-          12: ["#d94f70", "#ffe4eb"], 13: ["#b77b00", "#ffe19a"], 99: ["#9aa5ad", "#eef3f6"],
+          0: ["#28c51b", "#28c51b"], 1: ["#a100c2", "#a100c2"], 2: ["#ffffbe", "#e4e4a3"],
+          3: ["#ffaa00", "#e59600"], 4: ["#c6f5ad", "#9dd781"], 5: ["#ff1308", "#dc0d05"],
+          6: ["#aebda6", "#93a28b"], 7: ["#9aa5ad", "#eef3f6"], 8: ["#18b2dc", "#078fb5"],
+          9: ["#555555", "#d6d6d6"], 10: ["#858585", "#e1e1e1"], 11: ["#2f5c96", "#244a7a"],
+          12: ["#555555", "#d6d6d6"], 13: ["#bd7900", "#9c6300"], 99: ["#9aa5ad", "#eef3f6"],
         };
-        const palette = group === "ismailia" ? ismailiaLanduseSymbols : defaultPalette;
+        const palette = defaultPalette;
         const [fill, stroke] = palette[inferredCode] || palette[99];
         path.dataset.landuseCode = String(inferredCode);
-        path.style.fill = group === "ismailia" ? fill : `${fill}e8`;
+        path.style.fill = fill;
         path.style.stroke = stroke;
         path.style.strokeWidth = "0.75";
       }
@@ -1058,11 +1071,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         const bucketFeatureHits = bucketFeatures.flatMap((feature) => {
           if (!feature.geometry) return [];
           const geometry = feature.geometry;
-          const hitGeometries: Array<{ type: string; coordinates: Coordinates }> = group === "ismailia" && geometry.type === "Polygon"
+          const hitGeometries: Array<{ type: string; coordinates: Coordinates }> = geometry.type === "Polygon"
             ? (geometry.coordinates as number[][][]).map((ring) => ({ type: "Polygon", coordinates: [ring] }))
-            : group === "ismailia" && geometry.type === "MultiPolygon"
+            : geometry.type === "MultiPolygon"
               ? (geometry.coordinates as number[][][][]).map((polygon) => ({ type: "Polygon", coordinates: polygon }))
-              : group === "ismailia" && geometry.type === "MultiLineString"
+              : geometry.type === "MultiLineString"
                 ? (geometry.coordinates as number[][][]).map((line) => ({ type: "LineString", coordinates: line }))
                 : [geometry];
           return hitGeometries.map((hitGeometry) => {
