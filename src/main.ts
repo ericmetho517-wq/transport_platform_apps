@@ -47,7 +47,7 @@ const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "e
 document.documentElement.lang = platformLanguage;
 document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
-root.innerHTML = `<div class="platform-shell" dir="rtl">
+root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ? "ltr" : "rtl"}">
   <header class="platform-header">
     <a class="brand" href="#top" aria-label="العودة إلى بداية المنصة"><span class="brand-logos"><img src="/Picture1.jpg" alt="شعار وزارة النقل"/><img src="/images.jpg" alt="شعار نظم المعلومات الجغرافية"/></span><span><b>منصة تطبيقات وزارة النقل</b><small>Ministry of Transport Digital Platform</small></span></a>
     <nav><a href="#applications">التطبيقات</a></nav>
@@ -155,7 +155,7 @@ const render = () => {
   const uncategorized = visible.filter((app) => !axisOptions.some(([value]) => axisOf(app) === value));
   if (uncategorized.length) groups.push(["other", "تطبيقات مشتركة / Shared applications", uncategorized]);
   let cardIndex = 0;
-  grid.innerHTML = groups.map(([, label, items]) => `<section class="sector-group" aria-label="${label}"><div class="sector-group-heading"><div><span>قطاع / Sector</span><h3>${label}</h3></div><b>${items.length} تطبيق</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${typeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${app.title}</h3><p>${app.category}</p><span class="card-language">${app.language === "en" ? "EN" : "ع"}</span><span class="open">${app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${app.direction === "ltr" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`).join("") || `<div class="empty"><b>لا توجد نتائج مطابقة</b><span>No matching applications</span><button type="button" data-reset-empty>عرض جميع التطبيقات</button></div>`;
+  grid.innerHTML = groups.map(([, label, items]) => `<section class="sector-group" aria-label="${label}"><div class="sector-group-heading"><div><span>قطاع / Sector</span><h3>${label}</h3></div><b>${items.length} تطبيق</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${typeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${app.title}</h3><p>${app.category}</p><span class="card-language">${platformLanguage === "en" ? (app.language === "en" ? "EN" : "AR") : app.language === "en" ? "EN" : "ع"}</span><span class="open">${platformLanguage === "en" ? "Open application" : app.language === "en" ? "Open application" : "فتح التطبيق"} <b>${platformLanguage === "en" ? "→" : app.direction === "ltr" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`).join("") || `<div class="empty"><b>لا توجد نتائج مطابقة</b><span>No matching applications</span><button type="button" data-reset-empty>عرض جميع التطبيقات</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
   syncFiltersToUrl();
 };
