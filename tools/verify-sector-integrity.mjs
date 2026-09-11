@@ -10,7 +10,7 @@ const aliases = {
   "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road",
   "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
 };
-const expectedCounts = { Dashboard: 53, Experience: 10, StoryMap: 9, "Web AppViewer": 5, "Instant Filter Gallery": 4 };
+const expectedCounts = { Dashboard: 53, Experience: 10, StoryMap: 10, "Web AppViewer": 5, "Instant Filter Gallery": 4 };
 const errors = [];
 const warnings = [];
 const counts = {};

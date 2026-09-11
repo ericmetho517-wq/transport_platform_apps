@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-09T07:01:30.114Z",
-  "applications": 81,
+  "generatedAt": "2026-09-11T15:22:55.649Z",
+  "applications": 82,
   "totals": {
     "features": 77095,
     "sourceFeatures": 211460,
@@ -63,7 +63,7 @@
       "verifiedLocalData": true
     },
     "ismailia": {
-      "applications": 3,
+      "applications": 4,
       "activeFeatures": 63962,
       "activeLayers": 26,
       "verifiedLocalData": true

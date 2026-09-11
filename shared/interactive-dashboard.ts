@@ -151,7 +151,7 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
     ${yearLabel ? `<div class="temporal-year">${yearLabel}<small>عرض تفاعلي مترابط</small></div>` : ""}
     <div class="map-status"><span class="live-dot"></span><span class="map-status-text">جارٍ تحميل طبقات المشروع المحلية…</span></div>
     <label class="map-sector-filter" hidden><span>نطاق العرض</span><select class="map-sector-select"><option value="all">كل القطاعات</option></select></label>
-    <div class="map-layer-toggles"></div><label class="map-change-filter"><span>Change status</span><select class="map-change-select"><option value="all">All features</option><option value="changed">Changed</option><option value="unchanged">Unchanged</option></select></label>
+    <div class="map-layer-toggles"></div><label class="map-change-filter"><span>حالة التغير</span><select class="map-change-select"><option value="all">كل العناصر</option><option value="changed">متغير</option><option value="unchanged">غير متغير</option></select></label>
     <svg class="interactive-map" viewBox="0 0 1000 520" role="img" aria-label="خريطة تفاعلية لبيانات المشروع">
       <defs>
         <pattern id="map-grid-${suffix}" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#bbb" stroke-width=".6" opacity=".45"/></pattern>
@@ -181,7 +181,7 @@ function dashboardHeader(app: TransportApp, group = ""): string {
     ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
     : "";
   const sectorFilter = isIsmailia ? "" : `<label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label>`;
-  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions">${sectorFilter}${landuseFilter}<label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">تغير</option><option value="unchanged">لم يتغير</option></select></label><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
+  return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions">${sectorFilter}${landuseFilter}<label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">متغير</option><option value="unchanged">غير متغير</option></select></label><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
 }
 
 function priceMarkup(app: TransportApp, group: string): string {

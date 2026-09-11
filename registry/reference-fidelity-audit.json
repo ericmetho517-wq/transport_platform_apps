@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-08T08:41:44.949Z",
-  "applications": 78,
+  "generatedAt": "2026-09-11T15:22:56.693Z",
+  "applications": 82,
   "fidelityCounts": {
     "sector-and-application-type-reference": 46,
     "exact-item-reference": 21,
-    "source-reference-unavailable": 11
+    "source-reference-unavailable": 15
   },
   "typeCoverage": {
     "Dashboard": {
-      "applications": 50,
+      "applications": 53,
       "withReferences": 39
     },
     "Experience": {
@@ -16,7 +16,7 @@
       "withReferences": 10
     },
     "StoryMap": {
-      "applications": 9,
+      "applications": 10,
       "withReferences": 9
     },
     "Instant Filter Gallery": {
@@ -1410,6 +1410,54 @@
         13,
         10
       ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-ismailia-urban",
+      "title": "لوحة مؤشرات الأراضي العمرانية – الإسماعيلية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "ismailia",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-ismailia-prices",
+      "title": "لوحة مؤشرات أسعار الأراضي – الإسماعيلية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "ismailia",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-ismailia-agriculture",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – الإسماعيلية",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "ismailia",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-ismailia",
+      "title": "القصة المكانية التفاعلية – محور القاهرة–الإسماعيلية",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "ismailia",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
       "missingImages": []
     }
   ]

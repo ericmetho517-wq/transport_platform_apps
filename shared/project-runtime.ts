@@ -1,6 +1,7 @@
 import { initInteractiveDashboard, renderInteractiveDashboard } from "./interactive-dashboard";
 import { initSectorApplication, renderSectorApplication } from "./sector-runtime";
 import { enableApplicationLocalization } from "./localization";
+import { localizedAppTitle } from "./app-titles";
 
 export type AppType = "Dashboard" | "Experience" | "StoryMap" | "Web AppViewer" | "Instant Filter Gallery";
 
@@ -106,8 +107,7 @@ function viewer(app: TransportApp, filters = false): string {
 export function renderProject(app: TransportApp): void {
   const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
   const activeLanguage: "ar" | "en" = requestedLanguage === "en" || requestedLanguage === "ar" ? requestedLanguage : app.language;
-  const alternateTitle = activeLanguage === "en" ? app.alternateTitles?.find((title) => /[A-Za-z]/.test(title)) : undefined;
-  const activeApp: TransportApp = { ...app, ...(alternateTitle ? { title: alternateTitle } : {}), language: activeLanguage, direction: activeLanguage === "en" ? "ltr" : "rtl" };
+  const activeApp: TransportApp = { ...app, title: localizedAppTitle(app, activeLanguage), language: activeLanguage, direction: activeLanguage === "en" ? "ltr" : "rtl" };
   document.documentElement.lang = activeApp.language;
   document.documentElement.dir = activeApp.direction;
   document.title = activeApp.title;

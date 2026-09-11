@@ -2,14 +2,15 @@ import apps from "../registry/apps.json";
 import type { TransportApp } from "../shared/project-runtime";
 import { dashboardGroup } from "../shared/interactive-dashboard";
 import { enableApplicationLocalization } from "../shared/localization";
+import { localizedAppTitle } from "../shared/app-titles";
 
 const registry = apps as TransportApp[];
 const axisOptions = [
-  ["western-upper-egypt", "محور الصعيد الغربي / Western Upper Egypt"], ["ismailia", "محور القاهرة–الإسماعيلية / Cairo–Ismailia"], ["dahshur-south-link", "وصلة دهشور الجنوبية / Dahshur South Link"],
-  ["regional-ring-road", "الدائري الإقليمي / Regional Ring Road"],
-  ["kalabsha-axis", "محور كلابشة / Kalabsha Axis"], ["qena-luxor-road", "طريق قنا الأقصر / Qena–Luxor Road"],
-  ["qus-axis", "محور قوص / Qus Axis"], ["cairo-suez-road", "طريق القاهرة السويس / Cairo–Suez Road"],
-  ["suez-ring-link", "وصلة السويس / Suez Ring Link"], ["dabaa-axis", "محور الضبعة / Dabaa Axis"],
+  ["western-upper-egypt", "محور الصعيد الغربي"], ["ismailia", "محور القاهرة–الإسماعيلية"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
+  ["regional-ring-road", "الدائري الإقليمي"],
+  ["kalabsha-axis", "محور كلابشة"], ["qena-luxor-road", "طريق قنا الأقصر"],
+  ["qus-axis", "محور قوص"], ["cairo-suez-road", "طريق القاهرة السويس"],
+  ["suez-ring-link", "وصلة السويس"], ["dabaa-axis", "محور الضبعة"],
 ] as const;
 const axisOf = (app: TransportApp): string => dashboardGroup(app);
 const root = document.querySelector<HTMLDivElement>("#app");
@@ -72,66 +73,29 @@ const englishAxisLabels: Record<string, string> = {
   "suez-ring-link": "Suez Ring Link",
   "dabaa-axis": "El Dabaa Axis",
 };
-const englishTitles: Record<string, string> = {
-  "لوحة مؤشرات الأراضى العمرانية": "Urban Land Indicators Dashboard",
-  "لوحة مؤشرات الأراضي العمرانية": "Urban Land Indicators Dashboard",
-  "لوحة مؤشرات أسعار الأراضى": "Land Prices Indicators Dashboard",
-  "لوحة مؤشرات أسعار الأراضي": "Land Prices Indicators Dashboard",
-  "لوحة مؤشرات الأراضي الزراعية والصناعية": "Agricultural and Industrial Land Indicators Dashboard",
-  "محور الصعيد الغربي (الجيزة / ابوسمبل)": "Western Upper Egypt Axis (Giza / Abu Simbel)",
-  "طريق الصعيد الغربي": "Western Upper Egypt Road",
-  "لوحة مؤشرات الدراسة المدنية": "Civil Study Indicators Dashboard",
-  "لوحة مؤشرات أنماط و انواع الأراضى": "Land Types and Patterns Indicators Dashboard",
-  "لوحة مؤشرات أسعار و دراسات الأراضى": "Land Prices and Studies Indicators Dashboard",
-  "لوحة مؤشرات الدراسة المدنية الاقليمي": "Regional Civil Study Indicators Dashboard",
-  "منطقة الدراسة القوس الشرقى للدائرى الأقليمى و خط الروبيكى": "Eastern Arc of the Regional Ring Road and Robeki Railway Study Area",
-  "الدائري الإقليمي والروبيكي": "Regional Ring Road and Robeki Railway",
-  "قياس الأثر التنموي في نطاق التأثير التنموي المباشر للقوس الشرقي للطريق الدائري خلال الـ 30 سنة القادمة": "Development Impact Assessment for the Eastern Arc of the Ring Road: Next 30 Years",
-  "لوحة مؤشرات الأراضى الزراعية والعمرانية": "Agricultural and Urban Land Indicators Dashboard",
-  "تطور الاراضي المحيطة بمحور كلابشة": "Land Development Around Kalabsha Axis",
-  "لوحة مؤشرات أنماط و أسعار الأراضى": "Land Types and Prices Indicators Dashboard",
-  "منطقة دراسة محور كلابشة": "Kalabsha Axis Study Area",
-  "تطور الاراضي المحيطة بطريق قنا الأقصر": "Land Development Around Qena–Luxor Road",
-  "لوحة مؤشرات الاسعار الأراضى": "Land Prices Indicators Dashboard",
-  "منطقة الدراسة محور قنا": "Qena Axis Study Area",
-  "تطور الاراضي المحيطة بوصلة طريق السويس من الطريق الدائري": "Land Development Around the Suez Ring Road Link",
-  "وصلة طريق السويس من الطريق الدائري": "Suez Ring Road Link",
-  "السويس": "Suez",
-  "منطقة الدراسة وصلة طريق السويس من الطريق الدائري الاوسطي": "Suez Ring Road Link Study Area",
-  "طريق القاهرة - السويس الصحراوي - (السويس الحر)": "Cairo–Suez Desert Road (Suez Free Zone)",
-  "قياس الأثر التنموي في نطاق التأثير التنموي المباشر طريق السويس الحر خلال الـ 30 سنة القادمة": "Development Impact Assessment for Suez Free Road: Next 30 Years",
-  "قياس الأثر الاقتصادي والتنموي طريق القاهرة - السويس الصحراوي - (السويس الحر) (2014-2024)": "Economic and Development Impact Assessment: Cairo–Suez Desert Road (2014–2024)",
-  "طريق السويس": "Suez Road",
-  "تطور الاراضي المحيطة بمحور قوص": "Land Development Around Qus Axis",
-  "تطبيق منطقة الدراسة محور قوص": "Qus Axis Study Area Application",
-  "محور قوص": "Qus Axis",
-  "لوحة مؤشرات الأراضي العمرانية – الإسماعيلية": "Urban Land Indicators Dashboard – Ismailia",
-  "لوحة مؤشرات أسعار الأراضي – الإسماعيلية": "Land Prices Indicators Dashboard – Ismailia",
-  "لوحة مؤشرات الأراضي الزراعية والصناعية – الإسماعيلية": "Agricultural and Industrial Land Indicators Dashboard – Ismailia",
-  "القصة المكانية التفاعلية – محور القاهرة–الإسماعيلية": "Interactive Geographic Story – Cairo–Ismailia Axis",
-};
-const displayTitle = (app: TransportApp) => platformLanguage === "en" ? (englishTitles[app.title] || app.alternateTitles?.[0] || "Transport Application") : app.title;
+const displayTitle = (app: TransportApp) => localizedAppTitle(app, platformLanguage);
+const t = (arabic: string, english: string) => platformLanguage === "en" ? english : arabic;
 document.documentElement.lang = platformLanguage;
 document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
 root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ? "ltr" : "rtl"}">
   <header class="platform-header">
-    <a class="brand" href="#top" aria-label="${platformLanguage === "en" ? "Back to platform home" : "العودة إلى بداية المنصة"}"><span class="brand-logos"><img src="/Picture1.jpg" alt="${platformLanguage === "en" ? "Ministry of Transport logo" : "شعار وزارة النقل"}"/><img src="/images.jpg" alt="${platformLanguage === "en" ? "Geographic Information Systems logo" : "شعار نظم المعلومات الجغرافية"}"/></span><span><b>${platformLanguage === "en" ? "Platform Applications Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</b><small>Ministry of Transport Digital Platform</small></span></a>
+    <a class="brand" href="#top" aria-label="${platformLanguage === "en" ? "Back to platform home" : "العودة إلى بداية المنصة"}"><span class="brand-logos"><img src="/Picture1.jpg" alt="${platformLanguage === "en" ? "Ministry of Transport logo" : "شعار وزارة النقل"}"/><img src="/images.jpg" alt="${platformLanguage === "en" ? "Geographic Information Systems logo" : "شعار نظم المعلومات الجغرافية"}"/></span><span><b>${platformLanguage === "en" ? "Platform Applications Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</b><small>${t("المنصة الرقمية لوزارة النقل", "Ministry of Transport Digital Platform")}</small></span></a>
     <nav><a href="#applications">${platformLanguage === "en" ? "Applications" : "التطبيقات"}</a></nav>
     <a class="header-cta" href="#applications">${platformLanguage === "en" ? "Explore the Platform" : "استكشف المنصة"} <span>${platformLanguage === "en" ? "→" : "←"}</span></a>
   </header>
   <main id="top">
     <section class="platform-hero">
-      <div class="hero-copy"><span class="eyebrow"><i></i> ${platformLanguage === "en" ? "Open-source digital geospatial platform" : "منصة جغرافية رقمية مفتوحة المصدر"}</span><h1>${platformLanguage === "en" ? "All Transport Projects" : "كل مشروعات النقل"}<br/><em>${platformLanguage === "en" ? "in One Platform." : "في منصة واحدة."}</em></h1><p>${platformLanguage === "en" ? "A unified institutional portal for exploring indicator dashboards, interactive maps, geographic stories, and sector data with ease and clarity." : "بوابة مؤسسية موحدة لاستعراض لوحات المؤشرات والخرائط التفاعلية والقصص المكانية والبيانات القطاعية بسهولة ووضوح."}</p><div class="hero-actions"><a class="primary" href="#applications">${platformLanguage === "en" ? "Explore Applications" : "استعرض التطبيقات"} <span>${platformLanguage === "en" ? "→" : "←"}</span></a><span class="hero-trust">${platformLanguage === "en" ? "Verified and connected geospatial data" : "بيانات مكانية موثقة ومترابطة"}</span></div><div class="hero-tags"><span>${platformLanguage === "en" ? "Interactive Maps" : "خرائط تفاعلية"}</span><span>${platformLanguage === "en" ? "Sector Data" : "بيانات قطاعية"}</span><span>${platformLanguage === "en" ? "Arabic and English" : "عربي وEnglish"}</span></div></div>
+      <div class="hero-copy"><span class="eyebrow"><i></i> ${platformLanguage === "en" ? "Open-source digital geospatial platform" : "منصة جغرافية رقمية مفتوحة المصدر"}</span><h1>${platformLanguage === "en" ? "All Transport Projects" : "كل مشروعات النقل"}<br/><em>${platformLanguage === "en" ? "in One Platform." : "في منصة واحدة."}</em></h1><p>${platformLanguage === "en" ? "A unified institutional portal for exploring indicator dashboards, interactive maps, geographic stories, and sector data with ease and clarity." : "بوابة مؤسسية موحدة لاستعراض لوحات المؤشرات والخرائط التفاعلية والقصص المكانية والبيانات القطاعية بسهولة ووضوح."}</p><div class="hero-actions"><a class="primary" href="#applications">${platformLanguage === "en" ? "Explore Applications" : "استعرض التطبيقات"} <span>${platformLanguage === "en" ? "→" : "←"}</span></a><span class="hero-trust">${platformLanguage === "en" ? "Verified and connected geospatial data" : "بيانات مكانية موثقة ومترابطة"}</span></div><div class="hero-tags"><span>${platformLanguage === "en" ? "Interactive Maps" : "خرائط تفاعلية"}</span><span>${platformLanguage === "en" ? "Sector Data" : "بيانات قطاعية"}</span><span>${platformLanguage === "en" ? "Arabic and English" : "العربية والإنجليزية"}</span></div></div>
       <div class="network-art" aria-hidden="true"><div class="map-grid"></div><span class="route route-one"></span><span class="route route-two"></span><span class="identity-seal"><small>${platformLanguage === "en" ? "Arab Republic of Egypt" : "جمهورية مصر العربية"}</small><b>${platformLanguage === "en" ? "Ministry of Transport" : "وزارة النقل"}</b><em>${platformLanguage === "en" ? "Geospatial Applications Portal" : "بوابة التطبيقات المكانية"}</em></span><i></i><i></i><i></i><i></i><i></i></div>
       <a class="scroll-cue" href="#applications" aria-label="${platformLanguage === "en" ? "Go to applications" : "انتقل إلى التطبيقات"}"><span></span>${platformLanguage === "en" ? "Scroll to explore" : "مرّر للاستكشاف"}</a>
     </section>
     <section id="applications" class="catalog">
-      <div class="section-title"><div><span class="section-kicker">دليل التطبيقات</span><h2>استعرض جميع المشروعات</h2><p>${platformLanguage === "en" ? "Search by title or sector, then filter results by type and language." : "ابحث بالعنوان أو القطاع، ثم صفِّ النتائج حسب النوع واللغة."}</p></div><div class="catalog-controls">
+      <div class="section-title"><div><span class="section-kicker">${t("دليل التطبيقات", "Application Directory")}</span><h2>${t("استعرض جميع المشروعات", "Explore All Projects")}</h2><p>${t("ابحث بالعنوان أو القطاع، ثم صفِّ النتائج حسب النوع واللغة.", "Search by title or sector, then filter results by type and language.")}</p></div><div class="catalog-controls">
         <label class="search-control"><span>${platformLanguage === "en" ? "Search" : "بحث"}</span><input id="app-search" placeholder="${platformLanguage === "en" ? "Search by title or sector" : "ابحث بالعنوان أو القطاع"}"/></label>
-        <label><span>نوع التطبيق</span><select id="type-filter"><option value="all">جميع أنواع التطبيقات</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${displayTypeLabels[type] || type}</option>`).join("")}</select></label>
+        <label><span>${t("نوع التطبيق", "Application Type")}</span><select id="type-filter"><option value="all">${t("جميع أنواع التطبيقات", "All Application Types")}</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${displayTypeLabels[type] || type}</option>`).join("")}</select></label>
         <label><span>${platformLanguage === "en" ? "Language" : "اللغة"}</span><select id="language-filter"><option value="${platformLanguage}">${platformLanguage === "en" ? "English" : "العربية"}</option></select></label>
-        <label><span>المحور / Axis</span><select id="axis-filter"><option value="all">كل المحاور / All axes</option>${axisOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join("")}</select></label>
+        <label><span>${t("المحور", "Axis")}</span><select id="axis-filter"><option value="all">${t("كل المحاور", "All axes")}</option>${axisOptions.map(([value, label]) => `<option value="${value}">${platformLanguage === "en" ? englishAxisLabels[value] : label}</option>`).join("")}</select></label>
       </div></div>
       <div class="catalog-stats" aria-label="${platformLanguage === "en" ? "Application counts" : "إحصائيات التطبيقات"}">
         <article><strong>${totalApplications}</strong><span>${platformLanguage === "en" ? "Total applications" : "إجمالي التطبيقات"}</span></article>
@@ -141,8 +105,8 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
         <article><strong>${countOf("Web AppViewer")}</strong><span>${platformLanguage === "en" ? "Map viewers" : "عارضات الخرائط"}</span></article>
         <article><strong>${countOf("Instant Filter Gallery")}</strong><span>${platformLanguage === "en" ? "Application galleries" : "معارض التطبيقات"}</span></article>
       </div>
-      <div class="catalog-toolbar"><div class="quick-filters" aria-label="تصفية سريعة"><button class="active" data-quick-type="all">جميع التطبيقات</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${displayTypeLabels[type] || type}</button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">إعادة ضبط الفلاتر</button></div>
-      <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>اختر تطبيقًا لعرض تفاصيله وتشغيله</span></div>
+      <div class="catalog-toolbar"><div class="quick-filters" aria-label="${t("تصفية سريعة", "Quick filters")}"><button class="active" data-quick-type="all">${t("جميع التطبيقات", "All Applications")}</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${displayTypeLabels[type] || type}</button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">${t("إعادة ضبط الفلاتر", "Reset filters")}</button></div>
+      <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>${t("اختر تطبيقًا لعرض تفاصيله وتشغيله", "Choose an application to view its details and open it")}</span></div>
       <div id="app-grid" class="app-grid"></div>
     </section>
   </main>
@@ -158,7 +122,7 @@ if (languageHeader) {
   languageButton.id = "platform-language-toggle";
   languageButton.type = "button";
   languageButton.textContent = platformLanguage === "en" ? "العربية" : "English";
-  languageButton.setAttribute("aria-label", "Switch platform language");
+  languageButton.setAttribute("aria-label", t("تغيير لغة المنصة", "Switch platform language"));
   languageHeader.appendChild(languageButton);
   languageButton.addEventListener("click", () => {
     const next = platformLanguage === "en" ? "ar" : "en";
@@ -229,9 +193,9 @@ const render = () => {
   quickFilters.forEach((button) => button.classList.toggle("active", button.dataset.quickType === type));
   const groups = axisOptions.map(([value, label]) => [value, label, visible.filter((app) => axisOf(app) === value)] as const).filter(([, , items]) => items.length);
   const uncategorized = visible.filter((app) => !axisOptions.some(([value]) => axisOf(app) === value));
-  if (uncategorized.length) groups.push(["other", "تطبيقات مشتركة / Shared applications", uncategorized]);
+  if (uncategorized.length) groups.push(["other", t("تطبيقات مشتركة", "Shared applications"), uncategorized]);
   let cardIndex = 0;
-  grid.innerHTML = groups.map(([value, label, items]) => { const groupLabel = platformLanguage === "en" ? (englishAxisLabels[value] || label.split(" / ").pop() || label) : label; return `<section class="sector-group" aria-label="${groupLabel}"><div class="sector-group-heading"><div><span>${platformLanguage === "en" ? "Sector" : "قطاع / Sector"}</span><h3>${groupLabel}</h3></div><b>${items.length} ${platformLanguage === "en" ? (items.length === 1 ? "Application" : "Applications") : "تطبيق"}</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${displayTitle(app)}</h3><p>${platformLanguage === "en" ? groupLabel : app.category}</p><span class="card-language">${platformLanguage === "en" ? "EN" : "ع"}</span><span class="open">${platformLanguage === "en" ? "Open application" : "فتح التطبيق"} <b>${platformLanguage === "en" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${platformLanguage === "en" ? "No matching applications" : "لا توجد نتائج مطابقة"}</b><span>${platformLanguage === "en" ? "Try changing the filters." : "No matching applications"}</span><button type="button" data-reset-empty>${platformLanguage === "en" ? "View all applications" : "عرض جميع التطبيقات"}</button></div>`;
+  grid.innerHTML = groups.map(([value, label, items]) => { const groupLabel = platformLanguage === "en" ? (englishAxisLabels[value] || label) : label; return `<section class="sector-group" aria-label="${groupLabel}"><div class="sector-group-heading"><div><span>${t("قطاع", "Sector")}</span><h3>${groupLabel}</h3></div><b>${items.length} ${platformLanguage === "en" ? (items.length === 1 ? "Application" : "Applications") : "تطبيق"}</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : app.direction}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${displayTitle(app)}</h3><p>${platformLanguage === "en" ? groupLabel : app.category}</p><span class="card-language">${platformLanguage === "en" ? "EN" : "ع"}</span><span class="open">${t("فتح التطبيق", "Open application")} <b>${platformLanguage === "en" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${t("لا توجد نتائج مطابقة", "No matching applications")}</b><span>${t("جرّب تغيير خيارات البحث والتصفية.", "Try changing the filters.")}</span><button type="button" data-reset-empty>${t("عرض جميع التطبيقات", "View all applications")}</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
   syncFiltersToUrl();
 };

@@ -14,7 +14,7 @@ for (const app of registry) {
 const counts = registry.reduce((acc, app) => ({...acc, [app.type]: (acc[app.type] || 0) + 1}), {});
 const withReportReferences = registry.filter((app) => app.reportReferences?.length).length;
 console.log(JSON.stringify({applications: registry.length, counts, withReportReferences, missingFiles: missing.length}, null, 2));
-if (registry.length !== 81 || missing.length) {
+if (registry.length !== 82 || missing.length) {
   console.error(missing.join("\n"));
   process.exit(1);
 }

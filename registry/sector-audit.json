@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-08T09:42:57.015Z",
-  "applications": 81,
+  "generatedAt": "2026-09-11T15:22:53.418Z",
+  "applications": 82,
   "counts": {
     "Dashboard": 53,
     "Experience": 10,
-    "StoryMap": 9,
+    "StoryMap": 10,
     "Instant Filter Gallery": 4,
     "Web AppViewer": 5
   },
@@ -18,10 +18,10 @@
     "suez-free": 13,
     "qus": 6,
     "dabaa": 4,
-    "ismailia": 3
+    "ismailia": 4
   },
   "checks": {
-    "projectEntrypoints": 81,
+    "projectEntrypoints": 82,
     "sectorSummaries": 10,
     "reportProfiles": 10,
     "crossSectorReferences": 0
@@ -41,7 +41,8 @@
     "dashboard-f0a5bc623c: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ismailia-urban: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ismailia-prices: no embedded report screenshot; runtime remains data-driven",
-    "dashboard-ismailia-agriculture: no embedded report screenshot; runtime remains data-driven"
+    "dashboard-ismailia-agriculture: no embedded report screenshot; runtime remains data-driven",
+    "storymap-ismailia: no embedded report screenshot; runtime remains data-driven"
   ],
   "result": "PASSED"
 }
