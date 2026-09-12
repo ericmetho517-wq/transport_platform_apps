@@ -18,7 +18,7 @@ for (const type of ["type-dashboard", "type-experience", "type-storymap", "type-
 }
 if (!styles.includes("@media (max-width: 760px)")) errors.push("missing responsive mobile layout");
 if (!source.includes('value="${platformLanguage}"') || !source.includes('params.set("uiLang", next)')) errors.push("Arabic/English mode switching is incomplete");
-if (apps.length !== 82) errors.push(`expected 82 applications, found ${apps.length}`);
+if (apps.length !== 83) errors.push(`expected 83 applications, found ${apps.length}`);
 const groupAliases = { dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis", "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road", "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt" };
 const registryGroups = new Set(apps.map((app) => groupAliases[app.reportReferenceGroup] || app.reportReferenceGroup));
 for (const group of registryGroups) if (!source.includes(`["${group}",`)) errors.push(`axis filter is missing registry group: ${group}`);

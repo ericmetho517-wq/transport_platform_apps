@@ -35,10 +35,17 @@ const westernStoryReports: Array<Pick<StoryEntry, "key" | "label" | "sector" | "
   { key: "fayoum", label: "الفيوم", sector: "6", report: "(6).pdf" },
   { key: "giza", label: "الجيزة", sector: "3", report: "(7).pdf" },
   { key: "aswan", label: "أسوان", sector: "2", report: "" },
+  { key: "corridor-overview", label: "نظرة شاملة على المحور", sector: "all", report: "(9).pdf" },
 ];
+const westernStoryLabels: Record<string, string> = { "abu-simbel": "Abu Simbel", luxor: "Luxor", qena: "Qena", sohag: "Sohag", assiut: "Assiut", minya: "Minya", "beni-suef": "Beni Suef", fayoum: "Fayoum", giza: "Giza", aswan: "Aswan", "corridor-overview": "Axis Overview" };
+const storyEntryLabel = (entry: StoryEntry, language: "ar" | "en") => language === "en" ? (westernStoryLabels[entry.key] || entry.label) : entry.label;
 
 function storyEntries(app: TransportApp): StoryEntry[] {
-  const references = (app.reportReferences || []).filter((reference) => reference.referenceKind.startsWith("story"));
+  const ownReferences = (app.reportReferences || []).filter((reference) => reference.referenceKind.startsWith("story"));
+  const fallbackReferences = (applicationRegistry as TransportApp[])
+    .filter((candidate) => dashboardGroup(candidate) === dashboardGroup(app))
+    .sort((a, b) => (b.reportReferences?.length || 0) - (a.reportReferences?.length || 0))[0]?.reportReferences || [];
+  const references = ownReferences.length ? ownReferences : fallbackReferences;
   if (dashboardGroup(app) !== "western-upper-egypt") {
     const hero = references.find((reference) => reference.referenceKind === "story-hero") || references[0];
     const comparison = references.find((reference) => reference.referenceKind === "story-comparison") || references[1];
@@ -61,6 +68,7 @@ function relatedDashboard(app: TransportApp): string {
     "suez-ring-link": { ar: "dashboard-85be400b84", en: "dashboard-e4d0b8938f" },
     "dabaa-axis": { ar: "dashboard-c1e29f0123", en: "dashboard-c1e29f0123" },
     "ismailia": { ar: "dashboard-ismailia-urban", en: "dashboard-ismailia-urban" },
+    "dahshur-south-link": { ar: "dashboard-1cb1e42f43", en: "dashboard-7639a80123" },
   };
   return links[dashboardGroup(app)]?.[app.language] || "";
 }
@@ -70,7 +78,26 @@ function storyHeader(app: TransportApp, entries: StoryEntry[]): string {
   const isWestern = dashboardGroup(app) === "western-upper-egypt";
   const collectionHero = entries.find((entry) => entry.hero)?.hero || "";
   const collectionCompare = entries.find((entry) => entry.compare)?.compare || "";
-  return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><b>وزارة النقل</b><span>الهيئة العامة لتخطيط مشروعات النقل</span></a><strong>${esc(app.title)}</strong></div>${isWestern ? `<nav class="story-sector-tabs" aria-label="قطاعات محور الصعيد الغربي"><button class="active" data-story-key="all" data-story-sector="all" data-story-title="${esc(app.title)}" data-story-report="" data-story-hero="${esc(collectionHero)}" data-story-compare="${esc(collectionCompare)}">محور الصعيد الغربي</button>${entries.map((entry) => `<button data-story-key="${entry.key}" data-story-sector="${entry.sector}" data-story-title="${esc(entry.label)}" data-story-report="${esc(entry.report)}" data-story-hero="${esc(entry.hero)}" data-story-compare="${esc(entry.compare)}">${esc(entry.label)}</button>`).join("")}</nav>` : ""}<nav class="story-chapter-tabs"><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">الخرائط والتطورات</a><a href="#story-evidence">مرفقات المشروع</a>${dashboard ? `<a class="story-dashboard-link" href="../${dashboard}/index.html?lang=${app.language}">لوحة المؤشرات</a>` : ""}</nav></header>`;
+  return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><b>وزارة النقل</b><span>الهيئة العامة لتخطيط مشروعات النقل</span></a><strong>${esc(app.title)}</strong></div>${isWestern ? `<nav class="story-sector-tabs" aria-label="قطاعات محور الصعيد الغربي"><button class="active" data-story-key="all" data-story-sector="all" data-story-title="${esc(app.title)}" data-story-report="" data-story-hero="${esc(collectionHero)}" data-story-compare="${esc(collectionCompare)}">${app.language === "en" ? "Western Upper Egypt Axis" : "محور الصعيد الغربي"}</button>${entries.map((entry) => { const label = storyEntryLabel(entry, app.language); return `<button data-story-key="${entry.key}" data-story-sector="${entry.sector}" data-story-title="${esc(label)}" data-story-report="${esc(entry.report)}" data-story-hero="${esc(entry.hero)}" data-story-compare="${esc(entry.compare)}">${esc(label)}</button>`; }).join("")}</nav>` : ""}<nav class="story-chapter-tabs"><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">المقارنة الزمنية</a><a href="#story-details">صور ومراحل المحور</a>${dashboard ? `<a class="story-dashboard-link" href="../${dashboard}/index.html?lang=${app.language}">لوحة المؤشرات</a>` : ""}</nav></header>`;
+}
+
+function storyMediaChapters(app: TransportApp, entries: StoryEntry[]): string {
+  const ownReferences = (app.reportReferences || []).filter((reference) => reference.imagePath);
+  const fallbackReferences = (applicationRegistry as TransportApp[])
+    .filter((candidate) => dashboardGroup(candidate) === dashboardGroup(app))
+    .sort((a, b) => (b.reportReferences?.length || 0) - (a.reportReferences?.length || 0))[0]?.reportReferences || [];
+  const references = Array.from(new Map((ownReferences.length ? ownReferences : fallbackReferences).filter((reference) => reference.imagePath).map((reference) => [reference.imagePath, reference])).values());
+  const isWestern = dashboardGroup(app) === "western-upper-egypt";
+  const chapters = entries.map((entry, index) => {
+    const label = storyEntryLabel(entry, app.language);
+    const media = isWestern && entry.report ? references.filter((reference) => reference.reportName === entry.report) : isWestern ? [] : references;
+    const cover = media[0]?.imagePath || entry.hero;
+    const gallery = media.length
+      ? `<div class="story-media-grid ${media.length === 1 ? "single" : ""}">${media.map((reference, mediaIndex) => `<figure data-evidence-report="${esc(reference.reportName)}"><a class="evidence-image-link" href="${esc(reference.imagePath)}" aria-label="فتح الصورة بالحجم الأصلي"><img src="${esc(reference.imagePath)}" alt="${esc(`${label} - صورة ${mediaIndex + 1}`)}" loading="lazy"/></a><figcaption><b>${esc(label)}</b><span>${esc(reference.reportName || "مرجع المشروع")} · صفحة ${reference.page}</span></figcaption></figure>`).join("")}</div>`
+      : `<div class="story-place-no-media">لا توجد صورة تقرير منفصلة لهذا الجزء؛ تعرض الخريطة التفاعلية بياناته المكانية المراجعة.</div>`;
+    return `<article class="story-place" id="story-place-${entry.key}" data-story-detail="${entry.key}"><div class="story-place-banner" ${cover ? `style="--place-image:url('${esc(cover)}')"` : ""}><span>${String(index + 1).padStart(2, "0")}</span><div><small>تطور الأراضي المحيطة بالمحور</small><h2>${esc(label)}</h2><p>${entry.report ? `مرجع ${esc(entry.report)} · القطاع ${esc(entry.sector)}` : "بيانات مكانية محلية موثقة"}</p></div></div><div class="story-place-body"><div class="story-place-copy"><span>تفاصيل القطاع</span><h3>خرائط وصور ${esc(label)}</h3><p>استعراض متتابع للخرائط والصور الأصلية المرتبطة بهذا الجزء من المحور، مع إتاحة تكبير كل صورة ومراجعة مصدرها ورقم الصفحة.</p></div>${gallery}</div></article>`;
+  }).join("");
+  return `<section id="story-details" class="story-details"><div class="section-heading"><span>03</span><h2>الرحلة الكاملة على امتداد المحور</h2><p>جميع الصور المتاحة مرتبة حسب القطاع والتقرير، كما في القصة المكانية المرجعية.</p></div>${chapters}</section>`;
 }
 
 function experienceMarkup(app: TransportApp): string {
@@ -93,7 +120,7 @@ function storyMarkup(app: TransportApp): string {
     ${isWestern ? `<section class="story-collection"><div class="section-heading"><span>قطاعات المحور</span><h2>اختر القطاع لعرض القصة والخرائط والمقارنة الخاصة به</h2><p>كل صورة ومقارنة مرتبطة بالقطاع والتقرير الأصلي الظاهر في مراجع المشروع.</p></div><div class="story-sector-cards">${entries.map((entry) => `<button data-story-card="${entry.key}" class="${entry.hero ? "" : "data-only"}" ${entry.hero ? `style="--card-image:url('${esc(entry.hero)}')"` : ""}><span>${esc(entry.label)}</span><small>${entry.report ? `${esc(entry.report)} · بيانات القطاع ${esc(entry.sector)}` : "بيانات مكانية محلية"}</small></button>`).join("")}</div></section>` : ""}
     <section id="story-map" class="story-chapter"><div><b>01</b><h2>منطقة الدراسة ومسار المحور</h2><p>خريطة قمر صناعي تفاعلية تعرض حدود الدراسة ومسار الطريق ومناطق التغير العمراني والزراعي للقطاع المحدد فقط. استخدم أزرار التكبير واسحب الخريطة، وانقر على أي عنصر لعرض بياناته الوصفية.</p><div class="story-data-note" id="story-data-note">يتم عرض البيانات المحلية المراجعة للقطاع.</div><div class="story-kpis" id="story-kpis"><article><span>مساحة الدراسة</span><strong>—</strong><small>كم²</small></article><article><span>طول المحور</span><strong>—</strong><small>كم</small></article><article><span>التغير العمراني</span><strong>—</strong><small>كم²</small></article><article><span>المعالم المكانية</span><strong>—</strong><small>عنصر</small></article></div></div>${renderSectorMapMarkup()}</section>
     <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى ${isWestern ? "2024" : "2023"}</h2><p>حرّك الفاصل يمينًا ويسارًا للمقارنة بين جانبي الصورة الأصلية الواردة في تقرير القطاع.</p></div><div class="story-compare" id="story-compare" ${initialCompare ? `data-compare-src="${esc(initialCompare)}" style="--compare-image:url('${esc(initialCompare)}')"` : "hidden"}><div class="compare-before"><span>2014</span></div><div class="compare-after" id="compare-overlay"><div class="compare-after-image"></div><span>${isWestern ? "2024" : "2023"}</span></div><i id="compare-handle">↔</i><input id="compare-range" type="range" min="0" max="100" value="50" aria-label="نسبة المقارنة الزمنية لاستخدامات الأراضي"/></div><div class="story-compare-missing" id="story-compare-missing" ${initialCompare ? "hidden" : ""}>${isWestern ? "اختر أحد قطاعات المحور من الشريط العلوي لعرض المقارنة الزمنية الموثقة الخاصة به." : "لا توجد صورة مقارنة زمنية موثقة لهذا القطاع داخل ملفات التقارير الحالية؛ الخريطة بالأعلى تعرض بياناته المكانية المتاحة دون إضافة صورة افتراضية."}</div></section>
-    <section id="story-evidence" class="story-evidence-section"><div class="section-heading"><span>03</span><h2>أعمال ومرفقات القطاع</h2><p>الصور الأصلية المستخرجة من تقرير القطاع دون استبدالها بصور عامة.</p></div>${evidence(app)}</section>
+    ${storyMediaChapters(app, entries)}
   </main>`;
 }
 
@@ -221,7 +248,6 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     const title = button.dataset.storyTitle || app.title;
     const hero = button.dataset.storyHero || "";
     const compare = button.dataset.storyCompare || "";
-    const report = button.dataset.storyReport || "";
     const sector = button.dataset.storySector || "all";
     const key = button.dataset.storyKey || "all";
     const heroSection = document.querySelector<HTMLElement>(".story-sector-hero");
@@ -243,7 +269,6 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     if (dataNote) dataNote.textContent = app.language === "en" ? (sector === "all" ? "All project sectors are displayed from the local database." : `Only verified local data for ${title} is displayed.`) : (sector === "all" ? "يتم عرض جميع قطاعات المشروع من قاعدة البيانات المحلية." : `يتم عرض بيانات ${title} فقط من قاعدة البيانات المحلية.`);
     const range = document.querySelector<HTMLInputElement>("#compare-range");
     if (range) { range.value = "50"; range.dispatchEvent(new Event("input")); }
-    document.querySelectorAll<HTMLElement>("[data-evidence-report]").forEach((figure) => { figure.hidden = Boolean(report) && figure.dataset.evidenceReport !== report; });
     const sectorSelect = document.querySelector<HTMLSelectElement>(".map-sector-select");
     if (sectorSelect && Array.from(sectorSelect.options).some((option) => option.value === sector)) {
       sectorSelect.value = sector;
@@ -254,10 +279,14 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     else url.searchParams.set("sector", key);
     window.history.replaceState({}, "", url);
   };
-  document.querySelectorAll<HTMLButtonElement>("[data-story-key]").forEach((button) => button.addEventListener("click", () => activateStory(button)));
+  document.querySelectorAll<HTMLButtonElement>("[data-story-key]").forEach((button) => button.addEventListener("click", () => {
+    activateStory(button);
+    const key = button.dataset.storyKey || "all";
+    if (key !== "all") document.querySelector<HTMLElement>(`[data-story-detail="${key}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }));
   document.querySelectorAll<HTMLButtonElement>("[data-story-card]").forEach((card) => card.addEventListener("click", () => {
     const button = document.querySelector<HTMLButtonElement>(`[data-story-key="${card.dataset.storyCard}"]`);
-    if (button) { activateStory(button); document.querySelector("#story-intro")?.scrollIntoView({ behavior: "smooth" }); }
+    if (button) { activateStory(button); document.querySelector<HTMLElement>(`[data-story-detail="${card.dataset.storyCard}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" }); }
   }));
   const requestedStory = new URLSearchParams(window.location.search).get("sector");
   const requestedButton = requestedStory ? document.querySelector<HTMLButtonElement>(`[data-story-key="${requestedStory}"]`) : null;

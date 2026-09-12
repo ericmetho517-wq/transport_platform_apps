@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-11T15:22:56.693Z",
-  "applications": 82,
+  "generatedAt": "2026-09-12T21:30:57.609Z",
+  "applications": 83,
   "fidelityCounts": {
     "sector-and-application-type-reference": 46,
     "exact-item-reference": 21,
-    "source-reference-unavailable": 15
+    "source-reference-unavailable": 16
   },
   "typeCoverage": {
     "Dashboard": {
@@ -16,7 +16,7 @@
       "withReferences": 10
     },
     "StoryMap": {
-      "applications": 10,
+      "applications": 11,
       "withReferences": 9
     },
     "Instant Filter Gallery": {
@@ -1454,6 +1454,18 @@
       "type": "StoryMap",
       "language": "ar",
       "sector": "ismailia",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-dahshur",
+      "title": "القصة المكانية التفاعلية – وصلة دهشور الجنوبية",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "dahshur",
       "referenceCount": 0,
       "fidelity": "source-reference-unavailable",
       "reports": [],

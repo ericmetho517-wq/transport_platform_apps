@@ -1,5 +1,12 @@
 import type { TransportApp } from "./project-runtime";
 
+const arabicTitles: Record<string, string> = {
+  "Dabaa axis": "محور الضبعة",
+  "Development of the lands surrounding the Dabaa axis": "تطور الأراضي المحيطة بمحور الضبعة",
+  "Land Price Indicators Dashboard – El Dabaa Axis": "لوحة مؤشرات أسعار الأراضي – محور الضبعة",
+  "Agricultural and Urban Land Indicators – El Dabaa Axis": "لوحة مؤشرات الأراضي الزراعية والعمرانية – محور الضبعة",
+};
+
 const englishTitles: Record<string, string> = {
   "لوحة مؤشرات الأراضى العمرانية": "Urban Land Indicators Dashboard",
   "لوحة مؤشرات الأراضي العمرانية": "Urban Land Indicators Dashboard",
@@ -37,11 +44,17 @@ const englishTitles: Record<string, string> = {
   "لوحة مؤشرات أسعار الأراضي – الإسماعيلية": "Land Prices Indicators Dashboard – Ismailia",
   "لوحة مؤشرات الأراضي الزراعية والصناعية – الإسماعيلية": "Agricultural and Industrial Land Indicators Dashboard – Ismailia",
   "القصة المكانية التفاعلية – محور القاهرة–الإسماعيلية": "Interactive Geographic Story – Cairo–Ismailia Axis",
+  "القصة المكانية التفاعلية – وصلة دهشور الجنوبية": "Interactive Geographic Story – Dahshur South Link",
 };
 
 export function localizedAppTitle(app: TransportApp, language: "ar" | "en"): string {
-  if (language === "ar") return app.title;
+  if (language === "ar") return arabicTitles[app.title] || app.title;
   return englishTitles[app.title]
     || app.alternateTitles?.find((title) => /[A-Za-z]/.test(title))
     || (/^[\x00-\x7F\s\p{P}\p{N}]+$/u.test(app.title) ? app.title : "Transport Application");
+}
+
+export function localizedAppCategory(app: TransportApp, language: "ar" | "en"): string {
+  if (language === "ar") return /[A-Za-z]/.test(app.category) ? "تطبيقات محور الضبعة" : app.category;
+  return app.reportReferenceGroup === "dabaa" ? "El Dabaa Axis applications" : app.category;
 }

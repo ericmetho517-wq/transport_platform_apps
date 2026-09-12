@@ -1,6 +1,19 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["جميع الصور المتاحة مرتبة حسب القطاع والتقرير، كما في القصة المكانية المرجعية.", "All available imagery is organized by sector and source report, following the reference geographic story."],
+  ["استعراض متتابع للخرائط والصور الأصلية المرتبطة بهذا الجزء من المحور، مع إتاحة تكبير كل صورة ومراجعة مصدرها ورقم الصفحة.", "A sequential view of the original maps and imagery for this part of the axis, with full-size inspection and source-page details."],
+  ["لا توجد صورة تقرير منفصلة لهذا الجزء؛ تعرض الخريطة التفاعلية بياناته المكانية المراجعة.", "No separate report image is available for this section; the interactive map displays its verified spatial data."],
+  ["الرحلة الكاملة على امتداد المحور", "The complete journey along the axis"],
+  ["تطور الأراضي المحيطة بالمحور", "Land development around the axis"],
+  ["صور ومراحل المحور", "Axis stages and imagery"],
+  ["المقارنة الزمنية", "Temporal comparison"],
+  ["بيانات مكانية محلية موثقة", "Verified local spatial data"],
+  ["تفاصيل القطاع", "Sector details"],
+  ["خرائط وصور", "Maps and imagery for"],
+  ["مرجع المشروع", "Project reference"],
+  ["مرجع", "Source"],
+  ["صفحة", "Page"],
   ["نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي بالمنطقة", "Agricultural land as a share of the total area"],
   ["نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي", "Agricultural land as a share of total land"],
   ["نسبة مساحة التغير الصناعي بمنطقة الدراسة", "Industrial change as a share of the study area"],

@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-09-11T15:22:53.418Z",
-  "applications": 82,
+  "generatedAt": "2026-09-12T21:30:53.409Z",
+  "applications": 83,
   "counts": {
     "Dashboard": 53,
     "Experience": 10,
-    "StoryMap": 10,
+    "StoryMap": 11,
     "Instant Filter Gallery": 4,
     "Web AppViewer": 5
   },
   "sectors": {
     "western-upper-egypt": 9,
-    "dahshur": 9,
+    "dahshur": 10,
     "regional-ring": 13,
     "kalabsha": 7,
     "qena-luxor": 7,
@@ -21,7 +21,7 @@
     "ismailia": 4
   },
   "checks": {
-    "projectEntrypoints": 82,
+    "projectEntrypoints": 83,
     "sectorSummaries": 10,
     "reportProfiles": 10,
     "crossSectorReferences": 0
@@ -42,7 +42,8 @@
     "dashboard-ismailia-urban: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ismailia-prices: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ismailia-agriculture: no embedded report screenshot; runtime remains data-driven",
-    "storymap-ismailia: no embedded report screenshot; runtime remains data-driven"
+    "storymap-ismailia: no embedded report screenshot; runtime remains data-driven",
+    "storymap-dahshur: no embedded report screenshot; runtime remains data-driven"
   ],
   "result": "PASSED"
 }
