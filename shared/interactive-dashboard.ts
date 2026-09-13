@@ -479,13 +479,15 @@ function renderLineChart(summary: DashboardSummary, visible: Set<string>): void 
 function renderChangeBars(summary: DashboardSummary): void {
   const container = document.querySelector<HTMLElement>("#change-bars");
   if (!container) return;
-  const isIsmailia = document.querySelector<HTMLElement>(".interactive-dashboard")?.dataset.dashboardGroup === "ismailia";
+  const dashboardGroup = document.querySelector<HTMLElement>(".interactive-dashboard")?.dataset.dashboardGroup;
+  const isIsmailia = dashboardGroup === "ismailia";
+  const isWesternUpperEgypt = dashboardGroup === "western-upper-egypt";
   const data = isIsmailia ? [
     ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
     ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
     ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ffbf08"],
   ] as Array<[string, string, number, string]> : summary.profile?.changeBars?.length
-    ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, serviceLabelPattern.test(item.label) ? serviceColor : "#f28a00"] as [string, string, number, string])
+    ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, isWesternUpperEgypt || serviceLabelPattern.test(item.label) ? serviceColor : "#f28a00"] as [string, string, number, string])
     : [
       ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ff9e00"],
       ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
