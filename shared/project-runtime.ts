@@ -115,7 +115,15 @@ export function renderProject(app: TransportApp): void {
   if (!root) throw new Error("Missing #app root");
   root.innerHTML = activeApp.type === "Dashboard" ? renderInteractiveDashboard(activeApp) : renderSectorApplication(activeApp);
   enableApplicationLocalization(activeApp, root);
-  if (activeApp.type === "Dashboard") void initInteractiveDashboard(activeApp); else void initSectorApplication(activeApp);
+  const initialization = activeApp.type === "Dashboard"
+    ? initInteractiveDashboard(activeApp)
+    : initSectorApplication(activeApp);
+  void initialization.catch((reason: unknown) => {
+    const error = reason instanceof Error
+      ? reason
+      : new Error(typeof reason === "string" ? reason : "Application initialization failed");
+    console.error("Application initialization failed", error, reason);
+  });
   if (!root.querySelector("#language-toggle")) {
     const languageHost = root.querySelector<HTMLElement>(".dash-actions, .sector-header, .top-actions");
     if (languageHost) {

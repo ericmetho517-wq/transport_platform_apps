@@ -212,7 +212,7 @@ function priceMarkup(app: TransportApp, group: string): string {
 
 function dabaaLandMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard dabaa-land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
-    ${dashboardHeader(app)}
+    ${dashboardHeader(app, group)}
     <div class="dabaa-land-layout">
       <section class="dashboard-kpis dabaa-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="lime"><span>إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="gold"><span>إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article></section>
       <section class="dabaa-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
@@ -227,7 +227,7 @@ function landMarkup(app: TransportApp, group: string): string {
     : "اضغط على العمود لتصفية طبقة الخريطة";
   const changeBarsTitle = group === "ismailia" ? "مساحات أراضي الخدمات (كم²)" : "مناطق تغير استخدامات الأراضي";
   return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
-    ${dashboardHeader(app)}
+    ${dashboardHeader(app, group)}
     <div class="land-layout">
       <aside class="land-left"><article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="jobOpportunities">—</strong></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>${changeBarsTitle}</span>${changeBarsHint ? `<small>${changeBarsHint}</small>` : ""}</div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
       <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
@@ -238,7 +238,7 @@ function landMarkup(app: TransportApp, group: string): string {
 
 function reportLandMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard land-dashboard report-land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
-    ${dashboardHeader(app)}
+    ${dashboardHeader(app, group)}
     <div class="land-layout">
       <aside class="land-left"><article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="jobOpportunities" data-metric-scale="1000">—</strong><small>ألف عامل</small></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>مناطق التغير العمراني المستحدثة</span><small>اضغط على العمود لتصفية طبقة الخريطة</small></div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
       <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2023</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
@@ -261,7 +261,7 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
       ? `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card ownership-card"><span>نسبة ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section>`
       : `<section class="dark-card crop-card south-crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section>`;
   return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard ${group}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
-    ${dashboardHeader(app)}
+    ${dashboardHeader(app, group)}
     <div class="dashboard-kpis south-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>إجمالي مساحة الأراضي العمرانية (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article></div>
     <div class="south-agriculture-layout"><aside class="south-agriculture-side">${leftPanels}</aside><section class="south-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي لعامي <bdi>2014</bdi> - <bdi class="map-year-end">2023</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="south-agriculture-right">${rightPanels}</aside></div>
   </main>`;
@@ -271,7 +271,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
   const rawChangeData = group === "western-upper-egypt";
   if (rawChangeData) {
     return `<main class="interactive-dashboard agriculture-dashboard western-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
-      ${dashboardHeader(app)}
+      ${dashboardHeader(app, group)}
       <div class="western-agriculture-kpis dashboard-kpis">
         <article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article>
         <article><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalWorkers">—</strong></article>
@@ -322,7 +322,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
     </main>`;
   }
   return `<main class="interactive-dashboard agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
-    ${dashboardHeader(app)}
+    ${dashboardHeader(app, group)}
     <div class="agriculture-layout">
       <aside class="agriculture-side"><section class="dark-card agriculture-stat"><span>${agriculturalAreaLabel}</span><strong data-metric="agriculturalAreaFeddan">—</strong></section><section class="dark-card agriculture-stat"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></section><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section></aside>
       <section class="agriculture-center"><div class="dashboard-kpis agriculture-kpis"><article class="gold"><span>${urbanAreaLabel}</span><strong data-metric="urbanChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2024</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
@@ -333,7 +333,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
 
 function civilMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard civil-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="civil">
-    ${dashboardHeader(app)}
+    ${dashboardHeader(app, group)}
     <div class="specialized-layout">
       <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>عناصر الرفع المدني المسجلة</span><strong data-metric="civilFeatures">—</strong></article></section>
       <section class="specialized-body"><aside class="dark-card civil-panel"><h2>مؤشرات الدراسة المدنية</h2><p>تعرض هذه اللوحة عناصر الرفع والحصر المدني الخاصة بهذا القطاع فقط، مع إمكانية تشغيل وإيقاف الطبقات وفحص خصائص كل عنصر من الخريطة.</p><div class="civil-facts"><span>طبقات المشروع المتاحة <b data-metric="availableLayers">—</b></span><span>العناصر العمرانية <b data-metric="urbanFeatures">—</b></span><span>العناصر الزراعية <b data-metric="agriculturalFeatures">—</b></span></div></aside>${mapMarkup()}</section>
@@ -343,7 +343,7 @@ function civilMarkup(app: TransportApp, group: string): string {
 
 function impactMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard impact-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="impact">
-    ${dashboardHeader(app)}
+    ${dashboardHeader(app, group)}
     <div class="specialized-layout">
       <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول المحور (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>نطاق الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>مساحة التغير العمراني (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article></section>
       <section class="specialized-body impact-body"><aside class="dark-card impact-controls"><h2>سيناريو الأثر التنموي حتى 2053</h2><label for="impact-year">سنة العرض <strong id="impact-year-label">2024</strong></label><input id="impact-year" type="range" min="2024" max="2053" value="2024" step="1"/><div class="impact-results"><span>مؤشر التطور الزمني <b id="impact-progress">0٪</b></span><span>المساحة العمرانية التقديرية* <b id="impact-area">—</b></span><span>فرص العمل المرتبطة بالقطاع <b data-metric="jobOpportunities">—</b></span></div><small>* محاكاة خطية تفاعلية للعرض وليست قيمة تقريرية جديدة؛ القيم الأصلية المعتمدة معروضة في البطاقات والمراجع.</small></aside>${mapMarkup()}</section>
