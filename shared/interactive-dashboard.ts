@@ -170,7 +170,6 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
 export const renderSectorMapMarkup = mapMarkup;
 
 function dashboardHeader(app: TransportApp, group = ""): string {
-  const isIsmailia = group === "ismailia";
   const isAgricultureAndIndustry = /الزراعية.*الصناعية|agricultural.*industrial/i.test(app.title);
   const landuseOptions = isPriceDashboard(app)
     ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`
@@ -180,7 +179,9 @@ function dashboardHeader(app: TransportApp, group = ""): string {
   const landuseFilter = landuseOptions
     ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
     : "";
-  const sectorFilter = isIsmailia ? "" : `<label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label>`;
+  const sectorFilter = group === "western-upper-egypt"
+    ? `<label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label>`
+    : "";
   return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions">${sectorFilter}${landuseFilter}<label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">متغير</option><option value="unchanged">غير متغير</option></select></label><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
 }
 
