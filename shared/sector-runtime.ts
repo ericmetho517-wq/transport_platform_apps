@@ -78,9 +78,12 @@ function relatedDashboard(app: TransportApp): string {
 function storyHeader(app: TransportApp, entries: StoryEntry[]): string {
   const dashboard = relatedDashboard(app);
   const isWestern = dashboardGroup(app) === "western-upper-egypt";
-  const collectionHero = entries.find((entry) => entry.hero)?.hero || "";
-  const collectionCompare = entries.find((entry) => entry.compare)?.compare || "";
-  return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><b>وزارة النقل</b><span>الهيئة العامة لتخطيط مشروعات النقل</span></a><strong>${esc(app.title)}</strong></div>${isWestern ? `<nav class="story-sector-tabs" aria-label="قطاعات محور الصعيد الغربي"><button class="active" data-story-key="all" data-story-sector="all" data-story-title="${esc(app.title)}" data-story-report="" data-story-hero="${esc(collectionHero)}" data-story-compare="${esc(collectionCompare)}">${app.language === "en" ? "Western Upper Egypt Axis" : "محور الصعيد الغربي"}</button>${entries.map((entry) => { const label = storyEntryLabel(entry, app.language); return `<button data-story-key="${entry.key}" data-story-sector="${entry.sector}" data-story-title="${esc(label)}" data-story-report="${esc(entry.report)}" data-story-hero="${esc(entry.hero)}" data-story-compare="${esc(entry.compare)}">${esc(label)}</button>`; }).join("")}</nav>` : ""}<nav class="story-chapter-tabs"><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">المقارنة الزمنية</a><a href="#story-details">صور ومراحل المحور</a>${dashboard ? `<a class="story-dashboard-link" href="../${dashboard}/index.html?lang=${app.language}">لوحة المؤشرات</a>` : ""}</nav></header>`;
+  if (!isWestern) {
+    return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><b>وزارة النقل</b><span>الهيئة العامة لتخطيط مشروعات النقل</span></a><strong>${esc(app.title)}</strong></div><nav class="story-chapter-tabs"><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">المقارنة الزمنية</a><a href="#story-details">صور ومراحل المحور</a>${dashboard ? `<a class="story-dashboard-link" href="../${dashboard}/index.html?lang=${app.language}">لوحة المؤشرات</a>` : ""}</nav></header>`;
+  }
+  const firstKey = entries.find((entry) => entry.hero)?.key || entries[0]?.key;
+  const sectorTabs = entries.map((entry) => { const label = storyEntryLabel(entry, app.language); return `<button class="${entry.key === firstKey ? "active" : ""}" data-story-key="${entry.key}" data-story-sector="${entry.sector}" data-story-title="${esc(label)}" data-story-report="${esc(entry.report)}" data-story-hero="${esc(entry.hero)}" data-story-compare="${esc(entry.compare)}">${esc(label)}</button>`; }).join("");
+  return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><i aria-hidden="true">▦</i><span>تطور الأراضي المحيطة بطريق الصعيد الصحراوي</span></a></div><nav class="story-sector-tabs" aria-label="قطاعات محور الصعيد الغربي">${sectorTabs}${dashboard ? `<button class="story-dashboard-collection-link" data-story-dashboard data-dashboard-src="../${dashboard}/index.html?lang=${app.language}">لوحة المؤشرات</button>` : ""}</nav><nav class="story-chapter-tabs"><strong id="story-chrome-title">تطور الأراضي المحيطة بالمحور</strong><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">المقارنة الزمنية</a><a href="#story-details">صور ومراحل المحور</a></nav></header>`;
 }
 
 function storyMediaChapters(app: TransportApp, entries: StoryEntry[]): string {
@@ -97,7 +100,7 @@ function storyMediaChapters(app: TransportApp, entries: StoryEntry[]): string {
     const gallery = media.length
       ? `<div class="story-media-grid ${media.length === 1 ? "single" : ""}">${media.map((reference, mediaIndex) => `<figure data-evidence-report="${esc(reference.reportName)}"><a class="evidence-image-link" href="${esc(reference.imagePath)}" aria-label="فتح الصورة بالحجم الأصلي"><img src="${esc(reference.imagePath)}" alt="${esc(`${label} - صورة ${mediaIndex + 1}`)}" loading="lazy"/></a><figcaption><b>${esc(label)}</b><span>${esc(reference.reportName || "مرجع المشروع")} · صفحة ${reference.page}</span></figcaption></figure>`).join("")}</div>`
       : `<div class="story-place-no-media">لا توجد صورة تقرير منفصلة لهذا الجزء؛ تعرض الخريطة التفاعلية بياناته المكانية المراجعة.</div>`;
-    return `<article class="story-place" id="story-place-${entry.key}" data-story-detail="${entry.key}"><div class="story-place-banner" ${cover ? `style="--place-image:url('${esc(cover)}')"` : ""}><span>${String(index + 1).padStart(2, "0")}</span><div><small>تطور الأراضي المحيطة بالمحور</small><h2>${esc(label)}</h2><p>${entry.report ? `مرجع ${esc(entry.report)} · القطاع ${esc(entry.sector)}` : "بيانات مكانية محلية موثقة"}</p></div></div><div class="story-place-body"><div class="story-place-copy"><span>تفاصيل القطاع</span><h3>خرائط وصور ${esc(label)}</h3><p>استعراض متتابع للخرائط والصور الأصلية المرتبطة بهذا الجزء من المحور، مع إتاحة تكبير كل صورة ومراجعة مصدرها ورقم الصفحة.</p></div>${gallery}</div></article>`;
+    return `<article class="story-place${index === 0 ? " active" : ""}" id="story-place-${entry.key}" data-story-detail="${entry.key}"><div class="story-place-banner" ${cover ? `style="--place-image:url('${esc(cover)}')"` : ""}><span>${String(index + 1).padStart(2, "0")}</span><div><small>تطور الأراضي المحيطة بالمحور</small><h2>${esc(label)}</h2><p>${entry.report ? `مرجع ${esc(entry.report)} · القطاع ${esc(entry.sector)}` : "بيانات مكانية محلية موثقة"}</p></div></div><div class="story-place-body"><div class="story-place-copy"><span>تفاصيل القطاع</span><h3>خرائط وصور ${esc(label)}</h3><p>استعراض متتابع للخرائط والصور الأصلية المرتبطة بهذا الجزء من المحور، مع إتاحة تكبير كل صورة ومراجعة مصدرها ورقم الصفحة.</p></div>${gallery}</div></article>`;
   }).join("");
   return `<section id="story-details" class="story-details"><div class="section-heading"><span>03</span><h2>الرحلة الكاملة على امتداد المحور</h2><p>جميع الصور المتاحة مرتبة حسب القطاع والتقرير، كما في القصة المكانية المرجعية.</p></div>${chapters}</section>`;
 }
@@ -117,12 +120,15 @@ function storyMarkup(app: TransportApp): string {
   const firstAvailable = entries.find((entry) => entry.hero) || entries[0];
   const isWestern = dashboardGroup(app) === "western-upper-egypt";
   const initialCompare = firstAvailable?.compare || "";
-  return `<main class="sector-app story-runtime" dir="${app.direction}" data-sector-group="${dashboardGroup(app)}">${storyHeader(app, entries)}
-    <section id="story-intro" class="story-sector-hero" ${firstAvailable?.hero ? `style="--story-image:url('${esc(firstAvailable.hero)}')"` : ""}><div><span>قصة مكانية تفاعلية</span><h1 id="story-active-title">${esc(app.title)}</h1><p id="story-active-subtitle">تطور استخدامات الأراضي المحيطة بالمحور قبل وبعد الإنشاء</p><button data-story-scroll>ابدأ التصفح ↓</button></div></section>
-    ${isWestern ? `<section class="story-collection"><div class="section-heading"><span>قطاعات المحور</span><h2>اختر القطاع لعرض القصة والخرائط والمقارنة الخاصة به</h2><p>كل صورة ومقارنة مرتبطة بالقطاع والتقرير الأصلي الظاهر في مراجع المشروع.</p></div><div class="story-sector-cards">${entries.map((entry) => `<button data-story-card="${entry.key}" class="${entry.hero ? "" : "data-only"}" ${entry.hero ? `style="--card-image:url('${esc(entry.hero)}')"` : ""}><span>${esc(entry.label)}</span><small>${entry.report ? `${esc(entry.report)} · بيانات القطاع ${esc(entry.sector)}` : "بيانات مكانية محلية"}</small></button>`).join("")}</div></section>` : ""}
+  const initialTitle = firstAvailable ? storyEntryLabel(firstAvailable, app.language) : app.title;
+  const dashboard = relatedDashboard(app);
+  return `<main class="sector-app story-runtime${isWestern ? " arcgis-reference-story" : ""}" dir="${app.direction}" data-sector-group="${dashboardGroup(app)}">${storyHeader(app, entries)}
+    ${isWestern && dashboard ? `<section class="story-dashboard-view" hidden><iframe title="لوحة المؤشرات" loading="lazy" data-dashboard-frame></iframe></section>` : ""}<div class="story-content">
+    <section id="story-intro" class="story-sector-hero" ${firstAvailable?.hero ? `style="--story-image:url('${esc(firstAvailable.hero)}')"` : ""}><div><span>قصة مكانية تفاعلية</span><h1 id="story-active-title">${esc(initialTitle)}</h1><p id="story-active-subtitle">تطور الأراضي المحيطة بطريق الصعيد الصحراوي الغربي (${esc(initialTitle)})</p><button data-story-scroll aria-label="ابدأ التصفح">↓</button></div></section>
     <section id="story-map" class="story-chapter"><div><b>01</b><h2>منطقة الدراسة ومسار المحور</h2><p>خريطة قمر صناعي تفاعلية تعرض حدود الدراسة ومسار الطريق ومناطق التغير العمراني والزراعي للقطاع المحدد فقط. استخدم أزرار التكبير واسحب الخريطة، وانقر على أي عنصر لعرض بياناته الوصفية.</p><div class="story-data-note" id="story-data-note">يتم عرض البيانات المحلية المراجعة للقطاع.</div><div class="story-kpis" id="story-kpis"><article><span>مساحة الدراسة</span><strong>—</strong><small>كم²</small></article><article><span>طول المحور</span><strong>—</strong><small>كم</small></article><article><span>التغير العمراني</span><strong>—</strong><small>كم²</small></article><article><span>المعالم المكانية</span><strong>—</strong><small>عنصر</small></article></div></div>${renderSectorMapMarkup()}</section>
     <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى ${isWestern ? "2024" : "2023"}</h2><p>حرّك الفاصل يمينًا ويسارًا للمقارنة بين جانبي الصورة الأصلية الواردة في تقرير القطاع.</p></div><div class="story-compare" id="story-compare" ${initialCompare ? `data-compare-src="${esc(initialCompare)}" style="--compare-image:url('${esc(initialCompare)}')"` : "hidden"}><div class="compare-before"><span>2014</span></div><div class="compare-after" id="compare-overlay"><div class="compare-after-image"></div><span>${isWestern ? "2024" : "2023"}</span></div><i id="compare-handle">↔</i><input id="compare-range" type="range" min="0" max="100" value="50" aria-label="نسبة المقارنة الزمنية لاستخدامات الأراضي"/></div><div class="story-compare-missing" id="story-compare-missing" ${initialCompare ? "hidden" : ""}>${isWestern ? "اختر أحد قطاعات المحور من الشريط العلوي لعرض المقارنة الزمنية الموثقة الخاصة به." : "لا توجد صورة مقارنة زمنية موثقة لهذا القطاع داخل ملفات التقارير الحالية؛ الخريطة بالأعلى تعرض بياناته المكانية المتاحة دون إضافة صورة افتراضية."}</div></section>
     ${storyMediaChapters(app, entries)}
+    </div>
   </main>`;
 }
 
@@ -254,11 +260,20 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     const key = button.dataset.storyKey || "all";
     const heroSection = document.querySelector<HTMLElement>(".story-sector-hero");
     const activeTitle = document.querySelector<HTMLElement>("#story-active-title");
+    const activeSubtitle = document.querySelector<HTMLElement>("#story-active-subtitle");
+    const chromeTitle = document.querySelector<HTMLElement>("#story-chrome-title");
     const compareBox = document.querySelector<HTMLElement>("#story-compare");
     const compareMissing = document.querySelector<HTMLElement>("#story-compare-missing");
     const dataNote = document.querySelector<HTMLElement>("#story-data-note");
     if (activeTitle) activeTitle.textContent = title;
+    if (activeSubtitle) activeSubtitle.textContent = app.language === "en" ? `Land development along the Western Desert Road (${title})` : `تطور الأراضي المحيطة بطريق الصعيد الصحراوي الغربي (${title})`;
+    if (chromeTitle) chromeTitle.textContent = app.language === "en" ? `Land development · ${title}` : `تطور الأراضي · ${title}`;
     if (heroSection && hero) heroSection.style.setProperty("--story-image", `url('${hero}')`);
+    document.querySelectorAll<HTMLElement>("[data-story-detail]").forEach((chapter) => chapter.classList.toggle("active", chapter.dataset.storyDetail === key));
+    document.querySelector<HTMLButtonElement>("[data-story-dashboard]")?.classList.remove("active");
+    root.classList.remove("story-dashboard-open");
+    document.querySelector<HTMLElement>(".story-dashboard-view")?.setAttribute("hidden", "true");
+    document.querySelector<HTMLElement>(".story-content")?.removeAttribute("hidden");
     if (compareBox && compare) {
       compareBox.style.setProperty("--compare-image", `url('${compare}')`);
       const referenceImage = compareBox.querySelector<HTMLImageElement>("#story-compare-image");
@@ -283,8 +298,7 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
   };
   document.querySelectorAll<HTMLButtonElement>("[data-story-key]").forEach((button) => button.addEventListener("click", () => {
     activateStory(button);
-    const key = button.dataset.storyKey || "all";
-    if (key !== "all") document.querySelector<HTMLElement>(`[data-story-detail="${key}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.querySelector<HTMLElement>("#story-intro")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }));
   document.querySelectorAll<HTMLButtonElement>("[data-story-card]").forEach((card) => card.addEventListener("click", () => {
     const button = document.querySelector<HTMLButtonElement>(`[data-story-key="${card.dataset.storyCard}"]`);
@@ -293,6 +307,18 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
   const requestedStory = new URLSearchParams(window.location.search).get("sector");
   const requestedButton = requestedStory ? document.querySelector<HTMLButtonElement>(`[data-story-key="${requestedStory}"]`) : null;
   if (requestedButton) activateStory(requestedButton);
+  document.querySelector<HTMLButtonElement>("[data-story-dashboard]")?.addEventListener("click", (event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    document.querySelectorAll<HTMLButtonElement>("[data-story-key]").forEach((item) => item.classList.remove("active"));
+    button.classList.add("active");
+    const dashboardView = document.querySelector<HTMLElement>(".story-dashboard-view");
+    const frame = dashboardView?.querySelector<HTMLIFrameElement>("[data-dashboard-frame]");
+    if (frame && !frame.src) frame.src = button.dataset.dashboardSrc || "";
+    dashboardView?.removeAttribute("hidden");
+    document.querySelector<HTMLElement>(".story-content")?.setAttribute("hidden", "true");
+    root.classList.add("story-dashboard-open");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
   document.querySelectorAll<HTMLAnchorElement>(".story-chapter-tabs a[href^='#']").forEach((link) => link.addEventListener("click", () => {
     document.querySelectorAll(".story-chapter-tabs a[href^='#']").forEach((item) => item.classList.toggle("active", item === link));
   }));

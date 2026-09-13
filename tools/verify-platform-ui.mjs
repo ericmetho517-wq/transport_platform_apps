@@ -6,6 +6,8 @@ const source = readFileSync(join(root, "src", "main.ts"), "utf8");
 const styles = readFileSync(join(root, "shared", "platform-identity.css"), "utf8");
 const dashboardSource = readFileSync(join(root, "shared", "interactive-dashboard.ts"), "utf8");
 const dashboardStyles = readFileSync(join(root, "shared", "interactive-dashboard.css"), "utf8");
+const sectorSource = readFileSync(join(root, "shared", "sector-runtime.ts"), "utf8");
+const sectorStyles = readFileSync(join(root, "shared", "sector-runtime.css"), "utf8");
 const apps = JSON.parse(readFileSync(join(root, "registry", "apps.json"), "utf8"));
 const errors = [];
 
@@ -24,6 +26,9 @@ if (!dashboardSource.includes('class="dashboard-sector-filter"')) errors.push("d
 if (!dashboardStyles.includes('.interactive-dashboard:not([data-dashboard-group="western-upper-egypt"]) .dashboard-sector-filter')) errors.push("dashboard sector filter is not restricted to Western Upper Egypt");
 if (!dashboardSource.includes("path.dataset.sector = featureSector") || !dashboardSource.includes("path.dataset.sector = bucket.sector")) errors.push("dashboard map features are not linked to their sectors");
 if (!dashboardSource.includes("isWesternUpperEgypt || serviceLabelPattern.test(item.label) ? serviceColor")) errors.push("Western Upper Egypt change bars do not use one service colour");
+for (const storyFeature of ["arcgis-reference-story", "story-dashboard-view", "data-story-dashboard", "data-story-detail"]) {
+  if (!sectorSource.includes(storyFeature) && !sectorStyles.includes(storyFeature)) errors.push(`Western StoryMap reference layout is missing: ${storyFeature}`);
+}
 if (apps.length !== 94) errors.push(`expected 94 applications, found ${apps.length}`);
 const groupAliases = { dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis", "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road", "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt" };
 const registryGroups = new Set(apps.map((app) => groupAliases[app.reportReferenceGroup] || app.reportReferenceGroup));
