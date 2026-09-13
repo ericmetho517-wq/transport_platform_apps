@@ -4,6 +4,8 @@ import { join } from "node:path";
 const root = process.cwd();
 const source = readFileSync(join(root, "src", "main.ts"), "utf8");
 const styles = readFileSync(join(root, "shared", "platform-identity.css"), "utf8");
+const dashboardSource = readFileSync(join(root, "shared", "interactive-dashboard.ts"), "utf8");
+const dashboardStyles = readFileSync(join(root, "shared", "interactive-dashboard.css"), "utf8");
 const apps = JSON.parse(readFileSync(join(root, "registry", "apps.json"), "utf8"));
 const errors = [];
 
@@ -18,6 +20,8 @@ for (const type of ["type-dashboard", "type-experience", "type-storymap", "type-
 }
 if (!styles.includes("@media (max-width: 760px)")) errors.push("missing responsive mobile layout");
 if (!source.includes('value="${platformLanguage}"') || !source.includes('params.set("uiLang", next)')) errors.push("Arabic/English mode switching is incomplete");
+if (!dashboardSource.includes('class="dashboard-sector-filter"')) errors.push("dashboard sector filter markup is missing");
+if (!dashboardStyles.includes('.interactive-dashboard:not([data-dashboard-group="western-upper-egypt"]) .dashboard-sector-filter')) errors.push("dashboard sector filter is not restricted to Western Upper Egypt");
 if (apps.length !== 94) errors.push(`expected 94 applications, found ${apps.length}`);
 const groupAliases = { dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis", "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road", "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt" };
 const registryGroups = new Set(apps.map((app) => groupAliases[app.reportReferenceGroup] || app.reportReferenceGroup));

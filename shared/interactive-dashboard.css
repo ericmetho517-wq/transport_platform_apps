@@ -13,7 +13,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .dashboard-sector-filter select { min-width:130px; padding:5px 8px; border:1px solid #9fc9e7; border-radius:5px; background:#fff; color:#123b5e; font-weight:800; }
 .dashboard-landuse-filter { display:flex; align-items:center; gap:7px; padding:6px 9px; border:1px solid #42a5f5; border-radius:7px; background:#06375a; color:#fff; font-size:11px; font-weight:800; box-shadow:0 0 0 1px #42a5f522, 0 4px 12px #0004; }
 .dashboard-landuse-filter select { min-width:148px; padding:5px 8px; border:2px solid #8fd3ff; border-radius:6px; background:#fff; color:#123b5e; font-weight:800; }
-.interactive-dashboard[data-dashboard-group="ismailia"] .dashboard-sector-filter { display:none !important; }
+.interactive-dashboard:not([data-dashboard-group="western-upper-egypt"]) .dashboard-sector-filter { display:none !important; }
 .interactive-dashboard .map-sector-filter { display:none !important; }
 .dash-actions button { padding: 8px 11px; border: 1px solid #555; border-radius: 4px; background: #333; color: #fff; cursor: pointer; }
 .dash-actions button:hover { border-color: #ffc126; color: #ffc126; }
