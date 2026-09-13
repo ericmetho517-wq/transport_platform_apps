@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-12T21:30:57.609Z",
-  "applications": 83,
+  "generatedAt": "2026-09-13T07:02:23.042Z",
+  "applications": 94,
   "fidelityCounts": {
-    "sector-and-application-type-reference": 46,
+    "sector-and-application-type-reference": 55,
     "exact-item-reference": 21,
-    "source-reference-unavailable": 16
+    "source-reference-unavailable": 18
   },
   "typeCoverage": {
     "Dashboard": {
@@ -20,12 +20,12 @@
       "withReferences": 9
     },
     "Instant Filter Gallery": {
-      "applications": 4,
-      "withReferences": 4
+      "applications": 10,
+      "withReferences": 9
     },
     "Web AppViewer": {
-      "applications": 5,
-      "withReferences": 5
+      "applications": 10,
+      "withReferences": 9
     }
   },
   "errors": [],
@@ -1466,6 +1466,180 @@
       "type": "StoryMap",
       "language": "ar",
       "sector": "dahshur",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-b0ababe3e4",
+      "title": "تطبيق استعراض منطقة الدراسة - محور الصعيد الغربي",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "western-upper-egypt",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf",
+        "(2).pdf"
+      ],
+      "pages": [
+        59,
+        29
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-ed76e91447",
+      "title": "مركز البيانات والتطبيقات - محور الصعيد الغربي",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "western-upper-egypt",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(1).pdf"
+      ],
+      "pages": [
+        57
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-bdadd1e08c",
+      "title": "تطبيق استعراض منطقة الدراسة - وصلة دهشور الجنوبية",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "dahshur",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        125,
+        123
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-c2d0c7731c",
+      "title": "مركز البيانات والتطبيقات - وصلة دهشور الجنوبية",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "dahshur",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        123
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-43527f0b17",
+      "title": "مركز البيانات والتطبيقات - محور كلابشة",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "kalabsha",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        320
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-2e99d65343",
+      "title": "مركز البيانات والتطبيقات - طريق قنا - الأقصر",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "qena-luxor",
+      "referenceCount": 1,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Final Report 3-2024.pdf"
+      ],
+      "pages": [
+        213
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-c5f2b86d21",
+      "title": "تطبيق استعراض منطقة الدراسة - طريق القاهرة - السويس الصحراوي",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "suez-free",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "(8).pdf"
+      ],
+      "pages": [
+        59,
+        61
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-e951850d9b",
+      "title": "تطبيق استعراض منطقة الدراسة - محور الضبعة",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "dabaa",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Nakl_Dabaa_30Dec2023.pptx"
+      ],
+      "pages": [
+        5,
+        6
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-34ec7f7680",
+      "title": "مركز البيانات والتطبيقات - محور الضبعة",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "dabaa",
+      "referenceCount": 2,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Nakl_Dabaa_30Dec2023.pptx"
+      ],
+      "pages": [
+        5,
+        6
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-30ddd4974b",
+      "title": "تطبيق استعراض منطقة الدراسة - محور القاهرة - الإسماعيلية",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "ismailia",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-1024904d78",
+      "title": "مركز البيانات والتطبيقات - محور القاهرة - الإسماعيلية",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "ismailia",
       "referenceCount": 0,
       "fidelity": "source-reference-unavailable",
       "reports": [],

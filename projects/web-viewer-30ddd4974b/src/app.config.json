@@ -1,0 +1,16 @@
+{
+  "id": "30ddd4974beee0510d112e36c1e7ade5",
+  "slug": "web-viewer-30ddd4974b",
+  "title": "تطبيق استعراض منطقة الدراسة - محور القاهرة - الإسماعيلية",
+  "alternateTitles": [
+    "Study Area Web App Builder - Cairo - Ismailia Axis"
+  ],
+  "category": "تطبيقات محور القاهرة - الإسماعيلية",
+  "type": "Web AppViewer",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-axis-data",
+  "reportReferences": [],
+  "reportReferenceGroup": "ismailia"
+}

@@ -4,7 +4,9 @@ import applicationRegistry from "../registry/apps.json";
 import { localizedAppTitle } from "./app-titles";
 
 const esc = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char] || char);
-const localizedType = (type: TransportApp["type"], language: "ar" | "en") => language === "en" ? type : ({ Dashboard: "لوحة مؤشرات", Experience: "تطبيق تفاعلي", StoryMap: "قصة جغرافية", "Web AppViewer": "عارض خرائط", "Instant Filter Gallery": "معرض تطبيقات" }[type]);
+const localizedType = (type: TransportApp["type"], language: "ar" | "en") => language === "en"
+  ? ({ Dashboard: "Interactive Dashboard", Experience: "Interactive Application", StoryMap: "Story Map", "Web AppViewer": "Web App Builder", "Instant Filter Gallery": "Application Hub" }[type])
+  : ({ Dashboard: "لوحة مؤشرات تفاعلية", Experience: "تطبيق تفاعلي", StoryMap: "قصة مكانية", "Web AppViewer": "تطبيق Web App Builder", "Instant Filter Gallery": "منصة تطبيقات Application Hub" }[type]);
 
 function header(app: TransportApp, compact = false): string {
   return `<header class="sector-header ${compact ? "compact" : ""}"><a href="../../index.html" class="sector-brand"><span>وزارة النقل</span><b>الهيئة العامة لتخطيط مشروعات النقل</b></a><nav><button data-section="overview" class="active">الرئيسية</button><button data-section="map">الخريطة التفاعلية</button><button data-section="indicators">المؤشرات</button><button data-section="evidence">أعمال المشروع</button></nav><div class="sector-title">${esc(app.title)}</div></header>`;

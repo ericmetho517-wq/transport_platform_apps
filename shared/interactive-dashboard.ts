@@ -177,7 +177,7 @@ function dashboardHeader(app: TransportApp, group = ""): string {
     : isAgricultureAndIndustry
       ? `<option value="all">الزراعة والصناعة</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`
       : "";
-  const landuseFilter = isIsmailia && landuseOptions
+  const landuseFilter = landuseOptions
     ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
     : "";
   const sectorFilter = isIsmailia ? "" : `<label class="dashboard-sector-filter"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label>`;
@@ -185,7 +185,7 @@ function dashboardHeader(app: TransportApp, group = ""): string {
 }
 
 function priceMarkup(app: TransportApp, group: string): string {
-  const westernComparison = group === "western-upper-egypt" || group === "cairo-suez-road" || group === "ismailia";
+  const westernComparison = true;
   const isIsmailia = group === "ismailia";
   const priceStartYear = group === "ismailia" ? 2016 : 2014;
   const priceEndYear = group === "ismailia" ? 2026 : 2024;
@@ -193,7 +193,7 @@ function priceMarkup(app: TransportApp, group: string): string {
     ? `<div class="temporal-map-pair price-temporal-map-pair${group === "ismailia" ? " ismailia-temporal-map-pair" : ""}">${mapMarkup("price-baseline", `<span class="map-year-start">${priceStartYear}</span>`, false)}${mapMarkup("price-current", `<span class="map-year-end">${priceEndYear}</span>`, true)}</div>`
     : mapMarkup();
   const trendArea = westernComparison ? "" : `<section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>`;
-  const workspaceSummary = isIsmailia
+  const workspaceSummary = true
     ? `<div class="dashboard-kpis ismailia-map-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article></div>`
     : `<div class="dashboard-kpis"><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article class="gold"><span>سنة القياس</span><strong id="active-year">—</strong></article></div>`;
   return `<main class="interactive-dashboard price-dashboard${westernComparison ? " western-price-dashboard" : ""}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="price">
@@ -357,7 +357,7 @@ export function renderInteractiveDashboard(app: TransportApp): string {
   if (isPriceDashboard(app)) return priceMarkup(app, group);
   if (isUrbanDashboard(app)) return landMarkup(app, group);
   if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
-  if (["regional-ring-road", "dahshur-south-link", "suez-ring-link"].includes(group)) return reportLandMarkup(app, group);
+  if (["regional-ring-road", "dahshur-south-link", "suez-ring-link"].includes(group)) return landMarkup(app, group);
   if (["qena-luxor-road", "qus-axis", "kalabsha-axis"].includes(group)) return southernAgricultureMarkup(app, group);
   return group === "western-upper-egypt" || group === "cairo-suez-road" ? landMarkup(app, group) : agriculturalMarkup(app, group);
 }

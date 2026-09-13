@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-09-12T21:30:53.409Z",
-  "applications": 83,
+  "generatedAt": "2026-09-13T07:02:19.090Z",
+  "applications": 94,
   "counts": {
     "Dashboard": 53,
     "Experience": 10,
     "StoryMap": 11,
-    "Instant Filter Gallery": 4,
-    "Web AppViewer": 5
+    "Instant Filter Gallery": 10,
+    "Web AppViewer": 10
   },
   "sectors": {
-    "western-upper-egypt": 9,
-    "dahshur": 10,
+    "western-upper-egypt": 11,
+    "dahshur": 12,
     "regional-ring": 13,
-    "kalabsha": 7,
-    "qena-luxor": 7,
+    "kalabsha": 8,
+    "qena-luxor": 8,
     "suez-link": 10,
-    "suez-free": 13,
+    "suez-free": 14,
     "qus": 6,
-    "dabaa": 4,
-    "ismailia": 4
+    "dabaa": 6,
+    "ismailia": 6
   },
   "checks": {
-    "projectEntrypoints": 83,
+    "projectEntrypoints": 94,
     "sectorSummaries": 10,
     "reportProfiles": 10,
     "crossSectorReferences": 0
@@ -43,7 +43,9 @@
     "dashboard-ismailia-prices: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ismailia-agriculture: no embedded report screenshot; runtime remains data-driven",
     "storymap-ismailia: no embedded report screenshot; runtime remains data-driven",
-    "storymap-dahshur: no embedded report screenshot; runtime remains data-driven"
+    "storymap-dahshur: no embedded report screenshot; runtime remains data-driven",
+    "web-viewer-30ddd4974b: no embedded report screenshot; runtime remains data-driven",
+    "instant-filter-gallery-1024904d78: no embedded report screenshot; runtime remains data-driven"
   ],
   "result": "PASSED"
 }

@@ -1,0 +1,49 @@
+{
+  "id": "c5f2b86d216da8da6d5eb0e29fa5eac7",
+  "slug": "web-viewer-c5f2b86d21",
+  "title": "تطبيق استعراض منطقة الدراسة - طريق القاهرة - السويس الصحراوي",
+  "alternateTitles": [
+    "Study Area Web App Builder - Cairo - Suez Desert Road"
+  ],
+  "category": "تطبيقات طريق القاهرة - السويس الصحراوي",
+  "type": "Web AppViewer",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-axis-data",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/2dae1661499bb942.jpg",
+      "reportName": "(8).pdf",
+      "page": 59,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/686d8234e853421da6c7426cde8d",
+        "https://www.arcgis.com/apps/dashboards/686d8234e853421da6c7426cde8d6017"
+      ],
+      "sourceItemIds": [
+        "686d8234e853421da6c7426cde8d6017"
+      ],
+      "projectGroup": "suez-free",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 54 شكل63 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير استخدامات الأراضي https://www.arcgis.com/apps/dashboards/686d8234e853421da6c7426cde8d 6017",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/6cf4f210e15beb18.jpg",
+      "reportName": "(8).pdf",
+      "page": 61,
+      "sourceUrls": [
+        "https://storymaps.arcgis.com/stories/",
+        "https://storymaps.arcgis.com/stories/739c03527e86469fad61572dfd9592e1"
+      ],
+      "sourceItemIds": [
+        "739c03527e86469fad61572dfd9592e1"
+      ],
+      "projectGroup": "suez-free",
+      "referenceKind": "story",
+      "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 56 شكل65 )محتوى مكاني لتصفح أعمال ومرفقات المشروع Story Map 1e9592dfd61572fad86469e03527c739https://storymaps.arcgis.com/stories/ شكل66 )محتوى مكاني لتصفح أعمال ومرفقات المشروع Story Map",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "suez-free"
+}

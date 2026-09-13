@@ -10,7 +10,7 @@ const aliases = {
   "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road",
   "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
 };
-const expectedCounts = { Dashboard: 53, Experience: 10, StoryMap: 11, "Web AppViewer": 5, "Instant Filter Gallery": 4 };
+const expectedCounts = { Dashboard: 53, Experience: 10, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
 const errors = [];
 const warnings = [];
 const counts = {};
@@ -39,6 +39,11 @@ for (const [type, expected] of Object.entries(expectedCounts)) {
 }
 for (const group of Object.values(aliases)) {
   if (!profiles[group]) errors.push(`${group}: missing authoritative report profile`);
+}
+for (const sector of Object.keys(aliases)) {
+  for (const type of ["Dashboard", "StoryMap", "Web AppViewer", "Instant Filter Gallery"]) {
+    if (!apps.some((app) => app.reportReferenceGroup === sector && app.type === type)) errors.push(`${sector}: missing required ${type} application`);
+  }
 }
 
 const suezFree = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "cairo-suez-road", "summary.json"), "utf8"));

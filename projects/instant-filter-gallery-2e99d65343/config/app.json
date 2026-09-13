@@ -1,0 +1,32 @@
+{
+  "id": "2e99d65343bfaf5764023e19d523bbca",
+  "slug": "instant-filter-gallery-2e99d65343",
+  "title": "مركز البيانات والتطبيقات - طريق قنا - الأقصر",
+  "alternateTitles": [
+    "Data and Application Hub - Qena - Luxor Road"
+  ],
+  "category": "تطبيقات طريق قنا - الأقصر",
+  "type": "Instant Filter Gallery",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-axis-data",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/7a01b257aeb6e1e9.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 213,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=6d5e9f5f3985464197b7a06bfdb947b0"
+      ],
+      "sourceItemIds": [
+        "6d5e9f5f3985464197b7a06bfdb947b0"
+      ],
+      "projectGroup": "qena-luxor",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 211 6 – التطبيقات المكانية لمنطقة الدراسة ٦ - 1 المنصة الرقمية للتطبيقات المكانيةData & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيلية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة (Data Hub) تسم",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "qena-luxor"
+}

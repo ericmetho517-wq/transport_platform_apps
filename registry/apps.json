@@ -4941,12 +4941,14 @@
       }
     ],
     "reportReferenceGroup": "dabaa"
-  }
-  ,{
+  },
+  {
     "id": "ismailia-urban-2026-dashboard",
     "slug": "dashboard-ismailia-urban",
     "title": "لوحة مؤشرات الأراضي العمرانية – الإسماعيلية",
-    "alternateTitles": ["Urban Land Indicators Dashboard – Ismailia"],
+    "alternateTitles": [
+      "Urban Land Indicators Dashboard – Ismailia"
+    ],
     "category": "تطبيقات محور القاهرة–الإسماعيلية",
     "type": "Dashboard",
     "language": "ar",
@@ -4959,7 +4961,9 @@
     "id": "ismailia-prices-2026-dashboard",
     "slug": "dashboard-ismailia-prices",
     "title": "لوحة مؤشرات أسعار الأراضي – الإسماعيلية",
-    "alternateTitles": ["Land Price Indicators Dashboard – Ismailia"],
+    "alternateTitles": [
+      "Land Price Indicators Dashboard – Ismailia"
+    ],
     "category": "تطبيقات محور القاهرة–الإسماعيلية",
     "type": "Dashboard",
     "language": "ar",
@@ -4972,7 +4976,9 @@
     "id": "ismailia-agriculture-2026-dashboard",
     "slug": "dashboard-ismailia-agriculture",
     "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – الإسماعيلية",
-    "alternateTitles": ["Agricultural and Industrial Land Indicators Dashboard – Ismailia"],
+    "alternateTitles": [
+      "Agricultural and Industrial Land Indicators Dashboard – Ismailia"
+    ],
     "category": "تطبيقات محور القاهرة–الإسماعيلية",
     "type": "Dashboard",
     "language": "ar",
@@ -4985,7 +4991,9 @@
     "id": "ismailia-storymap-2026",
     "slug": "storymap-ismailia",
     "title": "القصة المكانية التفاعلية – محور القاهرة–الإسماعيلية",
-    "alternateTitles": ["Spatial StoryMap – Cairo–Ismailia Axis"],
+    "alternateTitles": [
+      "Spatial StoryMap – Cairo–Ismailia Axis"
+    ],
     "category": "تطبيقات محور القاهرة–الإسماعيلية",
     "type": "StoryMap",
     "language": "ar",
@@ -4998,7 +5006,9 @@
     "id": "dahshur-storymap-2026",
     "slug": "storymap-dahshur",
     "title": "القصة المكانية التفاعلية – وصلة دهشور الجنوبية",
-    "alternateTitles": ["Interactive Geographic Story – Dahshur South Link"],
+    "alternateTitles": [
+      "Interactive Geographic Story – Dahshur South Link"
+    ],
     "category": "تطبيقات وصلة دهشور الجنوبية",
     "type": "StoryMap",
     "language": "ar",
@@ -5006,5 +5016,389 @@
     "sourceUrl": "",
     "status": "generated-from-registry",
     "reportReferenceGroup": "dahshur"
+  },
+  {
+    "id": "b0ababe3e44e1165bfa11e1ca324118e",
+    "slug": "web-viewer-b0ababe3e4",
+    "title": "تطبيق استعراض منطقة الدراسة - محور الصعيد الغربي",
+    "alternateTitles": [
+      "Study Area Web App Builder - Western Upper Egypt Axis"
+    ],
+    "category": "تطبيقات محور الصعيد الغربي",
+    "type": "Web AppViewer",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/6a326fdbbf52afe9.png",
+        "reportName": "(1).pdf",
+        "page": 59,
+        "sourceUrls": [
+          "https://www.arcgis.com/apps/dashboards/",
+          "https://www.arcgis.com/apps/dashboards/6689e1843a4042759de24cce7623dfc3"
+        ],
+        "sourceItemIds": [
+          "6689e1843a4042759de24cce7623dfc3"
+        ],
+        "projectGroup": "western-upper-egypt",
+        "referenceKind": "landuse-dashboard",
+        "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 54 شكل63 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير استخدامات الأراضي 3dfc7623cce24de4042759a1843e6689https://www.arcgis.com/apps/dashboards/",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/572e75f69d733b60.png",
+        "reportName": "(2).pdf",
+        "page": 29,
+        "sourceUrls": [
+          "https://www.arcgis.com/apps/dashboards/",
+          "https://www.arcgis.com/apps/dashboards/6689e1843a4042759de24cce7623dfc3"
+        ],
+        "sourceItemIds": [
+          "6689e1843a4042759de24cce7623dfc3"
+        ],
+        "projectGroup": "western-upper-egypt",
+        "referenceKind": "landuse-dashboard",
+        "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 24 شكل16 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير استخدامات الأراضي 3dfc7623cce24de4042759a1843e6689https://www.arcgis.com/apps/dashboards/",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "western-upper-egypt"
+  },
+  {
+    "id": "ed76e914472804d76b4cad5b80c3dfd3",
+    "slug": "instant-filter-gallery-ed76e91447",
+    "title": "مركز البيانات والتطبيقات - محور الصعيد الغربي",
+    "alternateTitles": [
+      "Data and Application Hub - Western Upper Egypt Axis"
+    ],
+    "category": "تطبيقات محور الصعيد الغربي",
+    "type": "Instant Filter Gallery",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/b454e4ffa315bcc9.jpg",
+        "reportName": "(1).pdf",
+        "page": 57,
+        "sourceUrls": [
+          "https://transport",
+          "https://transport2.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=11907816e07a4f2e86161a1cd091a1db"
+        ],
+        "sourceItemIds": [
+          "11907816e07a4f2e86161a1cd091a1db"
+        ],
+        "projectGroup": "western-upper-egypt",
+        "referenceKind": "gallery",
+        "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 52 5- التطبيقات المكانية لمنطقةالدراسة: تم تصميم وبناء مجموعة من التطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج استقصاء إلكترونية – خرائط رقمية لاستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية -...) وتتضمن مخرجات الدراسة بالكامل سواء (دراسة ميدانية – دراسات إحصائية واقتصادية -..) لتداولها واستعراض بياناتها بشكل تفاعلي يخدم",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "western-upper-egypt"
+  },
+  {
+    "id": "bdadd1e08c095bc44ff74c5fa68613b3",
+    "slug": "web-viewer-bdadd1e08c",
+    "title": "تطبيق استعراض منطقة الدراسة - وصلة دهشور الجنوبية",
+    "alternateTitles": [
+      "Study Area Web App Builder - Dahshur South Link"
+    ],
+    "category": "تطبيقات وصلة دهشور الجنوبية",
+    "type": "Web AppViewer",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/d998f64dfde05122.jpg",
+        "reportName": "Final Report 3-2024.pdf",
+        "page": 125,
+        "sourceUrls": [
+          "https://www.arcgis.com/apps/dashboards/1cb1e42f43b04b67ba5923e3fa2996ba"
+        ],
+        "sourceItemIds": [
+          "1cb1e42f43b04b67ba5923e3fa2996ba"
+        ],
+        "projectGroup": "dahshur",
+        "referenceKind": "landuse-dashboard",
+        "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 123 6 - 3 مؤشرات أداء تفاعليةInteractive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي (العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرونة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ويتضح ذلك بالشكل رقم ( 124). شكل124) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الأراضي https:",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/a3ec223fb286f6c7.jpg",
+        "reportName": "Final Report 3-2024.pdf",
+        "page": 123,
+        "sourceUrls": [
+          "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=7581db2e6af8483391028b714f76c0c0"
+        ],
+        "sourceItemIds": [
+          "7581db2e6af8483391028b714f76c0c0"
+        ],
+        "projectGroup": "dahshur",
+        "referenceKind": "gallery",
+        "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 121 6 – التطبيقات المكانية لمنطقةالدراسة: 6 - 1 المنصة الرقميةللتطبيقات المكانية (Data & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية -...) وتم رفع هذه البيانات على منصة رقمية متكاملة ( Data Hub) تس",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "dahshur"
+  },
+  {
+    "id": "c2d0c7731cf67dbea49aea723282ee14",
+    "slug": "instant-filter-gallery-c2d0c7731c",
+    "title": "مركز البيانات والتطبيقات - وصلة دهشور الجنوبية",
+    "alternateTitles": [
+      "Data and Application Hub - Dahshur South Link"
+    ],
+    "category": "تطبيقات وصلة دهشور الجنوبية",
+    "type": "Instant Filter Gallery",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/a3ec223fb286f6c7.jpg",
+        "reportName": "Final Report 3-2024.pdf",
+        "page": 123,
+        "sourceUrls": [
+          "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=7581db2e6af8483391028b714f76c0c0"
+        ],
+        "sourceItemIds": [
+          "7581db2e6af8483391028b714f76c0c0"
+        ],
+        "projectGroup": "dahshur",
+        "referenceKind": "gallery",
+        "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 121 6 – التطبيقات المكانية لمنطقةالدراسة: 6 - 1 المنصة الرقميةللتطبيقات المكانية (Data & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية -...) وتم رفع هذه البيانات على منصة رقمية متكاملة ( Data Hub) تس",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "dahshur"
+  },
+  {
+    "id": "43527f0b1720e58f7bac99abc66aaca5",
+    "slug": "instant-filter-gallery-43527f0b17",
+    "title": "مركز البيانات والتطبيقات - محور كلابشة",
+    "alternateTitles": [
+      "Data and Application Hub - Kalabsha Axis"
+    ],
+    "category": "تطبيقات محور كلابشة",
+    "type": "Instant Filter Gallery",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/53f4b53ffca20bbb.jpg",
+        "reportName": "Final Report 3-2024.pdf",
+        "page": 320,
+        "sourceUrls": [
+          "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=f07b900e648349b5b71fb1655615dcf9"
+        ],
+        "sourceItemIds": [
+          "f07b900e648349b5b71fb1655615dcf9"
+        ],
+        "projectGroup": "kalabsha",
+        "referenceKind": "gallery",
+        "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 8 6 – التطبيقات المكانية لمنطقة الدراسة 6 - 1 المنصة الرقمية للتطبيقاتالمكانية (Data & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة (Data Hub) تسمح",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "kalabsha"
+  },
+  {
+    "id": "2e99d65343bfaf5764023e19d523bbca",
+    "slug": "instant-filter-gallery-2e99d65343",
+    "title": "مركز البيانات والتطبيقات - طريق قنا - الأقصر",
+    "alternateTitles": [
+      "Data and Application Hub - Qena - Luxor Road"
+    ],
+    "category": "تطبيقات طريق قنا - الأقصر",
+    "type": "Instant Filter Gallery",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/7a01b257aeb6e1e9.jpg",
+        "reportName": "Final Report 3-2024.pdf",
+        "page": 213,
+        "sourceUrls": [
+          "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=6d5e9f5f3985464197b7a06bfdb947b0"
+        ],
+        "sourceItemIds": [
+          "6d5e9f5f3985464197b7a06bfdb947b0"
+        ],
+        "projectGroup": "qena-luxor",
+        "referenceKind": "gallery",
+        "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 211 6 – التطبيقات المكانية لمنطقة الدراسة ٦ - 1 المنصة الرقمية للتطبيقات المكانيةData & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيلية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة (Data Hub) تسم",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "qena-luxor"
+  },
+  {
+    "id": "c5f2b86d216da8da6d5eb0e29fa5eac7",
+    "slug": "web-viewer-c5f2b86d21",
+    "title": "تطبيق استعراض منطقة الدراسة - طريق القاهرة - السويس الصحراوي",
+    "alternateTitles": [
+      "Study Area Web App Builder - Cairo - Suez Desert Road"
+    ],
+    "category": "تطبيقات طريق القاهرة - السويس الصحراوي",
+    "type": "Web AppViewer",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/2dae1661499bb942.jpg",
+        "reportName": "(8).pdf",
+        "page": 59,
+        "sourceUrls": [
+          "https://www.arcgis.com/apps/dashboards/686d8234e853421da6c7426cde8d",
+          "https://www.arcgis.com/apps/dashboards/686d8234e853421da6c7426cde8d6017"
+        ],
+        "sourceItemIds": [
+          "686d8234e853421da6c7426cde8d6017"
+        ],
+        "projectGroup": "suez-free",
+        "referenceKind": "landuse-dashboard",
+        "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 54 شكل63 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير استخدامات الأراضي https://www.arcgis.com/apps/dashboards/686d8234e853421da6c7426cde8d 6017",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/6cf4f210e15beb18.jpg",
+        "reportName": "(8).pdf",
+        "page": 61,
+        "sourceUrls": [
+          "https://storymaps.arcgis.com/stories/",
+          "https://storymaps.arcgis.com/stories/739c03527e86469fad61572dfd9592e1"
+        ],
+        "sourceItemIds": [
+          "739c03527e86469fad61572dfd9592e1"
+        ],
+        "projectGroup": "suez-free",
+        "referenceKind": "story",
+        "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 56 شكل65 )محتوى مكاني لتصفح أعمال ومرفقات المشروع Story Map 1e9592dfd61572fad86469e03527c739https://storymaps.arcgis.com/stories/ شكل66 )محتوى مكاني لتصفح أعمال ومرفقات المشروع Story Map",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "suez-free"
+  },
+  {
+    "id": "e951850d9b07589902ef6a19ec82b232",
+    "slug": "web-viewer-e951850d9b",
+    "title": "تطبيق استعراض منطقة الدراسة - محور الضبعة",
+    "alternateTitles": [
+      "Study Area Web App Builder - El Dabaa Axis"
+    ],
+    "category": "تطبيقات محور الضبعة",
+    "type": "Web AppViewer",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/dabaa/landuse-2014.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 5,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-map",
+        "caption": "خريطة استخدامات الأراضي لعام 2014.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/landuse-2023.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 6,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-map",
+        "caption": "خريطة استخدامات الأراضي لعام 2023.",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "dabaa"
+  },
+  {
+    "id": "34ec7f76809994c138064e94bb51f3e7",
+    "slug": "instant-filter-gallery-34ec7f7680",
+    "title": "مركز البيانات والتطبيقات - محور الضبعة",
+    "alternateTitles": [
+      "Data and Application Hub - El Dabaa Axis"
+    ],
+    "category": "تطبيقات محور الضبعة",
+    "type": "Instant Filter Gallery",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [
+      {
+        "imagePath": "../../references/dabaa/landuse-2014.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 5,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-map",
+        "caption": "خريطة استخدامات الأراضي لعام 2014.",
+        "matchType": "project-and-application-type"
+      },
+      {
+        "imagePath": "../../references/dabaa/landuse-2023.png",
+        "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+        "page": 6,
+        "sourceUrls": [],
+        "sourceItemIds": [],
+        "projectGroup": "dabaa",
+        "referenceKind": "story-map",
+        "caption": "خريطة استخدامات الأراضي لعام 2023.",
+        "matchType": "project-and-application-type"
+      }
+    ],
+    "reportReferenceGroup": "dabaa"
+  },
+  {
+    "id": "30ddd4974beee0510d112e36c1e7ade5",
+    "slug": "web-viewer-30ddd4974b",
+    "title": "تطبيق استعراض منطقة الدراسة - محور القاهرة - الإسماعيلية",
+    "alternateTitles": [
+      "Study Area Web App Builder - Cairo - Ismailia Axis"
+    ],
+    "category": "تطبيقات محور القاهرة - الإسماعيلية",
+    "type": "Web AppViewer",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [],
+    "reportReferenceGroup": "ismailia"
+  },
+  {
+    "id": "1024904d78ebf21096faa6fbeaa83cfd",
+    "slug": "instant-filter-gallery-1024904d78",
+    "title": "مركز البيانات والتطبيقات - محور القاهرة - الإسماعيلية",
+    "alternateTitles": [
+      "Data and Application Hub - Cairo - Ismailia Axis"
+    ],
+    "category": "تطبيقات محور القاهرة - الإسماعيلية",
+    "type": "Instant Filter Gallery",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-axis-data",
+    "reportReferences": [],
+    "reportReferenceGroup": "ismailia"
   }
 ]

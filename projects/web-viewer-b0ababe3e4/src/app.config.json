@@ -1,0 +1,49 @@
+{
+  "id": "b0ababe3e44e1165bfa11e1ca324118e",
+  "slug": "web-viewer-b0ababe3e4",
+  "title": "تطبيق استعراض منطقة الدراسة - محور الصعيد الغربي",
+  "alternateTitles": [
+    "Study Area Web App Builder - Western Upper Egypt Axis"
+  ],
+  "category": "تطبيقات محور الصعيد الغربي",
+  "type": "Web AppViewer",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-axis-data",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/6a326fdbbf52afe9.png",
+      "reportName": "(1).pdf",
+      "page": 59,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/6689e1843a4042759de24cce7623dfc3"
+      ],
+      "sourceItemIds": [
+        "6689e1843a4042759de24cce7623dfc3"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 54 شكل63 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير استخدامات الأراضي 3dfc7623cce24de4042759a1843e6689https://www.arcgis.com/apps/dashboards/",
+      "matchType": "project-and-application-type"
+    },
+    {
+      "imagePath": "../../references/572e75f69d733b60.png",
+      "reportName": "(2).pdf",
+      "page": 29,
+      "sourceUrls": [
+        "https://www.arcgis.com/apps/dashboards/",
+        "https://www.arcgis.com/apps/dashboards/6689e1843a4042759de24cce7623dfc3"
+      ],
+      "sourceItemIds": [
+        "6689e1843a4042759de24cce7623dfc3"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "landuse-dashboard",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 24 شكل16 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير استخدامات الأراضي 3dfc7623cce24de4042759a1843e6689https://www.arcgis.com/apps/dashboards/",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "western-upper-egypt"
+}

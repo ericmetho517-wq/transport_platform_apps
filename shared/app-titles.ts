@@ -55,6 +55,18 @@ export function localizedAppTitle(app: TransportApp, language: "ar" | "en"): str
 }
 
 export function localizedAppCategory(app: TransportApp, language: "ar" | "en"): string {
+  const englishCategories: Record<string, string> = {
+    "western-upper-egypt": "Western Upper Egypt Axis applications",
+    dahshur: "Dahshur South Link applications",
+    "regional-ring": "Eastern Regional Ring Road and Robeki Railway applications",
+    kalabsha: "Kalabsha Axis applications",
+    "qena-luxor": "Qena - Luxor Road applications",
+    "suez-link": "Suez Ring Road Link applications",
+    "suez-free": "Cairo - Suez Desert Road applications",
+    qus: "Qus Axis applications",
+    dabaa: "El Dabaa Axis applications",
+    ismailia: "Cairo - Ismailia Axis applications",
+  };
   if (language === "ar") return /[A-Za-z]/.test(app.category) ? "تطبيقات محور الضبعة" : app.category;
-  return app.reportReferenceGroup === "dabaa" ? "El Dabaa Axis applications" : app.category;
+  return englishCategories[app.reportReferenceGroup || ""] || "Ministry of Transport applications";
 }

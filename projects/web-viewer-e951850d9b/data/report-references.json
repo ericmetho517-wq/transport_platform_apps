@@ -1,0 +1,24 @@
+[
+  {
+    "imagePath": "../../references/dabaa/landuse-2014.png",
+    "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+    "page": 5,
+    "sourceUrls": [],
+    "sourceItemIds": [],
+    "projectGroup": "dabaa",
+    "referenceKind": "story-map",
+    "caption": "خريطة استخدامات الأراضي لعام 2014.",
+    "matchType": "project-and-application-type"
+  },
+  {
+    "imagePath": "../../references/dabaa/landuse-2023.png",
+    "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+    "page": 6,
+    "sourceUrls": [],
+    "sourceItemIds": [],
+    "projectGroup": "dabaa",
+    "referenceKind": "story-map",
+    "caption": "خريطة استخدامات الأراضي لعام 2023.",
+    "matchType": "project-and-application-type"
+  }
+]

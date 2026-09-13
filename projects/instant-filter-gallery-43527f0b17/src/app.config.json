@@ -1,0 +1,32 @@
+{
+  "id": "43527f0b1720e58f7bac99abc66aaca5",
+  "slug": "instant-filter-gallery-43527f0b17",
+  "title": "مركز البيانات والتطبيقات - محور كلابشة",
+  "alternateTitles": [
+    "Data and Application Hub - Kalabsha Axis"
+  ],
+  "category": "تطبيقات محور كلابشة",
+  "type": "Instant Filter Gallery",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-axis-data",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/53f4b53ffca20bbb.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 320,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=f07b900e648349b5b71fb1655615dcf9"
+      ],
+      "sourceItemIds": [
+        "f07b900e648349b5b71fb1655615dcf9"
+      ],
+      "projectGroup": "kalabsha",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 8 6 – التطبيقات المكانية لمنطقة الدراسة 6 - 1 المنصة الرقمية للتطبيقاتالمكانية (Data & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية - ...) وتم رفع هذه البيانات على منصة رقمية متكاملة (Data Hub) تسمح",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "kalabsha"
+}

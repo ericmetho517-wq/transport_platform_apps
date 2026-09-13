@@ -1,0 +1,33 @@
+{
+  "id": "ed76e914472804d76b4cad5b80c3dfd3",
+  "slug": "instant-filter-gallery-ed76e91447",
+  "title": "مركز البيانات والتطبيقات - محور الصعيد الغربي",
+  "alternateTitles": [
+    "Data and Application Hub - Western Upper Egypt Axis"
+  ],
+  "category": "تطبيقات محور الصعيد الغربي",
+  "type": "Instant Filter Gallery",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-axis-data",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/b454e4ffa315bcc9.jpg",
+      "reportName": "(1).pdf",
+      "page": 57,
+      "sourceUrls": [
+        "https://transport",
+        "https://transport2.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=11907816e07a4f2e86161a1cd091a1db"
+      ],
+      "sourceItemIds": [
+        "11907816e07a4f2e86161a1cd091a1db"
+      ],
+      "projectGroup": "western-upper-egypt",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 52 5- التطبيقات المكانية لمنطقةالدراسة: تم تصميم وبناء مجموعة من التطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج استقصاء إلكترونية – خرائط رقمية لاستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية -...) وتتضمن مخرجات الدراسة بالكامل سواء (دراسة ميدانية – دراسات إحصائية واقتصادية -..) لتداولها واستعراض بياناتها بشكل تفاعلي يخدم",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "western-upper-egypt"
+}

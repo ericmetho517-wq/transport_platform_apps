@@ -1,0 +1,32 @@
+{
+  "id": "c2d0c7731cf67dbea49aea723282ee14",
+  "slug": "instant-filter-gallery-c2d0c7731c",
+  "title": "مركز البيانات والتطبيقات - وصلة دهشور الجنوبية",
+  "alternateTitles": [
+    "Data and Application Hub - Dahshur South Link"
+  ],
+  "category": "تطبيقات وصلة دهشور الجنوبية",
+  "type": "Instant Filter Gallery",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-axis-data",
+  "reportReferences": [
+    {
+      "imagePath": "../../references/a3ec223fb286f6c7.jpg",
+      "reportName": "Final Report 3-2024.pdf",
+      "page": 123,
+      "sourceUrls": [
+        "https://transport-p-a.maps.arcgis.com/apps/instant/filtergallery/index.html?appid=7581db2e6af8483391028b714f76c0c0"
+      ],
+      "sourceItemIds": [
+        "7581db2e6af8483391028b714f76c0c0"
+      ],
+      "projectGroup": "dahshur",
+      "referenceKind": "gallery",
+      "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 121 6 – التطبيقات المكانية لمنطقةالدراسة: 6 - 1 المنصة الرقميةللتطبيقات المكانية (Data & Application Hub) : تم تصميم وبناء مجموعة منالتطبيقات المكانية تضم كافة البيانات بأشكالها المختلفة (صور أقمار صناعية – صور فوتوغرافية للمحور – نماذج إستبيان إلكترونية – خرائط رقمية لإستخدامات الأراضي – صور توثيقية فوتوغرافية لأعمال الدراسة الميدانية – فقرات كتابية توضيحية -...) وتم رفع هذه البيانات على منصة رقمية متكاملة ( Data Hub) تس",
+      "matchType": "project-and-application-type"
+    }
+  ],
+  "reportReferenceGroup": "dahshur"
+}

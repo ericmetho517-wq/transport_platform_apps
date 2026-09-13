@@ -23,15 +23,15 @@ const typeLabels: Record<string, string> = {
   Dashboard: "لوحات المؤشرات التنفيذية",
   Experience: "التطبيقات التفاعلية",
   StoryMap: "القصص الجغرافية",
-  "Web AppViewer": "تطبيقات استعراض الخرائط",
-  "Instant Filter Gallery": "كتالوج التطبيقات",
+  "Web AppViewer": "تطبيقات Web App Builder",
+  "Instant Filter Gallery": "منصات التطبيقات Application Hub",
 };
 const englishTypeLabels: Record<string, string> = {
   Dashboard: "Operational Indicator Dashboards",
   Experience: "Interactive Applications",
   StoryMap: "Geographic Stories",
-  "Web AppViewer": "Map Viewer Applications",
-  "Instant Filter Gallery": "Application Catalog",
+  "Web AppViewer": "Web App Builder",
+  "Instant Filter Gallery": "Application Hub",
 };
 
 const typeClass: Record<string, string> = {
@@ -53,11 +53,15 @@ const typeIcon: Record<string, string> = {
 const platformParams = new URLSearchParams(window.location.search);
 const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "en" : "ar";
 const displayTypeLabels = platformLanguage === "en" ? englishTypeLabels : typeLabels;
-// Arabic records are the complete, canonical catalogue. English mode opens the
-// same applications with `lang=en`, preventing a second translated copy of the
-// same application from appearing beside it.
-const arabicGroups = new Set(registry.filter((app) => app.language === "ar").map((app) => app.reportReferenceGroup));
-const modeRegistry = registry.filter((app) => app.language === "ar" || !arabicGroups.has(app.reportReferenceGroup));
+// Prefer the Arabic record when the registry contains the same localized app
+// twice, but retain genuinely English-only applications in that axis.
+const normalizedTitle = (value: string) => value.toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g, " ").trim();
+const arabicRegistry = registry.filter((app) => app.language === "ar");
+const modeRegistry = registry.filter((app) => app.language === "ar" || !arabicRegistry.some((candidate) =>
+  candidate.reportReferenceGroup === app.reportReferenceGroup
+  && candidate.type === app.type
+  && normalizedTitle(localizedAppTitle(candidate, "en")) === normalizedTitle(localizedAppTitle(app, "en")),
+));
 const modeCounts = new Map<string, number>();
 modeRegistry.forEach((app) => modeCounts.set(app.type, (modeCounts.get(app.type) || 0) + 1));
 const totalApplications = modeRegistry.length;
@@ -103,8 +107,8 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
         <article><strong>${countOf("Dashboard")}</strong><span>${platformLanguage === "en" ? "Indicator dashboards" : "لوحات المؤشرات"}</span></article>
         <article><strong>${countOf("Experience")}</strong><span>${platformLanguage === "en" ? "Interactive applications" : "التطبيقات التفاعلية"}</span></article>
         <article><strong>${countOf("StoryMap")}</strong><span>${platformLanguage === "en" ? "Geographic stories" : "القصص الجغرافية"}</span></article>
-        <article><strong>${countOf("Web AppViewer")}</strong><span>${platformLanguage === "en" ? "Map viewers" : "عارضات الخرائط"}</span></article>
-        <article><strong>${countOf("Instant Filter Gallery")}</strong><span>${platformLanguage === "en" ? "Application galleries" : "معارض التطبيقات"}</span></article>
+        <article><strong>${countOf("Web AppViewer")}</strong><span>${platformLanguage === "en" ? "Web App Builder" : "تطبيقات Web App Builder"}</span></article>
+        <article><strong>${countOf("Instant Filter Gallery")}</strong><span>${platformLanguage === "en" ? "Application Hubs" : "منصات التطبيقات Application Hub"}</span></article>
       </div>
       <div class="catalog-toolbar"><div class="quick-filters" aria-label="${t("تصفية سريعة", "Quick filters")}"><button class="active" data-quick-type="all">${t("جميع التطبيقات", "All Applications")}</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${displayTypeLabels[type] || type}</button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">${t("إعادة ضبط الفلاتر", "Reset filters")}</button></div>
       <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>${t("اختر تطبيقًا لعرض تفاصيله وتشغيله", "Choose an application to view its details and open it")}</span></div>
