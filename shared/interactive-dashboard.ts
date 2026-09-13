@@ -968,7 +968,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     groupElement.dataset.layerGroup = layer;
     groupElement.classList.add(`map-${layer}`);
     const aggregateLandcover = ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer) && (mapInstance.includes("baseline") || mapInstance.includes("current"));
-    const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string; status: string; geometry: string; features: Array<{ geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }> }>();
+    const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string; status: string; sector: string; geometry: string; features: Array<{ geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }> }>();
     for (const [featureIndex, feature] of collection.features.entries()) {
       // Yield between batches so a large layer cannot block scrolling/input.
       if (featureIndex > 0 && featureIndex % (aggregateLandcover ? 900 : 180) === 0) await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
@@ -997,6 +997,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         : rawStatusVal === "2" || rawStatusVal === "unchanged" || /ثابت|لم|بدون/i.test(rawStatusVal) ? "unchanged"
         : "unknown";
       path.dataset.changeStatus = exactStatus;
+      const featureSector = sectorOf(feature.properties);
+      if (featureSector) {
+        sectorValues.add(featureSector);
+        path.dataset.sector = featureSector;
+      }
       path.setAttribute("vector-effect", "non-scaling-stroke");
       if (layer === "landcover-start" || layer === "landcover-end") {
         const rawValue = feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.landuse_label
@@ -1028,8 +1033,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       }
       const code = path.dataset.landuseCode || layer;
       const status = path.dataset.changeStatus || "unknown";
-      const key = `${code}_${status}_${feature.geometry.type}`;
-      const bucket = landcoverBuckets.get(key) || { paths: [], fill: path.style.fill, stroke: path.style.stroke, strokeWidth: path.style.strokeWidth, code, status, geometry: feature.geometry.type, features: [] };
+      const key = `${code}_${status}_${featureSector}_${feature.geometry.type}`;
+      const bucket = landcoverBuckets.get(key) || { paths: [], fill: path.style.fill, stroke: path.style.stroke, strokeWidth: path.style.strokeWidth, code, status, sector: featureSector, geometry: feature.geometry.type, features: [] };
       bucket.paths.push(pathData);
       bucket.features.push(feature);
       landcoverBuckets.set(key, bucket);
@@ -1050,6 +1055,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.dataset.geometry = bucketIsLine ? "MultiLineString" : bucketIsPoint ? "MultiPoint" : "MultiPolygon";
         if (layer === "landcover-start" || layer === "landcover-end") path.dataset.landuseCode = bucket.code;
         path.dataset.changeStatus = bucket.status;
+        if (bucket.sector) path.dataset.sector = bucket.sector;
         path.style.fill = bucket.fill;
         path.style.stroke = bucketIsLine || bucketIsPoint ? bucket.stroke : "rgba(255,255,255,0.45)";
         path.style.strokeWidth = bucketIsLine || bucketIsPoint ? bucket.strokeWidth : "0.75";
@@ -1708,7 +1714,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       dashboardSectorFilter.innerHTML = sourceSectorSelect.innerHTML;
       dashboardSectorFilter.addEventListener("change", () => mapRoots.forEach((map) => { const select = map.querySelector<HTMLSelectElement>(".map-sector-select"); if (select && select.value !== dashboardSectorFilter.value) { select.value = dashboardSectorFilter.value; select.dispatchEvent(new Event("change")); } }));
       mapRoots.forEach((map) => map.addEventListener("change", (event) => { if ((event.target as HTMLElement).matches?.(".map-sector-select") && dashboardSectorFilter.value !== (event.target as HTMLSelectElement).value) dashboardSectorFilter.value = (event.target as HTMLSelectElement).value; }));
-    } else if (dashboardSectorFilter) dashboardSectorFilter.closest("label")?.setAttribute("hidden", "true");
+    }
     const dashboardChangeFilter = document.querySelector<HTMLSelectElement>("#dashboard-change-filter");
     if (dashboardChangeFilter) {
       const syncChangeStatus = () => {
