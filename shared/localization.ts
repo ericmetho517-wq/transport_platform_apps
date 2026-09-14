@@ -1,6 +1,98 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["تطور الأراضي المحيطة بطريق الصعيد الصحراوي الغربي", "Land development along the Western Desert Road"],
+  ["تطور الأراضي المحيطة بطريق الصعيد الصحراوي", "Land development along the Western Desert Road"],
+  ["مقارنة مساحات استخدامات الأراضي لعامي", "Land-use area comparison for"],
+  ["تطور استخدامات الأراضي من 2014 حتى", "Land-use development from 2014 to"],
+  ["نسبة مساحة التغير الزراعي بمنطقة الدراسة", "Agricultural change as a share of the study area"],
+  ["إجمالي مساحة الأراضي الصناعية المتغيرة (كم²)", "Total changed industrial land area (km²)"],
+  ["فتح الصورة ↗", "Open image ↗"],
+  ["المسطحات المائية", "Water bodies"],
+  ["كل الاستخدامات", "All land uses"],
+  ["الزراعة والصناعة", "Agriculture and industry"],
+  ["مكونات استخدامات الأراضي", "Land-use composition"],
+  ["مكونات الأراضي", "Land composition"],
+  ["أراضي الفضاء", "Vacant land"],
+  ["أنماط الخدمات", "Service types"],
+  ["الزراعة", "Agriculture"],
+  ["الصناعة", "Industry"],
+  ["العمران", "Urban development"],
+  ["خدمي", "Services"],
+  ["سياحي", "Tourism"],
+  ["ترفيهي", "Recreation"],
+  ["فواكه", "Fruit"],
+  ["حبوب", "Grains"],
+  ["العمراني", "Urban"],
+  ["الزراعي", "Agricultural"],
+  ["الصناعي", "Industrial"],
+  ["عمران", "Urban"],
+  ["خدمات", "Services"],
+  ["أخرى", "Other"],
+  ["الحالة", "Status"],
+  ["قائم", "Existing"],
+  ["محطات القطار الكهربائي الخفيف", "Light rail stations"],
+  ["خط القطار الكهربائي الخفيف", "Light rail line"],
+  ["الطريق الدائري حول القاهرة", "Cairo Ring Road"],
+  ["الطريق الدائري الأوسط", "Middle Ring Road"],
+  ["وصلة كفر داوود–السادات", "Kafr Dawood–Sadat link"],
+  ["وصلة الروبيكي–بلبيس", "Robeki–Belbeis link"],
+  ["الخط الأول للمترو", "Metro Line 1"],
+  ["الخط الثاني للمترو", "Metro Line 2"],
+  ["الخط الثالث للمترو", "Metro Line 3"],
+  ["الخط الرابع للمترو", "Metro Line 4"],
+  ["الخط السادس للمترو", "Metro Line 6"],
+  ["المونوريل – العاصمة", "Capital Monorail"],
+  ["المونوريل – أكتوبر", "October Monorail"],
+  ["الدائري الإقليمي", "Regional Ring Road"],
+  ["الخط الأخضر", "Green Line"],
+  ["خطوط المترو", "Metro lines"],
+  ["محطات المترو", "Metro stations"],
+  ["نسبة المقارنة الزمنية لاستخدامات الأراضي", "Land-use comparison position"],
+  ["تطور استخدامات الأراضي من 2014 حتى 2024", "Land-use development from 2014 to 2024"],
+  ["فتح الصورة بالحجم الأصلي", "Open full-size image"],
+  ["نظرة شاملة على المحور", "Corridor overview"],
+  ["قطاعات محور الصعيد الغربي", "Western Upper Egypt corridor sectors"],
+  ["مركز البيانات والتطبيقات", "Data & Application Hub"],
+  ["مرجع مقارنة استخدامات الأراضي", "Land-use comparison reference"],
+  ["اسحب فاصل المقارنة", "Drag the comparison divider"],
+  ["تكبير الصورة", "Enlarge image"],
+  ["مساحة الدراسة", "Study area"],
+  ["المعالم المكانية", "Spatial features"],
+  ["مؤشرات القطاع", "Sector indicators"],
+  ["نوع الاستخدام", "Land-use type"],
+  ["المساحة (كم²)", "Area (km²)"],
+  ["معلم", "features"],
+  ["طبقات", "layers"],
+  ["صورة", "Image"],
+  ["تعرض هذه اللوحة عناصر الرفع والحصر المدني الخاصة بهذا القطاع فقط، مع إمكانية تشغيل وإيقاف الطبقات وفحص خصائص كل عنصر من الخريطة.", "This dashboard presents the sector's civil survey inventory, with layer controls and feature inspection on the map."],
+  ["* محاكاة خطية تفاعلية للعرض وليست قيمة تقريرية جديدة؛ القيم الأصلية المعتمدة معروضة في البطاقات والمراجع.", "* Interactive linear projection for visualization only; verified source values are shown in the cards and references."],
+  ["لا توجد طبقة مقارنة مسجلة لهذا المشروع؛ الخريطة ما زالت تعرض الطبقات المتاحة.", "No comparison layer is recorded for this project; the map still displays the available layers."],
+  ["تعذر قراءة ملف البيانات المحلية لهذا المشروع.", "Unable to read this project's local data file."],
+  ["لا توجد هندسة محلية مطابقة", "No matching local geometry"],
+  ["خطأ في تحميل البيانات", "Data loading error"],
+  ["لا توجد قيمة مسجلة", "No recorded value"],
+  ["تعذر تحميل", "Failed to load"],
+  ["سنة العرض", "Display year"],
+  ["سنوات العرض", "Display year"],
+  ["نطاق الدراسة", "Study area"],
+  ["إجمالي مساحة الأراضي الزراعية (كم²)", "Total agricultural land area (km²)"],
+  ["فرق سعر الأراضي العمرانية", "Urban land price difference"],
+  ["فرق سعر الأراضي الزراعية", "Agricultural land price difference"],
+  ["فرق سعر الأراضي الصناعية", "Industrial land price difference"],
+  ["سعر الأراضي العمرانية عام", "Urban land price in"],
+  ["سعر الأراضي الزراعية عام", "Agricultural land price in"],
+  ["سعر الأراضي الصناعية عام", "Industrial land price in"],
+  ["المناطق الصناعية", "Industrial land"],
+  ["أراضي القوات المسلحة", "Military land"],
+  ["أراضي خدمات", "Service land"],
+  ["المناطق الترفيهية", "Recreational land"],
+  ["حرم الطريق", "Road right-of-way"],
+  ["الأراضي التعليمية", "Educational land"],
+  ["الأراضي الحكومية", "Government land"],
+  ["الأراضي السياحية", "Tourism land"],
+  ["مساحات خضراء", "Green areas"],
+  ["ديني", "Religious land"],
   ["جميع الصور المتاحة مرتبة حسب القطاع والتقرير، كما في القصة المكانية المرجعية.", "All available imagery is organized by sector and source report, following the reference geographic story."],
   ["استعراض متتابع للخرائط والصور الأصلية المرتبطة بهذا الجزء من المحور، مع إتاحة تكبير كل صورة ومراجعة مصدرها ورقم الصفحة.", "A sequential view of the original maps and imagery for this part of the axis, with full-size inspection and source-page details."],
   ["لا توجد صورة تقرير منفصلة لهذا الجزء؛ تعرض الخريطة التفاعلية بياناته المكانية المراجعة.", "No separate report image is available for this section; the interactive map displays its verified spatial data."],
@@ -342,19 +434,27 @@ const englishWords: Array<[string, string]> = [
   ["\u0627\u0644\u0645\u064a\u0627\u0647", "Water"], ["\u0627\u0644\u0637\u0631\u0642", "Roads"], ["\u0627\u0644\u0645\u0642\u0627\u0628\u0631", "Cemeteries"],
 ];
 
-function translate(value: string): string {
+const orderedReplacements = [...replacements, ...englishWords]
+  .sort(([left], [right]) => right.length - left.length);
+
+export function translateInterfaceText(value: string): string {
   let result = value;
-  for (const [arabic, english] of replacements) result = result.replaceAll(arabic, english);
-  for (const [arabic, english] of englishWords) result = result.replaceAll(arabic, english);
+  // Always translate complete phrases before their component words. This
+  // prevents mixed labels such as "Indicators الPrices وLand use".
+  for (const [arabic, english] of orderedReplacements) result = result.replaceAll(arabic, english);
   return result;
 }
 
 function translateNode(node: Node): void {
-  if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) node.textContent = translate(node.textContent);
+  if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
+    const translated = translateInterfaceText(node.textContent);
+    if (translated !== node.textContent) node.textContent = translated;
+  }
   if (node instanceof HTMLElement) {
     for (const name of ["aria-label", "title", "placeholder", "alt"]) {
       const value = node.getAttribute(name);
-      if (value) node.setAttribute(name, translate(value));
+      const translated = value ? translateInterfaceText(value) : "";
+      if (value && translated !== value) node.setAttribute(name, translated);
     }
   }
   node.childNodes.forEach(translateNode);
@@ -364,6 +464,10 @@ export function enableApplicationLocalization(app: TransportApp, root: HTMLEleme
   if (app.language !== "en") return;
   root.classList.add("english-ui");
   translateNode(root);
-  const observer = new MutationObserver((mutations) => mutations.forEach((mutation) => mutation.addedNodes.forEach(translateNode)));
-  observer.observe(root, { childList: true, subtree: true });
+  const observer = new MutationObserver((mutations) => mutations.forEach((mutation) => {
+    if (mutation.type === "characterData") translateNode(mutation.target);
+    else if (mutation.type === "attributes") translateNode(mutation.target);
+    else mutation.addedNodes.forEach(translateNode);
+  }));
+  observer.observe(root, { attributes: true, characterData: true, childList: true, subtree: true });
 }

@@ -103,6 +103,11 @@ for (const phrase of ["إجمالي مساحة الأراضي الزراعية �
 for (const phrase of ["نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي", "نسبة مساحة التغير الصناعي بمنطقة الدراسة", "نسبة الحالة العمرانية بمناطق التغير", "ألف عامل"]) {
   if (!localizationSource.includes(phrase)) failures.push(`English localization: missing report-layout translation for ${phrase}`);
 }
+for (const phrase of ["نطاق الدراسة", "سنوات العرض", "المناطق الصناعية", "أراضي القوات المسلحة", "مؤشرات الأسعار واستخدامات الأراضي", "خط القطار الكهربائي الخفيف", "الطريق الدائري حول القاهرة", "فتح الصورة بالحجم الأصلي"]) {
+  if (!localizationSource.includes(phrase)) failures.push(`English localization: missing complete widget translation for ${phrase}`);
+}
+if (!localizationSource.includes("orderedReplacements") || !localizationSource.includes("right.length - left.length")) failures.push("English localization: complete phrases must be translated before individual words");
+if (!localizationSource.includes("characterData: true") || !localizationSource.includes("attributes: true")) failures.push("English localization: dynamic widget text and attributes are not observed");
 for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey", "transport", "governorates"]) {
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }
