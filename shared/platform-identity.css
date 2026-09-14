@@ -71,9 +71,9 @@
 .platform-shell .hero-copy { position: relative; z-index: 2; animation: hero-in .8s cubic-bezier(.2,.7,.2,1) both; }
 .platform-shell .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; color: #c9ecff; font-size: 11px; font-weight: 900; letter-spacing: .04em; }
 .platform-shell .eyebrow i { width: 9px; height: 9px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 5px #4dbbfa2e; animation: signal 2.4s ease infinite; }
-.platform-shell .platform-hero h1 { margin: 0; max-width: 760px; color: #fff; font-size: clamp(48px, 6.4vw, 92px); line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
+.platform-shell .platform-hero h1 { margin: 0; max-width: 720px; color: #fff; font-size: clamp(46px, 5.6vw, 80px); line-height: 1.06; letter-spacing: -.025em; text-wrap: balance; }
 .platform-shell .platform-hero h1 em { display: inline-block; margin-top: 6px; color: #a9e2ff; font-style: normal; }
-.platform-shell .platform-hero p { max-width: 690px; margin: 27px 0 30px; color: #e2f3ff; font-size: 18px; line-height: 1.85; }
+.platform-shell .platform-hero p { max-width: 620px; margin: 24px 0 28px; color: #e2f3ff; font-size: 17px; line-height: 1.7; }
 .platform-shell .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; }
 .platform-shell .primary { display: inline-flex; align-items: center; gap: 22px; padding: 14px 21px; border: 1px solid #fff; border-radius: 13px; color: var(--brand-deep); background: #fff; box-shadow: 0 15px 35px #001b3554; }
 .platform-shell .primary:hover { transform: translateY(-3px); box-shadow: 0 20px 42px #001b3570; }
