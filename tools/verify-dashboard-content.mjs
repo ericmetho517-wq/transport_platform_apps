@@ -97,6 +97,7 @@ if (!runtimeSource.includes("deriveLandUseFromLocalLayers") || !runtimeSource.in
 if (runtimeSource.includes("open-reference") || runtimeSource.includes("reference-dialog")) failures.push("dashboard chrome: report-reference controls must not appear in the client-facing design");
 if (!runtimeSource.includes('group === "western-upper-egypt" || group === "cairo-suez-road"')) failures.push("dashboard layouts: Western Upper Egypt and Cairo-Suez must use their documented dual-map layouts");
 if (!runtimeSource.includes("dabaaLandMarkup") || runtimeSource.includes("classdark-card")) failures.push("dashboard layouts: Dabaa must use the documented four-KPI dashboard without malformed card markup");
+if (!runtimeSource.includes("normalizeChangeStatus") || !runtimeSource.includes("غير\\s*متغير") || runtimeSource.includes('mode === "unchanged" && status === "unknown"')) failures.push("dashboard change filter: changed, unchanged and unknown values are not classified safely");
 for (const phrase of ["إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)", "نسبة مساحة التغير العمراني بمنطقة الدراسة لعام 2023", "نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023", "مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023"]) {
   if (!localizationSource.includes(phrase)) failures.push(`English localization: missing Dabaa translation for ${phrase}`);
 }

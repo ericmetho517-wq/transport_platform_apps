@@ -112,6 +112,14 @@ type SectorDetail = NonNullable<SectorProfile["sectors"]>[string];
 
 const esc = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char] || char);
 
+export function normalizeChangeStatus(value: unknown): "changed" | "unchanged" | "unknown" {
+  const status = String(value ?? "").trim().toLowerCase();
+  if (!status) return "unknown";
+  if (status === "2" || status === "unchanged" || /غير\s*متغير|لا\s*تغي(?:ر|ير)|بدون\s*تغي(?:ر|ير)|لم\s*يتغي(?:ر|ير)|ثابت/.test(status)) return "unchanged";
+  if (status === "1" || status === "changed" || /متغير|تغي(?:ر|ير)/.test(status)) return "changed";
+  return "unknown";
+}
+
 const isPriceDashboard = (app: TransportApp) => /سعر|أسعار|اسعار|price/i.test(app.title);
 const civilDashboardSlugs = new Set(["dashboard-4b68db62a1", "dashboard-48c0447e11", "dashboard-890d333abf", "dashboard-489e365131", "dashboard-37e01603d0", "dashboard-ba98b53679"]);
 const impactDashboardSlugs = new Set(["dashboard-35c11a505b", "dashboard-83f3738705", "dashboard-676c18c4b7", "dashboard-4138cfe326", "dashboard-f0a5bc623c"]);
@@ -993,11 +1001,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.style.stroke = layer === "lRT_Station" || layer === "Metro_Station" ? "#ffffff" : "#263238";
         path.style.strokeWidth = layer === "lRT_Station" || layer === "Metro_Station" ? "0.9" : "1.5";
       }
-      const rawStatusVal = String(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"] ?? "").trim().toLowerCase();
       // In the Ismailia data field «حالة التغير»: 1 = changed, 2 = unchanged.
-      const exactStatus = rawStatusVal === "1" || rawStatusVal === "changed" || /تغير|متغير|غير/i.test(rawStatusVal) ? "changed"
-        : rawStatusVal === "2" || rawStatusVal === "unchanged" || /ثابت|لم|بدون/i.test(rawStatusVal) ? "unchanged"
-        : "unknown";
+      // Check the negative Arabic forms first because «غير متغير» also
+      // contains the positive word «متغير».
+      const exactStatus = normalizeChangeStatus(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"]);
       path.dataset.changeStatus = exactStatus;
       const featureSector = sectorOf(feature.properties);
       if (featureSector) {
@@ -1274,6 +1281,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const applyChangeFilter = () => {
       const mode = changeSelect.value;
       featureSelection.setAttribute("hidden", "true");
+      featureHover.setAttribute("hidden", "true");
       loaded.forEach(([layer]) => {
         const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
         if (!groupElement) return;
@@ -1283,10 +1291,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
             return;
           }
           const status = path.dataset.changeStatus || "unknown";
-          // Empty database values mean that no change was recorded for the
-          // feature. Keep them with the unchanged view instead of making an
-          // entire sector disappear when its status column is blank.
-          const matches = mode === "all" || status === mode || (mode === "unchanged" && status === "unknown");
+          // A blank status is unknown, not unchanged. Specific filters show
+          // only records explicitly classified by the source data.
+          const matches = mode === "all" || status === mode;
           path.classList.toggle("change-hidden", !matches);
           path.classList.toggle("change-match", mode !== "all" && matches);
         });
@@ -1697,10 +1704,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     if (summary.layers.includes("landcover-end")) {
       const latestLandcover = await loadGeoJson(`../../data/dashboard/${group}/landcover-end.geojson`);
       latestLandcover.features.forEach((feature) => {
-        const rawStatus = String(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"] ?? "").trim().toLowerCase();
-        const key = rawStatus === "1" || rawStatus === "changed" || /تغير|متغير|غير/i.test(rawStatus) ? "changed"
-          : rawStatus === "2" || rawStatus === "unchanged" || /ثابت|لم|بدون/i.test(rawStatus) ? "unchanged"
-          : null;
+        const key = normalizeChangeStatus(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"]);
         if (key === "changed" || key === "unchanged") {
           statusTotals[key] += Math.max(1, Number(feature.properties?.source_feature_count || 1));
           const landuseCode = String(feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.["استخدام_الأرض"] ?? "");
