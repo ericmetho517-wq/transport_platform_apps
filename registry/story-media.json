@@ -37,22 +37,6 @@
           "height": 973
         },
         {
-          "imagePath": "../../references/story-media/f9babf3e60e6cf93edef.jpg",
-          "reportName": ".pdf",
-          "page": 17,
-          "kind": "map",
-          "width": 1207,
-          "height": 831
-        },
-        {
-          "imagePath": "../../references/story-media/0998e31d4a4773044175.jpg",
-          "reportName": ".pdf",
-          "page": 17,
-          "kind": "map",
-          "width": 1210,
-          "height": 831
-        },
-        {
           "imagePath": "../../references/story-media/c75a7f805a19e6618213.jpg",
           "reportName": ".pdf",
           "page": 67,
@@ -93,22 +77,6 @@
           "height": 1186
         },
         {
-          "imagePath": "../../references/story-media/d5c5a0e82f4d4fd3b4b9.png",
-          "reportName": ".pdf",
-          "page": 73,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 872
-        },
-        {
-          "imagePath": "../../references/story-media/a02f556170efee461aea.png",
-          "reportName": ".pdf",
-          "page": 74,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 867
-        },
-        {
           "imagePath": "../../references/story-media/b12843fc166b9da018bc.jpg",
           "reportName": ".pdf",
           "page": 75,
@@ -130,6 +98,14 @@
           "imagePath": "../../references/story-media/3ce3465f8655ec73e2f7.jpg",
           "reportName": "(1).pdf",
           "page": 1,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/ca77889f0abc36386a2d.jpg",
+          "reportName": "(1).pdf",
+          "page": 13,
           "kind": "axis-photo",
           "width": 960,
           "height": 540
@@ -197,22 +173,6 @@
           "kind": "comparison",
           "width": 1696,
           "height": 1199
-        },
-        {
-          "imagePath": "../../references/story-media/40c93f25cf8ac31806ad.jpg",
-          "reportName": "(1).pdf",
-          "page": 58,
-          "kind": "dashboard",
-          "width": 1345,
-          "height": 612
-        },
-        {
-          "imagePath": "../../references/story-media/b94bd8518967ced225ed.png",
-          "reportName": "(1).pdf",
-          "page": 59,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 867
         },
         {
           "imagePath": "../../references/story-media/75c0af70e4dc6c6ba68d.jpg",
@@ -313,22 +273,6 @@
           "height": 1146
         },
         {
-          "imagePath": "../../references/story-media/727ca58e61441a15f227.png",
-          "reportName": "(3).pdf",
-          "page": 59,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 866
-        },
-        {
-          "imagePath": "../../references/story-media/a0c8e7a0bc4a1fa83c0c.png",
-          "reportName": "(3).pdf",
-          "page": 60,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 868
-        },
-        {
           "imagePath": "../../references/story-media/6c93bc59b7527435d948.jpg",
           "reportName": "(3).pdf",
           "page": 62,
@@ -403,20 +347,20 @@
           "height": 1237
         },
         {
-          "imagePath": "../../references/story-media/42b1c48c792cbbf6ab3b.png",
+          "imagePath": "../../references/story-media/3725b9064bbcbf30acfb.jpg",
           "reportName": "(2).pdf",
-          "page": 28,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 868
+          "page": 30,
+          "kind": "axis-photo",
+          "width": 1743,
+          "height": 810
         },
         {
-          "imagePath": "../../references/story-media/568ae1ca2cc345ac5f16.png",
+          "imagePath": "../../references/story-media/a42f65633ee21576169d.jpg",
           "reportName": "(2).pdf",
-          "page": 29,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 868
+          "page": 31,
+          "kind": "axis-photo",
+          "width": 1892,
+          "height": 720
         },
         {
           "imagePath": "../../references/story-media/98714fdb2a08a88bebd5.jpg",
@@ -501,20 +445,12 @@
           "height": 1202
         },
         {
-          "imagePath": "../../references/story-media/5a1166d4b21d0aee7be2.jpg",
+          "imagePath": "../../references/story-media/36e6adcf304af4be4636.jpg",
           "reportName": "(4).pdf",
-          "page": 58,
-          "kind": "dashboard",
-          "width": 1379,
-          "height": 871
-        },
-        {
-          "imagePath": "../../references/story-media/e306c62d0f867127434f.jpg",
-          "reportName": "(4).pdf",
-          "page": 59,
-          "kind": "dashboard",
-          "width": 1600,
-          "height": 723
+          "page": 60,
+          "kind": "axis-photo",
+          "width": 1648,
+          "height": 765
         },
         {
           "imagePath": "../../references/story-media/c8d6a8ce4910b23918d6.jpg",
@@ -527,28 +463,20 @@
       ],
       "minya": [
         {
+          "imagePath": "../../references/story-media/2e693bd164786cae6754.jpg",
+          "reportName": "(5).pdf",
+          "page": 13,
+          "kind": "axis-photo",
+          "width": 720,
+          "height": 405
+        },
+        {
           "imagePath": "../../references/story-media/dcec20cacadaecca5cf3.jpg",
           "reportName": "(5).pdf",
           "page": 14,
           "kind": "map",
           "width": 1427,
           "height": 1009
-        },
-        {
-          "imagePath": "../../references/story-media/9685a0f80b567e0f8595.jpg",
-          "reportName": "(5).pdf",
-          "page": 17,
-          "kind": "map",
-          "width": 1210,
-          "height": 831
-        },
-        {
-          "imagePath": "../../references/story-media/47b427552f2e4086a2c3.jpg",
-          "reportName": "(5).pdf",
-          "page": 17,
-          "kind": "map",
-          "width": 1211,
-          "height": 830
         },
         {
           "imagePath": "../../references/story-media/31019cf41dd52125044d.jpg",
@@ -591,20 +519,12 @@
           "height": 1199
         },
         {
-          "imagePath": "../../references/story-media/70b8b42097f70b3acbef.png",
+          "imagePath": "../../references/story-media/9537909fcbfcc6671779.jpg",
           "reportName": "(5).pdf",
-          "page": 58,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 872
-        },
-        {
-          "imagePath": "../../references/story-media/cb441104177b30504c6c.png",
-          "reportName": "(5).pdf",
-          "page": 59,
-          "kind": "dashboard",
-          "width": 1917,
-          "height": 872
+          "page": 60,
+          "kind": "axis-photo",
+          "width": 1677,
+          "height": 779
         },
         {
           "imagePath": "../../references/story-media/3674460c828a2c4a63e4.jpg",
@@ -631,6 +551,14 @@
           "kind": "axis-photo",
           "width": 700,
           "height": 400
+        },
+        {
+          "imagePath": "../../references/story-media/e2d121e5e08aa4586ee4.jpg",
+          "reportName": "(6).pdf",
+          "page": 13,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
         },
         {
           "imagePath": "../../references/story-media/4609af362ac37dfb143d.jpg",
@@ -697,44 +625,12 @@
           "height": 1194
         },
         {
-          "imagePath": "../../references/story-media/d73e8bd9eb9e195f3faf.jpg",
-          "reportName": "(6).pdf",
-          "page": 60,
-          "kind": "dashboard",
-          "width": 1345,
-          "height": 608
-        },
-        {
-          "imagePath": "../../references/story-media/26565fd73b07e23deef3.png",
-          "reportName": "(6).pdf",
-          "page": 61,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 867
-        },
-        {
           "imagePath": "../../references/story-media/242c4fb3bd940e5b471c.jpg",
           "reportName": "(6).pdf",
           "page": 63,
           "kind": "comparison",
           "width": 932,
           "height": 572
-        },
-        {
-          "imagePath": "../../references/story-media/eb658e078e3d0cbd7b1a.png",
-          "reportName": "(6).pdf",
-          "page": 159,
-          "kind": "dashboard",
-          "width": 953,
-          "height": 409
-        },
-        {
-          "imagePath": "../../references/story-media/d0e014bfcf68ce39425a.png",
-          "reportName": "(6).pdf",
-          "page": 160,
-          "kind": "dashboard",
-          "width": 953,
-          "height": 386
         }
       ],
       "giza": [
@@ -803,28 +699,28 @@
           "height": 1141
         },
         {
-          "imagePath": "../../references/story-media/4516b89a45daf0fa7f20.jpg",
-          "reportName": "(7).pdf",
-          "page": 47,
-          "kind": "dashboard",
-          "width": 1337,
-          "height": 603
-        },
-        {
-          "imagePath": "../../references/story-media/471486614dfc7f02d59f.jpg",
-          "reportName": "(7).pdf",
-          "page": 48,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 872
-        },
-        {
           "imagePath": "../../references/story-media/a00f2a8d7407cbcea3b7.jpg",
           "reportName": "(7).pdf",
           "page": 49,
           "kind": "comparison",
           "width": 1587,
           "height": 969
+        },
+        {
+          "imagePath": "../../references/story-media/034bb2fb06748af40e16.jpg",
+          "reportName": "(7).pdf",
+          "page": 50,
+          "kind": "axis-photo",
+          "width": 1364,
+          "height": 726
+        },
+        {
+          "imagePath": "../../references/story-media/40adc95f77ecf246be1a.jpg",
+          "reportName": "(7).pdf",
+          "page": 50,
+          "kind": "axis-photo",
+          "width": 935,
+          "height": 563
         }
       ],
       "corridor-overview": [
@@ -915,22 +811,6 @@
           "kind": "map",
           "width": 1383,
           "height": 978
-        },
-        {
-          "imagePath": "../../references/story-media/1d83639ada300c2ba353.jpg",
-          "reportName": "(9).pdf",
-          "page": 54,
-          "kind": "dashboard",
-          "width": 1902,
-          "height": 892
-        },
-        {
-          "imagePath": "../../references/story-media/baa0b72d97dd514a0dda.png",
-          "reportName": "(9).pdf",
-          "page": 55,
-          "kind": "dashboard",
-          "width": 1913,
-          "height": 857
         },
         {
           "imagePath": "../../references/story-media/d0faf9f650c2f7efe434.png",
@@ -1057,22 +937,6 @@
           "height": 1202
         },
         {
-          "imagePath": "../../references/story-media/2193012a31589158160b.jpg",
-          "reportName": "(8).pdf",
-          "page": 58,
-          "kind": "dashboard",
-          "width": 1345,
-          "height": 671
-        },
-        {
-          "imagePath": "../../references/story-media/73f1c6c80c31d0e022b3.jpg",
-          "reportName": "(8).pdf",
-          "page": 59,
-          "kind": "dashboard",
-          "width": 1918,
-          "height": 862
-        },
-        {
           "imagePath": "../../references/story-media/2d9888b920d90f9c20be.jpg",
           "reportName": "(8).pdf",
           "page": 61,
@@ -1157,14 +1021,6 @@
           "height": 480
         },
         {
-          "imagePath": "../../references/story-media/715bc5c73af46797873c.png",
-          "reportName": "قطاع_الاسماعيلية.docx",
-          "page": 0,
-          "kind": "dashboard",
-          "width": 1151,
-          "height": 523
-        },
-        {
           "imagePath": "../../references/story-media/100ae58586a1bda38c28.jpg",
           "reportName": "قطاع_الاسماعيلية.docx",
           "page": 0,
@@ -1229,22 +1085,6 @@
           "height": 233
         },
         {
-          "imagePath": "../../references/story-media/dd75f12562ac26634e09.png",
-          "reportName": "قطاع_الاسماعيلية.docx",
-          "page": 0,
-          "kind": "dashboard",
-          "width": 456,
-          "height": 267
-        },
-        {
-          "imagePath": "../../references/story-media/0fa06517f2f198268401.png",
-          "reportName": "قطاع_الاسماعيلية.docx",
-          "page": 0,
-          "kind": "dashboard",
-          "width": 463,
-          "height": 273
-        },
-        {
           "imagePath": "../../references/story-media/995007a24e58a641e2a2.jpg",
           "reportName": "قطاع_الاسماعيلية.docx",
           "page": 0,
@@ -1256,6 +1096,14 @@
     },
     "regional-ring-road": {
       "project": [
+        {
+          "imagePath": "../../references/story-media/2fc1dfc0b39a14f1ffae.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 18,
+          "kind": "axis-photo",
+          "width": 1255,
+          "height": 856
+        },
         {
           "imagePath": "../../references/story-media/011ca5132c948a505db4.jpg",
           "reportName": "Final Report 3-2024.pdf",
@@ -1273,36 +1121,20 @@
           "height": 747
         },
         {
-          "imagePath": "../../references/story-media/c7c0db10c2399cd3997a.png",
+          "imagePath": "../../references/story-media/4132f2c9c1c2d5140556.jpg",
           "reportName": "Final Report 3-2024.pdf",
-          "page": 55,
-          "kind": "dashboard",
-          "width": 1015,
-          "height": 552
+          "page": 24,
+          "kind": "axis-photo",
+          "width": 1493,
+          "height": 750
         },
         {
-          "imagePath": "../../references/story-media/75a463f02330ca5816bb.png",
+          "imagePath": "../../references/story-media/9ea7211af1ce46075eb8.jpg",
           "reportName": "Final Report 3-2024.pdf",
-          "page": 56,
-          "kind": "dashboard",
-          "width": 937,
-          "height": 430
-        },
-        {
-          "imagePath": "../../references/story-media/bb1ad590384063529624.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 57,
-          "kind": "dashboard",
-          "width": 939,
-          "height": 432
-        },
-        {
-          "imagePath": "../../references/story-media/364ff163fef9b0301b5b.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 58,
-          "kind": "dashboard",
-          "width": 943,
-          "height": 431
+          "page": 25,
+          "kind": "axis-photo",
+          "width": 1492,
+          "height": 750
         },
         {
           "imagePath": "../../references/story-media/8d25c1c9842eecaed50c.jpg",
@@ -1352,7 +1184,7 @@
           "imagePath": "../../references/story-media/70de0bfb5887a58e6e77.jpg",
           "reportName": "Final Report 3-2024.pdf",
           "page": 82,
-          "kind": "map",
+          "kind": "axis-photo",
           "width": 1346,
           "height": 987
         },
@@ -1379,6 +1211,22 @@
           "kind": "comparison",
           "width": 816,
           "height": 722
+        },
+        {
+          "imagePath": "../../references/story-media/9f6bf8590573416d1091.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 86,
+          "kind": "axis-photo",
+          "width": 1458,
+          "height": 752
+        },
+        {
+          "imagePath": "../../references/story-media/6e93162ec44916e965e9.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 87,
+          "kind": "axis-photo",
+          "width": 1462,
+          "height": 747
         },
         {
           "imagePath": "../../references/story-media/01c1b89f4504777a915f.jpg",
@@ -1421,44 +1269,20 @@
           "height": 520
         },
         {
-          "imagePath": "../../references/story-media/20c29f85db2a2fe86a21.png",
+          "imagePath": "../../references/story-media/7f4b376d9ddd674d253b.jpg",
           "reportName": "Final Report 3-2024.pdf",
-          "page": 110,
-          "kind": "dashboard",
-          "width": 948,
-          "height": 511
-        },
-        {
-          "imagePath": "../../references/story-media/965cc95d4f892637925d.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 111,
-          "kind": "dashboard",
-          "width": 1322,
-          "height": 614
-        },
-        {
-          "imagePath": "../../references/story-media/f4fb980004b2897cecc8.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 112,
-          "kind": "dashboard",
-          "width": 1325,
-          "height": 620
-        },
-        {
-          "imagePath": "../../references/story-media/29809e3de7efa318d148.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 113,
+          "page": 115,
           "kind": "map",
-          "width": 1327,
-          "height": 621
+          "width": 876,
+          "height": 556
         },
         {
-          "imagePath": "../../references/story-media/64cc10070f3e2c7c74f6.jpg",
+          "imagePath": "../../references/story-media/8b19308afa3022216566.png",
           "reportName": "Final Report 3-2024.pdf",
-          "page": 124,
-          "kind": "dashboard",
-          "width": 1375,
-          "height": 679
+          "page": 115,
+          "kind": "map",
+          "width": 1017,
+          "height": 575
         },
         {
           "imagePath": "../../references/story-media/a7bf82191077e333906e.jpg",
@@ -1497,6 +1321,14 @@
     "suez-ring-link": {
       "project": [
         {
+          "imagePath": "../../references/story-media/f9a0d2ca32d15bb4f9b8.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 138,
+          "kind": "axis-photo",
+          "width": 1346,
+          "height": 1107
+        },
+        {
           "imagePath": "../../references/story-media/2f23662644ac935662bc.jpg",
           "reportName": "Final Report 3-2024.pdf",
           "page": 139,
@@ -1521,6 +1353,22 @@
           "height": 687
         },
         {
+          "imagePath": "../../references/story-media/b5adf0a80f395986fc76.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 144,
+          "kind": "axis-photo",
+          "width": 897,
+          "height": 536
+        },
+        {
+          "imagePath": "../../references/story-media/8af60ca21b386433160d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 145,
+          "kind": "axis-photo",
+          "width": 917,
+          "height": 570
+        },
+        {
           "imagePath": "../../references/story-media/47771105f6f285fbb6ec.jpg",
           "reportName": "Final Report 3-2024.pdf",
           "page": 147,
@@ -1537,44 +1385,12 @@
           "height": 729
         },
         {
-          "imagePath": "../../references/story-media/dc19588075eed1456241.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 158,
-          "kind": "dashboard",
-          "width": 1017,
-          "height": 552
-        },
-        {
-          "imagePath": "../../references/story-media/4fe2bbe139c04c7ab3e9.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 159,
-          "kind": "dashboard",
-          "width": 1228,
-          "height": 573
-        },
-        {
           "imagePath": "../../references/story-media/84c676c75159b1c99a88.jpg",
           "reportName": "Final Report 3-2024.pdf",
           "page": 161,
           "kind": "map",
           "width": 803,
           "height": 527
-        },
-        {
-          "imagePath": "../../references/story-media/b978b30e34dc23fb874d.jpg",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 167,
-          "kind": "dashboard",
-          "width": 1351,
-          "height": 666
-        },
-        {
-          "imagePath": "../../references/story-media/7e7e62272378af67f590.jpg",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 168,
-          "kind": "dashboard",
-          "width": 1351,
-          "height": 666
         },
         {
           "imagePath": "../../references/story-media/5841947e3c80faedd256.jpg",
@@ -1605,12 +1421,36 @@
     "qena-luxor-road": {
       "project": [
         {
+          "imagePath": "../../references/story-media/64b243640b58b913006c.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 179,
+          "kind": "axis-photo",
+          "width": 1346,
+          "height": 869
+        },
+        {
           "imagePath": "../../references/story-media/4fb49f9682e97b964616.jpg",
           "reportName": "Final Report 3-2024.pdf",
           "page": 180,
           "kind": "comparison",
           "width": 1477,
           "height": 1042
+        },
+        {
+          "imagePath": "../../references/story-media/9e11f09b09d0eefa5869.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 183,
+          "kind": "axis-photo",
+          "width": 1247,
+          "height": 748
+        },
+        {
+          "imagePath": "../../references/story-media/e68cd4393c60addf4d35.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 184,
+          "kind": "axis-photo",
+          "width": 1336,
+          "height": 747
         },
         {
           "imagePath": "../../references/story-media/75a22f140159a445b65a.jpg",
@@ -1627,46 +1467,6 @@
           "kind": "map",
           "width": 774,
           "height": 797
-        },
-        {
-          "imagePath": "../../references/story-media/07023c63e130fe06e636.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 204,
-          "kind": "dashboard",
-          "width": 1019,
-          "height": 553
-        },
-        {
-          "imagePath": "../../references/story-media/8afffd7cdb39e0e8b3b5.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 205,
-          "kind": "dashboard",
-          "width": 1127,
-          "height": 526
-        },
-        {
-          "imagePath": "../../references/story-media/36044c4b66f35f8aec13.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 206,
-          "kind": "dashboard",
-          "width": 1127,
-          "height": 525
-        },
-        {
-          "imagePath": "../../references/story-media/6f5e48eedaa091d59cab.jpg",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 214,
-          "kind": "dashboard",
-          "width": 1332,
-          "height": 638
-        },
-        {
-          "imagePath": "../../references/story-media/8af52ae338ad92a8d4b0.jpg",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 216,
-          "kind": "comparison",
-          "width": 1246,
-          "height": 605
         },
         {
           "imagePath": "../../references/story-media/fa20452da38417d0ed40.jpg",
@@ -1704,6 +1504,14 @@
     },
     "qus-axis": {
       "project": [
+        {
+          "imagePath": "../../references/story-media/9e1ab09abbcdf8abbd78.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 227,
+          "kind": "axis-photo",
+          "width": 1206,
+          "height": 863
+        },
         {
           "imagePath": "../../references/story-media/0820d864e333237800e5.jpg",
           "reportName": "Final Report 3-2024.pdf",
@@ -1777,41 +1585,25 @@
           "height": 770
         },
         {
-          "imagePath": "../../references/story-media/38bf6d90bc942177e4cb.png",
+          "imagePath": "../../references/story-media/4109f92e85121c947e63.jpg",
           "reportName": "Final Report 3-2024.pdf",
-          "page": 258,
-          "kind": "dashboard",
-          "width": 1230,
-          "height": 571
-        },
-        {
-          "imagePath": "../../references/story-media/3236a41b4c95d178ebcd.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 259,
-          "kind": "dashboard",
-          "width": 1234,
-          "height": 567
-        },
-        {
-          "imagePath": "../../references/story-media/85e81a262b620a0f4f58.jpg",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 267,
-          "kind": "dashboard",
-          "width": 1262,
-          "height": 606
-        },
-        {
-          "imagePath": "../../references/story-media/f867bd7e06e681afe07f.jpg",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 268,
-          "kind": "dashboard",
-          "width": 1268,
-          "height": 580
+          "page": 270,
+          "kind": "axis-photo",
+          "width": 1126,
+          "height": 509
         }
       ]
     },
     "kalabsha-axis": {
       "project": [
+        {
+          "imagePath": "../../references/story-media/38d70ee70d9097969af1.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 279,
+          "kind": "axis-photo",
+          "width": 1345,
+          "height": 775
+        },
         {
           "imagePath": "../../references/story-media/010aebe1507216ce5874.jpg",
           "reportName": "Final Report 3-2024.pdf",
@@ -1835,6 +1627,22 @@
           "kind": "comparison",
           "width": 1018,
           "height": 750
+        },
+        {
+          "imagePath": "../../references/story-media/2cfed22a6736417c8cdb.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 283,
+          "kind": "axis-photo",
+          "width": 1310,
+          "height": 729
+        },
+        {
+          "imagePath": "../../references/story-media/5916d2058f219f955fe9.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 284,
+          "kind": "axis-photo",
+          "width": 1282,
+          "height": 696
         },
         {
           "imagePath": "../../references/story-media/f8624f5a8a8277fcc08b.jpg",
@@ -1867,38 +1675,6 @@
           "kind": "map",
           "width": 833,
           "height": 776
-        },
-        {
-          "imagePath": "../../references/story-media/1fa460db7ccf3e06faa7.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 311,
-          "kind": "dashboard",
-          "width": 1160,
-          "height": 613
-        },
-        {
-          "imagePath": "../../references/story-media/9db0d989fd9a47fbcf68.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 312,
-          "kind": "dashboard",
-          "width": 1416,
-          "height": 661
-        },
-        {
-          "imagePath": "../../references/story-media/8a388767237693bc404c.png",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 313,
-          "kind": "dashboard",
-          "width": 1416,
-          "height": 662
-        },
-        {
-          "imagePath": "../../references/story-media/432525d2b2d340a97279.jpg",
-          "reportName": "Final Report 3-2024.pdf",
-          "page": 321,
-          "kind": "dashboard",
-          "width": 1325,
-          "height": 667
         },
         {
           "imagePath": "../../references/story-media/12ca78e789220823e1fb.png",

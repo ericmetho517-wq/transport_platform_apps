@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T12:44:16.353Z",
+  "generatedAt": "2026-09-15T18:13:07.317Z",
   "applications": 94,
   "counts": {
     "Dashboard": 53,
@@ -25,7 +25,7 @@
     "sectorSummaries": 10,
     "reportProfiles": 10,
     "crossSectorReferences": 0,
-    "storyReportImages": 234
+    "storyReportImages": 206
   },
   "errors": [],
   "warnings": [

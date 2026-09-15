@@ -804,6 +804,22 @@ function coordinatePairs(coordinates: Coordinates, result: number[][] = []): num
   return result;
 }
 
+function polygonAreaKm2(coordinates: number[][][]): number {
+  const radiusKm = 6371.0088;
+  const ringArea = (ring: number[][]): number => {
+    if (ring.length < 3) return 0;
+    let area = 0;
+    for (let index = 0; index < ring.length; index += 1) {
+      const current = ring[index];
+      const next = ring[(index + 1) % ring.length];
+      const lonDelta = (next[0] - current[0]) * Math.PI / 180;
+      area += lonDelta * (2 + Math.sin(current[1] * Math.PI / 180) + Math.sin(next[1] * Math.PI / 180));
+    }
+    return Math.abs(area * radiusKm * radiusKm / 2);
+  };
+  return Math.max(0, ringArea(coordinates[0] || []) - coordinates.slice(1).reduce((sum, ring) => sum + ringArea(ring), 0));
+}
+
 function geometryPath(geometry: { type: string; coordinates: Coordinates }, project: (pair: number[]) => [number, number]): string {
   const line = (pairs: number[][], close = false) => {
     // A few source polygons contain accidental jumps between distant points.
@@ -1080,17 +1096,19 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           if (!feature.geometry) return [];
           const geometry = feature.geometry;
           const hitGeometries: Array<{ type: string; coordinates: Coordinates }> = geometry.type === "Polygon"
-            ? (geometry.coordinates as number[][][]).map((ring) => ({ type: "Polygon", coordinates: [ring] }))
+            ? [{ type: "Polygon", coordinates: geometry.coordinates }]
             : geometry.type === "MultiPolygon"
               ? (geometry.coordinates as number[][][][]).map((polygon) => ({ type: "Polygon", coordinates: polygon }))
               : geometry.type === "MultiLineString"
                 ? (geometry.coordinates as number[][][]).map((line) => ({ type: "LineString", coordinates: line }))
                 : [geometry];
-          return hitGeometries.map((hitGeometry) => {
+          return hitGeometries.map((hitGeometry, componentIndex) => {
             const projected = coordinatePairs(hitGeometry.coordinates).map(project);
             return {
               feature,
               pathData: geometryPath(hitGeometry, project),
+              componentIndex,
+              componentAreaKm2: hitGeometry.type === "Polygon" ? polygonAreaKm2(hitGeometry.coordinates as number[][][]) : undefined,
               minX: projected.length ? Math.min(...projected.map(([x]) => x)) : Infinity,
               maxX: projected.length ? Math.max(...projected.map(([x]) => x)) : -Infinity,
               minY: projected.length ? Math.min(...projected.map(([, y]) => y)) : Infinity,
@@ -1116,6 +1134,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           }
           return null;
         };
+        let activeHoverKey = "";
         path.addEventListener("pointermove", (event) => {
           const target = hitTestFeature(event);
           if (!target) {
@@ -1126,8 +1145,19 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           featureHover.dataset.geometry = bucketIsLine ? "MultiLineString" : bucketIsPoint ? "MultiPoint" : "MultiPolygon";
           featureHover.removeAttribute("hidden");
           content.appendChild(featureHover);
+          const hoverKey = `${bucketFeatures.indexOf(target.feature)}:${target.componentIndex}`;
+          if (hoverKey !== activeHoverKey) {
+            activeHoverKey = hoverKey;
+            showPopup(event);
+          }
         });
-        path.addEventListener("pointerleave", () => featureHover.setAttribute("hidden", "true"));
+        path.addEventListener("pointerleave", () => {
+          activeHoverKey = "";
+          featureHover.setAttribute("hidden", "true");
+          featureSelection.setAttribute("hidden", "true");
+          const popup = scope.querySelector<HTMLElement>(".feature-popup");
+          if (popup) popup.hidden = true;
+        });
         const showPopup = (event: Event) => {
           event.stopPropagation();
           scope.querySelectorAll<SVGPathElement>(".map-content path").forEach((p) => p.classList.remove("feature-selected"));
@@ -1138,8 +1168,14 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           let targetPathData = "";
           if (event instanceof MouseEvent) {
             const target = hitTestFeature(event);
-            targetProperties = target?.feature.properties || null;
+            targetProperties = target ? { ...(target.feature.properties || {}) } : null;
             targetPathData = target?.pathData || "";
+            if (targetProperties && Number(targetProperties.source_feature_count || 1) > 1) {
+              Object.keys(targetProperties).forEach((key) => {
+                if (!new Set(["landuse_label", "change_status", "sector"]).has(key)) delete targetProperties![key];
+              });
+              if (Number.isFinite(target?.componentAreaKm2)) targetProperties.area_km2 = target!.componentAreaKm2;
+            }
           }
           if (!targetProperties && bucketFeatures.length) {
             targetProperties = bucketFeatures[0].properties || null;
@@ -1150,22 +1186,22 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
             featureSelection.removeAttribute("hidden");
             content.appendChild(featureSelection);
           }
-          const hiddenPopupFields = new Set(["landuse_value", "landuse_code", "landuse_label", "change_status_key"]);
+          const hiddenPopupFields = new Set(["landuse_value", "landuse_code", "landuse_label", "change_status_key", "source_feature_count", "GlobalID", "OBJECTID", "FID", "SHAPE_Length", "SHAPE_Area"]);
           const rows = Object.entries(targetProperties || {}).filter(([key, value]) => !hiddenPopupFields.has(key) && value !== null && value !== "");
           const aggregateFieldLabels: Record<string, string> = { landuse_value: "استخدام الأرض", landuse_code: "كود استخدام الأرض", landuse_label: "وصف الاستخدام", source_feature_count: "عدد المعالم الأصلية", area_km2: "المساحة (كم²)", sector: "القطاع" };
           const landuseTitle = landuseNames[bucket.code] || labels[layer];
           const popupValue = (key: string, value: unknown): string => {
-            if (key === "change_status") {
+            if (key === "change_status" || key === "حالة_التغير") {
               const status = normalizeChangeStatus(value);
               if (status === "changed") return document.documentElement.lang === "en" ? "Changed" : "متغير";
               if (status === "unchanged") return document.documentElement.lang === "en" ? "Unchanged" : "لم يتغير";
             }
-            if (key === "area_km2") {
+            if (key === "area_km2" || key === "مساحة_كم2") {
               const rawArea = Number(value);
               if (Number.isFinite(rawArea)) {
                 // Some source exports store square metres in the legacy area_km2 field.
                 const areaKm2 = rawArea > Math.max(summary.metrics.studyAreaKm2 * 100, 100_000) ? rawArea / 1_000_000 : rawArea;
-                return `${formatNumber(areaKm2, 3)} ${document.documentElement.lang === "en" ? "km²" : "كم²"}`;
+                return `${formatNumber(areaKm2, 4)} ${document.documentElement.lang === "en" ? "km²" : "كم²"}`;
               }
             }
             if (key === "source_feature_count" && Number.isFinite(Number(value))) return formatNumber(Number(value), 0);
@@ -1175,7 +1211,6 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           popup.hidden = false;
           popup.style.display = "block";
         };
-        path.addEventListener("pointerdown", showPopup);
         path.addEventListener("click", showPopup);
         groupElement.appendChild(path);
       }

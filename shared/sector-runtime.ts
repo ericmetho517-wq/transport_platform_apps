@@ -26,6 +26,7 @@ interface StoryEntry {
   hero: string;
   compareBefore: string;
   compareAfter: string;
+  comparisons: Array<{ before: string; after: string }>;
 }
 
 interface StoryMediaReference {
@@ -41,6 +42,39 @@ const reportStoryMedia = (group: string, key = "project"): StoryMediaReference[]
   const groups = storyMediaManifest.groups as unknown as Record<string, Record<string, StoryMediaReference[]>>;
   return groups[group]?.[key] || [];
 };
+
+function storyComparisonPairs(media: StoryMediaReference[], group: string): Array<{ before: string; after: string }> {
+  const comparisons = media.filter((reference) => reference.kind === "comparison");
+  const pairs: Array<{ before: string; after: string }> = [];
+  const byPage = new Map<number, StoryMediaReference[]>();
+  comparisons.forEach((reference) => byPage.set(reference.page, [...(byPage.get(reference.page) || []), reference]));
+  const reviewedPages: Record<string, number[]> = {
+    ismailia: [0],
+    "regional-ring-road": [22],
+    "dahshur-south-link": [84],
+    "suez-ring-link": [140],
+    "qena-luxor-road": [],
+    "qus-axis": [229],
+    "kalabsha-axis": [281],
+  };
+  if (group in reviewedPages) {
+    reviewedPages[group].forEach((page) => {
+      const items = byPage.get(page) || [];
+      for (let index = 0; index + 1 < items.length && pairs.length < 3; index += 2) pairs.push({ before: items[index].imagePath, after: items[index + 1].imagePath });
+    });
+    return pairs;
+  }
+  for (let index = 0; index + 1 < comparisons.length; index += 1) {
+    const before = comparisons[index], after = comparisons[index + 1];
+    const beforeRatio = (before.width || 1) / (before.height || 1);
+    const afterRatio = (after.width || 1) / (after.height || 1);
+    if (after.page - before.page === 1 && Math.abs(beforeRatio - afterRatio) < 0.12) {
+      pairs.push({ before: before.imagePath, after: after.imagePath });
+      break;
+    }
+  }
+  return pairs;
+}
 
 const westernStoryReports: Array<Pick<StoryEntry, "key" | "label" | "sector" | "report">> = [
   { key: "abu-simbel", label: "أبو سمبل", sector: "7", report: ".pdf" },
@@ -66,23 +100,38 @@ function storyEntries(app: TransportApp): StoryEntry[] {
   const references = ownReferences.length ? ownReferences : fallbackReferences;
   if (dashboardGroup(app) !== "western-upper-egypt") {
     const extracted = reportStoryMedia(dashboardGroup(app));
-    const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "map");
+    const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "comparison");
     const comparisons = extracted.filter((reference) => reference.kind === "comparison");
+    const comparisonPairs = storyComparisonPairs(extracted, dashboardGroup(app));
     const fallbackHero = references.find((reference) => reference.referenceKind === "story-hero") || references[0];
     const fallbackComparison = references.find((reference) => reference.referenceKind === "story-comparison") || references[1];
     const compareBefore = comparisons[0]?.imagePath || fallbackComparison?.imagePath || "";
     const fullTitle = app.language === "en" ? (app.alternateTitles?.[0] || app.title) : app.title;
     const conciseTitle = fullTitle.replace(/^(القصة المكانية التفاعلية|Spatial StoryMap)\s*[–—-]\s*/i, "");
-    return [{ key: "project", label: conciseTitle, sector: "all", report: fallbackHero?.reportName || hero?.reportName || "", hero: hero?.imagePath || fallbackHero?.imagePath || "", compareBefore, compareAfter: comparisons[1]?.imagePath || compareBefore }];
+    return [{ key: "project", label: conciseTitle, sector: "all", report: fallbackHero?.reportName || hero?.reportName || "", hero: hero?.imagePath || fallbackHero?.imagePath || "", compareBefore, compareAfter: comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs }];
   }
+  const overviewMedia = reportStoryMedia("western-upper-egypt", "corridor-overview");
+  const corridorHero = overviewMedia.find((reference) => reference.kind === "axis-photo")?.imagePath || "";
   return westernStoryReports.map((item) => {
     const extracted = reportStoryMedia("western-upper-egypt", item.key);
     const matching = item.report ? references.filter((reference) => reference.reportName === item.report) : [];
-    const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "map");
+    const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "comparison");
     const comparisons = extracted.filter((reference) => reference.kind === "comparison");
+    const comparisonPairs = storyComparisonPairs(extracted, "western-upper-egypt");
     const compareBefore = comparisons[0]?.imagePath || matching[1]?.imagePath || "";
-    return { ...item, hero: hero?.imagePath || matching[0]?.imagePath || "", compareBefore, compareAfter: comparisons[1]?.imagePath || compareBefore };
+    return { ...item, hero: hero?.imagePath || matching[0]?.imagePath || corridorHero, compareBefore, compareAfter: comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs };
   });
+}
+
+function storyDetailedComparisons(app: TransportApp, entries: StoryEntry[], activeKey: string, endYear: string): string {
+  const sets = entries.map((entry) => {
+    if (!entry.comparisons.length) return "";
+    const label = storyEntryLabel(entry, app.language);
+    const cards = entry.comparisons.map((pair, index) => `<article class="story-detailed-compare-card"><h3>${app.language === "en" ? `Change example ${index + 1}` : `مثال تغير ${index + 1}`} · ${esc(label)}</h3><div class="story-compare story-report-swipe" style="--compare-before:url('${esc(pair.before)}');--compare-after:url('${esc(pair.after)}')"><div class="compare-before"><span>2014</span></div><div class="compare-after"><div class="compare-after-image"></div><span>${endYear}</span></div><i aria-hidden="true">↔</i><input type="range" min="0" max="100" value="50" aria-label="${app.language === "en" ? "Move the divider to compare the change" : "حرّك الفاصل لمقارنة التغير"}"/></div></article>`).join("");
+    return `<div class="story-detailed-compare-set${entry.key === activeKey ? " active" : ""}" data-story-comparison-set="${entry.key}">${cards}</div>`;
+  }).join("");
+  if (!sets) return "";
+  return `<div class="story-detailed-comparisons"><div class="story-detailed-comparisons-heading"><h2>${app.language === "en" ? "Detailed change examples" : "أمثلة تفصيلية للتغير"}</h2><p>${app.language === "en" ? "Satellite imagery with the documented change boundaries." : "صور أقمار صناعية موضح عليها حدود التغير الموثقة."}</p></div>${sets}</div>`;
 }
 
 function relatedDashboard(app: TransportApp): string {
@@ -123,8 +172,9 @@ function storyMediaChapters(app: TransportApp, entries: StoryEntry[]): string {
     const label = storyEntryLabel(entry, app.language);
     const extracted = reportStoryMedia(dashboardGroup(app), isWestern ? entry.key : "project");
     const fallbackMedia = isWestern && entry.report ? references.filter((reference) => reference.reportName === entry.report) : isWestern ? [] : references;
-    const media: StoryMediaReference[] = extracted.length ? extracted : fallbackMedia.map((reference) => ({ ...reference, kind: reference.referenceKind.includes("dashboard") ? "dashboard" : reference.referenceKind.includes("comparison") ? "comparison" : reference.referenceKind.includes("map") || reference.referenceKind === "webviewer" ? "map" : "evidence" }));
-    const mediaOrder: StoryMediaReference["kind"][] = ["axis-photo", "map", "comparison", "dashboard", "evidence"];
+    const rawMedia: StoryMediaReference[] = extracted.length ? extracted : fallbackMedia.map((reference) => ({ ...reference, kind: reference.referenceKind.includes("dashboard") ? "dashboard" : reference.referenceKind.includes("comparison") ? "comparison" : reference.referenceKind.includes("map") || reference.referenceKind === "webviewer" ? "map" : "evidence" }));
+    const media = rawMedia.filter((reference) => reference.kind !== "dashboard" && (app.language === "ar" || reference.kind === "axis-photo"));
+    const mediaOrder: StoryMediaReference["kind"][] = ["axis-photo", "map", "evidence"];
     const categoryLabels = app.language === "en"
       ? { "axis-photo": "Axis photos", map: "Maps", comparison: "Comparisons", dashboard: "Indicator dashboards", evidence: "Project evidence" }
       : { "axis-photo": "صور المحور", map: "الخرائط", comparison: "المقارنات", dashboard: "لوحات المؤشرات", evidence: "مرفقات المشروع" };
@@ -154,15 +204,15 @@ function storyMarkup(app: TransportApp): string {
   const entries = storyEntries(app);
   const firstAvailable = entries.find((entry) => entry.hero) || entries[0];
   const isWestern = dashboardGroup(app) === "western-upper-egypt";
-  const initialCompareBefore = firstAvailable?.compareBefore || "";
-  const initialCompareAfter = firstAvailable?.compareAfter || "";
+  const comparisonEndYear = dashboardGroup(app) === "ismailia" ? "2026" : isWestern ? "2024" : "2023";
   const initialTitle = firstAvailable ? storyEntryLabel(firstAvailable, app.language) : app.title;
+  const initialKey = firstAvailable?.key || entries[0]?.key || "project";
   const dashboard = relatedDashboard(app);
   return `<main class="sector-app story-runtime${isWestern ? " arcgis-reference-story" : ""}" dir="${app.direction}" data-sector-group="${dashboardGroup(app)}">${storyHeader(app, entries)}
     ${isWestern && dashboard ? `<section class="story-dashboard-view" hidden><iframe title="لوحة المؤشرات" loading="lazy" data-dashboard-frame></iframe></section>` : ""}<div class="story-content">
     <section id="story-intro" class="story-sector-hero" ${firstAvailable?.hero ? `style="--story-image:url('${esc(firstAvailable.hero)}')"` : ""}><div><span>قصة مكانية تفاعلية</span><h1 id="story-active-title">${esc(initialTitle)}</h1><p id="story-active-subtitle">${app.language === "en" ? "Land-use development" : "تطور استخدامات الأراضي"}</p><button data-story-scroll aria-label="ابدأ التصفح">↓</button></div></section>
     <section id="story-map" class="story-chapter"><div><b>01</b><h2>منطقة الدراسة ومسار المحور</h2><p>خريطة قمر صناعي تفاعلية تعرض حدود الدراسة ومسار الطريق ومناطق التغير العمراني والزراعي للقطاع المحدد فقط. استخدم أزرار التكبير واسحب الخريطة، وانقر على أي عنصر لعرض بياناته الوصفية.</p><div class="story-data-note" id="story-data-note">يتم عرض البيانات المحلية المراجعة للقطاع.</div><div class="story-kpis" id="story-kpis"><article><span>مساحة الدراسة</span><strong>—</strong><small>كم²</small></article><article><span>طول المحور</span><strong>—</strong><small>كم</small></article><article><span>التغير العمراني</span><strong>—</strong><small>كم²</small></article><article><span>المعالم المكانية</span><strong>—</strong><small>عنصر</small></article></div></div>${renderSectorMapMarkup()}</section>
-    <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى ${isWestern ? "2024" : "2023"}</h2><p>${app.language === "en" ? "Move the divider to compare." : "حرّك الفاصل للمقارنة."}</p></div><div class="story-compare" id="story-compare" ${initialCompareBefore ? `data-compare-before="${esc(initialCompareBefore)}" data-compare-after="${esc(initialCompareAfter)}" style="--compare-before:url('${esc(initialCompareBefore)}');--compare-after:url('${esc(initialCompareAfter)}')"` : "hidden"}><div class="compare-before"><span>2014</span></div><div class="compare-after" id="compare-overlay"><div class="compare-after-image"></div><span>${isWestern ? "2024" : "2023"}</span></div><i id="compare-handle">↔</i><input id="compare-range" type="range" min="0" max="100" value="50" aria-label="نسبة المقارنة الزمنية لاستخدامات الأراضي"/></div><div class="story-compare-missing" id="story-compare-missing" ${initialCompareBefore ? "hidden" : ""}>${app.language === "en" ? "No verified comparison is available." : "لا توجد مقارنة موثقة."}</div></section>
+    <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى ${comparisonEndYear}</h2><p>${app.language === "en" ? "Move the divider to compare." : "حرّك الفاصل للمقارنة."}</p></div><div class="story-compare story-map-compare" id="story-compare"><div class="compare-before">${renderSectorMapMarkup("story-baseline", "", false)}<span>2014</span></div><div class="compare-after"><div class="compare-after-image">${renderSectorMapMarkup("story-current", "", false)}</div><span>${comparisonEndYear}</span></div><i aria-hidden="true">↔</i><input type="range" min="0" max="100" value="50" aria-label="${app.language === "en" ? "Move the divider to compare land use" : "حرّك الفاصل لمقارنة استخدامات الأراضي"}"/></div><div class="story-compare-missing" id="story-compare-missing" hidden>${app.language === "en" ? "No verified comparison is available." : "لا توجد مقارنة موثقة."}</div>${storyDetailedComparisons(app, entries, initialKey, comparisonEndYear)}</section>
     ${storyMediaChapters(app, entries)}
     </div>
   </main>`;
@@ -173,7 +223,7 @@ function viewerMarkup(app: TransportApp): string {
 }
 
 function galleryMarkup(app: TransportApp): string {
-  const related = (applicationRegistry as TransportApp[]).filter((candidate) => candidate.language === "ar" && candidate.slug !== app.slug && dashboardGroup(candidate) === dashboardGroup(app));
+  const related = (applicationRegistry as TransportApp[]).filter((candidate) => candidate.language === app.language && candidate.slug !== app.slug && dashboardGroup(candidate) === dashboardGroup(app));
   const cards = related.map((candidate) => {
     const thumbnail = candidate.reportReferences?.[0]?.imagePath || "";
     return `<a class="application-gallery-card" href="../${esc(candidate.slug)}/index.html?lang=${app.language}" dir="${app.direction}">${thumbnail ? `<img src="${esc(thumbnail)}" alt="" loading="lazy"/>` : '<div class="application-gallery-placeholder">MOT</div>'}<div><b>${esc(localizedAppTitle(candidate, app.language))}</b><span>${esc(localizedType(candidate.type, app.language))}</span><small>${app.language === "en" ? "View application details ↗" : "عرض تفاصيل التطبيق ↗"}</small></div></a>`;
@@ -255,32 +305,19 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
       summary.landUse = profile.landUse || summary.landUse;
     }
   }
-  await initializeMap(group, summary);
+  const storyMapRoots = Array.from(document.querySelectorAll<HTMLElement>(".gis-map"));
+  await Promise.all(storyMapRoots.map((map) => initializeMap(group, summary, map)));
   document.querySelectorAll<HTMLButtonElement>("[data-view-layer], [data-gallery-layer]").forEach((button) => {
     const layer = button.dataset.viewLayer || button.dataset.galleryLayer || "";
     const available = summary.layers?.includes(layer) && Number(summary.sourceLayerCounts?.[layer] ?? summary.layerCounts?.[layer] ?? 0) > 0;
     button.hidden = !available;
   });
 
-  const fitStoryComparison = (source?: string) => {
-    const compareBox = document.querySelector<HTMLElement>("#story-compare");
-    if (!compareBox || !source) return;
-    compareBox.dataset.compareAfter = source;
-    const sourceImage = new Image();
-    sourceImage.addEventListener("load", () => {
-      compareBox.style.aspectRatio = `${sourceImage.naturalWidth} / ${sourceImage.naturalHeight}`;
-      compareBox.style.maxWidth = `${sourceImage.naturalWidth}px`;
-      document.querySelector<HTMLInputElement>("#compare-range")?.dispatchEvent(new Event("input"));
-    });
-    sourceImage.src = source;
-  };
-
   const activateStory = (button: HTMLButtonElement) => {
     document.querySelectorAll<HTMLButtonElement>("[data-story-key]").forEach((item) => item.classList.toggle("active", item === button));
     const title = button.dataset.storyTitle || app.title;
     const hero = button.dataset.storyHero || "";
     const compareBefore = button.dataset.storyCompareBefore || "";
-    const compareAfter = button.dataset.storyCompareAfter || compareBefore;
     const sector = button.dataset.storySector || "all";
     const key = button.dataset.storyKey || "all";
     const heroSection = document.querySelector<HTMLElement>(".story-sector-hero");
@@ -295,28 +332,23 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     if (chromeTitle) chromeTitle.textContent = app.language === "en" ? `Land development · ${title}` : `تطور الأراضي · ${title}`;
     if (heroSection && hero) heroSection.style.setProperty("--story-image", `url('${hero}')`);
     document.querySelectorAll<HTMLElement>("[data-story-detail]").forEach((chapter) => chapter.classList.toggle("active", chapter.dataset.storyDetail === key));
+    document.querySelectorAll<HTMLElement>("[data-story-comparison-set]").forEach((set) => set.classList.toggle("active", set.dataset.storyComparisonSet === key));
+    document.querySelector<HTMLElement>(".story-detailed-comparisons")?.toggleAttribute("hidden", !document.querySelector(`[data-story-comparison-set="${key}"]`));
     document.querySelector<HTMLButtonElement>("[data-story-dashboard]")?.classList.remove("active");
     root.classList.remove("story-dashboard-open");
     document.querySelector<HTMLElement>(".story-dashboard-view")?.setAttribute("hidden", "true");
     document.querySelector<HTMLElement>(".story-content")?.removeAttribute("hidden");
-    if (compareBox && compareBefore) {
-      compareBox.dataset.compareBefore = compareBefore;
-      compareBox.dataset.compareAfter = compareAfter;
-      compareBox.style.setProperty("--compare-before", `url('${compareBefore}')`);
-      compareBox.style.setProperty("--compare-after", `url('${compareAfter}')`);
-      fitStoryComparison(compareAfter);
-    }
-    compareBox?.toggleAttribute("hidden", !compareBefore);
-    compareMissing?.toggleAttribute("hidden", Boolean(compareBefore));
+    compareBox?.toggleAttribute("hidden", !compareBefore && !compareBox.classList.contains("story-map-compare"));
+    compareMissing?.toggleAttribute("hidden", Boolean(compareBefore) || Boolean(compareBox?.classList.contains("story-map-compare")));
     if (compareMissing && !compareBefore) compareMissing.textContent = app.language === "en" ? "No verified comparison is available." : "لا توجد مقارنة موثقة.";
     if (dataNote) dataNote.textContent = app.language === "en" ? (sector === "all" ? "All project sectors are displayed from the local database." : `Only verified local data for ${title} is displayed.`) : (sector === "all" ? "يتم عرض جميع قطاعات المشروع من قاعدة البيانات المحلية." : `يتم عرض بيانات ${title} فقط من قاعدة البيانات المحلية.`);
-    const range = document.querySelector<HTMLInputElement>("#compare-range");
-    if (range) { range.value = "50"; range.dispatchEvent(new Event("input")); }
-    const sectorSelect = document.querySelector<HTMLSelectElement>(".map-sector-select");
-    if (sectorSelect && Array.from(sectorSelect.options).some((option) => option.value === sector)) {
-      sectorSelect.value = sector;
-      sectorSelect.dispatchEvent(new Event("change"));
-    }
+    document.querySelectorAll<HTMLInputElement>(".story-compare input[type='range']").forEach((range) => { range.value = "50"; range.dispatchEvent(new Event("input")); });
+    document.querySelectorAll<HTMLSelectElement>(".map-sector-select").forEach((sectorSelect) => {
+      if (Array.from(sectorSelect.options).some((option) => option.value === sector)) {
+        sectorSelect.value = sector;
+        sectorSelect.dispatchEvent(new Event("change"));
+      }
+    });
     const url = new URL(window.location.href);
     if (key === "all" || key === "project") url.searchParams.delete("sector");
     else url.searchParams.set("sector", key);
@@ -332,7 +364,8 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
   }));
   const requestedStory = new URLSearchParams(window.location.search).get("sector");
   const requestedButton = requestedStory ? document.querySelector<HTMLButtonElement>(`[data-story-key="${requestedStory}"]`) : null;
-  if (requestedButton) activateStory(requestedButton);
+  const initialStoryButton = requestedButton || document.querySelector<HTMLButtonElement>("[data-story-key].active");
+  if (initialStoryButton) activateStory(initialStoryButton);
   document.querySelector<HTMLButtonElement>("[data-story-dashboard]")?.addEventListener("click", (event) => {
     const button = event.currentTarget as HTMLButtonElement;
     document.querySelectorAll<HTMLButtonElement>("[data-story-key]").forEach((item) => item.classList.remove("active"));
@@ -373,23 +406,22 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     const values = [summary.metrics.studyAreaKm2, summary.metrics.axisLengthKm, summary.metrics.urbanChangeKm2, (summary.metrics.urbanFeatures || 0) + (summary.metrics.agriculturalFeatures || 0) + (summary.metrics.industrialFeatures || 0)];
     storyKpis.querySelectorAll("article").forEach((card, index) => { const strong = card.querySelector("strong"); if (strong) strong.textContent = format(Number(values[index] || 0)); });
   }
-  const range = document.querySelector<HTMLInputElement>("#compare-range");
-  range?.addEventListener("input", () => {
-    const overlay = document.querySelector<HTMLElement>("#compare-overlay");
-    const handle = document.querySelector<HTMLElement>("#compare-handle");
-    const compare = document.querySelector<HTMLElement>("#story-compare");
-    const afterImage = document.querySelector<HTMLElement>(".compare-after-image");
-    if (overlay) overlay.style.width = `${range.value}%`;
-    if (handle) handle.style.left = `${range.value}%`;
-    if (compare && afterImage) afterImage.style.width = `${compare.clientWidth}px`;
-    if (compare) compare.style.setProperty("--compare-position", `${range.value}%`);
+  document.querySelectorAll<HTMLElement>(".story-compare").forEach((compare) => {
+    const range = compare.querySelector<HTMLInputElement>("input[type='range']");
+    const overlay = compare.querySelector<HTMLElement>(".compare-after");
+    const handle = compare.querySelector<HTMLElement>(":scope > i");
+    const afterImage = compare.querySelector<HTMLElement>(".compare-after-image");
+    if (!range || !overlay || !handle || !afterImage) return;
+    const update = () => {
+      overlay.style.width = `${range.value}%`;
+      handle.style.left = `${range.value}%`;
+      afterImage.style.width = `${compare.clientWidth}px`;
+      compare.style.setProperty("--compare-position", `${range.value}%`);
+    };
+    range.addEventListener("input", update);
+    new ResizeObserver(update).observe(compare);
+    update();
   });
-  const compareBox = document.querySelector<HTMLElement>("#story-compare");
-  if (compareBox) {
-    new ResizeObserver(() => range?.dispatchEvent(new Event("input"))).observe(compareBox);
-    fitStoryComparison(compareBox.dataset.compareAfter);
-  }
-  range?.dispatchEvent(new Event("input"));
   document.querySelector<HTMLButtonElement>("[data-story-scroll]")?.addEventListener("click", () => document.querySelector(".story-chapter")?.scrollIntoView({ behavior: "smooth" }));
   document.querySelectorAll<HTMLButtonElement>("[data-view-layer], [data-gallery-layer]").forEach((button) => button.addEventListener("click", () => selectOnly(button.dataset.viewLayer || button.dataset.galleryLayer || "study")));
   document.querySelectorAll<HTMLElement>("[data-layer-count]").forEach((element) => { element.textContent = format(summary.layerCounts?.[element.dataset.layerCount || ""] || 0); });

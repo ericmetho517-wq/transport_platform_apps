@@ -53,15 +53,8 @@ const typeIcon: Record<string, string> = {
 const platformParams = new URLSearchParams(window.location.search);
 const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "en" : "ar";
 const displayTypeLabels = platformLanguage === "en" ? englishTypeLabels : typeLabels;
-// Prefer the Arabic record when the registry contains the same localized app
-// twice, but retain genuinely English-only applications in that axis.
-const normalizedTitle = (value: string) => value.toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g, " ").trim();
-const arabicRegistry = registry.filter((app) => app.language === "ar");
-const modeRegistry = registry.filter((app) => app.language === "ar" || !arabicRegistry.some((candidate) =>
-  candidate.reportReferenceGroup === app.reportReferenceGroup
-  && candidate.type === app.type
-  && normalizedTitle(localizedAppTitle(candidate, "en")) === normalizedTitle(localizedAppTitle(app, "en")),
-));
+// Each interface mode displays only records authored for that language.
+const modeRegistry = registry.filter((app) => app.language === platformLanguage);
 const modeCounts = new Map<string, number>();
 modeRegistry.forEach((app) => modeCounts.set(app.type, (modeCounts.get(app.type) || 0) + 1));
 const totalApplications = modeRegistry.length;

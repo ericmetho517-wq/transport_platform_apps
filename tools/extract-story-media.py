@@ -48,7 +48,6 @@ ISMAILIA_MEDIA = {
     "image14.jpeg": "map",
     "image15.jpeg": "map",
     "image16.jpeg": "map",
-    "image17.png": "dashboard",
     "image18.jpeg": "comparison",
     "image19.jpeg": "comparison",
     "image20.jpeg": "comparison",
@@ -57,8 +56,6 @@ ISMAILIA_MEDIA = {
     "image23.jpeg": "comparison",
     "image24.jpeg": "comparison",
     "image25.jpeg": "comparison",
-    "image26.png": "dashboard",
-    "image27.png": "dashboard",
     "image28.jpeg": "map",
 }
 
@@ -70,6 +67,11 @@ REJECTED_DIGEST_PREFIXES = {
 
 REJECTED_REPORT_PAGES = {
     "Final Report 3-2024.pdf": {15, 29},  # workshop/building photos
+}
+
+HERO_PAGE_OVERRIDES = {
+    "(7).pdf": {50},
+    "Final Report 3-2024.pdf": {18, 82, 138, 179, 227, 279},
 }
 
 
@@ -135,7 +137,7 @@ def extract_report(
             target = output_dir / filename
             if not target.exists():
                 target.write_bytes(data)
-            kind = media_kind(page_text, width, height, image_index)
+            kind = "axis-photo" if page_number in HERO_PAGE_OVERRIDES.get(report_path.name, set()) else media_kind(page_text, width, height, image_index)
             records.append({
                 "imagePath": f"../../references/story-media/{filename}",
                 "reportName": report_path.name,
@@ -150,7 +152,7 @@ def extract_report(
 
 def curate_records(records: list[dict[str, object]]) -> list[dict[str, object]]:
     """Keep complete, presentation-ready project visuals only."""
-    limits = {"axis-photo": 3, "map": 8, "comparison": 6, "dashboard": 4}
+    limits = {"axis-photo": 3, "map": 8, "comparison": 6}
     counts = {kind: 0 for kind in limits}
     curated: list[dict[str, object]] = []
     for record in records:
@@ -166,9 +168,7 @@ def curate_records(records: list[dict[str, object]]) -> list[dict[str, object]]:
             continue
         if ratio < 0.9 or ratio > 2.7:
             continue
-        if kind == "comparison" and is_dark_chart_fragment(record):
-            continue
-        if kind == "axis-photo" and int(record["page"]) != 1:
+        if is_indicator_graphic(record):
             continue
         if counts[kind] >= limits[kind]:
             continue
@@ -177,16 +177,19 @@ def curate_records(records: list[dict[str, object]]) -> list[dict[str, object]]:
     return curated
 
 
-def is_dark_chart_fragment(record: dict[str, object]) -> bool:
-    """Reject cropped black chart pieces that were embedded separately in PDFs."""
+def is_indicator_graphic(record: dict[str, object]) -> bool:
+    """Reject dashboard captures and isolated white/dark chart fragments."""
     image = Path("public/references/story-media") / Path(str(record["imagePath"])).name
     try:
         with Image.open(image) as source:
             sample = source.convert("RGB")
             sample.thumbnail((180, 180))
             mean = sum(ImageStat.Stat(sample).mean) / 3
-            dark_pixels = sum(sample.convert("L").histogram()[:38])
-            return mean < 75 or dark_pixels / max(sample.width * sample.height, 1) > 0.5
+            histogram = sample.convert("L").histogram()
+            pixels = max(sample.width * sample.height, 1)
+            dark_share = sum(histogram[:38]) / pixels
+            white_share = sum(histogram[242:]) / pixels
+            return mean < 75 or dark_share > 0.5 or white_share > 0.68
     except OSError:
         return True
 
