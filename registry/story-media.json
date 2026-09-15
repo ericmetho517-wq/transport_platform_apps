@@ -1701,6 +1701,26 @@
           "height": 644
         }
       ]
+    },
+    "dabaa-axis": {
+      "project": [
+        {
+          "imagePath": "../../references/dabaa/landuse-2014.png",
+          "reportName": "محور الضبعة",
+          "page": 5,
+          "kind": "comparison",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "imagePath": "../../references/dabaa/landuse-2023.png",
+          "reportName": "محور الضبعة",
+          "page": 6,
+          "kind": "comparison",
+          "width": 1600,
+          "height": 900
+        }
+      ]
     }
   }
 }

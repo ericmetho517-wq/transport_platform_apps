@@ -48,19 +48,29 @@ function storyComparisonPairs(media: StoryMediaReference[], group: string): Arra
   const pairs: Array<{ before: string; after: string }> = [];
   const byPage = new Map<number, StoryMediaReference[]>();
   comparisons.forEach((reference) => byPage.set(reference.page, [...(byPage.get(reference.page) || []), reference]));
-  const reviewedPages: Record<string, number[]> = {
-    ismailia: [0],
-    "regional-ring-road": [22],
-    "dahshur-south-link": [84],
-    "suez-ring-link": [140],
-    "qena-luxor-road": [],
-    "qus-axis": [229],
-    "kalabsha-axis": [281],
+  const reviewedPagePairs: Record<string, Array<[number, number]>> = {
+    ismailia: [[0, 0], [0, 1], [0, 2], [0, 3]],
+    "regional-ring-road": [[22, 0]],
+    "dahshur-south-link": [[84, 0]],
+    "suez-ring-link": [[140, 0]],
+    "qena-luxor-road": [[217, 0], [218, 0]],
+    "qus-axis": [[229, 0]],
+    "kalabsha-axis": [[281, 0]],
   };
-  if (group in reviewedPages) {
-    reviewedPages[group].forEach((page) => {
+  const reviewedIndexPairs: Record<string, Array<[number, number]>> = {
+    "cairo-suez-road": [[1, 2]],
+  };
+  if (group in reviewedIndexPairs) {
+    reviewedIndexPairs[group].forEach(([beforeIndex, afterIndex]) => {
+      if (comparisons[beforeIndex] && comparisons[afterIndex]) pairs.push({ before: comparisons[beforeIndex].imagePath, after: comparisons[afterIndex].imagePath });
+    });
+    return pairs;
+  }
+  if (group in reviewedPagePairs) {
+    reviewedPagePairs[group].forEach(([page, pairIndex]) => {
       const items = byPage.get(page) || [];
-      for (let index = 0; index + 1 < items.length && pairs.length < 3; index += 2) pairs.push({ before: items[index].imagePath, after: items[index + 1].imagePath });
+      const index = pairIndex * 2;
+      if (items[index] && items[index + 1]) pairs.push({ before: items[index].imagePath, after: items[index + 1].imagePath });
     });
     return pairs;
   }
@@ -68,13 +78,26 @@ function storyComparisonPairs(media: StoryMediaReference[], group: string): Arra
     const before = comparisons[index], after = comparisons[index + 1];
     const beforeRatio = (before.width || 1) / (before.height || 1);
     const afterRatio = (after.width || 1) / (after.height || 1);
-    if (after.page - before.page === 1 && Math.abs(beforeRatio - afterRatio) < 0.12) {
+    if (after.page - before.page <= 1 && Math.abs(beforeRatio - afterRatio) < 0.12) {
       pairs.push({ before: before.imagePath, after: after.imagePath });
       break;
     }
   }
   return pairs;
 }
+
+const storyComparisonYears = (group: string): { start: string; end: string } => ({
+  ismailia: { start: "2014", end: "2026" },
+  "western-upper-egypt": { start: "2014", end: "2024" },
+  "cairo-suez-road": { start: "2014", end: "2024" },
+  "regional-ring-road": { start: "2014", end: "2023" },
+  "dahshur-south-link": { start: "2014", end: "2023" },
+  "suez-ring-link": { start: "2014", end: "2023" },
+  "qena-luxor-road": { start: "2014", end: "2023" },
+  "qus-axis": { start: "2014", end: "2023" },
+  "kalabsha-axis": { start: "2014", end: "2023" },
+  "dabaa-axis": { start: "2014", end: "2023" },
+}[group] || { start: "2014", end: "2023" });
 
 const westernStoryReports: Array<Pick<StoryEntry, "key" | "label" | "sector" | "report">> = [
   { key: "abu-simbel", label: "أبو سمبل", sector: "7", report: ".pdf" },
@@ -105,10 +128,10 @@ function storyEntries(app: TransportApp): StoryEntry[] {
     const comparisonPairs = storyComparisonPairs(extracted, dashboardGroup(app));
     const fallbackHero = references.find((reference) => reference.referenceKind === "story-hero") || references[0];
     const fallbackComparison = references.find((reference) => reference.referenceKind === "story-comparison") || references[1];
-    const compareBefore = comparisons[0]?.imagePath || fallbackComparison?.imagePath || "";
+    const compareBefore = comparisonPairs[0]?.before || comparisons[0]?.imagePath || fallbackComparison?.imagePath || "";
     const fullTitle = app.language === "en" ? (app.alternateTitles?.[0] || app.title) : app.title;
     const conciseTitle = fullTitle.replace(/^(القصة المكانية التفاعلية|Spatial StoryMap)\s*[–—-]\s*/i, "");
-    return [{ key: "project", label: conciseTitle, sector: "all", report: fallbackHero?.reportName || hero?.reportName || "", hero: hero?.imagePath || fallbackHero?.imagePath || "", compareBefore, compareAfter: comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs }];
+    return [{ key: "project", label: conciseTitle, sector: "all", report: fallbackHero?.reportName || hero?.reportName || "", hero: hero?.imagePath || fallbackHero?.imagePath || "", compareBefore, compareAfter: comparisonPairs[0]?.after || comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs }];
   }
   const overviewMedia = reportStoryMedia("western-upper-egypt", "corridor-overview");
   const corridorHero = overviewMedia.find((reference) => reference.kind === "axis-photo")?.imagePath || "";
@@ -118,8 +141,8 @@ function storyEntries(app: TransportApp): StoryEntry[] {
     const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "comparison");
     const comparisons = extracted.filter((reference) => reference.kind === "comparison");
     const comparisonPairs = storyComparisonPairs(extracted, "western-upper-egypt");
-    const compareBefore = comparisons[0]?.imagePath || matching[1]?.imagePath || "";
-    return { ...item, hero: hero?.imagePath || matching[0]?.imagePath || corridorHero, compareBefore, compareAfter: comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs };
+    const compareBefore = comparisonPairs[0]?.before || comparisons[0]?.imagePath || matching[1]?.imagePath || "";
+    return { ...item, hero: hero?.imagePath || matching[0]?.imagePath || corridorHero, compareBefore, compareAfter: comparisonPairs[0]?.after || comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs };
   });
 }
 
@@ -204,7 +227,9 @@ function storyMarkup(app: TransportApp): string {
   const entries = storyEntries(app);
   const firstAvailable = entries.find((entry) => entry.hero) || entries[0];
   const isWestern = dashboardGroup(app) === "western-upper-egypt";
-  const comparisonEndYear = dashboardGroup(app) === "ismailia" ? "2026" : isWestern ? "2024" : "2023";
+  const comparisonYears = storyComparisonYears(dashboardGroup(app));
+  const comparisonStartYear = comparisonYears.start;
+  const comparisonEndYear = comparisonYears.end;
   const initialTitle = firstAvailable ? storyEntryLabel(firstAvailable, app.language) : app.title;
   const initialKey = firstAvailable?.key || entries[0]?.key || "project";
   const dashboard = relatedDashboard(app);
@@ -212,7 +237,7 @@ function storyMarkup(app: TransportApp): string {
     ${isWestern && dashboard ? `<section class="story-dashboard-view" hidden><iframe title="لوحة المؤشرات" loading="lazy" data-dashboard-frame></iframe></section>` : ""}<div class="story-content">
     <section id="story-intro" class="story-sector-hero" ${firstAvailable?.hero ? `style="--story-image:url('${esc(firstAvailable.hero)}')"` : ""}><div><span>قصة مكانية تفاعلية</span><h1 id="story-active-title">${esc(initialTitle)}</h1><p id="story-active-subtitle">${app.language === "en" ? "Land-use development" : "تطور استخدامات الأراضي"}</p><button data-story-scroll aria-label="ابدأ التصفح">↓</button></div></section>
     <section id="story-map" class="story-chapter"><div><b>01</b><h2>منطقة الدراسة ومسار المحور</h2><p>خريطة قمر صناعي تفاعلية تعرض حدود الدراسة ومسار الطريق ومناطق التغير العمراني والزراعي للقطاع المحدد فقط. استخدم أزرار التكبير واسحب الخريطة، وانقر على أي عنصر لعرض بياناته الوصفية.</p><div class="story-data-note" id="story-data-note">يتم عرض البيانات المحلية المراجعة للقطاع.</div><div class="story-kpis" id="story-kpis"><article><span>مساحة الدراسة</span><strong>—</strong><small>كم²</small></article><article><span>طول المحور</span><strong>—</strong><small>كم</small></article><article><span>التغير العمراني</span><strong>—</strong><small>كم²</small></article><article><span>المعالم المكانية</span><strong>—</strong><small>عنصر</small></article></div></div>${renderSectorMapMarkup()}</section>
-    <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من 2014 حتى ${comparisonEndYear}</h2><p>${app.language === "en" ? "Move the divider to compare." : "حرّك الفاصل للمقارنة."}</p></div><div class="story-compare story-map-compare" id="story-compare"><div class="compare-before">${renderSectorMapMarkup("story-baseline", "", false)}<span>2014</span></div><div class="compare-after"><div class="compare-after-image">${renderSectorMapMarkup("story-current", "", false)}</div><span>${comparisonEndYear}</span></div><i aria-hidden="true">↔</i><input type="range" min="0" max="100" value="50" aria-label="${app.language === "en" ? "Move the divider to compare land use" : "حرّك الفاصل لمقارنة استخدامات الأراضي"}"/></div><div class="story-compare-missing" id="story-compare-missing" hidden>${app.language === "en" ? "No verified comparison is available." : "لا توجد مقارنة موثقة."}</div>${storyDetailedComparisons(app, entries, initialKey, comparisonEndYear)}</section>
+    <section id="story-development" class="story-compare-section"><div class="section-heading"><span>02</span><h2>تطور استخدامات الأراضي من ${comparisonStartYear} حتى ${comparisonEndYear}</h2><p>${app.language === "en" ? "Move the divider to compare the documented satellite images." : "حرّك الفاصل لمقارنة صور الأقمار الصناعية الموثقة وحدود التغير."}</p></div><div class="story-compare story-report-swipe" id="story-compare" style="--compare-before:url('${esc(firstAvailable?.compareBefore || "")}');--compare-after:url('${esc(firstAvailable?.compareAfter || "")}')"><div class="compare-before"><span>${comparisonStartYear}</span></div><div class="compare-after"><div class="compare-after-image"></div><span>${comparisonEndYear}</span></div><i aria-hidden="true">↔</i><input type="range" min="0" max="100" value="50" aria-label="${app.language === "en" ? "Move the divider to compare land use" : "حرّك الفاصل لمقارنة استخدامات الأراضي"}"/></div><div class="story-compare-missing" id="story-compare-missing" ${firstAvailable?.compareBefore ? "hidden" : ""}>${app.language === "en" ? "No verified comparison is available." : "لا توجد مقارنة موثقة."}</div>${storyDetailedComparisons(app, entries, initialKey, comparisonEndYear)}</section>
     ${storyMediaChapters(app, entries)}
     </div>
   </main>`;
@@ -318,6 +343,7 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     const title = button.dataset.storyTitle || app.title;
     const hero = button.dataset.storyHero || "";
     const compareBefore = button.dataset.storyCompareBefore || "";
+    const compareAfter = button.dataset.storyCompareAfter || compareBefore;
     const sector = button.dataset.storySector || "all";
     const key = button.dataset.storyKey || "all";
     const heroSection = document.querySelector<HTMLElement>(".story-sector-hero");
@@ -331,6 +357,10 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     if (activeSubtitle) activeSubtitle.textContent = app.language === "en" ? `Land development along the Western Desert Road (${title})` : `تطور الأراضي المحيطة بطريق الصعيد الصحراوي الغربي (${title})`;
     if (chromeTitle) chromeTitle.textContent = app.language === "en" ? `Land development · ${title}` : `تطور الأراضي · ${title}`;
     if (heroSection && hero) heroSection.style.setProperty("--story-image", `url('${hero}')`);
+    if (compareBox) {
+      compareBox.style.setProperty("--compare-before", `url('${compareBefore}')`);
+      compareBox.style.setProperty("--compare-after", `url('${compareAfter}')`);
+    }
     document.querySelectorAll<HTMLElement>("[data-story-detail]").forEach((chapter) => chapter.classList.toggle("active", chapter.dataset.storyDetail === key));
     document.querySelectorAll<HTMLElement>("[data-story-comparison-set]").forEach((set) => set.classList.toggle("active", set.dataset.storyComparisonSet === key));
     document.querySelector<HTMLElement>(".story-detailed-comparisons")?.toggleAttribute("hidden", !document.querySelector(`[data-story-comparison-set="${key}"]`));
@@ -338,8 +368,8 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     root.classList.remove("story-dashboard-open");
     document.querySelector<HTMLElement>(".story-dashboard-view")?.setAttribute("hidden", "true");
     document.querySelector<HTMLElement>(".story-content")?.removeAttribute("hidden");
-    compareBox?.toggleAttribute("hidden", !compareBefore && !compareBox.classList.contains("story-map-compare"));
-    compareMissing?.toggleAttribute("hidden", Boolean(compareBefore) || Boolean(compareBox?.classList.contains("story-map-compare")));
+    compareBox?.toggleAttribute("hidden", !compareBefore);
+    compareMissing?.toggleAttribute("hidden", Boolean(compareBefore));
     if (compareMissing && !compareBefore) compareMissing.textContent = app.language === "en" ? "No verified comparison is available." : "لا توجد مقارنة موثقة.";
     if (dataNote) dataNote.textContent = app.language === "en" ? (sector === "all" ? "All project sectors are displayed from the local database." : `Only verified local data for ${title} is displayed.`) : (sector === "all" ? "يتم عرض جميع قطاعات المشروع من قاعدة البيانات المحلية." : `يتم عرض بيانات ${title} فقط من قاعدة البيانات المحلية.`);
     document.querySelectorAll<HTMLInputElement>(".story-compare input[type='range']").forEach((range) => { range.value = "50"; range.dispatchEvent(new Event("input")); });
