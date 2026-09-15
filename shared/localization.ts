@@ -1,6 +1,9 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["أراضي فضاء", "Vacant land"],
+  ["لم يتغير", "Unchanged"],
+  ["حالة التغير", "Change status"],
   ["تطور الأراضي المحيطة بطريق الصعيد الصحراوي الغربي", "Land development along the Western Desert Road"],
   ["تطور الأراضي المحيطة بطريق الصعيد الصحراوي", "Land development along the Western Desert Road"],
   ["مقارنة مساحات استخدامات الأراضي لعامي", "Land-use area comparison for"],

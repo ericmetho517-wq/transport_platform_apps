@@ -49,7 +49,7 @@ const ismailiaLanduseSymbols: Record<number, [string, string]> = {
 const ismailiaLanduseNames: Record<string, string> = {
   "0": "الأراضي الزراعية", "1": "المناطق الصناعية", "2": "أراضي الفضاء", "3": "الأراضي العمرانية",
   "4": "أراضي القوات المسلحة", "5": "أراضي خدمات", "6": "المناطق الترفيهية",
-  "7": "المقابر", "8": "مسطحات مائية", "9": "حرم الطريق", "10": "حرم الطريق",
+  "7": "المقابر", "8": "مسطحات مائية", "9": "حرم الطريق", "10": "طرق",
   "11": "ديني", "12": "الأراضي التعليمية", "13": "الأراضي الحكومية",
   "14": "الأراضي السياحية", "15": "مساحات خضراء", "99": "غير مصنف",
 };
@@ -768,7 +768,7 @@ async function deriveLandUseFromLocalLayers(group: string, summary: DashboardSum
   const categoryFor = (raw: unknown): string => {
     const value = String(raw ?? "").trim().toLowerCase();
     const code = Number(raw);
-    if (Number.isFinite(code)) return ({ 0: "الأراضي الزراعية", 1: "الأراضي الصناعية", 2: "أراضي فضاء", 3: "الأراضي العمرانية", 4: "خدمات ومرافق", 5: "حكومي وعسكري", 6: "ترفيهي وسياحي", 7: "غير مصنف", 8: "مسطحات مائية", 9: "نقل ومرافق عامة", 10: "مقابر", 11: "تعليمي", 12: "طرق", 13: "استخدامات أخرى" } as Record<number, string>)[code] || `استخدام أرض ${code}`;
+    if (Number.isFinite(code)) return ismailiaLanduseNames[String(code)] || `استخدام أرض ${code}`;
     if (/agri|زراع/.test(value)) return "الأراضي الزراعية";
     if (/industr|factor|مصنع|صناع/.test(value)) return "الأراضي الصناعية";
     if (/vacant|vscant|vecant|فضاء|فارغ/.test(value)) return "أراضي فضاء";
@@ -1022,18 +1022,18 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
             : /industr|factor|مصنع|صناع/.test(normalized) ? 1
               : /vacant|vscant|vecant|فضاء|فارغ/.test(normalized) ? 2
                 : /urban|build|residen|عمران|مبان|سكن/.test(normalized) ? 3
-                  : /facilit|service|خدم/.test(normalized) ? 4
-                    : /military|government|حكوم|عسكر/.test(normalized) ? 5
-                      : /water|مياه|مائي/.test(normalized) ? 8
-                        : /road|طريق/.test(normalized) ? 12 : 99;
-        const defaultPalette: Record<number, [string, string]> = {
-          0: ["#28c51b", "#28c51b"], 1: ["#a100c2", "#a100c2"], 2: ["#ffffbe", "#e4e4a3"],
-          3: ["#ffaa00", "#e59600"], 4: ["#c6f5ad", "#9dd781"], 5: ["#ff1308", "#dc0d05"],
-          6: ["#aebda6", "#93a28b"], 7: ["#9aa5ad", "#eef3f6"], 8: ["#18b2dc", "#078fb5"],
-          9: ["#555555", "#d6d6d6"], 10: ["#858585", "#e1e1e1"], 11: ["#2f5c96", "#244a7a"],
-          12: ["#555555", "#d6d6d6"], 13: ["#bd7900", "#9c6300"], 99: ["#9aa5ad", "#eef3f6"],
-        };
-        const palette = defaultPalette;
+                  : /military|armed|عسكر|قوات/.test(normalized) ? 4
+                    : /facilit|service|خدم|مرافق/.test(normalized) ? 5
+                      : /recreat|ترفيه/.test(normalized) ? 6
+                        : /cemeter|مقابر|جبان/.test(normalized) ? 7
+                          : /water|مياه|مائي/.test(normalized) ? 8
+                            : /relig|دين|مسجد|كنيس/.test(normalized) ? 11
+                              : /educat|تعليم|مدرس|جامعة/.test(normalized) ? 12
+                                : /government|حكوم|وزارة/.test(normalized) ? 13
+                                  : /touris|سياح|فندق/.test(normalized) ? 14
+                                    : /green|خضراء|حدائق/.test(normalized) ? 15
+                                      : /road|طريق/.test(normalized) ? 9 : 99;
+        const palette = ismailiaLanduseSymbols;
         const [fill, stroke] = palette[inferredCode] || palette[99];
         path.dataset.landuseCode = String(inferredCode);
         path.style.fill = fill;
@@ -1048,13 +1048,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       bucket.features.push(feature);
       landcoverBuckets.set(key, bucket);
     }
-    const defaultLanduseNames: Record<string, string> = {
-      "0": "أراضي زراعية", "1": "أراضي صناعية", "2": "أراضي فضاء", "3": "أراضي عمرانية",
-      "4": "خدمات ومرافق", "5": "حكومي وعسكري", "6": "ترفيهي وسياحي", "7": "غير مصنف",
-      "8": "مسطحات مائية", "9": "نقل ومرافق عامة", "10": "مقابر", "11": "تعليمي",
-      "12": "طرق", "13": "استخدامات أخرى", "99": "غير مصنف"
-    };
-    const landuseNames = group === "ismailia" ? ismailiaLanduseNames : defaultLanduseNames;
+    const landuseNames = ismailiaLanduseNames;
     for (const bucket of landcoverBuckets.values()) {
       for (let start = 0; start < bucket.paths.length; start += 350) {
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -1156,10 +1150,28 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
             featureSelection.removeAttribute("hidden");
             content.appendChild(featureSelection);
           }
-          const rows = Object.entries(targetProperties || {}).filter(([, value]) => value !== null && value !== "");
+          const hiddenPopupFields = new Set(["landuse_value", "landuse_code", "landuse_label", "change_status_key"]);
+          const rows = Object.entries(targetProperties || {}).filter(([key, value]) => !hiddenPopupFields.has(key) && value !== null && value !== "");
           const aggregateFieldLabels: Record<string, string> = { landuse_value: "استخدام الأرض", landuse_code: "كود استخدام الأرض", landuse_label: "وصف الاستخدام", source_feature_count: "عدد المعالم الأصلية", area_km2: "المساحة (كم²)", sector: "القطاع" };
           const landuseTitle = landuseNames[bucket.code] || labels[layer];
-          popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${esc(labels[layer])}</p><p><span>نوع الاستخدام</span><b>${esc(landuseTitle)}</b></p>` + (rows.length ? rows.map(([key, value]) => `<p><span>${esc(aggregateFieldLabels[key] || key.replaceAll("_", " "))}</span><b>${esc(String(value))}</b></p>`).join("") : "");
+          const popupValue = (key: string, value: unknown): string => {
+            if (key === "change_status") {
+              const status = normalizeChangeStatus(value);
+              if (status === "changed") return document.documentElement.lang === "en" ? "Changed" : "متغير";
+              if (status === "unchanged") return document.documentElement.lang === "en" ? "Unchanged" : "لم يتغير";
+            }
+            if (key === "area_km2") {
+              const rawArea = Number(value);
+              if (Number.isFinite(rawArea)) {
+                // Some source exports store square metres in the legacy area_km2 field.
+                const areaKm2 = rawArea > Math.max(summary.metrics.studyAreaKm2 * 100, 100_000) ? rawArea / 1_000_000 : rawArea;
+                return `${formatNumber(areaKm2, 3)} ${document.documentElement.lang === "en" ? "km²" : "كم²"}`;
+              }
+            }
+            if (key === "source_feature_count" && Number.isFinite(Number(value))) return formatNumber(Number(value), 0);
+            return String(value);
+          };
+          popup.querySelector("div")!.innerHTML = `<p class="popup-layer">${esc(labels[layer])}</p><p><span>نوع الاستخدام</span><b>${esc(landuseTitle)}</b></p>` + (rows.length ? rows.map(([key, value]) => `<p><span>${esc(aggregateFieldLabels[key] || key.replaceAll("_", " "))}</span><b>${esc(popupValue(key, value))}</b></p>`).join("") : "");
           popup.hidden = false;
           popup.style.display = "block";
         };
@@ -1195,10 +1207,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (loaded.some(([layer]) => temporalLayers.includes(layer))) {
     const expanded = mapInstance.includes("baseline") || mapInstance.includes("current") ? "" : " open";
     // Use the same approved land-use legend for every axis, not only Ismailia.
-    const legendItems = true
-      ? [[0, "الأراضي الزراعية"], [1, "المناطق الصناعية"], [2, "أراضي الفضاء"], [3, "الأراضي العمرانية"], [4, "أراضي القوات المسلحة"], [5, "أراضي خدمات"], [6, "المناطق الترفيهية"], [7, "المقابر"], [8, "مسطحات مائية"], [11, "ديني"], [12, "الأراضي التعليمية"], [13, "الأراضي الحكومية"], [14, "الأراضي السياحية"]]
-        .map(([code, label]) => `<span style="--swatch:${ismailiaLanduseSymbols[Number(code)][0]}">${label}</span>`).join("")
-      : `<span style="--swatch:#45c51a">زراعي</span><span style="--swatch:#6657d9">صناعي</span><span style="--swatch:#cfe566">أراضٍ فضاء</span><span style="--swatch:#e4a313">عمراني</span><span style="--swatch:#ef6c35">خدمات ومرافق</span><span style="--swatch:#b17ad1">نقل ومرافق عامة</span><span style="--swatch:#21b7a8">ترفيهي وسياحي</span><span style="--swatch:#74826d">مقابر</span><span style="--swatch:#22a9e0">مسطحات مائية</span><span style="--swatch:#c7ad72">جزر</span><span style="--swatch:#d94f70">طرق</span><span style="--swatch:#5d82c9">تعليمي</span><span style="--swatch:#8f5aae">حكومي</span><span style="--swatch:#9aa5ad">غير مصنف</span>`;
+    const legendItems = [[0, "الأراضي الزراعية"], [1, "المناطق الصناعية"], [2, "أراضي الفضاء"], [3, "الأراضي العمرانية"], [4, "أراضي القوات المسلحة"], [5, "أراضي خدمات"], [6, "المناطق الترفيهية"], [7, "المقابر"], [8, "مسطحات مائية"], [9, "حرم الطريق"], [10, "طرق"], [11, "ديني"], [12, "الأراضي التعليمية"], [13, "الأراضي الحكومية"], [14, "الأراضي السياحية"], [15, "مساحات خضراء"], [99, "غير مصنف"]]
+      .map(([code, label]) => `<span style="--swatch:${ismailiaLanduseSymbols[Number(code)][0]}">${label}</span>`).join("");
     scope.insertAdjacentHTML("beforeend", `<details class="landuse-legend"${expanded}><summary>مفتاح استخدامات الأراضي</summary><div>${legendItems}</div></details>`);
   }
   toggles.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => button.addEventListener("click", () => {

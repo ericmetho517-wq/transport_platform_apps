@@ -36,6 +36,7 @@ const dynamicWidgetSamples = [
   "عمران 3.2 كم² (10٪)", "خدمات 1.2 كم² (4٪)", "أخرى 2.0 كم² (6٪)",
   "قائم 70٪", "تحت الإنشاء 30٪", "إيجار 20٪", "تمليك 80٪",
   "12 معلم · 20 نقطة هندسية · 3 طبقات", "قطاع 2",
+  "أراضي فضاء", "لم يتغير", "حالة التغير",
 ];
 for (const value of dynamicWidgetSamples) {
   const translated = translate(value);

@@ -98,6 +98,11 @@ if (runtimeSource.includes("open-reference") || runtimeSource.includes("referenc
 if (!runtimeSource.includes('group === "western-upper-egypt" || group === "cairo-suez-road"')) failures.push("dashboard layouts: Western Upper Egypt and Cairo-Suez must use their documented dual-map layouts");
 if (!runtimeSource.includes("dabaaLandMarkup") || runtimeSource.includes("classdark-card")) failures.push("dashboard layouts: Dabaa must use the documented four-KPI dashboard without malformed card markup");
 if (!runtimeSource.includes("normalizeChangeStatus") || !runtimeSource.includes("غير\\s*متغير") || runtimeSource.includes('mode === "unchanged" && status === "unknown"')) failures.push("dashboard change filter: changed, unchanged and unknown values are not classified safely");
+if (!runtimeSource.includes("const palette = ismailiaLanduseSymbols") || !runtimeSource.includes("const landuseNames = ismailiaLanduseNames") || runtimeSource.includes("const defaultPalette")) failures.push("dashboard maps: renderer, popup and legend must use the same approved land-use symbology");
+if (!runtimeSource.includes('hiddenPopupFields') || !runtimeSource.includes('rawArea / 1_000_000') || !runtimeSource.includes('normalizeChangeStatus(value)')) failures.push("dashboard maps: feature popup must normalize source codes, areas and change status");
+for (const legendCode of ['[9, "حرم الطريق"]', '[12, "الأراضي التعليمية"]', '[15, "مساحات خضراء"]', '[99, "غير مصنف"]']) {
+  if (!runtimeSource.includes(legendCode)) failures.push(`dashboard maps: legend is missing ${legendCode}`);
+}
 for (const phrase of ["إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)", "نسبة مساحة التغير العمراني بمنطقة الدراسة لعام 2023", "نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023", "مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023"]) {
   if (!localizationSource.includes(phrase)) failures.push(`English localization: missing Dabaa translation for ${phrase}`);
 }
