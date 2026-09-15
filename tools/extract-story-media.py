@@ -40,8 +40,6 @@ FINAL_REPORT_RANGES = {
 
 ISMAILIA_MEDIA = {
     "image6.jpg": "axis-photo",
-    "image7.png": "axis-photo",
-    "image8.jpeg": "axis-photo",
     "image9.png": "map",
     "image10.png": "map",
     "image11.jpeg": "map",

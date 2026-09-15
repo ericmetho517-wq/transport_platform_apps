@@ -132,7 +132,7 @@ function storyMediaChapters(app: TransportApp, entries: StoryEntry[]): string {
       ? `<div class="story-media-categories">${mediaOrder.map((kind) => {
         const items = media.filter((reference) => reference.kind === kind);
         if (!items.length) return "";
-        return `<section class="story-media-category" data-media-kind="${kind}"><h4>${categoryLabels[kind]} <span>${items.length}</span></h4><div class="story-media-grid ${items.length === 1 ? "single" : ""}">${items.map((reference) => `<figure><a class="evidence-image-link" href="${esc(reference.imagePath)}" aria-label="فتح الصورة بالحجم الأصلي"><img src="${esc(reference.imagePath)}" alt="" loading="lazy"/></a></figure>`).join("")}</div></section>`;
+        return `<section class="story-media-category" data-media-kind="${kind}"><h4>${categoryLabels[kind]} <span>${items.length}</span></h4><div class="story-media-grid ${items.length === 1 ? "single" : ""}">${items.map((reference, mediaIndex) => `<figure class="story-scroll-frame" data-story-media-index="${mediaIndex + 1}"><a class="evidence-image-link" href="${esc(reference.imagePath)}" aria-label="فتح الصورة بالحجم الأصلي"><img src="${esc(reference.imagePath)}" alt="" loading="lazy"/></a><i aria-hidden="true">${String(mediaIndex + 1).padStart(2, "0")}</i></figure>`).join("")}</div></section>`;
       }).join("")}</div>`
       : `<div class="story-place-no-media">لا توجد صورة تقرير منفصلة لهذا الجزء؛ تعرض الخريطة التفاعلية بياناته المكانية المراجعة.</div>`;
     return `<article class="story-place${index === 0 ? " active" : ""}" id="story-place-${entry.key}" data-story-detail="${entry.key}"><div class="story-place-banner"><span>${String(index + 1).padStart(2, "0")}</span><div><h2>${esc(label)}</h2></div></div><div class="story-place-body"><div class="story-place-copy"><h3>${app.language === "en" ? "Maps and images" : "الصور والخرائط"}</h3></div>${gallery}</div></article>`;
@@ -225,6 +225,13 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
   evidenceModal.querySelectorAll<HTMLElement>("[data-evidence-close]").forEach((element) => element.addEventListener("click", closeEvidence));
   document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !evidenceModal.hidden) closeEvidence(); });
   document.querySelectorAll<HTMLAnchorElement>(".evidence-image-link, .evidence-open-link").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); openEvidence(link); }));
+  const storyFrames = document.querySelectorAll<HTMLElement>(".story-scroll-frame");
+  if (storyFrames.length) {
+    const frameObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.target.classList.toggle("is-visible", entry.isIntersecting));
+    }, { rootMargin: "-12% 0px -12%", threshold: 0.35 });
+    storyFrames.forEach((frame) => frameObserver.observe(frame));
+  }
   const initialCompareBox = document.querySelector<HTMLElement>("#story-compare");
   if (initialCompareBox?.dataset.compareAfter) {
     const zoomButton = document.createElement("button");
