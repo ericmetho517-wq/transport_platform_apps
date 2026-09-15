@@ -10,9 +10,11 @@ import argparse
 import hashlib
 import json
 import re
+import zipfile
 from pathlib import Path
 
 import pymupdf
+from PIL import Image, ImageStat
 
 
 WESTERN_REPORTS = {
@@ -34,6 +36,42 @@ FINAL_REPORT_RANGES = {
     "qena-luxor-road": (178, 226),
     "qus-axis": (227, 277),
     "kalabsha-axis": (278, 341),
+}
+
+ISMAILIA_MEDIA = {
+    "image6.jpg": "axis-photo",
+    "image7.png": "axis-photo",
+    "image8.jpeg": "axis-photo",
+    "image9.png": "map",
+    "image10.png": "map",
+    "image11.jpeg": "map",
+    "image12.jpeg": "map",
+    "image13.jpeg": "map",
+    "image14.jpeg": "map",
+    "image15.jpeg": "map",
+    "image16.jpeg": "map",
+    "image17.png": "dashboard",
+    "image18.jpeg": "comparison",
+    "image19.jpeg": "comparison",
+    "image20.jpeg": "comparison",
+    "image21.jpeg": "comparison",
+    "image22.jpeg": "comparison",
+    "image23.jpeg": "comparison",
+    "image24.jpeg": "comparison",
+    "image25.jpeg": "comparison",
+    "image26.png": "dashboard",
+    "image27.png": "dashboard",
+    "image28.jpeg": "map",
+}
+
+REJECTED_DIGEST_PREFIXES = {
+    "15d2f9d8",  # decorative flag ribbon
+    "2446ab6f",  # standalone ministry seal
+    "3a5aacc2",  # generic train stock image in a road chapter
+}
+
+REJECTED_REPORT_PAGES = {
+    "Final Report 3-2024.pdf": {15, 29},  # workshop/building photos
 }
 
 
@@ -109,6 +147,73 @@ def extract_report(
                 "height": height,
             })
     document.close()
+    return curate_records(records)
+
+
+def curate_records(records: list[dict[str, object]]) -> list[dict[str, object]]:
+    """Keep complete, presentation-ready project visuals only."""
+    limits = {"axis-photo": 3, "map": 8, "comparison": 6, "dashboard": 4}
+    counts = {kind: 0 for kind in limits}
+    curated: list[dict[str, object]] = []
+    for record in records:
+        kind = str(record["kind"])
+        if kind not in limits:
+            continue
+        width, height = int(record["width"]), int(record["height"])
+        ratio = width / max(height, 1)
+        digest = Path(str(record["imagePath"])).stem
+        if any(digest.startswith(prefix) for prefix in REJECTED_DIGEST_PREFIXES):
+            continue
+        if int(record["page"]) in REJECTED_REPORT_PAGES.get(str(record["reportName"]), set()):
+            continue
+        if ratio < 0.9 or ratio > 2.7:
+            continue
+        if kind == "comparison" and is_dark_chart_fragment(record):
+            continue
+        if kind == "axis-photo" and int(record["page"]) != 1:
+            continue
+        if counts[kind] >= limits[kind]:
+            continue
+        counts[kind] += 1
+        curated.append(record)
+    return curated
+
+
+def is_dark_chart_fragment(record: dict[str, object]) -> bool:
+    """Reject cropped black chart pieces that were embedded separately in PDFs."""
+    image = Path("public/references/story-media") / Path(str(record["imagePath"])).name
+    try:
+        with Image.open(image) as source:
+            sample = source.convert("RGB")
+            sample.thumbnail((180, 180))
+            mean = sum(ImageStat.Stat(sample).mean) / 3
+            dark_pixels = sum(sample.convert("L").histogram()[:38])
+            return mean < 75 or dark_pixels / max(sample.width * sample.height, 1) > 0.5
+    except OSError:
+        return True
+
+
+def extract_ismailia_docx(report_path: Path, output_dir: Path) -> list[dict[str, object]]:
+    records: list[dict[str, object]] = []
+    with zipfile.ZipFile(report_path) as archive:
+        for filename, kind in ISMAILIA_MEDIA.items():
+            data = archive.read(f"word/media/{filename}")
+            digest = hashlib.sha256(data).hexdigest()
+            extension = Path(filename).suffix.lower().lstrip(".").replace("jpeg", "jpg")
+            target_name = f"{digest[:20]}.{extension}"
+            target = output_dir / target_name
+            if not target.exists():
+                target.write_bytes(data)
+            with pymupdf.open(stream=data, filetype=extension) as image_document:
+                rect = image_document[0].rect
+            records.append({
+                "imagePath": f"../../references/story-media/{target_name}",
+                "reportName": report_path.name,
+                "page": 0,
+                "kind": kind,
+                "width": round(rect.width),
+                "height": round(rect.height),
+            })
     return records
 
 
@@ -130,6 +235,9 @@ def main() -> None:
     groups["cairo-suez-road"] = {
         "project": extract_report(args.reports / "(8).pdf", args.output)
     }
+    groups["ismailia"] = {
+        "project": extract_ismailia_docx(args.reports / "قطاع_الاسماعيلية.docx", args.output)
+    }
     final_report = args.reports / "Final Report 3-2024.pdf"
     for group, (start, end) in FINAL_REPORT_RANGES.items():
         groups[group] = {"project": extract_report(final_report, args.output, start, end)}
@@ -140,6 +248,15 @@ def main() -> None:
         "groups": groups,
     }
     args.manifest.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    referenced = {
+        Path(str(item["imagePath"])).name
+        for entries in groups.values()
+        for items in entries.values()
+        for item in items
+    }
+    for image in args.output.iterdir():
+        if image.is_file() and image.name not in referenced:
+            image.unlink()
     count = sum(len(items) for entries in groups.values() for items in entries.values())
     print(f"Extracted {count} report visuals into {args.output}")
 

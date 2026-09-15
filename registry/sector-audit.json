@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T08:26:02.491Z",
+  "generatedAt": "2026-09-15T12:36:53.398Z",
   "applications": 94,
   "counts": {
     "Dashboard": 53,
@@ -25,7 +25,7 @@
     "sectorSummaries": 10,
     "reportProfiles": 10,
     "crossSectorReferences": 0,
-    "storyReportImages": 735
+    "storyReportImages": 236
   },
   "errors": [],
   "warnings": [
@@ -43,8 +43,6 @@
     "dashboard-ismailia-urban: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ismailia-prices: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ismailia-agriculture: no embedded report screenshot; runtime remains data-driven",
-    "storymap-ismailia: no embedded report screenshot; runtime remains data-driven",
-    "storymap-dahshur: no embedded report screenshot; runtime remains data-driven",
     "web-viewer-30ddd4974b: no embedded report screenshot; runtime remains data-driven",
     "instant-filter-gallery-1024904d78: no embedded report screenshot; runtime remains data-driven"
   ],
