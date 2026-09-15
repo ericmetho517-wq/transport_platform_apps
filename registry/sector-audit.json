@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T12:04:04.162Z",
+  "generatedAt": "2026-09-15T08:26:02.491Z",
   "applications": 94,
   "counts": {
     "Dashboard": 53,
@@ -24,7 +24,8 @@
     "projectEntrypoints": 94,
     "sectorSummaries": 10,
     "reportProfiles": 10,
-    "crossSectorReferences": 0
+    "crossSectorReferences": 0,
+    "storyReportImages": 735
   },
   "errors": [],
   "warnings": [

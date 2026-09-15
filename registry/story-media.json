@@ -1,0 +1,5934 @@
+{
+  "version": 1,
+  "source": "وزارة النقل/التقارير",
+  "groups": {
+    "western-upper-egypt": {
+      "abu-simbel": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": ".pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/3b97b54f1d588fda0854.jpg",
+          "reportName": ".pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 850,
+          "height": 478
+        },
+        {
+          "imagePath": "../../references/story-media/9cd3370f2d079f42f749.jpg",
+          "reportName": ".pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 850,
+          "height": 477
+        },
+        {
+          "imagePath": "../../references/story-media/d5981dc5e10090bbbe45.jpg",
+          "reportName": ".pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 1080,
+          "height": 624
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": ".pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/c7bff693bde7e70901e7.jpg",
+          "reportName": ".pdf",
+          "page": 13,
+          "kind": "axis-photo",
+          "width": 850,
+          "height": 478
+        },
+        {
+          "imagePath": "../../references/story-media/cee595e5208babbe9424.jpg",
+          "reportName": ".pdf",
+          "page": 14,
+          "kind": "map",
+          "width": 1376,
+          "height": 973
+        },
+        {
+          "imagePath": "../../references/story-media/f9babf3e60e6cf93edef.jpg",
+          "reportName": ".pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1207,
+          "height": 831
+        },
+        {
+          "imagePath": "../../references/story-media/0998e31d4a4773044175.jpg",
+          "reportName": ".pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1210,
+          "height": 831
+        },
+        {
+          "imagePath": "../../references/story-media/75f3410cae6368b4f442.jpg",
+          "reportName": ".pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1235,
+          "height": 873
+        },
+        {
+          "imagePath": "../../references/story-media/634f881e0eba7a309aa9.jpg",
+          "reportName": ".pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1229,
+          "height": 869
+        },
+        {
+          "imagePath": "../../references/story-media/ae63aab1d98323ea3fc1.png",
+          "reportName": ".pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/8ae52c481a6cfedf23cd.jpg",
+          "reportName": ".pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/05e6c5635e92c6f76b48.jpg",
+          "reportName": ".pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1251,
+          "height": 884
+        },
+        {
+          "imagePath": "../../references/story-media/98dc8ac83dc321c19adc.jpg",
+          "reportName": ".pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1241,
+          "height": 877
+        },
+        {
+          "imagePath": "../../references/story-media/81a47e5f0bee2306738d.jpg",
+          "reportName": ".pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1393,
+          "height": 985
+        },
+        {
+          "imagePath": "../../references/story-media/47173cc330477d634fb0.png",
+          "reportName": ".pdf",
+          "page": 29,
+          "kind": "comparison",
+          "width": 1747,
+          "height": 333
+        },
+        {
+          "imagePath": "../../references/story-media/37586be22ba3c8297bba.png",
+          "reportName": ".pdf",
+          "page": 41,
+          "kind": "comparison",
+          "width": 1729,
+          "height": 384
+        },
+        {
+          "imagePath": "../../references/story-media/694e7920b5e309c2e03d.png",
+          "reportName": ".pdf",
+          "page": 53,
+          "kind": "comparison",
+          "width": 1763,
+          "height": 323
+        },
+        {
+          "imagePath": "../../references/story-media/0cd92813e34cc259e694.png",
+          "reportName": ".pdf",
+          "page": 61,
+          "kind": "axis-photo",
+          "width": 788,
+          "height": 489
+        },
+        {
+          "imagePath": "../../references/story-media/c29fa4ebafc02f5ce146.png",
+          "reportName": ".pdf",
+          "page": 61,
+          "kind": "evidence",
+          "width": 789,
+          "height": 544
+        },
+        {
+          "imagePath": "../../references/story-media/3b22b3a1ba1ac76ce123.png",
+          "reportName": ".pdf",
+          "page": 62,
+          "kind": "evidence",
+          "width": 770,
+          "height": 509
+        },
+        {
+          "imagePath": "../../references/story-media/c75a7f805a19e6618213.jpg",
+          "reportName": ".pdf",
+          "page": 67,
+          "kind": "comparison",
+          "width": 1670,
+          "height": 1181
+        },
+        {
+          "imagePath": "../../references/story-media/0a03e3e0ab11a2ee19a1.jpg",
+          "reportName": ".pdf",
+          "page": 68,
+          "kind": "comparison",
+          "width": 1742,
+          "height": 1232
+        },
+        {
+          "imagePath": "../../references/story-media/47033ba096352bd93aa8.jpg",
+          "reportName": ".pdf",
+          "page": 69,
+          "kind": "comparison",
+          "width": 1738,
+          "height": 1229
+        },
+        {
+          "imagePath": "../../references/story-media/e6d1f9bbf19f8cf65575.jpg",
+          "reportName": ".pdf",
+          "page": 70,
+          "kind": "comparison",
+          "width": 1715,
+          "height": 1212
+        },
+        {
+          "imagePath": "../../references/story-media/c36b85dbd3078a08aa38.jpg",
+          "reportName": ".pdf",
+          "page": 71,
+          "kind": "comparison",
+          "width": 1678,
+          "height": 1186
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": ".pdf",
+          "page": 72,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/d5c5a0e82f4d4fd3b4b9.png",
+          "reportName": ".pdf",
+          "page": 73,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 872
+        },
+        {
+          "imagePath": "../../references/story-media/a02f556170efee461aea.png",
+          "reportName": ".pdf",
+          "page": 74,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 867
+        },
+        {
+          "imagePath": "../../references/story-media/b12843fc166b9da018bc.jpg",
+          "reportName": ".pdf",
+          "page": 75,
+          "kind": "comparison",
+          "width": 1280,
+          "height": 710
+        },
+        {
+          "imagePath": "../../references/story-media/006154a7c9c85e73fba3.jpg",
+          "reportName": ".pdf",
+          "page": 76,
+          "kind": "axis-photo",
+          "width": 1344,
+          "height": 497
+        },
+        {
+          "imagePath": "../../references/story-media/27902466c1f997683449.jpg",
+          "reportName": ".pdf",
+          "page": 76,
+          "kind": "comparison",
+          "width": 940,
+          "height": 571
+        },
+        {
+          "imagePath": "../../references/story-media/cf225c422eb6e50243e9.jpg",
+          "reportName": ".pdf",
+          "page": 77,
+          "kind": "comparison",
+          "width": 1382,
+          "height": 952
+        },
+        {
+          "imagePath": "../../references/story-media/b2476e07f52277a82e9e.jpg",
+          "reportName": ".pdf",
+          "page": 77,
+          "kind": "comparison",
+          "width": 1536,
+          "height": 674
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": ".pdf",
+          "page": 79,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/c6c9afe1c3803e4a0926.png",
+          "reportName": ".pdf",
+          "page": 92,
+          "kind": "axis-photo",
+          "width": 906,
+          "height": 335
+        },
+        {
+          "imagePath": "../../references/story-media/6c854b0fcef82245556d.png",
+          "reportName": ".pdf",
+          "page": 92,
+          "kind": "axis-photo",
+          "width": 906,
+          "height": 426
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": ".pdf",
+          "page": 95,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": ".pdf",
+          "page": 107,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/a1a21d8c223a0cc77b1a.png",
+          "reportName": ".pdf",
+          "page": 151,
+          "kind": "axis-photo",
+          "width": 916,
+          "height": 590
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": ".pdf",
+          "page": 153,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/beb4f7826ea6e2e54dd4.jpg",
+          "reportName": ".pdf",
+          "page": 161,
+          "kind": "evidence",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "imagePath": "../../references/story-media/835aff400481445ed07b.png",
+          "reportName": ".pdf",
+          "page": 165,
+          "kind": "axis-photo",
+          "width": 1069,
+          "height": 597
+        },
+        {
+          "imagePath": "../../references/story-media/b32dceafdd8b8691dca3.png",
+          "reportName": ".pdf",
+          "page": 173,
+          "kind": "axis-photo",
+          "width": 1107,
+          "height": 362
+        },
+        {
+          "imagePath": "../../references/story-media/073dbb8b501ec73002a8.png",
+          "reportName": ".pdf",
+          "page": 176,
+          "kind": "axis-photo",
+          "width": 1076,
+          "height": 419
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": ".pdf",
+          "page": 188,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ],
+      "luxor": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(1).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/c1e9196eadf99d342676.jpg",
+          "reportName": "(1).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 781,
+          "height": 521
+        },
+        {
+          "imagePath": "../../references/story-media/238c6b512e48a885f96e.jpg",
+          "reportName": "(1).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/3ce3465f8655ec73e2f7.jpg",
+          "reportName": "(1).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/856aebfe74d24bcbf2d3.jpg",
+          "reportName": "(1).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1200,
+          "height": 855
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(1).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/ca77889f0abc36386a2d.jpg",
+          "reportName": "(1).pdf",
+          "page": 13,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/e5c1649d9444ce4bf97e.jpg",
+          "reportName": "(1).pdf",
+          "page": 14,
+          "kind": "map",
+          "width": 1451,
+          "height": 1026
+        },
+        {
+          "imagePath": "../../references/story-media/ff91b0aba82d9c15ddd4.jpg",
+          "reportName": "(1).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1209,
+          "height": 830
+        },
+        {
+          "imagePath": "../../references/story-media/970738a80e25cf8d4c7f.jpg",
+          "reportName": "(1).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1210,
+          "height": 831
+        },
+        {
+          "imagePath": "../../references/story-media/87e42f9e266a944c5d03.jpg",
+          "reportName": "(1).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1235,
+          "height": 873
+        },
+        {
+          "imagePath": "../../references/story-media/d3ee36f9f9f86832cff9.jpg",
+          "reportName": "(1).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1229,
+          "height": 869
+        },
+        {
+          "imagePath": "../../references/story-media/230bcfd9226d957a83dc.jpg",
+          "reportName": "(1).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/67e435d9e98e7361fe29.jpg",
+          "reportName": "(1).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/3104e0f93e2bc381bca6.jpg",
+          "reportName": "(1).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1251,
+          "height": 884
+        },
+        {
+          "imagePath": "../../references/story-media/1cde2743e4f2932d767b.jpg",
+          "reportName": "(1).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1241,
+          "height": 877
+        },
+        {
+          "imagePath": "../../references/story-media/db2ccfba290475f6d243.jpg",
+          "reportName": "(1).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1445,
+          "height": 1022
+        },
+        {
+          "imagePath": "../../references/story-media/0b66bef37785f9871bf4.jpg",
+          "reportName": "(1).pdf",
+          "page": 24,
+          "kind": "map",
+          "width": 1484,
+          "height": 1660
+        },
+        {
+          "imagePath": "../../references/story-media/7d1444b17a85077f8af6.png",
+          "reportName": "(1).pdf",
+          "page": 29,
+          "kind": "comparison",
+          "width": 1699,
+          "height": 410
+        },
+        {
+          "imagePath": "../../references/story-media/10a6e5a95d5152a22c6f.png",
+          "reportName": "(1).pdf",
+          "page": 40,
+          "kind": "comparison",
+          "width": 1730,
+          "height": 332
+        },
+        {
+          "imagePath": "../../references/story-media/e3964f00dfe9cfbb5157.png",
+          "reportName": "(1).pdf",
+          "page": 48,
+          "kind": "evidence",
+          "width": 818,
+          "height": 542
+        },
+        {
+          "imagePath": "../../references/story-media/de4779d6a9815c0e7bf0.png",
+          "reportName": "(1).pdf",
+          "page": 48,
+          "kind": "axis-photo",
+          "width": 817,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/b9b7304db8e22690a07a.png",
+          "reportName": "(1).pdf",
+          "page": 49,
+          "kind": "evidence",
+          "width": 770,
+          "height": 550
+        },
+        {
+          "imagePath": "../../references/story-media/f52e695107ad15667b6e.jpg",
+          "reportName": "(1).pdf",
+          "page": 52,
+          "kind": "comparison",
+          "width": 1770,
+          "height": 1251
+        },
+        {
+          "imagePath": "../../references/story-media/5997d5339369279b29ae.jpg",
+          "reportName": "(1).pdf",
+          "page": 53,
+          "kind": "comparison",
+          "width": 1738,
+          "height": 1229
+        },
+        {
+          "imagePath": "../../references/story-media/69c638bdd87797ffea5e.jpg",
+          "reportName": "(1).pdf",
+          "page": 54,
+          "kind": "comparison",
+          "width": 1727,
+          "height": 1221
+        },
+        {
+          "imagePath": "../../references/story-media/d33d589263e035494933.jpg",
+          "reportName": "(1).pdf",
+          "page": 55,
+          "kind": "comparison",
+          "width": 1715,
+          "height": 1212
+        },
+        {
+          "imagePath": "../../references/story-media/686b12ee542b91f621b6.jpg",
+          "reportName": "(1).pdf",
+          "page": 56,
+          "kind": "comparison",
+          "width": 1696,
+          "height": 1199
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": "(1).pdf",
+          "page": 57,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/40c93f25cf8ac31806ad.jpg",
+          "reportName": "(1).pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 1345,
+          "height": 612
+        },
+        {
+          "imagePath": "../../references/story-media/b94bd8518967ced225ed.png",
+          "reportName": "(1).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 867
+        },
+        {
+          "imagePath": "../../references/story-media/9a078110db28f532f3ef.jpg",
+          "reportName": "(1).pdf",
+          "page": 60,
+          "kind": "axis-photo",
+          "width": 1742,
+          "height": 809
+        },
+        {
+          "imagePath": "../../references/story-media/0fc85da08f319599a08f.jpg",
+          "reportName": "(1).pdf",
+          "page": 61,
+          "kind": "axis-photo",
+          "width": 1901,
+          "height": 726
+        },
+        {
+          "imagePath": "../../references/story-media/75c0af70e4dc6c6ba68d.jpg",
+          "reportName": "(1).pdf",
+          "page": 61,
+          "kind": "comparison",
+          "width": 948,
+          "height": 570
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": "(1).pdf",
+          "page": 63,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/0fc933611f754b9ca7b9.png",
+          "reportName": "(1).pdf",
+          "page": 75,
+          "kind": "axis-photo",
+          "width": 955,
+          "height": 406
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(1).pdf",
+          "page": 79,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(1).pdf",
+          "page": 91,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/f28d2a9aabfc454fe795.png",
+          "reportName": "(1).pdf",
+          "page": 95,
+          "kind": "comparison",
+          "width": 715,
+          "height": 461
+        },
+        {
+          "imagePath": "../../references/story-media/39a6c3ee6d2558811156.png",
+          "reportName": "(1).pdf",
+          "page": 95,
+          "kind": "comparison",
+          "width": 714,
+          "height": 526
+        },
+        {
+          "imagePath": "../../references/story-media/08f4baec08b870920c92.png",
+          "reportName": "(1).pdf",
+          "page": 136,
+          "kind": "evidence",
+          "width": 834,
+          "height": 624
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(1).pdf",
+          "page": 137,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/beb4f7826ea6e2e54dd4.jpg",
+          "reportName": "(1).pdf",
+          "page": 145,
+          "kind": "evidence",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "imagePath": "../../references/story-media/18438d66a288525a326f.png",
+          "reportName": "(1).pdf",
+          "page": 149,
+          "kind": "axis-photo",
+          "width": 1125,
+          "height": 415
+        },
+        {
+          "imagePath": "../../references/story-media/e7d8dfb3aae4b2e74b5c.png",
+          "reportName": "(1).pdf",
+          "page": 150,
+          "kind": "axis-photo",
+          "width": 1060,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/4ab68ebe1644a0047e08.png",
+          "reportName": "(1).pdf",
+          "page": 154,
+          "kind": "axis-photo",
+          "width": 1021,
+          "height": 323
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": "(1).pdf",
+          "page": 166,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ],
+      "qena": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(3).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/08d8a08f8317706e1683.jpg",
+          "reportName": "(3).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/7fab621653618333455a.jpg",
+          "reportName": "(3).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/5730c8ca1e71d423ed77.jpg",
+          "reportName": "(3).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 781,
+          "height": 521
+        },
+        {
+          "imagePath": "../../references/story-media/7d9c72a644991efd07e1.jpg",
+          "reportName": "(3).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 1280,
+          "height": 711
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(3).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/5a43e3d84a2c044d42c4.jpg",
+          "reportName": "(3).pdf",
+          "page": 13,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/5df83b18665a4a64d38e.jpg",
+          "reportName": "(3).pdf",
+          "page": 14,
+          "kind": "map",
+          "width": 1427,
+          "height": 1009
+        },
+        {
+          "imagePath": "../../references/story-media/4d49cced5dbfaaa88258.jpg",
+          "reportName": "(3).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1210,
+          "height": 831
+        },
+        {
+          "imagePath": "../../references/story-media/fbc2f9f005b1e95bc5fe.jpg",
+          "reportName": "(3).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1210,
+          "height": 832
+        },
+        {
+          "imagePath": "../../references/story-media/2610de43c7e4e8bc8c77.jpg",
+          "reportName": "(3).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1235,
+          "height": 873
+        },
+        {
+          "imagePath": "../../references/story-media/c71d437a4d7024a31625.jpg",
+          "reportName": "(3).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1229,
+          "height": 869
+        },
+        {
+          "imagePath": "../../references/story-media/4479bc14a0a13fc70884.jpg",
+          "reportName": "(3).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/aaa9c005efa5d53ab997.jpg",
+          "reportName": "(3).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/a8f0f9f098b7d478f1ac.jpg",
+          "reportName": "(3).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1251,
+          "height": 884
+        },
+        {
+          "imagePath": "../../references/story-media/35ce02fbc4ff716590c0.jpg",
+          "reportName": "(3).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1241,
+          "height": 877
+        },
+        {
+          "imagePath": "../../references/story-media/962e2174e3be13497bb4.jpg",
+          "reportName": "(3).pdf",
+          "page": 22,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/a85afa523cbd399b44d7.jpg",
+          "reportName": "(3).pdf",
+          "page": 22,
+          "kind": "evidence",
+          "width": 1239,
+          "height": 876
+        },
+        {
+          "imagePath": "../../references/story-media/8d7d004b95a13d7bc959.jpg",
+          "reportName": "(3).pdf",
+          "page": 24,
+          "kind": "evidence",
+          "width": 1445,
+          "height": 1022
+        },
+        {
+          "imagePath": "../../references/story-media/4047c23f7e43738b251d.png",
+          "reportName": "(3).pdf",
+          "page": 30,
+          "kind": "comparison",
+          "width": 1757,
+          "height": 391
+        },
+        {
+          "imagePath": "../../references/story-media/eca6bdbe1d8dcfc2a160.png",
+          "reportName": "(3).pdf",
+          "page": 41,
+          "kind": "comparison",
+          "width": 1785,
+          "height": 399
+        },
+        {
+          "imagePath": "../../references/story-media/8a0ad6a75ddf3d7bd09c.png",
+          "reportName": "(3).pdf",
+          "page": 49,
+          "kind": "evidence",
+          "width": 785,
+          "height": 559
+        },
+        {
+          "imagePath": "../../references/story-media/1339b3f000c87d39553f.png",
+          "reportName": "(3).pdf",
+          "page": 49,
+          "kind": "evidence",
+          "width": 785,
+          "height": 519
+        },
+        {
+          "imagePath": "../../references/story-media/3677909b85f2af6c8d6d.png",
+          "reportName": "(3).pdf",
+          "page": 50,
+          "kind": "evidence",
+          "width": 770,
+          "height": 503
+        },
+        {
+          "imagePath": "../../references/story-media/e5447f9d1b371df78d60.jpg",
+          "reportName": "(3).pdf",
+          "page": 53,
+          "kind": "comparison",
+          "width": 1774,
+          "height": 1254
+        },
+        {
+          "imagePath": "../../references/story-media/055de1c7d6bf75178c35.jpg",
+          "reportName": "(3).pdf",
+          "page": 54,
+          "kind": "comparison",
+          "width": 1742,
+          "height": 1232
+        },
+        {
+          "imagePath": "../../references/story-media/b3a18edf7e277b7528d5.jpg",
+          "reportName": "(3).pdf",
+          "page": 55,
+          "kind": "comparison",
+          "width": 1738,
+          "height": 1229
+        },
+        {
+          "imagePath": "../../references/story-media/9e0c7967e7748b40e31e.jpg",
+          "reportName": "(3).pdf",
+          "page": 56,
+          "kind": "comparison",
+          "width": 1715,
+          "height": 1212
+        },
+        {
+          "imagePath": "../../references/story-media/1ce7a0d73b59678c9614.jpg",
+          "reportName": "(3).pdf",
+          "page": 57,
+          "kind": "comparison",
+          "width": 1621,
+          "height": 1146
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": "(3).pdf",
+          "page": 58,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/727ca58e61441a15f227.png",
+          "reportName": "(3).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 866
+        },
+        {
+          "imagePath": "../../references/story-media/a0c8e7a0bc4a1fa83c0c.png",
+          "reportName": "(3).pdf",
+          "page": 60,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 868
+        },
+        {
+          "imagePath": "../../references/story-media/6ca7be22e0f02337e96d.jpg",
+          "reportName": "(3).pdf",
+          "page": 61,
+          "kind": "axis-photo",
+          "width": 1746,
+          "height": 811
+        },
+        {
+          "imagePath": "../../references/story-media/f6df4e19c3516fd92385.jpg",
+          "reportName": "(3).pdf",
+          "page": 62,
+          "kind": "axis-photo",
+          "width": 1353,
+          "height": 606
+        },
+        {
+          "imagePath": "../../references/story-media/6c93bc59b7527435d948.jpg",
+          "reportName": "(3).pdf",
+          "page": 62,
+          "kind": "comparison",
+          "width": 931,
+          "height": 566
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": "(3).pdf",
+          "page": 63,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(3).pdf",
+          "page": 79,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(3).pdf",
+          "page": 91,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/84bd82eab4f166c43a66.png",
+          "reportName": "(3).pdf",
+          "page": 128,
+          "kind": "evidence",
+          "width": 708,
+          "height": 558
+        },
+        {
+          "imagePath": "../../references/story-media/f38be44f88f58af037a8.png",
+          "reportName": "(3).pdf",
+          "page": 136,
+          "kind": "axis-photo",
+          "width": 913,
+          "height": 570
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(3).pdf",
+          "page": 137,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/beb4f7826ea6e2e54dd4.jpg",
+          "reportName": "(3).pdf",
+          "page": 145,
+          "kind": "evidence",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "imagePath": "../../references/story-media/c629e829c27d65138352.png",
+          "reportName": "(3).pdf",
+          "page": 149,
+          "kind": "axis-photo",
+          "width": 1134,
+          "height": 405
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": "(3).pdf",
+          "page": 166,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ],
+      "sohag": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(2).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/81a9ecc8bc84ce44b770.jpg",
+          "reportName": "(2).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 800,
+          "height": 533
+        },
+        {
+          "imagePath": "../../references/story-media/0fd452d5f0591215ef7b.jpg",
+          "reportName": "(2).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 1280,
+          "height": 720
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(2).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/c4c97088d0faa377c1ea.jpg",
+          "reportName": "(2).pdf",
+          "page": 14,
+          "kind": "map",
+          "width": 1421,
+          "height": 1005
+        },
+        {
+          "imagePath": "../../references/story-media/9402dc7dff890619e63c.jpg",
+          "reportName": "(2).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1212,
+          "height": 833
+        },
+        {
+          "imagePath": "../../references/story-media/54e0eecb4f5dee823c59.jpg",
+          "reportName": "(2).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1209,
+          "height": 831
+        },
+        {
+          "imagePath": "../../references/story-media/573322e50de9c6a28146.jpg",
+          "reportName": "(2).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1331,
+          "height": 941
+        },
+        {
+          "imagePath": "../../references/story-media/f9e6e3a8cffff0498d89.jpg",
+          "reportName": "(2).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1335,
+          "height": 944
+        },
+        {
+          "imagePath": "../../references/story-media/74b6aca78e9630a2a0b8.jpg",
+          "reportName": "(2).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1331,
+          "height": 941
+        },
+        {
+          "imagePath": "../../references/story-media/cec35b5d39d1c9a6f1df.jpg",
+          "reportName": "(2).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1371,
+          "height": 969
+        },
+        {
+          "imagePath": "../../references/story-media/b22c88a6b7059f8bd2e8.png",
+          "reportName": "(2).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 783,
+          "height": 515
+        },
+        {
+          "imagePath": "../../references/story-media/432e9d723c45276c48fe.png",
+          "reportName": "(2).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 784,
+          "height": 514
+        },
+        {
+          "imagePath": "../../references/story-media/5274ce4576f5680cbe24.jpg",
+          "reportName": "(2).pdf",
+          "page": 23,
+          "kind": "comparison",
+          "width": 1762,
+          "height": 1246
+        },
+        {
+          "imagePath": "../../references/story-media/ccdb66f8676ddbf04b88.jpg",
+          "reportName": "(2).pdf",
+          "page": 24,
+          "kind": "comparison",
+          "width": 1774,
+          "height": 1254
+        },
+        {
+          "imagePath": "../../references/story-media/1b2d7a5e9df3041e593e.jpg",
+          "reportName": "(2).pdf",
+          "page": 25,
+          "kind": "comparison",
+          "width": 1711,
+          "height": 1210
+        },
+        {
+          "imagePath": "../../references/story-media/6ffb7c0e415ce5f3d9aa.jpg",
+          "reportName": "(2).pdf",
+          "page": 26,
+          "kind": "comparison",
+          "width": 1750,
+          "height": 1237
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": "(2).pdf",
+          "page": 27,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/42b1c48c792cbbf6ab3b.png",
+          "reportName": "(2).pdf",
+          "page": 28,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 868
+        },
+        {
+          "imagePath": "../../references/story-media/568ae1ca2cc345ac5f16.png",
+          "reportName": "(2).pdf",
+          "page": 29,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 868
+        },
+        {
+          "imagePath": "../../references/story-media/3725b9064bbcbf30acfb.jpg",
+          "reportName": "(2).pdf",
+          "page": 30,
+          "kind": "axis-photo",
+          "width": 1743,
+          "height": 810
+        },
+        {
+          "imagePath": "../../references/story-media/a42f65633ee21576169d.jpg",
+          "reportName": "(2).pdf",
+          "page": 31,
+          "kind": "axis-photo",
+          "width": 1892,
+          "height": 720
+        },
+        {
+          "imagePath": "../../references/story-media/98714fdb2a08a88bebd5.jpg",
+          "reportName": "(2).pdf",
+          "page": 31,
+          "kind": "comparison",
+          "width": 937,
+          "height": 566
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(2).pdf",
+          "page": 33,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(2).pdf",
+          "page": 39,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/1931ceeb49780b231fe7.png",
+          "reportName": "(2).pdf",
+          "page": 74,
+          "kind": "evidence",
+          "width": 757,
+          "height": 520
+        },
+        {
+          "imagePath": "../../references/story-media/56f6b8bd7b4a3b41d488.png",
+          "reportName": "(2).pdf",
+          "page": 83,
+          "kind": "axis-photo",
+          "width": 930,
+          "height": 569
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(2).pdf",
+          "page": 85,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": "(2).pdf",
+          "page": 90,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ],
+      "assiut": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(4).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/417b082d2512fb794d26.jpg",
+          "reportName": "(4).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 1000,
+          "height": 600
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(4).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/ed4ae40d31e38683733d.jpg",
+          "reportName": "(4).pdf",
+          "page": 13,
+          "kind": "evidence",
+          "width": 975,
+          "height": 650
+        },
+        {
+          "imagePath": "../../references/story-media/8e03429d6a9c16e64a33.jpg",
+          "reportName": "(4).pdf",
+          "page": 14,
+          "kind": "map",
+          "width": 1429,
+          "height": 1010
+        },
+        {
+          "imagePath": "../../references/story-media/509f976106664d4b5879.jpg",
+          "reportName": "(4).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1210,
+          "height": 830
+        },
+        {
+          "imagePath": "../../references/story-media/068cd43697b0ca8a8373.jpg",
+          "reportName": "(4).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1209,
+          "height": 830
+        },
+        {
+          "imagePath": "../../references/story-media/22c2e3a883396120e377.jpg",
+          "reportName": "(4).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1235,
+          "height": 873
+        },
+        {
+          "imagePath": "../../references/story-media/60d952f7285bfe1b2f87.jpg",
+          "reportName": "(4).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1229,
+          "height": 869
+        },
+        {
+          "imagePath": "../../references/story-media/5228c2781182f8e19937.jpg",
+          "reportName": "(4).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/6a718b0efd8f51eec191.jpg",
+          "reportName": "(4).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/029dc4b53a74895a8540.jpg",
+          "reportName": "(4).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1251,
+          "height": 884
+        },
+        {
+          "imagePath": "../../references/story-media/8c90ea80ecbf27950578.jpg",
+          "reportName": "(4).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1241,
+          "height": 877
+        },
+        {
+          "imagePath": "../../references/story-media/c1ab38fea32d7b89b326.jpg",
+          "reportName": "(4).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1453,
+          "height": 1027
+        },
+        {
+          "imagePath": "../../references/story-media/c4e518bbf7ab5b887619.png",
+          "reportName": "(4).pdf",
+          "page": 29,
+          "kind": "comparison",
+          "width": 1744,
+          "height": 409
+        },
+        {
+          "imagePath": "../../references/story-media/7ee7f4c198bd0645a724.png",
+          "reportName": "(4).pdf",
+          "page": 40,
+          "kind": "comparison",
+          "width": 1739,
+          "height": 392
+        },
+        {
+          "imagePath": "../../references/story-media/f9fa2cdb703fe1876e04.png",
+          "reportName": "(4).pdf",
+          "page": 48,
+          "kind": "evidence",
+          "width": 869,
+          "height": 612
+        },
+        {
+          "imagePath": "../../references/story-media/03e83874fe2df1ac3b04.png",
+          "reportName": "(4).pdf",
+          "page": 48,
+          "kind": "axis-photo",
+          "width": 869,
+          "height": 550
+        },
+        {
+          "imagePath": "../../references/story-media/9a3f2d35635243c3c7c7.png",
+          "reportName": "(4).pdf",
+          "page": 49,
+          "kind": "evidence",
+          "width": 790,
+          "height": 580
+        },
+        {
+          "imagePath": "../../references/story-media/3c99fb07a802ae8024bb.jpg",
+          "reportName": "(4).pdf",
+          "page": 52,
+          "kind": "comparison",
+          "width": 1770,
+          "height": 1251
+        },
+        {
+          "imagePath": "../../references/story-media/a02b7c0c33e2f13a440d.jpg",
+          "reportName": "(4).pdf",
+          "page": 53,
+          "kind": "comparison",
+          "width": 1700,
+          "height": 1202
+        },
+        {
+          "imagePath": "../../references/story-media/b6d1506f5c5d0fd035e6.jpg",
+          "reportName": "(4).pdf",
+          "page": 54,
+          "kind": "comparison",
+          "width": 1727,
+          "height": 1221
+        },
+        {
+          "imagePath": "../../references/story-media/8bf50267818f3de90e34.jpg",
+          "reportName": "(4).pdf",
+          "page": 55,
+          "kind": "comparison",
+          "width": 1711,
+          "height": 1210
+        },
+        {
+          "imagePath": "../../references/story-media/e5595d8c798237232b84.jpg",
+          "reportName": "(4).pdf",
+          "page": 56,
+          "kind": "comparison",
+          "width": 1700,
+          "height": 1202
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": "(4).pdf",
+          "page": 57,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/5a1166d4b21d0aee7be2.jpg",
+          "reportName": "(4).pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 1379,
+          "height": 871
+        },
+        {
+          "imagePath": "../../references/story-media/e306c62d0f867127434f.jpg",
+          "reportName": "(4).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1600,
+          "height": 723
+        },
+        {
+          "imagePath": "../../references/story-media/36e6adcf304af4be4636.jpg",
+          "reportName": "(4).pdf",
+          "page": 60,
+          "kind": "axis-photo",
+          "width": 1648,
+          "height": 765
+        },
+        {
+          "imagePath": "../../references/story-media/9a18d7b2723792338241.jpg",
+          "reportName": "(4).pdf",
+          "page": 61,
+          "kind": "comparison",
+          "width": 1306,
+          "height": 722
+        },
+        {
+          "imagePath": "../../references/story-media/c8d6a8ce4910b23918d6.jpg",
+          "reportName": "(4).pdf",
+          "page": 61,
+          "kind": "comparison",
+          "width": 932,
+          "height": 519
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": "(4).pdf",
+          "page": 63,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/48a1644c0208ce8c71d5.png",
+          "reportName": "(4).pdf",
+          "page": 76,
+          "kind": "axis-photo",
+          "width": 893,
+          "height": 330
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(4).pdf",
+          "page": 79,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(4).pdf",
+          "page": 93,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/20d7aeefbb09661614c5.png",
+          "reportName": "(4).pdf",
+          "page": 126,
+          "kind": "axis-photo",
+          "width": 707,
+          "height": 445
+        },
+        {
+          "imagePath": "../../references/story-media/0354924645ddb2bcf0c7.png",
+          "reportName": "(4).pdf",
+          "page": 139,
+          "kind": "evidence",
+          "width": 833,
+          "height": 647
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(4).pdf",
+          "page": 141,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/beb4f7826ea6e2e54dd4.jpg",
+          "reportName": "(4).pdf",
+          "page": 149,
+          "kind": "evidence",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "imagePath": "../../references/story-media/e5cbd5a82909f46e17f1.png",
+          "reportName": "(4).pdf",
+          "page": 152,
+          "kind": "axis-photo",
+          "width": 1095,
+          "height": 436
+        },
+        {
+          "imagePath": "../../references/story-media/98a40c9bc929cd836e9f.png",
+          "reportName": "(4).pdf",
+          "page": 153,
+          "kind": "axis-photo",
+          "width": 1031,
+          "height": 368
+        },
+        {
+          "imagePath": "../../references/story-media/7066c64595fa2a94576d.png",
+          "reportName": "(4).pdf",
+          "page": 158,
+          "kind": "axis-photo",
+          "width": 1051,
+          "height": 342
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": "(4).pdf",
+          "page": 170,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ],
+      "minya": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(5).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/34922f241c9d9623f7d9.jpg",
+          "reportName": "(5).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1600,
+          "height": 1200
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(5).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/2e693bd164786cae6754.jpg",
+          "reportName": "(5).pdf",
+          "page": 13,
+          "kind": "axis-photo",
+          "width": 720,
+          "height": 405
+        },
+        {
+          "imagePath": "../../references/story-media/dcec20cacadaecca5cf3.jpg",
+          "reportName": "(5).pdf",
+          "page": 14,
+          "kind": "map",
+          "width": 1427,
+          "height": 1009
+        },
+        {
+          "imagePath": "../../references/story-media/9685a0f80b567e0f8595.jpg",
+          "reportName": "(5).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1210,
+          "height": 831
+        },
+        {
+          "imagePath": "../../references/story-media/47b427552f2e4086a2c3.jpg",
+          "reportName": "(5).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1211,
+          "height": 830
+        },
+        {
+          "imagePath": "../../references/story-media/e2a8947f61df679e3dd0.jpg",
+          "reportName": "(5).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1235,
+          "height": 873
+        },
+        {
+          "imagePath": "../../references/story-media/4dd8644404cc2a28af38.jpg",
+          "reportName": "(5).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1229,
+          "height": 869
+        },
+        {
+          "imagePath": "../../references/story-media/bb1f8506be2d8de79c71.jpg",
+          "reportName": "(5).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/09258f8be97eb2a53450.jpg",
+          "reportName": "(5).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/ff7e4ff370684438f496.jpg",
+          "reportName": "(5).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1251,
+          "height": 884
+        },
+        {
+          "imagePath": "../../references/story-media/57781aa9b8a7928f9a6d.jpg",
+          "reportName": "(5).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1241,
+          "height": 877
+        },
+        {
+          "imagePath": "../../references/story-media/7021e66144750e11a67f.jpg",
+          "reportName": "(5).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1445,
+          "height": 1022
+        },
+        {
+          "imagePath": "../../references/story-media/41f4c3f24e58993c7ba0.jpg",
+          "reportName": "(5).pdf",
+          "page": 24,
+          "kind": "map",
+          "width": 1389,
+          "height": 1791
+        },
+        {
+          "imagePath": "../../references/story-media/1c018b61d91c33c9b61d.png",
+          "reportName": "(5).pdf",
+          "page": 29,
+          "kind": "comparison",
+          "width": 1754,
+          "height": 411
+        },
+        {
+          "imagePath": "../../references/story-media/63dd6e1a92834730d9d7.png",
+          "reportName": "(5).pdf",
+          "page": 40,
+          "kind": "comparison",
+          "width": 1740,
+          "height": 407
+        },
+        {
+          "imagePath": "../../references/story-media/d4607d210cc209744cdf.png",
+          "reportName": "(5).pdf",
+          "page": 48,
+          "kind": "evidence",
+          "width": 818,
+          "height": 591
+        },
+        {
+          "imagePath": "../../references/story-media/5f204ace607a4274f000.png",
+          "reportName": "(5).pdf",
+          "page": 48,
+          "kind": "axis-photo",
+          "width": 818,
+          "height": 446
+        },
+        {
+          "imagePath": "../../references/story-media/06e7d96962c69c42b6e9.png",
+          "reportName": "(5).pdf",
+          "page": 49,
+          "kind": "evidence",
+          "width": 814,
+          "height": 632
+        },
+        {
+          "imagePath": "../../references/story-media/31019cf41dd52125044d.jpg",
+          "reportName": "(5).pdf",
+          "page": 52,
+          "kind": "comparison",
+          "width": 1762,
+          "height": 1246
+        },
+        {
+          "imagePath": "../../references/story-media/114982cb800bb3581745.jpg",
+          "reportName": "(5).pdf",
+          "page": 53,
+          "kind": "comparison",
+          "width": 1742,
+          "height": 1232
+        },
+        {
+          "imagePath": "../../references/story-media/254f420f35e3d8dd4119.jpg",
+          "reportName": "(5).pdf",
+          "page": 54,
+          "kind": "comparison",
+          "width": 1746,
+          "height": 1234
+        },
+        {
+          "imagePath": "../../references/story-media/660289f183cecc4974de.jpg",
+          "reportName": "(5).pdf",
+          "page": 55,
+          "kind": "comparison",
+          "width": 1707,
+          "height": 1208
+        },
+        {
+          "imagePath": "../../references/story-media/52356523e02fc6387cae.jpg",
+          "reportName": "(5).pdf",
+          "page": 56,
+          "kind": "comparison",
+          "width": 1696,
+          "height": 1199
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": "(5).pdf",
+          "page": 57,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/70b8b42097f70b3acbef.png",
+          "reportName": "(5).pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 872
+        },
+        {
+          "imagePath": "../../references/story-media/cb441104177b30504c6c.png",
+          "reportName": "(5).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1917,
+          "height": 872
+        },
+        {
+          "imagePath": "../../references/story-media/9537909fcbfcc6671779.jpg",
+          "reportName": "(5).pdf",
+          "page": 60,
+          "kind": "axis-photo",
+          "width": 1677,
+          "height": 779
+        },
+        {
+          "imagePath": "../../references/story-media/3674460c828a2c4a63e4.jpg",
+          "reportName": "(5).pdf",
+          "page": 61,
+          "kind": "comparison",
+          "width": 1306,
+          "height": 722
+        },
+        {
+          "imagePath": "../../references/story-media/fd09d66c365016e34a86.jpg",
+          "reportName": "(5).pdf",
+          "page": 61,
+          "kind": "comparison",
+          "width": 940,
+          "height": 561
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": "(5).pdf",
+          "page": 63,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(5).pdf",
+          "page": 79,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(5).pdf",
+          "page": 93,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/adb9aab7fd98d3ab0001.png",
+          "reportName": "(5).pdf",
+          "page": 126,
+          "kind": "axis-photo",
+          "width": 749,
+          "height": 453
+        },
+        {
+          "imagePath": "../../references/story-media/c5ee843292b13486e042.png",
+          "reportName": "(5).pdf",
+          "page": 132,
+          "kind": "evidence",
+          "width": 801,
+          "height": 531
+        },
+        {
+          "imagePath": "../../references/story-media/359efa25c5705feabefc.png",
+          "reportName": "(5).pdf",
+          "page": 140,
+          "kind": "axis-photo",
+          "width": 837,
+          "height": 491
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(5).pdf",
+          "page": 141,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/beb4f7826ea6e2e54dd4.jpg",
+          "reportName": "(5).pdf",
+          "page": 149,
+          "kind": "evidence",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "imagePath": "../../references/story-media/12907827c102d79bcc0a.png",
+          "reportName": "(5).pdf",
+          "page": 156,
+          "kind": "axis-photo",
+          "width": 1086,
+          "height": 382
+        },
+        {
+          "imagePath": "../../references/story-media/be1ca6cb1c98503c9bc6.png",
+          "reportName": "(5).pdf",
+          "page": 157,
+          "kind": "axis-photo",
+          "width": 1070,
+          "height": 453
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": "(5).pdf",
+          "page": 170,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ],
+      "fayoum": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(6).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/79bc942509bed6a9679c.jpg",
+          "reportName": "(6).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 856,
+          "height": 483
+        },
+        {
+          "imagePath": "../../references/story-media/dc2687efd0afe82a594b.jpg",
+          "reportName": "(6).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 700,
+          "height": 400
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(6).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/e2d121e5e08aa4586ee4.jpg",
+          "reportName": "(6).pdf",
+          "page": 13,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/4609af362ac37dfb143d.jpg",
+          "reportName": "(6).pdf",
+          "page": 14,
+          "kind": "map",
+          "width": 1378,
+          "height": 974
+        },
+        {
+          "imagePath": "../../references/story-media/e67c9a08b13864e47123.jpg",
+          "reportName": "(6).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1213,
+          "height": 828
+        },
+        {
+          "imagePath": "../../references/story-media/588a38e4661550838ac1.jpg",
+          "reportName": "(6).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1209,
+          "height": 832
+        },
+        {
+          "imagePath": "../../references/story-media/338877f7d3f3e8221f71.jpg",
+          "reportName": "(6).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1235,
+          "height": 873
+        },
+        {
+          "imagePath": "../../references/story-media/07d4d43090ae8d48be87.jpg",
+          "reportName": "(6).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1229,
+          "height": 869
+        },
+        {
+          "imagePath": "../../references/story-media/b13c78acf91220b9f0fb.jpg",
+          "reportName": "(6).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/00b38767dc171b0371c3.jpg",
+          "reportName": "(6).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/44fa81e79f670d845f86.jpg",
+          "reportName": "(6).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1304,
+          "height": 922
+        },
+        {
+          "imagePath": "../../references/story-media/088fd2a23a38964ddc65.jpg",
+          "reportName": "(6).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1308,
+          "height": 925
+        },
+        {
+          "imagePath": "../../references/story-media/267e6cf3b8002ec4bc2d.jpg",
+          "reportName": "(6).pdf",
+          "page": 22,
+          "kind": "evidence",
+          "width": 1251,
+          "height": 884
+        },
+        {
+          "imagePath": "../../references/story-media/a3cd1420fbfddece4592.jpg",
+          "reportName": "(6).pdf",
+          "page": 22,
+          "kind": "evidence",
+          "width": 1241,
+          "height": 877
+        },
+        {
+          "imagePath": "../../references/story-media/fb9b5ca7cba396ac9c51.jpg",
+          "reportName": "(6).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/4d5dd2861b694177304e.jpg",
+          "reportName": "(6).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1239,
+          "height": 876
+        },
+        {
+          "imagePath": "../../references/story-media/e96200c3223ce81b444c.jpg",
+          "reportName": "(6).pdf",
+          "page": 25,
+          "kind": "evidence",
+          "width": 1445,
+          "height": 1022
+        },
+        {
+          "imagePath": "../../references/story-media/5efa631099f369b97f3f.png",
+          "reportName": "(6).pdf",
+          "page": 31,
+          "kind": "comparison",
+          "width": 1765,
+          "height": 361
+        },
+        {
+          "imagePath": "../../references/story-media/0560b1b6b7a0721d9038.png",
+          "reportName": "(6).pdf",
+          "page": 42,
+          "kind": "comparison",
+          "width": 1700,
+          "height": 433
+        },
+        {
+          "imagePath": "../../references/story-media/0a97c3339d388b0a401e.png",
+          "reportName": "(6).pdf",
+          "page": 50,
+          "kind": "axis-photo",
+          "width": 855,
+          "height": 355
+        },
+        {
+          "imagePath": "../../references/story-media/669d61ae9a6ac7837a4b.png",
+          "reportName": "(6).pdf",
+          "page": 50,
+          "kind": "axis-photo",
+          "width": 855,
+          "height": 408
+        },
+        {
+          "imagePath": "../../references/story-media/0422ba7add77de3c7b3e.png",
+          "reportName": "(6).pdf",
+          "page": 51,
+          "kind": "evidence",
+          "width": 784,
+          "height": 665
+        },
+        {
+          "imagePath": "../../references/story-media/c9a9954b4979570ca03c.jpg",
+          "reportName": "(6).pdf",
+          "page": 54,
+          "kind": "comparison",
+          "width": 1670,
+          "height": 1181
+        },
+        {
+          "imagePath": "../../references/story-media/f78d892b3af76f83a4b9.jpg",
+          "reportName": "(6).pdf",
+          "page": 55,
+          "kind": "comparison",
+          "width": 1738,
+          "height": 1229
+        },
+        {
+          "imagePath": "../../references/story-media/ac3a21958117c506fd49.jpg",
+          "reportName": "(6).pdf",
+          "page": 56,
+          "kind": "comparison",
+          "width": 1738,
+          "height": 1229
+        },
+        {
+          "imagePath": "../../references/story-media/26ae72f0450fc2c06e74.jpg",
+          "reportName": "(6).pdf",
+          "page": 57,
+          "kind": "comparison",
+          "width": 1711,
+          "height": 1210
+        },
+        {
+          "imagePath": "../../references/story-media/8949503d417ce43a1747.jpg",
+          "reportName": "(6).pdf",
+          "page": 58,
+          "kind": "comparison",
+          "width": 1689,
+          "height": 1194
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": "(6).pdf",
+          "page": 59,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/d73e8bd9eb9e195f3faf.jpg",
+          "reportName": "(6).pdf",
+          "page": 60,
+          "kind": "dashboard",
+          "width": 1345,
+          "height": 608
+        },
+        {
+          "imagePath": "../../references/story-media/26565fd73b07e23deef3.png",
+          "reportName": "(6).pdf",
+          "page": 61,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 867
+        },
+        {
+          "imagePath": "../../references/story-media/8d421df39975a46923d0.jpg",
+          "reportName": "(6).pdf",
+          "page": 62,
+          "kind": "axis-photo",
+          "width": 1600,
+          "height": 743
+        },
+        {
+          "imagePath": "../../references/story-media/ce7fd454e35907d5adfb.jpg",
+          "reportName": "(6).pdf",
+          "page": 63,
+          "kind": "axis-photo",
+          "width": 1341,
+          "height": 497
+        },
+        {
+          "imagePath": "../../references/story-media/242c4fb3bd940e5b471c.jpg",
+          "reportName": "(6).pdf",
+          "page": 63,
+          "kind": "comparison",
+          "width": 932,
+          "height": 572
+        },
+        {
+          "imagePath": "../../references/story-media/217d72311318fe4c31a3.jpg",
+          "reportName": "(6).pdf",
+          "page": 64,
+          "kind": "comparison",
+          "width": 1377,
+          "height": 952
+        },
+        {
+          "imagePath": "../../references/story-media/12cc1686a11f5a814e1e.jpg",
+          "reportName": "(6).pdf",
+          "page": 64,
+          "kind": "comparison",
+          "width": 1535,
+          "height": 732
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": "(6).pdf",
+          "page": 65,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(6).pdf",
+          "page": 83,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(6).pdf",
+          "page": 95,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/63556dac615acd193768.png",
+          "reportName": "(6).pdf",
+          "page": 140,
+          "kind": "evidence",
+          "width": 920,
+          "height": 740
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(6).pdf",
+          "page": 141,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/beb4f7826ea6e2e54dd4.jpg",
+          "reportName": "(6).pdf",
+          "page": 149,
+          "kind": "evidence",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "imagePath": "../../references/story-media/cf2a7469d9ce8d7fce40.png",
+          "reportName": "(6).pdf",
+          "page": 152,
+          "kind": "axis-photo",
+          "width": 1047,
+          "height": 305
+        },
+        {
+          "imagePath": "../../references/story-media/bb0f546ed7d68f37bc4e.png",
+          "reportName": "(6).pdf",
+          "page": 157,
+          "kind": "axis-photo",
+          "width": 1166,
+          "height": 459
+        },
+        {
+          "imagePath": "../../references/story-media/eb658e078e3d0cbd7b1a.png",
+          "reportName": "(6).pdf",
+          "page": 159,
+          "kind": "dashboard",
+          "width": 953,
+          "height": 409
+        },
+        {
+          "imagePath": "../../references/story-media/d0e014bfcf68ce39425a.png",
+          "reportName": "(6).pdf",
+          "page": 160,
+          "kind": "dashboard",
+          "width": 953,
+          "height": 386
+        },
+        {
+          "imagePath": "../../references/story-media/e88d564d31914e300095.png",
+          "reportName": "(6).pdf",
+          "page": 162,
+          "kind": "axis-photo",
+          "width": 1052,
+          "height": 329
+        },
+        {
+          "imagePath": "../../references/story-media/ba3c8f1b84600a5cd3ca.png",
+          "reportName": "(6).pdf",
+          "page": 163,
+          "kind": "axis-photo",
+          "width": 1020,
+          "height": 363
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": "(6).pdf",
+          "page": 176,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ],
+      "giza": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(7).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/20fa709b4623f08acdd7.jpg",
+          "reportName": "(7).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 2808,
+          "height": 1872
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(7).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/ed2c2fc296f35d4fbf2b.jpg",
+          "reportName": "(7).pdf",
+          "page": 14,
+          "kind": "map",
+          "width": 1427,
+          "height": 1009
+        },
+        {
+          "imagePath": "../../references/story-media/b1943e15f6e1fb68e0ef.jpg",
+          "reportName": "(7).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1212,
+          "height": 833
+        },
+        {
+          "imagePath": "../../references/story-media/a18298c95e58995776fd.jpg",
+          "reportName": "(7).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1210,
+          "height": 833
+        },
+        {
+          "imagePath": "../../references/story-media/8a6efb54223f9ea9f726.jpg",
+          "reportName": "(7).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1282,
+          "height": 906
+        },
+        {
+          "imagePath": "../../references/story-media/80e65c0cf0408af70ea6.jpg",
+          "reportName": "(7).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1299,
+          "height": 919
+        },
+        {
+          "imagePath": "../../references/story-media/2ca0ddb19535e8a640fc.jpg",
+          "reportName": "(7).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1282,
+          "height": 906
+        },
+        {
+          "imagePath": "../../references/story-media/e431d5e30418fad35178.jpg",
+          "reportName": "(7).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1299,
+          "height": 919
+        },
+        {
+          "imagePath": "../../references/story-media/945ef764e57f430f34a4.jpg",
+          "reportName": "(7).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/703f7633e728190b7afe.jpg",
+          "reportName": "(7).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/b9fb4146066330f6f2a4.jpg",
+          "reportName": "(7).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1445,
+          "height": 1022
+        },
+        {
+          "imagePath": "../../references/story-media/7ad1bb2ad4aaab047baa.jpg",
+          "reportName": "(7).pdf",
+          "page": 24,
+          "kind": "map",
+          "width": 1072,
+          "height": 1923
+        },
+        {
+          "imagePath": "../../references/story-media/0ff1f61239941b061294.png",
+          "reportName": "(7).pdf",
+          "page": 29,
+          "kind": "comparison",
+          "width": 1755,
+          "height": 454
+        },
+        {
+          "imagePath": "../../references/story-media/a9764be761eb388c9752.png",
+          "reportName": "(7).pdf",
+          "page": 37,
+          "kind": "axis-photo",
+          "width": 855,
+          "height": 550
+        },
+        {
+          "imagePath": "../../references/story-media/9c77dfc6d5e2703d53a8.png",
+          "reportName": "(7).pdf",
+          "page": 37,
+          "kind": "axis-photo",
+          "width": 855,
+          "height": 527
+        },
+        {
+          "imagePath": "../../references/story-media/622c7d9cb539ae2b9868.png",
+          "reportName": "(7).pdf",
+          "page": 38,
+          "kind": "evidence",
+          "width": 773,
+          "height": 556
+        },
+        {
+          "imagePath": "../../references/story-media/17c62f6177fc76fc0324.jpg",
+          "reportName": "(7).pdf",
+          "page": 41,
+          "kind": "comparison",
+          "width": 1754,
+          "height": 1240
+        },
+        {
+          "imagePath": "../../references/story-media/23df097fcf5a02b787bd.jpg",
+          "reportName": "(7).pdf",
+          "page": 42,
+          "kind": "comparison",
+          "width": 1742,
+          "height": 1232
+        },
+        {
+          "imagePath": "../../references/story-media/88f48be7e31d0a517a16.jpg",
+          "reportName": "(7).pdf",
+          "page": 43,
+          "kind": "comparison",
+          "width": 1742,
+          "height": 1232
+        },
+        {
+          "imagePath": "../../references/story-media/9cc6f83aaa5dd7df4116.jpg",
+          "reportName": "(7).pdf",
+          "page": 44,
+          "kind": "comparison",
+          "width": 1711,
+          "height": 1210
+        },
+        {
+          "imagePath": "../../references/story-media/67b58bd608f51a37fe3e.jpg",
+          "reportName": "(7).pdf",
+          "page": 45,
+          "kind": "comparison",
+          "width": 1615,
+          "height": 1141
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": "(7).pdf",
+          "page": 46,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/4516b89a45daf0fa7f20.jpg",
+          "reportName": "(7).pdf",
+          "page": 47,
+          "kind": "dashboard",
+          "width": 1337,
+          "height": 603
+        },
+        {
+          "imagePath": "../../references/story-media/471486614dfc7f02d59f.jpg",
+          "reportName": "(7).pdf",
+          "page": 48,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 872
+        },
+        {
+          "imagePath": "../../references/story-media/a00f2a8d7407cbcea3b7.jpg",
+          "reportName": "(7).pdf",
+          "page": 49,
+          "kind": "comparison",
+          "width": 1587,
+          "height": 969
+        },
+        {
+          "imagePath": "../../references/story-media/034bb2fb06748af40e16.jpg",
+          "reportName": "(7).pdf",
+          "page": 50,
+          "kind": "comparison",
+          "width": 1364,
+          "height": 726
+        },
+        {
+          "imagePath": "../../references/story-media/40adc95f77ecf246be1a.jpg",
+          "reportName": "(7).pdf",
+          "page": 50,
+          "kind": "comparison",
+          "width": 935,
+          "height": 563
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": "(7).pdf",
+          "page": 51,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/d86aa1e0087705072d0d.png",
+          "reportName": "(7).pdf",
+          "page": 63,
+          "kind": "axis-photo",
+          "width": 845,
+          "height": 389
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(7).pdf",
+          "page": 67,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(7).pdf",
+          "page": 79,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/1fba0444b9aa3ea943dd.png",
+          "reportName": "(7).pdf",
+          "page": 122,
+          "kind": "evidence",
+          "width": 868,
+          "height": 569
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(7).pdf",
+          "page": 123,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/beb4f7826ea6e2e54dd4.jpg",
+          "reportName": "(7).pdf",
+          "page": 129,
+          "kind": "evidence",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "imagePath": "../../references/story-media/87e3964c083bd77252ff.png",
+          "reportName": "(7).pdf",
+          "page": 132,
+          "kind": "axis-photo",
+          "width": 1005,
+          "height": 345
+        },
+        {
+          "imagePath": "../../references/story-media/88a7046ff366d4e88464.png",
+          "reportName": "(7).pdf",
+          "page": 132,
+          "kind": "axis-photo",
+          "width": 936,
+          "height": 357
+        },
+        {
+          "imagePath": "../../references/story-media/8cb53f453f710d15c1b9.png",
+          "reportName": "(7).pdf",
+          "page": 134,
+          "kind": "axis-photo",
+          "width": 1031,
+          "height": 370
+        },
+        {
+          "imagePath": "../../references/story-media/2635ca008f00c604ac29.png",
+          "reportName": "(7).pdf",
+          "page": 134,
+          "kind": "axis-photo",
+          "width": 913,
+          "height": 403
+        }
+      ],
+      "corridor-overview": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(9).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/9cd3370f2d079f42f749.jpg",
+          "reportName": "(9).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 850,
+          "height": 477
+        },
+        {
+          "imagePath": "../../references/story-media/26aecc708c44638b78b4.jpg",
+          "reportName": "(9).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 1280,
+          "height": 720
+        },
+        {
+          "imagePath": "../../references/story-media/238c6b512e48a885f96e.jpg",
+          "reportName": "(9).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/08d8a08f8317706e1683.jpg",
+          "reportName": "(9).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 960,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(9).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/ef6c4fe7c6052409413e.jpg",
+          "reportName": "(9).pdf",
+          "page": 16,
+          "kind": "evidence",
+          "width": 1380,
+          "height": 936
+        },
+        {
+          "imagePath": "../../references/story-media/71583940ad581c166fab.jpg",
+          "reportName": "(9).pdf",
+          "page": 17,
+          "kind": "map",
+          "width": 1427,
+          "height": 1009
+        },
+        {
+          "imagePath": "../../references/story-media/981a62e4ebf3c344bf49.png",
+          "reportName": "(9).pdf",
+          "page": 18,
+          "kind": "axis-photo",
+          "width": 1008,
+          "height": 437
+        },
+        {
+          "imagePath": "../../references/story-media/61f6b1da0a2ca18003a9.png",
+          "reportName": "(9).pdf",
+          "page": 18,
+          "kind": "axis-photo",
+          "width": 1008,
+          "height": 546
+        },
+        {
+          "imagePath": "../../references/story-media/a345ac8d3d7213a009c4.png",
+          "reportName": "(9).pdf",
+          "page": 19,
+          "kind": "axis-photo",
+          "width": 1090,
+          "height": 410
+        },
+        {
+          "imagePath": "../../references/story-media/32765b6ad72bee4b892a.png",
+          "reportName": "(9).pdf",
+          "page": 19,
+          "kind": "axis-photo",
+          "width": 1091,
+          "height": 459
+        },
+        {
+          "imagePath": "../../references/story-media/50bc7ddb9227120f20c9.png",
+          "reportName": "(9).pdf",
+          "page": 20,
+          "kind": "axis-photo",
+          "width": 1041,
+          "height": 412
+        },
+        {
+          "imagePath": "../../references/story-media/b5d9ab4fc8328c0235be.png",
+          "reportName": "(9).pdf",
+          "page": 20,
+          "kind": "axis-photo",
+          "width": 1041,
+          "height": 644
+        },
+        {
+          "imagePath": "../../references/story-media/d0a0f9b38ccf26afe867.png",
+          "reportName": "(9).pdf",
+          "page": 21,
+          "kind": "axis-photo",
+          "width": 1121,
+          "height": 660
+        },
+        {
+          "imagePath": "../../references/story-media/ffe871f46e7678a047bb.png",
+          "reportName": "(9).pdf",
+          "page": 21,
+          "kind": "axis-photo",
+          "width": 1120,
+          "height": 592
+        },
+        {
+          "imagePath": "../../references/story-media/e3520cc0e6999597dfb4.jpg",
+          "reportName": "(9).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1396,
+          "height": 956
+        },
+        {
+          "imagePath": "../../references/story-media/1731bf75de5f53c70f4f.jpg",
+          "reportName": "(9).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1388,
+          "height": 981
+        },
+        {
+          "imagePath": "../../references/story-media/228d47f02043a9796502.jpg",
+          "reportName": "(9).pdf",
+          "page": 24,
+          "kind": "map",
+          "width": 1396,
+          "height": 956
+        },
+        {
+          "imagePath": "../../references/story-media/c34f24ca101b590f1645.jpg",
+          "reportName": "(9).pdf",
+          "page": 24,
+          "kind": "map",
+          "width": 1398,
+          "height": 964
+        },
+        {
+          "imagePath": "../../references/story-media/d4a3339a6e3f9b225748.jpg",
+          "reportName": "(9).pdf",
+          "page": 25,
+          "kind": "map",
+          "width": 1487,
+          "height": 1051
+        },
+        {
+          "imagePath": "../../references/story-media/f89e2256708aef2b1313.jpg",
+          "reportName": "(9).pdf",
+          "page": 26,
+          "kind": "evidence",
+          "width": 1371,
+          "height": 969
+        },
+        {
+          "imagePath": "../../references/story-media/9cfe9fafcfdc54b8c6c0.jpg",
+          "reportName": "(9).pdf",
+          "page": 26,
+          "kind": "evidence",
+          "width": 1353,
+          "height": 956
+        },
+        {
+          "imagePath": "../../references/story-media/0bafb77d6a00fe56d9a2.jpg",
+          "reportName": "(9).pdf",
+          "page": 27,
+          "kind": "map",
+          "width": 1374,
+          "height": 971
+        },
+        {
+          "imagePath": "../../references/story-media/c87b066d53a407253e03.jpg",
+          "reportName": "(9).pdf",
+          "page": 27,
+          "kind": "map",
+          "width": 1344,
+          "height": 950
+        },
+        {
+          "imagePath": "../../references/story-media/47acf1fa3c0554d79c06.jpg",
+          "reportName": "(9).pdf",
+          "page": 28,
+          "kind": "map",
+          "width": 1510,
+          "height": 1068
+        },
+        {
+          "imagePath": "../../references/story-media/06a10e82ade80b6199ad.jpg",
+          "reportName": "(9).pdf",
+          "page": 29,
+          "kind": "evidence",
+          "width": 1350,
+          "height": 954
+        },
+        {
+          "imagePath": "../../references/story-media/c7334823b0bc8d5c0b95.jpg",
+          "reportName": "(9).pdf",
+          "page": 29,
+          "kind": "evidence",
+          "width": 1371,
+          "height": 969
+        },
+        {
+          "imagePath": "../../references/story-media/10ebca2a8f61e186050e.jpg",
+          "reportName": "(9).pdf",
+          "page": 30,
+          "kind": "map",
+          "width": 1383,
+          "height": 978
+        },
+        {
+          "imagePath": "../../references/story-media/67eb80e64eee50460a0d.jpg",
+          "reportName": "(9).pdf",
+          "page": 30,
+          "kind": "map",
+          "width": 1331,
+          "height": 941
+        },
+        {
+          "imagePath": "../../references/story-media/9d7792ae5f8b0c31383d.jpg",
+          "reportName": "(9).pdf",
+          "page": 31,
+          "kind": "map",
+          "width": 1445,
+          "height": 1022
+        },
+        {
+          "imagePath": "../../references/story-media/372c32b950c709ac9fa9.jpg",
+          "reportName": "(9).pdf",
+          "page": 32,
+          "kind": "evidence",
+          "width": 1364,
+          "height": 964
+        },
+        {
+          "imagePath": "../../references/story-media/79a13c30e9aebbc6c015.jpg",
+          "reportName": "(9).pdf",
+          "page": 32,
+          "kind": "evidence",
+          "width": 1378,
+          "height": 974
+        },
+        {
+          "imagePath": "../../references/story-media/62e5583cda5236872bbb.jpg",
+          "reportName": "(9).pdf",
+          "page": 33,
+          "kind": "map",
+          "width": 1373,
+          "height": 971
+        },
+        {
+          "imagePath": "../../references/story-media/5437b2889abdf1bb6407.jpg",
+          "reportName": "(9).pdf",
+          "page": 33,
+          "kind": "map",
+          "width": 1349,
+          "height": 955
+        },
+        {
+          "imagePath": "../../references/story-media/72a50853c96e6f39e015.jpg",
+          "reportName": "(9).pdf",
+          "page": 34,
+          "kind": "map",
+          "width": 1448,
+          "height": 1024
+        },
+        {
+          "imagePath": "../../references/story-media/fe8a1783aad5a468deee.jpg",
+          "reportName": "(9).pdf",
+          "page": 35,
+          "kind": "evidence",
+          "width": 1354,
+          "height": 957
+        },
+        {
+          "imagePath": "../../references/story-media/369fae49aab71a1a906d.jpg",
+          "reportName": "(9).pdf",
+          "page": 35,
+          "kind": "evidence",
+          "width": 1366,
+          "height": 966
+        },
+        {
+          "imagePath": "../../references/story-media/509b0581dcbdcfd3fc0f.jpg",
+          "reportName": "(9).pdf",
+          "page": 36,
+          "kind": "map",
+          "width": 1388,
+          "height": 981
+        },
+        {
+          "imagePath": "../../references/story-media/5f54b56f9695708000db.jpg",
+          "reportName": "(9).pdf",
+          "page": 36,
+          "kind": "map",
+          "width": 1352,
+          "height": 956
+        },
+        {
+          "imagePath": "../../references/story-media/9474e415e2ccb4b856dc.jpg",
+          "reportName": "(9).pdf",
+          "page": 37,
+          "kind": "map",
+          "width": 1448,
+          "height": 1024
+        },
+        {
+          "imagePath": "../../references/story-media/51b8a12e07b9f265312f.jpg",
+          "reportName": "(9).pdf",
+          "page": 38,
+          "kind": "evidence",
+          "width": 1381,
+          "height": 976
+        },
+        {
+          "imagePath": "../../references/story-media/68dc3832fa9fd995b18d.jpg",
+          "reportName": "(9).pdf",
+          "page": 38,
+          "kind": "evidence",
+          "width": 1364,
+          "height": 964
+        },
+        {
+          "imagePath": "../../references/story-media/a302103b32d1b5581e3f.jpg",
+          "reportName": "(9).pdf",
+          "page": 39,
+          "kind": "map",
+          "width": 1383,
+          "height": 978
+        },
+        {
+          "imagePath": "../../references/story-media/12e273300fc7dc5a81cb.jpg",
+          "reportName": "(9).pdf",
+          "page": 39,
+          "kind": "map",
+          "width": 1364,
+          "height": 964
+        },
+        {
+          "imagePath": "../../references/story-media/dba3ca3e1ac0e903cee1.jpg",
+          "reportName": "(9).pdf",
+          "page": 40,
+          "kind": "map",
+          "width": 1484,
+          "height": 1049
+        },
+        {
+          "imagePath": "../../references/story-media/f2f9a7f651d174e5edb3.jpg",
+          "reportName": "(9).pdf",
+          "page": 41,
+          "kind": "evidence",
+          "width": 1391,
+          "height": 949
+        },
+        {
+          "imagePath": "../../references/story-media/428c5340aa6494fc80a2.jpg",
+          "reportName": "(9).pdf",
+          "page": 41,
+          "kind": "evidence",
+          "width": 1401,
+          "height": 990
+        },
+        {
+          "imagePath": "../../references/story-media/f44b15bc0defbc25314a.jpg",
+          "reportName": "(9).pdf",
+          "page": 42,
+          "kind": "map",
+          "width": 1366,
+          "height": 966
+        },
+        {
+          "imagePath": "../../references/story-media/9abe60d938f3ddff59fd.jpg",
+          "reportName": "(9).pdf",
+          "page": 42,
+          "kind": "map",
+          "width": 1378,
+          "height": 974
+        },
+        {
+          "imagePath": "../../references/story-media/38bc795f812b58feab9f.jpg",
+          "reportName": "(9).pdf",
+          "page": 43,
+          "kind": "map",
+          "width": 1496,
+          "height": 1057
+        },
+        {
+          "imagePath": "../../references/story-media/a12364bf48c603965d51.jpg",
+          "reportName": "(9).pdf",
+          "page": 44,
+          "kind": "evidence",
+          "width": 1378,
+          "height": 974
+        },
+        {
+          "imagePath": "../../references/story-media/ba318e08c807fee5ce59.jpg",
+          "reportName": "(9).pdf",
+          "page": 44,
+          "kind": "evidence",
+          "width": 1361,
+          "height": 962
+        },
+        {
+          "imagePath": "../../references/story-media/0e41246d61bf0393d0ff.jpg",
+          "reportName": "(9).pdf",
+          "page": 45,
+          "kind": "map",
+          "width": 1371,
+          "height": 959
+        },
+        {
+          "imagePath": "../../references/story-media/d9503e177f4d3867cb5d.jpg",
+          "reportName": "(9).pdf",
+          "page": 45,
+          "kind": "map",
+          "width": 1386,
+          "height": 980
+        },
+        {
+          "imagePath": "../../references/story-media/8241207c9377d7e48a50.jpg",
+          "reportName": "(9).pdf",
+          "page": 46,
+          "kind": "map",
+          "width": 1493,
+          "height": 1055
+        },
+        {
+          "imagePath": "../../references/story-media/9f3560ca13fa84cfbd4c.jpg",
+          "reportName": "(9).pdf",
+          "page": 47,
+          "kind": "evidence",
+          "width": 1381,
+          "height": 976
+        },
+        {
+          "imagePath": "../../references/story-media/965f36e75ebb70e40228.jpg",
+          "reportName": "(9).pdf",
+          "page": 47,
+          "kind": "evidence",
+          "width": 1366,
+          "height": 966
+        },
+        {
+          "imagePath": "../../references/story-media/c047ae00337eacc55967.jpg",
+          "reportName": "(9).pdf",
+          "page": 48,
+          "kind": "map",
+          "width": 1347,
+          "height": 952
+        },
+        {
+          "imagePath": "../../references/story-media/4fe87a4a64e9065eea65.jpg",
+          "reportName": "(9).pdf",
+          "page": 48,
+          "kind": "map",
+          "width": 1381,
+          "height": 976
+        },
+        {
+          "imagePath": "../../references/story-media/d4c8f8e4857f2c443f6b.jpg",
+          "reportName": "(9).pdf",
+          "page": 49,
+          "kind": "map",
+          "width": 1443,
+          "height": 1020
+        },
+        {
+          "imagePath": "../../references/story-media/ee280f014937dd433a79.jpg",
+          "reportName": "(9).pdf",
+          "page": 50,
+          "kind": "evidence",
+          "width": 1361,
+          "height": 962
+        },
+        {
+          "imagePath": "../../references/story-media/5b4f902eefa647736dbb.jpg",
+          "reportName": "(9).pdf",
+          "page": 50,
+          "kind": "evidence",
+          "width": 1378,
+          "height": 974
+        },
+        {
+          "imagePath": "../../references/story-media/1320824a731239e677d2.jpg",
+          "reportName": "(9).pdf",
+          "page": 51,
+          "kind": "map",
+          "width": 1335,
+          "height": 944
+        },
+        {
+          "imagePath": "../../references/story-media/29d8b20bc420e6b46db4.jpg",
+          "reportName": "(9).pdf",
+          "page": 51,
+          "kind": "map",
+          "width": 1393,
+          "height": 985
+        },
+        {
+          "imagePath": "../../references/story-media/f1a56d42692a57d4c5ff.jpg",
+          "reportName": "(9).pdf",
+          "page": 52,
+          "kind": "map",
+          "width": 1427,
+          "height": 1009
+        },
+        {
+          "imagePath": "../../references/story-media/56ba32abb48791b73ad9.jpg",
+          "reportName": "(9).pdf",
+          "page": 53,
+          "kind": "map",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/1d83639ada300c2ba353.jpg",
+          "reportName": "(9).pdf",
+          "page": 54,
+          "kind": "dashboard",
+          "width": 1902,
+          "height": 892
+        },
+        {
+          "imagePath": "../../references/story-media/baa0b72d97dd514a0dda.png",
+          "reportName": "(9).pdf",
+          "page": 55,
+          "kind": "dashboard",
+          "width": 1913,
+          "height": 857
+        },
+        {
+          "imagePath": "../../references/story-media/d0faf9f650c2f7efe434.png",
+          "reportName": "(9).pdf",
+          "page": 56,
+          "kind": "comparison",
+          "width": 1293,
+          "height": 900
+        },
+        {
+          "imagePath": "../../references/story-media/df9f2b79fb9473932d5f.jpg",
+          "reportName": "(9).pdf",
+          "page": 57,
+          "kind": "comparison",
+          "width": 1440,
+          "height": 850
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(9).pdf",
+          "page": 59,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/52953ecb5dcaf77dff19.png",
+          "reportName": "(9).pdf",
+          "page": 64,
+          "kind": "axis-photo",
+          "width": 1102,
+          "height": 451
+        },
+        {
+          "imagePath": "../../references/story-media/6778d7ea6d8e5c671e6b.png",
+          "reportName": "(9).pdf",
+          "page": 65,
+          "kind": "axis-photo",
+          "width": 1043,
+          "height": 359
+        },
+        {
+          "imagePath": "../../references/story-media/678deb04460dd0b777de.png",
+          "reportName": "(9).pdf",
+          "page": 68,
+          "kind": "axis-photo",
+          "width": 1066,
+          "height": 577
+        },
+        {
+          "imagePath": "../../references/story-media/3d336dbe1a6cca62bbac.png",
+          "reportName": "(9).pdf",
+          "page": 69,
+          "kind": "axis-photo",
+          "width": 1085,
+          "height": 445
+        },
+        {
+          "imagePath": "../../references/story-media/9dc5ae6a08c02f98079b.png",
+          "reportName": "(9).pdf",
+          "page": 71,
+          "kind": "comparison",
+          "width": 1088,
+          "height": 680
+        },
+        {
+          "imagePath": "../../references/story-media/2673585e4728052b6e6f.png",
+          "reportName": "(9).pdf",
+          "page": 72,
+          "kind": "comparison",
+          "width": 1049,
+          "height": 689
+        },
+        {
+          "imagePath": "../../references/story-media/8019658527e45f1894b2.png",
+          "reportName": "(9).pdf",
+          "page": 76,
+          "kind": "comparison",
+          "width": 1053,
+          "height": 470
+        },
+        {
+          "imagePath": "../../references/story-media/335307e04455db3fb236.png",
+          "reportName": "(9).pdf",
+          "page": 79,
+          "kind": "axis-photo",
+          "width": 1106,
+          "height": 468
+        },
+        {
+          "imagePath": "../../references/story-media/2a53dd8708949d540013.png",
+          "reportName": "(9).pdf",
+          "page": 79,
+          "kind": "axis-photo",
+          "width": 1024,
+          "height": 422
+        },
+        {
+          "imagePath": "../../references/story-media/6c527fa8b23a9500313c.png",
+          "reportName": "(9).pdf",
+          "page": 81,
+          "kind": "axis-photo",
+          "width": 1065,
+          "height": 385
+        },
+        {
+          "imagePath": "../../references/story-media/bc3ed5de328217ef6ca1.png",
+          "reportName": "(9).pdf",
+          "page": 83,
+          "kind": "axis-photo",
+          "width": 1067,
+          "height": 648
+        },
+        {
+          "imagePath": "../../references/story-media/1d8ab5e1ee200937c95a.png",
+          "reportName": "(9).pdf",
+          "page": 84,
+          "kind": "axis-photo",
+          "width": 1099,
+          "height": 557
+        },
+        {
+          "imagePath": "../../references/story-media/8422c9c63ed52eb65765.png",
+          "reportName": "(9).pdf",
+          "page": 85,
+          "kind": "axis-photo",
+          "width": 1095,
+          "height": 357
+        },
+        {
+          "imagePath": "../../references/story-media/00f29e6c9eb4cd775c15.png",
+          "reportName": "(9).pdf",
+          "page": 85,
+          "kind": "axis-photo",
+          "width": 1075,
+          "height": 482
+        },
+        {
+          "imagePath": "../../references/story-media/fc24fb5d1d490ae0431e.png",
+          "reportName": "(9).pdf",
+          "page": 89,
+          "kind": "axis-photo",
+          "width": 1020,
+          "height": 571
+        },
+        {
+          "imagePath": "../../references/story-media/cc6084cc1c1af74b0458.png",
+          "reportName": "(9).pdf",
+          "page": 90,
+          "kind": "axis-photo",
+          "width": 1077,
+          "height": 457
+        },
+        {
+          "imagePath": "../../references/story-media/5a108354c69fb73b2840.png",
+          "reportName": "(9).pdf",
+          "page": 90,
+          "kind": "axis-photo",
+          "width": 1109,
+          "height": 474
+        },
+        {
+          "imagePath": "../../references/story-media/6fb08a53d9aaa8b89e92.png",
+          "reportName": "(9).pdf",
+          "page": 91,
+          "kind": "axis-photo",
+          "width": 1050,
+          "height": 575
+        },
+        {
+          "imagePath": "../../references/story-media/a3261c56c703f68321c3.png",
+          "reportName": "(9).pdf",
+          "page": 93,
+          "kind": "axis-photo",
+          "width": 1027,
+          "height": 516
+        },
+        {
+          "imagePath": "../../references/story-media/e8ea302bd00e2eb3f182.png",
+          "reportName": "(9).pdf",
+          "page": 94,
+          "kind": "axis-photo",
+          "width": 1031,
+          "height": 545
+        },
+        {
+          "imagePath": "../../references/story-media/3225710173b44184ef87.png",
+          "reportName": "(9).pdf",
+          "page": 95,
+          "kind": "axis-photo",
+          "width": 1056,
+          "height": 447
+        },
+        {
+          "imagePath": "../../references/story-media/1e32301a59ba18b42670.png",
+          "reportName": "(9).pdf",
+          "page": 95,
+          "kind": "axis-photo",
+          "width": 1078,
+          "height": 481
+        },
+        {
+          "imagePath": "../../references/story-media/fa3645355420b362e260.png",
+          "reportName": "(9).pdf",
+          "page": 97,
+          "kind": "axis-photo",
+          "width": 1041,
+          "height": 605
+        },
+        {
+          "imagePath": "../../references/story-media/9bb32cce4b84f5e3e383.png",
+          "reportName": "(9).pdf",
+          "page": 98,
+          "kind": "axis-photo",
+          "width": 1030,
+          "height": 454
+        },
+        {
+          "imagePath": "../../references/story-media/12f9e343b819fcd87456.png",
+          "reportName": "(9).pdf",
+          "page": 98,
+          "kind": "axis-photo",
+          "width": 1001,
+          "height": 465
+        },
+        {
+          "imagePath": "../../references/story-media/688414d12c42fd9d28d7.png",
+          "reportName": "(9).pdf",
+          "page": 99,
+          "kind": "axis-photo",
+          "width": 1012,
+          "height": 328
+        },
+        {
+          "imagePath": "../../references/story-media/2a5a1a7be323dcefdd4b.png",
+          "reportName": "(9).pdf",
+          "page": 100,
+          "kind": "axis-photo",
+          "width": 983,
+          "height": 505
+        },
+        {
+          "imagePath": "../../references/story-media/2a4159a995ec486ce9df.png",
+          "reportName": "(9).pdf",
+          "page": 101,
+          "kind": "axis-photo",
+          "width": 978,
+          "height": 465
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(9).pdf",
+          "page": 103,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/3e847b551faad4c1efa4.png",
+          "reportName": "(9).pdf",
+          "page": 106,
+          "kind": "axis-photo",
+          "width": 1121,
+          "height": 719
+        },
+        {
+          "imagePath": "../../references/story-media/75574a0b32336f999b11.png",
+          "reportName": "(9).pdf",
+          "page": 106,
+          "kind": "axis-photo",
+          "width": 1121,
+          "height": 330
+        },
+        {
+          "imagePath": "../../references/story-media/65bd32f9450e18bdc055.png",
+          "reportName": "(9).pdf",
+          "page": 107,
+          "kind": "map",
+          "width": 1063,
+          "height": 359
+        },
+        {
+          "imagePath": "../../references/story-media/c92d20ae85c4dccd97b7.png",
+          "reportName": "(9).pdf",
+          "page": 108,
+          "kind": "axis-photo",
+          "width": 1148,
+          "height": 372
+        },
+        {
+          "imagePath": "../../references/story-media/f1712942ad99c75894a1.png",
+          "reportName": "(9).pdf",
+          "page": 108,
+          "kind": "axis-photo",
+          "width": 1148,
+          "height": 467
+        },
+        {
+          "imagePath": "../../references/story-media/507af591db4eb7759245.png",
+          "reportName": "(9).pdf",
+          "page": 109,
+          "kind": "comparison",
+          "width": 1080,
+          "height": 564
+        },
+        {
+          "imagePath": "../../references/story-media/dbfa3c53e9a31a76f1d8.png",
+          "reportName": "(9).pdf",
+          "page": 110,
+          "kind": "comparison",
+          "width": 1030,
+          "height": 456
+        },
+        {
+          "imagePath": "../../references/story-media/ac2d610958a3449bdc91.png",
+          "reportName": "(9).pdf",
+          "page": 111,
+          "kind": "comparison",
+          "width": 1125,
+          "height": 719
+        },
+        {
+          "imagePath": "../../references/story-media/95bdd905450f5c4dd610.png",
+          "reportName": "(9).pdf",
+          "page": 112,
+          "kind": "comparison",
+          "width": 1135,
+          "height": 462
+        },
+        {
+          "imagePath": "../../references/story-media/73aece4a81f8c7c88aaf.png",
+          "reportName": "(9).pdf",
+          "page": 112,
+          "kind": "comparison",
+          "width": 1136,
+          "height": 519
+        },
+        {
+          "imagePath": "../../references/story-media/546b8d625cd3d487f0e6.png",
+          "reportName": "(9).pdf",
+          "page": 113,
+          "kind": "comparison",
+          "width": 1051,
+          "height": 565
+        },
+        {
+          "imagePath": "../../references/story-media/b58e45d946512bce74ad.png",
+          "reportName": "(9).pdf",
+          "page": 114,
+          "kind": "comparison",
+          "width": 1126,
+          "height": 422
+        },
+        {
+          "imagePath": "../../references/story-media/8d4f496c6508330e0f93.png",
+          "reportName": "(9).pdf",
+          "page": 114,
+          "kind": "comparison",
+          "width": 1126,
+          "height": 543
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": "(9).pdf",
+          "page": 115,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/4866cb8a39e3337296c1.png",
+          "reportName": "(9).pdf",
+          "page": 117,
+          "kind": "map",
+          "width": 1104,
+          "height": 408
+        },
+        {
+          "imagePath": "../../references/story-media/409172ea3250afac2881.png",
+          "reportName": "(9).pdf",
+          "page": 118,
+          "kind": "comparison",
+          "width": 1035,
+          "height": 494
+        },
+        {
+          "imagePath": "../../references/story-media/9b9da1774a2a12b7ef8e.png",
+          "reportName": "(9).pdf",
+          "page": 119,
+          "kind": "map",
+          "width": 1220,
+          "height": 587
+        },
+        {
+          "imagePath": "../../references/story-media/53ef3ac014f986951afb.png",
+          "reportName": "(9).pdf",
+          "page": 119,
+          "kind": "map",
+          "width": 1220,
+          "height": 503
+        },
+        {
+          "imagePath": "../../references/story-media/7d71802ac7ae6a983888.png",
+          "reportName": "(9).pdf",
+          "page": 120,
+          "kind": "map",
+          "width": 1054,
+          "height": 448
+        },
+        {
+          "imagePath": "../../references/story-media/20c0815d2cadd8f38265.png",
+          "reportName": "(9).pdf",
+          "page": 121,
+          "kind": "axis-photo",
+          "width": 989,
+          "height": 459
+        },
+        {
+          "imagePath": "../../references/story-media/8c29a4e856567649ed63.png",
+          "reportName": "(9).pdf",
+          "page": 122,
+          "kind": "axis-photo",
+          "width": 953,
+          "height": 390
+        },
+        {
+          "imagePath": "../../references/story-media/3730a207091101c535f5.png",
+          "reportName": "(9).pdf",
+          "page": 123,
+          "kind": "map",
+          "width": 1166,
+          "height": 570
+        },
+        {
+          "imagePath": "../../references/story-media/1fe8360bd981b65eea31.png",
+          "reportName": "(9).pdf",
+          "page": 123,
+          "kind": "map",
+          "width": 1166,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/752ebd1d0033625ebeb5.png",
+          "reportName": "(9).pdf",
+          "page": 124,
+          "kind": "map",
+          "width": 991,
+          "height": 475
+        },
+        {
+          "imagePath": "../../references/story-media/61dd3419be7a99adc15e.png",
+          "reportName": "(9).pdf",
+          "page": 125,
+          "kind": "map",
+          "width": 1127,
+          "height": 574
+        },
+        {
+          "imagePath": "../../references/story-media/54f8b84fbf857dc1932a.png",
+          "reportName": "(9).pdf",
+          "page": 125,
+          "kind": "map",
+          "width": 1127,
+          "height": 649
+        },
+        {
+          "imagePath": "../../references/story-media/4f7598593c7f0f35781d.png",
+          "reportName": "(9).pdf",
+          "page": 126,
+          "kind": "map",
+          "width": 997,
+          "height": 541
+        },
+        {
+          "imagePath": "../../references/story-media/2b8cdab0cec61fb33cfc.png",
+          "reportName": "(9).pdf",
+          "page": 127,
+          "kind": "map",
+          "width": 1050,
+          "height": 416
+        },
+        {
+          "imagePath": "../../references/story-media/ae82614233c0eb5c8e3f.png",
+          "reportName": "(9).pdf",
+          "page": 127,
+          "kind": "map",
+          "width": 1050,
+          "height": 509
+        },
+        {
+          "imagePath": "../../references/story-media/f3c6bcade4a23a10bc2c.png",
+          "reportName": "(9).pdf",
+          "page": 128,
+          "kind": "axis-photo",
+          "width": 1046,
+          "height": 301
+        },
+        {
+          "imagePath": "../../references/story-media/b0f48847fa93cd8c3883.png",
+          "reportName": "(9).pdf",
+          "page": 128,
+          "kind": "axis-photo",
+          "width": 1046,
+          "height": 435
+        },
+        {
+          "imagePath": "../../references/story-media/a184be5de2a68346791c.png",
+          "reportName": "(9).pdf",
+          "page": 128,
+          "kind": "axis-photo",
+          "width": 1046,
+          "height": 423
+        },
+        {
+          "imagePath": "../../references/story-media/50563e94c930751f49b6.png",
+          "reportName": "(9).pdf",
+          "page": 128,
+          "kind": "axis-photo",
+          "width": 1046,
+          "height": 314
+        },
+        {
+          "imagePath": "../../references/story-media/e9032f15f3e3a5539ad4.png",
+          "reportName": "(9).pdf",
+          "page": 129,
+          "kind": "axis-photo",
+          "width": 1060,
+          "height": 520
+        },
+        {
+          "imagePath": "../../references/story-media/f6e3947a2136292a180c.png",
+          "reportName": "(9).pdf",
+          "page": 129,
+          "kind": "axis-photo",
+          "width": 1061,
+          "height": 422
+        },
+        {
+          "imagePath": "../../references/story-media/1dcb567f4373b4407a52.png",
+          "reportName": "(9).pdf",
+          "page": 130,
+          "kind": "map",
+          "width": 1117,
+          "height": 600
+        },
+        {
+          "imagePath": "../../references/story-media/9a9a0aa3342704763d78.png",
+          "reportName": "(9).pdf",
+          "page": 130,
+          "kind": "map",
+          "width": 1116,
+          "height": 337
+        },
+        {
+          "imagePath": "../../references/story-media/10696ba734602a59fed8.png",
+          "reportName": "(9).pdf",
+          "page": 131,
+          "kind": "map",
+          "width": 992,
+          "height": 571
+        },
+        {
+          "imagePath": "../../references/story-media/4a7f2f61e7c94f682b64.png",
+          "reportName": "(9).pdf",
+          "page": 132,
+          "kind": "map",
+          "width": 1057,
+          "height": 498
+        },
+        {
+          "imagePath": "../../references/story-media/7e2d6fada1f4a50f4e55.png",
+          "reportName": "(9).pdf",
+          "page": 133,
+          "kind": "map",
+          "width": 1066,
+          "height": 507
+        },
+        {
+          "imagePath": "../../references/story-media/649118ee647f8f19e0d8.png",
+          "reportName": "(9).pdf",
+          "page": 135,
+          "kind": "comparison",
+          "width": 1041,
+          "height": 640
+        },
+        {
+          "imagePath": "../../references/story-media/e65ed68adcbdb3477fc0.png",
+          "reportName": "(9).pdf",
+          "page": 136,
+          "kind": "comparison",
+          "width": 1027,
+          "height": 692
+        },
+        {
+          "imagePath": "../../references/story-media/197f853ffb7b3dacc0a5.png",
+          "reportName": "(9).pdf",
+          "page": 137,
+          "kind": "comparison",
+          "width": 1010,
+          "height": 557
+        },
+        {
+          "imagePath": "../../references/story-media/15961ff97a2a6eee4f56.png",
+          "reportName": "(9).pdf",
+          "page": 138,
+          "kind": "comparison",
+          "width": 1029,
+          "height": 613
+        },
+        {
+          "imagePath": "../../references/story-media/1680ff68d796ae1c3251.png",
+          "reportName": "(9).pdf",
+          "page": 139,
+          "kind": "comparison",
+          "width": 1056,
+          "height": 519
+        },
+        {
+          "imagePath": "../../references/story-media/b839bf2dd3d94ef0d9f5.png",
+          "reportName": "(9).pdf",
+          "page": 140,
+          "kind": "comparison",
+          "width": 1015,
+          "height": 569
+        },
+        {
+          "imagePath": "../../references/story-media/79166201cc53726b8df0.png",
+          "reportName": "(9).pdf",
+          "page": 141,
+          "kind": "comparison",
+          "width": 1078,
+          "height": 492
+        },
+        {
+          "imagePath": "../../references/story-media/32b6da06fd95a325e714.png",
+          "reportName": "(9).pdf",
+          "page": 142,
+          "kind": "comparison",
+          "width": 1041,
+          "height": 577
+        },
+        {
+          "imagePath": "../../references/story-media/c24516635f0c7cfb1714.png",
+          "reportName": "(9).pdf",
+          "page": 143,
+          "kind": "comparison",
+          "width": 1042,
+          "height": 555
+        },
+        {
+          "imagePath": "../../references/story-media/26768f007a27269e1c18.png",
+          "reportName": "(9).pdf",
+          "page": 144,
+          "kind": "comparison",
+          "width": 1030,
+          "height": 480
+        },
+        {
+          "imagePath": "../../references/story-media/cf3e263936d399fe3b84.png",
+          "reportName": "(9).pdf",
+          "page": 145,
+          "kind": "comparison",
+          "width": 1018,
+          "height": 559
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(9).pdf",
+          "page": 147,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": "(9).pdf",
+          "page": 170,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ]
+    },
+    "cairo-suez-road": {
+      "project": [
+        {
+          "imagePath": "../../references/story-media/15d2f9d8cc0ac5242bf5.png",
+          "reportName": "(8).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 3573,
+          "height": 761
+        },
+        {
+          "imagePath": "../../references/story-media/99876f43972666f1f907.jpg",
+          "reportName": "(8).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "imagePath": "../../references/story-media/b2ca9817d423ae26fb4d.jpg",
+          "reportName": "(8).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 850,
+          "height": 478
+        },
+        {
+          "imagePath": "../../references/story-media/6a9b27330a0bf7c44788.jpg",
+          "reportName": "(8).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 840,
+          "height": 473
+        },
+        {
+          "imagePath": "../../references/story-media/3a5aacc20f94f213dbe7.jpg",
+          "reportName": "(8).pdf",
+          "page": 1,
+          "kind": "axis-photo",
+          "width": 2847,
+          "height": 1803
+        },
+        {
+          "imagePath": "../../references/story-media/2446ab6fbce368db1804.png",
+          "reportName": "(8).pdf",
+          "page": 1,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        },
+        {
+          "imagePath": "../../references/story-media/5ee0473e194cbbc2f6ae.jpg",
+          "reportName": "(8).pdf",
+          "page": 12,
+          "kind": "comparison",
+          "width": 840,
+          "height": 473
+        },
+        {
+          "imagePath": "../../references/story-media/4e67687243b5181b67b1.jpg",
+          "reportName": "(8).pdf",
+          "page": 13,
+          "kind": "map",
+          "width": 1427,
+          "height": 1009
+        },
+        {
+          "imagePath": "../../references/story-media/2341b5880ac8248b05c5.jpg",
+          "reportName": "(8).pdf",
+          "page": 16,
+          "kind": "map",
+          "width": 1243,
+          "height": 794
+        },
+        {
+          "imagePath": "../../references/story-media/45e3df56f2ad053e2154.jpg",
+          "reportName": "(8).pdf",
+          "page": 16,
+          "kind": "map",
+          "width": 1245,
+          "height": 796
+        },
+        {
+          "imagePath": "../../references/story-media/74e03ca370a13a9539ca.jpg",
+          "reportName": "(8).pdf",
+          "page": 18,
+          "kind": "evidence",
+          "width": 1282,
+          "height": 906
+        },
+        {
+          "imagePath": "../../references/story-media/abfd41c0b7dffc83d203.jpg",
+          "reportName": "(8).pdf",
+          "page": 18,
+          "kind": "evidence",
+          "width": 1261,
+          "height": 892
+        },
+        {
+          "imagePath": "../../references/story-media/6738139d3a49ec10931e.jpg",
+          "reportName": "(8).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1282,
+          "height": 906
+        },
+        {
+          "imagePath": "../../references/story-media/de42c0d5e482cc3ac1bc.jpg",
+          "reportName": "(8).pdf",
+          "page": 19,
+          "kind": "evidence",
+          "width": 1299,
+          "height": 919
+        },
+        {
+          "imagePath": "../../references/story-media/642841e18cb3b2eaa751.jpg",
+          "reportName": "(8).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/e639d57617f8d4b02810.jpg",
+          "reportName": "(8).pdf",
+          "page": 20,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/547bd59d5ca4a728a1ff.jpg",
+          "reportName": "(8).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1243,
+          "height": 879
+        },
+        {
+          "imagePath": "../../references/story-media/3bd9a6444f6924e74103.jpg",
+          "reportName": "(8).pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1245,
+          "height": 880
+        },
+        {
+          "imagePath": "../../references/story-media/3d63f8102f2883e5b703.jpg",
+          "reportName": "(8).pdf",
+          "page": 23,
+          "kind": "evidence",
+          "width": 1445,
+          "height": 1022
+        },
+        {
+          "imagePath": "../../references/story-media/03a8bec241b928152c46.jpg",
+          "reportName": "(8).pdf",
+          "page": 24,
+          "kind": "map",
+          "width": 1130,
+          "height": 847
+        },
+        {
+          "imagePath": "../../references/story-media/1db0e4a6806206066472.jpg",
+          "reportName": "(8).pdf",
+          "page": 24,
+          "kind": "map",
+          "width": 978,
+          "height": 733
+        },
+        {
+          "imagePath": "../../references/story-media/79e6db2e1641500dc948.jpg",
+          "reportName": "(8).pdf",
+          "page": 24,
+          "kind": "map",
+          "width": 760,
+          "height": 746
+        },
+        {
+          "imagePath": "../../references/story-media/7db0b6f826f45eeb1287.png",
+          "reportName": "(8).pdf",
+          "page": 30,
+          "kind": "comparison",
+          "width": 1622,
+          "height": 413
+        },
+        {
+          "imagePath": "../../references/story-media/82c259865b7c55de973e.png",
+          "reportName": "(8).pdf",
+          "page": 41,
+          "kind": "comparison",
+          "width": 1616,
+          "height": 413
+        },
+        {
+          "imagePath": "../../references/story-media/8ad610db5b2332247cde.png",
+          "reportName": "(8).pdf",
+          "page": 49,
+          "kind": "evidence",
+          "width": 785,
+          "height": 514
+        },
+        {
+          "imagePath": "../../references/story-media/bca4204dc9d7690d7625.png",
+          "reportName": "(8).pdf",
+          "page": 49,
+          "kind": "axis-photo",
+          "width": 784,
+          "height": 477
+        },
+        {
+          "imagePath": "../../references/story-media/f7a8480b4cec7b827b70.png",
+          "reportName": "(8).pdf",
+          "page": 50,
+          "kind": "evidence",
+          "width": 770,
+          "height": 557
+        },
+        {
+          "imagePath": "../../references/story-media/dda33caf40a6065cc04a.jpg",
+          "reportName": "(8).pdf",
+          "page": 53,
+          "kind": "comparison",
+          "width": 1774,
+          "height": 1254
+        },
+        {
+          "imagePath": "../../references/story-media/54c62fe1dc3b87c192f6.jpg",
+          "reportName": "(8).pdf",
+          "page": 54,
+          "kind": "comparison",
+          "width": 1730,
+          "height": 1223
+        },
+        {
+          "imagePath": "../../references/story-media/b01a10e42864c130091f.jpg",
+          "reportName": "(8).pdf",
+          "page": 55,
+          "kind": "comparison",
+          "width": 1742,
+          "height": 1232
+        },
+        {
+          "imagePath": "../../references/story-media/307793ae2798742ae592.jpg",
+          "reportName": "(8).pdf",
+          "page": 56,
+          "kind": "comparison",
+          "width": 1700,
+          "height": 1202
+        },
+        {
+          "imagePath": "../../references/story-media/636e0978cf3d832fc687.jpg",
+          "reportName": "(8).pdf",
+          "page": 57,
+          "kind": "map",
+          "width": 1744,
+          "height": 507
+        },
+        {
+          "imagePath": "../../references/story-media/2193012a31589158160b.jpg",
+          "reportName": "(8).pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 1345,
+          "height": 671
+        },
+        {
+          "imagePath": "../../references/story-media/73f1c6c80c31d0e022b3.jpg",
+          "reportName": "(8).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 862
+        },
+        {
+          "imagePath": "../../references/story-media/33d863b102440f6e12e1.png",
+          "reportName": "(8).pdf",
+          "page": 60,
+          "kind": "axis-photo",
+          "width": 1911,
+          "height": 850
+        },
+        {
+          "imagePath": "../../references/story-media/009f3fb66a20441e9492.jpg",
+          "reportName": "(8).pdf",
+          "page": 61,
+          "kind": "axis-photo",
+          "width": 1897,
+          "height": 792
+        },
+        {
+          "imagePath": "../../references/story-media/2d9888b920d90f9c20be.jpg",
+          "reportName": "(8).pdf",
+          "page": 61,
+          "kind": "comparison",
+          "width": 932,
+          "height": 568
+        },
+        {
+          "imagePath": "../../references/story-media/1e82ef51207cd31ddeef.jpg",
+          "reportName": "(8).pdf",
+          "page": 63,
+          "kind": "evidence",
+          "width": 2681,
+          "height": 1895
+        },
+        {
+          "imagePath": "../../references/story-media/2828085586bc7a97b57b.png",
+          "reportName": "(8).pdf",
+          "page": 76,
+          "kind": "axis-photo",
+          "width": 846,
+          "height": 368
+        },
+        {
+          "imagePath": "../../references/story-media/6335573cdeee1d7e741b.jpg",
+          "reportName": "(8).pdf",
+          "page": 79,
+          "kind": "evidence",
+          "width": 3111,
+          "height": 2074
+        },
+        {
+          "imagePath": "../../references/story-media/d9468835088ca3126d5e.jpg",
+          "reportName": "(8).pdf",
+          "page": 93,
+          "kind": "evidence",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "imagePath": "../../references/story-media/88d634b7958ece57620c.png",
+          "reportName": "(8).pdf",
+          "page": 138,
+          "kind": "axis-photo",
+          "width": 883,
+          "height": 528
+        },
+        {
+          "imagePath": "../../references/story-media/588e9d35bcb4f9742a1f.jpg",
+          "reportName": "(8).pdf",
+          "page": 139,
+          "kind": "evidence",
+          "width": 3428,
+          "height": 2285
+        },
+        {
+          "imagePath": "../../references/story-media/beb4f7826ea6e2e54dd4.jpg",
+          "reportName": "(8).pdf",
+          "page": 163,
+          "kind": "evidence",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "imagePath": "../../references/story-media/7b70fb1af20e580bf630.png",
+          "reportName": "(8).pdf",
+          "page": 167,
+          "kind": "axis-photo",
+          "width": 1096,
+          "height": 313
+        }
+      ]
+    },
+    "regional-ring-road": {
+      "project": [
+        {
+          "imagePath": "../../references/story-media/1564df7199bd578d921e.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 15,
+          "kind": "map",
+          "width": 837,
+          "height": 637
+        },
+        {
+          "imagePath": "../../references/story-media/2fc1dfc0b39a14f1ffae.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 18,
+          "kind": "evidence",
+          "width": 1255,
+          "height": 856
+        },
+        {
+          "imagePath": "../../references/story-media/457aee921b771a8941f1.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1550,
+          "height": 1078
+        },
+        {
+          "imagePath": "../../references/story-media/c4d2a8c77666c0b4acf7.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 21,
+          "kind": "evidence",
+          "width": 1545,
+          "height": 1013
+        },
+        {
+          "imagePath": "../../references/story-media/011ca5132c948a505db4.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 22,
+          "kind": "comparison",
+          "width": 808,
+          "height": 742
+        },
+        {
+          "imagePath": "../../references/story-media/de49d0d7bb7766536b7a.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 22,
+          "kind": "comparison",
+          "width": 784,
+          "height": 747
+        },
+        {
+          "imagePath": "../../references/story-media/4132f2c9c1c2d5140556.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 24,
+          "kind": "axis-photo",
+          "width": 1493,
+          "height": 750
+        },
+        {
+          "imagePath": "../../references/story-media/9ea7211af1ce46075eb8.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 25,
+          "kind": "axis-photo",
+          "width": 1492,
+          "height": 750
+        },
+        {
+          "imagePath": "../../references/story-media/b19fe41682689b2861cc.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 26,
+          "kind": "axis-photo",
+          "width": 1320,
+          "height": 752
+        },
+        {
+          "imagePath": "../../references/story-media/8c1cee8a2f3aad4eaf54.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 27,
+          "kind": "axis-photo",
+          "width": 1307,
+          "height": 745
+        },
+        {
+          "imagePath": "../../references/story-media/dc5ecc532b2acabcb6a0.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 28,
+          "kind": "evidence",
+          "width": 1476,
+          "height": 1043
+        },
+        {
+          "imagePath": "../../references/story-media/5fa9595bfff174f004d4.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 29,
+          "kind": "map",
+          "width": 959,
+          "height": 719
+        },
+        {
+          "imagePath": "../../references/story-media/6090ec6f2313c4fcc6f7.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 29,
+          "kind": "map",
+          "width": 720,
+          "height": 959
+        },
+        {
+          "imagePath": "../../references/story-media/24f4ab6127361b676e22.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 29,
+          "kind": "map",
+          "width": 922,
+          "height": 692
+        },
+        {
+          "imagePath": "../../references/story-media/17cc82b334f6b78e545f.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 40,
+          "kind": "axis-photo",
+          "width": 1492,
+          "height": 311
+        },
+        {
+          "imagePath": "../../references/story-media/511daa474934feba3a1e.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 42,
+          "kind": "axis-photo",
+          "width": 1471,
+          "height": 318
+        },
+        {
+          "imagePath": "../../references/story-media/f2f7a1c948438c8f57e5.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 44,
+          "kind": "axis-photo",
+          "width": 1538,
+          "height": 393
+        },
+        {
+          "imagePath": "../../references/story-media/eadd1ef2b7e8d3c7a38d.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 46,
+          "kind": "axis-photo",
+          "width": 1556,
+          "height": 351
+        },
+        {
+          "imagePath": "../../references/story-media/c7c0db10c2399cd3997a.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 55,
+          "kind": "dashboard",
+          "width": 1015,
+          "height": 552
+        },
+        {
+          "imagePath": "../../references/story-media/75a463f02330ca5816bb.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 56,
+          "kind": "dashboard",
+          "width": 937,
+          "height": 430
+        },
+        {
+          "imagePath": "../../references/story-media/bb1ad590384063529624.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 57,
+          "kind": "dashboard",
+          "width": 939,
+          "height": 432
+        },
+        {
+          "imagePath": "../../references/story-media/364ff163fef9b0301b5b.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 943,
+          "height": 431
+        },
+        {
+          "imagePath": "../../references/story-media/c8a045335b67b259f60e.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 59,
+          "kind": "axis-photo",
+          "width": 1038,
+          "height": 474
+        },
+        {
+          "imagePath": "../../references/story-media/ef1718d3cea1bfa0bdb1.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 60,
+          "kind": "evidence",
+          "width": 715,
+          "height": 581
+        },
+        {
+          "imagePath": "../../references/story-media/cd2a5fc00576a81551f5.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 60,
+          "kind": "evidence",
+          "width": 733,
+          "height": 574
+        },
+        {
+          "imagePath": "../../references/story-media/73a942b43838a27f07a0.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 62,
+          "kind": "axis-photo",
+          "width": 1665,
+          "height": 1042
+        },
+        {
+          "imagePath": "../../references/story-media/965b5f723cd8c7bdd69f.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 63,
+          "kind": "axis-photo",
+          "width": 1799,
+          "height": 1154
+        },
+        {
+          "imagePath": "../../references/story-media/8d25c1c9842eecaed50c.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 64,
+          "kind": "map",
+          "width": 1813,
+          "height": 1152
+        },
+        {
+          "imagePath": "../../references/story-media/069f598d7b30de390292.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 65,
+          "kind": "map",
+          "width": 1791,
+          "height": 1174
+        },
+        {
+          "imagePath": "../../references/story-media/6ce53198cd6d14e38d71.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 66,
+          "kind": "map",
+          "width": 1455,
+          "height": 420
+        },
+        {
+          "imagePath": "../../references/story-media/9014ba17c3422307e34b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 67,
+          "kind": "dashboard",
+          "width": 1920,
+          "height": 628
+        },
+        {
+          "imagePath": "../../references/story-media/106eab30a876eb75efb9.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 68,
+          "kind": "dashboard",
+          "width": 1200,
+          "height": 578
+        },
+        {
+          "imagePath": "../../references/story-media/51b5b2cdaf23899e8d18.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 69,
+          "kind": "comparison",
+          "width": 1450,
+          "height": 554
+        },
+        {
+          "imagePath": "../../references/story-media/867288b86e6117b3cc59.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 70,
+          "kind": "axis-photo",
+          "width": 1170,
+          "height": 462
+        },
+        {
+          "imagePath": "../../references/story-media/93399482a28b4bd8af03.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 70,
+          "kind": "comparison",
+          "width": 1034,
+          "height": 642
+        },
+        {
+          "imagePath": "../../references/story-media/3fa2f208f220c2374c0d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 71,
+          "kind": "axis-photo",
+          "width": 1377,
+          "height": 636
+        },
+        {
+          "imagePath": "../../references/story-media/4df2d2908b06de04065d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 71,
+          "kind": "comparison",
+          "width": 1379,
+          "height": 624
+        }
+      ]
+    },
+    "dahshur-south-link": {
+      "project": [
+        {
+          "imagePath": "../../references/story-media/70de0bfb5887a58e6e77.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 82,
+          "kind": "map",
+          "width": 1346,
+          "height": 987
+        },
+        {
+          "imagePath": "../../references/story-media/fd5f3fb500465d88c3bb.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 83,
+          "kind": "map",
+          "width": 1429,
+          "height": 1009
+        },
+        {
+          "imagePath": "../../references/story-media/6d72beb712537f59dcea.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 84,
+          "kind": "comparison",
+          "width": 897,
+          "height": 747
+        },
+        {
+          "imagePath": "../../references/story-media/ea0e1db16cac97924b14.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 84,
+          "kind": "comparison",
+          "width": 816,
+          "height": 722
+        },
+        {
+          "imagePath": "../../references/story-media/9f6bf8590573416d1091.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 86,
+          "kind": "axis-photo",
+          "width": 1458,
+          "height": 752
+        },
+        {
+          "imagePath": "../../references/story-media/6e93162ec44916e965e9.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 87,
+          "kind": "axis-photo",
+          "width": 1462,
+          "height": 747
+        },
+        {
+          "imagePath": "../../references/story-media/920329a7defdbc2d243b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 88,
+          "kind": "axis-photo",
+          "width": 921,
+          "height": 568
+        },
+        {
+          "imagePath": "../../references/story-media/af532db53a900f661cc6.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 89,
+          "kind": "evidence",
+          "width": 912,
+          "height": 608
+        },
+        {
+          "imagePath": "../../references/story-media/36e9ae17ace9fb38e29e.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 90,
+          "kind": "evidence",
+          "width": 1492,
+          "height": 1052
+        },
+        {
+          "imagePath": "../../references/story-media/01c1b89f4504777a915f.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 91,
+          "kind": "map",
+          "width": 725,
+          "height": 544
+        },
+        {
+          "imagePath": "../../references/story-media/f8acc77ab1a0f3ea55ee.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 91,
+          "kind": "map",
+          "width": 721,
+          "height": 540
+        },
+        {
+          "imagePath": "../../references/story-media/d147816a7365a6470c5d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 91,
+          "kind": "map",
+          "width": 743,
+          "height": 556
+        },
+        {
+          "imagePath": "../../references/story-media/96aab97fdabf64c0c582.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 91,
+          "kind": "map",
+          "width": 721,
+          "height": 548
+        },
+        {
+          "imagePath": "../../references/story-media/1ac7d95214734082a511.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 91,
+          "kind": "map",
+          "width": 1345,
+          "height": 520
+        },
+        {
+          "imagePath": "../../references/story-media/ce2eef3f0868a2897929.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 95,
+          "kind": "axis-photo",
+          "width": 1498,
+          "height": 360
+        },
+        {
+          "imagePath": "../../references/story-media/4846067afd1a2add3002.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 95,
+          "kind": "axis-photo",
+          "width": 1456,
+          "height": 340
+        },
+        {
+          "imagePath": "../../references/story-media/ddaa4cb0bd40639c7a84.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 97,
+          "kind": "axis-photo",
+          "width": 1552,
+          "height": 316
+        },
+        {
+          "imagePath": "../../references/story-media/4624ba37a4c11836546c.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 99,
+          "kind": "axis-photo",
+          "width": 1497,
+          "height": 372
+        },
+        {
+          "imagePath": "../../references/story-media/9786b06bb5d5a5b4b5d2.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 101,
+          "kind": "axis-photo",
+          "width": 1663,
+          "height": 422
+        },
+        {
+          "imagePath": "../../references/story-media/20c29f85db2a2fe86a21.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 110,
+          "kind": "dashboard",
+          "width": 948,
+          "height": 511
+        },
+        {
+          "imagePath": "../../references/story-media/965cc95d4f892637925d.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 111,
+          "kind": "dashboard",
+          "width": 1322,
+          "height": 614
+        },
+        {
+          "imagePath": "../../references/story-media/f4fb980004b2897cecc8.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 112,
+          "kind": "dashboard",
+          "width": 1325,
+          "height": 620
+        },
+        {
+          "imagePath": "../../references/story-media/29809e3de7efa318d148.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 113,
+          "kind": "map",
+          "width": 1327,
+          "height": 621
+        },
+        {
+          "imagePath": "../../references/story-media/1fdd7054cf8041a45d3f.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 114,
+          "kind": "axis-photo",
+          "width": 1036,
+          "height": 476
+        },
+        {
+          "imagePath": "../../references/story-media/7f4b376d9ddd674d253b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 115,
+          "kind": "map",
+          "width": 876,
+          "height": 556
+        },
+        {
+          "imagePath": "../../references/story-media/8b19308afa3022216566.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 115,
+          "kind": "map",
+          "width": 1017,
+          "height": 575
+        },
+        {
+          "imagePath": "../../references/story-media/35efac9449a7e467ef50.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 118,
+          "kind": "evidence",
+          "width": 1710,
+          "height": 1114
+        },
+        {
+          "imagePath": "../../references/story-media/1f90cc2cd975f7c953d2.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 119,
+          "kind": "evidence",
+          "width": 1749,
+          "height": 1174
+        },
+        {
+          "imagePath": "../../references/story-media/994212094d22ea88e326.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 120,
+          "kind": "evidence",
+          "width": 1788,
+          "height": 1176
+        },
+        {
+          "imagePath": "../../references/story-media/051f09feaef67f4c36f2.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 121,
+          "kind": "axis-photo",
+          "width": 1817,
+          "height": 1165
+        },
+        {
+          "imagePath": "../../references/story-media/e9c922bc40c92de2ebc3.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 122,
+          "kind": "evidence",
+          "width": 1795,
+          "height": 1159
+        },
+        {
+          "imagePath": "../../references/story-media/64cc10070f3e2c7c74f6.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 124,
+          "kind": "dashboard",
+          "width": 1375,
+          "height": 679
+        },
+        {
+          "imagePath": "../../references/story-media/c689ecbcbead4309d41d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 125,
+          "kind": "dashboard",
+          "width": 1262,
+          "height": 624
+        },
+        {
+          "imagePath": "../../references/story-media/a7bf82191077e333906e.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 126,
+          "kind": "comparison",
+          "width": 1417,
+          "height": 567
+        },
+        {
+          "imagePath": "../../references/story-media/2774b063594bbd9ad94a.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 127,
+          "kind": "axis-photo",
+          "width": 1172,
+          "height": 529
+        },
+        {
+          "imagePath": "../../references/story-media/29de0061634116fe62dc.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 127,
+          "kind": "comparison",
+          "width": 1034,
+          "height": 636
+        },
+        {
+          "imagePath": "../../references/story-media/49256ddc25dea728b0ac.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 128,
+          "kind": "comparison",
+          "width": 1346,
+          "height": 691
+        },
+        {
+          "imagePath": "../../references/story-media/b221b25ecc8793a23d01.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 128,
+          "kind": "comparison",
+          "width": 1332,
+          "height": 666
+        }
+      ]
+    },
+    "suez-ring-link": {
+      "project": [
+        {
+          "imagePath": "../../references/story-media/f9a0d2ca32d15bb4f9b8.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 138,
+          "kind": "evidence",
+          "width": 1346,
+          "height": 1107
+        },
+        {
+          "imagePath": "../../references/story-media/2f23662644ac935662bc.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 139,
+          "kind": "comparison",
+          "width": 1458,
+          "height": 1028
+        },
+        {
+          "imagePath": "../../references/story-media/c90216921386ef9f1c5a.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 140,
+          "kind": "comparison",
+          "width": 942,
+          "height": 681
+        },
+        {
+          "imagePath": "../../references/story-media/0b268e89e678c0f58f9e.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 140,
+          "kind": "comparison",
+          "width": 950,
+          "height": 687
+        },
+        {
+          "imagePath": "../../references/story-media/a5094fdb9ae3873877b0.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 142,
+          "kind": "evidence",
+          "width": 926,
+          "height": 756
+        },
+        {
+          "imagePath": "../../references/story-media/59800599ef55bb1f3fc3.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 143,
+          "kind": "evidence",
+          "width": 927,
+          "height": 748
+        },
+        {
+          "imagePath": "../../references/story-media/b5adf0a80f395986fc76.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 144,
+          "kind": "axis-photo",
+          "width": 897,
+          "height": 536
+        },
+        {
+          "imagePath": "../../references/story-media/8af60ca21b386433160d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 145,
+          "kind": "axis-photo",
+          "width": 917,
+          "height": 570
+        },
+        {
+          "imagePath": "../../references/story-media/2234b8032e369b7e3ae2.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 146,
+          "kind": "evidence",
+          "width": 1531,
+          "height": 1079
+        },
+        {
+          "imagePath": "../../references/story-media/47771105f6f285fbb6ec.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 147,
+          "kind": "map",
+          "width": 896,
+          "height": 706
+        },
+        {
+          "imagePath": "../../references/story-media/72be5c91759da992c3d7.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 147,
+          "kind": "map",
+          "width": 726,
+          "height": 904
+        },
+        {
+          "imagePath": "../../references/story-media/19cf36177da1acacbf11.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 147,
+          "kind": "map",
+          "width": 909,
+          "height": 729
+        },
+        {
+          "imagePath": "../../references/story-media/81ddeaa6cef51c5b2803.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 151,
+          "kind": "axis-photo",
+          "width": 1505,
+          "height": 368
+        },
+        {
+          "imagePath": "../../references/story-media/dc19588075eed1456241.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 158,
+          "kind": "dashboard",
+          "width": 1017,
+          "height": 552
+        },
+        {
+          "imagePath": "../../references/story-media/4fe2bbe139c04c7ab3e9.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 159,
+          "kind": "dashboard",
+          "width": 1228,
+          "height": 573
+        },
+        {
+          "imagePath": "../../references/story-media/c2767426802a18988efd.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 160,
+          "kind": "axis-photo",
+          "width": 1179,
+          "height": 527
+        },
+        {
+          "imagePath": "../../references/story-media/84c676c75159b1c99a88.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 161,
+          "kind": "map",
+          "width": 803,
+          "height": 527
+        },
+        {
+          "imagePath": "../../references/story-media/59b13338de306b23ea02.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 163,
+          "kind": "evidence",
+          "width": 1760,
+          "height": 1142
+        },
+        {
+          "imagePath": "../../references/story-media/ee33c662661168c03757.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 164,
+          "kind": "evidence",
+          "width": 1795,
+          "height": 1165
+        },
+        {
+          "imagePath": "../../references/story-media/5010052a266871f3416a.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 165,
+          "kind": "evidence",
+          "width": 1807,
+          "height": 1173
+        },
+        {
+          "imagePath": "../../references/story-media/1679c8a5d5d0f6d09769.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 166,
+          "kind": "map",
+          "width": 1356,
+          "height": 417
+        },
+        {
+          "imagePath": "../../references/story-media/b978b30e34dc23fb874d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 167,
+          "kind": "dashboard",
+          "width": 1351,
+          "height": 666
+        },
+        {
+          "imagePath": "../../references/story-media/7e7e62272378af67f590.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 168,
+          "kind": "dashboard",
+          "width": 1351,
+          "height": 666
+        },
+        {
+          "imagePath": "../../references/story-media/5841947e3c80faedd256.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 169,
+          "kind": "comparison",
+          "width": 1348,
+          "height": 664
+        },
+        {
+          "imagePath": "../../references/story-media/642a78be72381baf54dc.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 170,
+          "kind": "axis-photo",
+          "width": 1170,
+          "height": 449
+        },
+        {
+          "imagePath": "../../references/story-media/90e7bf490c5c1dcab34b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 170,
+          "kind": "comparison",
+          "width": 1034,
+          "height": 636
+        },
+        {
+          "imagePath": "../../references/story-media/2dbac8d85ab9a84da1d7.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 171,
+          "kind": "comparison",
+          "width": 1290,
+          "height": 605
+        },
+        {
+          "imagePath": "../../references/story-media/78e0f0baaf688b451391.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 171,
+          "kind": "comparison",
+          "width": 1301,
+          "height": 606
+        }
+      ]
+    },
+    "qena-luxor-road": {
+      "project": [
+        {
+          "imagePath": "../../references/story-media/64b243640b58b913006c.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 179,
+          "kind": "evidence",
+          "width": 1346,
+          "height": 869
+        },
+        {
+          "imagePath": "../../references/story-media/4fb49f9682e97b964616.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 180,
+          "kind": "comparison",
+          "width": 1477,
+          "height": 1042
+        },
+        {
+          "imagePath": "../../references/story-media/9e11f09b09d0eefa5869.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 183,
+          "kind": "axis-photo",
+          "width": 1247,
+          "height": 748
+        },
+        {
+          "imagePath": "../../references/story-media/e68cd4393c60addf4d35.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 184,
+          "kind": "axis-photo",
+          "width": 1336,
+          "height": 747
+        },
+        {
+          "imagePath": "../../references/story-media/a198a35477fda565ff5f.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 185,
+          "kind": "axis-photo",
+          "width": 1427,
+          "height": 737
+        },
+        {
+          "imagePath": "../../references/story-media/e6e8742220363d362281.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 186,
+          "kind": "axis-photo",
+          "width": 1478,
+          "height": 752
+        },
+        {
+          "imagePath": "../../references/story-media/fb0744f676ec75bbb66b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 187,
+          "kind": "evidence",
+          "width": 1491,
+          "height": 1050
+        },
+        {
+          "imagePath": "../../references/story-media/75a22f140159a445b65a.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 188,
+          "kind": "map",
+          "width": 767,
+          "height": 786
+        },
+        {
+          "imagePath": "../../references/story-media/053b2c79874f194957b3.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 188,
+          "kind": "map",
+          "width": 774,
+          "height": 797
+        },
+        {
+          "imagePath": "../../references/story-media/6ba924f6683912de69b1.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 194,
+          "kind": "axis-photo",
+          "width": 1468,
+          "height": 491
+        },
+        {
+          "imagePath": "../../references/story-media/07023c63e130fe06e636.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 204,
+          "kind": "dashboard",
+          "width": 1019,
+          "height": 553
+        },
+        {
+          "imagePath": "../../references/story-media/8afffd7cdb39e0e8b3b5.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 205,
+          "kind": "dashboard",
+          "width": 1127,
+          "height": 526
+        },
+        {
+          "imagePath": "../../references/story-media/36044c4b66f35f8aec13.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 206,
+          "kind": "dashboard",
+          "width": 1127,
+          "height": 525
+        },
+        {
+          "imagePath": "../../references/story-media/deb939b34e445aa8d05f.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 207,
+          "kind": "axis-photo",
+          "width": 1035,
+          "height": 471
+        },
+        {
+          "imagePath": "../../references/story-media/11040982f2a2204307c1.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 210,
+          "kind": "evidence",
+          "width": 1703,
+          "height": 1112
+        },
+        {
+          "imagePath": "../../references/story-media/30fba5b4c58b90b7442b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 211,
+          "kind": "evidence",
+          "width": 1719,
+          "height": 1134
+        },
+        {
+          "imagePath": "../../references/story-media/b78d3f152a0f13a3bf47.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 212,
+          "kind": "evidence",
+          "width": 1641,
+          "height": 1113
+        },
+        {
+          "imagePath": "../../references/story-media/e58f929a3618bba0503b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 213,
+          "kind": "map",
+          "width": 1366,
+          "height": 422
+        },
+        {
+          "imagePath": "../../references/story-media/6f5e48eedaa091d59cab.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 214,
+          "kind": "dashboard",
+          "width": 1332,
+          "height": 638
+        },
+        {
+          "imagePath": "../../references/story-media/1d71df70e4a187d40fb9.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 215,
+          "kind": "dashboard",
+          "width": 1332,
+          "height": 668
+        },
+        {
+          "imagePath": "../../references/story-media/8af52ae338ad92a8d4b0.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 216,
+          "kind": "comparison",
+          "width": 1246,
+          "height": 605
+        },
+        {
+          "imagePath": "../../references/story-media/fa20452da38417d0ed40.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 217,
+          "kind": "comparison",
+          "width": 1087,
+          "height": 524
+        },
+        {
+          "imagePath": "../../references/story-media/76ae6c919bc30880d662.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 217,
+          "kind": "comparison",
+          "width": 1034,
+          "height": 631
+        },
+        {
+          "imagePath": "../../references/story-media/9b96bfd697f22d04c35a.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 218,
+          "kind": "comparison",
+          "width": 1205,
+          "height": 598
+        },
+        {
+          "imagePath": "../../references/story-media/5d2731e8fefc934aadb8.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 218,
+          "kind": "comparison",
+          "width": 1204,
+          "height": 594
+        }
+      ]
+    },
+    "qus-axis": {
+      "project": [
+        {
+          "imagePath": "../../references/story-media/9e1ab09abbcdf8abbd78.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 227,
+          "kind": "evidence",
+          "width": 1206,
+          "height": 863
+        },
+        {
+          "imagePath": "../../references/story-media/0820d864e333237800e5.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 228,
+          "kind": "comparison",
+          "width": 1531,
+          "height": 1079
+        },
+        {
+          "imagePath": "../../references/story-media/b972e7d3fb7ee4d9498b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 229,
+          "kind": "comparison",
+          "width": 1342,
+          "height": 748
+        },
+        {
+          "imagePath": "../../references/story-media/5ecf7cad7128266ad0ca.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 229,
+          "kind": "comparison",
+          "width": 1357,
+          "height": 745
+        },
+        {
+          "imagePath": "../../references/story-media/f13bde53029bdd1b01ef.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 231,
+          "kind": "comparison",
+          "width": 782,
+          "height": 736
+        },
+        {
+          "imagePath": "../../references/story-media/5f6265936e963a4d77f5.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 232,
+          "kind": "comparison",
+          "width": 776,
+          "height": 741
+        },
+        {
+          "imagePath": "../../references/story-media/fb4940e9467c95bd049b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 233,
+          "kind": "comparison",
+          "width": 1180,
+          "height": 737
+        },
+        {
+          "imagePath": "../../references/story-media/ed9fe348644031ee3862.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 234,
+          "kind": "comparison",
+          "width": 1171,
+          "height": 735
+        },
+        {
+          "imagePath": "../../references/story-media/7a73d02cc1ffd201057f.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 235,
+          "kind": "evidence",
+          "width": 1523,
+          "height": 1072
+        },
+        {
+          "imagePath": "../../references/story-media/aa37348f8cb5e2f9a9ae.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 236,
+          "kind": "map",
+          "width": 731,
+          "height": 588
+        },
+        {
+          "imagePath": "../../references/story-media/c35b798d534896a1fedc.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 236,
+          "kind": "map",
+          "width": 826,
+          "height": 452
+        },
+        {
+          "imagePath": "../../references/story-media/3c69858517d7b14b95e4.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 236,
+          "kind": "map",
+          "width": 832,
+          "height": 770
+        },
+        {
+          "imagePath": "../../references/story-media/85e2c1889e1b4bef3e3e.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 244,
+          "kind": "comparison",
+          "width": 1554,
+          "height": 330
+        },
+        {
+          "imagePath": "../../references/story-media/b7d54d02b4ec3f777f01.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 246,
+          "kind": "comparison",
+          "width": 1614,
+          "height": 423
+        },
+        {
+          "imagePath": "../../references/story-media/774fbf53d1ada5803112.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 248,
+          "kind": "comparison",
+          "width": 1606,
+          "height": 421
+        },
+        {
+          "imagePath": "../../references/story-media/38bf6d90bc942177e4cb.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 258,
+          "kind": "dashboard",
+          "width": 1230,
+          "height": 571
+        },
+        {
+          "imagePath": "../../references/story-media/3236a41b4c95d178ebcd.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 259,
+          "kind": "dashboard",
+          "width": 1234,
+          "height": 567
+        },
+        {
+          "imagePath": "../../references/story-media/f24e20de77ac0c78a7e5.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 260,
+          "kind": "axis-photo",
+          "width": 885,
+          "height": 406
+        },
+        {
+          "imagePath": "../../references/story-media/73317e784339cce47c46.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 263,
+          "kind": "evidence",
+          "width": 1777,
+          "height": 1169
+        },
+        {
+          "imagePath": "../../references/story-media/bf2a7faa9658b3e0ec48.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 264,
+          "kind": "evidence",
+          "width": 1749,
+          "height": 1186
+        },
+        {
+          "imagePath": "../../references/story-media/6c45d6d0765a53b30583.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 265,
+          "kind": "evidence",
+          "width": 1717,
+          "height": 1171
+        },
+        {
+          "imagePath": "../../references/story-media/ecb467768cf665cfaafa.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 266,
+          "kind": "map",
+          "width": 1368,
+          "height": 419
+        },
+        {
+          "imagePath": "../../references/story-media/85e81a262b620a0f4f58.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 267,
+          "kind": "dashboard",
+          "width": 1262,
+          "height": 606
+        },
+        {
+          "imagePath": "../../references/story-media/f867bd7e06e681afe07f.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 268,
+          "kind": "dashboard",
+          "width": 1268,
+          "height": 580
+        },
+        {
+          "imagePath": "../../references/story-media/89dd6c4aec8b63b97993.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 269,
+          "kind": "comparison",
+          "width": 1819,
+          "height": 610
+        },
+        {
+          "imagePath": "../../references/story-media/4109f92e85121c947e63.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 270,
+          "kind": "axis-photo",
+          "width": 1126,
+          "height": 509
+        },
+        {
+          "imagePath": "../../references/story-media/079ca721a217f00ea901.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 270,
+          "kind": "comparison",
+          "width": 965,
+          "height": 549
+        },
+        {
+          "imagePath": "../../references/story-media/8ebfd0be1360a2a2aa9d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 271,
+          "kind": "comparison",
+          "width": 1315,
+          "height": 623
+        },
+        {
+          "imagePath": "../../references/story-media/5ccea21cebee71652ac7.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 271,
+          "kind": "comparison",
+          "width": 1247,
+          "height": 951
+        }
+      ]
+    },
+    "kalabsha-axis": {
+      "project": [
+        {
+          "imagePath": "../../references/story-media/38d70ee70d9097969af1.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 279,
+          "kind": "axis-photo",
+          "width": 1345,
+          "height": 775
+        },
+        {
+          "imagePath": "../../references/story-media/010aebe1507216ce5874.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 280,
+          "kind": "comparison",
+          "width": 1509,
+          "height": 1066
+        },
+        {
+          "imagePath": "../../references/story-media/476c858565274841939b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 281,
+          "kind": "comparison",
+          "width": 977,
+          "height": 747
+        },
+        {
+          "imagePath": "../../references/story-media/22ecd7db106ac61bdf56.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 281,
+          "kind": "comparison",
+          "width": 1018,
+          "height": 750
+        },
+        {
+          "imagePath": "../../references/story-media/2cfed22a6736417c8cdb.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 283,
+          "kind": "axis-photo",
+          "width": 1310,
+          "height": 729
+        },
+        {
+          "imagePath": "../../references/story-media/5916d2058f219f955fe9.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 284,
+          "kind": "axis-photo",
+          "width": 1282,
+          "height": 696
+        },
+        {
+          "imagePath": "../../references/story-media/451e135a316489a5d18b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 285,
+          "kind": "evidence",
+          "width": 1046,
+          "height": 752
+        },
+        {
+          "imagePath": "../../references/story-media/788df905b29aeb1e5c2e.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 286,
+          "kind": "evidence",
+          "width": 1038,
+          "height": 757
+        },
+        {
+          "imagePath": "../../references/story-media/246bdecb83cad24812e7.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 287,
+          "kind": "evidence",
+          "width": 1515,
+          "height": 1068
+        },
+        {
+          "imagePath": "../../references/story-media/f8624f5a8a8277fcc08b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 288,
+          "kind": "map",
+          "width": 827,
+          "height": 683
+        },
+        {
+          "imagePath": "../../references/story-media/caf03ce6410aecc13ff4.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 288,
+          "kind": "map",
+          "width": 824,
+          "height": 683
+        },
+        {
+          "imagePath": "../../references/story-media/62c0392da3cc5983d5da.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 288,
+          "kind": "map",
+          "width": 833,
+          "height": 776
+        },
+        {
+          "imagePath": "../../references/story-media/54955ca1e68b1bd1aae9.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 288,
+          "kind": "map",
+          "width": 833,
+          "height": 776
+        },
+        {
+          "imagePath": "../../references/story-media/e087e5c9852d382f4425.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 298,
+          "kind": "axis-photo",
+          "width": 1536,
+          "height": 305
+        },
+        {
+          "imagePath": "../../references/story-media/2233aa1ed6b84494d567.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 300,
+          "kind": "axis-photo",
+          "width": 1554,
+          "height": 359
+        },
+        {
+          "imagePath": "../../references/story-media/d2d0fcc3fdfab9fa03f5.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 302,
+          "kind": "axis-photo",
+          "width": 1556,
+          "height": 370
+        },
+        {
+          "imagePath": "../../references/story-media/1fa460db7ccf3e06faa7.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 311,
+          "kind": "dashboard",
+          "width": 1160,
+          "height": 613
+        },
+        {
+          "imagePath": "../../references/story-media/9db0d989fd9a47fbcf68.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 312,
+          "kind": "dashboard",
+          "width": 1416,
+          "height": 661
+        },
+        {
+          "imagePath": "../../references/story-media/8a388767237693bc404c.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 313,
+          "kind": "dashboard",
+          "width": 1416,
+          "height": 662
+        },
+        {
+          "imagePath": "../../references/story-media/7712224aacb1ffe96181.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 314,
+          "kind": "axis-photo",
+          "width": 1105,
+          "height": 508
+        },
+        {
+          "imagePath": "../../references/story-media/05fa496e8a9d18122503.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 317,
+          "kind": "evidence",
+          "width": 1717,
+          "height": 1151
+        },
+        {
+          "imagePath": "../../references/story-media/3d5501c37676acf5e9fc.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 318,
+          "kind": "evidence",
+          "width": 1719,
+          "height": 1148
+        },
+        {
+          "imagePath": "../../references/story-media/3f219aaf9353bd7de60f.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 319,
+          "kind": "evidence",
+          "width": 1699,
+          "height": 1146
+        },
+        {
+          "imagePath": "../../references/story-media/d20688928fc04ed44f99.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 320,
+          "kind": "map",
+          "width": 1328,
+          "height": 378
+        },
+        {
+          "imagePath": "../../references/story-media/432525d2b2d340a97279.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 321,
+          "kind": "dashboard",
+          "width": 1325,
+          "height": 667
+        },
+        {
+          "imagePath": "../../references/story-media/71b8ef5b028190a8f0fc.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 322,
+          "kind": "dashboard",
+          "width": 1268,
+          "height": 584
+        },
+        {
+          "imagePath": "../../references/story-media/12ca78e789220823e1fb.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 323,
+          "kind": "comparison",
+          "width": 1483,
+          "height": 604
+        },
+        {
+          "imagePath": "../../references/story-media/dfa1d71491285bab8f20.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 324,
+          "kind": "axis-photo",
+          "width": 1127,
+          "height": 497
+        },
+        {
+          "imagePath": "../../references/story-media/1dc2a34f86b6e826e1e3.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 324,
+          "kind": "comparison",
+          "width": 1035,
+          "height": 631
+        },
+        {
+          "imagePath": "../../references/story-media/fd9406f314511cb67486.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 325,
+          "kind": "comparison",
+          "width": 1220,
+          "height": 644
+        },
+        {
+          "imagePath": "../../references/story-media/e830e1984a8857ce697d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 325,
+          "kind": "comparison",
+          "width": 1296,
+          "height": 638
+        },
+        {
+          "imagePath": "../../references/story-media/385adee4b7d0d3036b19.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 333,
+          "kind": "evidence",
+          "width": 1188,
+          "height": 1715
+        },
+        {
+          "imagePath": "../../references/story-media/226b234a40a7d5970a2b.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 334,
+          "kind": "evidence",
+          "width": 1206,
+          "height": 1737
+        },
+        {
+          "imagePath": "../../references/story-media/e0d4cf739804ed3d8135.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 335,
+          "kind": "evidence",
+          "width": 1206,
+          "height": 1737
+        },
+        {
+          "imagePath": "../../references/story-media/a3598c48a23545802257.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 336,
+          "kind": "evidence",
+          "width": 1179,
+          "height": 1694
+        },
+        {
+          "imagePath": "../../references/story-media/bd4e2143c29c17ee5f6d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 337,
+          "kind": "evidence",
+          "width": 1200,
+          "height": 1724
+        },
+        {
+          "imagePath": "../../references/story-media/6afdb4432870c9d75a39.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 338,
+          "kind": "evidence",
+          "width": 1179,
+          "height": 1694
+        },
+        {
+          "imagePath": "../../references/story-media/d7b78c8e0bf74c4f3f94.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 341,
+          "kind": "evidence",
+          "width": 1041,
+          "height": 947
+        }
+      ]
+    }
+  }
+}

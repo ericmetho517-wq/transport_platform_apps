@@ -90,6 +90,10 @@ body.evidence-modal-open { overflow:hidden; }
 .story-place-copy { position:sticky; top:190px; }
 .story-place-copy h3 { margin:9px 0 14px; font-size:clamp(27px,3vw,42px); }
 .story-place-copy p { color:#5b756c; line-height:1.9; }
+.story-media-categories { display:grid; gap:48px; }
+.story-media-category { min-width:0; }
+.story-media-category h4 { margin:0 0 16px; padding-bottom:10px; display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid #078874; color:#17483a; font-size:20px; }
+.story-media-category h4 span { min-width:30px; padding:4px 9px; border-radius:999px; background:#078874; color:#fff; font-size:11px; text-align:center; }
 .story-media-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
 .story-media-grid.single { grid-template-columns:minmax(0,1fr); }
 .story-media-grid figure { margin:0; overflow:hidden; border:1px solid #d4ded9; background:#fff; box-shadow:0 14px 38px #003f3117; }
@@ -145,6 +149,8 @@ body.evidence-modal-open { overflow:hidden; }
 .arcgis-reference-story .story-place-copy>span{color:#efcb49}
 .arcgis-reference-story .story-place-copy h3{color:#efcb49}
 .arcgis-reference-story .story-place-copy p{color:#d8e9e3}
+.arcgis-reference-story .story-media-category h4{max-width:1034px;margin:0 auto 18px;border-color:#efcb49;color:#efcb49}
+.arcgis-reference-story .story-media-category h4 span{background:#efcb49;color:#003d30}
 .arcgis-reference-story .story-media-grid,.arcgis-reference-story .story-media-grid.single{grid-template-columns:1fr;max-width:1034px;margin:auto;gap:34px}
 .arcgis-reference-story .story-media-grid figure{border:0;background:transparent;box-shadow:none}
 .arcgis-reference-story .story-media-grid img{width:100%;max-height:none;object-fit:contain}

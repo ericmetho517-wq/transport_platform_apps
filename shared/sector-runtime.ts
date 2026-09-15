@@ -1,6 +1,7 @@
 import type { TransportApp } from "./project-runtime";
 import { dashboardGroup, initializeMap, renderSectorMapMarkup } from "./interactive-dashboard";
 import applicationRegistry from "../registry/apps.json";
+import storyMediaManifest from "../registry/story-media.json";
 import { localizedAppTitle } from "./app-titles";
 
 const esc = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char] || char);
@@ -26,6 +27,20 @@ interface StoryEntry {
   compare: string;
 }
 
+interface StoryMediaReference {
+  imagePath: string;
+  reportName: string;
+  page: number;
+  kind: "axis-photo" | "map" | "comparison" | "dashboard" | "evidence";
+  width?: number;
+  height?: number;
+}
+
+const reportStoryMedia = (group: string, key = "project"): StoryMediaReference[] => {
+  const groups = storyMediaManifest.groups as unknown as Record<string, Record<string, StoryMediaReference[]>>;
+  return groups[group]?.[key] || [];
+};
+
 const westernStoryReports: Array<Pick<StoryEntry, "key" | "label" | "sector" | "report">> = [
   { key: "abu-simbel", label: "أبو سمبل", sector: "7", report: ".pdf" },
   { key: "luxor", label: "الأقصر", sector: "12", report: "(1).pdf" },
@@ -49,13 +64,19 @@ function storyEntries(app: TransportApp): StoryEntry[] {
     .sort((a, b) => (b.reportReferences?.length || 0) - (a.reportReferences?.length || 0))[0]?.reportReferences || [];
   const references = ownReferences.length ? ownReferences : fallbackReferences;
   if (dashboardGroup(app) !== "western-upper-egypt") {
-    const hero = references.find((reference) => reference.referenceKind === "story-hero") || references[0];
-    const comparison = references.find((reference) => reference.referenceKind === "story-comparison") || references[1];
-    return [{ key: "project", label: app.title, sector: "all", report: hero?.reportName || "", hero: hero?.imagePath || "", compare: comparison?.imagePath || "" }];
+    const extracted = reportStoryMedia(dashboardGroup(app));
+    const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "map");
+    const comparison = extracted.find((reference) => reference.kind === "comparison");
+    const fallbackHero = references.find((reference) => reference.referenceKind === "story-hero") || references[0];
+    const fallbackComparison = references.find((reference) => reference.referenceKind === "story-comparison") || references[1];
+    return [{ key: "project", label: app.title, sector: "all", report: fallbackHero?.reportName || hero?.reportName || "", hero: fallbackHero?.imagePath || hero?.imagePath || "", compare: fallbackComparison?.imagePath || comparison?.imagePath || "" }];
   }
   return westernStoryReports.map((item) => {
+    const extracted = reportStoryMedia("western-upper-egypt", item.key);
     const matching = item.report ? references.filter((reference) => reference.reportName === item.report) : [];
-    return { ...item, hero: matching[0]?.imagePath || "", compare: matching[1]?.imagePath || matching[0]?.imagePath || "" };
+    const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "map");
+    const comparison = extracted.find((reference) => reference.kind === "comparison");
+    return { ...item, hero: matching[0]?.imagePath || hero?.imagePath || "", compare: matching[1]?.imagePath || comparison?.imagePath || "" };
   });
 }
 
@@ -95,10 +116,20 @@ function storyMediaChapters(app: TransportApp, entries: StoryEntry[]): string {
   const isWestern = dashboardGroup(app) === "western-upper-egypt";
   const chapters = entries.map((entry, index) => {
     const label = storyEntryLabel(entry, app.language);
-    const media = isWestern && entry.report ? references.filter((reference) => reference.reportName === entry.report) : isWestern ? [] : references;
+    const extracted = reportStoryMedia(dashboardGroup(app), isWestern ? entry.key : "project");
+    const fallbackMedia = isWestern && entry.report ? references.filter((reference) => reference.reportName === entry.report) : isWestern ? [] : references;
+    const media: StoryMediaReference[] = extracted.length ? extracted : fallbackMedia.map((reference) => ({ ...reference, kind: reference.referenceKind.includes("dashboard") ? "dashboard" : reference.referenceKind.includes("comparison") ? "comparison" : reference.referenceKind.includes("map") || reference.referenceKind === "webviewer" ? "map" : "evidence" }));
     const cover = media[0]?.imagePath || entry.hero;
+    const mediaOrder: StoryMediaReference["kind"][] = ["axis-photo", "map", "comparison", "dashboard", "evidence"];
+    const categoryLabels = app.language === "en"
+      ? { "axis-photo": "Axis photos", map: "Maps", comparison: "Comparisons", dashboard: "Indicator dashboards", evidence: "Project evidence" }
+      : { "axis-photo": "صور المحور", map: "الخرائط", comparison: "المقارنات", dashboard: "لوحات المؤشرات", evidence: "مرفقات المشروع" };
     const gallery = media.length
-      ? `<div class="story-media-grid ${media.length === 1 ? "single" : ""}">${media.map((reference, mediaIndex) => `<figure data-evidence-report="${esc(reference.reportName)}"><a class="evidence-image-link" href="${esc(reference.imagePath)}" aria-label="فتح الصورة بالحجم الأصلي"><img src="${esc(reference.imagePath)}" alt="${esc(`${label} - صورة ${mediaIndex + 1}`)}" loading="lazy"/></a><figcaption><b>${esc(label)}</b><span>${esc(reference.reportName || "مرجع المشروع")} · صفحة ${reference.page}</span></figcaption></figure>`).join("")}</div>`
+      ? `<div class="story-media-categories">${mediaOrder.map((kind) => {
+        const items = media.filter((reference) => reference.kind === kind);
+        if (!items.length) return "";
+        return `<section class="story-media-category" data-media-kind="${kind}"><h4>${categoryLabels[kind]} <span>${items.length}</span></h4><div class="story-media-grid ${items.length === 1 ? "single" : ""}">${items.map((reference, mediaIndex) => `<figure data-evidence-report="${esc(reference.reportName)}"><a class="evidence-image-link" href="${esc(reference.imagePath)}" aria-label="فتح الصورة بالحجم الأصلي"><img src="${esc(reference.imagePath)}" alt="${esc(`${label} - ${categoryLabels[kind]} ${mediaIndex + 1}`)}" loading="lazy"/></a><figcaption><b>${esc(label)}</b><span>${esc(reference.reportName || "مرجع المشروع")} · صفحة ${reference.page}</span></figcaption></figure>`).join("")}</div></section>`;
+      }).join("")}</div>`
       : `<div class="story-place-no-media">لا توجد صورة تقرير منفصلة لهذا الجزء؛ تعرض الخريطة التفاعلية بياناته المكانية المراجعة.</div>`;
     return `<article class="story-place${index === 0 ? " active" : ""}" id="story-place-${entry.key}" data-story-detail="${entry.key}"><div class="story-place-banner" ${cover ? `style="--place-image:url('${esc(cover)}')"` : ""}><span>${String(index + 1).padStart(2, "0")}</span><div><small>تطور الأراضي المحيطة بالمحور</small><h2>${esc(label)}</h2><p>${entry.report ? `مرجع ${esc(entry.report)} · القطاع ${esc(entry.sector)}` : "بيانات مكانية محلية موثقة"}</p></div></div><div class="story-place-body"><div class="story-place-copy"><span>تفاصيل القطاع</span><h3>خرائط وصور ${esc(label)}</h3><p>استعراض متتابع للخرائط والصور الأصلية المرتبطة بهذا الجزء من المحور، مع إتاحة تكبير كل صورة ومراجعة مصدرها ورقم الصفحة.</p></div>${gallery}</div></article>`;
   }).join("");
@@ -191,25 +222,6 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
   document.querySelectorAll<HTMLAnchorElement>(".evidence-image-link, .evidence-open-link").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); openEvidence(link); }));
   const initialCompareBox = document.querySelector<HTMLElement>("#story-compare");
   if (initialCompareBox?.dataset.compareSrc) {
-    initialCompareBox.classList.add("story-reference-compare");
-    const referenceImage = document.createElement("img");
-    referenceImage.id = "story-compare-image";
-    referenceImage.src = initialCompareBox.dataset.compareSrc;
-    referenceImage.alt = "مرجع مقارنة استخدامات الأراضي";
-    referenceImage.loading = "lazy";
-    const divider = document.createElement("i");
-    divider.id = "compare-handle";
-    divider.textContent = "↔";
-    const range = document.createElement("input");
-    range.id = "compare-range";
-    range.type = "range";
-    range.min = "0";
-    range.max = "100";
-    range.value = "50";
-    range.setAttribute("aria-label", "اسحب فاصل المقارنة");
-    initialCompareBox.replaceChildren(referenceImage, divider, range);
-  }
-  if (initialCompareBox?.dataset.compareSrc) {
     const zoomButton = document.createElement("button");
     zoomButton.type = "button";
     zoomButton.className = "compare-zoom-button";
@@ -276,8 +288,6 @@ export async function initSectorApplication(app: TransportApp): Promise<void> {
     document.querySelector<HTMLElement>(".story-content")?.removeAttribute("hidden");
     if (compareBox && compare) {
       compareBox.style.setProperty("--compare-image", `url('${compare}')`);
-      const referenceImage = compareBox.querySelector<HTMLImageElement>("#story-compare-image");
-      if (referenceImage) referenceImage.src = compare;
       fitStoryComparison(compare);
     }
     compareBox?.toggleAttribute("hidden", !compare);

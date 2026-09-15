@@ -54,6 +54,15 @@ if (!suezLink.verifiedLocalData || requiredSuezLayers.some((layer) => !suezLink.
 if ((suezFree.layerCounts.urban || 0) + (suezLink.layerCounts.urban || 0) !== 213) errors.push("Suez split: urban features were lost or duplicated");
 if ((suezFree.layerCounts.agricultural || 0) + (suezLink.layerCounts.agricultural || 0) !== 18) errors.push("Suez split: agricultural features were lost or duplicated");
 
+const storyMedia = JSON.parse(readFileSync(join(root, "registry", "story-media.json"), "utf8"));
+const storyMediaEntries = Object.entries(storyMedia.groups || {}).flatMap(([group, chapters]) => Object.entries(chapters).flatMap(([chapter, items]) => items.map((item) => ({ group, chapter, ...item }))));
+if (storyMediaEntries.length < 500) errors.push(`story maps: expected comprehensive report media, found only ${storyMediaEntries.length} images`);
+for (const item of storyMediaEntries) {
+  const image = item.imagePath?.replace(/^\.\.\/\.\.\//, "");
+  if (!image || !existsSync(join(root, "public", image))) errors.push(`story maps: missing extracted report image ${item.group}/${item.chapter}/${image || "unknown"}`);
+  if (!item.reportName || !Number.isInteger(item.page) || item.page < 1) errors.push(`story maps: invalid source citation for ${item.group}/${item.chapter}`);
+}
+
 const report = {
   generatedAt: new Date().toISOString(), applications: apps.length, counts, sectors,
   checks: {
@@ -61,6 +70,7 @@ const report = {
     sectorSummaries: new Set(apps.map((app) => aliases[app.reportReferenceGroup])).size,
     reportProfiles: Object.keys(profiles).length,
     crossSectorReferences: errors.filter((item) => item.includes("cross-sector")).length,
+    storyReportImages: storyMediaEntries.length,
   },
   errors, warnings,
   result: errors.length ? "FAILED" : "PASSED",
@@ -72,6 +82,8 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
 }
 if (!sectorRuntime.includes("application-gallery-card")) errors.push("filter gallery: report-matched application cards are missing");
 if (!sectorRuntime.includes("data-story-card")) errors.push("story maps: sector collection navigation is missing");
+if (!sectorRuntime.includes("storyMediaManifest") || !sectorRuntime.includes("story-media-categories")) errors.push("story maps: extracted report gallery is not connected to the runtime");
+if (sectorRuntime.includes("story-reference-compare")) errors.push("story maps: static comparison overlay must not replace the real before/after swipe");
 if (sectorRuntime.includes('{ key: "beni-suef", label: "بني سويف", sector: "9", report: "(9).pdf" }') || sectorRuntime.includes('{ key: "aswan", label: "أسوان", sector: "2", report: "(9).pdf" }')) errors.push("story maps: the overall Western Upper Egypt summary must not be assigned to Beni Suef or Aswan as a sector report");
 report.errors = errors;
 report.result = errors.length ? "FAILED" : "PASSED";
