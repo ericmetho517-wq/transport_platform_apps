@@ -1,1 +1,16 @@
-{"id":"ismailia-agriculture-2026-dashboard","slug":"dashboard-ismailia-agriculture","title":"لوحة مؤشرات الأراضي الزراعية والصناعية – الإسماعيلية","alternateTitles":["Agricultural and Industrial Land Indicators Dashboard – Ismailia"],"category":"تطبيقات محور القاهرة–الإسماعيلية","type":"Dashboard","language":"ar","direction":"rtl","sourceUrl":"C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات","status":"generated-from-registry","reportReferenceGroup":"ismailia"}
+{
+  "id": "ismailia-agriculture-2026-dashboard",
+  "slug": "dashboard-ismailia-agriculture",
+  "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور القاهرة - الإسماعيلية",
+  "alternateTitles": [
+    "Agricultural and Industrial Land Indicators Dashboard – Cairo - Ismailia Axis"
+  ],
+  "category": "تطبيقات محور القاهرة - الإسماعيلية",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات",
+  "status": "standardized-executive-dashboard",
+  "reportReferenceGroup": "ismailia",
+  "reportReferences": []
+}

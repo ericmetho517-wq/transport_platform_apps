@@ -1,14 +1,16 @@
 {
   "id": "2529bc0ae66a4f5f8e692c383d1d24ae",
   "slug": "dashboard-2529bc0ae6",
-  "title": "لوحة مؤشرات أسعار الأراضى",
-  "alternateTitles": [],
-  "category": "محور كلابشة",
+  "title": "لوحة مؤشرات أسعار الأراضي – محور كلابشة",
+  "alternateTitles": [
+    "Land Price Indicators Dashboard – Kalabsha Axis"
+  ],
+  "category": "تطبيقات محور كلابشة",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/2529bc0ae66a4f5f8e692c383d1d24ae",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/c87406ac90cc9ed5.jpg",

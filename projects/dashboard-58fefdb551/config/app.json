@@ -1,14 +1,16 @@
 {
   "id": "58fefdb551da441698ce9b40d9fccf80",
   "slug": "dashboard-58fefdb551",
-  "title": "لوحة مؤشرات الاسعار الأراضى",
-  "alternateTitles": [],
-  "category": "محور قوص",
+  "title": "لوحة مؤشرات أسعار الأراضي – محور قوص",
+  "alternateTitles": [
+    "Land Price Indicators Dashboard – Qus Axis"
+  ],
+  "category": "تطبيقات محور قوص",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/58fefdb551da441698ce9b40d9fccf80",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/88a54800fb0255a3.jpg",

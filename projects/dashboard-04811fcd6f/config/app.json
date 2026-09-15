@@ -1,14 +1,16 @@
 {
   "id": "04811fcd6f2d44518c3a44dd90cf20ca",
   "slug": "dashboard-04811fcd6f",
-  "title": "لوحة مؤشرات أسعار الأراضى",
-  "alternateTitles": [],
-  "category": "القوس الشرقى للدائرى الأقليمى و خط الروبيكى باللغة العربية",
+  "title": "لوحة مؤشرات أسعار الأراضي – القوس الشرقي للطريق الدائري الإقليمي وخط الروبيكي",
+  "alternateTitles": [
+    "Land Price Indicators Dashboard – Eastern Regional Ring Road and Robeki Railway"
+  ],
+  "category": "تطبيقات القوس الشرقي للطريق الدائري الإقليمي وخط الروبيكي",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/04811fcd6f2d44518c3a44dd90cf20ca",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/a8ea4e9b05d4ca4f.jpg",

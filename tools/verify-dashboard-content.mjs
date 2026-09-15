@@ -95,7 +95,7 @@ if (!runtimeSource.includes('"linked-map-view"') || !runtimeSource.includes("map
 if (!runtimeSource.includes("gauge-ticks") || !runtimeSource.includes("gauge-zone-low") || !runtimeSource.includes("comparison-axis")) failures.push("dashboard charts: report-matched SVG gauge and full-width comparison axis are required");
 if (!runtimeSource.includes("deriveLandUseFromLocalLayers") || !runtimeSource.includes('if (!summary.landUse.length)')) failures.push("dashboard charts: local 2014/current land-use layers must populate an otherwise empty comparison");
 if (runtimeSource.includes("open-reference") || runtimeSource.includes("reference-dialog")) failures.push("dashboard chrome: report-reference controls must not appear in the client-facing design");
-if (!runtimeSource.includes('group === "western-upper-egypt" || group === "cairo-suez-road"')) failures.push("dashboard layouts: Western Upper Egypt and Cairo-Suez must use their documented dual-map layouts");
+if (!runtimeSource.includes("ismailia-agriculture-dashboard") || !runtimeSource.includes("ismailia-reference-layout")) failures.push("dashboard layouts: the standard agricultural and industrial template is missing");
 if (!runtimeSource.includes("dabaaLandMarkup") || runtimeSource.includes("classdark-card")) failures.push("dashboard layouts: Dabaa must use the documented four-KPI dashboard without malformed card markup");
 if (!runtimeSource.includes("normalizeChangeStatus") || !runtimeSource.includes("غير\\s*متغير") || runtimeSource.includes('mode === "unchanged" && status === "unknown"')) failures.push("dashboard change filter: changed, unchanged and unknown values are not classified safely");
 if (!runtimeSource.includes("const palette = ismailiaLanduseSymbols") || !runtimeSource.includes("const landuseNames = ismailiaLanduseNames") || runtimeSource.includes("const defaultPalette")) failures.push("dashboard maps: renderer, popup and legend must use the same approved land-use symbology");
@@ -118,7 +118,11 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }
 
-if (dashboards.length !== 53) failures.push(`expected 53 dashboards, found ${dashboards.length}`);
+if (dashboards.length !== 30) failures.push(`expected 30 dashboards, found ${dashboards.length}`);
+for (const group of Object.keys({ "western-upper-egypt":1, dahshur:1, "regional-ring":1, kalabsha:1, "qena-luxor":1, "suez-link":1, "suez-free":1, qus:1, dabaa:1, ismailia:1 })) {
+  const suite = dashboards.filter((app) => app.reportReferenceGroup === group);
+  if (suite.length !== 3) failures.push(`${group}: executive dashboard suite must contain exactly three dashboards`);
+}
 if (failures.length) {
   console.error(`Dashboard content audit failed (${failures.length})`);
   failures.forEach((failure) => console.error(`- ${failure}`));

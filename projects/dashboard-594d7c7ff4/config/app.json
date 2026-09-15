@@ -1,14 +1,16 @@
 {
   "id": "594d7c7ff43e4e0f9fb3a2a65d1d8e62",
   "slug": "dashboard-594d7c7ff4",
-  "title": "Land Price Indicators Dashboard – El Dabaa Axis",
-  "alternateTitles": [],
-  "category": "Dabaa axis",
+  "title": "لوحة مؤشرات أسعار الأراضي – محور الضبعة",
+  "alternateTitles": [
+    "Land Price Indicators Dashboard – El Dabaa Axis"
+  ],
+  "category": "تطبيقات محور الضبعة",
   "type": "Dashboard",
-  "language": "en",
-  "direction": "ltr",
+  "language": "ar",
+  "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/594d7c7ff43e4e0f9fb3a2a65d1d8e62",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/dabaa/price-dashboard.png",

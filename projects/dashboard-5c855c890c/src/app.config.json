@@ -1,14 +1,16 @@
 {
   "id": "5c855c890cd349e185366b28dbafa9c2",
   "slug": "dashboard-5c855c890c",
-  "title": "لوحة مؤشرات الأراضى العمرانية",
-  "alternateTitles": [],
-  "category": "التطبيقات محور الصعيد الغربي باللغة العربية",
+  "title": "لوحة مؤشرات الأراضي العمرانية – محور الصعيد الغربي",
+  "alternateTitles": [
+    "Urban Land Indicators Dashboard – Western Upper Egypt Axis"
+  ],
+  "category": "تطبيقات محور الصعيد الغربي",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/5c855c890cd349e185366b28dbafa9c2",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/6a326fdbbf52afe9.png",

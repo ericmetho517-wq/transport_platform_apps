@@ -1,14 +1,16 @@
 {
   "id": "c1e29f0123aa40eda6791f0b3a81f62b",
   "slug": "dashboard-c1e29f0123",
-  "title": "Agricultural and Urban Land Indicators – El Dabaa Axis",
-  "alternateTitles": [],
-  "category": "Dabaa axis",
+  "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور الضبعة",
+  "alternateTitles": [
+    "Agricultural and Industrial Land Indicators Dashboard – El Dabaa Axis"
+  ],
+  "category": "تطبيقات محور الضبعة",
   "type": "Dashboard",
-  "language": "en",
-  "direction": "ltr",
+  "language": "ar",
+  "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/c1e29f0123aa40eda6791f0b3a81f62b",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/dabaa/landuse-dashboard.png",

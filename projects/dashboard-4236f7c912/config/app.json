@@ -1,14 +1,16 @@
 {
   "id": "4236f7c912454ed897b1b6928cfb84d6",
   "slug": "dashboard-4236f7c912",
-  "title": "لوحة مؤشرات الأراضي الزراعية والصناعية",
-  "alternateTitles": [],
-  "category": "التطبيقات محور الصعيد الغربي باللغة العربية",
+  "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور الصعيد الغربي",
+  "alternateTitles": [
+    "Agricultural and Industrial Land Indicators Dashboard – Western Upper Egypt Axis"
+  ],
+  "category": "تطبيقات محور الصعيد الغربي",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/4236f7c912454ed897b1b6928cfb84d6",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/6a326fdbbf52afe9.png",

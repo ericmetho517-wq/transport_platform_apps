@@ -1,14 +1,16 @@
 {
   "id": "49446055c2d44528b1f1cb1f61f9bc6e",
   "slug": "dashboard-49446055c2",
-  "title": "لوحة مؤشرات أسعار الأراضى",
-  "alternateTitles": [],
-  "category": "التطبيقات محور الصعيد الغربي باللغة العربية",
+  "title": "لوحة مؤشرات أسعار الأراضي – محور الصعيد الغربي",
+  "alternateTitles": [
+    "Land Price Indicators Dashboard – Western Upper Egypt Axis"
+  ],
+  "category": "تطبيقات محور الصعيد الغربي",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/49446055c2d44528b1f1cb1f61f9bc6e",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/e87aa37ea02f6d10.jpg",

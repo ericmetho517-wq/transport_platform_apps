@@ -1,14 +1,16 @@
 {
   "id": "5a3aaa3b3a2647cc9280e4ee6ff5c1f6",
   "slug": "dashboard-5a3aaa3b3a",
-  "title": "لوحة مؤشرات الأراضى الزراعية والعمرانية",
-  "alternateTitles": [],
-  "category": "محور قوص",
+  "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور قوص",
+  "alternateTitles": [
+    "Agricultural and Industrial Land Indicators Dashboard – Qus Axis"
+  ],
+  "category": "تطبيقات محور قوص",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/5a3aaa3b3a2647cc9280e4ee6ff5c1f6",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/159756654a6e9b97.jpg",

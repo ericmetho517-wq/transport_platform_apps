@@ -1,14 +1,16 @@
 {
   "id": "989c5ff2f91d44c096a1cb073358a4d3",
   "slug": "dashboard-989c5ff2f9",
-  "title": "لوحة مؤشرات الأراضى الزراعية والعمرانية",
-  "alternateTitles": [],
-  "category": "محور كلابشة",
+  "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور كلابشة",
+  "alternateTitles": [
+    "Agricultural and Industrial Land Indicators Dashboard – Kalabsha Axis"
+  ],
+  "category": "تطبيقات محور كلابشة",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/989c5ff2f91d44c096a1cb073358a4d3",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/11c8de8770795ae1.jpg",

@@ -6,8 +6,8 @@
     "sourceUrls": [],
     "sourceItemIds": [],
     "projectGroup": "dabaa",
-    "referenceKind": "experience-hero",
-    "caption": "واجهة المشروع ومكونات الدراسة لمحور الضبعة.",
+    "referenceKind": "story-hero",
+    "caption": "نطاق ومكونات مشروع محور الضبعة.",
     "matchType": "project-and-application-type"
   },
   {
@@ -17,8 +17,8 @@
     "sourceUrls": [],
     "sourceItemIds": [],
     "projectGroup": "dabaa",
-    "referenceKind": "experience-map",
-    "caption": "المقارنة المكانية لاستخدامات الأراضي.",
+    "referenceKind": "landuse-comparison",
+    "caption": "مقارنة خرائط وتصنيفات استخدامات الأراضي لعامي 2014 و2023.",
     "matchType": "project-and-application-type"
   },
   {
@@ -28,19 +28,8 @@
     "sourceUrls": [],
     "sourceItemIds": [],
     "projectGroup": "dabaa",
-    "referenceKind": "experience-dashboard",
-    "caption": "لوحة مؤشرات استخدامات الأراضي المرتبطة بالتجربة.",
-    "matchType": "project-and-application-type"
-  },
-  {
-    "imagePath": "../../references/dabaa/price-dashboard.png",
-    "reportName": "Nakl_Dabaa_30Dec2023.pptx",
-    "page": 14,
-    "sourceUrls": [],
-    "sourceItemIds": [],
-    "projectGroup": "dabaa",
-    "referenceKind": "experience-dashboard",
-    "caption": "لوحة مؤشرات أسعار الأراضي المرتبطة بالتجربة.",
+    "referenceKind": "landuse-dashboard",
+    "caption": "لوحة مؤشرات تغير استخدامات الأراضي بمحور الضبعة بالقيم والتوزيع الأصليين.",
     "matchType": "project-and-application-type"
   }
 ]

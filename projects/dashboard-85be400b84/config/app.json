@@ -1,14 +1,16 @@
 {
   "id": "85be400b84fe4c50be597182bfbf207d",
   "slug": "dashboard-85be400b84",
-  "title": "لوحة مؤشرات الأراضى العمرانية",
-  "alternateTitles": [],
-  "category": "وصلة طريق السويس من الطريق الدائري",
+  "title": "لوحة مؤشرات الأراضي العمرانية – وصلة طريق السويس من الطريق الدائري",
+  "alternateTitles": [
+    "Urban Land Indicators Dashboard – Suez Ring Road Link"
+  ],
+  "category": "تطبيقات وصلة طريق السويس من الطريق الدائري",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/85be400b84fe4c50be597182bfbf207d",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/25618d1a4022ca30.jpg",
@@ -23,7 +25,7 @@
       "projectGroup": "suez-link",
       "referenceKind": "landuse-dashboard",
       "caption": "تقرير دراسة تطور إستخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد الإنشاء 166 6 - ٣ مؤشرات أداء تفاعلية (Interactive Dashboards) لتغير إستخدامات الأراضي بمنطقة المشروع: مع تقديم دراسات تخطيطية تحليلية لتغير أنماط وأنواع إستخدامات الأراضي ( العمرانية – الزراعية – الصناعية – الفضاء) وتتوفر من خلالها الإستعلامات المرنة المقرون ة بالأعداد والخرائط والصور الميدانية التي جمعها خلال الدراسة ويتضح ذلك من الشكل رقم ( 170) . شكل0) يوضحمؤشرات أداء تفاعلية ( Interactive Dashboards) لتغيراستخدامات الأراضي h",
-      "matchType": "exact-item-id"
+      "matchType": "project-and-application-type"
     }
   ],
   "reportReferenceGroup": "suez-link"

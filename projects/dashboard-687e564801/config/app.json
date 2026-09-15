@@ -1,14 +1,16 @@
 {
   "id": "687e564801b248c6ab4541bca985f9bd",
   "slug": "dashboard-687e564801",
-  "title": "لوحة مؤشرات أسعار الأراضى",
-  "alternateTitles": [],
-  "category": "وصلة دهشور الجنوبية",
+  "title": "لوحة مؤشرات أسعار الأراضي – وصلة دهشور الجنوبية",
+  "alternateTitles": [
+    "Land Price Indicators Dashboard – Dahshur South Link"
+  ],
+  "category": "تطبيقات وصلة دهشور الجنوبية",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/687e564801b248c6ab4541bca985f9bd",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/f1467ffb56a3209b.jpg",

@@ -1,14 +1,16 @@
 {
   "id": "8a75afd782a84bcc9b32ce9b804025b7",
   "slug": "dashboard-8a75afd782",
-  "title": "لوحة مؤشرات الأراضي الزراعية والصناعية",
-  "alternateTitles": [],
-  "category": "طريق القاهرة السويس الصحراوي (السويس الحر)",
+  "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق القاهرة - السويس الصحراوي",
+  "alternateTitles": [
+    "Agricultural and Industrial Land Indicators Dashboard – Cairo - Suez Desert Road"
+  ],
+  "category": "تطبيقات طريق القاهرة - السويس الصحراوي",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/8a75afd782a84bcc9b32ce9b804025b7",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/2dae1661499bb942.jpg",

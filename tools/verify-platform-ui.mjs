@@ -29,7 +29,7 @@ if (!dashboardSource.includes("isWesternUpperEgypt || serviceLabelPattern.test(i
 for (const storyFeature of ["arcgis-reference-story", "story-dashboard-view", "data-story-dashboard", "data-story-detail"]) {
   if (!sectorSource.includes(storyFeature) && !sectorStyles.includes(storyFeature)) errors.push(`Western StoryMap reference layout is missing: ${storyFeature}`);
 }
-if (apps.length !== 94) errors.push(`expected 94 applications, found ${apps.length}`);
+if (apps.length !== 71) errors.push(`expected 71 canonical applications, found ${apps.length}`);
 const groupAliases = { dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis", "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road", "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt" };
 const registryGroups = new Set(apps.map((app) => groupAliases[app.reportReferenceGroup] || app.reportReferenceGroup));
 for (const group of registryGroups) if (!source.includes(`["${group}",`)) errors.push(`axis filter is missing registry group: ${group}`);

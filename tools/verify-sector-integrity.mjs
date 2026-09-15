@@ -10,12 +10,11 @@ const aliases = {
   "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road",
   "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
 };
-const expectedCounts = { Dashboard: 53, Experience: 10, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
+const expectedCounts = { Dashboard: 30, Experience: 10, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
 const errors = [];
 const warnings = [];
 const counts = {};
 const sectors = {};
-const specializedDashboards = new Set(["dashboard-4b68db62a1", "dashboard-48c0447e11", "dashboard-890d333abf", "dashboard-489e365131", "dashboard-37e01603d0", "dashboard-ba98b53679", "dashboard-35c11a505b", "dashboard-83f3738705", "dashboard-676c18c4b7", "dashboard-4138cfe326", "dashboard-f0a5bc623c"]);
 
 for (const app of apps) {
   counts[app.type] = (counts[app.type] || 0) + 1;
@@ -30,7 +29,6 @@ for (const app of apps) {
     const image = ref.imagePath?.replace(/^\.\.\/\.\.\//, "");
     if (image && !existsSync(join(root, "public", image))) errors.push(`${app.slug}: missing report reference ${image}`);
   }
-  if (specializedDashboards.has(app.slug) && (app.reportReferences || []).some((ref) => ref.referenceKind === "landuse-dashboard")) errors.push(`${app.slug}: specialized dashboard must not use a generic land-use screenshot as its design reference`);
   if (!app.reportReferences?.length) warnings.push(`${app.slug}: no embedded report screenshot; runtime remains data-driven`);
 }
 
@@ -44,6 +42,13 @@ for (const sector of Object.keys(aliases)) {
   for (const type of ["Dashboard", "StoryMap", "Web AppViewer", "Instant Filter Gallery"]) {
     if (!apps.some((app) => app.reportReferenceGroup === sector && app.type === type)) errors.push(`${sector}: missing required ${type} application`);
   }
+}
+for (const sector of Object.keys(aliases)) {
+  const dashboards = apps.filter((app) => app.reportReferenceGroup === sector && app.type === "Dashboard");
+  if (dashboards.length !== 3) errors.push(`${sector}: expected exactly three executive dashboards, found ${dashboards.length}`);
+  for (const pattern of [/العمرانية/, /الزراعية والصناعية/, /أسعار الأراضي/]) if (!dashboards.some((app) => pattern.test(app.title))) errors.push(`${sector}: incomplete executive dashboard suite`);
+  const experiences = apps.filter((app) => app.reportReferenceGroup === sector && app.type === "Experience");
+  if (experiences.length !== 1) errors.push(`${sector}: expected exactly one axis experience, found ${experiences.length}`);
 }
 
 const suezFree = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "cairo-suez-road", "summary.json"), "utf8"));

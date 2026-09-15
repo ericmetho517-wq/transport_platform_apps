@@ -1,14 +1,16 @@
 {
   "id": "686d8234e853421da6c7426cde8d6017",
   "slug": "dashboard-686d8234e8",
-  "title": "لوحة مؤشرات الأراضى العمرانية",
-  "alternateTitles": [],
-  "category": "طريق القاهرة السويس الصحراوي (السويس الحر)",
+  "title": "لوحة مؤشرات الأراضي العمرانية – طريق القاهرة - السويس الصحراوي",
+  "alternateTitles": [
+    "Urban Land Indicators Dashboard – Cairo - Suez Desert Road"
+  ],
+  "category": "تطبيقات طريق القاهرة - السويس الصحراوي",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",
   "sourceUrl": "https://www.arcgis.com/apps/dashboards/686d8234e853421da6c7426cde8d6017",
-  "status": "generated-from-registry",
+  "status": "standardized-executive-dashboard",
   "reportReferences": [
     {
       "imagePath": "../../references/2dae1661499bb942.jpg",
@@ -24,7 +26,7 @@
       "projectGroup": "suez-free",
       "referenceKind": "landuse-dashboard",
       "caption": "تقرير دراسة تطور استخدامات الأراضي المحيطة بمحاور التنمية قبل وبعد التطوير 54 شكل63 )مؤشرات أداء تفاعلية Interactive Dashboards) لتغير استخدامات الأراضي https://www.arcgis.com/apps/dashboards/686d8234e853421da6c7426cde8d 6017",
-      "matchType": "exact-item-id"
+      "matchType": "project-and-application-type"
     }
   ],
   "reportReferenceGroup": "suez-free"

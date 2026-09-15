@@ -53,8 +53,9 @@ const typeIcon: Record<string, string> = {
 const platformParams = new URLSearchParams(window.location.search);
 const platformLanguage: "ar" | "en" = platformParams.get("uiLang") === "en" ? "en" : "ar";
 const displayTypeLabels = platformLanguage === "en" ? englishTypeLabels : typeLabels;
-// Each interface mode displays only records authored for that language.
-const modeRegistry = registry.filter((app) => app.language === platformLanguage);
+// The catalog has one canonical record per application. Its Arabic and English
+// names are switched in-place, so duplicate language cards never appear.
+const modeRegistry = registry.filter((app) => app.language === "ar");
 const modeCounts = new Map<string, number>();
 modeRegistry.forEach((app) => modeCounts.set(app.type, (modeCounts.get(app.type) || 0) + 1));
 const totalApplications = modeRegistry.length;

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-13T12:04:06.518Z",
-  "applications": 94,
+  "generatedAt": "2026-09-15T18:45:29.180Z",
+  "applications": 71,
   "totals": {
     "features": 77095,
     "sourceFeatures": 211460,
@@ -9,61 +9,61 @@
   },
   "applicationCoverage": {
     "western-upper-egypt": {
-      "applications": 11,
+      "applications": 7,
       "activeFeatures": 3903,
       "activeLayers": 8,
       "verifiedLocalData": true
     },
     "dahshur-south-link": {
-      "applications": 12,
+      "applications": 7,
       "activeFeatures": 1572,
       "activeLayers": 10,
       "verifiedLocalData": true
     },
     "regional-ring-road": {
-      "applications": 13,
+      "applications": 8,
       "activeFeatures": 1845,
       "activeLayers": 11,
       "verifiedLocalData": true
     },
     "kalabsha-axis": {
-      "applications": 8,
+      "applications": 7,
       "activeFeatures": 799,
       "activeLayers": 7,
       "verifiedLocalData": true
     },
     "qena-luxor-road": {
-      "applications": 8,
+      "applications": 7,
       "activeFeatures": 760,
       "activeLayers": 2,
       "verifiedLocalData": true
     },
     "suez-ring-link": {
-      "applications": 10,
+      "applications": 7,
       "activeFeatures": 385,
       "activeLayers": 7,
       "verifiedLocalData": true
     },
     "cairo-suez-road": {
-      "applications": 14,
+      "applications": 7,
       "activeFeatures": 525,
       "activeLayers": 7,
       "verifiedLocalData": true
     },
     "qus-axis": {
-      "applications": 6,
+      "applications": 7,
       "activeFeatures": 2458,
       "activeLayers": 8,
       "verifiedLocalData": true
     },
     "dabaa-axis": {
-      "applications": 6,
+      "applications": 7,
       "activeFeatures": 886,
       "activeLayers": 7,
       "verifiedLocalData": true
     },
     "ismailia": {
-      "applications": 6,
+      "applications": 7,
       "activeFeatures": 63962,
       "activeLayers": 26,
       "verifiedLocalData": true

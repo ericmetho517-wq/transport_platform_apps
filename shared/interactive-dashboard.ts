@@ -274,29 +274,6 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
 }
 
 function agriculturalMarkup(app: TransportApp, group: string): string {
-  const rawChangeData = group === "western-upper-egypt";
-  if (rawChangeData) {
-    return `<main class="interactive-dashboard agriculture-dashboard western-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
-      ${dashboardHeader(app, group)}
-      <div class="western-agriculture-kpis dashboard-kpis">
-        <article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article>
-        <article><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalWorkers">—</strong></article>
-        <article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article>
-        <article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>
-        <article class="gold"><span>عدد العمالة الصناعية</span><strong data-metric="industrialWorkers">—</strong></article>
-        <article class="orange"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article>
-      </div>
-      <div class="agriculture-layout">
-        <aside class="agriculture-side western-agriculture-side"><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section></aside>
-        <section class="agriculture-center western-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2024</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
-        <aside class="agriculture-right western-agriculture-right"><section class="dark-card gauge-card"><span>نسبة التغير بالأراضي الزراعية</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة التغير بالأراضي الصناعية</span><div class="gauge" id="industrial-gauge"><i></i><strong>—</strong></div></section></aside>
-      </div>
-    </main>`;
-  }
-  const mixedLandData = /industrial|الصناعية/i.test(app.title);
-  const agriculturalAreaLabel = rawChangeData ? "مساحة التغير الزراعي المحصورة (فدان)" : "إجمالي مساحة الأراضي الزراعية (فدان)";
-  const urbanAreaLabel = rawChangeData ? "مساحة التغير العمراني المحصورة (كم²)" : "إجمالي مساحة الأراضي العمرانية (كم²)";
-  if (group === "ismailia") {
     return `<main class="interactive-dashboard agriculture-dashboard ismailia-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
       ${dashboardHeader(app, group)}
       <div class="ismailia-reference-layout">
@@ -316,7 +293,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
           <div class="ismailia-reference-body">
             <section class="agriculture-center">
               ${mapMarkup()}
-              <section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2016</bdi> / <bdi class="map-year-end">2026</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section>
+              <section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi class="map-year-start">2014</bdi> / <bdi class="map-year-end">2024</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section>
             </section>
             <aside class="agriculture-right ismailia-agri-right">
               <section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section>
@@ -326,15 +303,6 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
         </section>
       </div>
     </main>`;
-  }
-  return `<main class="interactive-dashboard agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
-    ${dashboardHeader(app, group)}
-    <div class="agriculture-layout">
-      <aside class="agriculture-side"><section class="dark-card agriculture-stat"><span>${agriculturalAreaLabel}</span><strong data-metric="agriculturalAreaFeddan">—</strong></section><section class="dark-card agriculture-stat"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></section><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section></aside>
-      <section class="agriculture-center"><div class="dashboard-kpis agriculture-kpis"><article class="gold"><span>${urbanAreaLabel}</span><strong data-metric="urbanChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2024</bdi></span><select id="comparison-mode"><option value="all">كل الفئات</option><option value="top4">أكبر 4 فئات</option></select></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
-      <aside class="agriculture-right"><section class="dark-card gauge-card"><span>نسبة التغير العمراني بمنطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div></section><section class="dark-card agriculture-change"><span>إجمالي مساحة التغير بالأراضي الزراعية (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></section>${mixedLandData ? '<section class="dark-card agriculture-change"><span>إجمالي مساحة الأراضي الصناعية المتغيرة (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></section>' : ''}<section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section></aside>
-    </div>
-  </main>`;
 }
 
 function civilMarkup(app: TransportApp, group: string): string {
@@ -359,14 +327,9 @@ function impactMarkup(app: TransportApp, group: string): string {
 
 export function renderInteractiveDashboard(app: TransportApp): string {
   const group = dashboardGroup(app);
-  if (isCivilDashboard(app)) return civilMarkup(app, group);
-  if (isImpactDashboard(app)) return impactMarkup(app, group);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
   if (isUrbanDashboard(app)) return landMarkup(app, group);
-  if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
-  if (["regional-ring-road", "dahshur-south-link", "suez-ring-link"].includes(group)) return landMarkup(app, group);
-  if (["qena-luxor-road", "qus-axis", "kalabsha-axis"].includes(group)) return southernAgricultureMarkup(app, group);
-  return group === "western-upper-egypt" || group === "cairo-suez-road" ? landMarkup(app, group) : agriculturalMarkup(app, group);
+  return agriculturalMarkup(app, group);
 }
 
 const formatNumber = (value: number, digits = 1) => new Intl.NumberFormat(document.documentElement.lang === "en" ? "en-US" : "ar-EG", { maximumFractionDigits: digits }).format(value || 0);
