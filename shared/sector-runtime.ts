@@ -2,6 +2,7 @@ import type { TransportApp } from "./project-runtime";
 import { dashboardGroup, initializeMap, renderSectorMapMarkup } from "./interactive-dashboard";
 import applicationRegistry from "../registry/apps.json";
 import storyMediaManifest from "../registry/story-media.json";
+import documentationSwipes from "../registry/documentation-swipes.json";
 import { localizedAppTitle } from "./app-titles";
 
 const esc = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char] || char);
@@ -43,7 +44,13 @@ const reportStoryMedia = (group: string, key = "project"): StoryMediaReference[]
   return groups[group]?.[key] || [];
 };
 
-function storyComparisonPairs(media: StoryMediaReference[], group: string): Array<{ before: string; after: string }> {
+function storyComparisonPairs(media: StoryMediaReference[], group: string, chapter = "project"): Array<{ before: string; after: string }> {
+  const documented = (documentationSwipes.groups as Record<string, Array<{ before: string; after: string }>>)[group === "western-upper-egypt" ? `${group}/${chapter}` : group];
+  if (documented?.length) {
+    const pairs = documented.map(({ before, after }) => ({ before, after }));
+    if (group === "dabaa-axis") pairs.push({ before: "../../references/dabaa/landuse-2014.png", after: "../../references/dabaa/landuse-2023.png" });
+    return pairs;
+  }
   const comparisons = media.filter((reference) => reference.kind === "comparison");
   const pairs: Array<{ before: string; after: string }> = [];
   const byPage = new Map<number, StoryMediaReference[]>();
@@ -140,7 +147,7 @@ function storyEntries(app: TransportApp): StoryEntry[] {
     const matching = item.report ? references.filter((reference) => reference.reportName === item.report) : [];
     const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "comparison");
     const comparisons = extracted.filter((reference) => reference.kind === "comparison");
-    const comparisonPairs = storyComparisonPairs(extracted, "western-upper-egypt");
+    const comparisonPairs = storyComparisonPairs(extracted, "western-upper-egypt", item.key);
     const compareBefore = comparisonPairs[0]?.before || comparisons[0]?.imagePath || matching[1]?.imagePath || "";
     return { ...item, hero: hero?.imagePath || matching[0]?.imagePath || corridorHero, compareBefore, compareAfter: comparisonPairs[0]?.after || comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs };
   });

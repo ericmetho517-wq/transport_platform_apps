@@ -59,6 +59,15 @@ if ((suezFree.layerCounts.urban || 0) + (suezLink.layerCounts.urban || 0) !== 21
 if ((suezFree.layerCounts.agricultural || 0) + (suezLink.layerCounts.agricultural || 0) !== 18) errors.push("Suez split: agricultural features were lost or duplicated");
 
 const storyMedia = JSON.parse(readFileSync(join(root, "registry", "story-media.json"), "utf8"));
+const documentationSwipes = JSON.parse(readFileSync(join(root, "registry", "documentation-swipes.json"), "utf8"));
+const documentedPairs = Object.entries(documentationSwipes.groups || {}).flatMap(([group, pairs]) => pairs.map((pair) => ({ group, ...pair })));
+for (const pair of documentedPairs) {
+  for (const phase of ["before", "after"]) {
+    const image = pair[phase]?.replace(/^\.\.\/\.\.\//, "");
+    if (!image || !existsSync(join(root, "public", image))) errors.push(`story swipe: missing ${phase} image for ${pair.group}`);
+  }
+  if (!pair.sourceDocument || !pair.beforeEntry || !pair.afterEntry || pair.before === pair.after) errors.push(`story swipe: invalid provenance for ${pair.group}`);
+}
 const storyMediaEntries = Object.entries(storyMedia.groups || {}).flatMap(([group, chapters]) => Object.entries(chapters).flatMap(([chapter, items]) => items.map((item) => ({ group, chapter, ...item }))));
 for (const app of apps.filter((item) => item.type === "StoryMap")) {
   const group = aliases[app.reportReferenceGroup];
@@ -84,6 +93,7 @@ const report = {
     reportProfiles: Object.keys(profiles).length,
     crossSectorReferences: errors.filter((item) => item.includes("cross-sector")).length,
     storyReportImages: storyMediaEntries.length,
+    documentedSwipePairs: documentedPairs.length,
   },
   errors, warnings,
   result: errors.length ? "FAILED" : "PASSED",

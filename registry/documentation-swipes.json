@@ -1,0 +1,374 @@
+{
+  "groups": {
+    "regional-ring-road": [
+      {
+        "before": "../../references/documentation-swipe/regional-ring-road-1-before.jpg",
+        "after": "../../references/documentation-swipe/regional-ring-road-1-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_01_Intro _ Eklimy_modified2024.docx",
+        "beforeEntry": "word/media/image12.jpg",
+        "afterEntry": "word/media/image13.jpg"
+      }
+    ],
+    "dahshur-south-link": [
+      {
+        "before": "../../references/documentation-swipe/dahshur-south-link-1-before.jpg",
+        "after": "../../references/documentation-swipe/dahshur-south-link-1-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_02_ Dahshor_modified2024.docx",
+        "beforeEntry": "word/media/image8.jpg",
+        "afterEntry": "word/media/image9.jpg"
+      },
+      {
+        "before": "../../references/documentation-swipe/dahshur-south-link-2-before.jpeg",
+        "after": "../../references/documentation-swipe/dahshur-south-link-2-after.jpeg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_02_ Dahshor_modified2024.docx",
+        "beforeEntry": "word/media/image32.jpeg",
+        "afterEntry": "word/media/image33.jpeg"
+      }
+    ],
+    "suez-ring-link": [
+      {
+        "before": "../../references/documentation-swipe/suez-ring-link-1-before.jpg",
+        "after": "../../references/documentation-swipe/suez-ring-link-1-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_03_Suize_modified2024.docx",
+        "beforeEntry": "word/media/image8.jpg",
+        "afterEntry": "word/media/image9.jpg"
+      },
+      {
+        "before": "../../references/documentation-swipe/suez-ring-link-2-before.jpg",
+        "after": "../../references/documentation-swipe/suez-ring-link-2-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_03_Suize_modified2024.docx",
+        "beforeEntry": "word/media/image10.jpg",
+        "afterEntry": "word/media/image11.jpg"
+      }
+    ],
+    "qena-luxor-road": [
+      {
+        "before": "../../references/documentation-swipe/qena-luxor-road-1-before.jpg",
+        "after": "../../references/documentation-swipe/qena-luxor-road-1-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_04_Qena_modified2024.docx",
+        "beforeEntry": "word/media/image8.jpg",
+        "afterEntry": "word/media/image9.jpg"
+      },
+      {
+        "before": "../../references/documentation-swipe/qena-luxor-road-2-before.png",
+        "after": "../../references/documentation-swipe/qena-luxor-road-2-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_04_Qena_modified2024.docx",
+        "beforeEntry": "word/media/image10.png",
+        "afterEntry": "word/media/image11.jpg"
+      }
+    ],
+    "qus-axis": [
+      {
+        "before": "../../references/documentation-swipe/qus-axis-1-before.jpg",
+        "after": "../../references/documentation-swipe/qus-axis-1-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_05_ Qos_modified2024.docx",
+        "beforeEntry": "word/media/image8.jpg",
+        "afterEntry": "word/media/image9.jpg"
+      },
+      {
+        "before": "../../references/documentation-swipe/qus-axis-2-before.jpg",
+        "after": "../../references/documentation-swipe/qus-axis-2-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_05_ Qos_modified2024.docx",
+        "beforeEntry": "word/media/image10.jpg",
+        "afterEntry": "word/media/image11.jpg"
+      }
+    ],
+    "kalabsha-axis": [
+      {
+        "before": "../../references/documentation-swipe/kalabsha-axis-1-before.jpg",
+        "after": "../../references/documentation-swipe/kalabsha-axis-1-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_06_Kalabsha_modified2024.docx",
+        "beforeEntry": "word/media/image8.jpg",
+        "afterEntry": "word/media/image9.jpg"
+      },
+      {
+        "before": "../../references/documentation-swipe/kalabsha-axis-2-before.jpg",
+        "after": "../../references/documentation-swipe/kalabsha-axis-2-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_06_Kalabsha_modified2024.docx",
+        "beforeEntry": "word/media/image10.jpg",
+        "afterEntry": "word/media/image11.jpg"
+      }
+    ],
+    "cairo-suez-road": [
+      {
+        "before": "../../references/documentation-swipe/cairo-suez-road-1-before.png",
+        "after": "../../references/documentation-swipe/cairo-suez-road-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_السويس_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/cairo-suez-road-2-before.png",
+        "after": "../../references/documentation-swipe/cairo-suez-road-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_السويس_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image11.png",
+        "afterEntry": "word/media/image12.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/cairo-suez-road-3-before.png",
+        "after": "../../references/documentation-swipe/cairo-suez-road-3-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_السويس_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image13.png",
+        "afterEntry": "word/media/image14.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/cairo-suez-road-4-before.png",
+        "after": "../../references/documentation-swipe/cairo-suez-road-4-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_السويس_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image15.png",
+        "afterEntry": "word/media/image16.png"
+      }
+    ],
+    "dabaa-axis": [
+      {
+        "before": "../../references/documentation-swipe/dabaa-axis-1-before.jpg",
+        "after": "../../references/documentation-swipe/dabaa-axis-1-after.jpg",
+        "sourceFolder": "التقارير",
+        "sourceDocument": "Nakl_Dabaa_30Dec2023.pptx",
+        "beforeEntry": "ppt/media/image12.jpg",
+        "afterEntry": "ppt/media/image13.jpg"
+      }
+    ],
+    "western-upper-egypt/abu-simbel": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-abu-simbel-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-abu-simbel-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_ابو_سمبل-_التقرير_النهائي_-.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-abu-simbel-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-abu-simbel-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_ابو_سمبل-_التقرير_النهائي_-.docx",
+        "beforeEntry": "word/media/image11.png",
+        "afterEntry": "word/media/image12.png"
+      }
+    ],
+    "western-upper-egypt/luxor": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-luxor-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-luxor-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الاقصر-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image6.png",
+        "afterEntry": "word/media/image7.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-luxor-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-luxor-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الاقصر-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image8.png",
+        "afterEntry": "word/media/image9.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-luxor-3-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-luxor-3-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الاقصر-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image11.png",
+        "afterEntry": "word/media/image12.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-luxor-4-before.jpeg",
+        "after": "../../references/documentation-swipe/western-upper-egypt-luxor-4-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الاقصر-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image35.jpeg",
+        "afterEntry": "word/media/image13.png"
+      }
+    ],
+    "western-upper-egypt/qena": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-qena-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-qena-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_قنا-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image7.png",
+        "afterEntry": "word/media/image8.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-qena-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-qena-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_قنا-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-qena-3-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-qena-3-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_قنا-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image13.png",
+        "afterEntry": "word/media/image14.png"
+      }
+    ],
+    "western-upper-egypt/sohag": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-sohag-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-sohag-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "التقرير_قطاع_محافظة_سوهاج.docx",
+        "beforeEntry": "word/media/image5.png",
+        "afterEntry": "word/media/image6.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-sohag-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-sohag-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "التقرير_قطاع_محافظة_سوهاج.docx",
+        "beforeEntry": "word/media/image7.png",
+        "afterEntry": "word/media/image8.png"
+      }
+    ],
+    "western-upper-egypt/assiut": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-assiut-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-assiut-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_أسيوط_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image7.png",
+        "afterEntry": "word/media/image8.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-assiut-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-assiut-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_أسيوط_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-assiut-3-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-assiut-3-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_أسيوط_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image13.png",
+        "afterEntry": "word/media/image14.png"
+      }
+    ],
+    "western-upper-egypt/minya": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-minya-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-minya-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_المنيا_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image7.png",
+        "afterEntry": "word/media/image8.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-minya-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-minya-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_المنيا_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-minya-3-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-minya-3-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_المنيا_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image13.png",
+        "afterEntry": "word/media/image14.png"
+      }
+    ],
+    "western-upper-egypt/fayoum": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-fayoum-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-fayoum-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الفيوم_-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-fayoum-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-fayoum-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الفيوم_-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image13.png",
+        "afterEntry": "word/media/image14.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-fayoum-3-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-fayoum-3-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الفيوم_-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image15.png",
+        "afterEntry": "word/media/image16.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-fayoum-4-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-fayoum-4-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الفيوم_-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image17.png",
+        "afterEntry": "word/media/image18.png"
+      }
+    ],
+    "western-upper-egypt/giza": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-giza-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-giza-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الجيزةالتقرير_النهائي_.docx",
+        "beforeEntry": "word/media/image7.png",
+        "afterEntry": "word/media/image8.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-giza-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-giza-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الجيزةالتقرير_النهائي_.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-giza-3-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-giza-3-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_الجيزةالتقرير_النهائي_.docx",
+        "beforeEntry": "word/media/image11.png",
+        "afterEntry": "word/media/image12.png"
+      }
+    ],
+    "western-upper-egypt/aswan": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-aswan-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-aswan-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_أسوان-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-aswan-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-aswan-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_أسوان-_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image11.png",
+        "afterEntry": "word/media/image12.png"
+      }
+    ]
+  }
+}
