@@ -10,7 +10,7 @@ const aliases = {
   "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road",
   "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
 };
-const expectedCounts = { Dashboard: 30, Experience: 10, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
+const expectedCounts = { Dashboard: 30, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
 const errors = [];
 const warnings = [];
 const counts = {};
@@ -47,8 +47,7 @@ for (const sector of Object.keys(aliases)) {
   const dashboards = apps.filter((app) => app.reportReferenceGroup === sector && app.type === "Dashboard");
   if (dashboards.length !== 3) errors.push(`${sector}: expected exactly three executive dashboards, found ${dashboards.length}`);
   for (const pattern of [/العمرانية/, /الزراعية والصناعية/, /أسعار الأراضي/]) if (!dashboards.some((app) => pattern.test(app.title))) errors.push(`${sector}: incomplete executive dashboard suite`);
-  const experiences = apps.filter((app) => app.reportReferenceGroup === sector && app.type === "Experience");
-  if (experiences.length !== 1) errors.push(`${sector}: expected exactly one axis experience, found ${experiences.length}`);
+  if (apps.some((app) => app.reportReferenceGroup === sector && app.type === "Experience")) errors.push(`${sector}: interactive applications must not appear in the catalog`);
 }
 
 const suezFree = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", "cairo-suez-road", "summary.json"), "utf8"));

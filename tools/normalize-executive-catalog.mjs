@@ -77,30 +77,7 @@ for (const [group, axis] of Object.entries(axes)) {
   }
 }
 
-const experiences = [];
-for (const [group, axis] of Object.entries(axes)) {
-  let app = apps.find((candidate) => candidate.type === "Experience" && candidate.reportReferenceGroup === group && candidate.language === "ar")
-    || apps.find((candidate) => candidate.type === "Experience" && candidate.reportReferenceGroup === group);
-  if (!app) {
-    const id = createHash("sha256").update(`mot-axis-experience:${group}`).digest("hex").slice(0, 32);
-    app = { ...JSON.parse(readFileSync(join(root, "projects", "experience-74d4e16588", "src", "app.config.json"), "utf8")), id, slug: `experience-${id.slice(0, 10)}` };
-  }
-  app = {
-    ...app,
-    title: axis.ar,
-    alternateTitles: [axis.en],
-    category: `تطبيقات ${axis.ar}`,
-    language: "ar",
-    direction: "rtl",
-    status: "standardized-axis-experience",
-    reportReferenceGroup: group,
-    reportReferences: uniqueReferences(group, "urban").slice(0, 3),
-  };
-  writeProjectData(app, "experience-74d4e16588");
-  experiences.push(app);
-}
-
 const retained = apps.filter((app) => !["Dashboard", "Experience"].includes(app.type));
-const registry = [...dashboards, ...experiences, ...retained];
+const registry = [...dashboards, ...retained];
 writeFileSync(registryPath, `${JSON.stringify(registry, null, 2)}\n`, "utf8");
-console.log(JSON.stringify({ applications: registry.length, dashboards: dashboards.length, experiences: experiences.length }, null, 2));
+console.log(JSON.stringify({ applications: registry.length, dashboards: dashboards.length }, null, 2));

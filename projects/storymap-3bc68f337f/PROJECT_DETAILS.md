@@ -1,11 +1,11 @@
-# Development of the lands surrounding the Dabaa axis
+# تطور الأراضي المحيطة بمحور الضبعة
 
 - Application ID: `3bc68f337ff0461896d3c1b2b218add9`
 - Type: `StoryMap`
-- Category: `Dabaa axis`
-- Language: `en`
+- Category: `تطبيقات محور الضبعة`
+- Language: `ar` (English title available)
 - Original ArcGIS URL: https://storymaps.arcgis.com/stories/3bc68f337ff0461896d3c1b2b218add9
-- Alternate titles: None
+- Alternate titles: Development of the lands surrounding the Dabaa axis
 
 ## Included implementation
 

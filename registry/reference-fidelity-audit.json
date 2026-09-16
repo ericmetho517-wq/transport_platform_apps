@@ -1,19 +1,15 @@
 {
-  "generatedAt": "2026-09-15T18:45:30.710Z",
-  "applications": 71,
+  "generatedAt": "2026-09-16T07:41:10.771Z",
+  "applications": 61,
   "fidelityCounts": {
-    "sector-and-application-type-reference": 42,
+    "sector-and-application-type-reference": 33,
     "exact-item-reference": 21,
-    "source-reference-unavailable": 8
+    "source-reference-unavailable": 7
   },
   "typeCoverage": {
     "Dashboard": {
       "applications": 30,
       "withReferences": 27
-    },
-    "Experience": {
-      "applications": 10,
-      "withReferences": 9
     },
     "StoryMap": {
       "applications": 11,
@@ -565,172 +561,6 @@
       "missingImages": []
     },
     {
-      "slug": "experience-74d4e16588",
-      "title": "محور الصعيد الغربي",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "western-upper-egypt",
-      "referenceCount": 3,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "(1).pdf",
-        "(2).pdf",
-        "(3).pdf"
-      ],
-      "pages": [
-        59,
-        29,
-        60
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-7159ef844c",
-      "title": "وصلة دهشور الجنوبية",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "dahshur",
-      "referenceCount": 1,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "Final Report 3-2024.pdf"
-      ],
-      "pages": [
-        125
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-13ce74e6e4",
-      "title": "القوس الشرقي للطريق الدائري الإقليمي وخط الروبيكي",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "regional-ring",
-      "referenceCount": 1,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "Final Report 3-2024.pdf"
-      ],
-      "pages": [
-        68
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-e197a27977",
-      "title": "محور كلابشة",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "kalabsha",
-      "referenceCount": 3,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "Final Report 3-2024.pdf"
-      ],
-      "pages": [
-        321,
-        322,
-        324
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-bf2cabc64d",
-      "title": "طريق قنا - الأقصر",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "qena-luxor",
-      "referenceCount": 3,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "Final Report 3-2024.pdf"
-      ],
-      "pages": [
-        217,
-        214
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-82083bf028",
-      "title": "وصلة طريق السويس من الطريق الدائري",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "suez-link",
-      "referenceCount": 1,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "Final Report 3-2024.pdf"
-      ],
-      "pages": [
-        168
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-7aa0262a12",
-      "title": "طريق القاهرة - السويس الصحراوي",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "suez-free",
-      "referenceCount": 1,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "(8).pdf"
-      ],
-      "pages": [
-        59
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-83aeb3c154",
-      "title": "محور قوص",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "qus",
-      "referenceCount": 3,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "Final Report 3-2024.pdf"
-      ],
-      "pages": [
-        270,
-        267
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-d72fea4308",
-      "title": "محور الضبعة",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "dabaa",
-      "referenceCount": 3,
-      "fidelity": "sector-and-application-type-reference",
-      "reports": [
-        "Nakl_Dabaa_30Dec2023.pptx"
-      ],
-      "pages": [
-        4,
-        10,
-        13
-      ],
-      "missingImages": []
-    },
-    {
-      "slug": "experience-5aaddeda57",
-      "title": "محور القاهرة - الإسماعيلية",
-      "type": "Experience",
-      "language": "ar",
-      "sector": "ismailia",
-      "referenceCount": 0,
-      "fidelity": "source-reference-unavailable",
-      "reports": [],
-      "pages": [],
-      "missingImages": []
-    },
-    {
       "slug": "storymap-92d2a80d7f",
       "title": "طريق الصعيد الغربي",
       "type": "StoryMap",
@@ -1018,9 +848,9 @@
     },
     {
       "slug": "storymap-3bc68f337f",
-      "title": "Development of the lands surrounding the Dabaa axis",
+      "title": "تطور الأراضي المحيطة بمحور الضبعة",
       "type": "StoryMap",
-      "language": "en",
+      "language": "ar",
       "sector": "dabaa",
       "referenceCount": 5,
       "fidelity": "sector-and-application-type-reference",

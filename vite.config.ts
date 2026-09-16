@@ -1,11 +1,9 @@
-import fs from "node:fs";
 import path from "node:path";
+import registry from "./registry/apps.json";
 
 const projectRoot = path.resolve(import.meta.dirname, "projects");
 const projectEntries = Object.fromEntries(
-  fs.readdirSync(projectRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => [entry.name, path.resolve(projectRoot, entry.name, "index.html")]),
+  registry.map((app) => [app.slug, path.resolve(projectRoot, app.slug, "index.html")]),
 );
 
 export default {

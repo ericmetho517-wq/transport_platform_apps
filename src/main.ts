@@ -21,14 +21,12 @@ registry.forEach((app) => counts.set(app.type, (counts.get(app.type) || 0) + 1))
 
 const typeLabels: Record<string, string> = {
   Dashboard: "لوحات المؤشرات التنفيذية",
-  Experience: "التطبيقات التفاعلية",
   StoryMap: "القصص الجغرافية",
   "Web AppViewer": "تطبيقات Web App Builder",
   "Instant Filter Gallery": "منصات التطبيقات Application Hub",
 };
 const englishTypeLabels: Record<string, string> = {
   Dashboard: "Operational Indicator Dashboards",
-  Experience: "Interactive Applications",
   StoryMap: "Geographic Stories",
   "Web AppViewer": "Web App Builder",
   "Instant Filter Gallery": "Application Hub",
@@ -36,7 +34,6 @@ const englishTypeLabels: Record<string, string> = {
 
 const typeClass: Record<string, string> = {
   Dashboard: "dashboard",
-  Experience: "experience",
   StoryMap: "storymap",
   "Web AppViewer": "viewer",
   "Instant Filter Gallery": "gallery",
@@ -44,7 +41,6 @@ const typeClass: Record<string, string> = {
 
 const typeIcon: Record<string, string> = {
   Dashboard: "▦",
-  Experience: "◫",
   StoryMap: "◇",
   "Web AppViewer": "⌖",
   "Instant Filter Gallery": "▥",
@@ -99,7 +95,6 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
       <div class="catalog-stats" aria-label="${platformLanguage === "en" ? "Application counts" : "إحصائيات التطبيقات"}">
         <article><strong>${totalApplications}</strong><span>${platformLanguage === "en" ? "Total applications" : "إجمالي التطبيقات"}</span></article>
         <article><strong>${countOf("Dashboard")}</strong><span>${platformLanguage === "en" ? "Indicator dashboards" : "لوحات المؤشرات"}</span></article>
-        <article><strong>${countOf("Experience")}</strong><span>${platformLanguage === "en" ? "Interactive applications" : "التطبيقات التفاعلية"}</span></article>
         <article><strong>${countOf("StoryMap")}</strong><span>${platformLanguage === "en" ? "Geographic stories" : "القصص الجغرافية"}</span></article>
         <article><strong>${countOf("Web AppViewer")}</strong><span>${platformLanguage === "en" ? "Web App Builder" : "تطبيقات Web App Builder"}</span></article>
         <article><strong>${countOf("Instant Filter Gallery")}</strong><span>${platformLanguage === "en" ? "Application Hubs" : "منصات التطبيقات Application Hub"}</span></article>

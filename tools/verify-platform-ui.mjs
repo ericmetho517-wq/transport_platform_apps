@@ -17,7 +17,7 @@ for (const control of ["app-search", "type-filter", "language-filter", "axis-fil
 for (const behavior of ["IntersectionObserver", "requestAnimationFrame", "pointermove", "prefers-reduced-motion"]) {
   if (!source.includes(behavior) && !styles.includes(behavior)) errors.push(`missing platform behavior: ${behavior}`);
 }
-for (const type of ["type-dashboard", "type-experience", "type-storymap", "type-viewer", "type-gallery"]) {
+for (const type of ["type-dashboard", "type-storymap", "type-viewer", "type-gallery"]) {
   if (!styles.includes(type)) errors.push(`missing visual identity for ${type}`);
 }
 if (!styles.includes("@media (max-width: 760px)")) errors.push("missing responsive mobile layout");
@@ -29,7 +29,10 @@ if (!dashboardSource.includes("isWesternUpperEgypt || serviceLabelPattern.test(i
 for (const storyFeature of ["arcgis-reference-story", "story-dashboard-view", "data-story-dashboard", "data-story-detail"]) {
   if (!sectorSource.includes(storyFeature) && !sectorStyles.includes(storyFeature)) errors.push(`Western StoryMap reference layout is missing: ${storyFeature}`);
 }
-if (apps.length !== 71) errors.push(`expected 71 canonical applications, found ${apps.length}`);
+if (apps.length !== 61) errors.push(`expected 61 canonical applications, found ${apps.length}`);
+if (apps.some((app) => app.type === "Experience")) errors.push("interactive applications must not appear in the catalog");
+const dabaaStory = apps.find((app) => app.slug === "storymap-3bc68f337f");
+if (dabaaStory?.language !== "ar" || !dabaaStory.alternateTitles?.length) errors.push("Dabaa StoryMap must appear in Arabic and English catalog modes");
 const groupAliases = { dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis", "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road", "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt" };
 const registryGroups = new Set(apps.map((app) => groupAliases[app.reportReferenceGroup] || app.reportReferenceGroup));
 for (const group of registryGroups) if (!source.includes(`["${group}",`)) errors.push(`axis filter is missing registry group: ${group}`);

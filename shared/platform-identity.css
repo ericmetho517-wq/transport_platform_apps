@@ -109,7 +109,7 @@
 
 .platform-shell .catalog { max-width: 1540px; padding: 72px clamp(20px, 5vw, 76px) 105px; }
 .platform-shell .section-title { align-items: end; margin-bottom: 25px; }
-.platform-shell .catalog-stats { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; margin:0 0 24px; }
+.platform-shell .catalog-stats { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin:0 0 24px; }
 .platform-shell .catalog-stats article { min-height:92px; display:grid; place-items:center; align-content:center; gap:7px; padding:14px 10px; border:1px solid #cfe1ee; border-radius:14px; background:#fff; box-shadow:0 8px 22px #0a416c0b; text-align:center; }
 .platform-shell .catalog-stats strong { color:var(--brand-blue); font-size:30px; line-height:1; }
 .platform-shell .catalog-stats span { color:#5f7890; font-size:10px; font-weight:800; }
