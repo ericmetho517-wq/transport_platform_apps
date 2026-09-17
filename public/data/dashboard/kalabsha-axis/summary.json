@@ -1,7 +1,7 @@
 {
   "slug": "kalabsha-axis",
   "projectTitle": "محور كلابشة",
-  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
   "verifiedLocalData": true,
   "yearStart": 2014,
   "yearEnd": 2023,
@@ -17,16 +17,16 @@
   },
   "prices": {
     "urban": {
-      "start": 20723578.65,
-      "end": 73637394.68
+      "start": 3800000000,
+      "end": 12000000000
     },
     "agricultural": {
-      "start": 163024.92,
-      "end": 1179676.44
+      "start": 3500000000,
+      "end": 15000000000
     },
     "industrial": {
-      "start": 20723578.65,
-      "end": 73637394.68
+      "start": 1040000000,
+      "end": 4080000000
     }
   },
   "priceSeries": {
@@ -43,40 +43,40 @@
       2023
     ],
     "urban": [
-      20723578.65,
-      26602891.54,
-      32482204.44,
-      38361517.33,
-      44240830.22,
-      50120143.11,
-      55999456,
-      61878768.9,
-      67758081.79,
-      73637394.68
+      3800000000,
+      4711111111,
+      5622222222,
+      6533333333,
+      7444444444,
+      8355555556,
+      9266666667,
+      10177777778,
+      11088888889,
+      12000000000
     ],
     "agricultural": [
-      163024.92,
-      275986.2,
-      388947.48,
-      501908.76,
-      614870.04,
-      727831.32,
-      840792.6,
-      953753.88,
-      1066715.16,
-      1179676.44
+      3500000000,
+      4777777778,
+      6055555556,
+      7333333333,
+      8611111111,
+      9888888889,
+      11166666667,
+      12444444444,
+      13722222222,
+      15000000000
     ],
     "industrial": [
-      20723578.65,
-      26602891.54,
-      32482204.44,
-      38361517.33,
-      44240830.22,
-      50120143.11,
-      55999456,
-      61878768.9,
-      67758081.79,
-      73637394.68
+      1040000000,
+      1377777778,
+      1715555556,
+      2053333333,
+      2391111111,
+      2728888889,
+      3066666667,
+      3404444444,
+      3742222222,
+      4080000000
     ]
   },
   "landUse": [
@@ -118,7 +118,11 @@
     "landcover-start",
     "landcover-end",
     "governorates",
-    "water"
+    "water",
+    "urban",
+    "buildings",
+    "landmarks",
+    "parcels"
   ],
   "layerCounts": {
     "axis": 1,
@@ -132,12 +136,23 @@
     "landcover-start": 3,
     "landcover-end": 255,
     "governorates": 1,
-    "water": 1
+    "water": 1,
+    "buildings": 0,
+    "landmarks": 0,
+    "parcels": 0
   },
   "sourceLayerCounts": {
     "landcover-start": 373,
     "landcover-end": 391,
     "governorates": 1,
-    "water": 1
-  }
+    "water": 1,
+    "study": 1,
+    "axis": 1,
+    "urban": 0,
+    "agricultural": 537,
+    "buildings": 0,
+    "landmarks": 0,
+    "parcels": 0
+  },
+  "authoritativeSource": "وزارة النقل/Data"
 }

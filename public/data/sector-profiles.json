@@ -2,223 +2,1476 @@
   "western-upper-egypt": {
     "title": "محور الصعيد الصحراوي الغربي (الجيزة / أبو سمبل)",
     "report": "(9).pdf",
-    "pages": [54],
+    "pages": [
+      54
+    ],
     "yearEnd": 2024,
-    "metrics": { "studyAreaKm2": 25126, "axisLengthKm": 1175, "urbanChangeKm2": 850.04, "industrialChangeKm2": 67.4, "agriculturalAreaFeddan": 1512791, "agriculturalWorkers": 206235, "industrialWorkers": 75459, "jobOpportunities": 50458, "urbanChangePercent": 100, "agriculturalChangePercent": 100, "industrialChangePercent": 100 },
-    "statusShares": { "existing": 90, "underConstruction": 10 },
-    "cropShares": [93, 5, 2],
-    "ownershipShares": [93, 7],
+    "metrics": {
+      "studyAreaKm2": 25126,
+      "axisLengthKm": 1175,
+      "urbanChangeKm2": 850.04,
+      "industrialChangeKm2": 67.4,
+      "agriculturalAreaFeddan": 1512791,
+      "agriculturalWorkers": 206235,
+      "industrialWorkers": 75459,
+      "jobOpportunities": 50458,
+      "urbanChangePercent": 100,
+      "agriculturalChangePercent": 100,
+      "industrialChangePercent": 100
+    },
+    "statusShares": {
+      "existing": 90,
+      "underConstruction": 10
+    },
+    "cropShares": [
+      93,
+      5,
+      2
+    ],
+    "ownershipShares": [
+      93,
+      7
+    ],
     "landUse": [
-      { "category": "أراضي فضاء", "year": 2014, "area": 19116 },
-      { "category": "الأراضي الزراعية", "year": 2014, "area": 4878 },
-      { "category": "الأراضي الصناعية", "year": 2014, "area": 51.1 },
-      { "category": "الأراضي العمرانية", "year": 2014, "area": 752.15 },
-      { "category": "أراضي فضاء", "year": 2024, "area": 17248 },
-      { "category": "الأراضي الزراعية", "year": 2024, "area": 6605 },
-      { "category": "الأراضي الصناعية", "year": 2024, "area": 67.4 },
-      { "category": "الأراضي العمرانية", "year": 2024, "area": 850.04 }
+      {
+        "category": "أراضي فضاء",
+        "year": 2014,
+        "area": 19116
+      },
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2014,
+        "area": 4878
+      },
+      {
+        "category": "الأراضي الصناعية",
+        "year": 2014,
+        "area": 51.1
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2014,
+        "area": 752.15
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2024,
+        "area": 17248
+      },
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2024,
+        "area": 6605
+      },
+      {
+        "category": "الأراضي الصناعية",
+        "year": 2024,
+        "area": 67.4
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2024,
+        "area": 850.04
+      }
     ],
     "changeBars": [
-      { "label": "إسكان اجتماعي شباب", "value": 1.7, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 16.8, "layer": "urban" },
-      { "label": "إسكان مخطط اقتصادي", "value": 14.1, "layer": "urban" }, { "label": "ترفيهي", "value": 0.6, "layer": "urban" },
-      { "label": "تعليمي", "value": 1.4, "layer": "urban" }, { "label": "حكومي", "value": 0.1, "layer": "urban" },
-      { "label": "خدمات", "value": 46.8, "layer": "urban" }, { "label": "ديني", "value": 0, "layer": "urban" },
-      { "label": "صناعي", "value": 16, "layer": "industrial" }, { "label": "قوات مسلحة", "value": 1.4, "layer": "urban" },
-      { "label": "كمبوند", "value": 2.7, "layer": "urban" }, { "label": "مخازن", "value": 2.1, "layer": "industrial" }
+      {
+        "label": "إسكان اجتماعي شباب",
+        "value": 1.7,
+        "layer": "urban"
+      },
+      {
+        "label": "إسكان عشوائي",
+        "value": 16.8,
+        "layer": "urban"
+      },
+      {
+        "label": "إسكان مخطط اقتصادي",
+        "value": 14.1,
+        "layer": "urban"
+      },
+      {
+        "label": "ترفيهي",
+        "value": 0.6,
+        "layer": "urban"
+      },
+      {
+        "label": "تعليمي",
+        "value": 1.4,
+        "layer": "urban"
+      },
+      {
+        "label": "حكومي",
+        "value": 0.1,
+        "layer": "urban"
+      },
+      {
+        "label": "خدمات",
+        "value": 46.8,
+        "layer": "urban"
+      },
+      {
+        "label": "ديني",
+        "value": 0,
+        "layer": "urban"
+      },
+      {
+        "label": "صناعي",
+        "value": 16,
+        "layer": "industrial"
+      },
+      {
+        "label": "قوات مسلحة",
+        "value": 1.4,
+        "layer": "urban"
+      },
+      {
+        "label": "كمبوند",
+        "value": 2.7,
+        "layer": "urban"
+      },
+      {
+        "label": "مخازن",
+        "value": 2.1,
+        "layer": "industrial"
+      }
     ],
     "prices": {
-      "urban": { "start": 718831802, "end": 3069414895 },
-      "industrial": { "start": 32836568, "end": 161913991 },
-      "agricultural": { "start": 343403084, "end": 1209979488 }
+      "urban": {
+        "start": 718831802,
+        "end": 3069414895
+      },
+      "industrial": {
+        "start": 32836568,
+        "end": 161913991
+      },
+      "agricultural": {
+        "start": 343403084,
+        "end": 1209979488
+      }
     },
     "sectors": {
       "1": {
         "title": "قطاع أسيوط",
         "report": "(4).pdf",
         "page": 58,
-        "metrics": { "studyAreaKm2": 2211, "axisLengthKm": 112.7, "urbanChangeKm2": 42.33, "industrialChangeKm2": 9.4, "agriculturalAreaFeddan": 124374, "jobOpportunities": 264, "urbanChangePercent": 100 },
-        "statusShares": { "existing": 84, "underConstruction": 16 },
-        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 0.6, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 0.2, "layer": "urban" }, { "label": "تعليمي", "value": 0.3, "layer": "urban" }, { "label": "خدمات", "value": 0.2, "layer": "urban" }, { "label": "صناعي", "value": 2.2, "layer": "industrial" }, { "label": "مخازن", "value": 0.5, "layer": "industrial" }],
-        "prices": { "urban": { "start": 44308805, "end": 165740272 }, "industrial": { "start": 4763731, "end": 19678099 }, "agricultural": { "start": 29279448, "end": 119584572 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 40.8 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 6.9 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 343.6 }, { "category": "أراضي فضاء", "year": 2014, "area": 1805 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 42.3 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 9.4 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 522.4 }, { "category": "أراضي فضاء", "year": 2024, "area": 1622 }]
+        "metrics": {
+          "studyAreaKm2": 2211,
+          "axisLengthKm": 112.7,
+          "urbanChangeKm2": 42.33,
+          "industrialChangeKm2": 9.4,
+          "agriculturalAreaFeddan": 124374,
+          "jobOpportunities": 264,
+          "urbanChangePercent": 100
+        },
+        "statusShares": {
+          "existing": 84,
+          "underConstruction": 16
+        },
+        "changeBars": [
+          {
+            "label": "إسكان اجتماعي شباب",
+            "value": 0.6,
+            "layer": "urban"
+          },
+          {
+            "label": "إسكان عشوائي",
+            "value": 0.2,
+            "layer": "urban"
+          },
+          {
+            "label": "تعليمي",
+            "value": 0.3,
+            "layer": "urban"
+          },
+          {
+            "label": "خدمات",
+            "value": 0.2,
+            "layer": "urban"
+          },
+          {
+            "label": "صناعي",
+            "value": 2.2,
+            "layer": "industrial"
+          },
+          {
+            "label": "مخازن",
+            "value": 0.5,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 44308805,
+            "end": 165740272
+          },
+          "industrial": {
+            "start": 4763731,
+            "end": 19678099
+          },
+          "agricultural": {
+            "start": 29279448,
+            "end": 119584572
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 40.8
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 6.9
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 343.6
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 1805
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 42.3
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 9.4
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 522.4
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 1622
+          }
+        ]
       },
       "2": {
         "title": "قطاع أسوان",
         "report": "(9).pdf",
         "page": 18,
-        "metrics": { "studyAreaKm2": 2755.63, "axisLengthKm": 146.5, "urbanChangeKm2": 200.1, "industrialChangeKm2": 8.4, "agriculturalAreaFeddan": 176929, "jobOpportunities": 8386, "urbanChangePercent": 7.26 },
-        "statusShares": { "existing": 90, "underConstruction": 10 },
-        "changeBars": [{ "label": "تغير عمراني", "value": 47.9, "layer": "urban" }, { "label": "تغير زراعي", "value": 63.7, "layer": "agricultural" }, { "label": "تغير صناعي", "value": 5.2, "layer": "industrial" }],
-        "prices": { "urban": { "start": 87591048, "end": 301972446 }, "industrial": { "start": 4192409, "end": 16769637 }, "agricultural": { "start": 27084996, "end": 119302289 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 152.2 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 3.2 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 679.4 }, { "category": "أراضي فضاء", "year": 2014, "area": 3179 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 200.1 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 8.4 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 743.1 }, { "category": "أراضي فضاء", "year": 2024, "area": 3061 }]
+        "metrics": {
+          "studyAreaKm2": 2755.63,
+          "axisLengthKm": 146.5,
+          "urbanChangeKm2": 200.1,
+          "industrialChangeKm2": 8.4,
+          "agriculturalAreaFeddan": 176929,
+          "jobOpportunities": 8386,
+          "urbanChangePercent": 7.26
+        },
+        "statusShares": {
+          "existing": 90,
+          "underConstruction": 10
+        },
+        "changeBars": [
+          {
+            "label": "تغير عمراني",
+            "value": 47.9,
+            "layer": "urban"
+          },
+          {
+            "label": "تغير زراعي",
+            "value": 63.7,
+            "layer": "agricultural"
+          },
+          {
+            "label": "تغير صناعي",
+            "value": 5.2,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 87591048,
+            "end": 301972446
+          },
+          "industrial": {
+            "start": 4192409,
+            "end": 16769637
+          },
+          "agricultural": {
+            "start": 27084996,
+            "end": 119302289
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 152.2
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 3.2
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 679.4
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 3179
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 200.1
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 8.4
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 743.1
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 3061
+          }
+        ]
       },
       "3": {
         "title": "قطاع الجيزة",
         "report": "(7).pdf",
         "page": 47,
-        "metrics": { "studyAreaKm2": 525, "axisLengthKm": 26.5, "urbanChangeKm2": 62.07, "industrialChangeKm2": 2.2, "agriculturalAreaFeddan": 338, "jobOpportunities": 3689, "urbanChangePercent": 100 },
-        "statusShares": { "existing": 71, "underConstruction": 29 },
-        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 1.9, "layer": "urban" }, { "label": "إسكان مخطط اقتصادي", "value": 13.6, "layer": "urban" }, { "label": "ترفيهي", "value": 0.1, "layer": "urban" }, { "label": "تعليمي", "value": 0.7, "layer": "urban" }, { "label": "حكومي", "value": 0, "layer": "urban" }, { "label": "خدمات", "value": 0.9, "layer": "urban" }, { "label": "صناعي", "value": 1, "layer": "industrial" }, { "label": "قوات مسلحة", "value": 1, "layer": "urban" }, { "label": "كمبوند", "value": 1.2, "layer": "urban" }, { "label": "مخازن", "value": 0.6, "layer": "industrial" }],
-        "prices": { "urban": { "start": 78441001, "end": 608288166 }, "industrial": { "start": 210302, "end": 11068506 }, "agricultural": { "start": 21065, "end": 140436 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 40.98 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 1.21 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 4.14 }, { "category": "أراضي فضاء", "year": 2014, "area": 475 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 62.07 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 2.21 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 1.42 }, { "category": "أراضي فضاء", "year": 2024, "area": 455 }]
+        "metrics": {
+          "studyAreaKm2": 525,
+          "axisLengthKm": 26.5,
+          "urbanChangeKm2": 62.07,
+          "industrialChangeKm2": 2.2,
+          "agriculturalAreaFeddan": 338,
+          "jobOpportunities": 3689,
+          "urbanChangePercent": 100
+        },
+        "statusShares": {
+          "existing": 71,
+          "underConstruction": 29
+        },
+        "changeBars": [
+          {
+            "label": "إسكان اجتماعي شباب",
+            "value": 1.9,
+            "layer": "urban"
+          },
+          {
+            "label": "إسكان مخطط اقتصادي",
+            "value": 13.6,
+            "layer": "urban"
+          },
+          {
+            "label": "ترفيهي",
+            "value": 0.1,
+            "layer": "urban"
+          },
+          {
+            "label": "تعليمي",
+            "value": 0.7,
+            "layer": "urban"
+          },
+          {
+            "label": "حكومي",
+            "value": 0,
+            "layer": "urban"
+          },
+          {
+            "label": "خدمات",
+            "value": 0.9,
+            "layer": "urban"
+          },
+          {
+            "label": "صناعي",
+            "value": 1,
+            "layer": "industrial"
+          },
+          {
+            "label": "قوات مسلحة",
+            "value": 1,
+            "layer": "urban"
+          },
+          {
+            "label": "كمبوند",
+            "value": 1.2,
+            "layer": "urban"
+          },
+          {
+            "label": "مخازن",
+            "value": 0.6,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 78441001,
+            "end": 608288166
+          },
+          "industrial": {
+            "start": 210302,
+            "end": 11068506
+          },
+          "agricultural": {
+            "start": 21065,
+            "end": 140436
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 40.98
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 1.21
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 4.14
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 475
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 62.07
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 2.21
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 1.42
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 455
+          }
+        ]
       },
       "4": {
         "title": "قطاع المنيا",
         "report": "(5).pdf",
         "page": 58,
-        "metrics": { "studyAreaKm2": 2766, "axisLengthKm": 138.5, "urbanChangeKm2": 59.38, "industrialChangeKm2": 3.8, "agriculturalAreaFeddan": 331595, "jobOpportunities": 240, "urbanChangePercent": 100 },
-        "statusShares": { "existing": 94, "underConstruction": 6 },
-        "changeBars": [{ "label": "إسكان عشوائي", "value": 1.1, "layer": "urban" }, { "label": "إسكان مخطط اقتصادي", "value": 0.2, "layer": "urban" }, { "label": "خدمات", "value": 0.1, "layer": "urban" }, { "label": "صناعي", "value": 1.5, "layer": "industrial" }],
-        "prices": { "urban": { "start": 38493245, "end": 128922337 }, "industrial": { "start": 1909786, "end": 9548931 }, "agricultural": { "start": 36699622, "end": 190075193 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 58 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 2.4 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 833.7 }, { "category": "أراضي فضاء", "year": 2014, "area": 1846 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 59.4 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 3.8 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 1392.7 }, { "category": "أراضي فضاء", "year": 2024, "area": 1284 }]
+        "metrics": {
+          "studyAreaKm2": 2766,
+          "axisLengthKm": 138.5,
+          "urbanChangeKm2": 59.38,
+          "industrialChangeKm2": 3.8,
+          "agriculturalAreaFeddan": 331595,
+          "jobOpportunities": 240,
+          "urbanChangePercent": 100
+        },
+        "statusShares": {
+          "existing": 94,
+          "underConstruction": 6
+        },
+        "changeBars": [
+          {
+            "label": "إسكان عشوائي",
+            "value": 1.1,
+            "layer": "urban"
+          },
+          {
+            "label": "إسكان مخطط اقتصادي",
+            "value": 0.2,
+            "layer": "urban"
+          },
+          {
+            "label": "خدمات",
+            "value": 0.1,
+            "layer": "urban"
+          },
+          {
+            "label": "صناعي",
+            "value": 1.5,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 38493245,
+            "end": 128922337
+          },
+          "industrial": {
+            "start": 1909786,
+            "end": 9548931
+          },
+          "agricultural": {
+            "start": 36699622,
+            "end": 190075193
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 58
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 2.4
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 833.7
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 1846
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 59.4
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 3.8
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 1392.7
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 1284
+          }
+        ]
       },
       "6": {
         "title": "قطاع الفيوم",
         "report": "(6).pdf",
         "page": 60,
-        "metrics": { "studyAreaKm2": 1765, "axisLengthKm": 89.6, "urbanChangeKm2": 122.83, "industrialChangeKm2": 24.1, "agriculturalAreaFeddan": 227960, "jobOpportunities": 1021, "urbanChangePercent": 100 },
-        "statusShares": { "existing": 80, "underConstruction": 20 },
-        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 0.2, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 3.6, "layer": "urban" }, { "label": "خدمات", "value": 0.2, "layer": "urban" }, { "label": "صناعي", "value": 2.7, "layer": "industrial" }, { "label": "كمبوند", "value": 1.5, "layer": "urban" }, { "label": "مخازن", "value": 0.2, "layer": "industrial" }],
-        "prices": { "urban": { "start": 97358869, "end": 285013841 }, "industrial": { "start": 12063818, "end": 60319091 }, "agricultural": { "start": 69128339, "end": 211587158 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 117 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 21.5 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 833.4 }, { "category": "أراضي فضاء", "year": 2014, "area": 766 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 122.8 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 24.1 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 957.4 }, { "category": "أراضي فضاء", "year": 2024, "area": 633 }]
+        "metrics": {
+          "studyAreaKm2": 1765,
+          "axisLengthKm": 89.6,
+          "urbanChangeKm2": 122.83,
+          "industrialChangeKm2": 24.1,
+          "agriculturalAreaFeddan": 227960,
+          "jobOpportunities": 1021,
+          "urbanChangePercent": 100
+        },
+        "statusShares": {
+          "existing": 80,
+          "underConstruction": 20
+        },
+        "changeBars": [
+          {
+            "label": "إسكان اجتماعي شباب",
+            "value": 0.2,
+            "layer": "urban"
+          },
+          {
+            "label": "إسكان عشوائي",
+            "value": 3.6,
+            "layer": "urban"
+          },
+          {
+            "label": "خدمات",
+            "value": 0.2,
+            "layer": "urban"
+          },
+          {
+            "label": "صناعي",
+            "value": 2.7,
+            "layer": "industrial"
+          },
+          {
+            "label": "كمبوند",
+            "value": 1.5,
+            "layer": "urban"
+          },
+          {
+            "label": "مخازن",
+            "value": 0.2,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 97358869,
+            "end": 285013841
+          },
+          "industrial": {
+            "start": 12063818,
+            "end": 60319091
+          },
+          "agricultural": {
+            "start": 69128339,
+            "end": 211587158
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 117
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 21.5
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 833.4
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 766
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 122.8
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 24.1
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 957.4
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 633
+          }
+        ]
       },
       "7": {
         "title": "قطاع أبو سمبل",
         "report": ".pdf",
         "page": 73,
-        "metrics": { "studyAreaKm2": 5575, "axisLengthKm": 281.8, "urbanChangeKm2": 45.39, "industrialChangeKm2": 4.2, "agriculturalAreaFeddan": 117383, "jobOpportunities": 230, "urbanChangePercent": 100 },
-        "statusShares": { "existing": 100, "underConstruction": 0 },
-        "changeBars": [{ "label": "إسكان عشوائي", "value": 0.7, "layer": "urban" }, { "label": "خدمات", "value": 0.6, "layer": "urban" }, { "label": "صناعي", "value": 0.2, "layer": "industrial" }],
-        "prices": { "urban": { "start": 46371754, "end": 211925578 }, "industrial": { "start": 2090212, "end": 8360848 }, "agricultural": { "start": 415792, "end": 2070031 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 44.1 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 3.9 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 35 }, { "category": "أراضي فضاء", "year": 2014, "area": 5345 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 45.4 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 4.2 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 493 }, { "category": "أراضي فضاء", "year": 2024, "area": 4798 }]
+        "metrics": {
+          "studyAreaKm2": 5575,
+          "axisLengthKm": 281.8,
+          "urbanChangeKm2": 45.39,
+          "industrialChangeKm2": 4.2,
+          "agriculturalAreaFeddan": 117383,
+          "jobOpportunities": 230,
+          "urbanChangePercent": 100
+        },
+        "statusShares": {
+          "existing": 100,
+          "underConstruction": 0
+        },
+        "changeBars": [
+          {
+            "label": "إسكان عشوائي",
+            "value": 0.7,
+            "layer": "urban"
+          },
+          {
+            "label": "خدمات",
+            "value": 0.6,
+            "layer": "urban"
+          },
+          {
+            "label": "صناعي",
+            "value": 0.2,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 46371754,
+            "end": 211925578
+          },
+          "industrial": {
+            "start": 2090212,
+            "end": 8360848
+          },
+          "agricultural": {
+            "start": 415792,
+            "end": 2070031
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 44.1
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 3.9
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 35
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 5345
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 45.4
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 4.2
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 493
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 4798
+          }
+        ]
       },
       "8": {
         "title": "قطاع سوهاج",
         "report": "(2).pdf",
         "page": 28,
-        "metrics": { "studyAreaKm2": 2540, "axisLengthKm": 130, "urbanChangeKm2": 0.03, "industrialChangeKm2": 1.1, "agriculturalAreaFeddan": 246, "jobOpportunities": 0, "urbanChangePercent": 100 },
-        "statusShares": { "existing": 100, "underConstruction": 0 },
-        "changeBars": [{ "label": "إسكان عشوائي", "value": 0, "layer": "urban" }, { "label": "صناعي", "value": 1.1, "layer": "industrial" }],
-        "prices": { "urban": { "start": 8827, "end": 26481 }, "industrial": { "start": 549060, "end": 2196242 }, "agricultural": { "start": 3837, "end": 38370 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 0.03 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 0 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 0 }, { "category": "أراضي فضاء", "year": 2014, "area": 2528 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 0.03 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 1.1 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 1 }, { "category": "أراضي فضاء", "year": 2024, "area": 2526 }]
+        "metrics": {
+          "studyAreaKm2": 2540,
+          "axisLengthKm": 130,
+          "urbanChangeKm2": 0.03,
+          "industrialChangeKm2": 1.1,
+          "agriculturalAreaFeddan": 246,
+          "jobOpportunities": 0,
+          "urbanChangePercent": 100
+        },
+        "statusShares": {
+          "existing": 100,
+          "underConstruction": 0
+        },
+        "changeBars": [
+          {
+            "label": "إسكان عشوائي",
+            "value": 0,
+            "layer": "urban"
+          },
+          {
+            "label": "صناعي",
+            "value": 1.1,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 8827,
+            "end": 26481
+          },
+          "industrial": {
+            "start": 549060,
+            "end": 2196242
+          },
+          "agricultural": {
+            "start": 3837,
+            "end": 38370
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 0.03
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 0
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 0
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 2528
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 0.03
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 1.1
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 1
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 2526
+          }
+        ]
       },
       "9": {
         "title": "قطاع بني سويف",
         "report": "(9).pdf",
         "page": 18,
-        "metrics": { "studyAreaKm2": 752.52, "axisLengthKm": 37.7, "urbanChangeKm2": 37.9, "industrialChangeKm2": 0.59, "agriculturalAreaFeddan": 107905, "jobOpportunities": 1978, "urbanChangePercent": 5.04 },
-        "statusShares": { "existing": 90, "underConstruction": 10 },
-        "changeBars": [{ "label": "تغير عمراني", "value": 11.3, "layer": "urban" }, { "label": "تغير زراعي", "value": 82.3, "layer": "agricultural" }, { "label": "تغير صناعي", "value": 0.03, "layer": "industrial" }],
-        "prices": { "urban": { "start": 16590208, "end": 57195181 }, "industrial": { "start": 294467, "end": 1177867 }, "agricultural": { "start": 16518531, "end": 72759787 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 26.6 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 0.56 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 370.9 }, { "category": "أراضي فضاء", "year": 2014, "area": 344 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 37.9 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 0.59 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 453.2 }, { "category": "أراضي فضاء", "year": 2024, "area": 251 }]
+        "metrics": {
+          "studyAreaKm2": 752.52,
+          "axisLengthKm": 37.7,
+          "urbanChangeKm2": 37.9,
+          "industrialChangeKm2": 0.59,
+          "agriculturalAreaFeddan": 107905,
+          "jobOpportunities": 1978,
+          "urbanChangePercent": 5.04
+        },
+        "statusShares": {
+          "existing": 90,
+          "underConstruction": 10
+        },
+        "changeBars": [
+          {
+            "label": "تغير عمراني",
+            "value": 11.3,
+            "layer": "urban"
+          },
+          {
+            "label": "تغير زراعي",
+            "value": 82.3,
+            "layer": "agricultural"
+          },
+          {
+            "label": "تغير صناعي",
+            "value": 0.03,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 16590208,
+            "end": 57195181
+          },
+          "industrial": {
+            "start": 294467,
+            "end": 1177867
+          },
+          "agricultural": {
+            "start": 16518531,
+            "end": 72759787
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 26.6
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 0.56
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 370.9
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 344
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 37.9
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 0.59
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 453.2
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 251
+          }
+        ]
       },
       "11": {
         "title": "قطاع قنا",
         "report": "(3).pdf",
         "page": 59,
-        "metrics": { "studyAreaKm2": 2615, "axisLengthKm": 133.3, "urbanChangeKm2": 164.41, "industrialChangeKm2": 11.3, "agriculturalAreaFeddan": 235900, "jobOpportunities": 771, "urbanChangePercent": 100 },
-        "statusShares": { "existing": 83, "underConstruction": 17 },
-        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 0.6, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 2.6, "layer": "urban" }, { "label": "إسكان مخطط اقتصادي", "value": 0.3, "layer": "urban" }, { "label": "تعليمي", "value": 0.3, "layer": "urban" }, { "label": "خدمات", "value": 0.2, "layer": "urban" }, { "label": "صناعي", "value": 0.4, "layer": "industrial" }, { "label": "مخازن", "value": 0.5, "layer": "industrial" }],
-        "prices": { "urban": { "start": 189704525, "end": 669942033 }, "industrial": { "start": 5660392, "end": 28385208 }, "agricultural": { "start": 100469395, "end": 297411681 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 160 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 11 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 889 }, { "category": "أراضي فضاء", "year": 2014, "area": 1467 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 164.4 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 11.3 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 990.8 }, { "category": "أراضي فضاء", "year": 2024, "area": 1360 }]
+        "metrics": {
+          "studyAreaKm2": 2615,
+          "axisLengthKm": 133.3,
+          "urbanChangeKm2": 164.41,
+          "industrialChangeKm2": 11.3,
+          "agriculturalAreaFeddan": 235900,
+          "jobOpportunities": 771,
+          "urbanChangePercent": 100
+        },
+        "statusShares": {
+          "existing": 83,
+          "underConstruction": 17
+        },
+        "changeBars": [
+          {
+            "label": "إسكان اجتماعي شباب",
+            "value": 0.6,
+            "layer": "urban"
+          },
+          {
+            "label": "إسكان عشوائي",
+            "value": 2.6,
+            "layer": "urban"
+          },
+          {
+            "label": "إسكان مخطط اقتصادي",
+            "value": 0.3,
+            "layer": "urban"
+          },
+          {
+            "label": "تعليمي",
+            "value": 0.3,
+            "layer": "urban"
+          },
+          {
+            "label": "خدمات",
+            "value": 0.2,
+            "layer": "urban"
+          },
+          {
+            "label": "صناعي",
+            "value": 0.4,
+            "layer": "industrial"
+          },
+          {
+            "label": "مخازن",
+            "value": 0.5,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 189704525,
+            "end": 669942033
+          },
+          "industrial": {
+            "start": 5660392,
+            "end": 28385208
+          },
+          "agricultural": {
+            "start": 100469395,
+            "end": 297411681
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 160
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 11
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 889
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 1467
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 164.4
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 11.3
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 990.8
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 1360
+          }
+        ]
       },
       "12": {
         "title": "قطاع الأقصر",
         "report": "(1).pdf",
         "page": 58,
-        "metrics": { "studyAreaKm2": 2240, "axisLengthKm": 118.5, "urbanChangeKm2": 115.6, "industrialChangeKm2": 2.2, "agriculturalAreaFeddan": 190160, "jobOpportunities": 551, "urbanChangePercent": 100 },
-        "statusShares": { "existing": 100, "underConstruction": 0 },
-        "changeBars": [{ "label": "إسكان اجتماعي شباب", "value": 0, "layer": "urban" }, { "label": "إسكان عشوائي", "value": 1.2, "layer": "urban" }, { "label": "خدمات", "value": 0.4, "layer": "urban" }, { "label": "صناعي", "value": 1.6, "layer": "industrial" }],
-        "prices": { "urban": { "start": 119963520, "end": 640388560 }, "industrial": { "start": 1102391, "end": 4409562 }, "agricultural": { "start": 63782059, "end": 197009971 } },
-        "landUse": [{ "category": "الأراضي العمرانية", "year": 2014, "area": 112.5 }, { "category": "الأراضي الصناعية", "year": 2014, "area": 0.6 }, { "category": "الأراضي الزراعية", "year": 2014, "area": 699.3 }, { "category": "أراضي فضاء", "year": 2014, "area": 1361 }, { "category": "الأراضي العمرانية", "year": 2024, "area": 115.7 }, { "category": "الأراضي الصناعية", "year": 2024, "area": 2.2 }, { "category": "الأراضي الزراعية", "year": 2024, "area": 798.7 }, { "category": "أراضي فضاء", "year": 2024, "area": 1257 }]
+        "metrics": {
+          "studyAreaKm2": 2240,
+          "axisLengthKm": 118.5,
+          "urbanChangeKm2": 115.6,
+          "industrialChangeKm2": 2.2,
+          "agriculturalAreaFeddan": 190160,
+          "jobOpportunities": 551,
+          "urbanChangePercent": 100
+        },
+        "statusShares": {
+          "existing": 100,
+          "underConstruction": 0
+        },
+        "changeBars": [
+          {
+            "label": "إسكان اجتماعي شباب",
+            "value": 0,
+            "layer": "urban"
+          },
+          {
+            "label": "إسكان عشوائي",
+            "value": 1.2,
+            "layer": "urban"
+          },
+          {
+            "label": "خدمات",
+            "value": 0.4,
+            "layer": "urban"
+          },
+          {
+            "label": "صناعي",
+            "value": 1.6,
+            "layer": "industrial"
+          }
+        ],
+        "prices": {
+          "urban": {
+            "start": 119963520,
+            "end": 640388560
+          },
+          "industrial": {
+            "start": 1102391,
+            "end": 4409562
+          },
+          "agricultural": {
+            "start": 63782059,
+            "end": 197009971
+          }
+        },
+        "landUse": [
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2014,
+            "area": 112.5
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2014,
+            "area": 0.6
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2014,
+            "area": 699.3
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2014,
+            "area": 1361
+          },
+          {
+            "category": "الأراضي العمرانية",
+            "year": 2024,
+            "area": 115.7
+          },
+          {
+            "category": "الأراضي الصناعية",
+            "year": 2024,
+            "area": 2.2
+          },
+          {
+            "category": "الأراضي الزراعية",
+            "year": 2024,
+            "area": 798.7
+          },
+          {
+            "category": "أراضي فضاء",
+            "year": 2024,
+            "area": 1257
+          }
+        ]
       }
     }
   },
   "regional-ring-road": {
     "title": "القوس الشرقي والغربي للطريق الدائري الإقليمي وخط الروبيكي ومشروع LRT",
     "report": "Final Report 3-2024.pdf",
-    "pages": [66, 67, 68, 69, 70],
-    "metrics": { "studyAreaKm2": 1256, "axisLengthKm": 126.3, "urbanChangeKm2": 141.2, "jobOpportunities": 346000, "urbanChangePercent": 69 },
+    "pages": [
+      66,
+      67,
+      68,
+      69,
+      70
+    ],
+    "metrics": {
+      "studyAreaKm2": 1256,
+      "axisLengthKm": 126.3,
+      "urbanChangeKm2": 141.2,
+      "jobOpportunities": 346000,
+      "urbanChangePercent": 69
+    },
     "prices": {
-      "urban": { "start": 287740000000, "end": 1330000000000 },
-      "agricultural": { "start": 4710000000, "end": 73800000000 },
-      "industrial": { "start": 17440000000, "end": 282380000000 }
+      "urban": {
+        "start": 287740000000,
+        "end": 1330000000000
+      },
+      "agricultural": {
+        "start": 4710000000,
+        "end": 73800000000
+      },
+      "industrial": {
+        "start": 17440000000,
+        "end": 282380000000
+      }
     },
     "changeBars": [
-      { "label": "إسكان اجتماعي", "value": 0.1, "layer": "urban" },
-      { "label": "إسكان مخطط اقتصادي", "value": 30.3, "layer": "urban" },
-      { "label": "كمبوند", "value": 47, "layer": "urban" },
-      { "label": "خدمات", "value": 9.6, "layer": "urban" },
-      { "label": "مصانع", "value": 9.3, "layer": "industrial" },
-      { "label": "مخازن", "value": 13, "layer": "industrial" },
-      { "label": "عشوائي", "value": 46.3, "layer": "urban" }
+      {
+        "label": "إسكان اجتماعي",
+        "value": 0.1,
+        "layer": "urban"
+      },
+      {
+        "label": "إسكان مخطط اقتصادي",
+        "value": 30.3,
+        "layer": "urban"
+      },
+      {
+        "label": "كمبوند",
+        "value": 47,
+        "layer": "urban"
+      },
+      {
+        "label": "خدمات",
+        "value": 9.6,
+        "layer": "urban"
+      },
+      {
+        "label": "مصانع",
+        "value": 9.3,
+        "layer": "industrial"
+      },
+      {
+        "label": "مخازن",
+        "value": 13,
+        "layer": "industrial"
+      },
+      {
+        "label": "عشوائي",
+        "value": 46.3,
+        "layer": "urban"
+      }
     ],
     "landUse": [
-      { "category": "الأراضي الزراعية", "year": 2014, "area": 141 },
-      { "category": "المناطق الصناعية", "year": 2014, "area": 29 },
-      { "category": "أراضي فضاء", "year": 2014, "area": 1041 },
-      { "category": "الأراضي العمرانية", "year": 2014, "area": 43 },
-      { "category": "الأراضي الزراعية", "year": 2023, "area": 147 },
-      { "category": "المناطق الصناعية", "year": 2023, "area": 29 },
-      { "category": "أراضي فضاء", "year": 2023, "area": 888 },
-      { "category": "الأراضي العمرانية", "year": 2023, "area": 141 },
-      { "category": "خدمات", "year": 2023, "area": 32 }
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2014,
+        "area": 141
+      },
+      {
+        "category": "المناطق الصناعية",
+        "year": 2014,
+        "area": 29
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2014,
+        "area": 1041
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2014,
+        "area": 43
+      },
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2023,
+        "area": 147
+      },
+      {
+        "category": "المناطق الصناعية",
+        "year": 2023,
+        "area": 29
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2023,
+        "area": 888
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2023,
+        "area": 141
+      },
+      {
+        "category": "خدمات",
+        "year": 2023,
+        "area": 32
+      }
     ],
-    "statusShares": { "existing": 48, "underConstruction": 52 }
+    "statusShares": {
+      "existing": 48,
+      "underConstruction": 52
+    }
   },
   "dahshur-south-link": {
     "title": "وصلة دهشور الجنوبية",
     "report": "Final Report 3-2024.pdf",
-    "pages": [123, 124, 125, 126, 127],
-    "metrics": { "studyAreaKm2": 350.5, "axisLengthKm": 35.1, "urbanChangeKm2": 92.6, "industrialChangeKm2": 38.6, "agriculturalAreaFeddan": 8674, "jobOpportunities": 236000, "urbanChangePercent": 32 },
+    "pages": [
+      123,
+      124,
+      125,
+      126,
+      127
+    ],
+    "metrics": {
+      "studyAreaKm2": 350.5,
+      "axisLengthKm": 35.1,
+      "urbanChangeKm2": 92.6,
+      "industrialChangeKm2": 38.6,
+      "agriculturalAreaFeddan": 8674,
+      "jobOpportunities": 236000,
+      "urbanChangePercent": 32
+    },
     "prices": {
-      "urban": { "start": 29580000000, "end": 848730000000 },
-      "agricultural": { "start": 1590000000, "end": 16520000000 },
-      "industrial": { "start": 3680000000, "end": 270490000000 }
+      "urban": {
+        "start": 29580000000,
+        "end": 848730000000
+      },
+      "agricultural": {
+        "start": 1590000000,
+        "end": 16520000000
+      },
+      "industrial": {
+        "start": 3680000000,
+        "end": 270490000000
+      }
     },
     "changeBars": [
-      { "label": "إسكان اجتماعي شباب", "value": 16.3, "layer": "urban" },
-      { "label": "إسكان أهلي", "value": 4.4, "layer": "urban" },
-      { "label": "خدمات", "value": 0.3, "layer": "urban" },
-      { "label": "كمبوند", "value": 8.4, "layer": "urban" }
+      {
+        "label": "إسكان اجتماعي شباب",
+        "value": 16.3,
+        "layer": "urban"
+      },
+      {
+        "label": "إسكان أهلي",
+        "value": 4.4,
+        "layer": "urban"
+      },
+      {
+        "label": "خدمات",
+        "value": 0.3,
+        "layer": "urban"
+      },
+      {
+        "label": "كمبوند",
+        "value": 8.4,
+        "layer": "urban"
+      }
     ],
     "landUse": [
-      { "category": "الأراضي الزراعية", "year": 2014, "area": 25.4 },
-      { "category": "المناطق الصناعية", "year": 2014, "area": 28.7 },
-      { "category": "أراضي فضاء", "year": 2014, "area": 242.1 },
-      { "category": "الأراضي العمرانية", "year": 2014, "area": 63.2 },
-      { "category": "الأراضي الزراعية", "year": 2023, "area": 35.1 },
-      { "category": "المناطق الصناعية", "year": 2023, "area": 38.6 },
-      { "category": "أراضي فضاء", "year": 2023, "area": 191.5 },
-      { "category": "الأراضي العمرانية", "year": 2023, "area": 92.6 }
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2014,
+        "area": 25.4
+      },
+      {
+        "category": "المناطق الصناعية",
+        "year": 2014,
+        "area": 28.7
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2014,
+        "area": 242.1
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2014,
+        "area": 63.2
+      },
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2023,
+        "area": 35.1
+      },
+      {
+        "category": "المناطق الصناعية",
+        "year": 2023,
+        "area": 38.6
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2023,
+        "area": 191.5
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2023,
+        "area": 92.6
+      }
     ],
-    "statusShares": { "existing": 74, "underConstruction": 26 }
+    "statusShares": {
+      "existing": 74,
+      "underConstruction": 26
+    }
   },
   "suez-ring-link": {
     "title": "وصلة طريق السويس من الطريق الدائري",
     "report": "Final Report 3-2024.pdf",
-    "pages": [166, 167, 168, 169, 170],
-    "metrics": { "studyAreaKm2": 154.3, "axisLengthKm": 17.6, "urbanChangeKm2": 87.2, "jobOpportunities": 66000, "urbanChangePercent": 34 },
-    "prices": { "urban": { "start": 337100000000, "end": 1400000000000 } },
+    "pages": [
+      166,
+      167,
+      168,
+      169,
+      170
+    ],
+    "metrics": {
+      "studyAreaKm2": 154.3,
+      "axisLengthKm": 17.6,
+      "urbanChangeKm2": 87.2,
+      "jobOpportunities": 66000,
+      "urbanChangePercent": 34
+    },
+    "prices": {
+      "urban": {
+        "start": 337100000000,
+        "end": 1400000000000
+      },
+      "industrial": {
+        "start": 12438050007,
+        "end": 29851320018
+      },
+      "agricultural": {
+        "start": 1590000000,
+        "end": 16520000000
+      }
+    },
     "changeBars": [
-      { "label": "إسكان أهلي", "value": 0.7, "layer": "urban" },
-      { "label": "خدمات", "value": 0.2, "layer": "urban" },
-      { "label": "كمبوند", "value": 1.3, "layer": "urban" },
-      { "label": "إسكان مخطط", "value": 2.9, "layer": "urban" },
-      { "label": "مصانع", "value": 12.9, "layer": "industrial" }
+      {
+        "label": "إسكان أهلي",
+        "value": 0.7,
+        "layer": "urban"
+      },
+      {
+        "label": "خدمات",
+        "value": 0.2,
+        "layer": "urban"
+      },
+      {
+        "label": "كمبوند",
+        "value": 1.3,
+        "layer": "urban"
+      },
+      {
+        "label": "إسكان مخطط",
+        "value": 2.9,
+        "layer": "urban"
+      },
+      {
+        "label": "مصانع",
+        "value": 12.9,
+        "layer": "industrial"
+      }
     ],
     "landUse": [
-      { "category": "أراضي فضاء", "year": 2014, "area": 126.3 },
-      { "category": "الأراضي العمرانية", "year": 2014, "area": 57.5 },
-      { "category": "أراضي فضاء", "year": 2023, "area": 95.8 },
-      { "category": "الأراضي العمرانية", "year": 2023, "area": 87.2 }
+      {
+        "category": "أراضي فضاء",
+        "year": 2014,
+        "area": 126.3
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2014,
+        "area": 57.5
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2023,
+        "area": 95.8
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2023,
+        "area": 87.2
+      }
     ],
-    "statusShares": { "existing": 53, "underConstruction": 47 }
+    "statusShares": {
+      "existing": 53,
+      "underConstruction": 47
+    }
   },
   "dabaa-axis": {
     "title": "محور الضبعة",
     "report": "Nakl_Dabaa_30Dec2023.pptx",
-    "pages": [4, 5, 6, 9, 10, 13, 14],
+    "pages": [
+      4,
+      5,
+      6,
+      9,
+      10,
+      13,
+      14
+    ],
     "yearEnd": 2023,
     "metrics": {
       "studyAreaKm2": 4452,
@@ -230,9 +1483,18 @@
       "agriculturalChangePercent": 48
     },
     "prices": {
-      "urban": { "start": 18610000000, "end": 281960000000 },
-      "agricultural": { "start": 2780000000, "end": 3990000000 },
-      "industrial": { "start": 1040000000, "end": 4080000000 }
+      "urban": {
+        "start": 18610000000,
+        "end": 281960000000
+      },
+      "agricultural": {
+        "start": 2780000000,
+        "end": 3990000000
+      },
+      "industrial": {
+        "start": 1040000000,
+        "end": 4080000000
+      }
     },
     "priceLabels": {
       "urban": "الأراضي العمرانية",
@@ -240,82 +1502,293 @@
       "industrial": "الأراضي الزراعية - تمليك"
     },
     "landUse": [
-      { "category": "الأراضي الزراعية", "year": 2014, "area": 1044 },
-      { "category": "الأراضي العمرانية", "year": 2014, "area": 264 },
-      { "category": "أراضٍ فضاء", "year": 2014, "area": 3139 },
-      { "category": "الأراضي الزراعية", "year": 2023, "area": 1636 },
-      { "category": "الأراضي العمرانية", "year": 2023, "area": 272 },
-      { "category": "أراضٍ فضاء", "year": 2023, "area": 2530 }
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2014,
+        "area": 1044
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2014,
+        "area": 264
+      },
+      {
+        "category": "أراضٍ فضاء",
+        "year": 2014,
+        "area": 3139
+      },
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2023,
+        "area": 1636
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2023,
+        "area": 272
+      },
+      {
+        "category": "أراضٍ فضاء",
+        "year": 2023,
+        "area": 2530
+      }
     ]
   },
   "qena-luxor-road": {
     "title": "محور قنا",
     "report": "Final Report 3-2024.pdf",
-    "pages": [213, 214, 215, 216, 217],
-    "metrics": { "studyAreaKm2": 279.7, "axisLengthKm": 31, "urbanChangeKm2": 16.1, "agriculturalAreaFeddan": 25252, "agriculturalWorkersThousands": 16, "agriculturalChangeFeddan": 2370, "urbanChangePercent": 4, "agriculturalSharePercent": 100 },
+    "pages": [
+      213,
+      214,
+      215,
+      216,
+      217
+    ],
+    "metrics": {
+      "studyAreaKm2": 279.7,
+      "axisLengthKm": 31,
+      "urbanChangeKm2": 16.1,
+      "agriculturalAreaFeddan": 25252,
+      "agriculturalWorkersThousands": 16,
+      "agriculturalChangeFeddan": 2370,
+      "urbanChangePercent": 4,
+      "agriculturalSharePercent": 100
+    },
     "prices": {
-      "urban": { "start": 3200000000, "end": 12900000000 },
-      "agricultural": { "start": 7100000000, "end": 26700000000 }
+      "urban": {
+        "start": 3200000000,
+        "end": 12900000000
+      },
+      "agricultural": {
+        "start": 7100000000,
+        "end": 26700000000
+      },
+      "industrial": {
+        "start": 1040000000,
+        "end": 4080000000
+      }
     },
     "landUse": [
-      { "category": "الأراضي الزراعية", "year": 2014, "area": 93.7 },
-      { "category": "أراضي فضاء", "year": 2014, "area": 172.7 },
-      { "category": "الأراضي العمرانية", "year": 2014, "area": 15.4 },
-      { "category": "الأراضي الزراعية", "year": 2023, "area": 102.2 },
-      { "category": "أراضي فضاء", "year": 2023, "area": 161.3 },
-      { "category": "الأراضي العمرانية", "year": 2023, "area": 16.1 }
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2014,
+        "area": 93.7
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2014,
+        "area": 172.7
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2014,
+        "area": 15.4
+      },
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2023,
+        "area": 102.2
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2023,
+        "area": 161.3
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2023,
+        "area": 16.1
+      }
     ],
-    "cropShares": [29, 14, 51, 6]
+    "cropShares": [
+      29,
+      14,
+      51,
+      6
+    ]
   },
   "qus-axis": {
     "title": "محور قوص",
     "report": "Final Report 3-2024.pdf",
-    "pages": [266, 267, 268, 269, 270],
-    "metrics": { "studyAreaKm2": 186.2, "axisLengthKm": 19, "urbanChangeKm2": 26, "agriculturalAreaFeddan": 33814, "agriculturalWorkersThousands": 15, "agriculturalChangeFeddan": 2123, "urbanChangePercent": 6 },
+    "pages": [
+      266,
+      267,
+      268,
+      269,
+      270
+    ],
+    "metrics": {
+      "studyAreaKm2": 186.2,
+      "axisLengthKm": 19,
+      "urbanChangeKm2": 26,
+      "agriculturalAreaFeddan": 33814,
+      "agriculturalWorkersThousands": 15,
+      "agriculturalChangeFeddan": 2123,
+      "urbanChangePercent": 6
+    },
     "prices": {
-      "urban": { "start": 16200000000, "end": 74500000000 },
-      "agricultural": { "start": 9700000000, "end": 30400000000 }
+      "urban": {
+        "start": 16200000000,
+        "end": 74500000000
+      },
+      "agricultural": {
+        "start": 9700000000,
+        "end": 30400000000
+      },
+      "industrial": {
+        "start": 1040000000,
+        "end": 4080000000
+      }
     },
     "landUse": [
-      { "category": "الأراضي الزراعية", "year": 2014, "area": 128.8 },
-      { "category": "أراضي فضاء", "year": 2014, "area": 35.9 },
-      { "category": "الأراضي العمرانية", "year": 2014, "area": 25.5 },
-      { "category": "الأراضي الزراعية", "year": 2023, "area": 136.9 },
-      { "category": "أراضي فضاء", "year": 2023, "area": 24.6 },
-      { "category": "الأراضي العمرانية", "year": 2023, "area": 26.1 }
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2014,
+        "area": 128.8
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2014,
+        "area": 35.9
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2014,
+        "area": 25.5
+      },
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2023,
+        "area": 136.9
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2023,
+        "area": 24.6
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2023,
+        "area": 26.1
+      }
     ],
-    "cropShares": [7, 93],
-    "ownershipShares": [8, 92]
+    "cropShares": [
+      7,
+      93
+    ],
+    "ownershipShares": [
+      8,
+      92
+    ]
   },
   "kalabsha-axis": {
     "title": "محور كلابشة",
     "report": "Final Report 3-2024.pdf",
-    "pages": [320, 321, 322, 323, 324],
-    "metrics": { "studyAreaKm2": 460.5, "axisLengthKm": 23, "urbanChangeKm2": 20, "agriculturalAreaFeddan": 24672, "agriculturalWorkersThousands": 39, "urbanChangePercent": 8.1, "industrialChangePercent": 8.1, "agriculturalSharePercent": 22.1 },
+    "pages": [
+      320,
+      321,
+      322,
+      323,
+      324
+    ],
+    "metrics": {
+      "studyAreaKm2": 460.5,
+      "axisLengthKm": 23,
+      "urbanChangeKm2": 20,
+      "agriculturalAreaFeddan": 24672,
+      "agriculturalWorkersThousands": 39,
+      "urbanChangePercent": 8.1,
+      "industrialChangePercent": 8.1,
+      "agriculturalSharePercent": 22.1
+    },
     "prices": {
-      "urban": { "start": 3800000000, "end": 12000000000 },
-      "agricultural": { "start": 3500000000, "end": 15000000000 }
+      "urban": {
+        "start": 3800000000,
+        "end": 12000000000
+      },
+      "agricultural": {
+        "start": 3500000000,
+        "end": 15000000000
+      },
+      "industrial": {
+        "start": 1040000000,
+        "end": 4080000000
+      }
     },
     "landUse": [
-      { "category": "الأراضي الزراعية", "year": 2014, "area": 93.3 },
-      { "category": "أراضي فضاء", "year": 2014, "area": 339.5 },
-      { "category": "الأراضي العمرانية", "year": 2014, "area": 20 },
-      { "category": "الأراضي الزراعية", "year": 2023, "area": 99.9 },
-      { "category": "أراضي فضاء", "year": 2023, "area": 332.9 },
-      { "category": "الأراضي العمرانية", "year": 2023, "area": 20 }
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2014,
+        "area": 93.3
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2014,
+        "area": 339.5
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2014,
+        "area": 20
+      },
+      {
+        "category": "الأراضي الزراعية",
+        "year": 2023,
+        "area": 99.9
+      },
+      {
+        "category": "أراضي فضاء",
+        "year": 2023,
+        "area": 332.9
+      },
+      {
+        "category": "الأراضي العمرانية",
+        "year": 2023,
+        "area": 20
+      }
     ],
-    "cropShares": [67, 11, 22]
+    "cropShares": [
+      67,
+      11,
+      22
+    ]
   },
   "cairo-suez-road": {
     "title": "طريق القاهرة - السويس الصحراوي (السويس الحر)",
     "report": "(8).pdf",
-    "pages": [57, 58, 59, 60, 61],
-    "metrics": { "studyAreaKm2": 1613, "axisLengthKm": 114.5, "urbanChangeKm2": 293.1, "industrialChangeKm2": 25, "jobOpportunities": 14183, "urbanChangePercent": 100 },
-    "prices": {
-      "urban": { "start": 1803467903867, "end": 6496140699847 },
-      "industrial": { "start": 12438050007, "end": 29851320018 }
+    "pages": [
+      57,
+      58,
+      59,
+      60,
+      61
+    ],
+    "metrics": {
+      "studyAreaKm2": 1613,
+      "axisLengthKm": 114.5,
+      "urbanChangeKm2": 293.1,
+      "industrialChangeKm2": 25,
+      "jobOpportunities": 14183,
+      "urbanChangePercent": 100
     },
-    "statusShares": { "existing": 30, "underConstruction": 70 }
+    "prices": {
+      "urban": {
+        "start": 1803467903867,
+        "end": 6496140699847
+      },
+      "industrial": {
+        "start": 12438050007,
+        "end": 29851320018
+      },
+      "agricultural": {
+        "start": 1590000000,
+        "end": 16520000000
+      }
+    },
+    "statusShares": {
+      "existing": 30,
+      "underConstruction": 70
+    }
   },
   "ismailia": {
     "title": "محور القاهرة–الإسماعيلية",
@@ -325,24 +1798,53 @@
     "metrics": {
       "studyAreaKm2": 2583.8,
       "axisLengthKm": 135.1981,
-      "urbanChangeKm2": 61.3,
-      "agriculturalChangeKm2": 258.1476,
-      "industrialChangeKm2": 19.0231,
+      "urbanTotalKm2": 248.22,
+      "urbanAreaKm2": 248.22,
+      "urbanChangeKm2": 61.63,
+      "agriculturalTotalKm2": 941.84,
+      "agriculturalAreaKm2": 941.84,
+      "agriculturalAreaFeddan": 224243.35,
+      "agriculturalChangeKm2": 241.53,
+      "agriculturalChangeFeddan": 57506.22,
+      "industrialTotalKm2": 78.36,
+      "industrialAreaKm2": 78.36,
+      "industrialChangeKm2": 18.87,
+      "servicesTotalKm2": 77.42,
+      "servicesChangeKm2": 12.55,
       "urbanFeatures": 8049,
       "agriculturalFeatures": 1365,
       "industrialFeatures": 262,
-      "urbanChangePercent": 14.6,
-      "agriculturalChangePercent": 10,
-      "industrialChangePercent": 0.7
+      "urbanChangePercent": 33.03,
+      "agriculturalChangePercent": 34.49,
+      "industrialChangePercent": 31.7
     },
     "prices": {
-      "urban": { "start": 316606478701.80603, "end": 5683827610371.09 },
-      "agricultural": { "start": 94777205283.4583, "end": 456644273464.868 },
-      "industrial": { "start": 35600984498.3984, "end": 760199655768.47 }
+      "urban": {
+        "start": 316606478701.806,
+        "end": 5683827610371.09
+      },
+      "agricultural": {
+        "start": 94777205283.4583,
+        "end": 456644273464.868
+      },
+      "industrial": {
+        "start": 35600984498.3984,
+        "end": 760199655768.47
+      }
     },
-    "statusShares": { "existing": 85.4, "underConstruction": 14.6 },
-    "cropShares": [41.7, 40.5, 17.8],
-    "ownershipShares": [75.8, 24.2],
+    "statusShares": {
+      "existing": 85.4,
+      "underConstruction": 14.6
+    },
+    "cropShares": [
+      41.7,
+      40.5,
+      17.8
+    ],
+    "ownershipShares": [
+      75.8,
+      24.2
+    ],
     "landUse": []
   }
 }

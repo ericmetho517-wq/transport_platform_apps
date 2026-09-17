@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-16T07:46:38.436Z",
+  "generatedAt": "2026-09-17T10:26:18.376Z",
   "applications": 61,
   "totals": {
-    "features": 77095,
-    "sourceFeatures": 211460,
-    "renderableFeatures": 77090,
-    "coordinatePairs": 2861069
+    "features": 77100,
+    "sourceFeatures": 212215,
+    "renderableFeatures": 77095,
+    "coordinatePairs": 2891731
   },
   "applicationCoverage": {
     "western-upper-egypt": {
@@ -29,13 +29,13 @@
     "kalabsha-axis": {
       "applications": 6,
       "activeFeatures": 799,
-      "activeLayers": 7,
+      "activeLayers": 11,
       "verifiedLocalData": true
     },
     "qena-luxor-road": {
       "applications": 6,
-      "activeFeatures": 760,
-      "activeLayers": 2,
+      "activeFeatures": 765,
+      "activeLayers": 8,
       "verifiedLocalData": true
     },
     "suez-ring-link": {
@@ -123,7 +123,7 @@
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\السويس\\السويس\\New File Geodatabase.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\السويس\\السويس\\New File Geodatabase.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
         "features": 525,
@@ -185,7 +185,7 @@
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
         "features": 886,
@@ -268,7 +268,7 @@
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb",
       "undeclaredLayerFiles": [
         "study.geojson"
       ],
@@ -465,7 +465,7 @@
         }
       },
       "verifiedLocalData": true,
-      "source": "C:/Work_Websites/الاسماعيليىة ابلكيشن/التصنيفات/التصنيفات/public/data",
+      "source": "C:\\\\Geoinformatics for Information Systems\\\\وزارة النقل\\\\Data\\\\الاسماعيلية\\\\Ismallia-22-7-2026\\\\Ismallia.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
         "features": 63962,
@@ -524,10 +524,38 @@
           "renderableFeatures": 1,
           "coordinatePairs": 12,
           "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
+        },
+        "buildings": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
+        },
+        "landmarks": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
+        },
+        "parcels": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
         "features": 799,
@@ -551,16 +579,58 @@
           "renderableFeatures": 5,
           "coordinatePairs": 30662,
           "invalidCoordinates": 0
+        },
+        "landcover-end": {
+          "features": 5,
+          "representedSourceFeatures": 755,
+          "renderableFeatures": 5,
+          "coordinatePairs": 30662,
+          "invalidCoordinates": 0
+        },
+        "study": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
+        },
+        "governorates": {
+          "features": 0,
+          "representedSourceFeatures": 0,
+          "renderableFeatures": 0,
+          "coordinatePairs": 0,
+          "invalidCoordinates": 0
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\قنا\\Database13022024.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\قنا\\Database13022024.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 760,
-        "sourceFeatures": 1510,
-        "coordinatePairs": 46790,
-        "renderableFeatures": 758
+        "features": 765,
+        "sourceFeatures": 2265,
+        "coordinatePairs": 77452,
+        "renderableFeatures": 763
       }
     },
     "qus-axis": {
@@ -623,7 +693,7 @@
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
         "features": 2458,
@@ -713,7 +783,7 @@
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\الاقليمي\\DataBase_Schema.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\الاقليمي\\DataBase_Schema.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
         "features": 1845,
@@ -775,7 +845,7 @@
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\السويس\\السويس\\New File Geodatabase.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\السويس\\السويس\\New File Geodatabase.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
         "features": 385,
@@ -844,7 +914,7 @@
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
         "features": 3903,

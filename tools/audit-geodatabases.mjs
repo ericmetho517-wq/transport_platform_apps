@@ -4,7 +4,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const repo = fileURLToPath(new URL("..", import.meta.url));
-const ministryRoot = "C:\\Geoinformatics for Information Systems\\وزارة النقل";
+const ministryRoot = "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data";
 const ogrinfo = "C:\\Program Files\\QGIS 4.0.3\\bin\\ogrinfo.exe";
 if (!existsSync(ogrinfo)) throw new Error(`QGIS ogrinfo was not found: ${ogrinfo}`);
 

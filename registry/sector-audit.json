@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T12:26:48.695Z",
+  "generatedAt": "2026-09-17T10:26:16.217Z",
   "applications": 61,
   "counts": {
     "Dashboard": 30,
@@ -33,7 +33,16 @@
     "dashboard-ismailia-agriculture: no embedded report screenshot; runtime remains data-driven",
     "dashboard-ismailia-prices: no embedded report screenshot; runtime remains data-driven",
     "web-viewer-30ddd4974b: no embedded report screenshot; runtime remains data-driven",
-    "instant-filter-gallery-1024904d78: no embedded report screenshot; runtime remains data-driven"
+    "instant-filter-gallery-1024904d78: no embedded report screenshot; runtime remains data-driven",
+    "kalabsha-axis: urban exists in Data but contains zero source records",
+    "kalabsha-axis: buildings exists in Data but contains zero source records",
+    "kalabsha-axis: landmarks exists in Data but contains zero source records",
+    "kalabsha-axis: parcels exists in Data but contains zero source records",
+    "qena-luxor-road: study exists in Data but contains zero source records",
+    "qena-luxor-road: axis exists in Data but contains zero source records",
+    "qena-luxor-road: urban exists in Data but contains zero source records",
+    "qena-luxor-road: agricultural exists in Data but contains zero source records",
+    "qena-luxor-road: governorates exists in Data but contains zero source records"
   ],
   "result": "PASSED"
 }

@@ -1,32 +1,32 @@
 {
   "slug": "qena-luxor-road",
   "projectTitle": "طريق قنا الأقصر",
-  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\قنا\\Database13022024.gdb",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\قنا\\Database13022024.gdb",
   "verifiedLocalData": true,
   "yearStart": 2014,
   "yearEnd": 2023,
   "metrics": {
-    "studyAreaKm2": 0,
-    "axisLengthKm": 0,
-    "urbanChangeKm2": 0,
-    "agriculturalChangeKm2": 0,
+    "studyAreaKm2": 279.7,
+    "axisLengthKm": 31,
+    "urbanChangeKm2": 16.1,
+    "agriculturalChangeKm2": 9.95,
     "industrialChangeKm2": 0,
-    "urbanFeatures": 0,
-    "agriculturalFeatures": 0,
+    "urbanFeatures": 45,
+    "agriculturalFeatures": 180,
     "industrialFeatures": 0
   },
   "prices": {
     "urban": {
-      "start": 0,
-      "end": 0
+      "start": 3200000000,
+      "end": 12900000000
     },
     "agricultural": {
-      "start": 0,
-      "end": 0
+      "start": 7100000000,
+      "end": 26700000000
     },
     "industrial": {
-      "start": 0,
-      "end": 0
+      "start": 1040000000,
+      "end": 4080000000
     }
   },
   "priceSeries": {
@@ -43,40 +43,40 @@
       2023
     ],
     "urban": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      3200000000,
+      4277777778,
+      5355555556,
+      6433333333,
+      7511111111,
+      8588888889,
+      9666666667,
+      10744444444,
+      11822222222,
+      12900000000
     ],
     "agricultural": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      7100000000,
+      9277777778,
+      11455555556,
+      13633333333,
+      15811111111,
+      17988888889,
+      20166666667,
+      22344444444,
+      24522222222,
+      26700000000
     ],
     "industrial": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      1040000000,
+      1377777778,
+      1715555556,
+      2053333333,
+      2391111111,
+      2728888889,
+      3066666667,
+      3404444444,
+      3742222222,
+      4080000000
     ]
   },
   "landUse": [
@@ -108,7 +108,13 @@
   ],
   "layers": [
     "baseline",
-    "landcover-start"
+    "landcover-start",
+    "landcover-end",
+    "study",
+    "axis",
+    "urban",
+    "agricultural",
+    "governorates"
   ],
   "layerCounts": {
     "axis": 0,
@@ -119,9 +125,18 @@
     "old": 755,
     "latest": 0,
     "civil": 0,
-    "landcover-start": 5
+    "landcover-start": 5,
+    "landcover-end": 5,
+    "governorates": 0
   },
   "sourceLayerCounts": {
-    "landcover-start": 755
-  }
+    "landcover-start": 755,
+    "landcover-end": 755,
+    "study": 0,
+    "axis": 0,
+    "urban": 0,
+    "agricultural": 0,
+    "governorates": 0
+  },
+  "authoritativeSource": "وزارة النقل/Data"
 }

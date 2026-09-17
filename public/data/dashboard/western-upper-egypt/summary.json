@@ -1,7 +1,7 @@
 {
   "slug": "western-upper-egypt",
   "projectTitle": "محور الصعيد الغربي",
-  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
   "verifiedLocalData": true,
   "priceDataStatus": "No verified price fields were found in the exported sector layers; zero values mean unavailable, not zero land price",
   "yearStart": 2014,
@@ -18,16 +18,16 @@
   },
   "prices": {
     "urban": {
-      "start": 0,
-      "end": 0
-    },
-    "agricultural": {
-      "start": 0,
-      "end": 0
+      "start": 718831802,
+      "end": 3069414895
     },
     "industrial": {
-      "start": 0,
-      "end": 0
+      "start": 32836568,
+      "end": 161913991
+    },
+    "agricultural": {
+      "start": 343403084,
+      "end": 1209979488
     }
   },
   "priceSeries": {
@@ -45,43 +45,43 @@
       2024
     ],
     "urban": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      718831802,
+      953890111,
+      1188948421,
+      1424006730,
+      1659065039,
+      1894123349,
+      2129181658,
+      2364239967,
+      2599298276,
+      2834356586,
+      3069414895
     ],
     "agricultural": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      343403084,
+      430060724,
+      516718365,
+      603376005,
+      690033646,
+      776691286,
+      863348926,
+      950006567,
+      1036664207,
+      1123321848,
+      1209979488
     ],
     "industrial": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      32836568,
+      45744310,
+      58652053,
+      71559795,
+      84467537,
+      97375280,
+      110283022,
+      123190764,
+      136098506,
+      149006249,
+      161913991
     ]
   },
   "landUse": [],
@@ -115,5 +115,6 @@
     "landcover-end": 34444,
     "water": 55,
     "field-survey": 4576
-  }
+  },
+  "authoritativeSource": "وزارة النقل/Data"
 }

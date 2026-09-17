@@ -75,30 +75,23 @@ document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
 root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ? "ltr" : "rtl"}">
   <header class="platform-header">
-    <a class="brand" href="#top" aria-label="${platformLanguage === "en" ? "Back to platform home" : "العودة إلى بداية المنصة"}"><span class="brand-logos"><img src="/Picture1.jpg" alt="${platformLanguage === "en" ? "Ministry of Transport logo" : "شعار وزارة النقل"}"/><img src="/images.jpg" alt="${platformLanguage === "en" ? "Geographic Information Systems logo" : "شعار نظم المعلومات الجغرافية"}"/></span><span><b>${platformLanguage === "en" ? "Platform Applications Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</b><small>${t("المنصة الرقمية لوزارة النقل", "Ministry of Transport Digital Platform")}</small></span></a>
+    <a class="brand" href="#top" aria-label="${platformLanguage === "en" ? "Back to platform home" : "العودة إلى بداية المنصة"}"><span class="brand-logos"><img src="/Picture1.jpg" alt="${platformLanguage === "en" ? "Ministry of Transport logo" : "شعار وزارة النقل"}"/></span><span><b>${platformLanguage === "en" ? "Platform Applications Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</b><small>${t("المنصة الرقمية لوزارة النقل", "Ministry of Transport Digital Platform")}</small></span></a>
     <nav><a href="#applications">${platformLanguage === "en" ? "Applications" : "التطبيقات"}</a></nav>
     <a class="header-cta" href="#applications">${platformLanguage === "en" ? "Explore the Platform" : "استكشف المنصة"} <span>${platformLanguage === "en" ? "→" : "←"}</span></a>
   </header>
   <main id="top">
     <section class="platform-hero">
       <div class="hero-copy"><span class="eyebrow"><i></i> ${platformLanguage === "en" ? "Ministry of Transport Digital Platform" : "المنصة الرقمية لوزارة النقل"}</span><p>${platformLanguage === "en" ? "Dashboards, maps, and geospatial applications for transport projects." : "لوحات مؤشرات وخرائط وتطبيقات مكانية لمشروعات النقل."}</p><div class="hero-actions"><a class="primary" href="#applications">${platformLanguage === "en" ? "View Applications" : "عرض التطبيقات"} <span>${platformLanguage === "en" ? "→" : "←"}</span></a></div></div>
-      <div class="network-art" aria-hidden="true"><div class="map-grid"></div><span class="route route-one"></span><span class="route route-two"></span><span class="identity-seal"><small>${platformLanguage === "en" ? "Arab Republic of Egypt" : "جمهورية مصر العربية"}</small><b>${platformLanguage === "en" ? "Ministry of Transport" : "وزارة النقل"}</b><em>${platformLanguage === "en" ? "Geospatial Applications Portal" : "بوابة التطبيقات المكانية"}</em></span><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="network-art" aria-hidden="true"><div class="map-grid"></div><span class="route route-one"></span><span class="route route-two"></span><span class="identity-seal identity-logo"><img src="/images.jpg" alt="${platformLanguage === "en" ? "Geographic Information Systems logo" : "شعار نظم المعلومات الجغرافية"}"/></span><i></i><i></i><i></i><i></i><i></i></div>
       <a class="scroll-cue" href="#applications" aria-label="${platformLanguage === "en" ? "Go to applications" : "انتقل إلى التطبيقات"}"><span></span>${platformLanguage === "en" ? "Scroll to explore" : "مرّر للاستكشاف"}</a>
     </section>
     <section id="applications" class="catalog">
       <div class="section-title"><div><span class="section-kicker">${t("دليل التطبيقات", "Application Directory")}</span><h2>${t("التطبيقات", "Applications")}</h2><p>${t("ابحث واختر التطبيق.", "Search and select an application.")}</p></div><div class="catalog-controls">
         <label class="search-control"><span>${platformLanguage === "en" ? "Search" : "بحث"}</span><input id="app-search" placeholder="${platformLanguage === "en" ? "Search by title or sector" : "ابحث بالعنوان أو القطاع"}"/></label>
         <label><span>${t("نوع التطبيق", "Application Type")}</span><select id="type-filter"><option value="all">${t("جميع أنواع التطبيقات", "All Application Types")}</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${displayTypeLabels[type] || type}</option>`).join("")}</select></label>
-        <label><span>${platformLanguage === "en" ? "Language" : "اللغة"}</span><select id="language-filter"><option value="${platformLanguage}">${platformLanguage === "en" ? "English" : "العربية"}</option></select></label>
         <label><span>${t("المحور", "Axis")}</span><select id="axis-filter"><option value="all">${t("كل المحاور", "All axes")}</option>${axisOptions.map(([value, label]) => `<option value="${value}">${platformLanguage === "en" ? englishAxisLabels[value] : label}</option>`).join("")}</select></label>
+        <label><span>${t("لغة الواجهة", "Interface language")}</span><select id="language-filter" value="${platformLanguage}"><option value="ar"${platformLanguage === "ar" ? " selected" : ""}>العربية</option><option value="en"${platformLanguage === "en" ? " selected" : ""}>English</option></select></label>
       </div></div>
-      <div class="catalog-stats" aria-label="${platformLanguage === "en" ? "Application counts" : "إحصائيات التطبيقات"}">
-        <article><strong>${totalApplications}</strong><span>${platformLanguage === "en" ? "Total applications" : "إجمالي التطبيقات"}</span></article>
-        <article><strong>${countOf("Dashboard")}</strong><span>${platformLanguage === "en" ? "Indicator dashboards" : "لوحات المؤشرات"}</span></article>
-        <article><strong>${countOf("StoryMap")}</strong><span>${platformLanguage === "en" ? "Geographic stories" : "القصص الجغرافية"}</span></article>
-        <article><strong>${countOf("Web AppViewer")}</strong><span>${platformLanguage === "en" ? "Web App Builder" : "تطبيقات Web App Builder"}</span></article>
-        <article><strong>${countOf("Instant Filter Gallery")}</strong><span>${platformLanguage === "en" ? "Application Hubs" : "منصات التطبيقات Application Hub"}</span></article>
-      </div>
       <div class="catalog-toolbar"><div class="quick-filters" aria-label="${t("تصفية سريعة", "Quick filters")}"><button class="active" data-quick-type="all">${t("جميع التطبيقات", "All Applications")}</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${displayTypeLabels[type] || type}</button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">${t("إعادة ضبط الفلاتر", "Reset filters")}</button></div>
       <div class="results-row"><p id="filter-summary" class="filter-summary" aria-live="polite"></p><span>${t("اختر تطبيقًا لعرض تفاصيله وتشغيله", "Choose an application to view its details and open it")}</span></div>
       <div id="app-grid" class="app-grid"></div>
@@ -130,7 +123,7 @@ if (languageHeader) {
 const grid = document.querySelector<HTMLDivElement>("#app-grid")!;
 const search = document.querySelector<HTMLInputElement>("#app-search")!;
 const typeFilter = document.querySelector<HTMLSelectElement>("#type-filter")!;
-const languageFilter = document.querySelector<HTMLSelectElement>("#language-filter")!;
+const languageFilter = document.querySelector<HTMLSelectElement>("#language-filter") || document.createElement("select");
 const axisFilter = document.querySelector<HTMLSelectElement>("#axis-filter")!;
 const summary = document.querySelector<HTMLParagraphElement>("#filter-summary")!;
 const clearFilters = document.querySelector<HTMLButtonElement>("#clear-filters")!;
@@ -174,7 +167,6 @@ if ("IntersectionObserver" in window) {
 const render = () => {
   const query = search.value.trim().toLocaleLowerCase();
   const type = typeFilter.value;
-  const language = languageFilter.value;
   const axis = axisFilter.value;
   const visible = modeRegistry.filter((app) =>
     (type === "all" || app.type === type)
@@ -183,20 +175,25 @@ const render = () => {
   summary.textContent = platformLanguage === "en"
     ? (visible.length ? "Applications matching your search and filter selections" : "No matching applications")
     : (visible.length ? "التطبيقات المطابقة لاختيارات البحث والتصفية" : "لا توجد تطبيقات مطابقة");
-  clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || language !== platformLanguage || axis !== "all"));
+  clearFilters.classList.toggle("visible", Boolean(query || type !== "all" || axis !== "all"));
   quickFilters.forEach((button) => button.classList.toggle("active", button.dataset.quickType === type));
   const groups = axisOptions.map(([value, label]) => [value, label, visible.filter((app) => axisOf(app) === value)] as const).filter(([, , items]) => items.length);
   const uncategorized = visible.filter((app) => !axisOptions.some(([value]) => axisOf(app) === value));
   if (uncategorized.length) groups.push(["other", t("تطبيقات مشتركة", "Shared applications"), uncategorized]);
   let cardIndex = 0;
-  grid.innerHTML = groups.map(([value, label, items]) => { const groupLabel = platformLanguage === "en" ? (englishAxisLabels[value] || label) : label; return `<section class="sector-group" aria-label="${groupLabel}"><div class="sector-group-heading"><div><span>${t("قطاع", "Sector")}</span><h3>${groupLabel}</h3></div><b>${items.length} ${platformLanguage === "en" ? (items.length === 1 ? "Application" : "Applications") : "تطبيق"}</b></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : "rtl"}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${displayTitle(app)}</h3><p>${platformLanguage === "en" ? groupLabel : localizedAppCategory(app, "ar")}</p><span class="card-language">${platformLanguage === "en" ? "EN" : "ع"}</span><span class="open">${t("فتح التطبيق", "Open application")} <b>${platformLanguage === "en" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${t("لا توجد نتائج مطابقة", "No matching applications")}</b><span>${t("جرّب تغيير خيارات البحث والتصفية.", "Try changing the filters.")}</span><button type="button" data-reset-empty>${t("عرض جميع التطبيقات", "View all applications")}</button></div>`;
+  grid.innerHTML = groups.map(([value, label, items]) => { const groupLabel = platformLanguage === "en" ? (englishAxisLabels[value] || label) : label; return `<section class="sector-group" aria-label="${groupLabel}"><div class="sector-group-heading"><div><span>${t("قطاع", "Sector")}</span><h3>${groupLabel}</h3></div></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : "rtl"}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${displayTitle(app)}</h3><p>${platformLanguage === "en" ? groupLabel : localizedAppCategory(app, "ar")}</p><span class="card-language">${platformLanguage === "en" ? "EN" : "ع"}</span><span class="open">${t("فتح التطبيق", "Open application")} <b>${platformLanguage === "en" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${t("لا توجد نتائج مطابقة", "No matching applications")}</b><span>${t("جرّب تغيير خيارات البحث والتصفية.", "Try changing the filters.")}</span><button type="button" data-reset-empty>${t("عرض جميع التطبيقات", "View all applications")}</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
   syncFiltersToUrl();
 };
 
 search.addEventListener("input", render);
 typeFilter.addEventListener("change", render);
-languageFilter.addEventListener("change", render);
+languageFilter.addEventListener("change", () => {
+  const next = languageFilter.value === "en" ? "en" : "ar";
+  const params = new URLSearchParams(window.location.search);
+  params.set("uiLang", next);
+  window.location.search = params.toString();
+});
 axisFilter.addEventListener("change", render);
 quickFilters.forEach((button) => button.addEventListener("click", () => {
   typeFilter.value = button.dataset.quickType || "all";

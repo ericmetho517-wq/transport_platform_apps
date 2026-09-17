@@ -1,6 +1,10 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["العمالة الزراعية (ألف عامل)", "Agricultural workforce (thousands)"],
+  ["العمالة الصناعية (ألف عامل)", "Industrial workforce (thousands)"],
+  ["نسب أنواع المحاصيل الزراعية", "Crop type shares"],
+  ["المؤشرات المعروضة هنا مقتصرة على القيم والطبقات الموثقة لهذا المحور؛ المؤشر غير الموثق لا يُعرض كصفر.", "Only documented values and layers for this corridor are shown; undocumented indicators are not displayed as zero."],
   ["أراضي فضاء", "Vacant land"],
   ["لم يتغير", "Unchanged"],
   ["حالة التغير", "Change status"],
@@ -390,6 +394,8 @@ const englishWords: Array<[string, string]> = [
   ["ابحث بالعنوان أو القطاع", "Search by title or sector"],
   ["نوع التطبيق", "Application Type"], ["جميع أنواع التطبيقات", "All Application Types"],
   ["تصفية سريعة", "Quick filters"], ["إعادة ضبط الفلاتر", "Reset filters"],
+  ["إعادة ضبط التصنيفات", "Reset categories"],
+  ["فرص العمل لمشروعات المباني المستحدثة", "Job opportunities for newly developed building projects"],
   ["اختر تطبيقًا لعرض تفاصيله وتشغيله", "Choose an application to view its details and open it"],
   ["لا توجد نتائج مطابقة", "No matching applications"], ["عرض جميع التطبيقات", "View all applications"],
   ["قطاع / Sector", "Sector"], ["تطبيقات مشتركة / Shared applications", "Shared applications"],

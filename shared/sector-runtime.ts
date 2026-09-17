@@ -39,20 +39,57 @@ interface StoryMediaReference {
   height?: number;
 }
 
+type StoryComparisonPair = { before: string; after: string };
+
+// These are the only supplemental pairs that were visually checked as two
+// dates of the same extent.  Story-report pages also contain logos, location
+// maps and overview graphics, so they must never be paired by position.
+const reviewedStoryComparisonPairs: Record<string, StoryComparisonPair[]> = {
+  "regional-ring-road": [
+    {
+      before: "../../references/story-media/011ca5132c948a505db4.jpg",
+      after: "../../references/story-media/de49d0d7bb7766536b7a.jpg",
+    },
+  ],
+};
+
+// The Luxor document's extracted adjacent images are different map extents
+// (and include a title graphic).  Leave that sector without a swipe rather
+// than showing a misleading before/after comparison.
+const excludedDocumentedSwipeChapters = new Set(["western-upper-egypt/luxor"]);
+
+const uniquePairs = (pairs: StoryComparisonPair[]): StoryComparisonPair[] => {
+  const seen = new Set<string>();
+  return pairs.filter(({ before, after }) => {
+    const key = `${before}::${after}`;
+    if (!before || !after || before === after || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+};
+
 const reportStoryMedia = (group: string, key = "project"): StoryMediaReference[] => {
   const groups = storyMediaManifest.groups as unknown as Record<string, Record<string, StoryMediaReference[]>>;
   return groups[group]?.[key] || [];
 };
 
-function storyComparisonPairs(media: StoryMediaReference[], group: string, chapter = "project"): Array<{ before: string; after: string }> {
-  const documented = (documentationSwipes.groups as Record<string, Array<{ before: string; after: string }>>)[group === "western-upper-egypt" ? `${group}/${chapter}` : group];
-  if (documented?.length) {
-    const pairs = documented.map(({ before, after }) => ({ before, after }));
+function storyComparisonPairs(media: StoryMediaReference[], group: string, chapter = "project"): StoryComparisonPair[] {
+  const documentationKey = group === "western-upper-egypt" ? `${group}/${chapter}` : group;
+  const documented = excludedDocumentedSwipeChapters.has(documentationKey)
+    ? []
+    : (documentationSwipes.groups as Record<string, StoryComparisonPair[]>)[documentationKey] || [];
+  const supplemental = reviewedStoryComparisonPairs[group] || [];
+  if (documented.length || supplemental.length) {
+    const pairs = uniquePairs([...documented, ...supplemental]);
     if (group === "dabaa-axis") pairs.push({ before: "../../references/dabaa/landuse-2014.png", after: "../../references/dabaa/landuse-2023.png" });
-    return pairs;
+    return uniquePairs(pairs);
   }
+  // Western Upper Egypt is report-led: only explicitly paired, verified
+  // satellite frames may be shown.  In particular, do not fall back to
+  // consecutive report illustrations for a sector with no verified pair.
+  if (group === "western-upper-egypt") return [];
   const comparisons = media.filter((reference) => reference.kind === "comparison");
-  const pairs: Array<{ before: string; after: string }> = [];
+  const pairs: StoryComparisonPair[] = [];
   const byPage = new Map<number, StoryMediaReference[]>();
   comparisons.forEach((reference) => byPage.set(reference.page, [...(byPage.get(reference.page) || []), reference]));
   const reviewedPagePairs: Record<string, Array<[number, number]>> = {
@@ -95,7 +132,7 @@ function storyComparisonPairs(media: StoryMediaReference[], group: string, chapt
 
 const storyComparisonYears = (group: string): { start: string; end: string } => ({
   ismailia: { start: "2014", end: "2026" },
-  "western-upper-egypt": { start: "2014", end: "2024" },
+  "western-upper-egypt": { start: "2014", end: "2023" },
   "cairo-suez-road": { start: "2014", end: "2024" },
   "regional-ring-road": { start: "2014", end: "2023" },
   "dahshur-south-link": { start: "2014", end: "2023" },
@@ -131,14 +168,12 @@ function storyEntries(app: TransportApp): StoryEntry[] {
   if (dashboardGroup(app) !== "western-upper-egypt") {
     const extracted = reportStoryMedia(dashboardGroup(app));
     const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "comparison");
-    const comparisons = extracted.filter((reference) => reference.kind === "comparison");
     const comparisonPairs = storyComparisonPairs(extracted, dashboardGroup(app));
     const fallbackHero = references.find((reference) => reference.referenceKind === "story-hero") || references[0];
-    const fallbackComparison = references.find((reference) => reference.referenceKind === "story-comparison") || references[1];
-    const compareBefore = comparisonPairs[0]?.before || comparisons[0]?.imagePath || fallbackComparison?.imagePath || "";
+    const compareBefore = comparisonPairs[0]?.before || "";
     const fullTitle = app.language === "en" ? (app.alternateTitles?.[0] || app.title) : app.title;
     const conciseTitle = fullTitle.replace(/^(القصة المكانية التفاعلية|Spatial StoryMap)\s*[–—-]\s*/i, "");
-    return [{ key: "project", label: conciseTitle, sector: "all", report: fallbackHero?.reportName || hero?.reportName || "", hero: hero?.imagePath || fallbackHero?.imagePath || "", compareBefore, compareAfter: comparisonPairs[0]?.after || comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs }];
+    return [{ key: "project", label: conciseTitle, sector: "all", report: fallbackHero?.reportName || hero?.reportName || "", hero: hero?.imagePath || fallbackHero?.imagePath || "", compareBefore, compareAfter: comparisonPairs[0]?.after || "", comparisons: comparisonPairs }];
   }
   const overviewMedia = reportStoryMedia("western-upper-egypt", "corridor-overview");
   const corridorHero = overviewMedia.find((reference) => reference.kind === "axis-photo")?.imagePath || "";
@@ -146,10 +181,9 @@ function storyEntries(app: TransportApp): StoryEntry[] {
     const extracted = reportStoryMedia("western-upper-egypt", item.key);
     const matching = item.report ? references.filter((reference) => reference.reportName === item.report) : [];
     const hero = extracted.find((reference) => reference.kind === "axis-photo") || extracted.find((reference) => reference.kind === "comparison");
-    const comparisons = extracted.filter((reference) => reference.kind === "comparison");
     const comparisonPairs = storyComparisonPairs(extracted, "western-upper-egypt", item.key);
-    const compareBefore = comparisonPairs[0]?.before || comparisons[0]?.imagePath || matching[1]?.imagePath || "";
-    return { ...item, hero: hero?.imagePath || matching[0]?.imagePath || corridorHero, compareBefore, compareAfter: comparisonPairs[0]?.after || comparisons[1]?.imagePath || compareBefore, comparisons: comparisonPairs };
+    const compareBefore = comparisonPairs[0]?.before || "";
+    return { ...item, hero: hero?.imagePath || matching[0]?.imagePath || corridorHero, compareBefore, compareAfter: comparisonPairs[0]?.after || "", comparisons: comparisonPairs };
   });
 }
 

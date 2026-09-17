@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const repo = fileURLToPath(new URL("..", import.meta.url));
-const ministryRoot = "C:\\Geoinformatics for Information Systems\\وزارة النقل";
+const ministryRoot = "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data";
 const ogr2ogr = "C:\\Program Files\\QGIS 4.0.3\\bin\\ogr2ogr.exe";
 const tempRoot = join(tmpdir(), "transport-landcover-export");
 const outputRoot = join(repo, "public", "data", "dashboard");
@@ -19,7 +19,7 @@ const sources = {
   "dahshur-south-link": { gdb: "دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
   "regional-ring-road": { gdb: "الاقليمي\\DataBase_Schema.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
   "kalabsha-axis": { gdb: "كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb", start: "Land_Cover2014", end: "Land_Cover2023", statusCodes: { "1": "changed", "2": "unchanged" } },
-  "qena-luxor-road": { gdb: "قنا\\Database13022024.gdb", start: "Land_Cover2014" },
+  "qena-luxor-road": { gdb: "قنا\\Database13022024.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
   "qus-axis": { gdb: "قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb", start: "Land_Cover2014", end: "Land_Cover2023", statusCodes: { "0": "changed", "1": "unchanged" } },
   "dabaa-axis": { gdb: "الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb", start: "Land_Use2014", end: "Land_Use2023" },
 };
@@ -39,7 +39,13 @@ const thematicSources = {
     transport: ["Eklimy_Road", "Robeky_Road", "LRT_Road"], buildings: ["Building"], landmarks: ["Landmarks"], parcels: ["Parcel"], water: ["Water_Containment"],
   },
   "kalabsha-axis": {
-    gdb: "كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb", governorates: ["Governorates"], water: ["Water_Containment"],
+    gdb: "كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
+    study: ["Study_Area"], axis: ["Axis_Road"], urban: ["Urban_Changes"], agricultural: ["Agricultural_Changes"],
+    governorates: ["Governorates"], buildings: ["Building"], landmarks: ["Landmarks"], parcels: ["Parcel"], water: ["Water_Containment"],
+  },
+  "qena-luxor-road": {
+    gdb: "قنا\\Database13022024.gdb",
+    study: ["Study_Area"], axis: ["Axis_Road"], urban: ["Urban_Changes"], agricultural: ["Agricultural_Changes"], governorates: ["Governorates"],
   },
   "qus-axis": {
     gdb: "قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb", buildings: ["Building"], water: ["Water_Containment"],
@@ -199,7 +205,16 @@ function writePreparedLayer(group, layerName, collection, sourceCount) {
   console.log(`${group}/${layerName}: ${sourceCount} source features -> ${collection.features.length} browser features`);
 }
 
+function stampAuthoritativeSource(group, gdbRelative) {
+  const summaryPath = join(outputRoot, group, "summary.json");
+  const summary = JSON.parse(readFileSync(summaryPath, "utf8"));
+  summary.source = join(ministryRoot, gdbRelative);
+  summary.authoritativeSource = "وزارة النقل/Data";
+  writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + "\n", "utf8");
+}
+
 for (const [group, source] of Object.entries(sources)) {
+  stampAuthoritativeSource(group, source.gdb);
   for (const [period, layer] of [["start", source.start], ["end", source.end]]) {
     if (!layer) continue;
     const raw = exportRaw(source.gdb, layer, group);
@@ -208,6 +223,7 @@ for (const [group, source] of Object.entries(sources)) {
 }
 
 const suezGroups = ["cairo-suez-road", "suez-ring-link"];
+for (const group of suezGroups) stampAuthoritativeSource(group, suezSource.gdb);
 const studyCenters = Object.fromEntries(suezGroups.map((group) => {
   const study = JSON.parse(readFileSync(join(outputRoot, group, "study.geojson"), "utf8"));
   return [group, featureCenter(study.features[0])];

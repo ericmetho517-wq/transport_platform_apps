@@ -37,6 +37,11 @@ for (const [type, expected] of Object.entries(expectedCounts)) {
 }
 for (const group of Object.values(aliases)) {
   if (!profiles[group]) errors.push(`${group}: missing authoritative report profile`);
+  const summary = JSON.parse(readFileSync(join(root, "public", "data", "dashboard", group, "summary.json"), "utf8"));
+  if (group !== "ismailia" && summary.authoritativeSource !== "وزارة النقل/Data") errors.push(`${group}: dashboard summary is not stamped with the authoritative Data source`);
+  for (const [layer, count] of Object.entries(summary.sourceLayerCounts || {})) {
+    if (Number(count) === 0) warnings.push(`${group}: ${layer} exists in Data but contains zero source records`);
+  }
 }
 for (const sector of Object.keys(aliases)) {
   for (const type of ["Dashboard", "StoryMap", "Web AppViewer", "Instant Filter Gallery"]) {
