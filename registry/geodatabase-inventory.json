@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-17T07:36:28.514Z",
+  "generatedAt": "2026-09-17T11:12:22.242Z",
   "sourceRoot": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data",
   "databaseCount": 18,
   "layerCount": 210,
   "featureCount": 415446,
-  "mappedDatabaseCount": 0,
+  "mappedDatabaseCount": 8,
   "databases": [
     {
       "path": "الاسماعيلية\\Ismallia-22-7-2026\\Ismallia.gdb",
@@ -160,7 +160,9 @@
     {
       "path": "الاقليمي\\DataBase_Schema.gdb",
       "absolutePath": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\الاقليمي\\DataBase_Schema.gdb",
-      "platformGroups": [],
+      "platformGroups": [
+        "regional-ring-road"
+      ],
       "layerCount": 15,
       "featureCount": 34228,
       "layers": [
@@ -316,7 +318,10 @@
     {
       "path": "السويس\\السويس\\New File Geodatabase.gdb",
       "absolutePath": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\السويس\\السويس\\New File Geodatabase.gdb",
-      "platformGroups": [],
+      "platformGroups": [
+        "cairo-suez-road",
+        "suez-ring-link"
+      ],
       "layerCount": 12,
       "featureCount": 4257,
       "layers": [
@@ -433,7 +438,9 @@
     {
       "path": "الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb",
       "absolutePath": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb",
-      "platformGroups": [],
+      "platformGroups": [
+        "dabaa-axis"
+      ],
       "layerCount": 8,
       "featureCount": 6554,
       "layers": [
@@ -1412,7 +1419,9 @@
     {
       "path": "دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb",
       "absolutePath": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb",
-      "platformGroups": [],
+      "platformGroups": [
+        "dahshur-south-link"
+      ],
       "layerCount": 14,
       "featureCount": 21387,
       "layers": [
@@ -1557,7 +1566,9 @@
     {
       "path": "طريق الصعيد الغربي\\New File Geodatabase.gdb",
       "absolutePath": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
-      "platformGroups": [],
+      "platformGroups": [
+        "western-upper-egypt"
+      ],
       "layerCount": 20,
       "featureCount": 75950,
       "layers": [
@@ -1762,7 +1773,9 @@
     {
       "path": "قنا\\Database13022024.gdb",
       "absolutePath": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\قنا\\Database13022024.gdb",
-      "platformGroups": [],
+      "platformGroups": [
+        "qena-luxor-road"
+      ],
       "layerCount": 10,
       "featureCount": 755,
       "layers": [
@@ -1827,7 +1840,9 @@
     {
       "path": "قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb",
       "absolutePath": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\قوس\\58f4867b-78a3-448f-82de-7a350f833156.gdb",
-      "platformGroups": [],
+      "platformGroups": [
+        "qus-axis"
+      ],
       "layerCount": 11,
       "featureCount": 6953,
       "layers": [
@@ -1939,7 +1954,9 @@
     {
       "path": "كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
       "absolutePath": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
-      "platformGroups": [],
+      "platformGroups": [
+        "kalabsha-axis"
+      ],
       "layerCount": 13,
       "featureCount": 2099,
       "layers": [

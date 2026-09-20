@@ -77,6 +77,22 @@
           "height": 1186
         },
         {
+          "imagePath": "../../references/story-media/d5c5a0e82f4d4fd3b4b9.png",
+          "reportName": ".pdf",
+          "page": 73,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 872
+        },
+        {
+          "imagePath": "../../references/story-media/a02f556170efee461aea.png",
+          "reportName": ".pdf",
+          "page": 74,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 867
+        },
+        {
           "imagePath": "../../references/story-media/b12843fc166b9da018bc.jpg",
           "reportName": ".pdf",
           "page": 75,
@@ -173,6 +189,22 @@
           "kind": "comparison",
           "width": 1696,
           "height": 1199
+        },
+        {
+          "imagePath": "../../references/story-media/40c93f25cf8ac31806ad.jpg",
+          "reportName": "(1).pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 1345,
+          "height": 612
+        },
+        {
+          "imagePath": "../../references/story-media/b94bd8518967ced225ed.png",
+          "reportName": "(1).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 867
         },
         {
           "imagePath": "../../references/story-media/75c0af70e4dc6c6ba68d.jpg",
@@ -273,6 +305,22 @@
           "height": 1146
         },
         {
+          "imagePath": "../../references/story-media/727ca58e61441a15f227.png",
+          "reportName": "(3).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 866
+        },
+        {
+          "imagePath": "../../references/story-media/a0c8e7a0bc4a1fa83c0c.png",
+          "reportName": "(3).pdf",
+          "page": 60,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 868
+        },
+        {
           "imagePath": "../../references/story-media/6c93bc59b7527435d948.jpg",
           "reportName": "(3).pdf",
           "page": 62,
@@ -345,6 +393,22 @@
           "kind": "comparison",
           "width": 1750,
           "height": 1237
+        },
+        {
+          "imagePath": "../../references/story-media/42b1c48c792cbbf6ab3b.png",
+          "reportName": "(2).pdf",
+          "page": 28,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 868
+        },
+        {
+          "imagePath": "../../references/story-media/568ae1ca2cc345ac5f16.png",
+          "reportName": "(2).pdf",
+          "page": 29,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 868
         },
         {
           "imagePath": "../../references/story-media/3725b9064bbcbf30acfb.jpg",
@@ -445,6 +509,22 @@
           "height": 1202
         },
         {
+          "imagePath": "../../references/story-media/5a1166d4b21d0aee7be2.jpg",
+          "reportName": "(4).pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 1379,
+          "height": 871
+        },
+        {
+          "imagePath": "../../references/story-media/e306c62d0f867127434f.jpg",
+          "reportName": "(4).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1600,
+          "height": 723
+        },
+        {
           "imagePath": "../../references/story-media/36e6adcf304af4be4636.jpg",
           "reportName": "(4).pdf",
           "page": 60,
@@ -517,6 +597,22 @@
           "kind": "comparison",
           "width": 1696,
           "height": 1199
+        },
+        {
+          "imagePath": "../../references/story-media/70b8b42097f70b3acbef.png",
+          "reportName": "(5).pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 872
+        },
+        {
+          "imagePath": "../../references/story-media/cb441104177b30504c6c.png",
+          "reportName": "(5).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1917,
+          "height": 872
         },
         {
           "imagePath": "../../references/story-media/9537909fcbfcc6671779.jpg",
@@ -625,12 +721,44 @@
           "height": 1194
         },
         {
+          "imagePath": "../../references/story-media/d73e8bd9eb9e195f3faf.jpg",
+          "reportName": "(6).pdf",
+          "page": 60,
+          "kind": "dashboard",
+          "width": 1345,
+          "height": 608
+        },
+        {
+          "imagePath": "../../references/story-media/26565fd73b07e23deef3.png",
+          "reportName": "(6).pdf",
+          "page": 61,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 867
+        },
+        {
           "imagePath": "../../references/story-media/242c4fb3bd940e5b471c.jpg",
           "reportName": "(6).pdf",
           "page": 63,
           "kind": "comparison",
           "width": 932,
           "height": 572
+        },
+        {
+          "imagePath": "../../references/story-media/eb658e078e3d0cbd7b1a.png",
+          "reportName": "(6).pdf",
+          "page": 159,
+          "kind": "dashboard",
+          "width": 953,
+          "height": 409
+        },
+        {
+          "imagePath": "../../references/story-media/d0e014bfcf68ce39425a.png",
+          "reportName": "(6).pdf",
+          "page": 160,
+          "kind": "dashboard",
+          "width": 953,
+          "height": 386
         }
       ],
       "giza": [
@@ -697,6 +825,22 @@
           "kind": "comparison",
           "width": 1615,
           "height": 1141
+        },
+        {
+          "imagePath": "../../references/story-media/4516b89a45daf0fa7f20.jpg",
+          "reportName": "(7).pdf",
+          "page": 47,
+          "kind": "dashboard",
+          "width": 1337,
+          "height": 603
+        },
+        {
+          "imagePath": "../../references/story-media/471486614dfc7f02d59f.jpg",
+          "reportName": "(7).pdf",
+          "page": 48,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 872
         },
         {
           "imagePath": "../../references/story-media/a00f2a8d7407cbcea3b7.jpg",
@@ -813,12 +957,234 @@
           "height": 978
         },
         {
+          "imagePath": "../../references/story-media/1d83639ada300c2ba353.jpg",
+          "reportName": "(9).pdf",
+          "page": 54,
+          "kind": "dashboard",
+          "width": 1902,
+          "height": 892
+        },
+        {
+          "imagePath": "../../references/story-media/baa0b72d97dd514a0dda.png",
+          "reportName": "(9).pdf",
+          "page": 55,
+          "kind": "dashboard",
+          "width": 1913,
+          "height": 857
+        },
+        {
           "imagePath": "../../references/story-media/d0faf9f650c2f7efe434.png",
           "reportName": "(9).pdf",
           "page": 56,
           "kind": "comparison",
           "width": 1293,
           "height": 900
+        }
+      ],
+      "beni-suef": [
+        {
+          "imagePath": "../../references/story-media/e9bb3022dd0de438c702.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "evidence",
+          "width": 434,
+          "height": 393
+        },
+        {
+          "imagePath": "../../references/story-media/653a4ddbf8803ecf76f0.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "evidence",
+          "width": 433,
+          "height": 403
+        },
+        {
+          "imagePath": "../../references/story-media/258b2abfa11ddbcd796e.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1770,
+          "height": 1251
+        },
+        {
+          "imagePath": "../../references/story-media/820fdac9732f5ac5bdfc.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1727,
+          "height": 1221
+        },
+        {
+          "imagePath": "../../references/story-media/e0e14c23f21af98aad93.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1742,
+          "height": 1232
+        },
+        {
+          "imagePath": "../../references/story-media/04c76c7a1273c7578133.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1692,
+          "height": 1196
+        },
+        {
+          "imagePath": "../../references/story-media/8689bd30da1d64d0fbdd.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1685,
+          "height": 1191
+        },
+        {
+          "imagePath": "../../references/story-media/81d40312ed4e20e47cbe.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "evidence",
+          "width": 1600,
+          "height": 501
+        },
+        {
+          "imagePath": "../../references/story-media/9bb4f59cfac8c2c146b1.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "dashboard",
+          "width": 1917,
+          "height": 873
+        },
+        {
+          "imagePath": "../../references/story-media/a739add196a57f0d89f8.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "dashboard",
+          "width": 1917,
+          "height": 870
+        },
+        {
+          "imagePath": "../../references/story-media/c85a4c03d73325348dab.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1751,
+          "height": 964
+        },
+        {
+          "imagePath": "../../references/story-media/cd5e766461c7bcfbb012.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "evidence",
+          "width": 1897,
+          "height": 722
+        },
+        {
+          "imagePath": "../../references/story-media/5fbe66894fb1064a40a4.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 931,
+          "height": 562
+        },
+        {
+          "imagePath": "../../references/story-media/dd36e94dd47dc0032f49.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1427,
+          "height": 1009
+        },
+        {
+          "imagePath": "../../references/story-media/5e2981d6201a3c5ae120.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1210,
+          "height": 834
+        },
+        {
+          "imagePath": "../../references/story-media/5b74578e82925c265218.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1210,
+          "height": 832
+        },
+        {
+          "imagePath": "../../references/story-media/727a53d3989579936ec7.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 1235,
+          "height": 873,
+          "inSwipe": true
+        },
+        {
+          "imagePath": "../../references/story-media/0754132509c8a467483d.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 1259,
+          "height": 890,
+          "inSwipe": true
+        },
+        {
+          "imagePath": "../../references/story-media/d7088c2178640c98a7fe.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 1243,
+          "height": 879,
+          "inSwipe": true
+        },
+        {
+          "imagePath": "../../references/story-media/431d9b96b939e9bed9ea.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 1245,
+          "height": 880,
+          "inSwipe": true
+        },
+        {
+          "imagePath": "../../references/story-media/d266b71f294240aba42d.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 1251,
+          "height": 884
+        },
+        {
+          "imagePath": "../../references/story-media/8e0e510b12d1c7d416fb.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 1241,
+          "height": 877
+        },
+        {
+          "imagePath": "../../references/story-media/ee0afd2a7460d7e23f25.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1445,
+          "height": 1022
+        },
+        {
+          "imagePath": "../../references/story-media/c0fd87ab4ace71cb42b3.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "map",
+          "width": 1380,
+          "height": 1670
+        },
+        {
+          "imagePath": "../../references/story-media/9386d2519d991a55b958.jpg",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "evidence",
+          "width": 435,
+          "height": 409
         }
       ]
     },
@@ -935,6 +1301,22 @@
           "kind": "comparison",
           "width": 1700,
           "height": 1202
+        },
+        {
+          "imagePath": "../../references/story-media/2193012a31589158160b.jpg",
+          "reportName": "(8).pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 1345,
+          "height": 671
+        },
+        {
+          "imagePath": "../../references/story-media/73f1c6c80c31d0e022b3.jpg",
+          "reportName": "(8).pdf",
+          "page": 59,
+          "kind": "dashboard",
+          "width": 1918,
+          "height": 862
         },
         {
           "imagePath": "../../references/story-media/2d9888b920d90f9c20be.jpg",
@@ -1085,12 +1467,130 @@
           "height": 233
         },
         {
+          "imagePath": "../../references/story-media/dd75f12562ac26634e09.png",
+          "reportName": "قطاع_الاسماعيلية.docx",
+          "page": 0,
+          "kind": "dashboard",
+          "width": 456,
+          "height": 267
+        },
+        {
+          "imagePath": "../../references/story-media/0fa06517f2f198268401.png",
+          "reportName": "قطاع_الاسماعيلية.docx",
+          "page": 0,
+          "kind": "dashboard",
+          "width": 463,
+          "height": 273
+        },
+        {
           "imagePath": "../../references/story-media/995007a24e58a641e2a2.jpg",
           "reportName": "قطاع_الاسماعيلية.docx",
           "page": 0,
           "kind": "map",
           "width": 525,
           "height": 372
+        }
+      ]
+    },
+    "dabaa-axis": {
+      "project": [
+        {
+          "imagePath": "../../references/story-media/0c812a5ca2736044f73f.jpg",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "axis-photo",
+          "width": 740,
+          "height": 555
+        },
+        {
+          "imagePath": "../../references/story-media/d0cccb70505c7318f8b4.png",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 1867,
+          "height": 1306
+        },
+        {
+          "imagePath": "../../references/story-media/29737aacce334a5cf043.png",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 1879,
+          "height": 1327
+        },
+        {
+          "imagePath": "../../references/story-media/c20a83ab7eae41cd0b9d.png",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "map",
+          "width": 1600,
+          "height": 1128
+        },
+        {
+          "imagePath": "../../references/story-media/a89db9a905591594a10b.png",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "map",
+          "width": 1600,
+          "height": 1130
+        },
+        {
+          "imagePath": "../../references/story-media/75837393ba4983b3783d.jpg",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 967,
+          "height": 565
+        },
+        {
+          "imagePath": "../../references/story-media/5b038ffcd7552dbd004d.jpg",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 967,
+          "height": 565
+        },
+        {
+          "imagePath": "../../references/story-media/15a82fa4cc7691ac12c5.jpg",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 805,
+          "height": 535,
+          "inSwipe": true
+        },
+        {
+          "imagePath": "../../references/story-media/6372350922ae8ddb4478.jpg",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "comparison",
+          "width": 808,
+          "height": 536,
+          "inSwipe": true
+        },
+        {
+          "imagePath": "../../references/story-media/59ad18c97177bceac32b.png",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "dashboard",
+          "width": 1222,
+          "height": 654
+        },
+        {
+          "imagePath": "../../references/story-media/058d81f52300f47d618a.png",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "dashboard",
+          "width": 1920,
+          "height": 892
+        },
+        {
+          "imagePath": "../../references/story-media/056d7838578bbadbc21c.png",
+          "reportName": "Nakl_Dabaa_30Dec2023.pptx",
+          "page": 0,
+          "kind": "dashboard",
+          "width": 1920,
+          "height": 882
         }
       ]
     },
@@ -1135,6 +1635,38 @@
           "kind": "axis-photo",
           "width": 1492,
           "height": 750
+        },
+        {
+          "imagePath": "../../references/story-media/c7c0db10c2399cd3997a.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 55,
+          "kind": "dashboard",
+          "width": 1015,
+          "height": 552
+        },
+        {
+          "imagePath": "../../references/story-media/75a463f02330ca5816bb.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 56,
+          "kind": "dashboard",
+          "width": 937,
+          "height": 430
+        },
+        {
+          "imagePath": "../../references/story-media/bb1ad590384063529624.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 57,
+          "kind": "dashboard",
+          "width": 939,
+          "height": 432
+        },
+        {
+          "imagePath": "../../references/story-media/364ff163fef9b0301b5b.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 58,
+          "kind": "dashboard",
+          "width": 943,
+          "height": 431
         },
         {
           "imagePath": "../../references/story-media/8d25c1c9842eecaed50c.jpg",
@@ -1218,7 +1750,8 @@
           "page": 86,
           "kind": "axis-photo",
           "width": 1458,
-          "height": 752
+          "height": 752,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/6e93162ec44916e965e9.jpg",
@@ -1226,7 +1759,8 @@
           "page": 87,
           "kind": "axis-photo",
           "width": 1462,
-          "height": 747
+          "height": 747,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/01c1b89f4504777a915f.jpg",
@@ -1269,6 +1803,30 @@
           "height": 520
         },
         {
+          "imagePath": "../../references/story-media/20c29f85db2a2fe86a21.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 110,
+          "kind": "dashboard",
+          "width": 948,
+          "height": 511
+        },
+        {
+          "imagePath": "../../references/story-media/965cc95d4f892637925d.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 111,
+          "kind": "dashboard",
+          "width": 1322,
+          "height": 614
+        },
+        {
+          "imagePath": "../../references/story-media/f4fb980004b2897cecc8.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 112,
+          "kind": "dashboard",
+          "width": 1325,
+          "height": 620
+        },
+        {
           "imagePath": "../../references/story-media/7f4b376d9ddd674d253b.jpg",
           "reportName": "Final Report 3-2024.pdf",
           "page": 115,
@@ -1283,6 +1841,14 @@
           "kind": "map",
           "width": 1017,
           "height": 575
+        },
+        {
+          "imagePath": "../../references/story-media/64cc10070f3e2c7c74f6.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 124,
+          "kind": "dashboard",
+          "width": 1375,
+          "height": 679
         },
         {
           "imagePath": "../../references/story-media/a7bf82191077e333906e.jpg",
@@ -1385,12 +1951,44 @@
           "height": 729
         },
         {
+          "imagePath": "../../references/story-media/dc19588075eed1456241.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 158,
+          "kind": "dashboard",
+          "width": 1017,
+          "height": 552
+        },
+        {
+          "imagePath": "../../references/story-media/4fe2bbe139c04c7ab3e9.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 159,
+          "kind": "dashboard",
+          "width": 1228,
+          "height": 573
+        },
+        {
           "imagePath": "../../references/story-media/84c676c75159b1c99a88.jpg",
           "reportName": "Final Report 3-2024.pdf",
           "page": 161,
           "kind": "map",
           "width": 803,
           "height": 527
+        },
+        {
+          "imagePath": "../../references/story-media/b978b30e34dc23fb874d.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 167,
+          "kind": "dashboard",
+          "width": 1351,
+          "height": 666
+        },
+        {
+          "imagePath": "../../references/story-media/7e7e62272378af67f590.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 168,
+          "kind": "dashboard",
+          "width": 1351,
+          "height": 666
         },
         {
           "imagePath": "../../references/story-media/5841947e3c80faedd256.jpg",
@@ -1442,7 +2040,8 @@
           "page": 183,
           "kind": "axis-photo",
           "width": 1247,
-          "height": 748
+          "height": 748,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/e68cd4393c60addf4d35.jpg",
@@ -1450,7 +2049,8 @@
           "page": 184,
           "kind": "axis-photo",
           "width": 1336,
-          "height": 747
+          "height": 747,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/75a22f140159a445b65a.jpg",
@@ -1467,6 +2067,38 @@
           "kind": "map",
           "width": 774,
           "height": 797
+        },
+        {
+          "imagePath": "../../references/story-media/07023c63e130fe06e636.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 204,
+          "kind": "dashboard",
+          "width": 1019,
+          "height": 553
+        },
+        {
+          "imagePath": "../../references/story-media/8afffd7cdb39e0e8b3b5.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 205,
+          "kind": "dashboard",
+          "width": 1127,
+          "height": 526
+        },
+        {
+          "imagePath": "../../references/story-media/36044c4b66f35f8aec13.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 206,
+          "kind": "dashboard",
+          "width": 1127,
+          "height": 525
+        },
+        {
+          "imagePath": "../../references/story-media/6f5e48eedaa091d59cab.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 214,
+          "kind": "dashboard",
+          "width": 1332,
+          "height": 638
         },
         {
           "imagePath": "../../references/story-media/fa20452da38417d0ed40.jpg",
@@ -1542,7 +2174,8 @@
           "page": 231,
           "kind": "comparison",
           "width": 782,
-          "height": 736
+          "height": 736,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/5f6265936e963a4d77f5.jpg",
@@ -1550,7 +2183,8 @@
           "page": 232,
           "kind": "comparison",
           "width": 776,
-          "height": 741
+          "height": 741,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/fb4940e9467c95bd049b.jpg",
@@ -1558,7 +2192,8 @@
           "page": 233,
           "kind": "comparison",
           "width": 1180,
-          "height": 737
+          "height": 737,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/aa37348f8cb5e2f9a9ae.jpg",
@@ -1583,6 +2218,38 @@
           "kind": "map",
           "width": 832,
           "height": 770
+        },
+        {
+          "imagePath": "../../references/story-media/38bf6d90bc942177e4cb.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 258,
+          "kind": "dashboard",
+          "width": 1230,
+          "height": 571
+        },
+        {
+          "imagePath": "../../references/story-media/3236a41b4c95d178ebcd.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 259,
+          "kind": "dashboard",
+          "width": 1234,
+          "height": 567
+        },
+        {
+          "imagePath": "../../references/story-media/85e81a262b620a0f4f58.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 267,
+          "kind": "dashboard",
+          "width": 1262,
+          "height": 606
+        },
+        {
+          "imagePath": "../../references/story-media/f867bd7e06e681afe07f.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 268,
+          "kind": "dashboard",
+          "width": 1268,
+          "height": 580
         },
         {
           "imagePath": "../../references/story-media/4109f92e85121c947e63.jpg",
@@ -1634,7 +2301,8 @@
           "page": 283,
           "kind": "axis-photo",
           "width": 1310,
-          "height": 729
+          "height": 729,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/5916d2058f219f955fe9.jpg",
@@ -1642,7 +2310,8 @@
           "page": 284,
           "kind": "axis-photo",
           "width": 1282,
-          "height": 696
+          "height": 696,
+          "inSwipe": true
         },
         {
           "imagePath": "../../references/story-media/f8624f5a8a8277fcc08b.jpg",
@@ -1677,6 +2346,38 @@
           "height": 776
         },
         {
+          "imagePath": "../../references/story-media/1fa460db7ccf3e06faa7.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 311,
+          "kind": "dashboard",
+          "width": 1160,
+          "height": 613
+        },
+        {
+          "imagePath": "../../references/story-media/9db0d989fd9a47fbcf68.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 312,
+          "kind": "dashboard",
+          "width": 1416,
+          "height": 661
+        },
+        {
+          "imagePath": "../../references/story-media/8a388767237693bc404c.png",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 313,
+          "kind": "dashboard",
+          "width": 1416,
+          "height": 662
+        },
+        {
+          "imagePath": "../../references/story-media/432525d2b2d340a97279.jpg",
+          "reportName": "Final Report 3-2024.pdf",
+          "page": 321,
+          "kind": "dashboard",
+          "width": 1325,
+          "height": 667
+        },
+        {
           "imagePath": "../../references/story-media/12ca78e789220823e1fb.png",
           "reportName": "Final Report 3-2024.pdf",
           "page": 323,
@@ -1699,26 +2400,6 @@
           "kind": "comparison",
           "width": 1220,
           "height": 644
-        }
-      ]
-    },
-    "dabaa-axis": {
-      "project": [
-        {
-          "imagePath": "../../references/dabaa/landuse-2014.png",
-          "reportName": "محور الضبعة",
-          "page": 5,
-          "kind": "comparison",
-          "width": 1600,
-          "height": 900
-        },
-        {
-          "imagePath": "../../references/dabaa/landuse-2023.png",
-          "reportName": "محور الضبعة",
-          "page": 6,
-          "kind": "comparison",
-          "width": 1600,
-          "height": 900
         }
       ]
     }

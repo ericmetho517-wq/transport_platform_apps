@@ -168,32 +168,8 @@
         "after": "../../references/documentation-swipe/western-upper-egypt-luxor-1-after.png",
         "sourceFolder": "التوثيق",
         "sourceDocument": "قطاع_الاقصر-_التقرير_النهائي.docx",
-        "beforeEntry": "word/media/image6.png",
-        "afterEntry": "word/media/image7.png"
-      },
-      {
-        "before": "../../references/documentation-swipe/western-upper-egypt-luxor-2-before.png",
-        "after": "../../references/documentation-swipe/western-upper-egypt-luxor-2-after.png",
-        "sourceFolder": "التوثيق",
-        "sourceDocument": "قطاع_الاقصر-_التقرير_النهائي.docx",
-        "beforeEntry": "word/media/image8.png",
-        "afterEntry": "word/media/image9.png"
-      },
-      {
-        "before": "../../references/documentation-swipe/western-upper-egypt-luxor-3-before.png",
-        "after": "../../references/documentation-swipe/western-upper-egypt-luxor-3-after.png",
-        "sourceFolder": "التوثيق",
-        "sourceDocument": "قطاع_الاقصر-_التقرير_النهائي.docx",
-        "beforeEntry": "word/media/image11.png",
-        "afterEntry": "word/media/image12.png"
-      },
-      {
-        "before": "../../references/documentation-swipe/western-upper-egypt-luxor-4-before.jpeg",
-        "after": "../../references/documentation-swipe/western-upper-egypt-luxor-4-after.png",
-        "sourceFolder": "التوثيق",
-        "sourceDocument": "قطاع_الاقصر-_التقرير_النهائي.docx",
-        "beforeEntry": "word/media/image35.jpeg",
-        "afterEntry": "word/media/image13.png"
+        "beforeEntry": "word/media/image7.png",
+        "afterEntry": "word/media/image8.png"
       }
     ],
     "western-upper-egypt/qena": [
@@ -368,6 +344,24 @@
         "sourceDocument": "قطاع_أسوان-_التقرير_النهائي.docx",
         "beforeEntry": "word/media/image11.png",
         "afterEntry": "word/media/image12.png"
+      }
+    ],
+    "western-upper-egypt/beni-suef": [
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-beni-suef-1-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-beni-suef-1-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_بني_سويف_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image7.png",
+        "afterEntry": "word/media/image8.png"
+      },
+      {
+        "before": "../../references/documentation-swipe/western-upper-egypt-beni-suef-2-before.png",
+        "after": "../../references/documentation-swipe/western-upper-egypt-beni-suef-2-after.png",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "قطاع_بني_سويف_التقرير_النهائي.docx",
+        "beforeEntry": "word/media/image9.png",
+        "afterEntry": "word/media/image10.png"
       }
     ]
   }

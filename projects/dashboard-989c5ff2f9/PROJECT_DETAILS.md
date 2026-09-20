@@ -1,6 +1,6 @@
-# لوحة مؤشرات الأراضي الزراعية والصناعية – محور كلابشة
+# لوحة مؤشرات الأراضي الزراعية – محور كلابشة
 
 - Type: `Dashboard`
 - Axis: `kalabsha`
-- English title: Agricultural and Industrial Land Indicators Dashboard – Kalabsha Axis
+- English title: Agricultural Land Indicators Dashboard – Kalabsha Axis
 - Data: verified local axis datasets and report indicators

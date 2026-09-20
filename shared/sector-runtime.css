@@ -105,7 +105,7 @@ body.evidence-modal-open { overflow:hidden; }
 .story-place-copy p { color:#5b756c; line-height:1.9; }
 .story-media-categories { display:grid; gap:72px; }
 .story-media-category { min-width:0; }
-.story-media-category h4 { position:sticky; top:164px; z-index:5; margin:0 0 24px; padding:13px 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid #078874; background:#f6f7f3ee; backdrop-filter:blur(12px); color:#17483a; font-size:20px; }
+.story-media-category h4 { position:sticky; top:164px; z-index:5; min-width:170px; width:max-content; max-width:min(360px,80%); margin:0 0 18px auto; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; direction:rtl; border-bottom:2px solid #078874; border-radius:0 0 8px 8px; background:#f6f7f3ee; backdrop-filter:blur(12px); color:#17483a; font-size:20px; font-weight:700; }
 .story-media-category h4 span { min-width:30px; padding:4px 9px; border-radius:999px; background:#078874; color:#fff; font-size:11px; text-align:center; }
 .story-media-grid,.story-media-grid.single { display:grid; grid-template-columns:1fr; gap:8vh; }
 .story-media-grid figure { position:relative; min-height:min(78vh,780px); margin:0; display:grid; place-items:center; overflow:hidden; border:1px solid #d4ded9; border-radius:16px; background:#e8eeeb; box-shadow:0 18px 52px #003f3120; opacity:.35; transform:translateY(36px) scale(.975); transition:opacity .55s ease,transform .55s ease,box-shadow .55s ease; scroll-margin-top:220px; }
@@ -164,13 +164,34 @@ body.evidence-modal-open { overflow:hidden; }
 .arcgis-reference-story .story-place-copy>span{color:#efcb49}
 .arcgis-reference-story .story-place-copy h3{color:#efcb49}
 .arcgis-reference-story .story-place-copy p{color:#d8e9e3}
-.arcgis-reference-story .story-media-category h4{max-width:1034px;margin:0 auto 18px;border-color:#efcb49;color:#efcb49}
+.arcgis-reference-story .story-media-category h4{max-width:min(360px,80%);margin:0 0 18px auto;border-color:#efcb49;color:#efcb49}
 .arcgis-reference-story .story-media-category h4 span{background:#efcb49;color:#003d30}
 .arcgis-reference-story .story-media-grid,.arcgis-reference-story .story-media-grid.single{grid-template-columns:1fr;max-width:1034px;margin:auto;gap:34px}
 .arcgis-reference-story .story-media-grid figure{border:0;background:transparent;box-shadow:none}
 .arcgis-reference-story .story-media-grid img{width:100%;max-height:none;object-fit:contain}
 .arcgis-reference-story .story-media-grid figcaption{justify-content:center;color:#f0cb43;text-align:center}
 .arcgis-reference-story .story-media-grid figcaption b{color:#fff}
+.story-media-category[data-media-kind="axis-photo"] .story-media-grid,
+.story-media-category[data-media-kind="dashboard"] .story-media-grid,
+.story-media-category[data-media-kind="evidence"] .story-media-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.story-media-category[data-media-kind="axis-photo"] .story-media-grid figure,
+.story-media-category[data-media-kind="dashboard"] .story-media-grid figure,
+.story-media-category[data-media-kind="evidence"] .story-media-grid figure{min-height:0;grid-template-rows:minmax(0,1fr) auto}
+.story-media-category[data-media-kind="axis-photo"] .story-media-grid img,
+.story-media-category[data-media-kind="dashboard"] .story-media-grid img,
+.story-media-category[data-media-kind="evidence"] .story-media-grid img{max-height:min(46vh,440px);object-fit:contain}
+.story-media-grid figure{grid-template-rows:minmax(0,1fr) auto}
+.story-media-grid figcaption{width:100%;box-sizing:border-box;justify-content:center;text-align:center}
+.arcgis-reference-story .story-route-overview{border-top:1px solid #ffffff33}
+.story-runtime .story-map-layer-panel{position:absolute;z-index:7;top:52px;inset-inline-end:10px;width:min(260px,calc(100% - 20px));border:1px solid #ffffff44;border-radius:9px;background:#082b3eed;color:#fff;box-shadow:0 8px 24px #001e2b55;overflow:hidden}
+.story-runtime .story-map-layer-panel summary{padding:9px 13px;cursor:pointer;font-size:12px;font-weight:700;list-style-position:inside}
+.story-runtime .story-map-layer-panel .map-layer-toggles{position:static;display:grid;max-width:none;max-height:min(52vh,360px);overflow:auto;padding:7px;box-shadow:none}
+.story-runtime .story-map-layer-panel .map-layer-toggles button{font-size:11px;min-height:28px}
+.story-runtime .gis-map .map-study{display:none}
+.story-runtime .gis-map [data-landuse-code]{display:none}
+.story-runtime .gis-map [data-landuse-code="0"],.story-runtime .gis-map [data-landuse-code="1"],.story-runtime .gis-map [data-landuse-code="3"]{display:inline}
+.story-map-compare .story-map-layer-panel{display:none}
+@media(max-width:720px){.story-media-category[data-media-kind="axis-photo"] .story-media-grid,.story-media-category[data-media-kind="dashboard"] .story-media-grid,.story-media-category[data-media-kind="evidence"] .story-media-grid{grid-template-columns:1fr}}
 .story-content[hidden],.story-dashboard-view[hidden]{display:none!important}
 .story-dashboard-view{height:calc(100vh - 54px);background:#f5f5f5}
 .story-dashboard-view iframe{display:block;width:100%;height:100%;border:0;background:#fff}

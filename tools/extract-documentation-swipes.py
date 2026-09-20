@@ -34,7 +34,12 @@ REVIEWED = {
     "western-upper-egypt/fayoum": ("قطاع_الفيوم_-_التقرير_النهائي.docx", [(36, 37), (41, 42), (43, 44), (45, 46)]),
     "western-upper-egypt/giza": ("قطاع_الجيزةالتقرير_النهائي_.docx", [(21, 23), (24, 25), (26, 27)]),
     "western-upper-egypt/aswan": ("قطاع_أسوان-_التقرير_النهائي.docx", [(31, 32), (33, 34)]),
+    "western-upper-egypt/beni-suef": ("\u0642\u0637\u0627\u0639_\u0628\u0646\u064a_\u0633\u0648\u064a\u0641_\u0627\u0644\u062a\u0642\u0631\u064a\u0631_\u0627\u0644\u0646\u0647\u0627\u0626\u064a.docx", [(22, 23), (24, 25)]),
 }
+
+# The reviewed Luxor frames at indexes 21/22 are the same outlined site;
+# earlier adjacent frames include a regional overview and are not comparable.
+REVIEWED["western-upper-egypt/luxor"] = (REVIEWED["western-upper-egypt/luxor"][0], [(21, 22)])
 
 DEST.mkdir(parents=True, exist_ok=True)
 result = {"groups": {}}

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import re
 import zipfile
@@ -56,8 +57,27 @@ ISMAILIA_MEDIA = {
     "image23.jpeg": "comparison",
     "image24.jpeg": "comparison",
     "image25.jpeg": "comparison",
+    "image26.png": "dashboard",
+    "image27.png": "dashboard",
     "image28.jpeg": "map",
 }
+
+DABAA_MEDIA = {
+    "image5.jpg": "axis-photo",
+    "image6.tiff": "comparison",
+    "image7.tiff": "comparison",
+    "image8.png": "map",
+    "image9.png": "map",
+    "image10.jpeg": "comparison",
+    "image11.jpeg": "comparison",
+    "image12.jpg": "comparison",
+    "image13.jpg": "comparison",
+    "image14.png": "dashboard",
+    "image15.png": "dashboard",
+    "image16.png": "dashboard",
+}
+
+BENI_SUEF_REPORT = "\u0642\u0637\u0627\u0639_\u0628\u0646\u064a_\u0633\u0648\u064a\u0641_\u0627\u0644\u062a\u0642\u0631\u064a\u0631_\u0627\u0644\u0646\u0647\u0627\u0626\u064a.docx"
 
 REJECTED_DIGEST_PREFIXES = {
     "15d2f9d8",  # decorative flag ribbon
@@ -152,7 +172,7 @@ def extract_report(
 
 def curate_records(records: list[dict[str, object]]) -> list[dict[str, object]]:
     """Keep complete, presentation-ready project visuals only."""
-    limits = {"axis-photo": 3, "map": 8, "comparison": 6}
+    limits = {"axis-photo": 3, "map": 8, "comparison": 6, "dashboard": 4}
     counts = {kind: 0 for kind in limits}
     curated: list[dict[str, object]] = []
     for record in records:
@@ -168,7 +188,7 @@ def curate_records(records: list[dict[str, object]]) -> list[dict[str, object]]:
             continue
         if ratio < 0.9 or ratio > 2.7:
             continue
-        if is_indicator_graphic(record):
+        if kind != "dashboard" and is_indicator_graphic(record):
             continue
         if counts[kind] >= limits[kind]:
             continue
@@ -218,6 +238,100 @@ def extract_ismailia_docx(report_path: Path, output_dir: Path) -> list[dict[str,
     return records
 
 
+def extract_dabaa_presentation(report_path: Path, output_dir: Path) -> list[dict[str, object]]:
+    """Use only the route-specific visuals, not seals and cover decorations."""
+    records: list[dict[str, object]] = []
+    with zipfile.ZipFile(report_path) as archive:
+        for filename, kind in DABAA_MEDIA.items():
+            data = archive.read(f"ppt/media/{filename}")
+            with Image.open(io.BytesIO(data)) as source:
+                width, height = source.size
+                extension = "png" if filename.endswith(".tiff") else Path(filename).suffix.lower().lstrip(".").replace("jpeg", "jpg")
+                digest = hashlib.sha256(data).hexdigest()
+                target_name = f"{digest[:20]}.{extension}"
+                target = output_dir / target_name
+                if not target.exists():
+                    if filename.endswith(".tiff"):
+                        source.convert("RGB").save(target, format="PNG")
+                    else:
+                        target.write_bytes(data)
+            records.append({
+                "imagePath": f"../../references/story-media/{target_name}",
+                "reportName": report_path.name,
+                "page": 0,
+                "kind": kind,
+                "width": width,
+                "height": height,
+            })
+    return records
+
+
+def extract_beni_suef_docx(report_path: Path, output_dir: Path) -> list[dict[str, object]]:
+    """Extract substantive visuals from the Beni Suef final report."""
+    records: list[dict[str, object]] = []
+    with zipfile.ZipFile(report_path) as archive:
+        entries = [name for name in archive.namelist() if name.startswith("word/media/") and name.lower().endswith((".png", ".jpg", ".jpeg"))]
+        # Source-order indexes were checked against the report contact sheet.
+        # Covers, seals and decorative stock illustrations are not project data.
+        excluded = {13, 14, 15, 16, 17, 26, 27, 28}
+        for index, filename in enumerate(entries):
+            if index in excluded:
+                continue
+            data = archive.read(filename)
+            try:
+                with Image.open(__import__("io").BytesIO(data)) as image:
+                    width, height = image.size
+            except Exception:
+                continue
+            if width < 400 or height < 200:
+                continue
+            digest = hashlib.sha256(data).hexdigest()
+            extension = Path(filename).suffix.lower().lstrip(".").replace("jpeg", "jpg")
+            target_name = f"{digest[:20]}.{extension}"
+            target = output_dir / target_name
+            if not target.exists():
+                target.write_bytes(data)
+            kind = "dashboard" if index in {8, 9} else "comparison" if index in {12, 22, 23, 24, 25, 29, 30} else "map" if width >= 1200 and height >= 800 else "evidence"
+            records.append({
+                "imagePath": f"../../references/story-media/{target_name}",
+                "reportName": report_path.name,
+                "page": 0,
+                "kind": kind,
+                "width": width,
+                "height": height,
+            })
+    return records
+
+
+def visual_fingerprint(path: Path) -> int:
+    """A 256 bit difference hash, stable across PDF/DOCX recompression."""
+    with Image.open(path) as source:
+        pixels = source.convert("L").resize((17, 16)).tobytes()
+    return sum(1 << (row * 16 + col) for row in range(16) for col in range(16)
+               if pixels[row * 17 + col] > pixels[row * 17 + col + 1])
+
+
+def mark_swipe_repetitions(groups: dict[str, dict[str, list[dict[str, object]]]], root: Path) -> None:
+    swipe_file = root / "registry" / "documentation-swipes.json"
+    if not swipe_file.is_file():
+        return
+    swipes = json.loads(swipe_file.read_text(encoding="utf-8")).get("groups", {})
+    cache: dict[str, int] = {}
+
+    def fingerprint(url: str) -> int:
+        if url not in cache:
+            cache[url] = visual_fingerprint(root / "public" / url.removeprefix("../../"))
+        return cache[url]
+
+    for group, chapters in groups.items():
+        for chapter, records in chapters.items():
+            key = f"{group}/{chapter}" if group == "western-upper-egypt" else group
+            paired = [fingerprint(pair[phase]) for pair in swipes.get(key, []) for phase in ("before", "after")]
+            for record in records:
+                if paired and min((fingerprint(str(record["imagePath"])) ^ sample).bit_count() for sample in paired) <= 24:
+                    record["inSwipe"] = True
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--reports", type=Path, required=True)
@@ -239,9 +353,18 @@ def main() -> None:
     groups["ismailia"] = {
         "project": extract_ismailia_docx(args.reports / "قطاع_الاسماعيلية.docx", args.output)
     }
+    groups["dabaa-axis"] = {
+        "project": extract_dabaa_presentation(args.reports / "Nakl_Dabaa_30Dec2023.pptx", args.output)
+    }
+    beni_report = args.reports / BENI_SUEF_REPORT
+    if not beni_report.is_file():
+        beni_report = args.reports.parent / "التوثيق" / BENI_SUEF_REPORT
+    groups["western-upper-egypt"]["beni-suef"] = extract_beni_suef_docx(beni_report, args.output)
     final_report = args.reports / "Final Report 3-2024.pdf"
     for group, (start, end) in FINAL_REPORT_RANGES.items():
         groups[group] = {"project": extract_report(final_report, args.output, start, end)}
+
+    mark_swipe_repetitions(groups, Path(__file__).resolve().parents[1])
 
     manifest = {
         "version": 1,

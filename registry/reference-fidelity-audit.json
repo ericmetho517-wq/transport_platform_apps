@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T10:26:19.799Z",
+  "generatedAt": "2026-09-20T10:14:09.769Z",
   "applications": 61,
   "fidelityCounts": {
     "sector-and-application-type-reference": 33,
@@ -235,7 +235,7 @@
     },
     {
       "slug": "dashboard-989c5ff2f9",
-      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور كلابشة",
+      "title": "لوحة مؤشرات الأراضي الزراعية – محور كلابشة",
       "type": "Dashboard",
       "language": "ar",
       "sector": "kalabsha",
@@ -287,7 +287,7 @@
     },
     {
       "slug": "dashboard-0c7d78be88",
-      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق قنا - الأقصر",
+      "title": "لوحة مؤشرات الأراضي الزراعية – طريق قنا - الأقصر",
       "type": "Dashboard",
       "language": "ar",
       "sector": "qena-luxor",
@@ -493,7 +493,7 @@
     },
     {
       "slug": "dashboard-c1e29f0123",
-      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور الضبعة",
+      "title": "لوحة مؤشرات الأراضي الزراعية – محور الضبعة",
       "type": "Dashboard",
       "language": "ar",
       "sector": "dabaa",

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-17T10:26:18.376Z",
+  "generatedAt": "2026-09-20T10:14:08.386Z",
   "applications": 61,
   "totals": {
-    "features": 77100,
+    "features": 76850,
     "sourceFeatures": 212215,
-    "renderableFeatures": 77095,
-    "coordinatePairs": 2891731
+    "renderableFeatures": 76845,
+    "coordinatePairs": 2891673
   },
   "applicationCoverage": {
     "western-upper-egypt": {
@@ -28,7 +28,7 @@
     },
     "kalabsha-axis": {
       "applications": 6,
-      "activeFeatures": 799,
+      "activeFeatures": 549,
       "activeLayers": 11,
       "verifiedLocalData": true
     },
@@ -480,7 +480,7 @@
           "features": 1,
           "representedSourceFeatures": 1,
           "renderableFeatures": 1,
-          "coordinatePairs": 4,
+          "coordinatePairs": 5,
           "invalidCoordinates": 0
         },
         "axis": {
@@ -501,14 +501,14 @@
           "features": 3,
           "representedSourceFeatures": 373,
           "renderableFeatures": 3,
-          "coordinatePairs": 1565,
+          "coordinatePairs": 1607,
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 255,
+          "features": 5,
           "representedSourceFeatures": 391,
-          "renderableFeatures": 255,
-          "coordinatePairs": 1677,
+          "renderableFeatures": 5,
+          "coordinatePairs": 1576,
           "invalidCoordinates": 0
         },
         "governorates": {
@@ -558,10 +558,10 @@
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 799,
+        "features": 549,
         "sourceFeatures": 1305,
-        "coordinatePairs": 5412,
-        "renderableFeatures": 799
+        "coordinatePairs": 5354,
+        "renderableFeatures": 549
       }
     },
     "qena-luxor-road": {
