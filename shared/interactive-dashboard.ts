@@ -1921,37 +1921,65 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       landuseSelect.addEventListener("change", applyLanduseFilter);
       applyLanduseFilter();
     }
-    const statusTotals = { changed: 0, unchanged: 0 };
-    const statusAreas = {
+    type ChangeStatus = "changed" | "unchanged";
+    type ChangeMode = "all" | ChangeStatus;
+    type StatusAreaSet = Record<"urban" | "agricultural" | "industrial", Record<ChangeStatus, number>>;
+    const emptyStatusAreas = (): StatusAreaSet => ({
       urban: { changed: 0, unchanged: 0 },
       agricultural: { changed: 0, unchanged: 0 },
       industrial: { changed: 0, unchanged: 0 },
-    };
-    const statusAreasBySector: Record<string, typeof statusAreas> = {};
+    });
+    const statusAreas = emptyStatusAreas();
+    const statusAreasBySector: Record<string, StatusAreaSet> = {};
+    const statusSectorOf = (properties: Record<string, unknown> = {}) => group === "ismailia" ? "" : String(properties["اسم_القطاع"] ?? properties["sector"] ?? properties["Sector"] ?? "").trim();
     if (summary.layers.includes("landcover-end")) {
       const latestLandcover = await loadGeoJson(`../../data/dashboard/${group}/landcover-end.geojson`);
       latestLandcover.features.forEach((feature) => {
         const key = normalizeChangeStatus(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"]);
-        if (key === "changed" || key === "unchanged") {
-          statusTotals[key] += Math.max(1, Number(feature.properties?.source_feature_count || 1));
-          const landuseCode = String(feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.["استخدام_الأرض"] ?? "");
-          const kind = landuseCode === "3" ? "urban" : landuseCode === "0" ? "agricultural" : landuseCode === "1" ? "industrial" : null;
-          const area = Number(feature.properties?.["مساحة_كم2"] ?? feature.properties?.area_km2 ?? 0);
-          if (kind && Number.isFinite(area)) {
-            statusAreas[kind][key] += area;
-            const sector = String(feature.properties?.sector ?? "").trim();
-            if (sector) {
-              statusAreasBySector[sector] ||= {
-                urban: { changed: 0, unchanged: 0 },
-                agricultural: { changed: 0, unchanged: 0 },
-                industrial: { changed: 0, unchanged: 0 },
-              };
-              statusAreasBySector[sector][kind][key] += area;
-            }
-          }
+        if (key !== "changed" && key !== "unchanged") return;
+        const landuseCode = String(feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.["استخدام_الأرض"] ?? "");
+        const kind = landuseCode === "3" ? "urban" : landuseCode === "0" ? "agricultural" : landuseCode === "1" ? "industrial" : null;
+        const rawArea = Number(feature.properties?.["مساحة_كم2"] ?? feature.properties?.area_km2 ?? 0);
+        const area = rawArea > 1_000_000 ? rawArea / 1_000_000 : rawArea;
+        const sector = statusSectorOf(feature.properties);
+        if (!kind || !Number.isFinite(area) || area <= 0) return;
+        statusAreas[kind][key] += area;
+        if (sector) {
+          statusAreasBySector[sector] ||= emptyStatusAreas();
+          statusAreasBySector[sector][kind][key] += area;
         }
       });
     }
+    const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
+      group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector]?.[kind] : statusAreas[kind];
+    const statusTotalFor = (areas?: Record<ChangeStatus, number>) => (areas?.changed || 0) + (areas?.unchanged || 0);
+    const updateChangeStatusGauge = (mode: ChangeMode) => {
+      const selectedSector = dashboardSectorFilter?.value || "all";
+      (["urban", "agricultural", "industrial"] as const).forEach((kind) => {
+        const gauge = root.querySelector<HTMLElement>(`#${kind}-gauge`);
+        if (!gauge) return;
+        if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, kind)) {
+          gauge.closest<HTMLElement>(".gauge-card")?.setAttribute("hidden", "true");
+          return;
+        }
+        gauge.closest<HTMLElement>(".gauge-card")?.removeAttribute("hidden");
+        const areas = statusAreaFor(selectedSector, kind);
+        const total = statusTotalFor(areas);
+        if (group === "western-upper-egypt") {
+          const title = gauge.closest<HTMLElement>(".gauge-card")?.querySelector("span");
+          if (title) title.textContent = document.documentElement.lang === "en"
+            ? kind === "urban" ? "Urban area share by change status among classified urban land" : kind === "agricultural" ? "Agricultural area share by change status among classified agricultural land" : "Industrial area share by change status among classified industrial land"
+            : kind === "urban" ? "نسبة مساحة العمران حسب حالة التغير من العمران المصنف" : kind === "agricultural" ? "نسبة مساحة الزراعة حسب حالة التغير من الزراعة المصنفة" : "نسبة مساحة الصناعة حسب حالة التغير من الصناعة المصنفة";
+          if (!total) {
+            setGaugeUnavailable(gauge);
+            return;
+          }
+          setGauge(gauge, ((areas![mode === "all" ? "changed" : mode] || 0) / total) * 100);
+          return;
+        }
+        if (mode !== "all" && total) setGauge(gauge, ((areas?.[mode] || 0) / total) * 100);
+      });
+    };
     const dashboardSectorFilter = document.querySelector<HTMLSelectElement>("#dashboard-sector-filter");
     const sourceSectorSelect = mapRoots.map((map) => map.querySelector<HTMLSelectElement>(".map-sector-select")).find((select) => select && select.options.length > 1);
     if (dashboardSectorFilter && sourceSectorSelect) {
@@ -1963,30 +1991,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     if (dashboardChangeFilter) {
       const syncChangeStatus = () => {
         const mode = dashboardChangeFilter.value as "all" | "changed" | "unchanged";
-        const selectedSector = dashboardSectorFilter?.value || "all";
         mapRoots.forEach((map) => { const select = map.querySelector<HTMLSelectElement>(".map-change-select"); if (select && select.value !== mode) { select.value = mode; select.dispatchEvent(new Event("change")); } });
-        (["urban", "agricultural", "industrial"] as const).forEach((kind) => {
-          const gauge = root.querySelector<HTMLElement>(`#${kind}-gauge`);
-          if (!gauge) return;
-          const sectorStatusAreas = group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector] : statusAreas;
-          const classifiedAreas = sectorStatusAreas?.[kind];
-          const total = (classifiedAreas?.changed || 0) + (classifiedAreas?.unchanged || 0);
-          if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, kind)) {
-            gauge.closest<HTMLElement>(".gauge-card")?.setAttribute("hidden", "true");
-            return;
-          }
-          if (group === "western-upper-egypt") {
-            // "All" describes the actual changed share; the other modes show
-            // their classified share within this sector and land-use class.
-            const title = gauge.closest<HTMLElement>(".gauge-card")?.querySelector("span");
-            if (title) title.textContent = document.documentElement.lang === "en"
-              ? kind === "urban" ? "Urban area share by change status among classified urban land" : kind === "agricultural" ? "Agricultural area share by change status among classified agricultural land" : "Industrial area share by change status among classified industrial land"
-              : kind === "urban" ? "نسبة مساحة العمران حسب حالة التغير من العمران المصنف" : kind === "agricultural" ? "نسبة مساحة الزراعة حسب حالة التغير من الزراعة المصنفة" : "نسبة مساحة الصناعة حسب حالة التغير من الصناعة المصنفة";
-            if (!total) setGaugeUnavailable(gauge);
-            else setGauge(gauge, (classifiedAreas![mode === "all" ? "changed" : mode] / total) * 100);
-          }
-          else if (mode !== "all" && total) setGauge(gauge, Math.round(statusAreas[kind][mode] / total * 100));
-        });
+        updateChangeStatusGauge(mode);
         root.dataset.changeStatus = mode;
       };
       dashboardChangeFilter.addEventListener("change", syncChangeStatus);
