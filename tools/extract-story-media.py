@@ -78,6 +78,7 @@ DABAA_MEDIA = {
 }
 
 BENI_SUEF_REPORT = "\u0642\u0637\u0627\u0639_\u0628\u0646\u064a_\u0633\u0648\u064a\u0641_\u0627\u0644\u062a\u0642\u0631\u064a\u0631_\u0627\u0644\u0646\u0647\u0627\u0626\u064a.docx"
+ASWAN_REPORT = "قطاع_أسوان-_التقرير_النهائي.docx"
 
 REJECTED_DIGEST_PREFIXES = {
     "15d2f9d8",  # decorative flag ribbon
@@ -303,6 +304,28 @@ def extract_beni_suef_docx(report_path: Path, output_dir: Path) -> list[dict[str
     return records
 
 
+def extract_docx_road_photo(report_path: Path, member: str, output_dir: Path) -> dict[str, object]:
+    """Keep a route photo as the chapter hero, even when it is a small embed."""
+    with zipfile.ZipFile(report_path) as archive:
+        data = archive.read(member)
+    with Image.open(io.BytesIO(data)) as image:
+        width, height = image.size
+    digest = hashlib.sha256(data).hexdigest()
+    extension = Path(member).suffix.lower().lstrip(".").replace("jpeg", "jpg")
+    filename = f"{digest[:20]}.{extension}"
+    target = output_dir / filename
+    if not target.exists():
+        target.write_bytes(data)
+    return {
+        "imagePath": f"../../references/story-media/{filename}",
+        "reportName": report_path.name,
+        "page": 0,
+        "kind": "axis-photo",
+        "width": width,
+        "height": height,
+    }
+
+
 def visual_fingerprint(path: Path) -> int:
     """A 256 bit difference hash, stable across PDF/DOCX recompression."""
     with Image.open(path) as source:
@@ -359,7 +382,14 @@ def main() -> None:
     beni_report = args.reports / BENI_SUEF_REPORT
     if not beni_report.is_file():
         beni_report = args.reports.parent / "التوثيق" / BENI_SUEF_REPORT
-    groups["western-upper-egypt"]["beni-suef"] = extract_beni_suef_docx(beni_report, args.output)
+    groups["western-upper-egypt"]["beni-suef"] = [
+        extract_docx_road_photo(beni_report, "word/media/image3.png", args.output),
+        *extract_beni_suef_docx(beni_report, args.output),
+    ]
+    aswan_report = args.reports.parent / "التوثيق" / ASWAN_REPORT
+    groups["western-upper-egypt"]["aswan"] = [
+        extract_docx_road_photo(aswan_report, "word/media/image5.jpeg", args.output)
+    ]
     final_report = args.reports / "Final Report 3-2024.pdf"
     for group, (start, end) in FINAL_REPORT_RANGES.items():
         groups[group] = {"project": extract_report(final_report, args.output, start, end)}

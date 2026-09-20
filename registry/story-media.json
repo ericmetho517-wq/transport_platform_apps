@@ -983,6 +983,14 @@
       ],
       "beni-suef": [
         {
+          "imagePath": "../../references/story-media/40288c6e90fff34d0888.png",
+          "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "axis-photo",
+          "width": 380,
+          "height": 200
+        },
+        {
           "imagePath": "../../references/story-media/e9bb3022dd0de438c702.jpg",
           "reportName": "قطاع_بني_سويف_التقرير_النهائي.docx",
           "page": 0,
@@ -1185,6 +1193,16 @@
           "kind": "evidence",
           "width": 435,
           "height": 409
+        }
+      ],
+      "aswan": [
+        {
+          "imagePath": "../../references/story-media/2a0602574e6e409fca65.jpg",
+          "reportName": "قطاع_أسوان-_التقرير_النهائي.docx",
+          "page": 0,
+          "kind": "axis-photo",
+          "width": 1024,
+          "height": 671
         }
       ]
     },
