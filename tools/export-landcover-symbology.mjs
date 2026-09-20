@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { spawnSync } from "node:child_process";
 import { tmpdir } from "node:os";
@@ -7,12 +7,11 @@ import { fileURLToPath } from "node:url";
 const repo = fileURLToPath(new URL("..", import.meta.url));
 const ministryRoot = "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data";
 const ogr2ogr = "C:\\Program Files\\QGIS 4.0.3\\bin\\ogr2ogr.exe";
-const tempRoot = join(tmpdir(), "transport-landcover-export");
+const tempRoot = mkdtempSync(join(tmpdir(), "transport-landcover-export-"));
 const outputRoot = join(repo, "public", "data", "dashboard");
+const westernEndOnly = process.argv.includes("--western-end-only");
 
 if (!existsSync(ogr2ogr)) throw new Error(`QGIS ogr2ogr was not found: ${ogr2ogr}`);
-rmSync(tempRoot, { recursive: true, force: true });
-mkdirSync(tempRoot, { recursive: true });
 
 const sources = {
   "western-upper-egypt": { gdb: "طريق الصعيد الغربي\\New File Geodatabase.gdb", start: "Land_Cover2014", end: "Land_Cover2024", statusCodes: { "1": "changed", "2": "unchanged" } },
@@ -87,7 +86,7 @@ function featureCenter(feature) {
   return [(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2];
 }
 
-function aggregate(collection, statusCodes = {}) {
+function aggregate(collection, statusCodes = {}, useSourceShapeArea = false) {
   const grouped = new Map();
   for (const feature of collection.features || []) {
     const polygons = polygonsOf(feature.geometry);
@@ -103,8 +102,12 @@ function aggregate(collection, statusCodes = {}) {
     const target = grouped.get(key);
     target.polygons.push(...polygons);
     target.count += 1;
+    // The source's SHAPE_Area is consistently square metres. The older
+    // magnitude heuristic mixed small square-metre features with km² values.
+    const shapeArea = Number(properties.SHAPE_Area ?? properties.Shape_Area);
     const rawArea = Number(first(properties, areaFields));
-    if (Number.isFinite(rawArea) && rawArea > 0) target.area += rawArea > 1_000_000 ? rawArea / 1_000_000 : rawArea;
+    if (useSourceShapeArea && Number.isFinite(shapeArea) && shapeArea > 0) target.area += shapeArea / 1_000_000;
+    else if (Number.isFinite(rawArea) && rawArea > 0) target.area += rawArea > 1_000_000 ? rawArea / 1_000_000 : rawArea;
   }
   return {
     type: "FeatureCollection",
@@ -177,13 +180,14 @@ function exportRaw(gdbRelative, layer, key) {
 function writeLayer(group, layerName, collection, sourceCount, statusCodes = {}) {
   const folder = join(outputRoot, group);
   mkdirSync(folder, { recursive: true });
-  writeFileSync(join(folder, `${layerName}.geojson`), JSON.stringify(aggregate(collection, statusCodes)), "utf8");
+  const aggregated = aggregate(collection, statusCodes, group === "western-upper-egypt");
+  writeFileSync(join(folder, `${layerName}.geojson`), JSON.stringify(aggregated), "utf8");
+  if (westernEndOnly) return;
   const summaryPath = join(folder, "summary.json");
   const summary = JSON.parse(readFileSync(summaryPath, "utf8"));
   if (!summary.layers.includes(layerName)) summary.layers.push(layerName);
   summary.layerCounts ||= {};
   summary.sourceLayerCounts ||= {};
-  const aggregated = aggregate(collection, statusCodes);
   summary.layerCounts[layerName] = aggregated.features.length;
   summary.sourceLayerCounts[layerName] = sourceCount;
   writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + "\n", "utf8");
@@ -214,12 +218,19 @@ function stampAuthoritativeSource(group, gdbRelative) {
 }
 
 for (const [group, source] of Object.entries(sources)) {
-  stampAuthoritativeSource(group, source.gdb);
+  if (westernEndOnly && group !== "western-upper-egypt") continue;
+  if (!westernEndOnly) stampAuthoritativeSource(group, source.gdb);
   for (const [period, layer] of [["start", source.start], ["end", source.end]]) {
     if (!layer) continue;
+    if (westernEndOnly && period !== "end") continue;
     const raw = exportRaw(source.gdb, layer, group);
     writeLayer(group, `landcover-${period}`, raw, raw.features.length, source.statusCodes);
   }
+}
+
+if (westernEndOnly) {
+  rmSync(tempRoot, { recursive: true, force: true });
+  process.exit(0);
 }
 
 const suezGroups = ["cairo-suez-road", "suez-ring-link"];
