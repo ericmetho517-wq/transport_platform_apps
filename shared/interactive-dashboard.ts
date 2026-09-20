@@ -666,6 +666,10 @@ function setGauge(gauge: HTMLElement | null, percent: number, displayPercent = p
   gauge.innerHTML = `<svg viewBox="0 0 260 158" role="img" aria-label="${value}%"><path class="gauge-track" d="M20 126 A110 110 0 0 1 240 126" pathLength="100"/><path class="gauge-zone gauge-zone-low" d="M20 126 A110 110 0 0 1 240 126" pathLength="100"/><path class="gauge-zone gauge-zone-mid" d="M20 126 A110 110 0 0 1 240 126" pathLength="100"/><path class="gauge-zone gauge-zone-high" d="M20 126 A110 110 0 0 1 240 126" pathLength="100"/><g class="gauge-ticks">${tickLines}</g><g class="gauge-labels">${labels}</g><g class="gauge-needle" transform="rotate(${angle} 130 126)"><line x1="130" y1="126" x2="130" y2="42"/></g><circle class="gauge-hub" cx="130" cy="126" r="8"/><text class="gauge-value" x="130" y="153">${value}%</text></svg>`;
 }
 
+function setGaugeUnavailable(gauge: HTMLElement | null): void {
+  if (gauge) gauge.innerHTML = `<span class="gauge-no-data">${document.documentElement.lang === "en" ? "No documented change-status data" : "لا توجد بيانات حالة تغير موثقة"}</span>`;
+}
+
 function renderGaugeAndDonut(summary: DashboardSummary): void {
   const study = summary.metrics.studyAreaKm2 || 1;
   const urban = summary.metrics.urbanChangeKm2 || 0;
@@ -677,8 +681,8 @@ function renderGaugeAndDonut(summary: DashboardSummary): void {
   const selectedChange = document.querySelector<HTMLSelectElement>("#dashboard-change-filter")?.value || "all";
   const isIsmailia = dashboard?.dataset.dashboardGroup === "ismailia";
   const isWesternUpperEgypt = dashboard?.dataset.dashboardGroup === "western-upper-egypt";
-  const defaultGauge = (isIsmailia || isWesternUpperEgypt) && selectedChange === "all";
-  setGauge(document.querySelector<HTMLElement>("#urban-gauge"), defaultGauge ? 100 : percent, isWesternUpperEgypt && selectedChange === "all" ? 1000 : undefined);
+  const defaultGauge = isIsmailia && selectedChange === "all";
+  if (!isWesternUpperEgypt) setGauge(document.querySelector<HTMLElement>("#urban-gauge"), defaultGauge ? 100 : percent);
   const donut = document.querySelector<HTMLElement>("#change-donut");
   if (donut) {
     if (!isIsmailia && dashboard?.dataset.mode === "land" && summary.landUse?.length) {
@@ -791,8 +795,9 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
       return;
     }
     gauge.closest<HTMLElement>(".gauge-card")?.removeAttribute("hidden");
-    const percent = (group === "ismailia" || group === "western-upper-egypt") && selectedChange === "all" ? 100 : Math.min(reported ?? 10, 100);
-    setGauge(gauge, percent, group === "western-upper-egypt" && selectedChange === "all" ? 1000 : undefined);
+    if (group === "western-upper-egypt") return;
+    const percent = group === "ismailia" && selectedChange === "all" ? 100 : Math.min(reported ?? 10, 100);
+    setGauge(gauge, percent);
   });
   setGauge(document.querySelector<HTMLElement>("#agricultural-share-gauge"), Math.min(profile?.metrics.agriculturalSharePercent ?? 0, 100));
 }
@@ -1419,9 +1424,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const gauge = document.querySelector<HTMLElement>("#urban-gauge");
       const studyArea = areaKm2("study"), urbanArea = areaKm2("urban");
       const selectedChange = document.querySelector<HTMLSelectElement>("#dashboard-change-filter")?.value || "all";
-      if (group === "western-upper-egypt" && gauge && selectedChange === "all") {
-        setGauge(gauge, 100, selected === "all" ? 1000 : 100);
-      } else if (gauge && studyArea > 0) {
+      if (group !== "western-upper-egypt" && gauge && studyArea > 0) {
         const percent = Math.min(urbanArea / studyArea * 100, 100);
         gauge.style.setProperty("--gauge", `${percent * 1.8}deg`);
         const gaugeLabel = gauge.querySelector("strong");
@@ -1959,51 +1962,35 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     const dashboardChangeFilter = document.querySelector<HTMLSelectElement>("#dashboard-change-filter");
     if (dashboardChangeFilter) {
       const syncChangeStatus = () => {
-        const mode = dashboardChangeFilter.value;
+        const mode = dashboardChangeFilter.value as "all" | "changed" | "unchanged";
         const selectedSector = dashboardSectorFilter?.value || "all";
         mapRoots.forEach((map) => { const select = map.querySelector<HTMLSelectElement>(".map-change-select"); if (select && select.value !== mode) { select.value = mode; select.dispatchEvent(new Event("change")); } });
         (["urban", "agricultural", "industrial"] as const).forEach((kind) => {
           const gauge = root.querySelector<HTMLElement>(`#${kind}-gauge`);
           if (!gauge) return;
           const sectorStatusAreas = group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector] : statusAreas;
-          const total = sectorStatusAreas[kind].changed + sectorStatusAreas[kind].unchanged;
+          const classifiedAreas = sectorStatusAreas?.[kind];
+          const total = (classifiedAreas?.changed || 0) + (classifiedAreas?.unchanged || 0);
           if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, kind)) {
             gauge.closest<HTMLElement>(".gauge-card")?.setAttribute("hidden", "true");
             return;
           }
           if (group === "western-upper-egypt") {
-            const unfiltered = mode === "all" && selectedSector === "all";
-            setGauge(gauge, mode === "all" ? 100 : total ? Math.round(sectorStatusAreas[kind][mode] / total * 100) : 0, unfiltered ? 1000 : undefined);
+            // "All" describes the actual changed share; the other modes show
+            // their classified share within this sector and land-use class.
+            const title = gauge.closest<HTMLElement>(".gauge-card")?.querySelector("span");
+            if (title) title.textContent = document.documentElement.lang === "en"
+              ? kind === "urban" ? "Urban area share by change status among classified urban land" : kind === "agricultural" ? "Agricultural area share by change status among classified agricultural land" : "Industrial area share by change status among classified industrial land"
+              : kind === "urban" ? "نسبة مساحة العمران حسب حالة التغير من العمران المصنف" : kind === "agricultural" ? "نسبة مساحة الزراعة حسب حالة التغير من الزراعة المصنفة" : "نسبة مساحة الصناعة حسب حالة التغير من الصناعة المصنفة";
+            if (!total) setGaugeUnavailable(gauge);
+            else setGauge(gauge, (classifiedAreas![mode === "all" ? "changed" : mode] / total) * 100);
           }
           else if (mode !== "all" && total) setGauge(gauge, Math.round(statusAreas[kind][mode] / total * 100));
         });
         root.dataset.changeStatus = mode;
       };
       dashboardChangeFilter.addEventListener("change", syncChangeStatus);
-      dashboardChangeFilter.addEventListener("change", () => {
-        queueMicrotask(() => {
-          if (group !== "western-upper-egypt") return;
-          const mode = dashboardChangeFilter.value;
-          const selectedSector = dashboardSectorFilter?.value || "all";
-          const areas = selectedSector === "all" ? statusAreas : statusAreasBySector[selectedSector];
-          (["urban", "agricultural", "industrial"] as const).forEach((kind) => {
-            const gauge = root.querySelector<HTMLElement>(`#${kind}-gauge`);
-            if (!gauge) return;
-            const total = (areas?.[kind].changed || 0) + (areas?.[kind].unchanged || 0);
-            setGauge(gauge, mode === "all" ? 100 : total ? Math.round((areas?.[kind][mode] || 0) / total * 100) : 0, mode === "all" && selectedSector === "all" ? 1000 : undefined);
-          });
-        });
-      });
       dashboardSectorFilter?.addEventListener("change", syncChangeStatus);
-      dashboardSectorFilter?.addEventListener("change", () => {
-        queueMicrotask(() => {
-          if (group !== "western-upper-egypt" || dashboardChangeFilter.value !== "all") return;
-          const selected = dashboardSectorFilter.value;
-          (["urban", "agricultural", "industrial"] as const).forEach((kind) => {
-            setGauge(root.querySelector<HTMLElement>(`#${kind}-gauge`), 100, selected === "all" ? 1000 : 100);
-          });
-        });
-      });
       root.addEventListener("dashboard-map-sector", syncChangeStatus);
       root.addEventListener("map-change-status", ((event: CustomEvent<string>) => { if (dashboardChangeFilter.value !== event.detail) { dashboardChangeFilter.value = event.detail; syncChangeStatus(); } }) as EventListener);
       syncChangeStatus();

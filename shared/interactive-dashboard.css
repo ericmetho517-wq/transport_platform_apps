@@ -310,6 +310,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .gauge-card, .donut-card { padding: 12px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; flex: 1 1 auto; }
 .gauge-card > span, .donut-card > span { font-size: 12px; font-weight: 800; line-height: 1.3; }
 .gauge-card small { color: #aaa; font-size: 9px; }
+.gauge-no-data { max-width: 230px; color: #e4d6a8; font-size: 12px; line-height: 1.7; }
 .gauge { position:relative; width:min(240px,94%); aspect-ratio:260/158; display:grid; place-items:center; direction:ltr; }
 .gauge svg { display:block; width:100%; height:auto; overflow:visible; }
 .gauge-track,.gauge-zone { fill:none; stroke-width:34; stroke-linecap:butt; }

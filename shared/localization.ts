@@ -1,6 +1,10 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["لا توجد بيانات حالة تغير موثقة", "No documented change-status data"],
+  ["نسبة مساحة العمران حسب حالة التغير من العمران المصنف", "Urban area share by change status among classified urban land"],
+  ["نسبة مساحة الزراعة حسب حالة التغير من الزراعة المصنفة", "Agricultural area share by change status among classified agricultural land"],
+  ["نسبة مساحة الصناعة حسب حالة التغير من الصناعة المصنفة", "Industrial area share by change status among classified industrial land"],
   ["خريطة قمر صناعي تفاعلية تعرض حدود منطقة الدراسة للقطاع المحدد. استخدم أزرار التكبير واسحب الخريطة، وانقر على المنطقة لعرض بياناتها الوصفية.", "An interactive satellite map shows the selected sector's study area. Zoom or drag the map, and click the area to inspect its attributes."],
   ["العمالة الزراعية (ألف عامل)", "Agricultural workforce (thousands)"],
   ["العمالة الصناعية (ألف عامل)", "Industrial workforce (thousands)"],
