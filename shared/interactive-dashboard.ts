@@ -976,24 +976,23 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const storyMode = Boolean(scope.closest(".story-runtime")) && !Boolean(scope.closest(".story-map-compare"));
   const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
   const temporalMap = mapInstance.includes("baseline") || mapInstance.includes("current");
-  const storyVisibleLayers = (layers: LayerName[]) => storyMode ? layers.filter((layer) => layer !== "study") : layers;
+  // Story maps are a focused spatial narrative: their interactive map shows
+  // only the verified study-area geometry for the selected sector.  Loading
+  // land-cover, water, survey or corridor layers here can introduce source
+  // polygons outside the area and visually obscure the satellite image.
+  const storyStudyLayers: LayerName[] = ["study"];
   const temporalStartLayers: LayerName[] = ["study", "urban", "agricultural", "industrial", "landcover-start", ...transportLayerNames, "axis"];
   const temporalEndLayers: LayerName[] = ["study", "urban", "agricultural", "industrial", "landcover-end", ...transportLayerNames, "axis"];
-  const requestedLayers = temporalMap
-    ? storyVisibleLayers(mapInstance.includes("baseline") ? temporalStartLayers.filter((layer) => usableLayers.includes(layer)) : temporalEndLayers.filter((layer) => usableLayers.includes(layer)))
+  const requestedLayers = storyMode
+    ? storyStudyLayers.filter((layer) => usableLayers.includes(layer))
+    : temporalMap
+    ? (mapInstance.includes("baseline") ? temporalStartLayers.filter((layer) => usableLayers.includes(layer)) : temporalEndLayers.filter((layer) => usableLayers.includes(layer)))
     : mapInstance.includes("baseline")
-    ? storyVisibleLayers([...regularLayers, ...(summary.layers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])])
+    ? [...regularLayers, ...(summary.layers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])]
     : mapInstance.includes("current")
-      ? storyVisibleLayers([...regularLayers, ...(summary.layers.includes("landcover-end") ? ["landcover-end" as LayerName] : [])])
+      ? [...regularLayers, ...(summary.layers.includes("landcover-end") ? ["landcover-end" as LayerName] : [])]
     : viewerMode ? usableLayers
-      : storyMode ? [...regularLayers.filter((layer) => layer !== "study"), ...temporalLayers.filter((layer) => usableLayers.includes(layer) && !(qenaCurrentFallback && layer === "landcover-end" && regularLayers.includes("baseline")))].sort((first, second) => {
-          const rank = (layer: LayerName) => layer === "study" ? 0
-            : layer === "landcover-start" ? 1 : layer === "landcover-end" ? 2
-              : layer === "baseline" ? 3 : ["urban", "agricultural", "industrial", "civil"].includes(layer) ? 4
-                : layer === "axis" ? 10 : 6;
-          return rank(first) - rank(second);
-        })
-        : [...regularLayers, ...(usableLayers.includes("landcover-end") ? ["landcover-end" as LayerName] : usableLayers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])];
+      : [...regularLayers, ...(usableLayers.includes("landcover-end") ? ["landcover-end" as LayerName] : usableLayers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])];
   const layerResults = await Promise.all(requestedLayers.map(async (layer) => {
     const sourceLayer = qenaCurrentFallback && layer === "landcover-end" ? "baseline" : layer;
     const url = `../../data/dashboard/${group}/${sourceLayer}.geojson`;
