@@ -278,13 +278,9 @@ function storyMediaChapters(app: TransportApp, entries: StoryEntry[]): string {
     const gallery = storyGalleryMarkup(app, label, rawMedia, entry.hero, entry.comparisons);
     return `<article class="story-place${index === 0 ? " active" : ""}" id="story-place-${entry.key}" data-story-detail="${entry.key}"><div class="story-place-banner"><span>${String(index + 1).padStart(2, "0")}</span><div><h2>${esc(label)}</h2></div></div><div class="story-place-body"><div class="story-place-copy"><h3>${app.language === "en" ? "Maps and images" : "الصور والخرائط"}</h3></div>${gallery}</div></article>`;
   }).join("");
-  const sectorImages = new Set(entries.flatMap((entry) => reportStoryMedia("western-upper-egypt", entry.key).map((reference) => reference.imagePath)));
-  const routeMedia = isWestern ? reportStoryMedia("western-upper-egypt", "corridor-overview").filter((reference) => !sectorImages.has(reference.imagePath)) : [];
-  const overviewLabel = app.language === "en" ? "Whole route overview" : "نظرة شاملة على المحور";
-  const overview = routeMedia.length
-    ? `<article class="story-place active story-route-overview"><div class="story-place-body"><div class="story-place-copy"><h3>${overviewLabel}</h3></div>${storyGalleryMarkup(app, overviewLabel, routeMedia, "", [])}</div></article>`
-    : "";
-  return `<section id="story-details" class="story-details"><div class="section-heading"><span>03</span><h2>${app.language === "en" ? "Project media" : "صور المشروع"}</h2></div>${chapters}${overview}</section>`;
+  // A sector page must never append the corridor-wide report: it contains
+  // maps of other sectors and remains visible regardless of the selected tab.
+  return `<section id="story-details" class="story-details"><div class="section-heading"><span>03</span><h2>${app.language === "en" ? "Project media" : "صور المشروع"}</h2></div>${chapters}</section>`;
 }
 
 function experienceMarkup(app: TransportApp): string {
