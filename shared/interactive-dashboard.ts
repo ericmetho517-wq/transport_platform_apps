@@ -1635,6 +1635,13 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   scope.querySelector<HTMLButtonElement>(".feature-popup > button")?.addEventListener("click", () => { const popup = scope.querySelector<HTMLElement>(".feature-popup"); if (popup) popup.hidden = true; });
   document.querySelector<HTMLElement>(".interactive-dashboard")?.addEventListener("dashboard-map-sector", ((event: CustomEvent<string>) => fitSector(event.detail)) as EventListener);
   scope.addEventListener("focus-story-sector", ((event: CustomEvent<string>) => fitSector(event.detail)) as EventListener);
+  // The sector control is populated before the map interaction handlers.
+  // Fit once it is ready, and on every change, so a single sector's study
+  // area never disappears inside the full corridor extent.
+  if (storyMode && sectorSelect) {
+    sectorSelect.addEventListener("change", () => fitSector(sectorSelect.value));
+    fitSector(sectorSelect.value);
+  }
   // Apply the focused initial view before the user interacts. Paired maps
   // receive subsequent wheel/pan changes through the linked-map-view event.
   apply(false);
