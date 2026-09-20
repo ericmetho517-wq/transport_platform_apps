@@ -1,6 +1,7 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["خريطة قمر صناعي تفاعلية تعرض حدود منطقة الدراسة للقطاع المحدد. استخدم أزرار التكبير واسحب الخريطة، وانقر على المنطقة لعرض بياناتها الوصفية.", "An interactive satellite map shows the selected sector's study area. Zoom or drag the map, and click the area to inspect its attributes."],
   ["العمالة الزراعية (ألف عامل)", "Agricultural workforce (thousands)"],
   ["العمالة الصناعية (ألف عامل)", "Industrial workforce (thousands)"],
   ["نسب أنواع المحاصيل الزراعية", "Crop type shares"],

@@ -187,7 +187,7 @@ body.evidence-modal-open { overflow:hidden; }
 .story-runtime .story-map-layer-panel summary{padding:9px 13px;cursor:pointer;font-size:12px;font-weight:700;list-style-position:inside}
 .story-runtime .story-map-layer-panel .map-layer-toggles{position:static;display:grid;max-width:none;max-height:min(52vh,360px);overflow:auto;padding:7px;box-shadow:none}
 .story-runtime .story-map-layer-panel .map-layer-toggles button{font-size:11px;min-height:28px}
-.story-runtime .gis-map .map-study path{fill:#ffffff08;stroke:#efcb49;stroke-width:2.4;filter:drop-shadow(0 0 2px #003d30);pointer-events:none}
+.story-runtime .gis-map .map-study path{fill:#ffd15029;stroke:#efcb49;stroke-width:2.4;filter:drop-shadow(0 0 2px #003d30)}
 .story-map-compare .story-map-layer-panel{display:none}
 @media(max-width:720px){.story-media-category[data-media-kind="axis-photo"] .story-media-grid,.story-media-category[data-media-kind="dashboard"] .story-media-grid,.story-media-category[data-media-kind="evidence"] .story-media-grid{grid-template-columns:1fr}}
 .story-content[hidden],.story-dashboard-view[hidden]{display:none!important}

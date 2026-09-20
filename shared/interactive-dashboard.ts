@@ -1152,6 +1152,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         path.style.fill = bucket.fill;
         path.style.stroke = bucketIsLine || bucketIsPoint ? bucket.stroke : bucket.fill || "transparent";
         path.style.strokeWidth = bucketIsLine || bucketIsPoint ? bucket.strokeWidth : "0.2";
+        if (storyMode && layer === "study") {
+          path.style.fill = "rgba(255, 209, 80, 0.16)";
+          path.style.stroke = "#efcb49";
+          path.style.strokeWidth = "2.4";
+        }
         if (bucketIsLine) {
           path.style.strokeLinecap = "round";
           path.style.strokeLinejoin = "round";
