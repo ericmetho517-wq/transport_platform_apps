@@ -81,44 +81,44 @@
   },
   "landUse": [
     {
-      "category": "Vscant Lands",
-      "year": 2014,
-      "area": 3138.716
-    },
-    {
       "category": "Agriculture",
       "year": 2014,
-      "area": 1044.027
+      "area": 1044
+    },
+    {
+      "category": "Vscant Lands",
+      "year": 2014,
+      "area": 3138.7
     },
     {
       "category": "Urban",
       "year": 2014,
-      "area": 264.099
+      "area": 264.1
     },
     {
       "category": "Water Bodies ",
       "year": 2014,
-      "area": 5.213
-    },
-    {
-      "category": "Vscant Lands",
-      "year": 2023,
-      "area": 2529.551
+      "area": 5.2
     },
     {
       "category": "Agriculture",
       "year": 2023,
-      "area": 1622.772
+      "area": 1622.8
+    },
+    {
+      "category": "Vscant Lands",
+      "year": 2023,
+      "area": 2529.6
     },
     {
       "category": "Urban",
       "year": 2023,
-      "area": 272.052
+      "area": 272.1
     },
     {
       "category": "Water Bodies ",
       "year": 2023,
-      "area": 5.213
+      "area": 5.2
     }
   ],
   "layers": [

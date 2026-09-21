@@ -84,7 +84,138 @@
       161913991
     ]
   },
-  "landUse": [],
+  "landUse": [
+    {
+      "category": "الأراضي الزراعية",
+      "year": 2014,
+      "area": 2342.8
+    },
+    {
+      "category": "المناطق الصناعية",
+      "year": 2014,
+      "area": 4606.6
+    },
+    {
+      "category": "أراضي الفضاء",
+      "year": 2014,
+      "area": 716.1
+    },
+    {
+      "category": "الأراضي العمرانية",
+      "year": 2014,
+      "area": 419.1
+    },
+    {
+      "category": "أراضي القوات المسلحة",
+      "year": 2014,
+      "area": 4.4
+    },
+    {
+      "category": "أراضي خدمات",
+      "year": 2014,
+      "area": 7418.2
+    },
+    {
+      "category": "المناطق الترفيهية",
+      "year": 2014,
+      "area": 7599.6
+    },
+    {
+      "category": "المقابر",
+      "year": 2014,
+      "area": 14.6
+    },
+    {
+      "category": "مسطحات مائية",
+      "year": 2014,
+      "area": 57.7
+    },
+    {
+      "category": "حرم الطريق",
+      "year": 2014,
+      "area": 14.6
+    },
+    {
+      "category": "طرق",
+      "year": 2014,
+      "area": 24.2
+    },
+    {
+      "category": "الأراضي التعليمية",
+      "year": 2014,
+      "area": 0.8
+    },
+    {
+      "category": "الأراضي الحكومية",
+      "year": 2014,
+      "area": 0.8
+    },
+    {
+      "category": "الأراضي الزراعية",
+      "year": 2024,
+      "area": 3758.8
+    },
+    {
+      "category": "أراضي الفضاء",
+      "year": 2024,
+      "area": 6573.8
+    },
+    {
+      "category": "أراضي خدمات",
+      "year": 2024,
+      "area": 7420.8
+    },
+    {
+      "category": "الأراضي العمرانية",
+      "year": 2024,
+      "area": 2914.8
+    },
+    {
+      "category": "المناطق الصناعية",
+      "year": 2024,
+      "area": 23.6
+    },
+    {
+      "category": "مسطحات مائية",
+      "year": 2024,
+      "area": 322.5
+    },
+    {
+      "category": "الأراضي الحكومية",
+      "year": 2024,
+      "area": 14334.5
+    },
+    {
+      "category": "المناطق الترفيهية",
+      "year": 2024,
+      "area": 3.7
+    },
+    {
+      "category": "الأراضي التعليمية",
+      "year": 2024,
+      "area": 1.5
+    },
+    {
+      "category": "المقابر",
+      "year": 2024,
+      "area": 19.4
+    },
+    {
+      "category": "أراضي القوات المسلحة",
+      "year": 2024,
+      "area": 5.4
+    },
+    {
+      "category": "حرم الطريق",
+      "year": 2024,
+      "area": 22
+    },
+    {
+      "category": "طرق",
+      "year": 2024,
+      "area": 31.9
+    }
+  ],
   "landUseDataStatus": "The exported 2014 layer does not contain a complete area series comparable with 2024; the chart is intentionally unavailable",
   "layers": [
     "study",

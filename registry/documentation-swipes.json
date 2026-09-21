@@ -98,6 +98,14 @@
         "sourceDocument": "whole_report_06_Kalabsha_modified2024.docx",
         "beforeEntry": "word/media/image10.jpg",
         "afterEntry": "word/media/image11.jpg"
+      },
+      {
+        "before": "../../references/documentation-swipe/kalabsha-axis-3-before.jpg",
+        "after": "../../references/documentation-swipe/kalabsha-axis-3-after.jpg",
+        "sourceFolder": "التوثيق",
+        "sourceDocument": "whole_report_06_Kalabsha_modified2024.docx",
+        "beforeEntry": "word/media/image25.jpeg",
+        "afterEntry": "word/media/image26.jpeg"
       }
     ],
     "cairo-suez-road": [

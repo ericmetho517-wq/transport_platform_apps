@@ -52,6 +52,13 @@ const reviewedStoryComparisonPairs: Record<string, StoryComparisonPair[]> = {
       after: "../../references/story-media/de49d0d7bb7766536b7a.jpg",
     },
   ],
+  "kalabsha-axis": [
+    {
+      // الغطاء الأرضي بالمنطقة 2014 vs 2023 – extracted from docx شكل (330/331)
+      before: "../../references/documentation-swipe/kalabsha-axis-3-before.jpg",
+      after: "../../references/documentation-swipe/kalabsha-axis-3-after.jpg",
+    },
+  ],
 };
 
 // The Luxor document's extracted adjacent images are different map extents
@@ -226,7 +233,7 @@ function storyHeader(app: TransportApp, entries: StoryEntry[]): string {
   }
   const firstKey = entries.find((entry) => entry.hero)?.key || entries[0]?.key;
   const sectorTabs = entries.map((entry) => { const label = storyEntryLabel(entry, app.language); return `<button class="${entry.key === firstKey ? "active" : ""}" data-story-key="${entry.key}" data-story-sector="${entry.sector}" data-story-title="${esc(label)}" data-story-report="${esc(entry.report)}" data-story-hero="${esc(entry.hero)}" data-story-compare-before="${esc(entry.compareBefore)}" data-story-compare-after="${esc(entry.compareAfter)}">${esc(label)}</button>`; }).join("");
-  return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><i aria-hidden="true">▦</i><span>تطور الأراضي المحيطة بطريق الصعيد الصحراوي</span></a></div><nav class="story-sector-tabs" aria-label="قطاعات محور الصعيد الغربي">${sectorTabs}${dashboard ? `<button class="story-dashboard-collection-link" data-story-dashboard data-dashboard-src="../${dashboard}/index.html?lang=${app.language}">لوحة المؤشرات</button>` : ""}</nav><nav class="story-chapter-tabs"><strong id="story-chrome-title">تطور الأراضي المحيطة بالمحور</strong><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">المقارنة الزمنية</a><a href="#story-details">صور ومراحل المحور</a></nav></header>`;
+  return `<header class="story-app-header"><div class="story-identity"><a href="../../index.html" aria-label="العودة إلى المنصة"><i aria-hidden="true">▦</i><span>تطور الأراضي المحيطة بطريق الصعيد الصحراوي</span></a></div><nav class="story-sector-tabs" aria-label="قطاعات محور الصعيد الغربي">${sectorTabs}</nav><nav class="story-chapter-tabs"><strong id="story-chrome-title">تطور الأراضي المحيطة بالمحور</strong><a class="active" href="#story-intro">مقدمة</a><a href="#story-map">الخريطة التفاعلية</a><a href="#story-development">المقارنة الزمنية</a><a href="#story-details">صور ومراحل المحور</a></nav></header>`;
 }
 
 function storyGalleryMarkup(app: TransportApp, label: string, rawMedia: StoryMediaReference[], hero: string, comparisons: StoryComparisonPair[]): string {

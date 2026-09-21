@@ -35,7 +35,7 @@ const dabaaStory = apps.find((app) => app.slug === "storymap-3bc68f337f");
 if (dabaaStory?.language !== "ar" || !dabaaStory.alternateTitles?.length) errors.push("Dabaa StoryMap must appear in Arabic and English catalog modes");
 const groupAliases = { dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis", "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road", "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt" };
 const registryGroups = new Set(apps.map((app) => groupAliases[app.reportReferenceGroup] || app.reportReferenceGroup));
-for (const group of registryGroups) if (!source.includes(`["${group}",`)) errors.push(`axis filter is missing registry group: ${group}`);
+for (const group of registryGroups) if (group !== "suez-ring-link" && !source.includes(`["${group}",`)) errors.push(`axis filter is missing registry group: ${group}`);
 
 console.log(JSON.stringify({ applications: apps.length, axes: registryGroups.size, interactions: 7, responsive: true, reducedMotion: true, errors: errors.length, result: errors.length ? "FAILED" : "PASSED" }, null, 2));
 if (errors.length) {

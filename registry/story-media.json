@@ -2418,6 +2418,30 @@
           "kind": "comparison",
           "width": 1220,
           "height": 644
+        },
+        {
+          "imagePath": "../../references/documentation-swipe/kalabsha-axis-3-before.jpg",
+          "reportName": "whole_report_06_Kalabsha_modified2024.docx",
+          "page": 330,
+          "kind": "comparison",
+          "width": 1717,
+          "height": 1151
+        },
+        {
+          "imagePath": "../../references/documentation-swipe/kalabsha-axis-3-after.jpg",
+          "reportName": "whole_report_06_Kalabsha_modified2024.docx",
+          "page": 331,
+          "kind": "comparison",
+          "width": 1719,
+          "height": 1148
+        },
+        {
+          "imagePath": "../../references/documentation-swipe/kalabsha-axis-change-map.jpg",
+          "reportName": "whole_report_06_Kalabsha_modified2024.docx",
+          "page": 332,
+          "kind": "map",
+          "width": 1699,
+          "height": 1146
         }
       ]
     }

@@ -81,39 +81,39 @@
   },
   "landUse": [
     {
-      "category": "غير مصنف",
+      "category": "الأراضي الزراعية",
       "year": 2014,
-      "area": 128.802
+      "area": 128.8
     },
     {
-      "category": "2",
+      "category": "الأراضي العمرانية",
       "year": 2014,
-      "area": 35.918
+      "area": 25.5
     },
     {
-      "category": "3",
+      "category": "أراضي الفضاء",
       "year": 2014,
-      "area": 25.477
+      "area": 35.9
     },
     {
-      "category": "غير مصنف",
+      "category": "الأراضي الزراعية",
       "year": 2023,
-      "area": 136.897
+      "area": 136.9
     },
     {
-      "category": "3",
+      "category": "الأراضي العمرانية",
       "year": 2023,
-      "area": 26.072
+      "area": 26.1
     },
     {
-      "category": "2",
+      "category": "أراضي الفضاء",
       "year": 2023,
-      "area": 24.577
+      "area": 24.6
     },
     {
-      "category": "4",
+      "category": "أراضي القوات المسلحة",
       "year": 2023,
-      "area": 2.415
+      "area": 2.4
     }
   ],
   "layers": [

@@ -6,14 +6,14 @@ type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "b
 // in the renderer (rather than per-dashboard CSS) means a road or rail layer
 // has exactly the same colour, width, and dash pattern everywhere.
 const lineSymbols: Partial<Record<LayerName, { color: string; width: number; dash?: string }>> = {
-  axis: { color: "#ed1c24", width: 3.0 },
+  axis: { color: "#ed1c24", width: 3.2 },
   transport: { color: "#18b8ad", width: 2.4 },
-  Road_CairoRing: { color: "#18b8ad", width: 2.4 },
-  Road_MiddleRing: { color: "#174f86", width: 2.4 },
-  Road_RegionalRing: { color: "#e510c5", width: 2.4 },
+  Road_CairoRing: { color: "#f59e0b", width: 3.0 },
+  Road_MiddleRing: { color: "#e510c5", width: 3.0 },
+  Road_RegionalRing: { color: "#22c55e", width: 3.0 },
   LRT_Line: { color: "#43c94f", width: 2.4 },
   Metro_Line: { color: "#2b7fd1", width: 2.4 },
-  Transit_GreenLine: { color: "#4bd35c", width: 3.8, dash: "11 5" },
+  Transit_GreenLine: { color: "#262626", width: 3.0, dash: "10 5" },
   Transit_KafrDawoodSadat: { color: "#808080", width: 3.8, dash: "11 5" },
   Transit_LRT: { color: "#43c94f", width: 2.4 },
   Transit_Metro1: { color: "#2995df", width: 2.4 },
@@ -23,13 +23,13 @@ const lineSymbols: Partial<Record<LayerName, { color: string; width: number; das
   Transit_Metro6: { color: "#a573db", width: 3.8 },
   Transit_MonorailCapital: { color: "#9b9b9b", width: 2.4 },
   Transit_MonorailOctober: { color: "#9b9b9b", width: 2.4 },
-  Transit_RobikiBelbeis: { color: "#111111", width: 2.4 },
+  Transit_RobikiBelbeis: { color: "#1a1a1a", width: 2.8, dash: "4 3" },
 };
 
 const ismailiaLanduseSymbols: Record<number, [string, string]> = {
   0: ["#28c51b", "#28c51b"],  // الأراضي الزراعية
   1: ["#a100c2", "#a100c2"],  // المناطق الصناعية
-  2: ["#ffffbe", "#e4e4a3"],  // أراضي الفضاء
+  2: ["transparent", "transparent"],  // أراضي الفضاء (شفاف – يظهر الـ basemap)
   3: ["#ffaa00", "#e59600"],  // الأراضي العمرانية
   4: ["#ff1308", "#dc0d05"],  // أراضي القوات المسلحة
   5: ["#c6f5ad", "#9dd781"],  // أراضي خدمات
@@ -844,8 +844,8 @@ async function deriveLandUseFromLocalLayers(group: string, summary: DashboardSum
     const totals = new Map<string, number>();
     for (const feature of collection.features) {
       const properties = feature.properties || {};
-      const category = categoryFor(properties.landuse_code ?? properties.landuse_value ?? properties.landuse_label);
-      const rawArea = Number(properties.area_km2 ?? 0);
+      const category = categoryFor(properties.landuse_code ?? properties.landuse_value ?? properties.landuse_label ?? properties["استخدام_الأرض"] ?? properties["وصف_الاستخدام"]);
+      const rawArea = Number(properties.area_km2 ?? properties["مساحة_كم2"] ?? properties["SHAPE_Area"] ?? 0);
       if (!Number.isFinite(rawArea) || rawArea <= 0) continue;
       const threshold = Math.max((summary.metrics.studyAreaKm2 || 1) * 2, 10_000);
       const area = rawArea > threshold ? rawArea / 1_000_000 : rawArea;
@@ -974,19 +974,22 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       : imageryTiles.current;
   const temporalLayers: LayerName[] = ["landcover-start", "landcover-end"];
   const qenaCurrentFallback = group === "qena-luxor-road" && !summary.layers.includes("landcover-end") && summary.layers.includes("baseline");
+  const suezTransport = group === "cairo-suez-road" || group === "suez-ring-link";
   const usableLayers = summary.layers
-    .concat(qenaCurrentFallback ? ["landcover-end" as LayerName] : []);
+    .concat(qenaCurrentFallback ? ["landcover-end" as LayerName] : [])
+    .concat(suezTransport ? transportLayerNames : []);
   const regularLayers = usableLayers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && usableLayers.includes("landcover-start") && !Boolean(scope.closest(".story-runtime"))));
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
   const storyMode = Boolean(scope.closest(".story-runtime")) && !Boolean(scope.closest(".story-map-compare"));
   const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
   const temporalMap = mapInstance.includes("baseline") || mapInstance.includes("current");
   // Story maps are a focused spatial narrative: their interactive map shows
-  // only the verified study-area geometry for the selected sector.  Loading
+  // only the verified study-area geometry for the selected sector. Loading
   // land-cover, water, survey or corridor layers here can introduce source
   // polygons outside the area and visually obscure the satellite image.
   const storyStudyLayers: LayerName[] = ["study"];
-  const temporalStartLayers: LayerName[] = ["study", "urban", "agricultural", "industrial", "landcover-start", ...transportLayerNames, "axis"];
+  const baselineTransportNames: LayerName[] = suezTransport ? transportLayerNames : ["Road_CairoRing"];
+  const temporalStartLayers: LayerName[] = ["study", "urban", "agricultural", "industrial", "landcover-start", ...baselineTransportNames, "axis"];
   const temporalEndLayers: LayerName[] = ["study", "urban", "agricultural", "industrial", "landcover-end", ...transportLayerNames, "axis"];
   const requestedLayers = storyMode
     ? storyStudyLayers.filter((layer) => usableLayers.includes(layer))
@@ -1000,9 +1003,21 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       : [...regularLayers, ...(usableLayers.includes("landcover-end") ? ["landcover-end" as LayerName] : usableLayers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])];
   const layerResults = await Promise.all(requestedLayers.map(async (layer) => {
     const sourceLayer = qenaCurrentFallback && layer === "landcover-end" ? "baseline" : layer;
-    const url = `../../data/dashboard/${group}/${sourceLayer}.geojson`;
+    const isTransport = transportLayerNames.includes(layer as any);
+    const primaryUrl = `../../data/dashboard/${group}/${sourceLayer}.geojson`;
+    const fallbackUrl = `../../data/dashboard/ismailia/${sourceLayer}.geojson`;
     try {
-      return { layer, collection: await loadGeoJson(url) } as const;
+      let collection: GeoJsonCollection;
+      try {
+        collection = await loadGeoJson(primaryUrl);
+      } catch (err) {
+        if (isTransport) {
+          collection = await loadGeoJson(fallbackUrl);
+        } else {
+          throw err;
+        }
+      }
+      return { layer, collection } as const;
     } catch (error) {
       console.error(`Unable to load map layer ${group}/${layer}`, error);
       return { layer, error } as const;
@@ -1018,12 +1033,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       pairCount += 1; minX = Math.min(minX, value[0]); maxX = Math.max(maxX, value[0]); minY = Math.min(minY, value[1]); maxY = Math.max(maxY, value[1]);
     } else if (Array.isArray(value)) value.forEach((item) => scanCoordinates(item as Coordinates));
   };
-  // Keep the initial extent focused on the study corridor. Ismailia also
-  // contains reference transport layers covering much of Egypt; including
-  // those in the extent makes the actual study area appear tiny.
-  const extentLayers = group === "ismailia"
-    ? new Set<LayerName>(["study", "axis", "urban", "agricultural", "industrial", "landcover-start", "landcover-end"])
-    : null;
+  // Keep the initial extent focused on the study corridor. Transport layers
+  // cover larger regions; including them in the extent makes the study area tiny.
+  const extentLayers = new Set<LayerName>(["study", "axis", "urban", "agricultural", "industrial", "landcover-start", "landcover-end"]);
   loaded.forEach(([layer, collection]) => {
     if (extentLayers && !extentLayers.has(layer)) return;
     collection.features.forEach((feature) => { if (feature.geometry) scanCoordinates(feature.geometry.coordinates); });
@@ -1670,17 +1682,43 @@ function activateLanduseCode(code: string): void {
 
 function activateLandusePatterns(codes: string[], layer: "landcover-start" | "landcover-end"): void {
   const accepted = new Set(codes);
-  activateLayerOnly(layer);
-  document.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => {
-    const activeLayer = group.dataset.layerGroup === layer;
-    group.classList.toggle("layer-hidden", !activeLayer);
-    group.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => {
-      path.toggleAttribute("hidden", !activeLayer || !accepted.has(path.dataset.landuseCode || ""));
+  // Detect paired temporal maps (one baseline, one current).
+  const baselineMap = document.querySelector<HTMLElement>(".gis-map[data-map-instance*=\"baseline\"]");
+  const currentMap = document.querySelector<HTMLElement>(".gis-map[data-map-instance*=\"current\"]");
+  const isPaired = Boolean(baselineMap && currentMap);
+  if (isPaired) {
+    // In a paired layout filter each map's own temporal layer by the accepted codes.
+    // Neither map is hidden — they stay visible and both show the chosen land use.
+    const applyToMap = (map: HTMLElement, ownLayer: "landcover-start" | "landcover-end") => {
+      map.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => {
+        const isOwnLayer = group.dataset.layerGroup === ownLayer;
+        group.classList.toggle("layer-hidden", !isOwnLayer);
+        group.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => {
+          path.toggleAttribute("hidden", !accepted.has(path.dataset.landuseCode || ""));
+        });
+      });
+      map.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
+        if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) {
+          button.classList.toggle("active", button.dataset.mapLayer === ownLayer);
+        }
+      });
+    };
+    applyToMap(baselineMap!, "landcover-start");
+    applyToMap(currentMap!, "landcover-end");
+  } else {
+    // Single-map behaviour: show only the clicked temporal layer and filter by codes.
+    activateLayerOnly(layer);
+    document.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => {
+      const activeLayer = group.dataset.layerGroup === layer;
+      group.classList.toggle("layer-hidden", !activeLayer);
+      group.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => {
+        path.toggleAttribute("hidden", !activeLayer || !accepted.has(path.dataset.landuseCode || ""));
+      });
     });
-  });
-  document.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
-    if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) button.classList.toggle("active", button.dataset.mapLayer === layer);
-  });
+    document.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
+      if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) button.classList.toggle("active", button.dataset.mapLayer === layer);
+    });
+  }
 }
 
 export async function initInteractiveDashboard(app: TransportApp): Promise<void> {
@@ -1871,15 +1909,39 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           changeSelect.value = "all";
           changeSelect.dispatchEvent(new Event("change"));
         }
-        mapRoots.forEach((map) => {
-          map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((layerGroup) => {
-            layerGroup.classList.remove("layer-hidden");
-            layerGroup.querySelectorAll<SVGPathElement>("path").forEach((path) => {
-              path.removeAttribute("hidden");
-              path.classList.remove("layer-hidden", "change-hidden", "change-match");
+        // In paired temporal maps restore each map to its own landcover layer.
+        const baselineMapEl = root.querySelector<HTMLElement>(".gis-map[data-map-instance*=\"baseline\"]");
+        const currentMapEl = root.querySelector<HTMLElement>(".gis-map[data-map-instance*=\"current\"]");
+        if (baselineMapEl && currentMapEl) {
+          const restoreMap = (map: HTMLElement, ownLayer: "landcover-start" | "landcover-end") => {
+            map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((layerGroup) => {
+              const lg = layerGroup.dataset.layerGroup || "";
+              const isOtherTemporal = (ownLayer === "landcover-start" && lg === "landcover-end") || (ownLayer === "landcover-end" && lg === "landcover-start");
+              layerGroup.classList.toggle("layer-hidden", isOtherTemporal);
+              layerGroup.querySelectorAll<SVGPathElement>("path").forEach((path) => {
+                path.removeAttribute("hidden");
+                path.classList.remove("layer-hidden", "change-hidden", "change-match");
+              });
+            });
+            map.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
+              if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) {
+                button.classList.toggle("active", button.dataset.mapLayer === ownLayer);
+              }
+            });
+          };
+          restoreMap(baselineMapEl, "landcover-start");
+          restoreMap(currentMapEl, "landcover-end");
+        } else {
+          mapRoots.forEach((map) => {
+            map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((layerGroup) => {
+              layerGroup.classList.remove("layer-hidden");
+              layerGroup.querySelectorAll<SVGPathElement>("path").forEach((path) => {
+                path.removeAttribute("hidden");
+                path.classList.remove("layer-hidden", "change-hidden", "change-match");
+              });
             });
           });
-        });
+        }
         root.querySelectorAll<HTMLButtonElement>("#change-bars button").forEach((btn) => btn.classList.remove("active"));
         root.querySelectorAll<HTMLElement>("#comparison-chart .comparison-row i").forEach((item) => item.classList.remove("active"));
         renderComparison(summary);
@@ -1891,10 +1953,17 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const applyLanduseFilter = () => {
         const selected = landuseSelect.value || "all";
         const priceColumns = root.querySelector<HTMLElement>("#price-columns");
-        priceColumns?.classList.toggle("price-filtered", false);
-        priceColumns?.querySelectorAll<HTMLElement>("[data-price-kind]").forEach((card) => {
-          card.classList.toggle("is-selected", selected !== "all" && card.dataset.priceKind === selected);
-        });
+        if (priceColumns) {
+          const cards = priceColumns.querySelectorAll<HTMLElement>("[data-price-kind]");
+          let visibleCount = 0;
+          cards.forEach((card) => {
+            const match = selected === "all" || card.dataset.priceKind === selected;
+            card.hidden = !match;
+            card.classList.toggle("is-selected", selected !== "all" && match);
+            if (match) visibleCount++;
+          });
+          priceColumns.style.setProperty("--price-columns", String(visibleCount || 1));
+        }
         mapRoots.forEach((map) => {
           map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((layerGroup) => {
             const layer = layerGroup.dataset.layerGroup || "";
@@ -1910,11 +1979,11 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           });
         });
         const gaugeRail = root.querySelector<HTMLElement>(".ismailia-agri-right");
-        (["agricultural", "industrial"] as const).forEach((kind) => {
+        (["agricultural", "industrial", "urban"] as const).forEach((kind) => {
           const gaugeCard = root.querySelector<HTMLElement>(`#${kind}-gauge`)?.closest<HTMLElement>(".gauge-card");
           if (gaugeCard) gaugeCard.hidden = selected !== "all" && selected !== kind;
         });
-        gaugeRail?.classList.toggle("single-gauge", selected === "agricultural" || selected === "industrial");
+        gaugeRail?.classList.toggle("single-gauge", selected !== "all");
         root.dataset.landuseFilter = selected;
         root.dispatchEvent(new CustomEvent("dashboard-landuse-filter", { detail: selected }));
       };
@@ -1974,7 +2043,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
             setGaugeUnavailable(gauge);
             return;
           }
-          setGauge(gauge, ((areas![mode === "all" ? "changed" : mode] || 0) / total) * 100);
+          setGauge(gauge, mode === "all" ? 100 : ((areas![mode] || 0) / total) * 100);
           return;
         }
         if (mode !== "all" && total) setGauge(gauge, ((areas?.[mode] || 0) / total) * 100);

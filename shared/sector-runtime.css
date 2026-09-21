@@ -136,8 +136,8 @@ body.evidence-modal-open { overflow:hidden; }
 .arcgis-reference-story .story-identity{min-height:54px;padding:5px 22px;border:0;white-space:nowrap}
 .arcgis-reference-story .story-identity a{display:flex;align-items:center;gap:9px;color:#52635d;font-size:11px}
 .arcgis-reference-story .story-identity a i{display:grid;place-items:center;width:28px;height:28px;color:#40544d;font-size:19px;font-style:normal}
-.arcgis-reference-story .story-sector-tabs{min-height:54px;padding:4px 18px;justify-content:flex-start;gap:2px;overflow-x:auto}
-.arcgis-reference-story .story-sector-tabs button{padding:8px 11px;border-radius:2px;color:#687871;font-size:10px;font-weight:700;white-space:nowrap}
+.arcgis-reference-story .story-sector-tabs{min-height:54px;padding:6px 18px;justify-content:center;gap:4px;overflow-x:auto}
+.arcgis-reference-story .story-sector-tabs button{padding:8px 14px;border-radius:3px;color:#556660;font-size:13px;font-weight:700;white-space:nowrap}
 .arcgis-reference-story .story-sector-tabs button:hover{background:#edf4f1;color:#006b55}
 .arcgis-reference-story .story-sector-tabs button.active{background:#078b72;color:#fff;box-shadow:none}
 .arcgis-reference-story .story-chapter-tabs{grid-column:1/-1;min-height:45px;padding:4px clamp(18px,7vw,135px);justify-content:center;gap:18px;background:#00664f}

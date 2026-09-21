@@ -81,29 +81,54 @@
   },
   "landUse": [
     {
-      "category": "3",
+      "category": "الأراضي العمرانية",
       "year": 2014,
-      "area": 0
+      "area": 37.9
     },
     {
-      "category": "8",
+      "category": "مسطحات مائية",
       "year": 2014,
-      "area": 0
+      "area": 8.1
     },
     {
-      "category": "غير مصنف",
+      "category": "الأراضي الزراعية",
       "year": 2014,
-      "area": 0
+      "area": 14.8
     },
     {
-      "category": "1",
+      "category": "المناطق الصناعية",
       "year": 2014,
-      "area": 0
+      "area": 0.4
     },
     {
-      "category": "2",
+      "category": "أراضي الفضاء",
       "year": 2014,
-      "area": 0
+      "area": 0.1
+    },
+    {
+      "category": "الأراضي العمرانية",
+      "year": 2023,
+      "area": 37.9
+    },
+    {
+      "category": "مسطحات مائية",
+      "year": 2023,
+      "area": 8.1
+    },
+    {
+      "category": "الأراضي الزراعية",
+      "year": 2023,
+      "area": 14.8
+    },
+    {
+      "category": "المناطق الصناعية",
+      "year": 2023,
+      "area": 0.4
+    },
+    {
+      "category": "أراضي الفضاء",
+      "year": 2023,
+      "area": 0.1
     }
   ],
   "layers": [

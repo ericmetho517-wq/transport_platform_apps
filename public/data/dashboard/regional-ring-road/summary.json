@@ -81,64 +81,64 @@
   },
   "landUse": [
     {
-      "category": "2",
+      "category": "أراضي الفضاء",
       "year": 2014,
-      "area": 1041.088
+      "area": 1041.1
     },
     {
-      "category": "غير مصنف",
+      "category": "الأراضي العمرانية",
       "year": 2014,
-      "area": 140.546
+      "area": 43.3
     },
     {
-      "category": "3",
+      "category": "الأراضي الزراعية",
       "year": 2014,
-      "area": 43.292
+      "area": 140.5
     },
     {
-      "category": "1",
+      "category": "أراضي خدمات",
       "year": 2014,
-      "area": 20.797
+      "area": 3
     },
     {
-      "category": "5",
+      "category": "أراضي القوات المسلحة",
       "year": 2014,
-      "area": 3.032
+      "area": 1.9
     },
     {
-      "category": "4",
+      "category": "المناطق الصناعية",
       "year": 2014,
-      "area": 1.864
+      "area": 20.8
     },
     {
-      "category": "2",
+      "category": "أراضي الفضاء",
       "year": 2023,
-      "area": 888.234
+      "area": 888.2
     },
     {
-      "category": "غير مصنف",
+      "category": "الأراضي الزراعية",
       "year": 2023,
-      "area": 147.082
+      "area": 147.1
     },
     {
-      "category": "3",
+      "category": "الأراضي العمرانية",
       "year": 2023,
-      "area": 141.162
+      "area": 141.2
     },
     {
-      "category": "4",
+      "category": "أراضي خدمات",
       "year": 2023,
-      "area": 31.602
+      "area": 18.1
     },
     {
-      "category": "1",
+      "category": "المناطق الصناعية",
       "year": 2023,
-      "area": 29.065
+      "area": 29.1
     },
     {
-      "category": "5",
+      "category": "أراضي القوات المسلحة",
       "year": 2023,
-      "area": 18.069
+      "area": 31.6
     }
   ],
   "layers": [

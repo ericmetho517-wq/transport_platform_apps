@@ -4,13 +4,14 @@ import { dashboardGroup } from "../shared/interactive-dashboard";
 import { enableApplicationLocalization } from "../shared/localization";
 import { localizedAppCategory, localizedAppTitle } from "../shared/app-titles";
 
-const registry = apps as TransportApp[];
+const registry = (apps as TransportApp[]).filter((app) => dashboardGroup(app) !== "suez-ring-link");
 const axisOptions = [
-  ["western-upper-egypt", "محور الصعيد الغربي"], ["ismailia", "محور القاهرة–الإسماعيلية"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
+  ["ismailia", "محور القاهرة–الإسماعيلية"], ["western-upper-egypt", "محور الصعيد الغربي"],
+  ["cairo-suez-road", "طريق القاهرة السويس"],
   ["regional-ring-road", "الدائري الإقليمي"],
-  ["kalabsha-axis", "محور كلابشة"], ["qena-luxor-road", "طريق قنا الأقصر"],
-  ["qus-axis", "محور قوص"], ["cairo-suez-road", "طريق القاهرة السويس"],
-  ["suez-ring-link", "وصلة السويس"], ["dabaa-axis", "محور الضبعة"],
+  ["kalabsha-axis", "محور كلابشة"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
+  ["qus-axis", "محور قوص"], ["qena-luxor-road", "طريق قنا الأقصر"],
+  ["dabaa-axis", "محور الضبعة"],
 ] as const;
 const axisOf = (app: TransportApp): string => dashboardGroup(app);
 const root = document.querySelector<HTMLDivElement>("#app");
