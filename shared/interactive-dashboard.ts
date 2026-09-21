@@ -687,6 +687,36 @@ function renderComparison(summary: DashboardSummary, topOnly = false): void {
     return;
   }
   const years = Array.from(new Set(summary.landUse.map((item) => item.year))).sort();
+  // Keep all non-Ismailia comparison charts limited to the five requested
+  // decision-use classes. Other source classes remain available on the maps.
+  const comparisonCategories = [
+    { label: "أرض الفضاء", codes: ["2"], color: "#fff4ae", matches: /فضاء|vacant|فارغ/i },
+    { label: "الزراعة", codes: ["0"], color: "#16c51b", matches: /زراع|agricultur/i },
+    { label: "العمران", codes: ["3"], color: "#f6a900", matches: /عمران|مبان|urban|build/i },
+    { label: "الصناعة", codes: ["1"], color: "#9800c7", matches: /صناع|industr|factor/i },
+    { label: "الخدمات", codes: ["5"], color: ismailiaLanduseSymbols[5][0], matches: /خدم|مرافق|service/i },
+  ];
+  if (summary.landUse.length) {
+    const rows = years.map((year) => {
+      const values = new Map(comparisonCategories.map((category) => [category.label, 0]));
+      summary.landUse.filter((item) => item.year === year).forEach((item) => {
+        const category = comparisonCategories.find((candidate) => candidate.matches.test(item.category));
+        if (category) values.set(category.label, (values.get(category.label) || 0) + item.area);
+      });
+      const total = Array.from(values.values()).reduce((sum, value) => sum + value, 0);
+      const layer = year === summary.yearStart ? "landcover-start" : "landcover-end";
+      const segments = comparisonCategories.map((category) => {
+        const value = values.get(category.label) || 0;
+        const percent = total ? value / total * 100 : 0;
+        return `<i data-landuse-codes="${category.codes.join(",")}" data-landuse-layer="${layer}" data-landuse-year="${year}" style="width:${percent}%;background:${category.color}" title="${category.label} · ${formatNumber(value, 2)} كم² · ${formatNumber(percent, 1)}٪"><b>${percent >= 6 ? `${formatNumber(percent, 0)}٪` : ""}</b></i>`;
+      }).join("");
+      return `<div class="comparison-row"><b>${year}</b><div>${segments}</div><span>${formatNumber(total, 1)} كم²</span></div>`;
+    }).join("");
+    const axis = `<div class="comparison-axis"><span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100%</span></div>`;
+    const legend = comparisonCategories.map((category) => `<span><i style="background:${category.color}"></i>${category.label}</span>`).join("");
+    container.innerHTML = `${rows}${axis}<div class="comparison-legend">${legend}</div>`;
+    return;
+  }
   let categories = Array.from(new Set(summary.landUse.map((item) => item.category)));
   if (topOnly) {
     const totals = categories.map((category) => [category, summary.landUse.filter((item) => item.category === category).reduce((sum, item) => sum + item.area, 0)] as const).sort((a, b) => b[1] - a[1]);
