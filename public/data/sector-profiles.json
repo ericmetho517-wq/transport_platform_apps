@@ -1816,7 +1816,12 @@
       "industrialFeatures": 262,
       "urbanChangePercent": 33.03,
       "agriculturalChangePercent": 34.49,
-      "industrialChangePercent": 31.7
+      "industrialChangePercent": 31.7,
+      "urbanJobs": 159062,
+      "agriculturalJobs": 147197,
+      "industrialJobs": 268529,
+      "servicesJobs": 190848,
+      "jobOpportunities": 159062
     },
     "prices": {
       "urban": {

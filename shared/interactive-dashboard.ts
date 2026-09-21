@@ -239,10 +239,13 @@ function landMarkup(app: TransportApp, group: string): string {
   const changeBarsTitle = group === "ismailia" ? "مساحات أراضي الخدمات (كم²)" : "مناطق تغير استخدامات الأراضي";
   const urbanMetricKey = group === "ismailia" ? "urbanChangeKm2" : "totalChangeKm2";
   const urbanMetricLabel = "إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)";
+  const ismailiaJobs = group === "ismailia"
+    ? `<div class="ismailia-jobs-cards"><article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="urbanJobs">—</strong><small>فرصة عمل</small></article><article class="opportunity-card opportunity-card-small"><span>فرص العمل لأراضي الخدمات</span><strong data-metric="servicesJobs">—</strong><small>فرصة عمل</small></article></div>`
+    : `<article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="jobOpportunities">—</strong></article>`;
   return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
     ${dashboardHeader(app, group)}
     <div class="land-layout">
-      <aside class="land-left"><article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="jobOpportunities">—</strong></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>${changeBarsTitle}</span>${changeBarsHint ? `<small>${changeBarsHint}</small>` : ""}</div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
+      <aside class="land-left">${ismailiaJobs}<section class="dark-card vertical-chart-card"><div class="card-title"><span>${changeBarsTitle}</span>${changeBarsHint ? `<small>${changeBarsHint}</small>` : ""}</div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
       <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>مكونات استخدامات الأراضي</span><div class="donut" id="change-donut"><strong>مكونات الأراضي</strong></div><div id="donut-legend"></div></section></aside>
     </div>
@@ -287,20 +290,20 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
 function agriculturalMarkup(app: TransportApp, group: string): string {
     return `<main class="interactive-dashboard agriculture-dashboard ismailia-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
       ${dashboardHeader(app, group)}
+      <div class="dashboard-kpis agriculture-kpis south-agriculture-kpis ismailia-summary-kpis">
+        <article style="background:#aeff36;color:#000;"><span>إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)</span><strong data-metric="agriculturalChangeFeddan" style="color:#000;">—</strong></article>
+        <article style="background:#aeff36;color:#000;"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalJobs" style="color:#000;">—</strong></article>
+        <article style="background:#4f82e9;color:#000;"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm" style="color:#000;">—</strong></article>
+        <article style="background:#ffffff;color:#000;"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2" style="color:#000;">—</strong></article>
+        <article style="background:#e066ff;color:#000;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialJobs" style="color:#000;">—</strong></article>
+        <article style="background:#9800c7;color:#000;"><span>إجمالي مساحة الأراضي الصناعية المتغيرة (كم²)</span><strong data-metric="industrialChangeKm2" style="color:#000;">—</strong></article>
+      </div>
       <div class="ismailia-reference-layout">
         <aside class="agriculture-side ismailia-left-rail">
-          <article class="ismailia-agri-total"><span>إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></article>
           <section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section>
           <section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section>
         </aside>
         <section class="ismailia-reference-main">
-          <div class="dashboard-kpis agriculture-kpis south-agriculture-kpis ismailia-summary-kpis">
-            <article style="background:#aeff36;color:#000;"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalFeatures" style="color:#000;">—</strong></article>
-            <article style="background:#4f82e9;color:#fff;"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm" style="color:#fff;">—</strong></article>
-            <article style="background:#ffffff;color:#000;"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2" style="color:#000;">—</strong></article>
-            <article style="background:#e066ff;color:#000;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialFeatures" style="color:#000;">—</strong></article>
-            <article style="background:#9800c7;color:#fff;"><span>إجمالي مساحة الأراضي الصناعية المتغيرة (كم²)</span><strong data-metric="industrialChangeKm2" style="color:#fff;">—</strong></article>
-          </div>
           <div class="ismailia-reference-body">
             <section class="agriculture-center">
               ${mapMarkup()}
@@ -1479,13 +1482,15 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         if (!groupElement) return;
         groupElement.querySelectorAll<SVGPathElement>("path").forEach((path) => {
           if (layer !== "landcover-end") {
-            path.classList.remove("change-hidden");
+            path.classList.remove("change-hidden", "change-match");
             return;
           }
           const status = path.dataset.changeStatus || "unknown";
+          const isLanduseHidden = path.classList.contains("landuse-hidden") || path.hasAttribute("hidden") || path.closest(".layer-hidden") !== null;
           const matches = mode === "all" || status === mode;
-          path.classList.toggle("change-hidden", !matches);
-          path.classList.toggle("change-match", mode !== "all" && matches);
+          const shouldHighlight = mode !== "all" && matches && !isLanduseHidden;
+          path.classList.toggle("change-hidden", mode !== "all" && (!matches || isLanduseHidden));
+          path.classList.toggle("change-match", shouldHighlight);
         });
       });
       scope.dataset.changeStatus = mode;
@@ -1826,6 +1831,10 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     setMetric("totalChangeKm2", totalChange);
     if (group === "ismailia") {
       setMetric("jobOpportunities", summary.metrics.jobOpportunities ?? Math.round((summary.metrics.urbanFeatures || 0) * 3.5 + (summary.metrics.agriculturalFeatures || 0) * .35));
+      for (const name of ["urbanJobs", "agriculturalJobs", "industrialJobs", "servicesJobs"]) {
+        const value = summary.metrics[name] ?? summary.profile?.metrics[name];
+        if (typeof value === "number") setMetric(name, value); else hideUnavailableMetricPanel(name);
+      }
     } else if (summary.profile?.metrics.jobOpportunities !== undefined) {
       setMetric("jobOpportunities", summary.profile.metrics.jobOpportunities);
     } else {
@@ -2014,7 +2023,10 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           if (selectedFilter === "industrial") {
             return { codes: new Set(["1"]), allowedLayers: new Set(["industrial"]) };
           }
-          return { codes: allLandcoverCodesExceptUrban, allowedLayers: new Set(["agricultural", "industrial"]) };
+          if (selectedFilter === "urban") {
+            return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
+          }
+          return { codes: allLandcoverCodes, allowedLayers: new Set(["urban", "agricultural", "industrial"]) };
         }
         if (selectedFilter === "urban") {
           return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
@@ -2069,9 +2081,15 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
                 const match = codes.has(path.dataset.landuseCode || "");
                 path.toggleAttribute("hidden", !match);
                 path.classList.toggle("landuse-hidden", !match);
+                if (!match) {
+                  path.classList.remove("change-match");
+                  path.classList.add("change-hidden");
+                }
               });
             }
           });
+          const changeSelect = map.querySelector<HTMLSelectElement>(".map-change-select");
+          if (changeSelect) changeSelect.dispatchEvent(new Event("change"));
         });
 
         const gaugeRail = root.querySelector<HTMLElement>(".ismailia-agri-right");

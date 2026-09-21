@@ -21,10 +21,10 @@ const counts = new Map<string, number>();
 registry.forEach((app) => counts.set(app.type, (counts.get(app.type) || 0) + 1));
 
 const typeLabels: Record<string, string> = {
-  Dashboard: "لوحات المؤشرات التنفيذية",
-  StoryMap: "القصص الجغرافية",
-  "Web AppViewer": "تطبيقات Web App Builder",
-  "Instant Filter Gallery": "منصات التطبيقات Application Hub",
+  Dashboard: "لوحات البيانات والمؤشرات",
+  StoryMap: "القصص المكانية التفاعلية",
+  "Web AppViewer": "خرائط التطبيقات الرقمية",
+  "Instant Filter Gallery": "بوابات التطبيقات المتكاملة",
 };
 const englishTypeLabels: Record<string, string> = {
   Dashboard: "Operational Indicator Dashboards",
