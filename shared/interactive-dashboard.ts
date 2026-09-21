@@ -293,13 +293,14 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
       : kalabsha
         ? `<section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><strong>—</strong></div></section>`
         : `<section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي</span><div class="gauge" id="agricultural-share-gauge"><strong>—</strong></div></section>`;
-  const leftPanels = qena
+  const serialChart = `<section class="dark-card vertical-chart-card serial-chart-card"><div class="card-title"><span>مناطق تغير استخدامات الأراضي</span><small>اضغط على العمود لتصفية طبقة الخريطة</small></div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section>`;
+  const leftPanels = (qena
     ? `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card agriculture-change highlight-stat"><span>إجمالي مساحة التغير بالأراضي الزراعية (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></section>`
     : qus
       ? `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card ownership-card"><span>نسبة ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section>`
-      : `<section class="dark-card crop-card south-crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section>`;
+      : `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section>`) + serialChart;
   const urbanKpi = (kalabsha || qena) ? "" : `<article class="gold"><span>إجمالي مساحة الأراضي العمرانية (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article>`;
-  return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard ${group}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
+  return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard has-serial-chart ${group}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
     <div class="dashboard-kpis south-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>${urbanKpi}</div>
     <div class="south-agriculture-layout"><aside class="south-agriculture-side">${leftPanels}</aside><section class="south-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي لعامي <bdi>2014</bdi> - <bdi class="map-year-end">2023</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="south-agriculture-right">${rightPanels}</aside></div>
@@ -553,6 +554,43 @@ function renderChangeBars(summary: DashboardSummary): void {
       ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
       ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
     ] as Array<[string, string, number, string]>;
+  // Keep the specialised Ismailia and Western Upper Egypt serial charts
+  // exactly as authored. The other dashboards use the complete classified
+  // land-use breakdown for the latest survey year.
+  if (!isIsmailia && !isWesternUpperEgypt && summary.landUse.length) {
+    const latestYear = Math.max(...summary.landUse.map((item) => item.year));
+    const values = new Map<string, number>();
+    summary.landUse.filter((item) => item.year === latestYear && item.area > 0).forEach((item) => values.set(item.category, (values.get(item.category) || 0) + item.area));
+    const codeForCategory = (category: string) => {
+      if (/زراع|agricultur/i.test(category)) return "0";
+      if (/صناع|industr|factor/i.test(category)) return "1";
+      if (/فضاء|vacant|فارغ/i.test(category)) return "2";
+      if (/عمران|مبان|urban|build/i.test(category)) return "3";
+      if (/عسكر|قوات|military/i.test(category)) return "4";
+      if (/خدم|مرافق|service/i.test(category)) return "5";
+      if (/ترفيه|recreat/i.test(category)) return "6";
+      if (/مقابر|cemeter/i.test(category)) return "7";
+      if (/مائي|مياه|water/i.test(category)) return "8";
+      if (/طرق|طريق|road/i.test(category)) return "9";
+      if (/ديني|relig/i.test(category)) return "11";
+      if (/تعليم|educat/i.test(category)) return "12";
+      if (/حكوم|government/i.test(category)) return "13";
+      if (/سياح|touris/i.test(category)) return "14";
+      if (/خضر|green/i.test(category)) return "15";
+      return "99";
+    };
+    const detailed = Array.from(values, ([label, value]) => {
+      const code = codeForCategory(label);
+      return [code, label, value, ismailiaLanduseSymbols[code]?.[0] || "#aeb7c2"] as [string, string, number, string];
+    }).sort((a, b) => b[2] - a[2]).filter((item) => Number.isFinite(item[2]) && item[2] > 0);
+    const max = Math.max(...detailed.map((item) => item[2]), 1);
+    container.innerHTML = detailed.map(([code, label, value, color]) => `<button type="button" data-filter-layer="landcover-end" data-landuse-codes="${code}" data-landuse-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color};--bar-border:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
+    container.querySelectorAll<HTMLElement>("[data-landuse-codes]").forEach((button) => button.addEventListener("click", () => {
+      const codes = button.dataset.landuseCodes?.split(",").filter(Boolean) || [];
+      if (codes.length) activateLandusePatterns(codes, "landcover-end");
+    }));
+    return;
+  }
   const shown = isIsmailia ? data : data.filter((item) => Number.isFinite(item[2]) && item[2] > 0);
   const max = Math.max(...shown.map((item) => item[2]), 1);
   container.innerHTML = shown.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color};--bar-border:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${label}">${label}</span></button>`).join("");
