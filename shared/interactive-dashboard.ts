@@ -182,12 +182,17 @@ export const renderSectorMapMarkup = mapMarkup;
 
 function dashboardHeader(app: TransportApp, group = ""): string {
   const isAgricultureAndIndustry = /الزراعية.*الصناعية|agricultural.*industrial/i.test(app.title);
-  const hasIndustrial = !["kalabsha-axis", "qus-axis", "qena-luxor-road", "suez-ring-link", "cairo-suez-road", "dabaa-axis"].includes(group);
-  const hasAgricultural = !["suez-ring-link", "cairo-suez-road"].includes(group);
+  // Only offer a land-use type when it belongs to this dashboard's subject.
+  // Cairo–Suez has both agricultural and industrial classified polygons, so
+  // excluding it here made its industrial filter inaccessible.
+  const hasIndustrial = !["kalabsha-axis", "qus-axis", "qena-luxor-road", "suez-ring-link", "dabaa-axis"].includes(group);
+  const hasAgricultural = !["suez-ring-link"].includes(group);
   const landuseOptions = isPriceDashboard(app)
     ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option>${hasAgricultural ? `<option value="agricultural">الزراعي</option>` : ""}${hasIndustrial ? `<option value="industrial">الصناعي</option>` : ""}`
     : isAgricultureAndIndustry
-      ? `<option value="all">الزراعة والصناعة</option>${hasAgricultural ? `<option value="agricultural">الزراعي</option>` : ""}${hasIndustrial ? `<option value="industrial">الصناعي</option>` : ""}`
+      ? (hasIndustrial
+          ? `<option value="all">الزراعة والصناعة</option>${hasAgricultural ? `<option value="agricultural">الزراعي</option>` : ""}<option value="industrial">الصناعي</option>`
+          : `<option value="all">الزراعة</option>`)
       : "";
   const landuseFilter = landuseOptions
     ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
@@ -286,7 +291,7 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
     : qus
       ? `<section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني بمنطقة الدراسة</span><div class="gauge" id="urban-gauge"><strong>—</strong></div></section><section class="dark-card agriculture-change highlight-stat"><span>إجمالي مساحة التغير بالأراضي الزراعية (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></section>`
       : kalabsha
-        ? `<section class="dark-card gauge-card"><span>نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي</span><div class="gauge" id="agricultural-share-gauge"><strong>—</strong></div></section>`
+        ? `<section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><strong>—</strong></div></section>`
         : `<section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي</span><div class="gauge" id="agricultural-share-gauge"><strong>—</strong></div></section>`;
   const leftPanels = qena
     ? `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card agriculture-change highlight-stat"><span>إجمالي مساحة التغير بالأراضي الزراعية (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></section>`
@@ -2142,7 +2147,10 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         if (key !== "changed" && key !== "unchanged") return;
         const landuseCode = String(feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.["استخدام_الأرض"] ?? "");
         const kind = /urban|عمران|3/i.test(landuseCode) ? "urban" : /agri|زراع|0/i.test(landuseCode) ? "agricultural" : /industr|صناع|1/i.test(landuseCode) ? "industrial" : null;
-        const rawArea = Number(feature.properties?.["مساحة_كم2"] ?? feature.properties?.area_km2 ?? 0);
+        // Some source GDBs (notably Cairo–Suez) store the feature area only
+        // in SHAPE_Area.  Use it as the final source rather than treating all
+        // of those classified polygons as zero-area records.
+        const rawArea = Number(feature.properties?.["مساحة_كم2"] ?? feature.properties?.area_km2 ?? feature.properties?.["SHAPE_Area"] ?? feature.properties?.Shape_Area ?? 0);
         const area = rawArea > 1_000_000 ? rawArea / 1_000_000 : rawArea;
         const sector = statusSectorOf(feature.properties);
         if (!kind || !Number.isFinite(area) || area <= 0) return;
@@ -2156,6 +2164,24 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
       group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector]?.[kind] : statusAreas[kind];
     const statusTotalFor = (areas?: Record<ChangeStatus, number>) => (areas?.changed || 0) + (areas?.unchanged || 0);
+    const reportedChangeShareFor = (kind: "urban" | "agricultural" | "industrial"): number | null => {
+      const key = `${kind}ChangePercent` as keyof typeof summary.metrics;
+      const direct = summary.profile?.metrics[key] ?? summary.metrics[key];
+      if (typeof direct === "number" && Number.isFinite(direct)) return Math.min(Math.max(direct, 0), 100);
+
+      // Qena–Luxor has no per-polygon status field in the supplied GDB, but
+      // the report documents agricultural change and total agricultural area
+      // in feddans. Use that documented ratio so the status gauge remains
+      // meaningful when the user selects changed/unchanged.
+      if (kind === "agricultural") {
+        const changed = summary.profile?.metrics.agriculturalChangeFeddan;
+        const total = summary.profile?.metrics.agriculturalAreaFeddan;
+        if (typeof changed === "number" && typeof total === "number" && total > 0) {
+          return Math.min(Math.max((changed / total) * 100, 0), 100);
+        }
+      }
+      return null;
+    };
     const updateChangeStatusGauge = (mode: ChangeMode) => {
       const selectedSector = dashboardSectorFilter?.value || "all";
       const selectedLanduse = landuseSelect?.value || "all";
@@ -2174,7 +2200,11 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           return;
         }
 
-        if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, kind)) {
+        // A classified layer is a first-class source for a gauge even when a
+        // summary KPI was not supplied in the report (as in Cairo–Suez).
+        // Conversely, do not leave an empty industrial gauge in dashboards
+        // that genuinely have no industrial polygons or documented metric.
+        if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, kind) && !total) {
           gaugeCard.setAttribute("hidden", "true");
           gaugeCard.hidden = true;
           return;
@@ -2226,11 +2256,15 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           gauge.removeAttribute("title");
           setGauge(gauge, ((areas?.[mode] || 0) / total) * 100);
         } else {
-          const estimatedChanged = summary.profile?.metrics[`${kind}ChangePercent`] ?? summary.metrics[`${kind}ChangePercent` as keyof typeof summary.metrics];
-          if (typeof estimatedChanged === "number" && Number.isFinite(estimatedChanged)) {
+          const reportedChanged = reportedChangeShareFor(kind);
+          if (reportedChanged !== null) {
             gauge.removeAttribute("data-status-estimate");
-            gauge.removeAttribute("title");
-            setGauge(gauge, mode === "changed" ? estimatedChanged : 100 - estimatedChanged);
+            gauge.title = document.documentElement.lang === "en"
+              ? "Calculated from the documented land-use totals in the report"
+              : "محسوب من مساحات استخدامات الأراضي الموثقة في التقرير";
+            setGauge(gauge, mode === "changed" ? reportedChanged : 100 - reportedChanged);
+          } else {
+            setGaugeUnavailable(gauge);
           }
         }
       });
@@ -2256,6 +2290,10 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       root.addEventListener("map-change-status", ((event: CustomEvent<string>) => { if (dashboardChangeFilter.value !== event.detail) { dashboardChangeFilter.value = event.detail; syncChangeStatus(); } }) as EventListener);
       syncChangeStatus();
     }
+    // Land-use selection can expose a different gauge while a change status
+    // is already selected; recalculate it immediately instead of waiting for
+    // the user to change the status a second time.
+    landuseSelect?.addEventListener("change", () => updateChangeStatusGauge((dashboardChangeFilter?.value || "all") as ChangeMode));
     const comparisonChart = document.querySelector<HTMLElement>("#comparison-chart");
     comparisonChart?.addEventListener("click", (event) => {
       const segment = (event.target as HTMLElement).closest<HTMLElement>(".comparison-row i");
