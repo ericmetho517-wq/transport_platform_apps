@@ -2039,11 +2039,19 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           if (title) title.textContent = document.documentElement.lang === "en"
             ? kind === "urban" ? "Urban area share by change status among classified urban land" : kind === "agricultural" ? "Agricultural area share by change status among classified agricultural land" : "Industrial area share by change status among classified industrial land"
             : kind === "urban" ? "نسبة مساحة العمران حسب حالة التغير من العمران المصنف" : kind === "agricultural" ? "نسبة مساحة الزراعة حسب حالة التغير من الزراعة المصنفة" : "نسبة مساحة الصناعة حسب حالة التغير من الصناعة المصنفة";
+          // "All" is the whole classified selection.  It must always read as
+          // 100%, whether the user is looking at the entire corridor or one
+          // sector.  The two explicit change states are calculated only from
+          // polygons that have a documented status (1 = changed, 2 = unchanged).
+          if (mode === "all") {
+            setGauge(gauge, 100);
+            return;
+          }
           if (!total) {
             setGaugeUnavailable(gauge);
             return;
           }
-          setGauge(gauge, mode === "all" ? 100 : ((areas![mode] || 0) / total) * 100);
+          setGauge(gauge, ((areas![mode] || 0) / total) * 100);
           return;
         }
         if (mode !== "all" && total) setGauge(gauge, ((areas?.[mode] || 0) / total) * 100);
