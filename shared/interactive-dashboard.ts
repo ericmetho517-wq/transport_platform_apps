@@ -582,7 +582,9 @@ function renderChangeBars(summary: DashboardSummary): void {
     const detailed = Array.from(values, ([label, value]) => {
       const code = codeForCategory(label);
       return [code, label, value, ismailiaLanduseSymbols[code]?.[0] || "#aeb7c2"] as [string, string, number, string];
-    }).sort((a, b) => b[2] - a[2]).filter((item) => Number.isFinite(item[2]) && item[2] > 0);
+    // Vacant land and roads remain on the map and in the comparison chart,
+    // but are context layers rather than change-use indicators in the serial chart.
+    }).sort((a, b) => b[2] - a[2]).filter((item) => !["2", "9"].includes(item[0]) && Number.isFinite(item[2]) && item[2] > 0);
     const max = Math.max(...detailed.map((item) => item[2]), 1);
     container.innerHTML = detailed.map(([code, label, value, color]) => `<button type="button" data-filter-layer="landcover-end" data-landuse-codes="${code}" data-landuse-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color};--bar-border:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
     container.querySelectorAll<HTMLElement>("[data-landuse-codes]").forEach((button) => button.addEventListener("click", () => {
