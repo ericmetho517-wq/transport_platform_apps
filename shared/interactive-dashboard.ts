@@ -544,15 +544,15 @@ function renderChangeBars(summary: DashboardSummary): void {
   const isIsmailia = dashboardGroup === "ismailia";
   const isWesternUpperEgypt = dashboardGroup === "western-upper-egypt";
   const data = isIsmailia ? [
-    ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
-    ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
-    ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ffbf08"],
+    ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || 0, "#00a3d7"],
+    ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || 0, "#85d927"],
+    ["urban", "عمراني", summary.metrics.urbanChangeKm2 || 0, "#ffbf08"],
   ] as Array<[string, string, number, string]> : summary.profile?.changeBars?.length
     ? summary.profile.changeBars.map((item) => [item.layer, item.label, item.value, isWesternUpperEgypt || serviceLabelPattern.test(item.label) ? serviceColor : "#f28a00"] as [string, string, number, string])
     : [
-      ["urban", "عمراني", summary.metrics.urbanChangeKm2 || summary.metrics.urbanFeatures, "#ff9e00"],
-      ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || summary.metrics.agriculturalFeatures, "#85d927"],
-      ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || summary.metrics.industrialFeatures, "#00a3d7"],
+      ["urban", "عمراني", summary.metrics.urbanChangeKm2 || 0, "#ff9e00"],
+      ["agricultural", "زراعي", summary.metrics.agriculturalChangeKm2 || 0, "#85d927"],
+      ["industrial", "صناعي", summary.metrics.industrialChangeKm2 || 0, "#00a3d7"],
     ] as Array<[string, string, number, string]>;
   // Keep the specialised Ismailia and Western Upper Egypt serial charts
   // exactly as authored. The other dashboards use the complete classified
@@ -586,7 +586,7 @@ function renderChangeBars(summary: DashboardSummary): void {
     // but are context layers rather than change-use indicators in the serial chart.
     }).sort((a, b) => b[2] - a[2]).filter((item) => !["2", "9"].includes(item[0]) && Number.isFinite(item[2]) && item[2] > 0);
     const max = Math.max(...detailed.map((item) => item[2]), 1);
-    container.innerHTML = detailed.map(([code, label, value, color]) => `<button type="button" data-filter-layer="landcover-end" data-landuse-codes="${code}" data-landuse-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color};--bar-border:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
+    container.innerHTML = detailed.map(([code, label, value, color]) => `<button type="button" data-filter-layer="landcover-end" data-landuse-codes="${code}" data-landuse-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color};--bar-border:${color}"><i></i><b>${formatNumber(value, 2)} كم²</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
     container.querySelectorAll<HTMLElement>("[data-landuse-codes]").forEach((button) => button.addEventListener("click", () => {
       const codes = button.dataset.landuseCodes?.split(",").filter(Boolean) || [];
       if (codes.length) activateLandusePatterns(codes, "landcover-end");
@@ -595,7 +595,7 @@ function renderChangeBars(summary: DashboardSummary): void {
   }
   const shown = isIsmailia ? data : data.filter((item) => Number.isFinite(item[2]) && item[2] > 0);
   const max = Math.max(...shown.map((item) => item[2]), 1);
-  container.innerHTML = shown.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color};--bar-border:${color}"><i></i><b>${formatNumber(value, 2)}</b><span title="${label}">${label}</span></button>`).join("");
+  container.innerHTML = shown.map(([key, label, value, color]) => `<button type="button" data-filter-layer="${key}" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${color};--bar-border:${color}"><i></i><b>${formatNumber(value, 2)} كم²</b><span title="${label}">${label}</span></button>`).join("");
   if (isIsmailia) void renderIsmailiaUseDescriptionBars(container);
 }
 
@@ -639,7 +639,7 @@ async function renderIsmailiaUseDescriptionBars(container: HTMLElement): Promise
     const data = serviceCategories.map(({ label, code }) => ({ label, code, value: values.get(label) || 0 }));
     if (!data.length) return;
     const max = Math.max(...data.map((item) => item.value), 1);
-    container.innerHTML = data.map(({ label, code, value }) => `<button type="button" data-filter-layer="landcover-end" data-landuse-codes="${code}" data-landuse-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${serviceColor};--bar-border:${serviceColor}"><i></i><b>${formatNumber(value, 2)}</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
+    container.innerHTML = data.map(({ label, code, value }) => `<button type="button" data-filter-layer="landcover-end" data-landuse-codes="${code}" data-landuse-layer="landcover-end" style="--height:${Math.max(value / max * 100, 3)}%;--bar:${serviceColor};--bar-border:${serviceColor}"><i></i><b>${formatNumber(value, 2)} كم²</b><span title="${esc(label)}">${esc(label)}</span></button>`).join("");
     container.querySelectorAll<HTMLElement>("[data-landuse-codes]").forEach((button) => button.addEventListener("click", () => {
       const codes = button.dataset.landuseCodes?.split(",").filter(Boolean) || [];
       const layer = button.dataset.landuseLayer as "landcover-start" | "landcover-end" | undefined;
