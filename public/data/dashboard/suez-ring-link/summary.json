@@ -193,13 +193,13 @@
     "old": 0,
     "latest": 0,
     "civil": 0,
-    "landcover-start": 8,
-    "landcover-end": 16,
+    "landcover-start": 300,
+    "landcover-end": 300,
     "field-survey": 283
   },
   "sourceLayerCounts": {
-    "landcover-start": 651,
-    "landcover-end": 651,
+    "landcover-start": 300,
+    "landcover-end": 300,
     "field-survey": 283
   },
   "authoritativeSource": "وزارة النقل/Data"
