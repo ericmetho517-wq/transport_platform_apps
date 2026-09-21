@@ -983,7 +983,6 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const regularLayers = usableLayers.filter((layer) => !temporalLayers.includes(layer) && !(layer === "baseline" && usableLayers.includes("landcover-start") && !Boolean(scope.closest(".story-runtime"))));
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
   const storyMode = Boolean(scope.closest(".story-runtime")) && !Boolean(scope.closest(".story-map-compare"));
-  const focusedPriceMap = group === "ismailia" && Boolean(scope.closest(".price-dashboard"));
   const temporalMap = mapInstance.includes("baseline") || mapInstance.includes("current");
   // Story maps are a focused spatial narrative: their interactive map shows
   // only the verified study-area geometry for the selected sector. Loading
@@ -992,14 +991,12 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const storyStudyLayers: LayerName[] = ["study"];
   const baselineTransportNames: LayerName[] = suezTransport ? transportLayerNames : ["Road_CairoRing"];
   const temporalStartLayers: LayerName[] = ["study", "landcover-start", ...baselineTransportNames, "axis"];
-  // The price dashboard gets its current land-use colours and its change
-  // status from the documented 2026 land-cover layer.  The three thematic
-  // change files are summary overlays without a per-feature change status;
-  // loading them here duplicates the polygons and lets an orange overlay
-  // remain visible after selecting "متغير"/"غير متغير".
-  const temporalEndLayers: LayerName[] = focusedPriceMap
-    ? ["study", "landcover-end", ...transportLayerNames, "axis"]
-    : ["study", "urban", "agricultural", "industrial", "landcover-end", ...transportLayerNames, "axis"];
+  // Temporal maps must draw their current land-use colours and change state
+  // from the documented end-year land-cover layer only. The standalone
+  // urban/agricultural/industrial files are summary overlays (and can use a
+  // different colour convention), so rendering them together duplicates
+  // geometry and bypasses the per-polygon change-status filter.
+  const temporalEndLayers: LayerName[] = ["study", "landcover-end", ...transportLayerNames, "axis"];
   const requestedLayers = storyMode
     ? storyStudyLayers.filter((layer) => usableLayers.includes(layer))
     : temporalMap
