@@ -6,12 +6,12 @@ import { localizedAppCategory, localizedAppTitle } from "../shared/app-titles";
 
 const registry = (apps as TransportApp[]).filter((app) => dashboardGroup(app) !== "suez-ring-link");
 const axisOptions = [
-  ["ismailia", "محور القاهرة–الإسماعيلية"], ["western-upper-egypt", "محور الصعيد الغربي"],
+  ["ismailia", "طريق القاهرة–الإسماعيلية"], ["western-upper-egypt", "طريق الصعيد الغربي"],
   ["cairo-suez-road", "طريق القاهرة السويس"],
   ["regional-ring-road", "الدائري الإقليمي"],
-  ["kalabsha-axis", "محور كلابشة"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
-  ["qus-axis", "محور قوص"], ["qena-luxor-road", "طريق قنا الأقصر"],
-  ["dabaa-axis", "محور الضبعة"],
+  ["kalabsha-axis", "طريق كلابشة"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
+  ["qus-axis", "طريق قوص"], ["qena-luxor-road", "طريق قنا الأقصر"],
+  ["dabaa-axis", "طريق الضبعة"],
 ] as const;
 const axisOf = (app: TransportApp): string => dashboardGroup(app);
 const root = document.querySelector<HTMLDivElement>("#app");
@@ -58,16 +58,16 @@ modeRegistry.forEach((app) => modeCounts.set(app.type, (modeCounts.get(app.type)
 const totalApplications = modeRegistry.length;
 const countOf = (type: string) => modeCounts.get(type) || 0;
 const englishAxisLabels: Record<string, string> = {
-  "western-upper-egypt": "Western Upper Egypt",
-  ismailia: "Cairo–Ismailia Axis",
+  "western-upper-egypt": "Western Upper Egypt Road",
+  ismailia: "Cairo–Ismailia Road",
   "dahshur-south-link": "Dahshur South Link",
   "regional-ring-road": "Regional Ring Road",
-  "kalabsha-axis": "Kalabsha Axis",
+  "kalabsha-axis": "Kalabsha Road",
   "qena-luxor-road": "Qena–Luxor Road",
-  "qus-axis": "Qus Axis",
+  "qus-axis": "Qus Road",
   "cairo-suez-road": "Cairo–Suez Road",
   "suez-ring-link": "Suez Ring Link",
-  "dabaa-axis": "El Dabaa Axis",
+  "dabaa-axis": "El Dabaa Road",
 };
 const displayTitle = (app: TransportApp) => localizedAppTitle(app, platformLanguage);
 const t = (arabic: string, english: string) => platformLanguage === "en" ? english : arabic;
@@ -76,7 +76,7 @@ document.documentElement.dir = platformLanguage === "en" ? "ltr" : "rtl";
 
 root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ? "ltr" : "rtl"}">
   <header class="platform-header">
-    <a class="brand" href="#top" aria-label="${platformLanguage === "en" ? "Back to platform home" : "العودة إلى بداية المنصة"}"><span class="brand-logos"><img src="/Picture1.jpg" alt="${platformLanguage === "en" ? "Ministry of Transport logo" : "شعار وزارة النقل"}"/></span><span><b>${platformLanguage === "en" ? "Platform Applications Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</b><small>${t("المنصة الرقمية لوزارة النقل", "Ministry of Transport Digital Platform")}</small></span></a>
+    <a class="brand" href="#top" aria-label="${platformLanguage === "en" ? "Back to platform home" : "العودة إلى بداية المنصة"}"><span class="brand-logos"><img src="/Picture1.jpg" alt="${platformLanguage === "en" ? "Ministry of Transport logo" : "شعار وزارة النقل"}"/></span><span><b>${platformLanguage === "en" ? "Applications Platform Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</b><small>${t("المنصة الرقمية لوزارة النقل", "Ministry of Transport Digital Platform")}</small></span></a>
     <nav><a href="#applications">${platformLanguage === "en" ? "Applications" : "التطبيقات"}</a></nav>
     <a class="header-cta" href="#applications">${platformLanguage === "en" ? "Explore the Platform" : "استكشف المنصة"} <span>${platformLanguage === "en" ? "→" : "←"}</span></a>
   </header>
@@ -90,7 +90,7 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
       <div class="section-title"><div><span class="section-kicker">${t("دليل التطبيقات", "Application Directory")}</span><h2>${t("التطبيقات", "Applications")}</h2><p>${t("ابحث واختر التطبيق.", "Search and select an application.")}</p></div><div class="catalog-controls">
         <label class="search-control"><span>${platformLanguage === "en" ? "Search" : "بحث"}</span><input id="app-search" placeholder="${platformLanguage === "en" ? "Search by title or sector" : "ابحث بالعنوان أو القطاع"}"/></label>
         <label><span>${t("نوع التطبيق", "Application Type")}</span><select id="type-filter"><option value="all">${t("جميع أنواع التطبيقات", "All Application Types")}</option>${Array.from(counts.keys()).map((type) => `<option value="${type}">${displayTypeLabels[type] || type}</option>`).join("")}</select></label>
-        <label><span>${t("المحور", "Axis")}</span><select id="axis-filter"><option value="all">${t("كل المحاور", "All axes")}</option>${axisOptions.map(([value, label]) => `<option value="${value}">${platformLanguage === "en" ? englishAxisLabels[value] : label}</option>`).join("")}</select></label>
+        <label><span>${t("الطريق", "Road")}</span><select id="axis-filter"><option value="all">${t("كل الطرق", "All roads")}</option>${axisOptions.map(([value, label]) => `<option value="${value}">${platformLanguage === "en" ? englishAxisLabels[value] : label}</option>`).join("")}</select></label>
         <label><span>${t("لغة الواجهة", "Interface language")}</span><select id="language-filter" value="${platformLanguage}"><option value="ar"${platformLanguage === "ar" ? " selected" : ""}>العربية</option><option value="en"${platformLanguage === "en" ? " selected" : ""}>English</option></select></label>
       </div></div>
       <div class="catalog-toolbar"><div class="quick-filters" aria-label="${t("تصفية سريعة", "Quick filters")}"><button class="active" data-quick-type="all">${t("جميع التطبيقات", "All Applications")}</button>${Array.from(counts.keys()).map((type) => `<button data-quick-type="${type}">${displayTypeLabels[type] || type}</button>`).join("")}</div><button id="clear-filters" class="clear-filters" type="button">${t("إعادة ضبط الفلاتر", "Reset filters")}</button></div>
@@ -98,7 +98,7 @@ root.innerHTML = `<div class="platform-shell" dir="${platformLanguage === "en" ?
       <div id="app-grid" class="app-grid"></div>
     </section>
   </main>
-  <footer><span>${platformLanguage === "en" ? "Platform Applications Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</span><span>${platformLanguage === "en" ? "Open-source digital geospatial platform" : "منصة جغرافية رقمية مفتوحة المصدر"}</span></footer>
+  <footer><span>${platformLanguage === "en" ? "Applications Platform Ministry of Transport" : "منصة تطبيقات وزارة النقل"}</span><span>${platformLanguage === "en" ? "Open-source digital geospatial platform" : "منصة جغرافية رقمية مفتوحة المصدر"}</span></footer>
   <button id="back-to-top" class="back-to-top" type="button" aria-label="${platformLanguage === "en" ? "Back to top" : "العودة إلى أعلى الصفحة"}">↑</button>
 </div>`;
 
@@ -180,7 +180,10 @@ const render = () => {
   quickFilters.forEach((button) => button.classList.toggle("active", button.dataset.quickType === type));
   const groups = axisOptions.map(([value, label]) => [value, label, visible.filter((app) => axisOf(app) === value)] as const).filter(([, , items]) => items.length);
   const uncategorized = visible.filter((app) => !axisOptions.some(([value]) => axisOf(app) === value));
-  if (uncategorized.length) groups.push(["other", t("تطبيقات مشتركة", "Shared applications"), uncategorized]);
+  if (uncategorized.length) {
+    const sharedGroup: [string, string, TransportApp[]] = ["other", t("تطبيقات مشتركة", "Shared applications"), uncategorized];
+    (groups as [string, string, TransportApp[]][]).push(sharedGroup);
+  }
   let cardIndex = 0;
   grid.innerHTML = groups.map(([value, label, items]) => { const groupLabel = platformLanguage === "en" ? (englishAxisLabels[value] || label) : label; return `<section class="sector-group" aria-label="${groupLabel}"><div class="sector-group-heading"><div><span>${t("قطاع", "Sector")}</span><h3>${groupLabel}</h3></div></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" dir="${platformLanguage === "en" ? "ltr" : "rtl"}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${displayTitle(app)}</h3><p>${platformLanguage === "en" ? groupLabel : localizedAppCategory(app, "ar")}</p><span class="card-language">${platformLanguage === "en" ? "EN" : "ع"}</span><span class="open">${t("فتح التطبيق", "Open application")} <b>${platformLanguage === "en" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${t("لا توجد نتائج مطابقة", "No matching applications")}</b><span>${t("جرّب تغيير خيارات البحث والتصفية.", "Try changing the filters.")}</span><button type="button" data-reset-empty>${t("عرض جميع التطبيقات", "View all applications")}</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));

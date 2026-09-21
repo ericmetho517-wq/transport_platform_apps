@@ -1,11 +1,11 @@
 {
   "id": "b0ababe3e44e1165bfa11e1ca324118e",
   "slug": "web-viewer-b0ababe3e4",
-  "title": "تطبيق استعراض منطقة الدراسة - محور الصعيد الغربي",
+  "title": "تطبيق استعراض منطقة الدراسة - طريق الصعيد الغربي",
   "alternateTitles": [
-    "Study Area Web App Builder - Western Upper Egypt Axis"
+    "Study Area Web App Builder - Western Upper Egypt Road"
   ],
-  "category": "تطبيقات محور الصعيد الغربي",
+  "category": "تطبيقات طريق الصعيد الغربي",
   "type": "Web AppViewer",
   "language": "ar",
   "direction": "rtl",

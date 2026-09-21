@@ -225,7 +225,7 @@ function dabaaLandMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard dabaa-land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
     <div class="dabaa-land-layout">
-      <section class="dashboard-kpis dabaa-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="lime"><span>إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article></section>
+      <section class="dashboard-kpis dabaa-kpis"><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="lime"><span>إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article></section>
       <section class="dabaa-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023</span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="dabaa-gauges"><section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section></aside>
     </div>
@@ -243,7 +243,7 @@ function landMarkup(app: TransportApp, group: string): string {
     ${dashboardHeader(app, group)}
     <div class="land-layout">
       <aside class="land-left"><article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="jobOpportunities">—</strong></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>${changeBarsTitle}</span>${changeBarsHint ? `<small>${changeBarsHint}</small>` : ""}</div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
-      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>مكونات استخدامات الأراضي</span><div class="donut" id="change-donut"><strong>مكونات الأراضي</strong></div><div id="donut-legend"></div></section></aside>
     </div>
   </main>`;
@@ -254,7 +254,7 @@ function reportLandMarkup(app: TransportApp, group: string): string {
     ${dashboardHeader(app, group)}
     <div class="land-layout">
       <aside class="land-left"><article class="opportunity-card"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="jobOpportunities" data-metric-scale="1000">—</strong><small>ألف عامل</small></article><section class="dark-card vertical-chart-card"><div class="card-title"><span>مناطق التغير العمراني المستحدثة</span><small>اضغط على العمود لتصفية طبقة الخريطة</small></div><div id="change-bars" class="change-bars loading-panel">جارٍ قراءة البيانات…</div></section></aside>
-      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2023</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
+      <section class="land-center"><div class="dashboard-kpis"><article class="gold"><span>إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)</span><strong data-metric="totalChangeKm2">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div>${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi>2014</bdi> / <bdi class="map-year-end">2023</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
       <aside class="land-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section><section class="dark-card donut-card"><span>مكونات استخدامات الأراضي</span><div class="donut" id="change-donut"><strong>مكونات الأراضي</strong></div><div id="donut-legend"></div></section></aside>
     </div>
   </main>`;
@@ -279,7 +279,7 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
   const urbanKpi = (kalabsha || qena) ? "" : `<article class="gold"><span>إجمالي مساحة الأراضي العمرانية (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article>`;
   return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard ${group}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
-    <div class="dashboard-kpis south-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>${urbanKpi}</div>
+    <div class="dashboard-kpis south-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>${urbanKpi}</div>
     <div class="south-agriculture-layout"><aside class="south-agriculture-side">${leftPanels}</aside><section class="south-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي لعامي <bdi>2014</bdi> - <bdi class="map-year-end">2023</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="south-agriculture-right">${rightPanels}</aside></div>
   </main>`;
 }
@@ -296,7 +296,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
         <section class="ismailia-reference-main">
           <div class="dashboard-kpis agriculture-kpis south-agriculture-kpis ismailia-summary-kpis">
             <article style="background:#aeff36;color:#000;"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalFeatures" style="color:#000;">—</strong></article>
-            <article style="background:#4f82e9;color:#fff;"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm" style="color:#fff;">—</strong></article>
+            <article style="background:#4f82e9;color:#fff;"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm" style="color:#fff;">—</strong></article>
             <article style="background:#ffffff;color:#000;"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2" style="color:#000;">—</strong></article>
             <article style="background:#e066ff;color:#000;"><span>عدد العمالة الصناعية</span><strong data-metric="industrialFeatures" style="color:#000;">—</strong></article>
             <article style="background:#9800c7;color:#fff;"><span>إجمالي مساحة الأراضي الصناعية المتغيرة (كم²)</span><strong data-metric="industrialChangeKm2" style="color:#fff;">—</strong></article>
@@ -319,7 +319,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
 function westernAgricultureMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard agriculture-dashboard western-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
-    <div class="dashboard-kpis western-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (ألف عامل)</span><strong data-metric="agriculturalWorkers" data-metric-scale="1000">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="orange"><span>العمالة الصناعية (ألف عامل)</span><strong data-metric="industrialWorkers" data-metric-scale="1000">—</strong></article><article class="orange"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article></div>
+    <div class="dashboard-kpis western-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (ألف عامل)</span><strong data-metric="agriculturalWorkers" data-metric-scale="1000">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="orange"><span>العمالة الصناعية (ألف عامل)</span><strong data-metric="industrialWorkers" data-metric-scale="1000">—</strong></article><article class="orange"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article></div>
     <div class="agriculture-layout"><aside class="agriculture-side western-agriculture-side"><section class="dark-card crop-card"><span>نسب أنواع المحاصيل الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section></aside><section class="agriculture-center western-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi class="map-year-start">2014</bdi> / <bdi class="map-year-end">2024</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="agriculture-right western-agriculture-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><strong>—</strong></div></section></aside></div>
   </main>`;
 }
@@ -327,7 +327,7 @@ function westernAgricultureMarkup(app: TransportApp, group: string): string {
 function generalAgricultureMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard agriculture-dashboard general-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
-    <div class="dashboard-kpis general-agriculture-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="lime"><span>مساحة التغير الزراعي (كم²)</span><strong data-metric="agriculturalChangeKm2">—</strong></article><article class="orange"><span>مساحة التغير الصناعي (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article></div>
+    <div class="dashboard-kpis general-agriculture-kpis"><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="lime"><span>مساحة التغير الزراعي (كم²)</span><strong data-metric="agriculturalChangeKm2">—</strong></article><article class="orange"><span>مساحة التغير الصناعي (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article></div>
     <div class="general-agriculture-layout"><section class="general-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi class="map-year-start">2014</bdi> / <bdi class="map-year-end">2023</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="general-agriculture-side"><section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><strong>—</strong></div></section></aside></div>
   </main>`;
 }
@@ -336,7 +336,7 @@ function civilMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard civil-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="civil">
     ${dashboardHeader(app, group)}
     <div class="specialized-layout">
-      <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>عناصر الرفع المدني المسجلة</span><strong data-metric="civilFeatures">—</strong></article></section>
+      <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>عناصر الرفع المدني المسجلة</span><strong data-metric="civilFeatures">—</strong></article></section>
       <section class="specialized-body"><aside class="dark-card civil-panel"><h2>مؤشرات الدراسة المدنية</h2><p>تعرض هذه اللوحة عناصر الرفع والحصر المدني الخاصة بهذا القطاع فقط، مع إمكانية تشغيل وإيقاف الطبقات وفحص خصائص كل عنصر من الخريطة.</p><div class="civil-facts"><span>طبقات المشروع المتاحة <b data-metric="availableLayers">—</b></span><span>العناصر العمرانية <b data-metric="urbanFeatures">—</b></span><span>العناصر الزراعية <b data-metric="agriculturalFeatures">—</b></span></div></aside>${mapMarkup()}</section>
     </div>
   </main>`;
@@ -969,7 +969,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const toggles = scope.querySelector<HTMLElement>(".map-layer-toggles");
   const status = scope.querySelector<HTMLElement>(".map-status-text");
   if (!svg || !viewport || !satellite || !content || !toggles) return;
-  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "محور الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}`, buildings: "المباني", parcels: "قطع الأراضي", landmarks: "المعالم والخدمات", water: "المسطحات المائية", "field-survey": "الرفع الميداني", transport: "شبكة النقل", governorates: "حدود المحافظات", LRT_Line: "خط القطار الكهربائي الخفيف", lRT_Station: "محطات القطار الكهربائي الخفيف", Metro_Line: "خطوط المترو", Metro_Station: "محطات المترو", Road_CairoRing: "الطريق الدائري حول القاهرة", Road_MiddleRing: "الطريق الدائري الأوسط", Road_RegionalRing: "الدائري الإقليمي", Transit_GreenLine: "الخط الأخضر", Transit_KafrDawoodSadat: "وصلة كفر داوود–السادات", Transit_LRT: "القطار الكهربائي الخفيف", Transit_Metro1: "الخط الأول للمترو", Transit_Metro2: "الخط الثاني للمترو", Transit_Metro3: "الخط الثالث للمترو", Transit_Metro4: "الخط الرابع للمترو", Transit_Metro6: "الخط السادس للمترو", Transit_MonorailCapital: "المونوريل – العاصمة", Transit_MonorailOctober: "المونوريل – أكتوبر", Transit_RobikiBelbeis: "وصلة الروبيكي–بلبيس" };
+  const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "مسار الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}`, buildings: "المباني", parcels: "قطع الأراضي", landmarks: "المعالم والخدمات", water: "المسطحات المائية", "field-survey": "الرفع الميداني", transport: "شبكة النقل", governorates: "حدود المحافظات", LRT_Line: "خط القطار الكهربائي الخفيف", lRT_Station: "محطات القطار الكهربائي الخفيف", Metro_Line: "خطوط المترو", Metro_Station: "محطات المترو", Road_CairoRing: "الطريق الدائري حول القاهرة", Road_MiddleRing: "الطريق الدائري الأوسط", Road_RegionalRing: "الدائري الإقليمي", Transit_GreenLine: "الخط الأخضر", Transit_KafrDawoodSadat: "وصلة كفر داوود–السادات", Transit_LRT: "القطار الكهربائي الخفيف", Transit_Metro1: "الخط الأول للمترو", Transit_Metro2: "الخط الثاني للمترو", Transit_Metro3: "الخط الثالث للمترو", Transit_Metro4: "الخط الرابع للمترو", Transit_Metro6: "الخط السادس للمترو", Transit_MonorailCapital: "المونوريل – العاصمة", Transit_MonorailOctober: "المونوريل – أكتوبر", Transit_RobikiBelbeis: "وصلة الروبيكي–بلبيس" };
   const mapInstance = scope.dataset.mapInstance || "primary";
   const tileTemplate = mapInstance.includes("baseline") ? imageryTiles[2014]
     : mapInstance.includes("current") ? imageryTiles[2024]
@@ -991,8 +991,15 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   // polygons outside the area and visually obscure the satellite image.
   const storyStudyLayers: LayerName[] = ["study"];
   const baselineTransportNames: LayerName[] = suezTransport ? transportLayerNames : ["Road_CairoRing"];
-  const temporalStartLayers: LayerName[] = ["study", "urban", "agricultural", "industrial", "landcover-start", ...baselineTransportNames, "axis"];
-  const temporalEndLayers: LayerName[] = ["study", "urban", "agricultural", "industrial", "landcover-end", ...transportLayerNames, "axis"];
+  const temporalStartLayers: LayerName[] = ["study", "landcover-start", ...baselineTransportNames, "axis"];
+  // The price dashboard gets its current land-use colours and its change
+  // status from the documented 2026 land-cover layer.  The three thematic
+  // change files are summary overlays without a per-feature change status;
+  // loading them here duplicates the polygons and lets an orange overlay
+  // remain visible after selecting "متغير"/"غير متغير".
+  const temporalEndLayers: LayerName[] = focusedPriceMap
+    ? ["study", "landcover-end", ...transportLayerNames, "axis"]
+    : ["study", "urban", "agricultural", "industrial", "landcover-end", ...transportLayerNames, "axis"];
   const requestedLayers = storyMode
     ? storyStudyLayers.filter((layer) => usableLayers.includes(layer))
     : temporalMap
@@ -1678,47 +1685,88 @@ function activateLayerOnly(layer: string): void {
 }
 
 function activateLanduseCode(code: string): void {
-  document.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => path.classList.toggle("layer-hidden", path.dataset.landuseCode !== code));
-  document.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => group.classList.remove("layer-hidden"));
+  activateLandusePatterns([code], "landcover-end");
 }
 
 function activateLandusePatterns(codes: string[], layer: "landcover-start" | "landcover-end"): void {
   const accepted = new Set(codes);
-  // Detect paired temporal maps (one baseline, one current).
+  const standaloneCodeMap: Record<string, string> = {
+    urban: "3",
+    agricultural: "0",
+    industrial: "1",
+  };
   const baselineMap = document.querySelector<HTMLElement>(".gis-map[data-map-instance*=\"baseline\"]");
   const currentMap = document.querySelector<HTMLElement>(".gis-map[data-map-instance*=\"current\"]");
   const isPaired = Boolean(baselineMap && currentMap);
-  if (isPaired) {
-    // In a paired layout filter each map's own temporal layer by the accepted codes.
-    // Neither map is hidden — they stay visible and both show the chosen land use.
-    const applyToMap = (map: HTMLElement, ownLayer: "landcover-start" | "landcover-end") => {
-      map.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => {
-        const isOwnLayer = group.dataset.layerGroup === ownLayer;
-        group.classList.toggle("layer-hidden", !isOwnLayer);
-        group.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => {
-          path.toggleAttribute("hidden", !accepted.has(path.dataset.landuseCode || ""));
+
+  const applyToMap = (map: HTMLElement, ownLayer: "landcover-start" | "landcover-end") => {
+    map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((group) => {
+      const lg = group.dataset.layerGroup || "";
+      if (lg === "landcover-start" || lg === "landcover-end" || lg === "baseline" || lg === "landcover" || lg === "landuse") {
+        const isOtherTemporal = (ownLayer === "landcover-start" && lg === "landcover-end") || (ownLayer === "landcover-end" && lg === "landcover-start");
+        group.classList.toggle("layer-hidden", isOtherTemporal);
+        group.querySelectorAll<SVGPathElement>("path[data-landuse-code]").forEach((path) => {
+          const match = !isOtherTemporal && accepted.has(path.dataset.landuseCode || "");
+          path.toggleAttribute("hidden", !match);
+          path.classList.toggle("landuse-hidden", !match);
         });
-      });
-      map.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
-        if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) {
-          button.classList.toggle("active", button.dataset.mapLayer === ownLayer);
-        }
-      });
-    };
+      } else if (lg in standaloneCodeMap) {
+        const code = standaloneCodeMap[lg];
+        const match = accepted.has(code);
+        group.classList.toggle("layer-hidden", !match);
+        group.querySelectorAll<SVGPathElement>("path").forEach((path) => {
+          path.toggleAttribute("hidden", !match);
+          path.classList.toggle("landuse-hidden", !match);
+        });
+      }
+    });
+    map.querySelectorAll<SVGPathElement>("path[data-landuse-code]").forEach((path) => {
+      const match = accepted.has(path.dataset.landuseCode || "");
+      path.toggleAttribute("hidden", !match);
+      path.classList.toggle("landuse-hidden", !match);
+    });
+    map.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
+      if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) {
+        button.classList.toggle("active", button.dataset.mapLayer === ownLayer);
+      }
+    });
+  };
+
+  if (isPaired) {
     applyToMap(baselineMap!, "landcover-start");
     applyToMap(currentMap!, "landcover-end");
   } else {
-    // Single-map behaviour: show only the clicked temporal layer and filter by codes.
-    activateLayerOnly(layer);
-    document.querySelectorAll<SVGGElement>('[data-layer-group="landcover-start"], [data-layer-group="landcover-end"]').forEach((group) => {
-      const activeLayer = group.dataset.layerGroup === layer;
-      group.classList.toggle("layer-hidden", !activeLayer);
-      group.querySelectorAll<SVGPathElement>("[data-landuse-code]").forEach((path) => {
-        path.toggleAttribute("hidden", !activeLayer || !accepted.has(path.dataset.landuseCode || ""));
+    document.querySelectorAll<HTMLElement>(".gis-map").forEach((map) => {
+      map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((group) => {
+        const lg = group.dataset.layerGroup || "";
+        if (lg === "landcover-start" || lg === "landcover-end" || lg === "baseline" || lg === "landcover" || lg === "landuse") {
+          const activeLayer = lg === layer || lg === "baseline";
+          group.classList.toggle("layer-hidden", !activeLayer);
+          group.querySelectorAll<SVGPathElement>("path[data-landuse-code]").forEach((path) => {
+            const match = activeLayer && accepted.has(path.dataset.landuseCode || "");
+            path.toggleAttribute("hidden", !match);
+            path.classList.toggle("landuse-hidden", !match);
+          });
+        } else if (lg in standaloneCodeMap) {
+          const code = standaloneCodeMap[lg];
+          const match = accepted.has(code);
+          group.classList.toggle("layer-hidden", !match);
+          group.querySelectorAll<SVGPathElement>("path").forEach((path) => {
+            path.toggleAttribute("hidden", !match);
+            path.classList.toggle("landuse-hidden", !match);
+          });
+        }
+      });
+      map.querySelectorAll<SVGPathElement>("path[data-landuse-code]").forEach((path) => {
+        const match = accepted.has(path.dataset.landuseCode || "");
+        path.toggleAttribute("hidden", !match);
+        path.classList.toggle("landuse-hidden", !match);
       });
     });
     document.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
-      if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) button.classList.toggle("active", button.dataset.mapLayer === layer);
+      if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) {
+        button.classList.toggle("active", button.dataset.mapLayer === layer);
+      }
     });
   }
 }
@@ -1951,9 +1999,42 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     }
     const landuseSelect = root.querySelector<HTMLSelectElement>("#dashboard-landuse-filter");
     if (landuseSelect) {
-      const landuseCodes: Record<string, string> = { urban: "3", agricultural: "0", industrial: "1" };
+      const allLandcoverCodesExceptUrban = new Set(["0", "1", "2", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "99"]);
+      const allLandcoverCodes = new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "99"]);
+
+      const getAcceptedLanduseForFilter = (selectedFilter: string): { codes: Set<string>; allowedLayers: Set<string> } => {
+        const title = app.title || "";
+        const isAgriInd = /الزراعية.*الصناعية|agricultural.*industrial/i.test(title);
+        const isUrbanOnly = /العمرانية|urban/i.test(title) && !isAgriInd && root.dataset.mode !== "price";
+
+        if (isUrbanOnly) {
+          return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
+        }
+        if (isAgriInd) {
+          if (selectedFilter === "agricultural") {
+            return { codes: new Set(["0"]), allowedLayers: new Set(["agricultural"]) };
+          }
+          if (selectedFilter === "industrial") {
+            return { codes: new Set(["1"]), allowedLayers: new Set(["industrial"]) };
+          }
+          return { codes: allLandcoverCodesExceptUrban, allowedLayers: new Set(["agricultural", "industrial"]) };
+        }
+        if (selectedFilter === "urban") {
+          return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
+        }
+        if (selectedFilter === "agricultural") {
+          return { codes: new Set(["0"]), allowedLayers: new Set(["agricultural"]) };
+        }
+        if (selectedFilter === "industrial") {
+          return { codes: new Set(["1"]), allowedLayers: new Set(["industrial"]) };
+        }
+        return { codes: allLandcoverCodes, allowedLayers: new Set(["urban", "agricultural", "industrial"]) };
+      };
+
       const applyLanduseFilter = () => {
         const selected = landuseSelect.value || "all";
+        const { codes, allowedLayers } = getAcceptedLanduseForFilter(selected);
+
         const priceColumns = root.querySelector<HTMLElement>("#price-columns");
         if (priceColumns) {
           const cards = priceColumns.querySelectorAll<HTMLElement>("[data-price-kind]");
@@ -1966,20 +2047,36 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           });
           priceColumns.style.setProperty("--price-columns", String(visibleCount || 1));
         }
+
         mapRoots.forEach((map) => {
+          const mapInstance = map.dataset.mapInstance || "";
+          const isBaseline = mapInstance.includes("baseline");
+          const isCurrent = mapInstance.includes("current");
+
           map.querySelectorAll<SVGGElement>("[data-layer-group]").forEach((layerGroup) => {
             const layer = layerGroup.dataset.layerGroup || "";
             if (["urban", "agricultural", "industrial"].includes(layer)) {
-              layerGroup.classList.toggle("layer-hidden", selected !== "all" && layer !== selected);
+              layerGroup.classList.toggle("layer-hidden", !allowedLayers.has(layer));
             }
             if (layer === "landcover-start" || layer === "landcover-end") {
+              if (isBaseline && layer === "landcover-end") {
+                layerGroup.classList.add("layer-hidden");
+                return;
+              }
+              if (isCurrent && layer === "landcover-start") {
+                layerGroup.classList.add("layer-hidden");
+                return;
+              }
               layerGroup.classList.toggle("layer-hidden", false);
               layerGroup.querySelectorAll<SVGPathElement>("path[data-landuse-code]").forEach((path) => {
-                path.toggleAttribute("hidden", selected !== "all" && path.dataset.landuseCode !== landuseCodes[selected]);
+                const match = codes.has(path.dataset.landuseCode || "");
+                path.toggleAttribute("hidden", !match);
+                path.classList.toggle("landuse-hidden", !match);
               });
             }
           });
         });
+
         const gaugeRail = root.querySelector<HTMLElement>(".ismailia-agri-right");
         (["agricultural", "industrial", "urban"] as const).forEach((kind) => {
           const gaugeCard = root.querySelector<HTMLElement>(`#${kind}-gauge`)?.closest<HTMLElement>(".gauge-card");
@@ -2032,14 +2129,30 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     const statusTotalFor = (areas?: Record<ChangeStatus, number>) => (areas?.changed || 0) + (areas?.unchanged || 0);
     const updateChangeStatusGauge = (mode: ChangeMode) => {
       const selectedSector = dashboardSectorFilter?.value || "all";
+      const selectedLanduse = landuseSelect?.value || "all";
+      const gaugeRail = root.querySelector<HTMLElement>(".ismailia-agri-right");
+      gaugeRail?.classList.toggle("single-gauge", selectedLanduse !== "all");
+
       (["urban", "agricultural", "industrial"] as const).forEach((kind) => {
         const gauge = root.querySelector<HTMLElement>(`#${kind}-gauge`);
         if (!gauge) return;
-        if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, kind)) {
-          gauge.closest<HTMLElement>(".gauge-card")?.setAttribute("hidden", "true");
+        const gaugeCard = gauge.closest<HTMLElement>(".gauge-card");
+        if (!gaugeCard) return;
+
+        if (selectedLanduse !== "all" && selectedLanduse !== kind) {
+          gaugeCard.setAttribute("hidden", "true");
+          gaugeCard.hidden = true;
           return;
         }
-        gauge.closest<HTMLElement>(".gauge-card")?.removeAttribute("hidden");
+
+        if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, kind)) {
+          gaugeCard.setAttribute("hidden", "true");
+          gaugeCard.hidden = true;
+          return;
+        }
+
+        gaugeCard.removeAttribute("hidden");
+        gaugeCard.hidden = false;
         const areas = statusAreaFor(selectedSector, kind);
         const total = statusTotalFor(areas);
         if (group === "western-upper-egypt") {
@@ -2075,7 +2188,15 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           setGauge(gauge, ((areas![mode] || 0) / total) * 100);
           return;
         }
-        if (mode !== "all" && total) setGauge(gauge, ((areas?.[mode] || 0) / total) * 100);
+        if (mode === "all") {
+          setGauge(gauge, 100);
+          gauge.removeAttribute("data-status-estimate");
+          gauge.removeAttribute("title");
+        } else if (total) {
+          gauge.removeAttribute("data-status-estimate");
+          gauge.removeAttribute("title");
+          setGauge(gauge, ((areas?.[mode] || 0) / total) * 100);
+        }
       });
     };
     const dashboardSectorFilter = document.querySelector<HTMLSelectElement>("#dashboard-sector-filter");

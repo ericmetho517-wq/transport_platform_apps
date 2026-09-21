@@ -1,11 +1,11 @@
 {
   "id": "ismailia-urban-2026-dashboard",
   "slug": "dashboard-ismailia-urban",
-  "title": "لوحة مؤشرات الأراضي العمرانية – محور القاهرة - الإسماعيلية",
+  "title": "لوحة مؤشرات الأراضي العمرانية – طريق القاهرة–الإسماعيلية",
   "alternateTitles": [
-    "Urban Land Indicators Dashboard – Cairo - Ismailia Axis"
+    "Urban Land Indicators Dashboard – Cairo–Ismailia Road"
   ],
-  "category": "تطبيقات محور القاهرة - الإسماعيلية",
+  "category": "تطبيقات طريق القاهرة–الإسماعيلية",
   "type": "Dashboard",
   "language": "ar",
   "direction": "rtl",

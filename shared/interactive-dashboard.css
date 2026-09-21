@@ -115,7 +115,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .map-Transit_RobikiBelbeis path { fill:none; stroke:#000000; stroke-width:4.0; stroke-linecap:round; stroke-dasharray:8 4; }
 .map-lRT_Station path,.map-Metro_Station path { fill:#f4f4f4; stroke:#263238; stroke-width:1.5; }
 .map-governorates path { fill:none; stroke:#fff; stroke-width:2.5; stroke-dasharray:9 5; }
-.layer-hidden { display: none; }
+.layer-hidden, .landuse-hidden, path.change-hidden, [hidden], path[hidden], g[hidden], svg [hidden] { display: none !important; }
 .map-status { position: absolute; top: 8px; inset-inline-end: 9px; z-index: 3; display: flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 7px; background: #052f58eb; color: #fff; font-size: 10px; box-shadow:0 4px 15px #0006; }
 .map-layer-toggles { position: absolute; z-index: 3; top: 40px; inset-inline-end: 9px; display: grid; gap: 4px; max-width: 190px; }
 .map-sector-filter { position: absolute; z-index: 4; top: 9px; left: 50%; translate: -50% 0; display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 7px; background: #052f58ed; color: #fff; font-size: 10px; box-shadow: 0 4px 15px #0006; }

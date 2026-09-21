@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T09:21:37.527Z",
+  "generatedAt": "2026-09-21T12:08:44.755Z",
   "applications": 61,
   "fidelityCounts": {
     "sector-and-application-type-reference": 33,
@@ -29,7 +29,7 @@
   "applicationsAudit": [
     {
       "slug": "dashboard-5c855c890c",
-      "title": "لوحة مؤشرات الأراضي العمرانية – محور الصعيد الغربي",
+      "title": "لوحة مؤشرات الأراضي العمرانية – طريق الصعيد الغربي",
       "type": "Dashboard",
       "language": "ar",
       "sector": "western-upper-egypt",
@@ -59,7 +59,7 @@
     },
     {
       "slug": "dashboard-4236f7c912",
-      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور الصعيد الغربي",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق الصعيد الغربي",
       "type": "Dashboard",
       "language": "ar",
       "sector": "western-upper-egypt",
@@ -89,7 +89,7 @@
     },
     {
       "slug": "dashboard-49446055c2",
-      "title": "لوحة مؤشرات أسعار الأراضي – محور الصعيد الغربي",
+      "title": "لوحة مؤشرات أسعار الأراضي – طريق الصعيد الغربي",
       "type": "Dashboard",
       "language": "ar",
       "sector": "western-upper-egypt",
@@ -215,7 +215,7 @@
     },
     {
       "slug": "dashboard-064fecc5d9",
-      "title": "لوحة مؤشرات الأراضي العمرانية – محور كلابشة",
+      "title": "لوحة مؤشرات الأراضي العمرانية – طريق كلابشة",
       "type": "Dashboard",
       "language": "ar",
       "sector": "kalabsha",
@@ -235,7 +235,7 @@
     },
     {
       "slug": "dashboard-989c5ff2f9",
-      "title": "لوحة مؤشرات الأراضي الزراعية – محور كلابشة",
+      "title": "لوحة مؤشرات الأراضي الزراعية – طريق كلابشة",
       "type": "Dashboard",
       "language": "ar",
       "sector": "kalabsha",
@@ -251,7 +251,7 @@
     },
     {
       "slug": "dashboard-2529bc0ae6",
-      "title": "لوحة مؤشرات أسعار الأراضي – محور كلابشة",
+      "title": "لوحة مؤشرات أسعار الأراضي – طريق كلابشة",
       "type": "Dashboard",
       "language": "ar",
       "sector": "kalabsha",
@@ -419,7 +419,7 @@
     },
     {
       "slug": "dashboard-3e59ea73ec",
-      "title": "لوحة مؤشرات الأراضي العمرانية – محور قوص",
+      "title": "لوحة مؤشرات الأراضي العمرانية – طريق قوص",
       "type": "Dashboard",
       "language": "ar",
       "sector": "qus",
@@ -439,7 +439,7 @@
     },
     {
       "slug": "dashboard-5a3aaa3b3a",
-      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور قوص",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق قوص",
       "type": "Dashboard",
       "language": "ar",
       "sector": "qus",
@@ -455,7 +455,7 @@
     },
     {
       "slug": "dashboard-58fefdb551",
-      "title": "لوحة مؤشرات أسعار الأراضي – محور قوص",
+      "title": "لوحة مؤشرات أسعار الأراضي – طريق قوص",
       "type": "Dashboard",
       "language": "ar",
       "sector": "qus",
@@ -471,7 +471,7 @@
     },
     {
       "slug": "dashboard-c79fcd32aa",
-      "title": "لوحة مؤشرات الأراضي العمرانية – محور الضبعة",
+      "title": "لوحة مؤشرات الأراضي العمرانية – طريق الضبعة",
       "type": "Dashboard",
       "language": "ar",
       "sector": "dabaa",
@@ -493,7 +493,7 @@
     },
     {
       "slug": "dashboard-c1e29f0123",
-      "title": "لوحة مؤشرات الأراضي الزراعية – محور الضبعة",
+      "title": "لوحة مؤشرات الأراضي الزراعية – طريق الضبعة",
       "type": "Dashboard",
       "language": "ar",
       "sector": "dabaa",
@@ -510,7 +510,7 @@
     },
     {
       "slug": "dashboard-594d7c7ff4",
-      "title": "لوحة مؤشرات أسعار الأراضي – محور الضبعة",
+      "title": "لوحة مؤشرات أسعار الأراضي – طريق الضبعة",
       "type": "Dashboard",
       "language": "ar",
       "sector": "dabaa",
@@ -526,7 +526,7 @@
     },
     {
       "slug": "dashboard-ismailia-urban",
-      "title": "لوحة مؤشرات الأراضي العمرانية – محور القاهرة - الإسماعيلية",
+      "title": "لوحة مؤشرات الأراضي العمرانية – طريق القاهرة–الإسماعيلية",
       "type": "Dashboard",
       "language": "ar",
       "sector": "ismailia",
@@ -538,7 +538,7 @@
     },
     {
       "slug": "dashboard-ismailia-agriculture",
-      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور القاهرة - الإسماعيلية",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق القاهرة–الإسماعيلية",
       "type": "Dashboard",
       "language": "ar",
       "sector": "ismailia",
@@ -550,7 +550,7 @@
     },
     {
       "slug": "dashboard-ismailia-prices",
-      "title": "لوحة مؤشرات أسعار الأراضي – محور القاهرة - الإسماعيلية",
+      "title": "لوحة مؤشرات أسعار الأراضي – طريق القاهرة–الإسماعيلية",
       "type": "Dashboard",
       "language": "ar",
       "sector": "ismailia",
@@ -656,7 +656,7 @@
     },
     {
       "slug": "storymap-3c8f04f4d0",
-      "title": "تطور الاراضي المحيطة بمحور كلابشة",
+      "title": "تطور الاراضي المحيطة بطريق كلابشة",
       "type": "StoryMap",
       "language": "ar",
       "sector": "kalabsha",
@@ -672,7 +672,7 @@
     },
     {
       "slug": "web-viewer-61f7685c76",
-      "title": "منطقة دراسة محور كلابشة",
+      "title": "منطقة دراسة طريق كلابشة",
       "type": "Web AppViewer",
       "language": "ar",
       "sector": "kalabsha",
@@ -704,7 +704,7 @@
     },
     {
       "slug": "web-viewer-43915f9815",
-      "title": "منطقة الدراسة محور قنا",
+      "title": "منطقة الدراسة طريق قنا",
       "type": "Web AppViewer",
       "language": "ar",
       "sector": "qena-luxor",
@@ -800,7 +800,7 @@
     },
     {
       "slug": "storymap-bd328e2a5b",
-      "title": "تطور الاراضي المحيطة بمحور قوص",
+      "title": "تطور الاراضي المحيطة بطريق قوص",
       "type": "StoryMap",
       "language": "ar",
       "sector": "qus",
@@ -816,7 +816,7 @@
     },
     {
       "slug": "web-viewer-67afc36571",
-      "title": "تطبيق منطقة الدراسة محور قوص",
+      "title": "تطبيق منطقة الدراسة طريق قوص",
       "type": "Web AppViewer",
       "language": "ar",
       "sector": "qus",
@@ -832,7 +832,7 @@
     },
     {
       "slug": "instant-filter-gallery-1d894feec2",
-      "title": "محور قوص",
+      "title": "طريق قوص",
       "type": "Instant Filter Gallery",
       "language": "ar",
       "sector": "qus",
@@ -848,7 +848,7 @@
     },
     {
       "slug": "storymap-3bc68f337f",
-      "title": "تطور الأراضي المحيطة بمحور الضبعة",
+      "title": "تطور الأراضي المحيطة بطريق الضبعة",
       "type": "StoryMap",
       "language": "ar",
       "sector": "dabaa",
@@ -868,7 +868,7 @@
     },
     {
       "slug": "storymap-ismailia",
-      "title": "القصة المكانية التفاعلية – محور القاهرة–الإسماعيلية",
+      "title": "القصة المكانية التفاعلية – طريق القاهرة–الإسماعيلية",
       "type": "StoryMap",
       "language": "ar",
       "sector": "ismailia",
@@ -892,7 +892,7 @@
     },
     {
       "slug": "web-viewer-b0ababe3e4",
-      "title": "تطبيق استعراض منطقة الدراسة - محور الصعيد الغربي",
+      "title": "تطبيق استعراض منطقة الدراسة - طريق الصعيد الغربي",
       "type": "Web AppViewer",
       "language": "ar",
       "sector": "western-upper-egypt",
@@ -910,7 +910,7 @@
     },
     {
       "slug": "instant-filter-gallery-ed76e91447",
-      "title": "مركز البيانات والتطبيقات - محور الصعيد الغربي",
+      "title": "مركز البيانات والتطبيقات - طريق الصعيد الغربي",
       "type": "Instant Filter Gallery",
       "language": "ar",
       "sector": "western-upper-egypt",
@@ -959,7 +959,7 @@
     },
     {
       "slug": "instant-filter-gallery-43527f0b17",
-      "title": "مركز البيانات والتطبيقات - محور كلابشة",
+      "title": "مركز البيانات والتطبيقات - طريق كلابشة",
       "type": "Instant Filter Gallery",
       "language": "ar",
       "sector": "kalabsha",
@@ -1008,7 +1008,7 @@
     },
     {
       "slug": "web-viewer-e951850d9b",
-      "title": "تطبيق استعراض منطقة الدراسة - محور الضبعة",
+      "title": "تطبيق استعراض منطقة الدراسة - طريق الضبعة",
       "type": "Web AppViewer",
       "language": "ar",
       "sector": "dabaa",
@@ -1025,7 +1025,7 @@
     },
     {
       "slug": "instant-filter-gallery-34ec7f7680",
-      "title": "مركز البيانات والتطبيقات - محور الضبعة",
+      "title": "مركز البيانات والتطبيقات - طريق الضبعة",
       "type": "Instant Filter Gallery",
       "language": "ar",
       "sector": "dabaa",
@@ -1042,7 +1042,7 @@
     },
     {
       "slug": "web-viewer-30ddd4974b",
-      "title": "تطبيق استعراض منطقة الدراسة - محور القاهرة - الإسماعيلية",
+      "title": "تطبيق استعراض منطقة الدراسة - طريق القاهرة–الإسماعيلية",
       "type": "Web AppViewer",
       "language": "ar",
       "sector": "ismailia",
@@ -1054,7 +1054,7 @@
     },
     {
       "slug": "instant-filter-gallery-1024904d78",
-      "title": "مركز البيانات والتطبيقات - محور القاهرة - الإسماعيلية",
+      "title": "مركز البيانات والتطبيقات - طريق القاهرة–الإسماعيلية",
       "type": "Instant Filter Gallery",
       "language": "ar",
       "sector": "ismailia",

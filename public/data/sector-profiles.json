@@ -1,6 +1,6 @@
 {
   "western-upper-egypt": {
-    "title": "محور الصعيد الصحراوي الغربي (الجيزة / أبو سمبل)",
+    "title": "طريق الصعيد الصحراوي الغربي (الجيزة / أبو سمبل)",
     "report": "(9).pdf",
     "pages": [
       54
@@ -1461,7 +1461,7 @@
     }
   },
   "dabaa-axis": {
-    "title": "محور الضبعة",
+    "title": "طريق الضبعة",
     "report": "Nakl_Dabaa_30Dec2023.pptx",
     "pages": [
       4,
@@ -1535,7 +1535,7 @@
     ]
   },
   "qena-luxor-road": {
-    "title": "محور قنا",
+    "title": "طريق قنا",
     "report": "Final Report 3-2024.pdf",
     "pages": [
       213,
@@ -1608,7 +1608,7 @@
     ]
   },
   "qus-axis": {
-    "title": "محور قوص",
+    "title": "طريق قوص",
     "report": "Final Report 3-2024.pdf",
     "pages": [
       266,
@@ -1682,7 +1682,7 @@
     ]
   },
   "kalabsha-axis": {
-    "title": "محور كلابشة",
+    "title": "طريق كلابشة",
     "report": "Final Report 3-2024.pdf",
     "pages": [
       320,
@@ -1791,7 +1791,7 @@
     }
   },
   "ismailia": {
-    "title": "محور القاهرة–الإسماعيلية",
+    "title": "طريق القاهرة–الإسماعيلية",
     "report": "بيانات الإسماعيلية المحلية 2016–2026",
     "pages": [],
     "yearEnd": 2026,

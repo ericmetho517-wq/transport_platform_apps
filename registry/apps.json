@@ -2,11 +2,11 @@
   {
     "id": "5c855c890cd349e185366b28dbafa9c2",
     "slug": "dashboard-5c855c890c",
-    "title": "لوحة مؤشرات الأراضي العمرانية – محور الصعيد الغربي",
+    "title": "لوحة مؤشرات الأراضي العمرانية – طريق الصعيد الغربي",
     "alternateTitles": [
-      "Urban Land Indicators Dashboard – Western Upper Egypt Axis"
+      "Urban Land Indicators Dashboard – Western Upper Egypt Road"
     ],
-    "category": "تطبيقات محور الصعيد الغربي",
+    "category": "تطبيقات طريق الصعيد الغربي",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -163,11 +163,11 @@
   {
     "id": "4236f7c912454ed897b1b6928cfb84d6",
     "slug": "dashboard-4236f7c912",
-    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور الصعيد الغربي",
+    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق الصعيد الغربي",
     "alternateTitles": [
-      "Agricultural and Industrial Land Indicators Dashboard – Western Upper Egypt Axis"
+      "Agricultural and Industrial Land Indicators Dashboard – Western Upper Egypt Road"
     ],
-    "category": "تطبيقات محور الصعيد الغربي",
+    "category": "تطبيقات طريق الصعيد الغربي",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -324,11 +324,11 @@
   {
     "id": "49446055c2d44528b1f1cb1f61f9bc6e",
     "slug": "dashboard-49446055c2",
-    "title": "لوحة مؤشرات أسعار الأراضي – محور الصعيد الغربي",
+    "title": "لوحة مؤشرات أسعار الأراضي – طريق الصعيد الغربي",
     "alternateTitles": [
-      "Land Price Indicators Dashboard – Western Upper Egypt Axis"
+      "Land Price Indicators Dashboard – Western Upper Egypt Road"
     ],
-    "category": "تطبيقات محور الصعيد الغربي",
+    "category": "تطبيقات طريق الصعيد الغربي",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -675,11 +675,11 @@
   {
     "id": "064fecc5d9e4784db172821c100b52e0",
     "slug": "dashboard-064fecc5d9",
-    "title": "لوحة مؤشرات الأراضي العمرانية – محور كلابشة",
+    "title": "لوحة مؤشرات الأراضي العمرانية – طريق كلابشة",
     "alternateTitles": [
-      "Urban Land Indicators Dashboard – Kalabsha Axis"
+      "Urban Land Indicators Dashboard – Kalabsha Road"
     ],
-    "category": "تطبيقات محور كلابشة",
+    "category": "تطبيقات طريق كلابشة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -782,11 +782,11 @@
   {
     "id": "989c5ff2f91d44c096a1cb073358a4d3",
     "slug": "dashboard-989c5ff2f9",
-    "title": "لوحة مؤشرات الأراضي الزراعية – محور كلابشة",
+    "title": "لوحة مؤشرات الأراضي الزراعية – طريق كلابشة",
     "alternateTitles": [
-      "Agricultural Land Indicators Dashboard – Kalabsha Axis"
+      "Agricultural Land Indicators Dashboard – Kalabsha Road"
     ],
-    "category": "تطبيقات محور كلابشة",
+    "category": "تطبيقات طريق كلابشة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -814,11 +814,11 @@
   {
     "id": "2529bc0ae66a4f5f8e692c383d1d24ae",
     "slug": "dashboard-2529bc0ae6",
-    "title": "لوحة مؤشرات أسعار الأراضي – محور كلابشة",
+    "title": "لوحة مؤشرات أسعار الأراضي – طريق كلابشة",
     "alternateTitles": [
-      "Land Price Indicators Dashboard – Kalabsha Axis"
+      "Land Price Indicators Dashboard – Kalabsha Road"
     ],
-    "category": "تطبيقات محور كلابشة",
+    "category": "تطبيقات طريق كلابشة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1286,11 +1286,11 @@
   {
     "id": "3e59ea73ec43a3289d6f09f607236912",
     "slug": "dashboard-3e59ea73ec",
-    "title": "لوحة مؤشرات الأراضي العمرانية – محور قوص",
+    "title": "لوحة مؤشرات الأراضي العمرانية – طريق قوص",
     "alternateTitles": [
-      "Urban Land Indicators Dashboard – Qus Axis"
+      "Urban Land Indicators Dashboard – Qus Road"
     ],
-    "category": "تطبيقات محور قوص",
+    "category": "تطبيقات طريق قوص",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1393,11 +1393,11 @@
   {
     "id": "5a3aaa3b3a2647cc9280e4ee6ff5c1f6",
     "slug": "dashboard-5a3aaa3b3a",
-    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور قوص",
+    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق قوص",
     "alternateTitles": [
-      "Agricultural and Industrial Land Indicators Dashboard – Qus Axis"
+      "Agricultural and Industrial Land Indicators Dashboard – Qus Road"
     ],
-    "category": "تطبيقات محور قوص",
+    "category": "تطبيقات طريق قوص",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1425,11 +1425,11 @@
   {
     "id": "58fefdb551da441698ce9b40d9fccf80",
     "slug": "dashboard-58fefdb551",
-    "title": "لوحة مؤشرات أسعار الأراضي – محور قوص",
+    "title": "لوحة مؤشرات أسعار الأراضي – طريق قوص",
     "alternateTitles": [
-      "Land Price Indicators Dashboard – Qus Axis"
+      "Land Price Indicators Dashboard – Qus Road"
     ],
-    "category": "تطبيقات محور قوص",
+    "category": "تطبيقات طريق قوص",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1457,11 +1457,11 @@
   {
     "id": "c79fcd32aa7c12aa7095d68cd5c36ed6",
     "slug": "dashboard-c79fcd32aa",
-    "title": "لوحة مؤشرات الأراضي العمرانية – محور الضبعة",
+    "title": "لوحة مؤشرات الأراضي العمرانية – طريق الضبعة",
     "alternateTitles": [
-      "Urban Land Indicators Dashboard – El Dabaa Axis"
+      "Urban Land Indicators Dashboard – El Dabaa Road"
     ],
-    "category": "تطبيقات محور الضبعة",
+    "category": "تطبيقات طريق الضبعة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1551,11 +1551,11 @@
   {
     "id": "c1e29f0123aa40eda6791f0b3a81f62b",
     "slug": "dashboard-c1e29f0123",
-    "title": "لوحة مؤشرات الأراضي الزراعية – محور الضبعة",
+    "title": "لوحة مؤشرات الأراضي الزراعية – طريق الضبعة",
     "alternateTitles": [
-      "Agricultural Land Indicators Dashboard – El Dabaa Axis"
+      "Agricultural Land Indicators Dashboard – El Dabaa Road"
     ],
-    "category": "تطبيقات محور الضبعة",
+    "category": "تطبيقات طريق الضبعة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1590,11 +1590,11 @@
   {
     "id": "594d7c7ff43e4e0f9fb3a2a65d1d8e62",
     "slug": "dashboard-594d7c7ff4",
-    "title": "لوحة مؤشرات أسعار الأراضي – محور الضبعة",
+    "title": "لوحة مؤشرات أسعار الأراضي – طريق الضبعة",
     "alternateTitles": [
-      "Land Price Indicators Dashboard – El Dabaa Axis"
+      "Land Price Indicators Dashboard – El Dabaa Road"
     ],
-    "category": "تطبيقات محور الضبعة",
+    "category": "تطبيقات طريق الضبعة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1618,11 +1618,11 @@
   {
     "id": "ismailia-urban-2026-dashboard",
     "slug": "dashboard-ismailia-urban",
-    "title": "لوحة مؤشرات الأراضي العمرانية – محور القاهرة - الإسماعيلية",
+    "title": "لوحة مؤشرات الأراضي العمرانية – طريق القاهرة–الإسماعيلية",
     "alternateTitles": [
-      "Urban Land Indicators Dashboard – Cairo - Ismailia Axis"
+      "Urban Land Indicators Dashboard – Cairo–Ismailia Road"
     ],
-    "category": "تطبيقات محور القاهرة - الإسماعيلية",
+    "category": "تطبيقات طريق القاهرة–الإسماعيلية",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1634,11 +1634,11 @@
   {
     "id": "ismailia-agriculture-2026-dashboard",
     "slug": "dashboard-ismailia-agriculture",
-    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – محور القاهرة - الإسماعيلية",
+    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق القاهرة–الإسماعيلية",
     "alternateTitles": [
-      "Agricultural and Industrial Land Indicators Dashboard – Cairo - Ismailia Axis"
+      "Agricultural and Industrial Land Indicators Dashboard – Cairo–Ismailia Road"
     ],
-    "category": "تطبيقات محور القاهرة - الإسماعيلية",
+    "category": "تطبيقات طريق القاهرة–الإسماعيلية",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1650,11 +1650,11 @@
   {
     "id": "ismailia-prices-2026-dashboard",
     "slug": "dashboard-ismailia-prices",
-    "title": "لوحة مؤشرات أسعار الأراضي – محور القاهرة - الإسماعيلية",
+    "title": "لوحة مؤشرات أسعار الأراضي – طريق القاهرة–الإسماعيلية",
     "alternateTitles": [
-      "Land Price Indicators Dashboard – Cairo - Ismailia Axis"
+      "Land Price Indicators Dashboard – Cairo–Ismailia Road"
     ],
-    "category": "تطبيقات محور القاهرة - الإسماعيلية",
+    "category": "تطبيقات طريق القاهرة–الإسماعيلية",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1668,7 +1668,7 @@
     "slug": "storymap-92d2a80d7f",
     "title": "طريق الصعيد الغربي",
     "alternateTitles": [],
-    "category": "التطبيقات محور الصعيد الغربي باللغة العربية",
+    "category": "التطبيقات طريق الصعيد الغربي باللغة العربية",
     "type": "StoryMap",
     "language": "ar",
     "direction": "rtl",
@@ -2108,9 +2108,9 @@
   {
     "id": "3c8f04f4d0f94198928d81848c5795eb",
     "slug": "storymap-3c8f04f4d0",
-    "title": "تطور الاراضي المحيطة بمحور كلابشة",
+    "title": "تطور الاراضي المحيطة بطريق كلابشة",
     "alternateTitles": [],
-    "category": "محور كلابشة",
+    "category": "طريق كلابشة",
     "type": "StoryMap",
     "language": "ar",
     "direction": "rtl",
@@ -2153,9 +2153,9 @@
   {
     "id": "61f7685c76824fd2b7ff3777a59f7775",
     "slug": "web-viewer-61f7685c76",
-    "title": "منطقة دراسة محور كلابشة",
+    "title": "منطقة دراسة طريق كلابشة",
     "alternateTitles": [],
-    "category": "محور كلابشة",
+    "category": "طريق كلابشة",
     "type": "Web AppViewer",
     "language": "ar",
     "direction": "rtl",
@@ -2228,7 +2228,7 @@
   {
     "id": "43915f9815224bdc8084c5a1f3d77ef7",
     "slug": "web-viewer-43915f9815",
-    "title": "منطقة الدراسة محور قنا",
+    "title": "منطقة الدراسة طريق قنا",
     "alternateTitles": [],
     "category": "طريق قنا الاقصر",
     "type": "Web AppViewer",
@@ -2441,9 +2441,9 @@
   {
     "id": "bd328e2a5b8a4d9985bdba2eae711a07",
     "slug": "storymap-bd328e2a5b",
-    "title": "تطور الاراضي المحيطة بمحور قوص",
+    "title": "تطور الاراضي المحيطة بطريق قوص",
     "alternateTitles": [],
-    "category": "محور قوص",
+    "category": "طريق قوص",
     "type": "StoryMap",
     "language": "ar",
     "direction": "rtl",
@@ -2486,9 +2486,9 @@
   {
     "id": "67afc365717a4e57bc896300b8938411",
     "slug": "web-viewer-67afc36571",
-    "title": "تطبيق منطقة الدراسة محور قوص",
+    "title": "تطبيق منطقة الدراسة طريق قوص",
     "alternateTitles": [],
-    "category": "محور قوص",
+    "category": "طريق قوص",
     "type": "Web AppViewer",
     "language": "ar",
     "direction": "rtl",
@@ -2516,9 +2516,9 @@
   {
     "id": "1d894feec2724517af8c09e13ac9146a",
     "slug": "instant-filter-gallery-1d894feec2",
-    "title": "محور قوص",
+    "title": "طريق قوص",
     "alternateTitles": [],
-    "category": "محور قوص",
+    "category": "طريق قوص",
     "type": "Instant Filter Gallery",
     "language": "ar",
     "direction": "rtl",
@@ -2546,11 +2546,11 @@
   {
     "id": "3bc68f337ff0461896d3c1b2b218add9",
     "slug": "storymap-3bc68f337f",
-    "title": "تطور الأراضي المحيطة بمحور الضبعة",
+    "title": "تطور الأراضي المحيطة بطريق الضبعة",
     "alternateTitles": [
-      "Development of the lands surrounding the Dabaa axis"
+      "Development of the lands surrounding the Dabaa road"
     ],
-    "category": "تطبيقات محور الضبعة",
+    "category": "تطبيقات طريق الضبعة",
     "type": "StoryMap",
     "language": "ar",
     "direction": "rtl",
@@ -2618,11 +2618,11 @@
   {
     "id": "ismailia-storymap-2026",
     "slug": "storymap-ismailia",
-    "title": "القصة المكانية التفاعلية – محور القاهرة–الإسماعيلية",
+    "title": "القصة المكانية التفاعلية – طريق القاهرة–الإسماعيلية",
     "alternateTitles": [
-      "Spatial StoryMap – Cairo–Ismailia Axis"
+      "Spatial StoryMap – Cairo–Ismailia Road"
     ],
-    "category": "تطبيقات محور القاهرة–الإسماعيلية",
+    "category": "تطبيقات طريق القاهرة–الإسماعيلية",
     "type": "StoryMap",
     "language": "ar",
     "direction": "rtl",
@@ -2648,11 +2648,11 @@
   {
     "id": "b0ababe3e44e1165bfa11e1ca324118e",
     "slug": "web-viewer-b0ababe3e4",
-    "title": "تطبيق استعراض منطقة الدراسة - محور الصعيد الغربي",
+    "title": "تطبيق استعراض منطقة الدراسة - طريق الصعيد الغربي",
     "alternateTitles": [
-      "Study Area Web App Builder - Western Upper Egypt Axis"
+      "Study Area Web App Builder - Western Upper Egypt Road"
     ],
-    "category": "تطبيقات محور الصعيد الغربي",
+    "category": "تطبيقات طريق الصعيد الغربي",
     "type": "Web AppViewer",
     "language": "ar",
     "direction": "rtl",
@@ -2697,11 +2697,11 @@
   {
     "id": "ed76e914472804d76b4cad5b80c3dfd3",
     "slug": "instant-filter-gallery-ed76e91447",
-    "title": "مركز البيانات والتطبيقات - محور الصعيد الغربي",
+    "title": "مركز البيانات والتطبيقات - طريق الصعيد الغربي",
     "alternateTitles": [
-      "Data and Application Hub - Western Upper Egypt Axis"
+      "Data and Application Hub - Western Upper Egypt Road"
     ],
-    "category": "تطبيقات محور الصعيد الغربي",
+    "category": "تطبيقات طريق الصعيد الغربي",
     "type": "Instant Filter Gallery",
     "language": "ar",
     "direction": "rtl",
@@ -2809,11 +2809,11 @@
   {
     "id": "43527f0b1720e58f7bac99abc66aaca5",
     "slug": "instant-filter-gallery-43527f0b17",
-    "title": "مركز البيانات والتطبيقات - محور كلابشة",
+    "title": "مركز البيانات والتطبيقات - طريق كلابشة",
     "alternateTitles": [
-      "Data and Application Hub - Kalabsha Axis"
+      "Data and Application Hub - Kalabsha Road"
     ],
-    "category": "تطبيقات محور كلابشة",
+    "category": "تطبيقات طريق كلابشة",
     "type": "Instant Filter Gallery",
     "language": "ar",
     "direction": "rtl",
@@ -2922,11 +2922,11 @@
   {
     "id": "e951850d9b07589902ef6a19ec82b232",
     "slug": "web-viewer-e951850d9b",
-    "title": "تطبيق استعراض منطقة الدراسة - محور الضبعة",
+    "title": "تطبيق استعراض منطقة الدراسة - طريق الضبعة",
     "alternateTitles": [
-      "Study Area Web App Builder - El Dabaa Axis"
+      "Study Area Web App Builder - El Dabaa Road"
     ],
-    "category": "تطبيقات محور الضبعة",
+    "category": "تطبيقات طريق الضبعة",
     "type": "Web AppViewer",
     "language": "ar",
     "direction": "rtl",
@@ -2961,11 +2961,11 @@
   {
     "id": "34ec7f76809994c138064e94bb51f3e7",
     "slug": "instant-filter-gallery-34ec7f7680",
-    "title": "مركز البيانات والتطبيقات - محور الضبعة",
+    "title": "مركز البيانات والتطبيقات - طريق الضبعة",
     "alternateTitles": [
-      "Data and Application Hub - El Dabaa Axis"
+      "Data and Application Hub - El Dabaa Road"
     ],
-    "category": "تطبيقات محور الضبعة",
+    "category": "تطبيقات طريق الضبعة",
     "type": "Instant Filter Gallery",
     "language": "ar",
     "direction": "rtl",
@@ -3000,11 +3000,11 @@
   {
     "id": "30ddd4974beee0510d112e36c1e7ade5",
     "slug": "web-viewer-30ddd4974b",
-    "title": "تطبيق استعراض منطقة الدراسة - محور القاهرة - الإسماعيلية",
+    "title": "تطبيق استعراض منطقة الدراسة - طريق القاهرة–الإسماعيلية",
     "alternateTitles": [
-      "Study Area Web App Builder - Cairo - Ismailia Axis"
+      "Study Area Web App Builder - Cairo–Ismailia Road"
     ],
-    "category": "تطبيقات محور القاهرة - الإسماعيلية",
+    "category": "تطبيقات طريق القاهرة–الإسماعيلية",
     "type": "Web AppViewer",
     "language": "ar",
     "direction": "rtl",
@@ -3016,11 +3016,11 @@
   {
     "id": "1024904d78ebf21096faa6fbeaa83cfd",
     "slug": "instant-filter-gallery-1024904d78",
-    "title": "مركز البيانات والتطبيقات - محور القاهرة - الإسماعيلية",
+    "title": "مركز البيانات والتطبيقات - طريق القاهرة–الإسماعيلية",
     "alternateTitles": [
-      "Data and Application Hub - Cairo - Ismailia Axis"
+      "Data and Application Hub - Cairo–Ismailia Road"
     ],
-    "category": "تطبيقات محور القاهرة - الإسماعيلية",
+    "category": "تطبيقات طريق القاهرة–الإسماعيلية",
     "type": "Instant Filter Gallery",
     "language": "ar",
     "direction": "rtl",
