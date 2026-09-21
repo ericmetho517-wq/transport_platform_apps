@@ -348,10 +348,13 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .report-land-dashboard .land-center > .gis-map { min-height:0 !important; height: 100%; }
 .south-agriculture-kpis { grid-template-columns:repeat(5,minmax(0,1fr)); direction:ltr; flex: 0 0 auto; }
 .south-agriculture-kpis article { direction:rtl; min-height: 48px; padding: 4px 6px; }
+.southern-agriculture-dashboard.kalabsha-axis .south-agriculture-kpis,
+.southern-agriculture-dashboard.qena-luxor-road .south-agriculture-kpis { grid-template-columns:repeat(4,minmax(0,1fr)); }
 .south-agriculture-layout { height:calc(100vh - 52px); max-height:calc(100vh - 52px); min-height:0; display:grid; grid-template-columns:minmax(200px,23%) minmax(0,57%) minmax(180px,20%); direction:ltr; box-sizing: border-box; overflow: hidden; }
 .south-agriculture-side,.south-agriculture-center,.south-agriculture-right { min-width:0; height:100%; min-height:0; direction:rtl; overflow: hidden; }
 .south-agriculture-side,.south-agriculture-right { display:grid; grid-template-rows:repeat(2, minmax(0, 1fr)); }
 .southern-agriculture-dashboard.has-serial-chart .south-agriculture-side { grid-template-rows:repeat(3, minmax(0, 1fr)); overflow-y:auto; }
+.southern-agriculture-dashboard.kalabsha-axis.has-serial-chart .south-agriculture-side { grid-template-rows:repeat(2, minmax(0, 1fr)); }
 .southern-agriculture-dashboard .serial-chart-card { min-height:220px; }
 .south-agriculture-center { display:grid; grid-template-rows:minmax(0, 1.5fr) minmax(0, 1fr); height:100%; min-height:0; }
 .south-agriculture-center > .gis-map { min-height:0 !important; height: 100%; }
