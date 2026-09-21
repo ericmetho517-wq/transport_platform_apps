@@ -29,7 +29,9 @@ const lineSymbols: Partial<Record<LayerName, { color: string; width: number; das
 const ismailiaLanduseSymbols: Record<number, [string, string]> = {
   0: ["#28c51b", "#28c51b"],  // الأراضي الزراعية
   1: ["#a100c2", "#a100c2"],  // المناطق الصناعية
-  2: ["transparent", "transparent"],  // أراضي الفضاء (شفاف – يظهر الـ basemap)
+  // Keep vacant land visible: it is a documented land-cover class, not an
+  // empty map area. The translucent fill preserves the satellite context.
+  2: ["rgba(255,244,174,.72)", "#d8bd31"],
   3: ["#ffaa00", "#e59600"],  // الأراضي العمرانية
   4: ["#ff1308", "#dc0d05"],  // أراضي القوات المسلحة
   5: ["#c6f5ad", "#9dd781"],  // أراضي خدمات
@@ -59,7 +61,7 @@ const ismailiaLanduseNames: Record<string, string> = {
 // service matcher here prevents each project from drifting to a different
 // colour when it is rendered in a chart or filter.
 const serviceColor = ismailiaLanduseSymbols[5][0];
-const storyVisibleLanduseCodes = new Set([0, 1, 3]);
+const storyVisibleLanduseCodes = new Set([0, 1, 2, 3]);
 const serviceLabelPattern = /خدم|تعليم|حكوم|دين|سياح|ترفيه|مقابر/i;
 const transportLayerNames: LayerName[] = [
   "Road_CairoRing", "Road_MiddleRing", "Road_RegionalRing",
