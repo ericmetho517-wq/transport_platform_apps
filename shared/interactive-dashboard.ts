@@ -38,14 +38,14 @@ const ismailiaLanduseSymbols: Record<number, [string, string]> = {
   6: ["#aebda6", "#93a28b"],  // المناطق الترفيهية
   7: ["#858585", "#e1e1e1"],  // مقابر
   8: ["#18b2dc", "#078fb5"],  // مسطحات مائية
-  9: ["#555555", "#d6d6d6"],  // حرم الطريق
-  10: ["#555555", "#d6d6d6"], // طرق وحرم طريق
+  9: ["transparent", "transparent"],  // حرم الطريق
+  10: ["#555555", "transparent"], // طرق
   11: ["#dedede", "#c7c7c7"], // ديني
   12: ["#2f5c96", "#244a7a"], // الأراضي التعليمية
   13: ["#bd7900", "#9c6300"], // الأراضي الحكومية
   14: ["#13cabb", "#0ba99d"], // الأراضي السياحية
   15: ["#62cf49", "#d8ffce"], // مساحات خضراء
-  99: ["#9aa5ad", "#eef3f6"],
+  99: ["transparent", "transparent"],
 };
 
 const ismailiaLanduseNames: Record<string, string> = {
@@ -224,10 +224,24 @@ function priceMarkup(app: TransportApp, group: string): string {
 function dabaaLandMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard dabaa-land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
+    <div class="dashboard-kpis general-agriculture-kpis" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
+      <article class="orange"><span>إجمالي مساحة الأراضي العمرانية المتغيرة (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article>
+      <article class="lime"><span>إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article>
+      <article class="white"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>
+      <article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article>
+    </div>
     <div class="dabaa-land-layout">
-      <section class="dashboard-kpis dabaa-kpis"><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="lime"><span>إجمالي مساحة الأراضي الزراعية المتغيرة (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article></section>
-      <section class="dabaa-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023</span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section>
-      <aside class="dabaa-gauges"><section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section></aside>
+      <section class="dabaa-center">
+        ${mapMarkup()}
+        <section class="dark-card comparison-card">
+          <div class="card-title"><span>مقارنة مساحات استخدام الأراضي لعامي 2014 - 2023</span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div>
+          <div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div>
+        </section>
+      </section>
+      <aside class="dabaa-gauges">
+        <section class="dark-card gauge-card"><span>نسبة مساحة التغير العمراني بمنطقة الدراسة لعام 2023</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div></section>
+        <section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة لعام 2023</span><div class="gauge" id="agricultural-gauge"><i></i><strong>—</strong></div></section>
+      </aside>
     </div>
   </main>`;
 }
@@ -322,7 +336,7 @@ function agriculturalMarkup(app: TransportApp, group: string): string {
 function westernAgricultureMarkup(app: TransportApp, group: string): string {
   return `<main class="interactive-dashboard agriculture-dashboard western-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
-    <div class="dashboard-kpis western-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (ألف عامل)</span><strong data-metric="agriculturalWorkers" data-metric-scale="1000">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="orange"><span>العمالة الصناعية (ألف عامل)</span><strong data-metric="industrialWorkers" data-metric-scale="1000">—</strong></article><article class="orange"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article></div>
+    <div class="dashboard-kpis western-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>عدد العمالة الزراعية</span><strong data-metric="agriculturalWorkers">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article class="white"><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="grey"><span>عدد العمالة الصناعية</span><strong data-metric="industrialWorkers">—</strong></article><article class="grey"><span>إجمالي مساحة الأراضي الصناعية (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article></div>
     <div class="agriculture-layout"><aside class="agriculture-side western-agriculture-side"><section class="dark-card crop-card"><span>نسب أنواع المحاصيل الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card ownership-card"><span>نسب ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section></aside><section class="agriculture-center western-agriculture-center">${mapMarkup()}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi class="map-year-start">2014</bdi> / <bdi class="map-year-end">2024</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="agriculture-right western-agriculture-right"><section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><strong>—</strong></div></section></aside></div>
   </main>`;
 }
@@ -358,9 +372,9 @@ function impactMarkup(app: TransportApp, group: string): string {
 export function renderInteractiveDashboard(app: TransportApp): string {
   const group = dashboardGroup(app);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
+  if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
   if (isUrbanDashboard(app)) return landMarkup(app, group);
   if (group === "ismailia") return agriculturalMarkup(app, group);
-  if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
   if (["qena-luxor-road", "qus-axis", "kalabsha-axis"].includes(group)) return southernAgricultureMarkup(app, group);
   if (group === "western-upper-egypt") return westernAgricultureMarkup(app, group);
   return generalAgricultureMarkup(app, group);
@@ -1818,8 +1832,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     Object.entries(summary.metrics).forEach(([name, value]) => setMetric(name, value));
     setMetric("agriculturalFeatures", summary.layerCounts?.agricultural || 0);
     setMetric("industrialFeatures", summary.layerCounts?.industrial || 0);
-    if (!summary.metrics.agriculturalWorkersThousands) { setUnavailableMetric("agriculturalWorkersThousands"); hideUnavailableMetricPanel("agriculturalWorkersThousands"); }
-    if (!summary.metrics.agriculturalAreaFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) { setUnavailableMetric("agriculturalAreaFeddan"); hideUnavailableMetricPanel("agriculturalAreaFeddan"); }
+    if (!summary.metrics.agriculturalWorkersThousands && summary.profile?.metrics.agriculturalWorkersThousands === undefined) { setUnavailableMetric("agriculturalWorkersThousands"); hideUnavailableMetricPanel("agriculturalWorkersThousands"); }
+    if (!summary.metrics.agriculturalAreaFeddan && !(summary.metrics.agriculturalChangeKm2 > 0) && summary.profile?.metrics.agriculturalAreaFeddan === undefined) { setUnavailableMetric("agriculturalAreaFeddan"); hideUnavailableMetricPanel("agriculturalAreaFeddan"); }
     if (!summary.metrics.agriculturalChangeFeddan && !(summary.metrics.agriculturalChangeKm2 > 0)) { setUnavailableMetric("agriculturalChangeFeddan"); hideUnavailableMetricPanel("agriculturalChangeFeddan"); }
     if (group !== "ismailia" && root.dataset.mode === "agriculture") {
       for (const name of ["agriculturalChangeKm2", "industrialChangeKm2", "agriculturalWorkers", "industrialWorkers"]) {
@@ -2127,7 +2141,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const key = normalizeChangeStatus(feature.properties?.change_status_key ?? feature.properties?.change_status ?? feature.properties?.["حالة_التغير"]);
         if (key !== "changed" && key !== "unchanged") return;
         const landuseCode = String(feature.properties?.landuse_code ?? feature.properties?.landuse_value ?? feature.properties?.["استخدام_الأرض"] ?? "");
-        const kind = landuseCode === "3" ? "urban" : landuseCode === "0" ? "agricultural" : landuseCode === "1" ? "industrial" : null;
+        const kind = /urban|عمران|3/i.test(landuseCode) ? "urban" : /agri|زراع|0/i.test(landuseCode) ? "agricultural" : /industr|صناع|1/i.test(landuseCode) ? "industrial" : null;
         const rawArea = Number(feature.properties?.["مساحة_كم2"] ?? feature.properties?.area_km2 ?? 0);
         const area = rawArea > 1_000_000 ? rawArea / 1_000_000 : rawArea;
         const sector = statusSectorOf(feature.properties);
@@ -2211,6 +2225,13 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           gauge.removeAttribute("data-status-estimate");
           gauge.removeAttribute("title");
           setGauge(gauge, ((areas?.[mode] || 0) / total) * 100);
+        } else {
+          const estimatedChanged = summary.profile?.metrics[`${kind}ChangePercent`] ?? summary.metrics[`${kind}ChangePercent` as keyof typeof summary.metrics];
+          if (typeof estimatedChanged === "number" && Number.isFinite(estimatedChanged)) {
+            gauge.removeAttribute("data-status-estimate");
+            gauge.removeAttribute("title");
+            setGauge(gauge, mode === "changed" ? estimatedChanged : 100 - estimatedChanged);
+          }
         }
       });
     };

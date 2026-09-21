@@ -218,7 +218,6 @@
   ],
   "landUseDataStatus": "The exported 2014 layer does not contain a complete area series comparable with 2024; the chart is intentionally unavailable",
   "layers": [
-    "study",
     "axis",
     "urban",
     "agricultural",

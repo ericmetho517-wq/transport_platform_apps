@@ -7,6 +7,7 @@ const replacements: Array<[string, string]> = [
   ["نسبة مساحة الصناعة حسب حالة التغير من الصناعة المصنفة", "Industrial area share by change status among classified industrial land"],
   ["خريطة قمر صناعي تفاعلية تعرض حدود منطقة الدراسة للقطاع المحدد. استخدم أزرار التكبير واسحب الخريطة، وانقر على المنطقة لعرض بياناتها الوصفية.", "An interactive satellite map shows the selected sector's study area. Zoom or drag the map, and click the area to inspect its attributes."],
   ["العمالة الزراعية (ألف عامل)", "Agricultural workforce (thousands)"],
+  ["طول محور الدراسة (كم)", "Study corridor length (km)"],
   ["العمالة الصناعية (ألف عامل)", "Industrial workforce (thousands)"],
   ["نسب أنواع المحاصيل الزراعية", "Crop type shares"],
   ["المؤشرات المعروضة هنا مقتصرة على القيم والطبقات الموثقة لهذا الطريق؛ المؤشر غير الموثق لا يُعرض كصفر.", "Only documented values and layers for this road are shown; undocumented indicators are not displayed as zero."],

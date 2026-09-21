@@ -2,7 +2,6 @@
   "western-upper-egypt": {
     "summary": "data/dashboard/western-upper-egypt/summary.json",
     "layers": [
-      "study",
       "axis",
       "urban",
       "agricultural",
@@ -112,7 +111,6 @@
   "dabaa-axis": {
     "summary": "data/dashboard/dabaa-axis/summary.json",
     "layers": [
-      "study",
       "axis",
       "urban",
       "agricultural",

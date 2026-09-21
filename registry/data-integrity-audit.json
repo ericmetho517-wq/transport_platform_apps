@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-09-21T14:11:00.473Z",
+  "generatedAt": "2026-09-21T18:18:24.475Z",
   "applications": 61,
   "totals": {
-    "features": 76850,
-    "sourceFeatures": 212215,
-    "renderableFeatures": 76845,
-    "coordinatePairs": 2891673
+    "features": 76839,
+    "sourceFeatures": 212204,
+    "renderableFeatures": 76834,
+    "coordinatePairs": 2890202
   },
   "applicationCoverage": {
     "western-upper-egypt": {
       "applications": 6,
-      "activeFeatures": 3903,
-      "activeLayers": 8,
+      "activeFeatures": 3893,
+      "activeLayers": 7,
       "verifiedLocalData": true
     },
     "dahshur-south-link": {
@@ -58,8 +58,8 @@
     },
     "dabaa-axis": {
       "applications": 6,
-      "activeFeatures": 886,
-      "activeLayers": 7,
+      "activeFeatures": 885,
+      "activeLayers": 6,
       "verifiedLocalData": true
     },
     "ismailia": {
@@ -134,13 +134,6 @@
     },
     "dabaa-axis": {
       "layers": {
-        "study": {
-          "features": 1,
-          "representedSourceFeatures": 1,
-          "renderableFeatures": 1,
-          "coordinatePairs": 131,
-          "invalidCoordinates": 0
-        },
         "axis": {
           "features": 3,
           "representedSourceFeatures": 3,
@@ -186,12 +179,14 @@
       },
       "verifiedLocalData": true,
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\الضبعة\\028a8e17-53a4-4b69-8e27-f31b5e572aa7.gdb",
-      "undeclaredLayerFiles": [],
+      "undeclaredLayerFiles": [
+        "study.geojson"
+      ],
       "totals": {
-        "features": 886,
-        "sourceFeatures": 6534,
-        "coordinatePairs": 107664,
-        "renderableFeatures": 886
+        "features": 885,
+        "sourceFeatures": 6533,
+        "coordinatePairs": 107533,
+        "renderableFeatures": 885
       }
     },
     "dahshur-south-link": {
@@ -856,13 +851,6 @@
     },
     "western-upper-egypt": {
       "layers": {
-        "study": {
-          "features": 10,
-          "representedSourceFeatures": 10,
-          "renderableFeatures": 10,
-          "coordinatePairs": 1340,
-          "invalidCoordinates": 0
-        },
         "axis": {
           "features": 10,
           "representedSourceFeatures": 10,
@@ -915,20 +903,24 @@
       },
       "verifiedLocalData": true,
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
-      "undeclaredLayerFiles": [],
+      "undeclaredLayerFiles": [
+        "study.geojson"
+      ],
       "totals": {
-        "features": 3903,
-        "sourceFeatures": 75950,
-        "coordinatePairs": 1612452,
-        "renderableFeatures": 3901
+        "features": 3893,
+        "sourceFeatures": 75940,
+        "coordinatePairs": 1611112,
+        "renderableFeatures": 3891
       }
     }
   },
   "errors": [],
   "warnings": [
+    "dabaa-axis/study.geojson: 1 features are inactive because they are not declared for this sector",
     "ismailia/landcover-end: 1 source records have empty geometry and are excluded from rendering",
     "qena-luxor-road/baseline: 2 source records have empty geometry and are excluded from rendering",
-    "western-upper-egypt/water: 2 source records have empty geometry and are excluded from rendering"
+    "western-upper-egypt/water: 2 source records have empty geometry and are excluded from rendering",
+    "western-upper-egypt/study.geojson: 10 features are inactive because they are not declared for this sector"
   ],
   "result": "PASSED"
 }

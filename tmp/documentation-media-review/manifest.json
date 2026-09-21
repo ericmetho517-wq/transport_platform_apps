@@ -1,0 +1,4326 @@
+{
+  "Presentation.pptx": [
+    {
+      "index": 0,
+      "name": "ppt/media/image4.png",
+      "width": 251,
+      "height": 242
+    },
+    {
+      "index": 1,
+      "name": "ppt/media/image5.jpg",
+      "width": 960,
+      "height": 540
+    },
+    {
+      "index": 2,
+      "name": "ppt/media/image6.png",
+      "width": 1600,
+      "height": 1130
+    },
+    {
+      "index": 3,
+      "name": "ppt/media/image7.jpg",
+      "width": 693,
+      "height": 752
+    },
+    {
+      "index": 4,
+      "name": "ppt/media/image8.jpg",
+      "width": 697,
+      "height": 748
+    },
+    {
+      "index": 5,
+      "name": "ppt/media/image9.jpg",
+      "width": 200,
+      "height": 150
+    },
+    {
+      "index": 6,
+      "name": "ppt/media/image10.jpg",
+      "width": 200,
+      "height": 266
+    },
+    {
+      "index": 7,
+      "name": "ppt/media/image11.jpg",
+      "width": 200,
+      "height": 266
+    },
+    {
+      "index": 8,
+      "name": "ppt/media/image12.jpg",
+      "width": 200,
+      "height": 266
+    },
+    {
+      "index": 9,
+      "name": "ppt/media/image13.png",
+      "width": 1630,
+      "height": 903
+    },
+    {
+      "index": 10,
+      "name": "ppt/media/image14.png",
+      "width": 1600,
+      "height": 1130
+    },
+    {
+      "index": 11,
+      "name": "ppt/media/image15.png",
+      "width": 1600,
+      "height": 1128
+    },
+    {
+      "index": 12,
+      "name": "ppt/media/image16.png",
+      "width": 1600,
+      "height": 1128
+    },
+    {
+      "index": 13,
+      "name": "ppt/media/image17.png",
+      "width": 1487,
+      "height": 752
+    },
+    {
+      "index": 14,
+      "name": "ppt/media/image18.png",
+      "width": 1483,
+      "height": 745
+    },
+    {
+      "index": 15,
+      "name": "ppt/media/image19.png",
+      "width": 1487,
+      "height": 755
+    },
+    {
+      "index": 16,
+      "name": "ppt/media/image20.png",
+      "width": 1482,
+      "height": 746
+    },
+    {
+      "index": 17,
+      "name": "ppt/media/image21.png",
+      "width": 1492,
+      "height": 748
+    },
+    {
+      "index": 18,
+      "name": "ppt/media/image22.png",
+      "width": 1491,
+      "height": 748
+    },
+    {
+      "index": 19,
+      "name": "ppt/media/image23.png",
+      "width": 1920,
+      "height": 882
+    },
+    {
+      "index": 20,
+      "name": "ppt/media/image24.png",
+      "width": 1920,
+      "height": 877
+    },
+    {
+      "index": 21,
+      "name": "ppt/media/image25.png",
+      "width": 1920,
+      "height": 882
+    },
+    {
+      "index": 22,
+      "name": "ppt/media/image26.png",
+      "width": 1918,
+      "height": 888
+    },
+    {
+      "index": 23,
+      "name": "ppt/media/image27.jpg",
+      "width": 740,
+      "height": 555
+    },
+    {
+      "index": 24,
+      "name": "ppt/media/image28.png",
+      "width": 1600,
+      "height": 1130
+    },
+    {
+      "index": 25,
+      "name": "ppt/media/image29.jpg",
+      "width": 967,
+      "height": 565
+    },
+    {
+      "index": 26,
+      "name": "ppt/media/image30.jpg",
+      "width": 967,
+      "height": 565
+    },
+    {
+      "index": 27,
+      "name": "ppt/media/image31.jpg",
+      "width": 600,
+      "height": 400
+    },
+    {
+      "index": 28,
+      "name": "ppt/media/image32.jpeg",
+      "width": 3298,
+      "height": 2474
+    },
+    {
+      "index": 29,
+      "name": "ppt/media/image33.jpeg",
+      "width": 3301,
+      "height": 2475
+    },
+    {
+      "index": 30,
+      "name": "ppt/media/image34.jpeg",
+      "width": 3299,
+      "height": 2474
+    },
+    {
+      "index": 31,
+      "name": "ppt/media/image35.png",
+      "width": 1600,
+      "height": 1128
+    },
+    {
+      "index": 32,
+      "name": "ppt/media/image36.png",
+      "width": 1600,
+      "height": 1130
+    },
+    {
+      "index": 33,
+      "name": "ppt/media/image37.jpg",
+      "width": 789,
+      "height": 527
+    },
+    {
+      "index": 34,
+      "name": "ppt/media/image38.jpg",
+      "width": 789,
+      "height": 518
+    },
+    {
+      "index": 35,
+      "name": "ppt/media/image39.jpg",
+      "width": 774,
+      "height": 513
+    },
+    {
+      "index": 36,
+      "name": "ppt/media/image40.jpg",
+      "width": 774,
+      "height": 510
+    },
+    {
+      "index": 37,
+      "name": "ppt/media/image41.png",
+      "width": 1600,
+      "height": 1128
+    },
+    {
+      "index": 38,
+      "name": "ppt/media/image42.jpg",
+      "width": 805,
+      "height": 531
+    },
+    {
+      "index": 39,
+      "name": "ppt/media/image43.jpg",
+      "width": 808,
+      "height": 535
+    },
+    {
+      "index": 40,
+      "name": "ppt/media/image44.jpg",
+      "width": 805,
+      "height": 535
+    },
+    {
+      "index": 41,
+      "name": "ppt/media/image45.jpg",
+      "width": 808,
+      "height": 536
+    },
+    {
+      "index": 42,
+      "name": "ppt/media/image46.png",
+      "width": 1920,
+      "height": 892
+    },
+    {
+      "index": 43,
+      "name": "ppt/media/image47.png",
+      "width": 1920,
+      "height": 882
+    },
+    {
+      "index": 44,
+      "name": "ppt/media/image48.png",
+      "width": 1273,
+      "height": 847
+    },
+    {
+      "index": 45,
+      "name": "ppt/media/image50.png",
+      "width": 598,
+      "height": 490
+    },
+    {
+      "index": 46,
+      "name": "ppt/media/image51.png",
+      "width": 597,
+      "height": 496
+    },
+    {
+      "index": 47,
+      "name": "ppt/media/image52.png",
+      "width": 787,
+      "height": 591
+    },
+    {
+      "index": 48,
+      "name": "ppt/media/image53.png",
+      "width": 884,
+      "height": 663
+    },
+    {
+      "index": 49,
+      "name": "ppt/media/image54.png",
+      "width": 401,
+      "height": 535
+    },
+    {
+      "index": 50,
+      "name": "ppt/media/image55.png",
+      "width": 580,
+      "height": 436
+    },
+    {
+      "index": 51,
+      "name": "ppt/media/image56.jpg",
+      "width": 2086,
+      "height": 1385
+    },
+    {
+      "index": 52,
+      "name": "ppt/media/image57.png",
+      "width": 1600,
+      "height": 1128
+    },
+    {
+      "index": 53,
+      "name": "ppt/media/image59.png",
+      "width": 852,
+      "height": 681
+    },
+    {
+      "index": 54,
+      "name": "ppt/media/image60.png",
+      "width": 848,
+      "height": 667
+    },
+    {
+      "index": 55,
+      "name": "ppt/media/image61.png",
+      "width": 1002,
+      "height": 613
+    },
+    {
+      "index": 56,
+      "name": "ppt/media/image62.png",
+      "width": 1007,
+      "height": 721
+    },
+    {
+      "index": 57,
+      "name": "ppt/media/image63.png",
+      "width": 1600,
+      "height": 1128
+    },
+    {
+      "index": 58,
+      "name": "ppt/media/image64.png",
+      "width": 768,
+      "height": 585
+    },
+    {
+      "index": 59,
+      "name": "ppt/media/image65.png",
+      "width": 818,
+      "height": 627
+    },
+    {
+      "index": 60,
+      "name": "ppt/media/image66.png",
+      "width": 760,
+      "height": 713
+    },
+    {
+      "index": 61,
+      "name": "ppt/media/image67.png",
+      "width": 775,
+      "height": 691
+    },
+    {
+      "index": 62,
+      "name": "ppt/media/image68.png",
+      "width": 1600,
+      "height": 1128
+    },
+    {
+      "index": 63,
+      "name": "ppt/media/image69.png",
+      "width": 960,
+      "height": 602
+    },
+    {
+      "index": 64,
+      "name": "ppt/media/image70.png",
+      "width": 937,
+      "height": 568
+    },
+    {
+      "index": 65,
+      "name": "ppt/media/image79.png",
+      "width": 736,
+      "height": 528
+    },
+    {
+      "index": 66,
+      "name": "ppt/media/image80.png",
+      "width": 743,
+      "height": 541
+    },
+    {
+      "index": 67,
+      "name": "ppt/media/image81.jpeg",
+      "width": 787,
+      "height": 590
+    },
+    {
+      "index": 68,
+      "name": "ppt/media/image82.jpeg",
+      "width": 849,
+      "height": 637
+    },
+    {
+      "index": 69,
+      "name": "ppt/media/image83.jpeg",
+      "width": 598,
+      "height": 449
+    },
+    {
+      "index": 70,
+      "name": "ppt/media/image84.jpeg",
+      "width": 525,
+      "height": 598
+    },
+    {
+      "index": 71,
+      "name": "ppt/media/image85.png",
+      "width": 1600,
+      "height": 1127
+    },
+    {
+      "index": 72,
+      "name": "ppt/media/image88.png",
+      "width": 968,
+      "height": 743
+    },
+    {
+      "index": 73,
+      "name": "ppt/media/image89.png",
+      "width": 958,
+      "height": 727
+    },
+    {
+      "index": 74,
+      "name": "ppt/media/image90.png",
+      "width": 833,
+      "height": 747
+    },
+    {
+      "index": 75,
+      "name": "ppt/media/image91.png",
+      "width": 823,
+      "height": 747
+    },
+    {
+      "index": 76,
+      "name": "ppt/media/image92.png",
+      "width": 1918,
+      "height": 877
+    },
+    {
+      "index": 77,
+      "name": "ppt/media/image93.png",
+      "width": 1920,
+      "height": 886
+    },
+    {
+      "index": 78,
+      "name": "ppt/media/image94.png",
+      "width": 1920,
+      "height": 892
+    },
+    {
+      "index": 79,
+      "name": "ppt/media/image95.jpg",
+      "width": 960,
+      "height": 540
+    },
+    {
+      "index": 80,
+      "name": "ppt/media/image96.png",
+      "width": 1600,
+      "height": 1128
+    },
+    {
+      "index": 81,
+      "name": "ppt/media/image97.jpg",
+      "width": 642,
+      "height": 750
+    },
+    {
+      "index": 82,
+      "name": "ppt/media/image98.jpg",
+      "width": 636,
+      "height": 748
+    },
+    {
+      "index": 83,
+      "name": "ppt/media/image99.jpg",
+      "width": 200,
+      "height": 150
+    },
+    {
+      "index": 84,
+      "name": "ppt/media/image100.jpg",
+      "width": 200,
+      "height": 150
+    },
+    {
+      "index": 85,
+      "name": "ppt/media/image101.jpg",
+      "width": 200,
+      "height": 150
+    },
+    {
+      "index": 86,
+      "name": "ppt/media/image102.jpg",
+      "width": 200,
+      "height": 150
+    },
+    {
+      "index": 87,
+      "name": "ppt/media/image103.png",
+      "width": 1692,
+      "height": 865
+    },
+    {
+      "index": 88,
+      "name": "ppt/media/image104.png",
+      "width": 1600,
+      "height": 1130
+    },
+    {
+      "index": 89,
+      "name": "ppt/media/image73.png",
+      "width": 1920,
+      "height": 898
+    },
+    {
+      "index": 90,
+      "name": "ppt/media/image105.png",
+      "width": 1600,
+      "height": 1127
+    },
+    {
+      "index": 91,
+      "name": "ppt/media/image106.png",
+      "width": 1443,
+      "height": 740
+    },
+    {
+      "index": 92,
+      "name": "ppt/media/image107.png",
+      "width": 1467,
+      "height": 663
+    },
+    {
+      "index": 93,
+      "name": "ppt/media/image108.png",
+      "width": 1427,
+      "height": 737
+    },
+    {
+      "index": 94,
+      "name": "ppt/media/image109.png",
+      "width": 1463,
+      "height": 662
+    },
+    {
+      "index": 95,
+      "name": "ppt/media/image110.png",
+      "width": 1917,
+      "height": 890
+    },
+    {
+      "index": 96,
+      "name": "ppt/media/image111.png",
+      "width": 1920,
+      "height": 888
+    },
+    {
+      "index": 97,
+      "name": "ppt/media/image114.png",
+      "width": 927,
+      "height": 592
+    },
+    {
+      "index": 98,
+      "name": "ppt/media/image115.png",
+      "width": 940,
+      "height": 592
+    },
+    {
+      "index": 99,
+      "name": "ppt/media/image116.jpeg",
+      "width": 787,
+      "height": 590
+    },
+    {
+      "index": 100,
+      "name": "ppt/media/image117.jpeg",
+      "width": 849,
+      "height": 636
+    },
+    {
+      "index": 101,
+      "name": "ppt/media/image118.jpeg",
+      "width": 832,
+      "height": 465
+    },
+    {
+      "index": 102,
+      "name": "ppt/media/image72.png",
+      "width": 762,
+      "height": 466
+    },
+    {
+      "index": 103,
+      "name": "ppt/media/image119.jpeg",
+      "width": 525,
+      "height": 598
+    },
+    {
+      "index": 104,
+      "name": "ppt/media/image120.jpeg",
+      "width": 2424,
+      "height": 1384
+    },
+    {
+      "index": 105,
+      "name": "ppt/media/image74.png",
+      "width": 1920,
+      "height": 868
+    },
+    {
+      "index": 106,
+      "name": "ppt/media/image122.png",
+      "width": 913,
+      "height": 548
+    },
+    {
+      "index": 107,
+      "name": "ppt/media/image123.png",
+      "width": 902,
+      "height": 526
+    },
+    {
+      "index": 108,
+      "name": "ppt/media/image124.png",
+      "width": 1018,
+      "height": 747
+    },
+    {
+      "index": 109,
+      "name": "ppt/media/image125.png",
+      "width": 1015,
+      "height": 741
+    },
+    {
+      "index": 110,
+      "name": "ppt/media/image126.png",
+      "width": 1920,
+      "height": 885
+    },
+    {
+      "index": 111,
+      "name": "ppt/media/image127.png",
+      "width": 1920,
+      "height": 882
+    },
+    {
+      "index": 112,
+      "name": "ppt/media/image130.png",
+      "width": 1006,
+      "height": 700
+    },
+    {
+      "index": 113,
+      "name": "ppt/media/image131.png",
+      "width": 1007,
+      "height": 697
+    },
+    {
+      "index": 114,
+      "name": "ppt/media/image132.jpeg",
+      "width": 787,
+      "height": 590
+    },
+    {
+      "index": 115,
+      "name": "ppt/media/image133.jpeg",
+      "width": 849,
+      "height": 637
+    },
+    {
+      "index": 116,
+      "name": "ppt/media/image134.jpeg",
+      "width": 491,
+      "height": 581
+    },
+    {
+      "index": 117,
+      "name": "ppt/media/image135.jpeg",
+      "width": 580,
+      "height": 435
+    },
+    {
+      "index": 118,
+      "name": "ppt/media/image75.png",
+      "width": 1920,
+      "height": 885
+    },
+    {
+      "index": 119,
+      "name": "ppt/media/image138.png",
+      "width": 630,
+      "height": 476
+    },
+    {
+      "index": 120,
+      "name": "ppt/media/image139.png",
+      "width": 645,
+      "height": 517
+    },
+    {
+      "index": 121,
+      "name": "ppt/media/image140.png",
+      "width": 745,
+      "height": 530
+    },
+    {
+      "index": 122,
+      "name": "ppt/media/image141.png",
+      "width": 757,
+      "height": 591
+    },
+    {
+      "index": 123,
+      "name": "ppt/media/image142.png",
+      "width": 797,
+      "height": 576
+    },
+    {
+      "index": 124,
+      "name": "ppt/media/image143.png",
+      "width": 865,
+      "height": 587
+    },
+    {
+      "index": 125,
+      "name": "ppt/media/image144.png",
+      "width": 1920,
+      "height": 880
+    },
+    {
+      "index": 126,
+      "name": "ppt/media/image145.png",
+      "width": 1920,
+      "height": 888
+    },
+    {
+      "index": 127,
+      "name": "ppt/media/image71.png",
+      "width": 817,
+      "height": 512
+    },
+    {
+      "index": 128,
+      "name": "ppt/media/image76.png",
+      "width": 1920,
+      "height": 897
+    },
+    {
+      "index": 129,
+      "name": "ppt/media/image77.jpg",
+      "width": 600,
+      "height": 338
+    },
+    {
+      "index": 130,
+      "name": "ppt/media/image1.jpeg",
+      "width": 2933,
+      "height": 473
+    },
+    {
+      "index": 131,
+      "name": "ppt/media/image2.png",
+      "width": 181,
+      "height": 176
+    },
+    {
+      "index": 132,
+      "name": "ppt/media/image3.png",
+      "width": 179,
+      "height": 176
+    }
+  ],
+  "whole_report_01_Intro _ Eklimy_modified2024.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image1.png",
+      "width": 1920,
+      "height": 954
+    },
+    {
+      "index": 1,
+      "name": "word/media/image2.jpeg",
+      "width": 837,
+      "height": 768
+    },
+    {
+      "index": 2,
+      "name": "word/media/image3.jpeg",
+      "width": 960,
+      "height": 540
+    },
+    {
+      "index": 3,
+      "name": "word/media/image6.jpg",
+      "width": 1185,
+      "height": 742
+    },
+    {
+      "index": 4,
+      "name": "word/media/image7.jpg",
+      "width": 1188,
+      "height": 747
+    },
+    {
+      "index": 5,
+      "name": "word/media/image8.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 6,
+      "name": "word/media/image9.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 7,
+      "name": "word/media/image10.jpg",
+      "width": 1493,
+      "height": 750
+    },
+    {
+      "index": 8,
+      "name": "word/media/image12.jpg",
+      "width": 1320,
+      "height": 752
+    },
+    {
+      "index": 9,
+      "name": "word/media/image13.jpg",
+      "width": 1307,
+      "height": 745
+    },
+    {
+      "index": 10,
+      "name": "word/media/image15.jpeg",
+      "width": 959,
+      "height": 719
+    },
+    {
+      "index": 11,
+      "name": "word/media/image16.jpeg",
+      "width": 720,
+      "height": 959
+    },
+    {
+      "index": 12,
+      "name": "word/media/image17.jpeg",
+      "width": 959,
+      "height": 719
+    },
+    {
+      "index": 13,
+      "name": "word/media/image18.jpeg",
+      "width": 720,
+      "height": 959
+    },
+    {
+      "index": 14,
+      "name": "word/media/image19.jpeg",
+      "width": 922,
+      "height": 692
+    },
+    {
+      "index": 15,
+      "name": "word/media/image11.jpg",
+      "width": 1492,
+      "height": 750
+    },
+    {
+      "index": 16,
+      "name": "word/media/image20.png",
+      "width": 1015,
+      "height": 552
+    },
+    {
+      "index": 17,
+      "name": "word/media/image21.png",
+      "width": 937,
+      "height": 430
+    },
+    {
+      "index": 18,
+      "name": "word/media/image22.png",
+      "width": 939,
+      "height": 432
+    },
+    {
+      "index": 19,
+      "name": "word/media/image23.png",
+      "width": 943,
+      "height": 431
+    },
+    {
+      "index": 20,
+      "name": "word/media/image24.png",
+      "width": 1038,
+      "height": 474
+    },
+    {
+      "index": 21,
+      "name": "word/media/image25.png",
+      "width": 876,
+      "height": 633
+    },
+    {
+      "index": 22,
+      "name": "word/media/image26.png",
+      "width": 891,
+      "height": 625
+    },
+    {
+      "index": 23,
+      "name": "word/media/image31.png",
+      "width": 1920,
+      "height": 951
+    },
+    {
+      "index": 24,
+      "name": "word/media/image32.png",
+      "width": 1200,
+      "height": 578
+    },
+    {
+      "index": 25,
+      "name": "word/media/image33.png",
+      "width": 1920,
+      "height": 909
+    },
+    {
+      "index": 26,
+      "name": "word/media/image34.png",
+      "width": 1920,
+      "height": 953
+    },
+    {
+      "index": 27,
+      "name": "word/media/image35.png",
+      "width": 1034,
+      "height": 642
+    },
+    {
+      "index": 28,
+      "name": "word/media/image36.png",
+      "width": 1920,
+      "height": 952
+    },
+    {
+      "index": 29,
+      "name": "word/media/image37.png",
+      "width": 1920,
+      "height": 948
+    }
+  ],
+  "whole_report_02_ Dahshor_modified2024.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image11.jpg",
+      "width": 912,
+      "height": 753
+    },
+    {
+      "index": 1,
+      "name": "word/media/image1.png",
+      "width": 1273,
+      "height": 847
+    },
+    {
+      "index": 2,
+      "name": "word/media/image2.jpeg",
+      "width": 1429,
+      "height": 1009
+    },
+    {
+      "index": 3,
+      "name": "word/media/image3.jpg",
+      "width": 990,
+      "height": 722
+    },
+    {
+      "index": 4,
+      "name": "word/media/image4.jpg",
+      "width": 973,
+      "height": 747
+    },
+    {
+      "index": 5,
+      "name": "word/media/image5.png",
+      "width": 597,
+      "height": 496
+    },
+    {
+      "index": 6,
+      "name": "word/media/image6.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 7,
+      "name": "word/media/image7.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 8,
+      "name": "word/media/image8.jpg",
+      "width": 1458,
+      "height": 752
+    },
+    {
+      "index": 9,
+      "name": "word/media/image9.jpg",
+      "width": 1462,
+      "height": 747
+    },
+    {
+      "index": 10,
+      "name": "word/media/image10.jpg",
+      "width": 921,
+      "height": 747
+    },
+    {
+      "index": 11,
+      "name": "word/media/image12.jpeg",
+      "width": 1492,
+      "height": 1052
+    },
+    {
+      "index": 12,
+      "name": "word/media/image13.jpeg",
+      "width": 725,
+      "height": 544
+    },
+    {
+      "index": 13,
+      "name": "word/media/image14.jpeg",
+      "width": 721,
+      "height": 540
+    },
+    {
+      "index": 14,
+      "name": "word/media/image15.jpeg",
+      "width": 743,
+      "height": 556
+    },
+    {
+      "index": 15,
+      "name": "word/media/image16.jpeg",
+      "width": 721,
+      "height": 548
+    },
+    {
+      "index": 16,
+      "name": "word/media/image17.jpeg",
+      "width": 2000,
+      "height": 720
+    },
+    {
+      "index": 17,
+      "name": "word/media/image18.jpeg",
+      "width": 725,
+      "height": 544
+    },
+    {
+      "index": 18,
+      "name": "word/media/image19.jpeg",
+      "width": 721,
+      "height": 540
+    },
+    {
+      "index": 19,
+      "name": "word/media/image20.jpeg",
+      "width": 743,
+      "height": 556
+    },
+    {
+      "index": 20,
+      "name": "word/media/image21.jpeg",
+      "width": 721,
+      "height": 548
+    },
+    {
+      "index": 21,
+      "name": "word/media/image22.jpeg",
+      "width": 2000,
+      "height": 720
+    },
+    {
+      "index": 22,
+      "name": "word/media/image23.png",
+      "width": 948,
+      "height": 511
+    },
+    {
+      "index": 23,
+      "name": "word/media/image24.png",
+      "width": 1322,
+      "height": 614
+    },
+    {
+      "index": 24,
+      "name": "word/media/image25.png",
+      "width": 1325,
+      "height": 620
+    },
+    {
+      "index": 25,
+      "name": "word/media/image26.png",
+      "width": 1327,
+      "height": 621
+    },
+    {
+      "index": 26,
+      "name": "word/media/image27.png",
+      "width": 1036,
+      "height": 476
+    },
+    {
+      "index": 27,
+      "name": "word/media/image28.png",
+      "width": 1076,
+      "height": 593
+    },
+    {
+      "index": 28,
+      "name": "word/media/image29.png",
+      "width": 1253,
+      "height": 621
+    },
+    {
+      "index": 29,
+      "name": "word/media/image30.png",
+      "width": 717,
+      "height": 347
+    },
+    {
+      "index": 30,
+      "name": "word/media/image31.png",
+      "width": 713,
+      "height": 348
+    },
+    {
+      "index": 31,
+      "name": "word/media/image32.jpeg",
+      "width": 1710,
+      "height": 1114
+    },
+    {
+      "index": 32,
+      "name": "word/media/image33.jpeg",
+      "width": 1749,
+      "height": 1174
+    },
+    {
+      "index": 33,
+      "name": "word/media/image34.jpeg",
+      "width": 1788,
+      "height": 1176
+    },
+    {
+      "index": 34,
+      "name": "word/media/image35.jpeg",
+      "width": 1817,
+      "height": 1165
+    },
+    {
+      "index": 35,
+      "name": "word/media/image36.jpeg",
+      "width": 1795,
+      "height": 1159
+    },
+    {
+      "index": 36,
+      "name": "word/media/image37.png",
+      "width": 1493,
+      "height": 775
+    },
+    {
+      "index": 37,
+      "name": "word/media/image38.png",
+      "width": 1920,
+      "height": 953
+    },
+    {
+      "index": 38,
+      "name": "word/media/image39.png",
+      "width": 1920,
+      "height": 951
+    },
+    {
+      "index": 39,
+      "name": "word/media/image40.png",
+      "width": 1920,
+      "height": 907
+    },
+    {
+      "index": 40,
+      "name": "word/media/image41.png",
+      "width": 1920,
+      "height": 951
+    },
+    {
+      "index": 41,
+      "name": "word/media/image42.png",
+      "width": 1034,
+      "height": 636
+    },
+    {
+      "index": 42,
+      "name": "word/media/image43.png",
+      "width": 1920,
+      "height": 954
+    },
+    {
+      "index": 43,
+      "name": "word/media/image44.png",
+      "width": 1920,
+      "height": 951
+    }
+  ],
+  "whole_report_03_Suize_modified2024.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image5.jpg",
+      "width": 950,
+      "height": 687
+    },
+    {
+      "index": 1,
+      "name": "word/media/image6.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 2,
+      "name": "word/media/image7.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 3,
+      "name": "word/media/image8.jpg",
+      "width": 926,
+      "height": 756
+    },
+    {
+      "index": 4,
+      "name": "word/media/image9.jpg",
+      "width": 927,
+      "height": 748
+    },
+    {
+      "index": 5,
+      "name": "word/media/image10.jpg",
+      "width": 897,
+      "height": 745
+    },
+    {
+      "index": 6,
+      "name": "word/media/image11.jpg",
+      "width": 917,
+      "height": 752
+    },
+    {
+      "index": 7,
+      "name": "word/media/image12.jpeg",
+      "width": 1531,
+      "height": 1079
+    },
+    {
+      "index": 8,
+      "name": "word/media/image13.jpeg",
+      "width": 726,
+      "height": 904
+    },
+    {
+      "index": 9,
+      "name": "word/media/image14.jpeg",
+      "width": 909,
+      "height": 729
+    },
+    {
+      "index": 10,
+      "name": "word/media/image15.jpeg",
+      "width": 726,
+      "height": 904
+    },
+    {
+      "index": 11,
+      "name": "word/media/image16.jpeg",
+      "width": 909,
+      "height": 729
+    },
+    {
+      "index": 12,
+      "name": "word/media/image17.jpeg",
+      "width": 896,
+      "height": 706
+    },
+    {
+      "index": 13,
+      "name": "word/media/image18.png",
+      "width": 1017,
+      "height": 552
+    },
+    {
+      "index": 14,
+      "name": "word/media/image19.png",
+      "width": 1228,
+      "height": 573
+    },
+    {
+      "index": 15,
+      "name": "word/media/image20.png",
+      "width": 1179,
+      "height": 527
+    },
+    {
+      "index": 16,
+      "name": "word/media/image21.png",
+      "width": 984,
+      "height": 579
+    },
+    {
+      "index": 17,
+      "name": "word/media/image22.jpeg",
+      "width": 1760,
+      "height": 1142
+    },
+    {
+      "index": 18,
+      "name": "word/media/image23.jpeg",
+      "width": 1795,
+      "height": 1165
+    },
+    {
+      "index": 19,
+      "name": "word/media/image24.jpeg",
+      "width": 1807,
+      "height": 1173
+    },
+    {
+      "index": 20,
+      "name": "word/media/image25.png",
+      "width": 1920,
+      "height": 953
+    },
+    {
+      "index": 21,
+      "name": "word/media/image26.png",
+      "width": 1351,
+      "height": 666
+    },
+    {
+      "index": 22,
+      "name": "word/media/image27.png",
+      "width": 1351,
+      "height": 666
+    },
+    {
+      "index": 23,
+      "name": "word/media/image28.png",
+      "width": 1348,
+      "height": 664
+    },
+    {
+      "index": 24,
+      "name": "word/media/image29.png",
+      "width": 1920,
+      "height": 950
+    },
+    {
+      "index": 25,
+      "name": "word/media/image30.png",
+      "width": 1034,
+      "height": 636
+    },
+    {
+      "index": 26,
+      "name": "word/media/image31.png",
+      "width": 1920,
+      "height": 952
+    },
+    {
+      "index": 27,
+      "name": "word/media/image32.png",
+      "width": 1920,
+      "height": 952
+    },
+    {
+      "index": 28,
+      "name": "word/media/image1.jpeg",
+      "width": 600,
+      "height": 338
+    },
+    {
+      "index": 29,
+      "name": "word/media/image2.jpeg",
+      "width": 1458,
+      "height": 1028
+    },
+    {
+      "index": 30,
+      "name": "word/media/image3.jpg",
+      "width": 942,
+      "height": 681
+    },
+    {
+      "index": 31,
+      "name": "word/media/image4.png",
+      "width": 597,
+      "height": 496
+    }
+  ],
+  "whole_report_04_Qena_modified2024.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image2.jpeg",
+      "width": 1477,
+      "height": 1042
+    },
+    {
+      "index": 1,
+      "name": "word/media/image3.png",
+      "width": 636,
+      "height": 748
+    },
+    {
+      "index": 2,
+      "name": "word/media/image4.png",
+      "width": 597,
+      "height": 496
+    },
+    {
+      "index": 3,
+      "name": "word/media/image5.png",
+      "width": 642,
+      "height": 750
+    },
+    {
+      "index": 4,
+      "name": "word/media/image7.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 5,
+      "name": "word/media/image8.jpg",
+      "width": 1247,
+      "height": 748
+    },
+    {
+      "index": 6,
+      "name": "word/media/image9.jpg",
+      "width": 1336,
+      "height": 747
+    },
+    {
+      "index": 7,
+      "name": "word/media/image10.png",
+      "width": 1427,
+      "height": 737
+    },
+    {
+      "index": 8,
+      "name": "word/media/image11.jpg",
+      "width": 1478,
+      "height": 752
+    },
+    {
+      "index": 9,
+      "name": "word/media/image12.jpeg",
+      "width": 1491,
+      "height": 1050
+    },
+    {
+      "index": 10,
+      "name": "word/media/image13.jpeg",
+      "width": 767,
+      "height": 786
+    },
+    {
+      "index": 11,
+      "name": "word/media/image14.jpeg",
+      "width": 554,
+      "height": 786
+    },
+    {
+      "index": 12,
+      "name": "word/media/image15.jpeg",
+      "width": 767,
+      "height": 786
+    },
+    {
+      "index": 13,
+      "name": "word/media/image16.jpeg",
+      "width": 554,
+      "height": 786
+    },
+    {
+      "index": 14,
+      "name": "word/media/image17.jpeg",
+      "width": 774,
+      "height": 797
+    },
+    {
+      "index": 15,
+      "name": "word/media/image18.jpeg",
+      "width": 682,
+      "height": 1124
+    },
+    {
+      "index": 16,
+      "name": "word/media/image19.jpeg",
+      "width": 774,
+      "height": 797
+    },
+    {
+      "index": 17,
+      "name": "word/media/image20.jpeg",
+      "width": 682,
+      "height": 1124
+    },
+    {
+      "index": 18,
+      "name": "word/media/image6.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 19,
+      "name": "word/media/image21.png",
+      "width": 1019,
+      "height": 553
+    },
+    {
+      "index": 20,
+      "name": "word/media/image22.png",
+      "width": 1127,
+      "height": 526
+    },
+    {
+      "index": 21,
+      "name": "word/media/image23.png",
+      "width": 1127,
+      "height": 525
+    },
+    {
+      "index": 22,
+      "name": "word/media/image24.png",
+      "width": 1035,
+      "height": 471
+    },
+    {
+      "index": 23,
+      "name": "word/media/image25.jpeg",
+      "width": 1703,
+      "height": 1112
+    },
+    {
+      "index": 24,
+      "name": "word/media/image26.jpeg",
+      "width": 1719,
+      "height": 1134
+    },
+    {
+      "index": 25,
+      "name": "word/media/image27.jpeg",
+      "width": 1641,
+      "height": 1113
+    },
+    {
+      "index": 26,
+      "name": "word/media/image28.png",
+      "width": 1920,
+      "height": 952
+    },
+    {
+      "index": 27,
+      "name": "word/media/image29.png",
+      "width": 1920,
+      "height": 952
+    },
+    {
+      "index": 28,
+      "name": "word/media/image30.png",
+      "width": 1920,
+      "height": 953
+    },
+    {
+      "index": 29,
+      "name": "word/media/image31.png",
+      "width": 1920,
+      "height": 901
+    },
+    {
+      "index": 30,
+      "name": "word/media/image32.png",
+      "width": 1920,
+      "height": 952
+    },
+    {
+      "index": 31,
+      "name": "word/media/image33.png",
+      "width": 1034,
+      "height": 631
+    },
+    {
+      "index": 32,
+      "name": "word/media/image34.png",
+      "width": 1920,
+      "height": 953
+    },
+    {
+      "index": 33,
+      "name": "word/media/image35.png",
+      "width": 1920,
+      "height": 947
+    },
+    {
+      "index": 34,
+      "name": "word/media/image1.jpeg",
+      "width": 960,
+      "height": 540
+    }
+  ],
+  "whole_report_05_ Qos_modified2024.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image4.png",
+      "width": 597,
+      "height": 496
+    },
+    {
+      "index": 1,
+      "name": "word/media/image5.jpg",
+      "width": 1357,
+      "height": 745
+    },
+    {
+      "index": 2,
+      "name": "word/media/image6.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 3,
+      "name": "word/media/image7.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 4,
+      "name": "word/media/image8.jpg",
+      "width": 782,
+      "height": 736
+    },
+    {
+      "index": 5,
+      "name": "word/media/image9.jpg",
+      "width": 776,
+      "height": 741
+    },
+    {
+      "index": 6,
+      "name": "word/media/image10.jpg",
+      "width": 1180,
+      "height": 737
+    },
+    {
+      "index": 7,
+      "name": "word/media/image11.jpg",
+      "width": 1171,
+      "height": 735
+    },
+    {
+      "index": 8,
+      "name": "word/media/image12.jpeg",
+      "width": 1523,
+      "height": 1072
+    },
+    {
+      "index": 9,
+      "name": "word/media/image13.jpeg",
+      "width": 876,
+      "height": 403
+    },
+    {
+      "index": 10,
+      "name": "word/media/image14.jpeg",
+      "width": 1280,
+      "height": 588
+    },
+    {
+      "index": 11,
+      "name": "word/media/image15.jpeg",
+      "width": 876,
+      "height": 403
+    },
+    {
+      "index": 12,
+      "name": "word/media/image16.jpeg",
+      "width": 1280,
+      "height": 588
+    },
+    {
+      "index": 13,
+      "name": "word/media/image17.jpeg",
+      "width": 982,
+      "height": 452
+    },
+    {
+      "index": 14,
+      "name": "word/media/image18.jpeg",
+      "width": 832,
+      "height": 770
+    },
+    {
+      "index": 15,
+      "name": "word/media/image19.jpeg",
+      "width": 982,
+      "height": 452
+    },
+    {
+      "index": 16,
+      "name": "word/media/image20.jpeg",
+      "width": 832,
+      "height": 770
+    },
+    {
+      "index": 17,
+      "name": "word/media/image21.png",
+      "width": 650,
+      "height": 346
+    },
+    {
+      "index": 18,
+      "name": "word/media/image22.png",
+      "width": 1230,
+      "height": 571
+    },
+    {
+      "index": 19,
+      "name": "word/media/image23.png",
+      "width": 1234,
+      "height": 567
+    },
+    {
+      "index": 20,
+      "name": "word/media/image24.png",
+      "width": 885,
+      "height": 406
+    },
+    {
+      "index": 21,
+      "name": "word/media/image25.jpeg",
+      "width": 1777,
+      "height": 1169
+    },
+    {
+      "index": 22,
+      "name": "word/media/image26.jpeg",
+      "width": 1749,
+      "height": 1186
+    },
+    {
+      "index": 23,
+      "name": "word/media/image27.jpeg",
+      "width": 1717,
+      "height": 1171
+    },
+    {
+      "index": 24,
+      "name": "word/media/image28.png",
+      "width": 1920,
+      "height": 956
+    },
+    {
+      "index": 25,
+      "name": "word/media/image29.png",
+      "width": 1920,
+      "height": 951
+    },
+    {
+      "index": 26,
+      "name": "word/media/image30.png",
+      "width": 1268,
+      "height": 580
+    },
+    {
+      "index": 27,
+      "name": "word/media/image31.png",
+      "width": 1920,
+      "height": 907
+    },
+    {
+      "index": 28,
+      "name": "word/media/image32.png",
+      "width": 1920,
+      "height": 953
+    },
+    {
+      "index": 29,
+      "name": "word/media/image33.png",
+      "width": 965,
+      "height": 612
+    },
+    {
+      "index": 30,
+      "name": "word/media/image34.png",
+      "width": 1920,
+      "height": 950
+    },
+    {
+      "index": 31,
+      "name": "word/media/image35.png",
+      "width": 1920,
+      "height": 951
+    },
+    {
+      "index": 32,
+      "name": "word/media/image1.jpeg",
+      "width": 380,
+      "height": 200
+    },
+    {
+      "index": 33,
+      "name": "word/media/image2.jpeg",
+      "width": 1531,
+      "height": 1079
+    },
+    {
+      "index": 34,
+      "name": "word/media/image3.jpg",
+      "width": 1342,
+      "height": 748
+    }
+  ],
+  "whole_report_06_Kalabsha_modified2024.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image4.png",
+      "width": 597,
+      "height": 496
+    },
+    {
+      "index": 1,
+      "name": "word/media/image5.png",
+      "width": 1018,
+      "height": 750
+    },
+    {
+      "index": 2,
+      "name": "word/media/image6.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 3,
+      "name": "word/media/image7.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 4,
+      "name": "word/media/image8.jpg",
+      "width": 1310,
+      "height": 755
+    },
+    {
+      "index": 5,
+      "name": "word/media/image9.jpg",
+      "width": 1282,
+      "height": 761
+    },
+    {
+      "index": 6,
+      "name": "word/media/image10.jpg",
+      "width": 1046,
+      "height": 752
+    },
+    {
+      "index": 7,
+      "name": "word/media/image11.jpg",
+      "width": 1038,
+      "height": 757
+    },
+    {
+      "index": 8,
+      "name": "word/media/image13.jpeg",
+      "width": 827,
+      "height": 683
+    },
+    {
+      "index": 9,
+      "name": "word/media/image14.jpeg",
+      "width": 824,
+      "height": 683
+    },
+    {
+      "index": 10,
+      "name": "word/media/image15.jpeg",
+      "width": 827,
+      "height": 683
+    },
+    {
+      "index": 11,
+      "name": "word/media/image16.jpeg",
+      "width": 824,
+      "height": 683
+    },
+    {
+      "index": 12,
+      "name": "word/media/image17.jpeg",
+      "width": 833,
+      "height": 776
+    },
+    {
+      "index": 13,
+      "name": "word/media/image18.jpeg",
+      "width": 833,
+      "height": 776
+    },
+    {
+      "index": 14,
+      "name": "word/media/image19.jpeg",
+      "width": 833,
+      "height": 776
+    },
+    {
+      "index": 15,
+      "name": "word/media/image20.jpeg",
+      "width": 833,
+      "height": 776
+    },
+    {
+      "index": 16,
+      "name": "word/media/image21.png",
+      "width": 1160,
+      "height": 613
+    },
+    {
+      "index": 17,
+      "name": "word/media/image22.png",
+      "width": 1416,
+      "height": 661
+    },
+    {
+      "index": 18,
+      "name": "word/media/image23.png",
+      "width": 1416,
+      "height": 662
+    },
+    {
+      "index": 19,
+      "name": "word/media/image24.png",
+      "width": 1105,
+      "height": 508
+    },
+    {
+      "index": 20,
+      "name": "word/media/image25.jpeg",
+      "width": 1717,
+      "height": 1151
+    },
+    {
+      "index": 21,
+      "name": "word/media/image26.jpeg",
+      "width": 1719,
+      "height": 1148
+    },
+    {
+      "index": 22,
+      "name": "word/media/image27.jpeg",
+      "width": 1699,
+      "height": 1146
+    },
+    {
+      "index": 23,
+      "name": "word/media/image28.png",
+      "width": 1920,
+      "height": 959
+    },
+    {
+      "index": 24,
+      "name": "word/media/image29.png",
+      "width": 1920,
+      "height": 950
+    },
+    {
+      "index": 25,
+      "name": "word/media/image30.png",
+      "width": 1268,
+      "height": 584
+    },
+    {
+      "index": 26,
+      "name": "word/media/image31.png",
+      "width": 1920,
+      "height": 903
+    },
+    {
+      "index": 27,
+      "name": "word/media/image32.png",
+      "width": 1920,
+      "height": 951
+    },
+    {
+      "index": 28,
+      "name": "word/media/image33.png",
+      "width": 1035,
+      "height": 631
+    },
+    {
+      "index": 29,
+      "name": "word/media/image34.png",
+      "width": 1920,
+      "height": 942
+    },
+    {
+      "index": 30,
+      "name": "word/media/image35.png",
+      "width": 1919,
+      "height": 945
+    },
+    {
+      "index": 31,
+      "name": "word/media/image36.png",
+      "width": 1188,
+      "height": 1715
+    },
+    {
+      "index": 32,
+      "name": "word/media/image37.png",
+      "width": 1206,
+      "height": 1737
+    },
+    {
+      "index": 33,
+      "name": "word/media/image38.png",
+      "width": 1206,
+      "height": 1737
+    },
+    {
+      "index": 34,
+      "name": "word/media/image39.png",
+      "width": 1179,
+      "height": 1694
+    },
+    {
+      "index": 35,
+      "name": "word/media/image40.png",
+      "width": 1200,
+      "height": 1724
+    },
+    {
+      "index": 36,
+      "name": "word/media/image41.png",
+      "width": 1179,
+      "height": 1694
+    },
+    {
+      "index": 37,
+      "name": "word/media/image1.jpeg",
+      "width": 850,
+      "height": 477
+    },
+    {
+      "index": 38,
+      "name": "word/media/image2.jpeg",
+      "width": 1509,
+      "height": 1066
+    },
+    {
+      "index": 39,
+      "name": "word/media/image3.png",
+      "width": 977,
+      "height": 747
+    }
+  ],
+  "التقرير_قطاع_محافظة_سوهاج.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image10.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 1,
+      "name": "word/media/image1.jpeg",
+      "width": 300,
+      "height": 168
+    },
+    {
+      "index": 2,
+      "name": "word/media/image2.png",
+      "width": 1421,
+      "height": 1005
+    },
+    {
+      "index": 3,
+      "name": "word/media/image3.png",
+      "width": 1212,
+      "height": 833
+    },
+    {
+      "index": 4,
+      "name": "word/media/image4.png",
+      "width": 1209,
+      "height": 831
+    },
+    {
+      "index": 5,
+      "name": "word/media/image5.png",
+      "width": 1331,
+      "height": 941
+    },
+    {
+      "index": 6,
+      "name": "word/media/image6.png",
+      "width": 1335,
+      "height": 944
+    },
+    {
+      "index": 7,
+      "name": "word/media/image7.png",
+      "width": 1331,
+      "height": 941
+    },
+    {
+      "index": 8,
+      "name": "word/media/image8.png",
+      "width": 1371,
+      "height": 969
+    },
+    {
+      "index": 9,
+      "name": "word/media/image9.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 10,
+      "name": "word/media/image11.png",
+      "width": 1762,
+      "height": 1246
+    },
+    {
+      "index": 11,
+      "name": "word/media/image23.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 12,
+      "name": "word/media/image12.png",
+      "width": 1774,
+      "height": 1254
+    },
+    {
+      "index": 13,
+      "name": "word/media/image13.png",
+      "width": 1711,
+      "height": 1210
+    },
+    {
+      "index": 14,
+      "name": "word/media/image14.png",
+      "width": 1750,
+      "height": 1237
+    },
+    {
+      "index": 15,
+      "name": "word/media/image15.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 16,
+      "name": "word/media/image16.png",
+      "width": 1918,
+      "height": 868
+    },
+    {
+      "index": 17,
+      "name": "word/media/image17.png",
+      "width": 1918,
+      "height": 868
+    },
+    {
+      "index": 18,
+      "name": "word/media/image18.JPG",
+      "width": 1743,
+      "height": 967
+    },
+    {
+      "index": 19,
+      "name": "word/media/image19.png",
+      "width": 1892,
+      "height": 720
+    },
+    {
+      "index": 20,
+      "name": "word/media/image20.png",
+      "width": 937,
+      "height": 566
+    },
+    {
+      "index": 21,
+      "name": "word/media/image21.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 22,
+      "name": "word/media/image22.jpeg",
+      "width": 1131,
+      "height": 1600
+    }
+  ],
+  "قطاع_أسوان-_التقرير_النهائي.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image18.JPG",
+      "width": 439,
+      "height": 411
+    },
+    {
+      "index": 1,
+      "name": "word/media/image19.JPG",
+      "width": 435,
+      "height": 406
+    },
+    {
+      "index": 2,
+      "name": "word/media/image20.JPG",
+      "width": 437,
+      "height": 406
+    },
+    {
+      "index": 3,
+      "name": "word/media/image21.JPG",
+      "width": 436,
+      "height": 400
+    },
+    {
+      "index": 4,
+      "name": "word/media/image22.png",
+      "width": 1723,
+      "height": 1218
+    },
+    {
+      "index": 5,
+      "name": "word/media/image23.png",
+      "width": 1727,
+      "height": 1221
+    },
+    {
+      "index": 6,
+      "name": "word/media/image24.png",
+      "width": 1742,
+      "height": 1232
+    },
+    {
+      "index": 7,
+      "name": "word/media/image25.png",
+      "width": 1711,
+      "height": 1210
+    },
+    {
+      "index": 8,
+      "name": "word/media/image26.png",
+      "width": 1689,
+      "height": 1194
+    },
+    {
+      "index": 9,
+      "name": "word/media/image27.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 10,
+      "name": "word/media/image28.png",
+      "width": 1917,
+      "height": 866
+    },
+    {
+      "index": 11,
+      "name": "word/media/image29.jpeg",
+      "width": 1600,
+      "height": 722
+    },
+    {
+      "index": 12,
+      "name": "word/media/image30.jpeg",
+      "width": 1746,
+      "height": 966
+    },
+    {
+      "index": 13,
+      "name": "word/media/image31.png",
+      "width": 1878,
+      "height": 691
+    },
+    {
+      "index": 14,
+      "name": "word/media/image32.png",
+      "width": 937,
+      "height": 562
+    },
+    {
+      "index": 15,
+      "name": "word/media/image33.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 16,
+      "name": "word/media/image34.jpeg",
+      "width": 439,
+      "height": 406
+    },
+    {
+      "index": 17,
+      "name": "word/media/image35.jpeg",
+      "width": 433,
+      "height": 403
+    },
+    {
+      "index": 18,
+      "name": "word/media/image36.jpeg",
+      "width": 434,
+      "height": 407
+    },
+    {
+      "index": 19,
+      "name": "word/media/image37.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 20,
+      "name": "word/media/image38.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 21,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 22,
+      "name": "word/media/image2.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 23,
+      "name": "word/media/image3.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 24,
+      "name": "word/media/image4.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 25,
+      "name": "word/media/image5.jpeg",
+      "width": 1024,
+      "height": 671
+    },
+    {
+      "index": 26,
+      "name": "word/media/image6.png",
+      "width": 1378,
+      "height": 974
+    },
+    {
+      "index": 27,
+      "name": "word/media/image7.png",
+      "width": 1211,
+      "height": 833
+    },
+    {
+      "index": 28,
+      "name": "word/media/image39.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 29,
+      "name": "word/media/image8.png",
+      "width": 1208,
+      "height": 831
+    },
+    {
+      "index": 30,
+      "name": "word/media/image40.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 31,
+      "name": "word/media/image9.png",
+      "width": 1301,
+      "height": 920
+    },
+    {
+      "index": 32,
+      "name": "word/media/image10.png",
+      "width": 1319,
+      "height": 933
+    },
+    {
+      "index": 33,
+      "name": "word/media/image11.png",
+      "width": 1251,
+      "height": 884
+    },
+    {
+      "index": 34,
+      "name": "word/media/image12.png",
+      "width": 1241,
+      "height": 877
+    },
+    {
+      "index": 35,
+      "name": "word/media/image13.png",
+      "width": 1453,
+      "height": 1027
+    },
+    {
+      "index": 36,
+      "name": "word/media/image14.png",
+      "width": 1221,
+      "height": 1933
+    },
+    {
+      "index": 37,
+      "name": "word/media/image15.JPG",
+      "width": 435,
+      "height": 413
+    },
+    {
+      "index": 38,
+      "name": "word/media/image16.JPG",
+      "width": 439,
+      "height": 413
+    },
+    {
+      "index": 39,
+      "name": "word/media/image17.JPG",
+      "width": 443,
+      "height": 403
+    }
+  ],
+  "قطاع_أسيوط_التقرير_النهائي.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image20.png",
+      "width": 1770,
+      "height": 1251
+    },
+    {
+      "index": 1,
+      "name": "word/media/image21.png",
+      "width": 1700,
+      "height": 1202
+    },
+    {
+      "index": 2,
+      "name": "word/media/image22.png",
+      "width": 1727,
+      "height": 1221
+    },
+    {
+      "index": 3,
+      "name": "word/media/image23.png",
+      "width": 1711,
+      "height": 1210
+    },
+    {
+      "index": 4,
+      "name": "word/media/image24.png",
+      "width": 1700,
+      "height": 1202
+    },
+    {
+      "index": 5,
+      "name": "word/media/image25.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 6,
+      "name": "word/media/image26.png",
+      "width": 1918,
+      "height": 871
+    },
+    {
+      "index": 7,
+      "name": "word/media/image27.jpeg",
+      "width": 1600,
+      "height": 723
+    },
+    {
+      "index": 8,
+      "name": "word/media/image28.JPG",
+      "width": 1648,
+      "height": 971
+    },
+    {
+      "index": 9,
+      "name": "word/media/image29.png",
+      "width": 1890,
+      "height": 722
+    },
+    {
+      "index": 10,
+      "name": "word/media/image30.png",
+      "width": 932,
+      "height": 560
+    },
+    {
+      "index": 11,
+      "name": "word/media/image31.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 12,
+      "name": "word/media/image32.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 13,
+      "name": "word/media/image33.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 14,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 15,
+      "name": "word/media/image2.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 16,
+      "name": "word/media/image3.jpeg",
+      "width": 975,
+      "height": 650
+    },
+    {
+      "index": 17,
+      "name": "word/media/image4.png",
+      "width": 1429,
+      "height": 1010
+    },
+    {
+      "index": 18,
+      "name": "word/media/image5.png",
+      "width": 1210,
+      "height": 830
+    },
+    {
+      "index": 19,
+      "name": "word/media/image6.png",
+      "width": 1209,
+      "height": 830
+    },
+    {
+      "index": 20,
+      "name": "word/media/image7.png",
+      "width": 1235,
+      "height": 873
+    },
+    {
+      "index": 21,
+      "name": "word/media/image8.png",
+      "width": 1229,
+      "height": 869
+    },
+    {
+      "index": 22,
+      "name": "word/media/image34.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 23,
+      "name": "word/media/image9.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 24,
+      "name": "word/media/image10.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 25,
+      "name": "word/media/image11.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 26,
+      "name": "word/media/image12.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 27,
+      "name": "word/media/image13.png",
+      "width": 1251,
+      "height": 884
+    },
+    {
+      "index": 28,
+      "name": "word/media/image14.png",
+      "width": 1241,
+      "height": 877
+    },
+    {
+      "index": 29,
+      "name": "word/media/image15.png",
+      "width": 1453,
+      "height": 1027
+    },
+    {
+      "index": 30,
+      "name": "word/media/image16.png",
+      "width": 483,
+      "height": 720
+    },
+    {
+      "index": 31,
+      "name": "word/media/image17.JPG",
+      "width": 438,
+      "height": 403
+    },
+    {
+      "index": 32,
+      "name": "word/media/image18.JPG",
+      "width": 438,
+      "height": 385
+    },
+    {
+      "index": 33,
+      "name": "word/media/image19.JPG",
+      "width": 435,
+      "height": 388
+    }
+  ],
+  "قطاع_ابو_سمبل-_التقرير_النهائي_-.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image17.JPG",
+      "width": 435,
+      "height": 404
+    },
+    {
+      "index": 1,
+      "name": "word/media/image18.JPG",
+      "width": 443,
+      "height": 400
+    },
+    {
+      "index": 2,
+      "name": "word/media/image19.JPG",
+      "width": 441,
+      "height": 383
+    },
+    {
+      "index": 3,
+      "name": "word/media/image20.JPG",
+      "width": 441,
+      "height": 374
+    },
+    {
+      "index": 4,
+      "name": "word/media/image21.JPG",
+      "width": 439,
+      "height": 418
+    },
+    {
+      "index": 5,
+      "name": "word/media/image22.JPG",
+      "width": 434,
+      "height": 378
+    },
+    {
+      "index": 6,
+      "name": "word/media/image23.JPG",
+      "width": 435,
+      "height": 394
+    },
+    {
+      "index": 7,
+      "name": "word/media/image24.JPG",
+      "width": 436,
+      "height": 377
+    },
+    {
+      "index": 8,
+      "name": "word/media/image25.JPG",
+      "width": 438,
+      "height": 382
+    },
+    {
+      "index": 9,
+      "name": "word/media/image26.JPG",
+      "width": 439,
+      "height": 395
+    },
+    {
+      "index": 10,
+      "name": "word/media/image27.png",
+      "width": 1670,
+      "height": 1181
+    },
+    {
+      "index": 11,
+      "name": "word/media/image28.png",
+      "width": 1742,
+      "height": 1232
+    },
+    {
+      "index": 12,
+      "name": "word/media/image29.png",
+      "width": 1738,
+      "height": 1229
+    },
+    {
+      "index": 13,
+      "name": "word/media/image30.png",
+      "width": 1715,
+      "height": 1212
+    },
+    {
+      "index": 14,
+      "name": "word/media/image31.png",
+      "width": 1678,
+      "height": 1186
+    },
+    {
+      "index": 15,
+      "name": "word/media/image32.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 16,
+      "name": "word/media/image33.png",
+      "width": 1918,
+      "height": 872
+    },
+    {
+      "index": 17,
+      "name": "word/media/image34.png",
+      "width": 1918,
+      "height": 867
+    },
+    {
+      "index": 18,
+      "name": "word/media/image35.jpeg",
+      "width": 1280,
+      "height": 710
+    },
+    {
+      "index": 19,
+      "name": "word/media/image36.png",
+      "width": 1344,
+      "height": 588
+    },
+    {
+      "index": 20,
+      "name": "word/media/image37.png",
+      "width": 1218,
+      "height": 820
+    },
+    {
+      "index": 21,
+      "name": "word/media/image38.png",
+      "width": 1920,
+      "height": 952
+    },
+    {
+      "index": 22,
+      "name": "word/media/image39.png",
+      "width": 1536,
+      "height": 674
+    },
+    {
+      "index": 23,
+      "name": "word/media/image40.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 24,
+      "name": "word/media/image41.JPG",
+      "width": 434,
+      "height": 404
+    },
+    {
+      "index": 25,
+      "name": "word/media/image42.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 26,
+      "name": "word/media/image43.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 27,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 28,
+      "name": "word/media/image2.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 29,
+      "name": "word/media/image3.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 30,
+      "name": "word/media/image4.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 31,
+      "name": "word/media/image5.jpeg",
+      "width": 850,
+      "height": 478
+    },
+    {
+      "index": 32,
+      "name": "word/media/image6.png",
+      "width": 1376,
+      "height": 973
+    },
+    {
+      "index": 33,
+      "name": "word/media/image7.png",
+      "width": 1207,
+      "height": 831
+    },
+    {
+      "index": 34,
+      "name": "word/media/image8.png",
+      "width": 1210,
+      "height": 831
+    },
+    {
+      "index": 35,
+      "name": "word/media/image9.png",
+      "width": 1235,
+      "height": 873
+    },
+    {
+      "index": 36,
+      "name": "word/media/image10.png",
+      "width": 1229,
+      "height": 869
+    },
+    {
+      "index": 37,
+      "name": "word/media/image11.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 38,
+      "name": "word/media/image12.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 39,
+      "name": "word/media/image13.png",
+      "width": 1251,
+      "height": 884
+    },
+    {
+      "index": 40,
+      "name": "word/media/image14.png",
+      "width": 1241,
+      "height": 877
+    },
+    {
+      "index": 41,
+      "name": "word/media/image15.png",
+      "width": 1393,
+      "height": 985
+    },
+    {
+      "index": 42,
+      "name": "word/media/image44.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 43,
+      "name": "word/media/image16.png",
+      "width": 486,
+      "height": 615
+    },
+    {
+      "index": 44,
+      "name": "word/media/image45.jpeg",
+      "width": 1131,
+      "height": 1600
+    }
+  ],
+  "قطاع_الاقصر-_التقرير_النهائي.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image19.JPG",
+      "width": 428,
+      "height": 396
+    },
+    {
+      "index": 1,
+      "name": "word/media/image20.png",
+      "width": 1770,
+      "height": 1251
+    },
+    {
+      "index": 2,
+      "name": "word/media/image21.png",
+      "width": 1738,
+      "height": 1229
+    },
+    {
+      "index": 3,
+      "name": "word/media/image22.png",
+      "width": 1727,
+      "height": 1221
+    },
+    {
+      "index": 4,
+      "name": "word/media/image23.png",
+      "width": 1715,
+      "height": 1212
+    },
+    {
+      "index": 5,
+      "name": "word/media/image24.png",
+      "width": 1696,
+      "height": 1199
+    },
+    {
+      "index": 6,
+      "name": "word/media/image25.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 7,
+      "name": "word/media/image26.png",
+      "width": 1918,
+      "height": 873
+    },
+    {
+      "index": 8,
+      "name": "word/media/image27.png",
+      "width": 1918,
+      "height": 867
+    },
+    {
+      "index": 9,
+      "name": "word/media/image28.JPG",
+      "width": 1742,
+      "height": 963
+    },
+    {
+      "index": 10,
+      "name": "word/media/image29.png",
+      "width": 1901,
+      "height": 726
+    },
+    {
+      "index": 11,
+      "name": "word/media/image30.png",
+      "width": 948,
+      "height": 570
+    },
+    {
+      "index": 12,
+      "name": "word/media/image31.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 13,
+      "name": "word/media/image32.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 14,
+      "name": "word/media/image33.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 15,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 16,
+      "name": "word/media/image2.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 17,
+      "name": "word/media/image3.jpeg",
+      "width": 960,
+      "height": 540
+    },
+    {
+      "index": 18,
+      "name": "word/media/image4.png",
+      "width": 1451,
+      "height": 1026
+    },
+    {
+      "index": 19,
+      "name": "word/media/image5.png",
+      "width": 1209,
+      "height": 830
+    },
+    {
+      "index": 20,
+      "name": "word/media/image6.png",
+      "width": 1210,
+      "height": 831
+    },
+    {
+      "index": 21,
+      "name": "word/media/image7.png",
+      "width": 1235,
+      "height": 873
+    },
+    {
+      "index": 22,
+      "name": "word/media/image8.png",
+      "width": 1229,
+      "height": 869
+    },
+    {
+      "index": 23,
+      "name": "word/media/image9.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 24,
+      "name": "word/media/image34.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 25,
+      "name": "word/media/image10.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 26,
+      "name": "word/media/image11.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 27,
+      "name": "word/media/image12.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 28,
+      "name": "word/media/image35.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 29,
+      "name": "word/media/image13.png",
+      "width": 1251,
+      "height": 884
+    },
+    {
+      "index": 30,
+      "name": "word/media/image14.png",
+      "width": 1241,
+      "height": 877
+    },
+    {
+      "index": 31,
+      "name": "word/media/image15.png",
+      "width": 1445,
+      "height": 1022
+    },
+    {
+      "index": 32,
+      "name": "word/media/image16.png",
+      "width": 1484,
+      "height": 1660
+    },
+    {
+      "index": 33,
+      "name": "word/media/image17.JPG",
+      "width": 434,
+      "height": 380
+    },
+    {
+      "index": 34,
+      "name": "word/media/image18.JPG",
+      "width": 431,
+      "height": 377
+    }
+  ],
+  "قطاع_الجيزةالتقرير_النهائي_.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image17.JPG",
+      "width": 434,
+      "height": 401
+    },
+    {
+      "index": 1,
+      "name": "word/media/image18.png",
+      "width": 1754,
+      "height": 1240
+    },
+    {
+      "index": 2,
+      "name": "word/media/image19.png",
+      "width": 1742,
+      "height": 1232
+    },
+    {
+      "index": 3,
+      "name": "word/media/image20.png",
+      "width": 1742,
+      "height": 1232
+    },
+    {
+      "index": 4,
+      "name": "word/media/image21.png",
+      "width": 1711,
+      "height": 1210
+    },
+    {
+      "index": 5,
+      "name": "word/media/image22.png",
+      "width": 1615,
+      "height": 1141
+    },
+    {
+      "index": 6,
+      "name": "word/media/image23.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 7,
+      "name": "word/media/image24.png",
+      "width": 1918,
+      "height": 865
+    },
+    {
+      "index": 8,
+      "name": "word/media/image25.png",
+      "width": 1918,
+      "height": 872
+    },
+    {
+      "index": 9,
+      "name": "word/media/image26.jpeg",
+      "width": 1587,
+      "height": 969
+    },
+    {
+      "index": 10,
+      "name": "word/media/image27.png",
+      "width": 1892,
+      "height": 726
+    },
+    {
+      "index": 11,
+      "name": "word/media/image28.png",
+      "width": 935,
+      "height": 563
+    },
+    {
+      "index": 12,
+      "name": "word/media/image29.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 13,
+      "name": "word/media/image30.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 14,
+      "name": "word/media/image31.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 15,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 16,
+      "name": "word/media/image2.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 17,
+      "name": "word/media/image3.jpeg",
+      "width": 275,
+      "height": 183
+    },
+    {
+      "index": 18,
+      "name": "word/media/image4.png",
+      "width": 1427,
+      "height": 1009
+    },
+    {
+      "index": 19,
+      "name": "word/media/image5.png",
+      "width": 1212,
+      "height": 833
+    },
+    {
+      "index": 20,
+      "name": "word/media/image6.png",
+      "width": 1210,
+      "height": 833
+    },
+    {
+      "index": 21,
+      "name": "word/media/image7.png",
+      "width": 1282,
+      "height": 906
+    },
+    {
+      "index": 22,
+      "name": "word/media/image32.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 23,
+      "name": "word/media/image8.png",
+      "width": 1299,
+      "height": 919
+    },
+    {
+      "index": 24,
+      "name": "word/media/image9.png",
+      "width": 1282,
+      "height": 906
+    },
+    {
+      "index": 25,
+      "name": "word/media/image10.png",
+      "width": 1299,
+      "height": 919
+    },
+    {
+      "index": 26,
+      "name": "word/media/image11.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 27,
+      "name": "word/media/image12.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 28,
+      "name": "word/media/image13.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 29,
+      "name": "word/media/image14.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 30,
+      "name": "word/media/image15.png",
+      "width": 1445,
+      "height": 1022
+    },
+    {
+      "index": 31,
+      "name": "word/media/image16.png",
+      "width": 1072,
+      "height": 1923
+    }
+  ],
+  "قطاع_السويس_التقرير_النهائي.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image24.jpeg",
+      "width": 1774,
+      "height": 1254
+    },
+    {
+      "index": 1,
+      "name": "word/media/image25.jpeg",
+      "width": 1730,
+      "height": 1223
+    },
+    {
+      "index": 2,
+      "name": "word/media/image26.jpeg",
+      "width": 1742,
+      "height": 1232
+    },
+    {
+      "index": 3,
+      "name": "word/media/image27.jpeg",
+      "width": 1700,
+      "height": 1202
+    },
+    {
+      "index": 4,
+      "name": "word/media/image28.JPG",
+      "width": 1744,
+      "height": 507
+    },
+    {
+      "index": 5,
+      "name": "word/media/image29.png",
+      "width": 1890,
+      "height": 943
+    },
+    {
+      "index": 6,
+      "name": "word/media/image30.png",
+      "width": 1918,
+      "height": 862
+    },
+    {
+      "index": 7,
+      "name": "word/media/image31.png",
+      "width": 1911,
+      "height": 850
+    },
+    {
+      "index": 8,
+      "name": "word/media/image32.png",
+      "width": 1897,
+      "height": 792
+    },
+    {
+      "index": 9,
+      "name": "word/media/image33.png",
+      "width": 932,
+      "height": 568
+    },
+    {
+      "index": 10,
+      "name": "word/media/image34.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 11,
+      "name": "word/media/image35.jpeg",
+      "width": 431,
+      "height": 406
+    },
+    {
+      "index": 12,
+      "name": "word/media/image36.jpeg",
+      "width": 434,
+      "height": 392
+    },
+    {
+      "index": 13,
+      "name": "word/media/image37.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 14,
+      "name": "word/media/image38.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 15,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 16,
+      "name": "word/media/image2.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 17,
+      "name": "word/media/image3.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 18,
+      "name": "word/media/image4.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 19,
+      "name": "word/media/image5.jpeg",
+      "width": 840,
+      "height": 473
+    },
+    {
+      "index": 20,
+      "name": "word/media/image6.jpeg",
+      "width": 1427,
+      "height": 1009
+    },
+    {
+      "index": 21,
+      "name": "word/media/image7.png",
+      "width": 1243,
+      "height": 794
+    },
+    {
+      "index": 22,
+      "name": "word/media/image8.png",
+      "width": 1245,
+      "height": 796
+    },
+    {
+      "index": 23,
+      "name": "word/media/image9.png",
+      "width": 1282,
+      "height": 906
+    },
+    {
+      "index": 24,
+      "name": "word/media/image10.png",
+      "width": 1261,
+      "height": 892
+    },
+    {
+      "index": 25,
+      "name": "word/media/image11.png",
+      "width": 1282,
+      "height": 906
+    },
+    {
+      "index": 26,
+      "name": "word/media/image12.png",
+      "width": 1299,
+      "height": 919
+    },
+    {
+      "index": 27,
+      "name": "word/media/image13.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 28,
+      "name": "word/media/image14.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 29,
+      "name": "word/media/image15.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 30,
+      "name": "word/media/image16.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 31,
+      "name": "word/media/image17.jpeg",
+      "width": 1445,
+      "height": 1022
+    },
+    {
+      "index": 32,
+      "name": "word/media/image18.jpeg",
+      "width": 1130,
+      "height": 847
+    },
+    {
+      "index": 33,
+      "name": "word/media/image19.jpeg",
+      "width": 978,
+      "height": 733
+    },
+    {
+      "index": 34,
+      "name": "word/media/image39.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 35,
+      "name": "word/media/image20.jpeg",
+      "width": 760,
+      "height": 746
+    },
+    {
+      "index": 36,
+      "name": "word/media/image21.jpeg",
+      "width": 1130,
+      "height": 847
+    },
+    {
+      "index": 37,
+      "name": "word/media/image22.jpeg",
+      "width": 978,
+      "height": 733
+    },
+    {
+      "index": 38,
+      "name": "word/media/image23.jpeg",
+      "width": 760,
+      "height": 746
+    }
+  ],
+  "قطاع_الفيوم_-_التقرير_النهائي.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image22.JPG",
+      "width": 435,
+      "height": 389
+    },
+    {
+      "index": 1,
+      "name": "word/media/image23.JPG",
+      "width": 438,
+      "height": 409
+    },
+    {
+      "index": 2,
+      "name": "word/media/image24.JPG",
+      "width": 440,
+      "height": 394
+    },
+    {
+      "index": 3,
+      "name": "word/media/image25.JPG",
+      "width": 439,
+      "height": 376
+    },
+    {
+      "index": 4,
+      "name": "word/media/image26.jpeg",
+      "width": 1670,
+      "height": 1181
+    },
+    {
+      "index": 5,
+      "name": "word/media/image27.jpeg",
+      "width": 1738,
+      "height": 1229
+    },
+    {
+      "index": 6,
+      "name": "word/media/image28.jpeg",
+      "width": 1738,
+      "height": 1229
+    },
+    {
+      "index": 7,
+      "name": "word/media/image29.jpeg",
+      "width": 1711,
+      "height": 1210
+    },
+    {
+      "index": 8,
+      "name": "word/media/image30.jpeg",
+      "width": 1689,
+      "height": 1194
+    },
+    {
+      "index": 9,
+      "name": "word/media/image31.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 10,
+      "name": "word/media/image32.png",
+      "width": 1918,
+      "height": 868
+    },
+    {
+      "index": 11,
+      "name": "word/media/image33.png",
+      "width": 1918,
+      "height": 867
+    },
+    {
+      "index": 12,
+      "name": "word/media/image34.PNG",
+      "width": 1600,
+      "height": 750
+    },
+    {
+      "index": 13,
+      "name": "word/media/image35.png",
+      "width": 1341,
+      "height": 539
+    },
+    {
+      "index": 14,
+      "name": "word/media/image36.PNG",
+      "width": 932,
+      "height": 572
+    },
+    {
+      "index": 15,
+      "name": "word/media/image37.png",
+      "width": 1920,
+      "height": 952
+    },
+    {
+      "index": 16,
+      "name": "word/media/image38.png",
+      "width": 1535,
+      "height": 732
+    },
+    {
+      "index": 17,
+      "name": "word/media/image39.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 18,
+      "name": "word/media/image40.JPG",
+      "width": 435,
+      "height": 406
+    },
+    {
+      "index": 19,
+      "name": "word/media/image41.JPG",
+      "width": 432,
+      "height": 404
+    },
+    {
+      "index": 20,
+      "name": "word/media/image42.JPG",
+      "width": 432,
+      "height": 407
+    },
+    {
+      "index": 21,
+      "name": "word/media/image43.JPG",
+      "width": 438,
+      "height": 409
+    },
+    {
+      "index": 22,
+      "name": "word/media/image44.JPG",
+      "width": 429,
+      "height": 405
+    },
+    {
+      "index": 23,
+      "name": "word/media/image45.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 24,
+      "name": "word/media/image46.JPG",
+      "width": 432,
+      "height": 406
+    },
+    {
+      "index": 25,
+      "name": "word/media/image47.JPG",
+      "width": 430,
+      "height": 402
+    },
+    {
+      "index": 26,
+      "name": "word/media/image48.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 27,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 28,
+      "name": "word/media/image2.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 29,
+      "name": "word/media/image3.jpeg",
+      "width": 960,
+      "height": 540
+    },
+    {
+      "index": 30,
+      "name": "word/media/image4.jpeg",
+      "width": 1378,
+      "height": 974
+    },
+    {
+      "index": 31,
+      "name": "word/media/image5.png",
+      "width": 1213,
+      "height": 828
+    },
+    {
+      "index": 32,
+      "name": "word/media/image6.png",
+      "width": 1209,
+      "height": 832
+    },
+    {
+      "index": 33,
+      "name": "word/media/image7.png",
+      "width": 1235,
+      "height": 873
+    },
+    {
+      "index": 34,
+      "name": "word/media/image49.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 35,
+      "name": "word/media/image8.png",
+      "width": 1229,
+      "height": 869
+    },
+    {
+      "index": 36,
+      "name": "word/media/image9.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 37,
+      "name": "word/media/image10.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 38,
+      "name": "word/media/image11.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 39,
+      "name": "word/media/image50.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 40,
+      "name": "word/media/image12.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 41,
+      "name": "word/media/image13.png",
+      "width": 1304,
+      "height": 922
+    },
+    {
+      "index": 42,
+      "name": "word/media/image14.png",
+      "width": 1308,
+      "height": 925
+    },
+    {
+      "index": 43,
+      "name": "word/media/image15.png",
+      "width": 1251,
+      "height": 884
+    },
+    {
+      "index": 44,
+      "name": "word/media/image16.png",
+      "width": 1241,
+      "height": 877
+    },
+    {
+      "index": 45,
+      "name": "word/media/image17.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 46,
+      "name": "word/media/image18.png",
+      "width": 1239,
+      "height": 876
+    },
+    {
+      "index": 47,
+      "name": "word/media/image19.jpeg",
+      "width": 1445,
+      "height": 1022
+    },
+    {
+      "index": 48,
+      "name": "word/media/image20.png",
+      "width": 450,
+      "height": 614
+    },
+    {
+      "index": 49,
+      "name": "word/media/image21.JPG",
+      "width": 432,
+      "height": 398
+    }
+  ],
+  "قطاع_المنيا_التقرير_النهائي.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image19.JPG",
+      "width": 432,
+      "height": 404
+    },
+    {
+      "index": 1,
+      "name": "word/media/image20.png",
+      "width": 1762,
+      "height": 1246
+    },
+    {
+      "index": 2,
+      "name": "word/media/image21.png",
+      "width": 1742,
+      "height": 1232
+    },
+    {
+      "index": 3,
+      "name": "word/media/image22.png",
+      "width": 1746,
+      "height": 1234
+    },
+    {
+      "index": 4,
+      "name": "word/media/image23.png",
+      "width": 1707,
+      "height": 1208
+    },
+    {
+      "index": 5,
+      "name": "word/media/image24.png",
+      "width": 1696,
+      "height": 1199
+    },
+    {
+      "index": 6,
+      "name": "word/media/image25.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 7,
+      "name": "word/media/image26.png",
+      "width": 1918,
+      "height": 872
+    },
+    {
+      "index": 8,
+      "name": "word/media/image27.png",
+      "width": 1917,
+      "height": 872
+    },
+    {
+      "index": 9,
+      "name": "word/media/image28.JPG",
+      "width": 1677,
+      "height": 969
+    },
+    {
+      "index": 10,
+      "name": "word/media/image29.png",
+      "width": 1890,
+      "height": 722
+    },
+    {
+      "index": 11,
+      "name": "word/media/image30.png",
+      "width": 940,
+      "height": 561
+    },
+    {
+      "index": 12,
+      "name": "word/media/image31.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 13,
+      "name": "word/media/image32.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 14,
+      "name": "word/media/image33.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 15,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 16,
+      "name": "word/media/image2.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 17,
+      "name": "word/media/image3.jpeg",
+      "width": 720,
+      "height": 405
+    },
+    {
+      "index": 18,
+      "name": "word/media/image4.png",
+      "width": 1427,
+      "height": 1009
+    },
+    {
+      "index": 19,
+      "name": "word/media/image5.png",
+      "width": 1210,
+      "height": 831
+    },
+    {
+      "index": 20,
+      "name": "word/media/image6.png",
+      "width": 1211,
+      "height": 830
+    },
+    {
+      "index": 21,
+      "name": "word/media/image7.png",
+      "width": 1235,
+      "height": 873
+    },
+    {
+      "index": 22,
+      "name": "word/media/image8.png",
+      "width": 1229,
+      "height": 869
+    },
+    {
+      "index": 23,
+      "name": "word/media/image9.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 24,
+      "name": "word/media/image10.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 25,
+      "name": "word/media/image11.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 26,
+      "name": "word/media/image12.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 27,
+      "name": "word/media/image13.png",
+      "width": 1251,
+      "height": 884
+    },
+    {
+      "index": 28,
+      "name": "word/media/image14.png",
+      "width": 1241,
+      "height": 877
+    },
+    {
+      "index": 29,
+      "name": "word/media/image15.png",
+      "width": 1445,
+      "height": 1022
+    },
+    {
+      "index": 30,
+      "name": "word/media/image16.png",
+      "width": 1389,
+      "height": 1791
+    },
+    {
+      "index": 31,
+      "name": "word/media/image34.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 32,
+      "name": "word/media/image17.JPG",
+      "width": 429,
+      "height": 400
+    },
+    {
+      "index": 33,
+      "name": "word/media/image18.JPG",
+      "width": 433,
+      "height": 404
+    }
+  ],
+  "قطاع_قنا-_التقرير_النهائي.docx": [
+    {
+      "index": 0,
+      "name": "word/media/image20.png",
+      "width": 1774,
+      "height": 1254
+    },
+    {
+      "index": 1,
+      "name": "word/media/image21.png",
+      "width": 1742,
+      "height": 1232
+    },
+    {
+      "index": 2,
+      "name": "word/media/image22.png",
+      "width": 1738,
+      "height": 1229
+    },
+    {
+      "index": 3,
+      "name": "word/media/image23.png",
+      "width": 1715,
+      "height": 1212
+    },
+    {
+      "index": 4,
+      "name": "word/media/image24.png",
+      "width": 1621,
+      "height": 1146
+    },
+    {
+      "index": 5,
+      "name": "word/media/image25.jpg",
+      "width": 1600,
+      "height": 501
+    },
+    {
+      "index": 6,
+      "name": "word/media/image26.png",
+      "width": 1918,
+      "height": 866
+    },
+    {
+      "index": 7,
+      "name": "word/media/image27.png",
+      "width": 1918,
+      "height": 868
+    },
+    {
+      "index": 8,
+      "name": "word/media/image28.JPG",
+      "width": 1746,
+      "height": 969
+    },
+    {
+      "index": 9,
+      "name": "word/media/image29.png",
+      "width": 1893,
+      "height": 606
+    },
+    {
+      "index": 10,
+      "name": "word/media/image30.png",
+      "width": 931,
+      "height": 566
+    },
+    {
+      "index": 11,
+      "name": "word/media/image31.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 12,
+      "name": "word/media/image32.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 13,
+      "name": "word/media/image33.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 14,
+      "name": "word/media/image1.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 15,
+      "name": "word/media/image2.jpg",
+      "width": 1655,
+      "height": 2340
+    },
+    {
+      "index": 16,
+      "name": "word/media/image3.jpeg",
+      "width": 960,
+      "height": 540
+    },
+    {
+      "index": 17,
+      "name": "word/media/image4.png",
+      "width": 1427,
+      "height": 1009
+    },
+    {
+      "index": 18,
+      "name": "word/media/image5.png",
+      "width": 1210,
+      "height": 831
+    },
+    {
+      "index": 19,
+      "name": "word/media/image6.png",
+      "width": 1210,
+      "height": 832
+    },
+    {
+      "index": 20,
+      "name": "word/media/image7.png",
+      "width": 1235,
+      "height": 873
+    },
+    {
+      "index": 21,
+      "name": "word/media/image8.png",
+      "width": 1229,
+      "height": 869
+    },
+    {
+      "index": 22,
+      "name": "word/media/image9.png",
+      "width": 1243,
+      "height": 879
+    },
+    {
+      "index": 23,
+      "name": "word/media/image10.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 24,
+      "name": "word/media/image11.png",
+      "width": 799,
+      "height": 259
+    },
+    {
+      "index": 25,
+      "name": "word/media/image12.png",
+      "width": 268,
+      "height": 165
+    },
+    {
+      "index": 26,
+      "name": "word/media/image13.png",
+      "width": 1251,
+      "height": 884
+    },
+    {
+      "index": 27,
+      "name": "word/media/image14.png",
+      "width": 1241,
+      "height": 877
+    },
+    {
+      "index": 28,
+      "name": "word/media/image15.png",
+      "width": 1245,
+      "height": 880
+    },
+    {
+      "index": 29,
+      "name": "word/media/image16.png",
+      "width": 1239,
+      "height": 876
+    },
+    {
+      "index": 30,
+      "name": "word/media/image17.png",
+      "width": 1445,
+      "height": 1022
+    },
+    {
+      "index": 31,
+      "name": "word/media/image34.jpeg",
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "index": 32,
+      "name": "word/media/image18.png",
+      "width": 479,
+      "height": 698
+    },
+    {
+      "index": 33,
+      "name": "word/media/image19.JPG",
+      "width": 436,
+      "height": 392
+    }
+  ]
+}

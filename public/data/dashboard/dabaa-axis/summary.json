@@ -10,6 +10,9 @@
     "axisLengthKm": 235.07,
     "urbanChangeKm2": 27.73,
     "agriculturalChangeKm2": 155.34,
+    "agriculturalAreaFeddan": 196887,
+    "urbanChangePercent": 10,
+    "agriculturalChangePercent": 48,
     "industrialChangeKm2": 0,
     "urbanFeatures": 94,
     "agriculturalFeatures": 745,
@@ -86,7 +89,7 @@
       "area": 1044
     },
     {
-      "category": "Vscant Lands",
+      "category": "Vacant Lands",
       "year": 2014,
       "area": 3138.7
     },
@@ -96,7 +99,7 @@
       "area": 264.1
     },
     {
-      "category": "Water Bodies ",
+      "category": "Water Bodies",
       "year": 2014,
       "area": 5.2
     },
@@ -106,7 +109,7 @@
       "area": 1622.8
     },
     {
-      "category": "Vscant Lands",
+      "category": "Vacant Lands",
       "year": 2023,
       "area": 2529.6
     },
@@ -116,13 +119,12 @@
       "area": 272.1
     },
     {
-      "category": "Water Bodies ",
+      "category": "Water Bodies",
       "year": 2023,
       "area": 5.2
     }
   ],
   "layers": [
-    "study",
     "axis",
     "urban",
     "agricultural",

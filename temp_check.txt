@@ -1,0 +1,12 @@
+﻿
+=== landcover-start.geojson (3 features) ===
+  code=3, label=None, area=19.958586 km2, status=?, geom=MultiPolygon
+  code=0, label=None, area=93.264089 km2, status=?, geom=MultiPolygon
+  code=2, label=None, area=339.499837 km2, status=?, geom=MultiPolygon
+
+=== landcover-end.geojson (5 features) ===
+  code=0, label=None, area=0.022585 km2, status=┘ä┘à ┘è╪¬╪║┘è╪▒, geom=MultiPolygon
+  code=2, label=None, area=326.485413 km2, status=2, geom=MultiPolygon
+  code=3, label=None, area=0.730316 km2, status=1, geom=Polygon
+  code=0, label=None, area=1.053677 km2, status=╪¬╪║┘è╪▒, geom=MultiPolygon
+  code=3, label=None, area=19.237313 km2, status=?, geom=MultiPolygon
