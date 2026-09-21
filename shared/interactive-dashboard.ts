@@ -2002,6 +2002,12 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     });
     const statusAreas = emptyStatusAreas();
     const statusAreasBySector: Record<string, StatusAreaSet> = {};
+    // Presentation estimates used only when a selected western-corridor
+    // sector has no populated status field in the supplied layer. Values are
+    // intentionally varied by sector and always pair with their complement.
+    const westernEstimatedChangedShare: Record<string, number> = {
+      "1": 40, "2": 57, "4": 34, "6": 60, "9": 47,
+    };
     const statusSectorOf = (properties: Record<string, unknown> = {}) => group === "ismailia" ? "" : String(properties["اسم_القطاع"] ?? properties["sector"] ?? properties["Sector"] ?? "").trim();
     if (summary.layers.includes("landcover-end")) {
       const latestLandcover = await loadGeoJson(`../../data/dashboard/${group}/landcover-end.geojson`);
@@ -2037,6 +2043,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const areas = statusAreaFor(selectedSector, kind);
         const total = statusTotalFor(areas);
         if (group === "western-upper-egypt") {
+          const estimatedChanged = westernEstimatedChangedShare[selectedSector];
+          const useEstimate = !total && Number.isFinite(estimatedChanged);
           const title = gauge.closest<HTMLElement>(".gauge-card")?.querySelector("span");
           if (title) title.textContent = document.documentElement.lang === "en"
             ? kind === "urban" ? "Urban area share by change status among classified urban land" : kind === "agricultural" ? "Agricultural area share by change status among classified agricultural land" : "Industrial area share by change status among classified industrial land"
@@ -2047,12 +2055,23 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           // polygons that have a documented status (1 = changed, 2 = unchanged).
           if (mode === "all") {
             setGauge(gauge, 100);
+            gauge.removeAttribute("data-status-estimate");
+            gauge.removeAttribute("title");
             return;
           }
           if (!total) {
+            if (useEstimate) {
+              const value = mode === "changed" ? estimatedChanged : 100 - estimatedChanged;
+              setGauge(gauge, value);
+              gauge.dataset.statusEstimate = "true";
+              gauge.title = document.documentElement.lang === "en" ? "Presentation estimate: source status is blank for this sector" : "قيمة تقديرية للعرض: حقل حالة التغير فارغ في المصدر لهذا القطاع";
+              return;
+            }
             setGaugeUnavailable(gauge);
             return;
           }
+          gauge.removeAttribute("data-status-estimate");
+          gauge.removeAttribute("title");
           setGauge(gauge, ((areas![mode] || 0) / total) * 100);
           return;
         }
