@@ -1450,28 +1450,33 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     return `<button type="button" class="${active ? "active" : ""}" data-map-layer="${layer}"><i></i>${labels[layer]}<b>${sourceCount(layer, collection).toLocaleString(document.documentElement.lang === "en" ? "en-US" : "ar-EG")}</b></button>`;
   }).join("");
   scope.querySelector(".landuse-legend")?.remove();
-  // Every published map gets one compact, closed-by-default key. It contains
-  // only the layers, land-use classes and change states that are actually
-  // present in this map instance, so it never obscures the map at first load.
-  const keyPanel = document.createElement("details");
-  keyPanel.className = "map-key-panel";
-  const keySummary = document.createElement("summary");
-  keySummary.textContent = document.documentElement.lang === "en" ? "Map key" : "مفتاح الخريطة";
-  keyPanel.append(keySummary, toggles);
+  // Split each map key across the two lower corners: layers on one side and
+  // classifications/statuses on the other. Both are closed on first load.
+  const layerKeyPanel = document.createElement("details");
+  layerKeyPanel.className = "map-key-panel map-key-layers";
+  const layerKeySummary = document.createElement("summary");
+  layerKeySummary.textContent = document.documentElement.lang === "en" ? "Layers" : "طبقات الخريطة";
+  layerKeyPanel.append(layerKeySummary, toggles);
+  const categoryKeyPanel = document.createElement("details");
+  categoryKeyPanel.className = "map-key-panel map-key-categories";
+  const categoryKeySummary = document.createElement("summary");
+  categoryKeySummary.textContent = document.documentElement.lang === "en" ? "Classes" : "التصنيفات";
+  categoryKeyPanel.append(categoryKeySummary);
   // Keep the published classification vocabulary here; the UI below filters
   // this list to classes that occur in the current map only.
   const landuseLegendLabels: Array<[number, string]> = [[0, "الأراضي الزراعية"], [1, "المناطق الصناعية"], [2, "أراضي الفضاء"], [3, "الأراضي العمرانية"], [4, "أراضي القوات المسلحة"], [5, "أراضي خدمات"], [6, "المناطق الترفيهية"], [7, "المقابر"], [8, "مسطحات مائية"], [9, "حرم الطريق"], [10, "طرق"], [11, "ديني"], [12, "الأراضي التعليمية"], [13, "الأراضي الحكومية"], [14, "الأراضي السياحية"], [15, "مساحات خضراء"], [99, "غير مصنف"]];
   const visibleLanduseCodes = Array.from(new Set(Array.from(content.querySelectorAll<SVGPathElement>("[data-landuse-code]")).map((path) => Number(path.dataset.landuseCode)).filter((code) => Number.isFinite(code)))).sort((a, b) => a - b);
   if (visibleLanduseCodes.length) {
     const landuseItems = visibleLanduseCodes.map((code) => `<span style="--swatch:${ismailiaLanduseSymbols[code]?.[0] || ismailiaLanduseSymbols[99][0]}">${esc(landuseLegendLabels.find(([legendCode]) => legendCode === code)?.[1] || ismailiaLanduseNames[String(code)] || ismailiaLanduseNames["99"])}</span>`).join("");
-    keyPanel.insertAdjacentHTML("beforeend", `<section class="map-key-section"><b>${document.documentElement.lang === "en" ? "Land use" : "استخدامات الأراضي"}</b><div class="map-key-landuse">${landuseItems}</div></section>`);
+    categoryKeyPanel.insertAdjacentHTML("beforeend", `<section class="map-key-section"><b>${document.documentElement.lang === "en" ? "Land use" : "استخدامات الأراضي"}</b><div class="map-key-landuse">${landuseItems}</div></section>`);
   }
   const visibleStatuses = new Set(Array.from(content.querySelectorAll<SVGPathElement>("[data-change-status]")).map((path) => path.dataset.changeStatus).filter((value): value is "changed" | "unchanged" => value === "changed" || value === "unchanged"));
   if (visibleStatuses.size) {
     const statusItems = ["changed", "unchanged"].filter((status) => visibleStatuses.has(status as "changed" | "unchanged")).map((status) => `<span class="map-key-status ${status}">${document.documentElement.lang === "en" ? status === "changed" ? "Changed" : "Unchanged" : status === "changed" ? "متغير" : "غير متغير"}</span>`).join("");
-    keyPanel.insertAdjacentHTML("beforeend", `<section class="map-key-section"><b>${document.documentElement.lang === "en" ? "Change status" : "حالة التغير"}</b><div class="map-key-statuses">${statusItems}</div></section>`);
+    categoryKeyPanel.insertAdjacentHTML("beforeend", `<section class="map-key-section"><b>${document.documentElement.lang === "en" ? "Change status" : "حالة التغير"}</b><div class="map-key-statuses">${statusItems}</div></section>`);
   }
-  scope.appendChild(keyPanel);
+  scope.appendChild(layerKeyPanel);
+  if (categoryKeyPanel.children.length > 1) scope.appendChild(categoryKeyPanel);
   toggles.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => button.addEventListener("click", () => {
     const active = !button.classList.contains("active");
     document.querySelectorAll<HTMLButtonElement>(`[data-map-layer="${button.dataset.mapLayer}"]`).forEach((peer) => peer.classList.toggle("active", active));
