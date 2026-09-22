@@ -564,13 +564,13 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 
   /* Keep the KPI values inside their allocated header track.  A previous
      62px track clipped values in every price dashboard below the labels. */
-  .price-workspace { grid-template-rows: 88px minmax(0, 1fr) !important; }
+  .price-workspace { grid-template-rows: 108px minmax(0, 1fr) !important; }
   /* KPIs sit directly above the year strip on every price comparison.
      Give that row an explicit box so enlarged values cannot bleed into it. */
-  .price-dashboard .ismailia-map-kpis { min-height:88px; height:88px; overflow:hidden; isolation:isolate; }
-  .price-dashboard .ismailia-map-kpis > article { height:88px; min-height:88px; max-height:88px; padding:6px 9px; justify-content:center; gap:4px; overflow:hidden; }
-  .price-dashboard .ismailia-map-kpis > article span { height:34px; min-height:34px; max-height:34px; flex:0 0 34px; font-size:13px; line-height:1.28; }
-  .price-dashboard .ismailia-map-kpis > article strong { flex:0 0 auto; margin:0; font-size:clamp(23px,2vw,31px); line-height:1; }
+  .price-dashboard .ismailia-map-kpis { min-height:108px; height:108px; overflow:hidden; isolation:isolate; }
+  .price-dashboard .ismailia-map-kpis > article { height:108px; min-height:108px; max-height:108px; padding:8px 9px 10px; justify-content:center; gap:5px; overflow:hidden; }
+  .price-dashboard .ismailia-map-kpis > article span { height:36px; min-height:36px; max-height:36px; flex:0 0 36px; font-size:13px; line-height:1.3; }
+  .price-dashboard .ismailia-map-kpis > article strong { flex:0 0 auto; margin:0; font-size:clamp(23px,2vw,31px); line-height:1.15; }
   .price-temporal-map-pair, .temporal-map-pair { min-height: 0; height: 100%; }
   .temporal-map, .temporal-map .gis-map { min-height: 0; }
   .price-columns { min-height: 0; }
