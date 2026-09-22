@@ -365,8 +365,38 @@ function impactMarkup(app: TransportApp, group: string): string {
   </main>`;
 }
 
+function ismailiaImpactIcon(kind: "fuel" | "people" | "map" | "coins" | "value"): string {
+  const icons: Record<typeof kind, string> = {
+    fuel: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 12h22v40H18zM22 17h14v15H22zM40 23h5l6 7v15c0 4-3 7-7 7h-4v-6h4c1 0 2-1 2-2V33l-4-4z"/><path d="M27 39h7"/></svg>`,
+    people: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="23" cy="24" r="8"/><circle cx="41" cy="24" r="8"/><path d="M9 48c0-9 6-16 14-16s14 7 14 16M27 48c0-9 6-16 14-16s14 7 14 16"/></svg>`,
+    map: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="m10 16 16-7 13 7 15-7v39l-15 7-13-7-16 7zM26 9v39M39 16v39"/><circle cx="39" cy="22" r="5"/></svg>`,
+    coins: `<svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="35" cy="16" rx="14" ry="6"/><path d="M21 16v10c0 8 28 8 28 0V16M21 26v10c0 8 28 8 28 0V26M11 29c0-6 20-6 20 0v9c0 6-20 6-20 0z"/></svg>`,
+    value: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 49V37h9v12M28 49V25h9v24M43 49V13h9v36"/><path d="m14 31 15-13 9 7 14-14"/></svg>`,
+  };
+  return icons[kind];
+}
+
+function ismailiaImpactMarkup(app: TransportApp): string {
+  const indicators = [
+    { color: "red", icon: "fuel" as const, label: "الوفر في الوقود بدون الدعم", value: "20,371", unit: "( مليار جنيه )" },
+    { color: "orange", icon: "fuel" as const, label: "الوفر في الوقود بوجود الدعم", value: "4,818", unit: "( مليار جنيه )" },
+    { color: "gold", icon: "people" as const, label: "العمالة", value: "765,636", unit: "" },
+    { color: "purple", icon: "map" as const, label: "مساحة الأرض المضافة", value: "336", unit: "( كم² )" },
+    { color: "green", icon: "coins" as const, label: "الاستثمارات", value: "16,268", unit: "( تريليون جنيه )" },
+    { color: "blue", icon: "value" as const, label: "القيمة المضافة", value: "8,725", unit: "( تريليون جنيه )" },
+  ];
+  return `<main class="ismailia-impact-board" dir="${app.direction}" aria-labelledby="impact-board-title">
+    <header class="impact-board-header"><div class="impact-brand"><b>وزارة النقل</b><i></i></div><div class="impact-road-title">طريق القاهرة - الإسماعيلية</div><div class="impact-sector-title">مؤشرات التنمية<br>البنية التحتية<i></i></div></header>
+    <section class="impact-board-content"><h1 id="impact-board-title">الأثر التنموي للجزء المطور من الطريق</h1><h2>خلال الفترة ( 2016 – 2026 )</h2>
+      <div class="impact-timeline" aria-label="المؤشرات الرئيسية للأثر التنموي">${indicators.map((item) => `<article class="impact-kpi ${item.color}"><div class="impact-orb">${ismailiaImpactIcon(item.icon)}<strong>${item.label}</strong></div><div class="impact-connector"></div><div class="impact-value"><bdi>${item.value}</bdi><small>${item.unit || "&nbsp;"}</small></div><div class="impact-node"></div></article>`).join("")}</div>
+      <footer>المؤشرات الرئيسية للأثر التنموي للجزء المطور من طريق القاهرة - الإسماعيلية</footer>
+    </section>
+  </main>`;
+}
+
 export function renderInteractiveDashboard(app: TransportApp): string {
   const group = dashboardGroup(app);
+  if (app.slug === "dashboard-ismailia-development-impact") return ismailiaImpactMarkup(app);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
   if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
   if (isUrbanDashboard(app)) return landMarkup(app, group);

@@ -1,0 +1,5 @@
+{
+  "sourceDataRoot": "public/data/dashboard/ismailia",
+  "sources": ["summary.json", "sector-profiles.json"],
+  "purpose": "Static executive development-impact presentation"
+}

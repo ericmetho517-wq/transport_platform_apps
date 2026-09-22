@@ -1,0 +1,5 @@
+{
+  "applicationId": "dashboard-ismailia-development-impact",
+  "sourceDataRoot": "public/data/dashboard/ismailia",
+  "copiedDataFiles": ["summary.json"]
+}

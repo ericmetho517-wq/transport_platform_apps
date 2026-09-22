@@ -1,6 +1,12 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["المؤشرات الرئيسية للأثر التنموي للجزء المطور من طريق القاهرة - الإسماعيلية", "Key development-impact indicators for the developed Cairo–Ismailia Road section"],
+  ["الأثر التنموي للجزء المطور من الطريق", "Development impact of the developed road section"],
+  ["خلال الفترة ( 2016 – 2026 )", "During the period (2016–2026)"],
+  ["طريق القاهرة - الإسماعيلية", "Cairo–Ismailia Road"],
+  ["مؤشرات التنمية", "Development indicators"],
+  ["البنية التحتية", "Infrastructure"],
   ["لا توجد بيانات حالة تغير موثقة", "No documented change-status data"],
   ["نسبة مساحة العمران حسب حالة التغير من العمران المصنف", "Urban area share by change status among classified urban land"],
   ["نسبة مساحة الزراعة حسب حالة التغير من الزراعة المصنفة", "Agricultural area share by change status among classified agricultural land"],

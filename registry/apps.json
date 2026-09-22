@@ -1632,6 +1632,22 @@
     "reportReferences": []
   },
   {
+    "id": "dashboard-ismailia-development-impact",
+    "slug": "dashboard-ismailia-development-impact",
+    "title": "لوحة الأثر التنموي للجزء المطور – طريق القاهرة–الإسماعيلية",
+    "alternateTitles": [
+      "Development Impact Dashboard – Cairo–Ismailia Road"
+    ],
+    "category": "تطبيقات طريق القاهرة–الإسماعيلية",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "standardized-executive-dashboard",
+    "reportReferenceGroup": "ismailia",
+    "reportReferences": []
+  },
+  {
     "id": "ismailia-agriculture-2026-dashboard",
     "slug": "dashboard-ismailia-agriculture",
     "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق القاهرة–الإسماعيلية",

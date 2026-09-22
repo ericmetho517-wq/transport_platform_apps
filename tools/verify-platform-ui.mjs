@@ -29,7 +29,7 @@ if (!dashboardSource.includes("isWesternUpperEgypt || serviceLabelPattern.test(i
 for (const storyFeature of ["arcgis-reference-story", "story-dashboard-view", "data-story-dashboard", "data-story-detail"]) {
   if (!sectorSource.includes(storyFeature) && !sectorStyles.includes(storyFeature)) errors.push(`Western StoryMap reference layout is missing: ${storyFeature}`);
 }
-if (apps.length !== 61) errors.push(`expected 61 canonical applications, found ${apps.length}`);
+if (apps.length !== 62) errors.push(`expected 62 canonical applications, found ${apps.length}`);
 if (apps.some((app) => app.type === "Experience")) errors.push("interactive applications must not appear in the catalog");
 const dabaaStory = apps.find((app) => app.slug === "storymap-3bc68f337f");
 if (dabaaStory?.language !== "ar" || !dabaaStory.alternateTitles?.length) errors.push("Dabaa StoryMap must appear in Arabic and English catalog modes");

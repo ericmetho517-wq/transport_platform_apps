@@ -118,10 +118,11 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }
 
-if (dashboards.length !== 30) failures.push(`expected 30 dashboards, found ${dashboards.length}`);
+if (dashboards.length !== 31) failures.push(`expected 31 dashboards, found ${dashboards.length}`);
 for (const group of Object.keys({ "western-upper-egypt":1, dahshur:1, "regional-ring":1, kalabsha:1, "qena-luxor":1, "suez-link":1, "suez-free":1, qus:1, dabaa:1, ismailia:1 })) {
   const suite = dashboards.filter((app) => app.reportReferenceGroup === group);
-  if (suite.length !== 3) failures.push(`${group}: executive dashboard suite must contain exactly three dashboards`);
+  const expectedCount = group === "ismailia" ? 4 : 3;
+  if (suite.length !== expectedCount) failures.push(`${group}: executive dashboard suite must contain exactly ${expectedCount} dashboards`);
 }
 if (failures.length) {
   console.error(`Dashboard content audit failed (${failures.length})`);
