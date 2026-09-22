@@ -61,7 +61,6 @@ const ismailiaLanduseNames: Record<string, string> = {
 // service matcher here prevents each project from drifting to a different
 // colour when it is rendered in a chart or filter.
 const serviceColor = ismailiaLanduseSymbols[5][0];
-const storyVisibleLanduseCodes = new Set([0, 1, 2, 3]);
 const serviceLabelPattern = /خدم|تعليم|حكوم|دين|سياح|ترفيه|مقابر/i;
 const transportLayerNames: LayerName[] = [
   "Road_CairoRing", "Road_MiddleRing", "Road_RegionalRing",
@@ -1076,11 +1075,12 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const viewerMode = Boolean(scope.closest(".viewer-runtime"));
   const storyMode = Boolean(scope.closest(".story-runtime")) && !Boolean(scope.closest(".story-map-compare"));
   const temporalMap = mapInstance.includes("baseline") || mapInstance.includes("current");
-  // Story maps are a focused spatial narrative: their interactive map shows
-  // only the verified study-area geometry for the selected sector. Loading
-  // land-cover, water, survey or corridor layers here can introduce source
-  // polygons outside the area and visually obscure the satellite image.
-  const storyStudyLayers: LayerName[] = ["study"];
+  // At the opening of every Story Map, present the verified study boundary
+  // together with the current classified land cover for the entire sector.
+  // The latter carries each polygon's documented change state, so the shared
+  // "changed / unchanged" control filters the actual map geometry.
+  // Keep the study layer last so its outline remains legible above the colours.
+  const storyStudyLayers: LayerName[] = ["landcover-end", "study"];
   const baselineTransportNames: LayerName[] = suezTransport ? transportLayerNames : ["Road_CairoRing"];
   const temporalStartLayers: LayerName[] = ["study", "landcover-start", ...baselineTransportNames, "axis"];
   // Temporal maps must draw their current land-use colours and change state
@@ -1186,7 +1186,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const groupElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
     groupElement.dataset.layerGroup = layer;
     groupElement.classList.add(`map-${layer}`);
-    const aggregateLandcover = ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer) && (mapInstance.includes("baseline") || mapInstance.includes("current"));
+    const aggregateLandcover = ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer) && (mapInstance.includes("baseline") || mapInstance.includes("current") || storyMode);
     const landcoverBuckets = new Map<string, { paths: string[]; fill: string; stroke: string; strokeWidth: string; code: string; status: string; sector: string; geometry: string; features: Array<{ geometry?: { type: string; coordinates: Coordinates }; properties?: Record<string, unknown> }> }>();
     for (const [featureIndex, feature] of collection.features.entries()) {
       // Yield between batches so a large layer cannot block scrolling/input.
@@ -1245,7 +1245,6 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
                                       : /road|طريق/.test(normalized) ? 9 : 99;
         const palette = ismailiaLanduseSymbols;
         const [fill, stroke] = palette[inferredCode] || palette[99];
-        if (storyMode && !storyVisibleLanduseCodes.has(inferredCode)) continue;
         path.dataset.landuseCode = String(inferredCode);
         path.style.fill = fill;
         path.style.stroke = stroke;
@@ -1477,7 +1476,6 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const expanded = mapInstance.includes("baseline") || mapInstance.includes("current") ? "" : " open";
     // Use the same approved land-use legend for every axis, not only Ismailia.
     const legendItems = [[0, "الأراضي الزراعية"], [1, "المناطق الصناعية"], [2, "أراضي الفضاء"], [3, "الأراضي العمرانية"], [4, "أراضي القوات المسلحة"], [5, "أراضي خدمات"], [6, "المناطق الترفيهية"], [7, "المقابر"], [8, "مسطحات مائية"], [9, "حرم الطريق"], [10, "طرق"], [11, "ديني"], [12, "الأراضي التعليمية"], [13, "الأراضي الحكومية"], [14, "الأراضي السياحية"], [15, "مساحات خضراء"], [99, "غير مصنف"]]
-      .filter(([code]) => !storyMode || storyVisibleLanduseCodes.has(Number(code)))
       .map(([code, label]) => `<span style="--swatch:${ismailiaLanduseSymbols[Number(code)][0]}">${label}</span>`).join("");
     scope.insertAdjacentHTML("beforeend", `<details class="landuse-legend"${expanded}><summary>مفتاح استخدامات الأراضي</summary><div>${legendItems}</div></details>`);
   }
