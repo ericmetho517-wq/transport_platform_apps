@@ -125,7 +125,7 @@ export function renderProject(app: TransportApp): void {
     console.error("Application initialization failed", error, reason);
   });
   if (!root.querySelector("#language-toggle")) {
-    const languageHost = root.querySelector<HTMLElement>(".dash-actions, .sector-header, .top-actions");
+    const languageHost = root.querySelector<HTMLElement>(".dash-actions, .sector-header, .top-actions, .impact-board-header");
     if (languageHost) {
       const languageButton = document.createElement("button");
       languageButton.id = "language-toggle";
