@@ -143,7 +143,7 @@
   ],
   "layerCounts": {
     "axis": 0,
-    "study": 0,
+    "study": 1,
     "urban": 0,
     "agricultural": 0,
     "industrial": 0,
@@ -157,7 +157,7 @@
   "sourceLayerCounts": {
     "landcover-start": 755,
     "landcover-end": 755,
-    "study": 0,
+    "study": 1,
     "axis": 0,
     "urban": 0,
     "agricultural": 0,
