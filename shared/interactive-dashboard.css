@@ -164,6 +164,11 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="landcover-start"] i,
 .interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="landcover-end"] i { background:linear-gradient(135deg,#16c51b 0 25%,#fff4ae 25% 50%,#9800c7 50% 75%,#f6a900 75%); }
 .interactive-dashboard[data-dashboard-group="ismailia"] .map-layer-toggles button.active[data-map-layer="water"] i { background:#08afe1; }
+/* Ismailia's former full-screen layer rail must not escape the compact key. */
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-key-panel .map-layer-toggles { position:static; inset:auto; z-index:auto; width:auto; max-height:none; overflow:visible; padding:4px; border:0; border-radius:0; background:transparent; box-shadow:none; gap:2px; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-key-panel .map-layer-toggles button { min-height:0; grid-template-columns:9px minmax(0,1fr); padding:3px 4px; border-radius:5px; background:#090909e8; font-size:8px; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-key-panel .map-layer-toggles button i { width:9px; height:9px; border-radius:2px; }
+.interactive-dashboard[data-dashboard-group="ismailia"] .map-key-panel .map-layer-toggles button b { display:none; }
 .map-sector-filter span { white-space: nowrap; }
 .map-layer-toggles button { display: grid; grid-template-columns: 11px 1fr auto; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid #ffffff66; border-radius: 6px; background: #071d31f2; color: #dce9f3; text-align: start; cursor: pointer; font-size: 10px; box-shadow:0 3px 10px #0007; }
 .map-layer-toggles button i { width: 9px; height: 9px; border-radius: 2px; background: #777; }

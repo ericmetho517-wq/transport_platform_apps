@@ -2067,13 +2067,12 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
               layerGroup.classList.toggle("layer-hidden", isOtherTemporal);
               layerGroup.querySelectorAll<SVGPathElement>("path").forEach((path) => {
                 path.removeAttribute("hidden");
-                path.classList.remove("layer-hidden", "change-hidden", "change-match");
+                path.classList.remove("layer-hidden", "landuse-hidden", "change-hidden", "change-match");
               });
             });
             map.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => {
-              if (["landcover-start", "landcover-end"].includes(button.dataset.mapLayer || "")) {
-                button.classList.toggle("active", button.dataset.mapLayer === ownLayer);
-              }
+              const layer = button.dataset.mapLayer || "";
+              button.classList.toggle("active", !["landcover-start", "landcover-end"].includes(layer) || layer === ownLayer);
             });
           };
           restoreMap(baselineMapEl, "landcover-start");
@@ -2084,9 +2083,10 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
               layerGroup.classList.remove("layer-hidden");
               layerGroup.querySelectorAll<SVGPathElement>("path").forEach((path) => {
                 path.removeAttribute("hidden");
-                path.classList.remove("layer-hidden", "change-hidden", "change-match");
+                path.classList.remove("layer-hidden", "landuse-hidden", "change-hidden", "change-match");
               });
             });
+            map.querySelectorAll<HTMLButtonElement>("[data-map-layer]").forEach((button) => button.classList.add("active"));
           });
         }
         root.querySelectorAll<HTMLButtonElement>("#change-bars button").forEach((btn) => btn.classList.remove("active"));
