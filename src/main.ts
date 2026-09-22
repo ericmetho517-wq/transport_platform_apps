@@ -4,7 +4,10 @@ import { dashboardGroup } from "../shared/interactive-dashboard";
 import { enableApplicationLocalization } from "../shared/localization";
 import { localizedAppCategory, localizedAppTitle } from "../shared/app-titles";
 
-const registry = (apps as TransportApp[]).filter((app) => dashboardGroup(app) !== "suez-ring-link");
+const registry = (apps as TransportApp[]).filter((app) =>
+  dashboardGroup(app) !== "suez-ring-link"
+  && app.slug !== "web-viewer-30ddd4974b",
+);
 const axisOptions = [
   ["ismailia", "طريق القاهرة–الإسماعيلية"], ["western-upper-egypt", "طريق الصعيد الغربي"],
   ["cairo-suez-road", "طريق القاهرة السويس"],
