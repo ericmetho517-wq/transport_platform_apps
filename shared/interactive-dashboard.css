@@ -223,6 +223,8 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .loading-panel, .no-data { min-height: 120px; display: grid; place-items: center; padding: 20px; color: #aaa; font-size: 12px; text-align: center; }
 
 .land-layout { flex: 1 1 auto; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(240px, 27%) minmax(0, 50%) minmax(210px, 23%); direction: ltr; box-sizing: border-box; }
+/* The retired chart and donut no longer reserve dashboard rails. */
+.land-layout.map-expanded { grid-template-columns: minmax(0, 77%) minmax(210px, 23%); }
 .dabaa-land-layout { flex: 1 1 auto; height: calc(100vh - 120px); min-height: 0; display: grid; grid-template-columns: minmax(0, 74%) minmax(220px, 26%); direction: ltr; box-sizing: border-box; overflow: hidden; }
 .dabaa-center { min-width: 0; display: grid; grid-template-rows: minmax(0, 1.4fr) minmax(200px, 1fr); direction: rtl; height: 100%; min-height: 0; }
 .dabaa-center > .gis-map { min-height: 0 !important; height: 100%; }
@@ -359,6 +361,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .south-agriculture-layout { height:calc(100vh - 52px); max-height:calc(100vh - 52px); min-height:0; display:grid; grid-template-columns:minmax(200px,23%) minmax(0,57%) minmax(180px,20%); direction:ltr; box-sizing: border-box; overflow: hidden; }
 .south-agriculture-side,.south-agriculture-center,.south-agriculture-right { min-width:0; height:100%; min-height:0; direction:rtl; overflow: hidden; }
 .south-agriculture-side,.south-agriculture-right { display:grid; grid-template-rows:repeat(2, minmax(0, 1fr)); }
+.south-agriculture-side > :only-child { grid-row: 1 / -1; }
 .southern-agriculture-dashboard.has-serial-chart .south-agriculture-side { grid-template-rows:repeat(3, minmax(0, 1fr)); overflow-y:auto; }
 .southern-agriculture-dashboard.kalabsha-axis.has-serial-chart .south-agriculture-side { grid-template-rows:repeat(2, minmax(0, 1fr)); }
 .southern-agriculture-dashboard .serial-chart-card { min-height:220px; }
@@ -434,6 +437,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .price-dashboard .price-layout { grid-template-columns:1fr; }
   .price-columns { min-height: 250px; border: 0; border-bottom: 2px solid #444; }
   .land-layout { grid-template-columns: 1fr 1.7fr; }
+  .land-layout.map-expanded { grid-template-columns: minmax(0,1.7fr) minmax(210px,1fr); }
   .dabaa-land-layout { grid-template-columns: 1fr; }
   .dabaa-kpis { grid-column: 1; }
   .dabaa-gauges { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
@@ -474,7 +478,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .dabaa-kpis { grid-template-columns: 1fr 1fr; }
   .dabaa-gauges { grid-template-columns: 1fr; }
   .dashboard-kpis article { min-height: 58px; }
-  .land-layout { grid-template-columns: 1fr; }
+  .land-layout, .land-layout.map-expanded { grid-template-columns: 1fr; }
   .land-left { min-height: 620px; }
   .land-center { grid-template-rows: auto 420px 320px; }
   .temporal-map-pair { grid-template-columns: 1fr; overflow: auto; }
