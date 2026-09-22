@@ -460,6 +460,136 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 #crop-legend span, #ownership-legend span { display: flex; align-items: center; gap: 5px; color: #f2f2f2; font-size: 11px; font-weight:700; line-height:1.35; }
 #crop-legend i, #ownership-legend i { width: 10px; height: 10px; border-radius: 50%; flex:0 0 auto; }
 
+/* Desktop command-centre fit: every operational dashboard stays within one
+   browser viewport at normal zoom.  Internal grid tracks, rather than the
+   document, absorb height changes so maps and charts remain visible together. */
+@media (min-width: 1100px) {
+  html:has(.interactive-dashboard), body:has(.interactive-dashboard) {
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .interactive-dashboard {
+    height: 100dvh;
+    min-height: 0;
+    max-height: 100dvh;
+    overflow: hidden;
+  }
+
+  .interactive-head {
+    min-height: 62px;
+    height: 62px;
+    padding: 5px 16px;
+    gap: 12px;
+    overflow: hidden;
+  }
+  .interactive-head > div:first-child { min-width: 0; }
+  .interactive-head h1 { margin-top: 1px; font-size: clamp(19px, 1.7vw, 26px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .interactive-head span { font-size: 11px; }
+  .dash-actions { flex-wrap: nowrap; gap: 7px; }
+  .dashboard-change-filter, .dashboard-landuse-filter { min-height: 34px; padding: 3px 7px; }
+  .dashboard-sector-filter { padding: 4px 7px; }
+  .dashboard-change-filter select, .dashboard-landuse-filter select, .dashboard-sector-filter select { min-height: 26px; }
+  .dash-actions button { padding: 6px 9px; white-space: nowrap; }
+
+  .interactive-dashboard > .dashboard-kpis {
+    flex: 0 0 62px;
+    height: 62px;
+    min-height: 62px;
+  }
+  .dashboard-kpis article,
+  .ismailia-jobs-cards .opportunity-card,
+  .ismailia-agri-total,
+  .ismailia-summary-kpis article { height: 62px; min-height: 62px; max-height: 62px; padding: 4px 7px; }
+  .dashboard-kpis span,
+  .ismailia-jobs-cards .opportunity-card span,
+  .ismailia-agri-total span,
+  .ismailia-summary-kpis article span { height: 25px; min-height: 25px; max-height: 25px; font-size: 12px; }
+  .dashboard-kpis strong,
+  .ismailia-jobs-cards .opportunity-card strong,
+  .ismailia-agri-total strong,
+  .ismailia-summary-kpis article strong { font-size: clamp(20px, 1.8vw, 27px); }
+
+  .price-layout,
+  .land-layout,
+  .dabaa-land-layout,
+  .agriculture-layout,
+  .south-agriculture-layout,
+  .ismailia-reference-layout,
+  .general-agriculture-layout,
+  .specialized-layout {
+    flex: 1 1 auto;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden;
+  }
+
+  .price-layout, .land-layout, .dabaa-land-layout, .agriculture-layout,
+  .south-agriculture-layout, .ismailia-reference-layout,
+  .general-agriculture-layout, .specialized-layout,
+  .price-workspace, .land-center, .dabaa-center, .agriculture-center,
+  .south-agriculture-center, .general-agriculture-center,
+  .western-agriculture-center, .ismailia-reference-main,
+  .ismailia-reference-body, .specialized-body {
+    min-height: 0;
+  }
+
+  .price-workspace { grid-template-rows: 62px minmax(0, 1fr) !important; }
+  .price-temporal-map-pair, .temporal-map-pair { min-height: 0; height: 100%; }
+  .temporal-map, .temporal-map .gis-map { min-height: 0; }
+  .price-columns { min-height: 0; }
+
+  .land-center,
+  .dabaa-center,
+  .south-agriculture-center,
+  .general-agriculture-center,
+  .western-agriculture-center,
+  .ismailia-reference-body .agriculture-center {
+    display: grid;
+    grid-template-rows: minmax(0, 1.42fr) minmax(205px, .88fr);
+  }
+  .land-center > .dashboard-kpis { flex: none; height: 58px; min-height: 58px; }
+  .land-center { grid-template-rows: 58px minmax(0, 1.42fr) minmax(205px, .88fr); }
+  .land-center > .gis-map,
+  .dabaa-center > .gis-map,
+  .south-agriculture-center > .gis-map,
+  .general-agriculture-center > .gis-map,
+  .western-agriculture-center > .gis-map,
+  .ismailia-reference-body .agriculture-center > .gis-map,
+  .specialized-body > .gis-map { min-height: 0 !important; height: 100%; }
+  .land-bottom-row { min-height: 0; height: 100%; }
+
+  .comparison-card { min-height: 0; height: 100%; padding: 7px 12px; overflow: hidden; }
+  .comparison-card .card-title { min-height: 30px; font-size: 14px; }
+  #comparison-chart { min-height: 0; height: calc(100% - 30px); padding-top: 3px; }
+  .comparison-row { margin: 6px 0; }
+  .comparison-row > div { height: 34px; }
+  .comparison-row b { font-size: 14px; }
+  .comparison-row span { font-size: 12px; }
+  .comparison-legend { gap: 6px 10px; padding-top: 5px; }
+  .comparison-legend span { font-size: 11px; }
+
+  .land-right, .agriculture-side, .agriculture-right,
+  .south-agriculture-side, .south-agriculture-right,
+  .general-agriculture-side, .western-agriculture-side,
+  .western-agriculture-right, .dabaa-gauges, .ismailia-agri-right { min-height: 0; overflow: hidden; }
+  .gauge-card, .donut-card { min-height: 0; padding: 8px 9px; gap: 5px; }
+  .gauge-card > span, .donut-card > span { font-size: 14px; line-height: 1.32; }
+  .gauge-card small { font-size: 12px; }
+  .gauge { width: min(225px, 92%); }
+  .gauge-labels text { font-size: 10px; }
+  .gauge-value { font-size: 27px; }
+  .crop-card, .ownership-card { min-height: 0; padding: 8px; gap: 6px; }
+  .crop-donut, .ownership-donut { width: min(142px, 68%); }
+  .agriculture-stat, .agriculture-change { min-height: 0; padding: 7px; }
+
+  .specialized-layout { grid-template-rows: 62px minmax(0, 1fr); gap: 6px; padding: 6px; }
+  .specialized-body { min-height: 0 !important; }
+}
+
 @media (max-width: 1050px) {
   .price-layout { grid-template-columns: 1fr; }
   .price-dashboard .price-layout { grid-template-columns:1fr; }
