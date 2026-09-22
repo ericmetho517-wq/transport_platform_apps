@@ -510,9 +510,9 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
     gap: 12px;
     overflow: hidden;
   }
-  .interactive-head > div:first-child { min-width: 0; }
-  .interactive-head h1 { margin-top: 1px; font-size: clamp(19px, 1.7vw, 26px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .interactive-head span { font-size: 11px; }
+  .interactive-head > div:first-child { flex:1 1 auto; min-width: 0; max-width:calc(100% - 330px); }
+  .interactive-head h1 { margin-top: 1px; font-size: clamp(18px, 1.5vw, 25px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .interactive-head span { font-size: 11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .dash-actions { flex-wrap: nowrap; gap: 7px; }
   .dashboard-change-filter, .dashboard-landuse-filter { min-height: 34px; padding: 3px 7px; }
   .dashboard-sector-filter { padding: 4px 7px; }
@@ -562,7 +562,12 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
     min-height: 0;
   }
 
-  .price-workspace { grid-template-rows: 62px minmax(0, 1fr) !important; }
+  /* Keep the KPI values inside their allocated header track.  A previous
+     62px track clipped values in every price dashboard below the labels. */
+  .price-workspace { grid-template-rows: 78px minmax(0, 1fr) !important; }
+  .price-dashboard .ismailia-map-kpis > article { height:78px; min-height:78px; max-height:78px; }
+  .price-dashboard .ismailia-map-kpis > article span { height:28px; min-height:28px; max-height:28px; font-size:11px; }
+  .price-dashboard .ismailia-map-kpis > article strong { font-size:clamp(19px,1.7vw,26px); }
   .price-temporal-map-pair, .temporal-map-pair { min-height: 0; height: 100%; }
   .temporal-map, .temporal-map .gis-map { min-height: 0; }
   .price-columns { min-height: 0; }
