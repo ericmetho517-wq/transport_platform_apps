@@ -252,7 +252,9 @@ function storyGalleryMarkup(app: TransportApp, label: string, rawMedia: StoryMed
   return `<div class="story-media-categories">${mediaOrder.map((kind) => {
     const items = media.filter((reference) => reference.kind === kind);
     if (!items.length) return "";
-    return `<section class="story-media-category" data-media-kind="${kind}"><h4>${categoryLabels[kind]}</h4><div class="story-media-grid ${items.length === 1 ? "single" : ""}">${items.map((reference) => `<figure class="story-scroll-frame"><a class="evidence-image-link" href="${esc(reference.imagePath)}" aria-label="${app.language === "en" ? "Open full-size report image" : "فتح صورة التقرير بالحجم الأصلي"}"><img src="${esc(reference.imagePath)}" alt="${esc(label)} · ${esc(categoryLabels[kind])}" loading="lazy"/></a><figcaption>${app.language === "en" ? "Report image" : "صورة من التقرير"}${reference.page > 0 ? ` · ${app.language === "en" ? "Page" : "صفحة"} ${reference.page}` : ""}</figcaption></figure>`).join("")}</div></section>`;
+    // Keep StoryMap media clean: report/page provenance stays in the data
+    // catalog, while the narrative presents the image itself without a label.
+    return `<section class="story-media-category" data-media-kind="${kind}"><h4>${categoryLabels[kind]}</h4><div class="story-media-grid ${items.length === 1 ? "single" : ""}">${items.map((reference) => `<figure class="story-scroll-frame"><a class="evidence-image-link" href="${esc(reference.imagePath)}" aria-label="${app.language === "en" ? "Open full-size report image" : "فتح صورة التقرير بالحجم الأصلي"}"><img src="${esc(reference.imagePath)}" alt="${esc(label)} · ${esc(categoryLabels[kind])}" loading="lazy"/></a></figure>`).join("")}</div></section>`;
   }).join("")}</div>`;
 }
 
