@@ -186,8 +186,11 @@ function dashboardHeader(app: TransportApp, group = ""): string {
   // excluding it here made its industrial filter inaccessible.
   const hasIndustrial = !["kalabsha-axis", "qus-axis", "qena-luxor-road", "suez-ring-link", "dabaa-axis"].includes(group);
   const hasAgricultural = !["suez-ring-link"].includes(group);
+  const isDabaaLandDashboard = group === "dabaa-axis";
   const landuseOptions = isPriceDashboard(app)
     ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option>${hasAgricultural ? `<option value="agricultural">الزراعي</option>` : ""}${hasIndustrial ? `<option value="industrial">الصناعي</option>` : ""}`
+    : isDabaaLandDashboard
+      ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option><option value="agricultural">الزراعي</option>`
     : isAgricultureAndIndustry
       ? (hasIndustrial
           ? `<option value="all">الزراعة والصناعة</option>${hasAgricultural ? `<option value="agricultural">الزراعي</option>` : ""}<option value="industrial">الصناعي</option>`
@@ -2104,7 +2107,9 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const getAcceptedLanduseForFilter = (selectedFilter: string): { codes: Set<string>; allowedLayers: Set<string> } => {
         const title = app.title || "";
         const isAgriInd = /الزراعية.*الصناعية|agricultural.*industrial/i.test(title);
-        const isUrbanOnly = /العمرانية|urban/i.test(title) && !isAgriInd && root.dataset.mode !== "price";
+        // Dabaa has separate urban and agricultural gauges even on its urban dashboard.
+        // Do not force it back to urban when the user explicitly selects agriculture.
+        const isUrbanOnly = /العمرانية|urban/i.test(title) && !isAgriInd && root.dataset.mode !== "price" && group !== "dabaa-axis";
 
         if (isUrbanOnly) {
           return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
@@ -2274,6 +2279,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           return;
         }
 
+        const areas = statusAreaFor(selectedSector, kind);
+        const total = statusTotalFor(areas);
         // A classified layer is a first-class source for a gauge even when a
         // summary KPI was not supplied in the report (as in Cairo–Suez).
         // Conversely, do not leave an empty industrial gauge in dashboards
@@ -2286,8 +2293,6 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
 
         gaugeCard.removeAttribute("hidden");
         gaugeCard.hidden = false;
-        const areas = statusAreaFor(selectedSector, kind);
-        const total = statusTotalFor(areas);
         if (group === "western-upper-egypt") {
           const estimatedChanged = westernEstimatedChangedShare[selectedSector];
           const useEstimate = !total && Number.isFinite(estimatedChanged);
