@@ -353,11 +353,11 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .comparison-legend span { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #c3c3c3; }
 .comparison-legend i { width: 10px; height: 10px; border-radius: 2px; }
 .land-right { display: flex; flex-direction: column; justify-content: space-around; gap: 12px; padding: 12px; border-inline-start: 2px solid #3d3d3d; overflow-y: auto; scrollbar-width: thin; }
-.gauge-card, .donut-card { padding: 12px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; flex: 1 1 auto; }
-.gauge-card > span, .donut-card > span { font-size: 12px; font-weight: 800; line-height: 1.3; }
-.gauge-card small { color: #aaa; font-size: 9px; }
+.gauge-card, .donut-card { padding: 16px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; flex: 1 1 auto; }
+.gauge-card > span, .donut-card > span { max-width:100%; color:#fff; font-size: 15px; font-weight: 800; line-height: 1.45; text-wrap:balance; }
+.gauge-card small { color: #d5d5d5; font-size: 11px; line-height:1.35; }
 .gauge-no-data { max-width: 230px; color: #e4d6a8; font-size: 12px; line-height: 1.7; }
-.gauge { position:relative; width:min(240px,94%); aspect-ratio:260/158; display:grid; place-items:center; direction:ltr; }
+.gauge { position:relative; width:min(280px,96%); aspect-ratio:260/158; display:grid; place-items:center; direction:ltr; }
 .gauge svg { display:block; width:100%; height:auto; overflow:visible; }
 .gauge-track,.gauge-zone { fill:none; stroke-width:34; stroke-linecap:butt; }
 .gauge-track { stroke:#464646; }
@@ -365,10 +365,10 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .gauge-zone-mid { stroke:#f28a00; stroke-dasharray:40 60; stroke-dashoffset:-30; }
 .gauge-zone-high { stroke:#ef321d; stroke-dasharray:30 70; stroke-dashoffset:-70; }
 .gauge-ticks line { stroke:#f4f4f4; stroke-width:2; }
-.gauge-labels text { fill:#fff; font:700 9px Arial,sans-serif; text-anchor:middle; paint-order:stroke; stroke:#252525; stroke-width:3px; }
+.gauge-labels text { fill:#fff; font:700 11px Arial,sans-serif; text-anchor:middle; paint-order:stroke; stroke:#252525; stroke-width:3px; }
 .gauge-needle line { stroke:#fff; stroke-width:5; stroke-linecap:round; filter:drop-shadow(0 1px 2px #000); }
 .gauge-hub { fill:#f8f8f8; stroke:#252525; stroke-width:4; }
-.gauge-value { fill:#fff; font:700 25px Arial,sans-serif; text-anchor:middle; paint-order:stroke; stroke:#252525; stroke-width:3px; }
+.gauge-value { fill:#fff; font:800 31px Arial,sans-serif; text-anchor:middle; paint-order:stroke; stroke:#252525; stroke-width:3px; }
 .donut { width: min(150px, 72%); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(#ff9e00 0 33%, #84db24 33% 66%, #00a6d8 66% 100%); box-shadow:0 0 0 1px #ffffff15; flex-shrink: 0; }
 .donut::before { content: ""; grid-area: 1 / 1; width: 54%; aspect-ratio: 1; border-radius: 50%; background: #252525; }
 .donut strong { z-index: 1; grid-area: 1 / 1; max-width: 72px; font-size: 11px; }
@@ -414,9 +414,9 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .ismailia-agri-right { display: grid; grid-template-rows: 1fr 1fr; border-inline-start: 2px solid #3d3d3d; max-height: 100%; height: 100%; min-height: 0; overflow: hidden; }
 .ismailia-agri-right.single-gauge { grid-template-rows:1fr; }
 .ismailia-agri-right .gauge-card[hidden] { display:none; }
-.ismailia-agri-right .gauge-card { padding: 6px 8px; gap: 4px; }
-.ismailia-agri-right .gauge-card > span { font-size: 12px; font-weight: 800; }
-.ismailia-agri-right .gauge { width: min(210px, 94%); }
+.ismailia-agri-right .gauge-card { padding: 12px 10px; gap: 8px; }
+.ismailia-agri-right .gauge-card > span { font-size: 14px; font-weight: 800; }
+.ismailia-agri-right .gauge { width: min(260px, 96%); }
 .ismailia-agri-right .donut-card { padding: 6px 8px; gap: 4px; }
 .ismailia-agri-right .donut-card > span { font-size: 12px; font-weight: 800; }
 .ismailia-agri-right .donut { width: min(135px, 75%); }
@@ -450,15 +450,15 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .western-agriculture-right { display:grid; grid-template-rows:1fr 1fr; height:100%; min-height:0; background:#252525; }
 .western-agriculture-side > section, .western-agriculture-right > section { height:100%; min-height:0; box-sizing:border-box; border-bottom:1px solid #414141; }
 .agriculture-stat, .agriculture-change { padding: 10px; display: grid; place-items: center; align-content: center; gap: 4px; text-align: center; }
-.agriculture-stat span, .agriculture-change span, .crop-card > span, .ownership-card > span { color: #c7ff2d; font-size: 11px; font-weight: 800; }
+.agriculture-stat span, .agriculture-change span, .crop-card > span, .ownership-card > span { color: #d9ff4a; font-size: 14px; font-weight: 800; line-height:1.4; text-wrap:balance; }
 .agriculture-stat strong, .agriculture-change strong { color: #8bff00; font-size: clamp(24px, 3vw, 44px); line-height: 1; }
-.crop-card, .ownership-card { padding: 10px; display: grid; place-items: center; align-content: center; gap: 8px; text-align: center; }
-.crop-donut, .ownership-donut { width: min(140px, 68%); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: #444; }
+.crop-card, .ownership-card { padding: 16px 12px; display: grid; place-items: center; align-content: center; gap: 12px; text-align: center; }
+.crop-donut, .ownership-donut { width: min(176px, 76%); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: #444; }
 .crop-donut::before, .ownership-donut::before { content: ""; grid-area: 1/1; width: 52%; aspect-ratio: 1; border-radius: 50%; background: #252525; }
-.crop-donut strong, .ownership-donut strong { z-index: 1; grid-area: 1/1; font-size: 10px; }
-#crop-legend, #ownership-legend { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
-#crop-legend span, #ownership-legend span { display: flex; align-items: center; gap: 4px; color: #bbb; font-size: 8px; }
-#crop-legend i, #ownership-legend i { width: 8px; height: 8px; border-radius: 50%; }
+.crop-donut strong, .ownership-donut strong { z-index: 1; grid-area: 1/1; color:#fff; font-size: 13px; font-weight:800; }
+#crop-legend, #ownership-legend { display: flex; gap: 7px 10px; flex-wrap: wrap; justify-content: center; }
+#crop-legend span, #ownership-legend span { display: flex; align-items: center; gap: 5px; color: #f2f2f2; font-size: 11px; font-weight:700; line-height:1.35; }
+#crop-legend i, #ownership-legend i { width: 10px; height: 10px; border-radius: 50%; flex:0 0 auto; }
 
 @media (max-width: 1050px) {
   .price-layout { grid-template-columns: 1fr; }
