@@ -1089,8 +1089,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   // different colour convention), so rendering them together duplicates
   // geometry and bypasses the per-polygon change-status filter.
   const temporalEndLayers: LayerName[] = ["study", "landcover-end", ...transportLayerNames, "axis"];
-  const requestedLayers = storyMode
-    ? storyStudyLayers.filter((layer) => usableLayers.includes(layer))
+  const requestedLayers = (storyMode
+    // Story maps always request the study footprint directly. Some legacy
+    // summaries did not list it even though the sector's verified GeoJSON is
+    // present, which left the "study area" chapter without its boundary.
+    ? storyStudyLayers
     : temporalMap
     ? (mapInstance.includes("baseline") ? temporalStartLayers.filter((layer) => usableLayers.includes(layer)) : temporalEndLayers.filter((layer) => usableLayers.includes(layer)))
     : mapInstance.includes("baseline")
@@ -1098,7 +1101,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     : mapInstance.includes("current")
       ? [...regularLayers, ...(summary.layers.includes("landcover-end") ? ["landcover-end" as LayerName] : [])]
     : viewerMode ? usableLayers
-      : [...regularLayers, ...(usableLayers.includes("landcover-end") ? ["landcover-end" as LayerName] : usableLayers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])];
+      : [...regularLayers, ...(usableLayers.includes("landcover-end") ? ["landcover-end" as LayerName] : usableLayers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])])
+    // Field-survey polygons are source-work layers, not a published land-use
+    // category. Their default grey rendering obscures the thematic map.
+    .filter((layer) => layer !== "field-survey");
   const layerResults = await Promise.all(requestedLayers.map(async (layer) => {
     const sourceLayer = qenaCurrentFallback && layer === "landcover-end" ? "baseline" : layer;
     const isTransport = transportLayerNames.includes(layer as any);
