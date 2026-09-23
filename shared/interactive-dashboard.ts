@@ -2389,6 +2389,12 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       }
       return null;
     };
+    const overallChangeShareFor = (kind: "urban" | "agricultural" | "industrial", areas?: Record<ChangeStatus, number>): number | null => {
+      const documented = reportedChangeShareFor(kind);
+      if (documented !== null) return documented;
+      const total = statusTotalFor(areas);
+      return total > 0 ? statusShareOfStudy(areas, "changed", total) + statusShareOfStudy(areas, "unchanged", total) : null;
+    };
     const updateChangeStatusGauge = (mode: ChangeMode) => {
       const selectedSector = dashboardSectorFilter?.value || "all";
       const selectedLanduse = landuseSelect?.value || "all";
@@ -2428,12 +2434,13 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
               ? kind === "urban" ? "Urban area share by change status among classified urban land" : kind === "agricultural" ? "Agricultural area share by change status among classified agricultural land" : "Industrial area share by change status among classified industrial land"
               : kind === "urban" ? "نسبة مساحة العمران حسب حالة التغير من العمران المصنف" : kind === "agricultural" ? "نسبة مساحة الزراعة حسب حالة التغير من الزراعة المصنفة" : "نسبة مساحة الصناعة حسب حالة التغير من الصناعة المصنفة";
           }
-          // "All" is the whole classified selection.  It must always read as
-          // 100%, whether the user is looking at the entire corridor or one
-          // sector.  The two explicit change states are calculated only from
-          // polygons that have a documented status (1 = changed, 2 = unchanged).
+          // "All" means the documented change share of the study area, not
+          // 100% of a filtered subset. This matches the gauge title and stops
+          // the value jumping when the user clears a change-status filter.
           if (mode === "all") {
-            setGauge(gauge, 100);
+            const overall = overallChangeShareFor(kind, areas);
+            if (overall === null) setGaugeUnavailable(gauge);
+            else setGauge(gauge, overall);
             gauge.removeAttribute("data-status-estimate");
             gauge.removeAttribute("title");
             return;
@@ -2445,7 +2452,9 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           return;
         }
         if (mode === "all") {
-          setGauge(gauge, 100);
+          const overall = overallChangeShareFor(kind, areas);
+          if (overall === null) setGaugeUnavailable(gauge);
+          else setGauge(gauge, overall);
           gauge.removeAttribute("data-status-estimate");
           gauge.removeAttribute("title");
         } else if (total) {
