@@ -2370,37 +2370,19 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
       group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector]?.[kind] : statusAreas[kind];
     const statusTotalFor = (areas?: Record<ChangeStatus, number>) => (areas?.changed || 0) + (areas?.unchanged || 0);
-    const studyAreaKm2 = Number(summary.profile?.metrics.studyAreaKm2 ?? summary.metrics.studyAreaKm2 ?? 0);
-    const statusShareOfStudy = (areas: Record<ChangeStatus, number> | undefined, mode: ChangeStatus, fallbackTotal: number) => {
-      const selectedSector = dashboardSectorFilter?.value || "all";
-      const denominator = studyAreaKm2 > 0 ? studyAreaKm2 : fallbackTotal;
-      return denominator > 0 ? Math.min(Math.max(((areas?.[mode] || 0) / denominator) * 100, 0), 100) : 0;
-    };
-    const reportedChangeShareFor = (kind: "urban" | "agricultural" | "industrial"): number | null => {
-      // The *_ChangePercent fields describe change inside each land-use class
-      // (for example 61.63 / 248.22 = 33.03% in Ismailia). The gauge title
-      // asks for change relative to the *study area*, so it must instead use
-      // the visible change-area KPI divided by the study-area KPI.
-      const metricKey = `${kind}ChangeKm2` as keyof typeof summary.metrics;
-      const areaKm2 = summary.profile?.metrics[metricKey] ?? summary.metrics[metricKey];
-      if (typeof areaKm2 === "number" && Number.isFinite(areaKm2) && studyAreaKm2 > 0) {
-        return Math.min(Math.max((areaKm2 / studyAreaKm2) * 100, 0), 100);
-      }
-
-      // Some reports supply agricultural change only in feddans.
-      if (kind === "agricultural") {
-        const changedFeddan = summary.profile?.metrics.agriculturalChangeFeddan ?? summary.metrics.agriculturalChangeFeddan;
-        if (typeof changedFeddan === "number" && Number.isFinite(changedFeddan) && studyAreaKm2 > 0) {
-          return Math.min(Math.max(((changedFeddan * .0042) / studyAreaKm2) * 100, 0), 100);
-        }
-      }
-      return null;
-    };
-    const overallChangeShareFor = (kind: "urban" | "agricultural" | "industrial", areas?: Record<ChangeStatus, number>): number | null => {
-      const documented = reportedChangeShareFor(kind);
-      if (documented !== null) return documented;
+    // The status gauge is a distribution of the Landcover end-year features.
+    // Hence all = 100%, and changed + unchanged = 100% for the very same
+    // documented features that are displayed by the map filter.
+    const statusShare = (areas: Record<ChangeStatus, number> | undefined, mode: ChangeStatus) => {
       const total = statusTotalFor(areas);
-      return total > 0 ? statusShareOfStudy(areas, "changed", total) + statusShareOfStudy(areas, "unchanged", total) : null;
+      return total > 0 ? Math.min(Math.max(((areas?.[mode] || 0) / total) * 100, 0), 100) : null;
+    };
+    const statusTitle = (kind: "urban" | "agricultural" | "industrial", mode: ChangeMode) => {
+      const names = document.documentElement.lang === "en"
+        ? { urban: "urban land", agricultural: "agricultural land", industrial: "industrial land" }
+        : { urban: "العمران", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية" };
+      if (document.documentElement.lang === "en") return mode === "all" ? `Change-status distribution for classified ${names[kind]}` : `${mode === "changed" ? "Changed" : "Unchanged"} share of classified ${names[kind]}`;
+      return mode === "all" ? `توزيع حالة التغير للعناصر المصنفة: ${names[kind]}` : `نسبة ${mode === "changed" ? "المتغير" : "غير المتغير"} من إجمالي ${names[kind]} المصنفة`;
     };
     const updateChangeStatusGauge = (mode: ChangeMode) => {
       const selectedSector = dashboardSectorFilter?.value || "all";
@@ -2434,20 +2416,11 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
 
         gaugeCard.removeAttribute("hidden");
         gaugeCard.hidden = false;
+        const title = gaugeCard.querySelector<HTMLElement>("span");
+        if (title) title.textContent = statusTitle(kind, mode);
         if (group === "western-upper-egypt") {
-          const title = gauge.closest<HTMLElement>(".gauge-card")?.querySelector("span");
-          if (title && root.dataset.mode !== "land") {
-            title.textContent = document.documentElement.lang === "en"
-              ? kind === "urban" ? "Urban area share by change status among classified urban land" : kind === "agricultural" ? "Agricultural area share by change status among classified agricultural land" : "Industrial area share by change status among classified industrial land"
-              : kind === "urban" ? "نسبة مساحة العمران حسب حالة التغير من العمران المصنف" : kind === "agricultural" ? "نسبة مساحة الزراعة حسب حالة التغير من الزراعة المصنفة" : "نسبة مساحة الصناعة حسب حالة التغير من الصناعة المصنفة";
-          }
-          // "All" means the documented change share of the study area, not
-          // 100% of a filtered subset. This matches the gauge title and stops
-          // the value jumping when the user clears a change-status filter.
           if (mode === "all") {
-            const overall = overallChangeShareFor(kind, areas);
-            if (overall === null) setGaugeUnavailable(gauge);
-            else setGauge(gauge, overall);
+            setGauge(gauge, 100);
             gauge.removeAttribute("data-status-estimate");
             gauge.removeAttribute("title");
             return;
@@ -2455,30 +2428,21 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           if (!total) { setGaugeUnavailable(gauge); return; }
           gauge.removeAttribute("data-status-estimate");
           gauge.removeAttribute("title");
-          setGauge(gauge, statusShareOfStudy(areas, mode, total));
+          const share = statusShare(areas, mode);
+          if (share === null) setGaugeUnavailable(gauge); else setGauge(gauge, share);
           return;
         }
         if (mode === "all") {
-          const overall = overallChangeShareFor(kind, areas);
-          if (overall === null) setGaugeUnavailable(gauge);
-          else setGauge(gauge, overall);
+          setGauge(gauge, 100);
           gauge.removeAttribute("data-status-estimate");
           gauge.removeAttribute("title");
         } else if (total) {
           gauge.removeAttribute("data-status-estimate");
           gauge.removeAttribute("title");
-          setGauge(gauge, statusShareOfStudy(areas, mode, total));
+          const share = statusShare(areas, mode);
+          if (share === null) setGaugeUnavailable(gauge); else setGauge(gauge, share);
         } else {
-          const reportedChanged = reportedChangeShareFor(kind);
-          if (reportedChanged !== null) {
-            gauge.removeAttribute("data-status-estimate");
-            gauge.title = document.documentElement.lang === "en"
-              ? "Calculated from the documented land-use totals in the report"
-              : "محسوب من مساحات استخدامات الأراضي الموثقة في التقرير";
-            setGauge(gauge, mode === "changed" ? reportedChanged : 100 - reportedChanged);
-          } else {
-            setGaugeUnavailable(gauge);
-          }
+          setGaugeUnavailable(gauge);
         }
       });
     };
