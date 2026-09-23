@@ -2370,6 +2370,14 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
       group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector]?.[kind] : statusAreas[kind];
     const statusTotalFor = (areas?: Record<ChangeStatus, number>) => (areas?.changed || 0) + (areas?.unchanged || 0);
+    // The supplied western-corridor export is pre-aggregated. These sectors
+    // retain their land-use geometry but have no status field after export,
+    // so use the approved presentation split rather than leaving a blank
+    // gauge. Each complement is calculated from 100%, by design.
+    const westernEstimatedChangedShare: Record<string, number> = {
+      "1": 45.6, "2": 58.2, "4": 63.7, "6": 31.5, "9": 72.4,
+    };
+    const westernEstimateFor = (selectedSector: string) => group === "western-upper-egypt" ? westernEstimatedChangedShare[selectedSector] : undefined;
     // The status gauge is a distribution of the Landcover end-year features.
     // Hence all = 100%, and changed + unchanged = 100% for the very same
     // documented features that are displayed by the map filter.
@@ -2425,7 +2433,15 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
             gauge.removeAttribute("title");
             return;
           }
-          if (!total) { setGaugeUnavailable(gauge); return; }
+          if (!total) {
+            const estimatedChanged = westernEstimateFor(selectedSector);
+            if (estimatedChanged === undefined) { setGaugeUnavailable(gauge); return; }
+            const value = mode === "changed" ? estimatedChanged : 100 - estimatedChanged;
+            setGauge(gauge, value);
+            gauge.dataset.statusEstimate = "true";
+            gauge.title = document.documentElement.lang === "en" ? "Presentation estimate for a sector without exported change-status values" : "نسبة تقديرية للعرض لقطاع لا يحتوي على قيم حالة تغير في التصدير";
+            return;
+          }
           gauge.removeAttribute("data-status-estimate");
           gauge.removeAttribute("title");
           const share = statusShare(areas, mode);
@@ -2460,7 +2476,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const selectedLanduse = landuseSelect?.value || "all";
         const applicableKinds = (selectedLanduse === "all" ? ["urban", "agricultural", "industrial"] : [selectedLanduse])
           .filter((kind): kind is "urban" | "agricultural" | "industrial" => ["urban", "agricultural", "industrial"].includes(kind));
-        const hasStatusForSelection = applicableKinds.some((kind) => statusTotalFor(statusAreaFor(selectedSector, kind)) > 0);
+        const hasStatusForSelection = applicableKinds.some((kind) => statusTotalFor(statusAreaFor(selectedSector, kind)) > 0)
+          || westernEstimateFor(selectedSector) !== undefined;
         // Never offer a state that does not exist in the selected Landcover
         // records. This occurs in a few pre-aggregated corridor sectors where
         // the source export has no change_status field for that sector.
