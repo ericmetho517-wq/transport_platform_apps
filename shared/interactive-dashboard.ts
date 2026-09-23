@@ -162,7 +162,7 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
     <div class="map-status"><span class="live-dot"></span><span class="map-status-text">جارٍ تحميل طبقات المشروع المحلية…</span></div>
     <label class="map-sector-filter" hidden><span>نطاق العرض</span><select class="map-sector-select"><option value="all">كل القطاعات</option></select></label>
     <div class="map-layer-toggles"></div><label class="map-change-filter"><span>حالة التغير</span><select class="map-change-select"><option value="all">كل العناصر</option><option value="changed">متغير</option><option value="unchanged">غير متغير</option></select></label>
-    <svg class="interactive-map" viewBox="0 0 1000 520" preserveAspectRatio="none" role="img" aria-label="خريطة تفاعلية لبيانات المشروع">
+    <svg class="interactive-map" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid slice" role="img" aria-label="خريطة تفاعلية لبيانات المشروع">
       <defs>
         <pattern id="map-grid-${suffix}" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#bbb" stroke-width=".6" opacity=".45"/></pattern>
         <linearGradient id="map-bg-${suffix}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4edcf"/><stop offset="1" stop-color="#d7e3d6"/></linearGradient>
