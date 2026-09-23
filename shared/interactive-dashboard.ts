@@ -2456,6 +2456,20 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     const dashboardChangeFilter = document.querySelector<HTMLSelectElement>("#dashboard-change-filter");
     if (dashboardChangeFilter) {
       const syncChangeStatus = () => {
+        const selectedSector = dashboardSectorFilter?.value || "all";
+        const selectedLanduse = landuseSelect?.value || "all";
+        const applicableKinds = (selectedLanduse === "all" ? ["urban", "agricultural", "industrial"] : [selectedLanduse])
+          .filter((kind): kind is "urban" | "agricultural" | "industrial" => ["urban", "agricultural", "industrial"].includes(kind));
+        const hasStatusForSelection = applicableKinds.some((kind) => statusTotalFor(statusAreaFor(selectedSector, kind)) > 0);
+        // Never offer a state that does not exist in the selected Landcover
+        // records. This occurs in a few pre-aggregated corridor sectors where
+        // the source export has no change_status field for that sector.
+        [dashboardChangeFilter, ...mapRoots.map((map) => map.querySelector<HTMLSelectElement>(".map-change-select")).filter(Boolean) as HTMLSelectElement[]]
+          .forEach((select) => {
+            select.querySelectorAll<HTMLOptionElement>('option[value="changed"], option[value="unchanged"]').forEach((option) => { option.disabled = !hasStatusForSelection; });
+            select.title = hasStatusForSelection ? "" : (document.documentElement.lang === "en" ? "No documented change-status data for this selection" : "لا توجد بيانات حالة تغير موثقة للاختيار الحالي");
+          });
+        if (!hasStatusForSelection && dashboardChangeFilter.value !== "all") dashboardChangeFilter.value = "all";
         const mode = dashboardChangeFilter.value as "all" | "changed" | "unchanged";
         mapRoots.forEach((map) => { const select = map.querySelector<HTMLSelectElement>(".map-change-select"); if (select && select.value !== mode) { select.value = mode; select.dispatchEvent(new Event("change")); } });
         updateChangeStatusGauge(mode);
