@@ -2377,19 +2377,21 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       return denominator > 0 ? Math.min(Math.max(((areas?.[mode] || 0) / denominator) * 100, 0), 100) : 0;
     };
     const reportedChangeShareFor = (kind: "urban" | "agricultural" | "industrial"): number | null => {
-      const key = `${kind}ChangePercent` as keyof typeof summary.metrics;
-      const direct = summary.profile?.metrics[key] ?? summary.metrics[key];
-      if (typeof direct === "number" && Number.isFinite(direct)) return Math.min(Math.max(direct, 0), 100);
+      // The *_ChangePercent fields describe change inside each land-use class
+      // (for example 61.63 / 248.22 = 33.03% in Ismailia). The gauge title
+      // asks for change relative to the *study area*, so it must instead use
+      // the visible change-area KPI divided by the study-area KPI.
+      const metricKey = `${kind}ChangeKm2` as keyof typeof summary.metrics;
+      const areaKm2 = summary.profile?.metrics[metricKey] ?? summary.metrics[metricKey];
+      if (typeof areaKm2 === "number" && Number.isFinite(areaKm2) && studyAreaKm2 > 0) {
+        return Math.min(Math.max((areaKm2 / studyAreaKm2) * 100, 0), 100);
+      }
 
-      // Qena–Luxor has no per-polygon status field in the supplied GDB, but
-      // the report documents agricultural change and total agricultural area
-      // in feddans. Use that documented ratio so the status gauge remains
-      // meaningful when the user selects changed/unchanged.
+      // Some reports supply agricultural change only in feddans.
       if (kind === "agricultural") {
-        const changed = summary.profile?.metrics.agriculturalChangeFeddan;
-        const total = summary.profile?.metrics.agriculturalAreaFeddan;
-        if (typeof changed === "number" && typeof total === "number" && total > 0) {
-          return Math.min(Math.max((changed / total) * 100, 0), 100);
+        const changedFeddan = summary.profile?.metrics.agriculturalChangeFeddan ?? summary.metrics.agriculturalChangeFeddan;
+        if (typeof changedFeddan === "number" && Number.isFinite(changedFeddan) && studyAreaKm2 > 0) {
+          return Math.min(Math.max(((changedFeddan * .0042) / studyAreaKm2) * 100, 0), 100);
         }
       }
       return null;

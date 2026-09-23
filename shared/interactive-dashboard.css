@@ -2,11 +2,11 @@
 body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; background: #171717; color: #f3f3f3; overflow-x: hidden; box-sizing: border-box; }
 .interactive-dashboard { min-height: 100vh; display: flex; flex-direction: column; background: #1b1b1b; color: #f3f3f3; font-family: "Segoe UI", Tahoma, Arial, sans-serif; box-sizing: border-box; }
 .interactive-head { flex: 0 0 auto; min-height: 64px; padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #272727; border-bottom: 3px solid #393939; box-sizing: border-box; }
-.interactive-head > div:first-child { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 12px; }
+.interactive-head > div:first-child { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 12px; min-width: 0; flex: 1 1 auto; }
 .interactive-head h1 { grid-column: 1 / -1; margin: 4px 0 0; font-size: clamp(16px, 1.8vw, 24px); line-height: 1.25; }
 .interactive-head span { color: #bcbcbc; font-size: 11px; }
 .mot-badge { padding: 6px 10px; border-radius: 4px; background: #111; color: #ffc126; text-decoration: none; font-size: 12px; font-weight: 800; }
-.dash-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: end; }
+.dash-actions { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; flex-wrap: wrap; justify-content: end; margin-left: 14px; }
 .dashboard-change-filter { display:flex; align-items:center; gap:8px; min-height:40px; padding:5px 10px; border:1px solid #2f6b9c; border-radius:9px; background:linear-gradient(135deg,#0d3658,#09243d); color:#fff; font-size:12px; font-weight:800; box-shadow:0 4px 12px #0004; }
 .dashboard-change-filter select { min-width:132px; min-height:30px; padding:5px 28px 5px 9px; border:1px solid #9fc9e7; border-radius:6px; background:#fff; color:#123b5e; font-weight:800; }
 .dashboard-sector-filter { display:flex; align-items:center; gap:7px; padding:6px 9px; border:1px solid #2f6b9c; border-radius:7px; background:#0b2d49; color:#fff; font-size:11px; font-weight:800; }
@@ -281,7 +281,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .land-layout.map-expanded { grid-template-columns: minmax(0, 1fr); }
 .dabaa-land-layout { flex: 1 1 auto; height: calc(100vh - 120px); min-height: 0; display: grid; grid-template-columns: minmax(0, 74%) minmax(220px, 26%); direction: ltr; box-sizing: border-box; overflow: hidden; }
 .dabaa-center { min-width: 0; display: grid; grid-template-rows: minmax(0, 1.4fr) minmax(200px, 1fr); direction: rtl; height: 100%; min-height: 0; }
-.dabaa-center > .gis-map { min-height: 0 !important; height: 100%; }
+.dabaa-center > .gis-map, .dabaa-center > .temporal-map-pair { min-height: 0 !important; height: 100%; }
 .dabaa-gauges { display: grid; grid-template-rows: 1fr 1fr; min-width: 0; background: #252525; height: 100%; min-height: 0; direction: rtl; }
 .dabaa-gauges .gauge-card { height: 100%; min-height: 0; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid #414141; }
 .land-left, .land-center, .land-right { min-width: 0; direction: rtl; }
@@ -431,7 +431,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .southern-agriculture-dashboard.kalabsha-axis.has-serial-chart .south-agriculture-side { grid-template-rows:repeat(2, minmax(0, 1fr)); }
 .southern-agriculture-dashboard .serial-chart-card { min-height:220px; }
 .south-agriculture-center { display:grid; grid-template-rows:minmax(0, 1.5fr) minmax(0, 1fr); height:100%; min-height:0; }
-.south-agriculture-center > .gis-map { min-height:0 !important; height: 100%; }
+.south-agriculture-center > .gis-map, .south-agriculture-center > .temporal-map-pair { min-height:0 !important; height: 100%; }
 .south-agriculture-side > section,.south-agriculture-right > section { border-bottom:1px solid #414141; }
 .south-crop-card { grid-row:1/-1; }
 .highlight-stat { background:#78ea00; color:#000; }
@@ -447,7 +447,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .ismailia-reference-main { grid-area:dashboard-main; min-width:0; height:100%; min-height:0; display:grid; grid-template-rows:minmax(0,1fr); direction:rtl; overflow: hidden; }
 .ismailia-reference-body { min-height:0; height:100%; display:grid; grid-template-columns:minmax(0,76%) minmax(180px,24%); direction:ltr; overflow: hidden; }
 .ismailia-reference-body .agriculture-center { display:grid; grid-template-rows:minmax(0,1.5fr) minmax(0,1fr); height:100%; min-height:0; }
-.ismailia-reference-body .agriculture-center > .gis-map { min-height:0 !important; height:100%; }
+.ismailia-reference-body .agriculture-center > .gis-map, .ismailia-reference-body .agriculture-center > .temporal-map-pair { min-height:0 !important; height:100%; }
 .ismailia-agri-right { display: grid; grid-template-rows: 1fr 1fr; border-inline-start: 2px solid #3d3d3d; max-height: 100%; height: 100%; min-height: 0; overflow: hidden; }
 .ismailia-agri-right.single-gauge { grid-template-rows:1fr; }
 .ismailia-agri-right .gauge-card[hidden] { display:none; }
@@ -477,13 +477,14 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .general-agriculture-kpis { grid-template-columns:repeat(4,minmax(0,1fr)); }
 .general-agriculture-layout { display:grid; grid-template-columns:minmax(0,78%) minmax(210px,22%); direction:ltr; height:calc(100vh - 120px); min-height:570px; }
 .general-agriculture-center { display:grid; grid-template-rows:minmax(300px,1.5fr) minmax(220px,1fr); min-width:0; min-height:0; direction:rtl; }
-.general-agriculture-center > .gis-map { min-height:0 !important; height:100%; }
+.general-agriculture-center > .gis-map, .general-agriculture-center > .temporal-map-pair { min-height:0 !important; height:100%; }
 .general-agriculture-side { display:grid; grid-template-rows:repeat(2,minmax(0,1fr)); min-width:0; direction:rtl; background:#252525; }
 .general-agriculture-side > section { border-bottom:1px solid #414141; }
 .general-agriculture-side .gauge-card[hidden] { display:none; }
 .general-agriculture-kpis article[hidden],.western-agriculture-kpis article[hidden] { display:none; }
 .western-agriculture-side { display:grid; grid-template-rows:1fr 1fr; height:100%; min-height:0; background:#252525; }
 .western-agriculture-center { display:grid; grid-template-rows:minmax(0,1.5fr) minmax(0,1fr); height:100%; min-height:0; }
+.western-agriculture-center > .gis-map, .western-agriculture-center > .temporal-map-pair { min-height:0 !important; height:100%; }
 .western-agriculture-right { display:grid; grid-template-rows:1fr 1fr; height:100%; min-height:0; background:#252525; }
 .western-agriculture-side > section, .western-agriculture-right > section { height:100%; min-height:0; box-sizing:border-box; border-bottom:1px solid #414141; }
 .agriculture-stat, .agriculture-change { padding: 10px; display: grid; place-items: center; align-content: center; gap: 4px; text-align: center; }
@@ -599,12 +600,20 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .land-center > .dashboard-kpis { flex: none; height: 70px; min-height: 70px; }
   .land-center { grid-template-rows: 70px minmax(0, 1.42fr) minmax(205px, .88fr); }
   .land-center > .gis-map,
+  .land-center > .temporal-map-pair,
   .dabaa-center > .gis-map,
+  .dabaa-center > .temporal-map-pair,
   .south-agriculture-center > .gis-map,
+  .south-agriculture-center > .temporal-map-pair,
   .general-agriculture-center > .gis-map,
+  .general-agriculture-center > .temporal-map-pair,
   .western-agriculture-center > .gis-map,
+  .western-agriculture-center > .temporal-map-pair,
   .ismailia-reference-body .agriculture-center > .gis-map,
-  .specialized-body > .gis-map { min-height: 0 !important; height: 100%; }
+  .ismailia-reference-body .agriculture-center > .temporal-map-pair,
+  .specialized-body > .gis-map,
+  .specialized-body > .temporal-map-pair { min-height: 0 !important; height: 100%; }
+  .temporal-map-pair > .gis-map { min-height: 0 !important; height: 100%; }
   .land-bottom-row { min-height: 0; height: 100%; }
 
   .comparison-card { min-height: 0; height: 100%; padding: 7px 12px; overflow: hidden; }
