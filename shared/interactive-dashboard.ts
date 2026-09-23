@@ -1602,7 +1602,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
         if (!groupElement) return;
         groupElement.querySelectorAll<SVGPathElement>("path").forEach((path) => {
-          if (layer !== "landcover-end") {
+          const isChangeThematicLayer = ["landcover-end", "urban", "agricultural", "industrial"].includes(layer);
+          if (!isChangeThematicLayer) {
             path.classList.remove("change-hidden", "change-match");
             return;
           }
