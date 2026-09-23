@@ -394,9 +394,49 @@ function ismailiaImpactMarkup(app: TransportApp): string {
   </main>`;
 }
 
+/** Executive, source-image-backed impact board for the Western Upper Egypt axis. */
+function westernUpperEgyptImpactMarkup(app: TransportApp): string {
+  const isEnglish = app.language === "en";
+  const copy = isEnglish ? {
+    ministry: "Ministry of Transport", road: "Western Upper Egypt Corridor – Giza / Abu Simbel",
+    sector: "Development indicators<br>Infrastructure", heading: "Economic and development impact of the Western Upper Egypt Corridor",
+    period: "During the period (2014 – 2024)", aria: "Key economic and development indicators",
+    footer: "The corridor's contribution to stimulating gross domestic product in economic sectors equals an added value of EGP 585 billion.",
+    indicators: [
+      { color: "green", icon: "map" as const, label: "Land value", value: "638", unit: "(EGP billion)" },
+      { color: "purple", icon: "coins" as const, label: "Investments", value: "1.3", unit: "(EGP trillion)" },
+      { color: "blue", icon: "value" as const, label: "Value added", value: "585", unit: "(EGP billion)" },
+      { color: "gold", icon: "people" as const, label: "Job opportunities", value: "1.02", unit: "(million opportunities)" },
+      { color: "orange", icon: "coins" as const, label: "Environmental preservation value<br>through emissions reduction", value: "44", unit: "(USD million)" },
+      { color: "red", icon: "fuel" as const, label: "Fuel saving", value: "13.3 / 2.9", unit: "(EGP billion · without / with subsidy)" },
+    ],
+  } : {
+    ministry: "وزارة النقل", road: "محور الصعيد الصحراوي الغربي – طريق الجيزة / أبو سمبل",
+    sector: "مؤشرات التنمية<br>البنية التحتية", heading: "الأثر الاقتصادي والتنموي لمحور الصعيد الغربي",
+    period: "خلال الفترة ( 2014 – 2024 )", aria: "المؤشرات الرئيسية للأثر الاقتصادي والتنموي",
+    footer: "قيمة مساهمة المحور في تحفيز توليد الناتج المحلي الإجمالي في القطاعات الاقتصادية = القيمة المضافة 585 مليار جنيه مصري",
+    indicators: [
+      { color: "green", icon: "map" as const, label: "قيمة الأرض", value: "638", unit: "(مليار جنيه)" },
+      { color: "purple", icon: "coins" as const, label: "الاستثمارات", value: "1.3", unit: "(تريليون جنيه)" },
+      { color: "blue", icon: "value" as const, label: "القيمة المضافة", value: "585", unit: "(مليار جنيه)" },
+      { color: "gold", icon: "people" as const, label: "فرص العمل", value: "1.02", unit: "(مليون فرصة)" },
+      { color: "orange", icon: "coins" as const, label: "قيمة الحفاظ على البيئة<br>بتخفيض الانبعاثات", value: "44", unit: "(مليون دولار)" },
+      { color: "red", icon: "fuel" as const, label: "الوفر في الوقود", value: "13.3 / 2.9", unit: "(مليار جنيه · بدون / بوجود الدعم)" },
+    ],
+  };
+  return `<main class="ismailia-impact-board western-upper-egypt-impact-board" dir="${app.direction}" aria-labelledby="impact-board-title">
+    <header class="impact-board-header"><div class="impact-brand"><b>${copy.ministry}</b><i></i></div><div class="impact-road-title">${copy.road}</div><div class="impact-sector-title">${copy.sector}<i></i></div></header>
+    <section class="impact-board-content"><h1 id="impact-board-title">${copy.heading}</h1><h2>${copy.period}</h2>
+      <div class="impact-timeline" aria-label="${copy.aria}">${copy.indicators.map((item) => `<article class="impact-kpi ${item.color}" tabindex="0" aria-label="${item.label.replace("<br>", " ")}: ${item.value} ${item.unit}"><div class="impact-orb">${ismailiaImpactIcon(item.icon)}<strong>${item.label}</strong></div><div class="impact-connector"></div><div class="impact-value"><bdi>${item.value}</bdi><small>${item.unit}</small></div><div class="impact-node"></div></article>`).join("")}</div>
+      <footer>${copy.footer}</footer>
+    </section>
+  </main>`;
+}
+
 export function renderInteractiveDashboard(app: TransportApp): string {
   const group = dashboardGroup(app);
   if (app.slug === "dashboard-ismailia-development-impact") return ismailiaImpactMarkup(app);
+  if (app.slug === "dashboard-western-upper-egypt-development-impact") return westernUpperEgyptImpactMarkup(app);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
   if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
   if (isUrbanDashboard(app)) return landMarkup(app, group);

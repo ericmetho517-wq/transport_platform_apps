@@ -1,0 +1,5 @@
+{
+  "sourceDataRoot": "public/data/dashboard/western-upper-egypt",
+  "sources": ["summary.json"],
+  "purpose": "Static executive economic and development impact presentation"
+}

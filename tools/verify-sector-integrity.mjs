@@ -10,7 +10,7 @@ const aliases = {
   "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road",
   "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
 };
-const expectedCounts = { Dashboard: 31, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
+const expectedCounts = { Dashboard: 32, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
 const errors = [];
 const warnings = [];
 const counts = {};
@@ -56,7 +56,7 @@ for (const sector of Object.keys(aliases)) {
 }
 for (const sector of Object.keys(aliases)) {
   const dashboards = apps.filter((app) => app.reportReferenceGroup === sector && app.type === "Dashboard");
-  const expectedDashboards = sector === "ismailia" ? 4 : 3;
+  const expectedDashboards = ["ismailia", "western-upper-egypt"].includes(sector) ? 4 : 3;
   if (dashboards.length !== expectedDashboards) errors.push(`${sector}: expected exactly ${expectedDashboards} executive dashboards, found ${dashboards.length}`);
   for (const pattern of [/العمرانية/, /الزراعية/, /أسعار الأراضي/]) if (!dashboards.some((app) => pattern.test(app.title))) errors.push(`${sector}: incomplete executive dashboard suite`);
   if (apps.some((app) => app.reportReferenceGroup === sector && app.type === "Experience")) errors.push(`${sector}: interactive applications must not appear in the catalog`);
