@@ -6,7 +6,10 @@ import { localizedAppCategory, localizedAppTitle } from "../shared/app-titles";
 
 const registry = (apps as TransportApp[]).filter((app) =>
   dashboardGroup(app) !== "suez-ring-link"
-  && app.slug !== "web-viewer-30ddd4974b",
+  && app.slug !== "web-viewer-30ddd4974b"
+  // Keep the Western Upper Egypt study-area viewer in its project while
+  // removing this card from the public application catalog.
+  && app.slug !== "web-viewer-b0ababe3e4",
 );
 const axisOptions = [
   ["ismailia", "طريق القاهرة–الإسماعيلية"], ["western-upper-egypt", "طريق الصعيد الغربي"],
