@@ -1602,7 +1602,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         const groupElement = content.querySelector<SVGGElement>(`[data-layer-group="${layer}"]`);
         if (!groupElement) return;
         groupElement.querySelectorAll<SVGPathElement>("path").forEach((path) => {
-          const isChangeThematicLayer = ["landcover-end", "urban", "agricultural", "industrial"].includes(layer);
+          const isChangeThematicLayer = ["landcover-start", "landcover-end", "urban", "agricultural", "industrial"].includes(layer);
           if (!isChangeThematicLayer) {
             path.classList.remove("change-hidden", "change-match");
             return;
@@ -2269,6 +2269,11 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
       group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector]?.[kind] : statusAreas[kind];
     const statusTotalFor = (areas?: Record<ChangeStatus, number>) => (areas?.changed || 0) + (areas?.unchanged || 0);
+    const studyAreaKm2 = Number(summary.profile?.metrics.studyAreaKm2 ?? summary.metrics.studyAreaKm2 ?? 0);
+    const statusShareOfStudy = (areas: Record<ChangeStatus, number> | undefined, mode: ChangeStatus, fallbackTotal: number) => {
+      const denominator = studyAreaKm2 > 0 ? studyAreaKm2 : fallbackTotal;
+      return denominator > 0 ? Math.min(Math.max(((areas?.[mode] || 0) / denominator) * 100, 0), 100) : 0;
+    };
     const reportedChangeShareFor = (kind: "urban" | "agricultural" | "industrial"): number | null => {
       const key = `${kind}ChangePercent` as keyof typeof summary.metrics;
       const direct = summary.profile?.metrics[key] ?? summary.metrics[key];
@@ -2349,7 +2354,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
           }
           gauge.removeAttribute("data-status-estimate");
           gauge.removeAttribute("title");
-          setGauge(gauge, ((areas![mode] || 0) / total) * 100);
+          setGauge(gauge, statusShareOfStudy(areas, mode, total));
           return;
         }
         if (mode === "all") {
@@ -2359,7 +2364,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         } else if (total) {
           gauge.removeAttribute("data-status-estimate");
           gauge.removeAttribute("title");
-          setGauge(gauge, ((areas?.[mode] || 0) / total) * 100);
+          setGauge(gauge, statusShareOfStudy(areas, mode, total));
         } else {
           const reportedChanged = reportedChangeShareFor(kind);
           if (reportedChanged !== null) {
