@@ -886,8 +886,13 @@ function renderGaugeAndDonut(summary: DashboardSummary): void {
   const selectedChange = document.querySelector<HTMLSelectElement>("#dashboard-change-filter")?.value || "all";
   const isIsmailia = dashboard?.dataset.dashboardGroup === "ismailia";
   const isWesternUpperEgypt = dashboard?.dataset.dashboardGroup === "western-upper-egypt";
+  // Dashboards with a status filter are updated by updateChangeStatusGauge.
+  // Do not overwrite that filtered result later with this broad summary pass.
+  const hasChangeStatusFilter = Boolean(document.querySelector<HTMLSelectElement>("#dashboard-change-filter"));
   const defaultGauge = isIsmailia && selectedChange === "all";
-  if (isWesternUpperEgypt) {
+  if (hasChangeStatusFilter) {
+    // The filter synchronizer owns this value after all map layers load.
+  } else if (isWesternUpperEgypt) {
     const westernUrbanPercent = summary.profile?.metrics.urbanChangePercent ?? 100;
     setGauge(document.querySelector<HTMLElement>("#urban-gauge"), westernUrbanPercent);
   } else {
@@ -1005,7 +1010,7 @@ function renderAgricultureIndicators(summary: DashboardSummary): void {
       return;
     }
     gauge.closest<HTMLElement>(".gauge-card")?.removeAttribute("hidden");
-    if (group === "western-upper-egypt") return;
+    if (group === "western-upper-egypt" || document.querySelector("#dashboard-change-filter")) return;
     const percent = group === "ismailia" && selectedChange === "all" ? 100 : Math.min(reported ?? 10, 100);
     setGauge(gauge, percent);
   });
