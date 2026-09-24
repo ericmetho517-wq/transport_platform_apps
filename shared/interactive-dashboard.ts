@@ -223,14 +223,17 @@ function dashboardHeader(app: TransportApp, group = ""): string {
   const hasIndustrial = !["kalabsha-axis", "qus-axis", "qena-luxor-road", "suez-ring-link", "dabaa-axis"].includes(group);
   const hasAgricultural = !["suez-ring-link"].includes(group);
   const isDabaaLandDashboard = group === "dabaa-axis";
+  const isAgriculturalDashboard = /الأراضي الزراعية|agricultural/i.test(app.title) && !isPriceDashboard(app);
+  // Land dashboards must always open on the complete mapped dataset.  The
+  // classification choices are refined from the loaded map geometry below;
+  // never use a dashboard title to force an initial land-use selection.
+  const isUrbanDashboard = /العمرانية|urban/i.test(app.title) && !isPriceDashboard(app) && !isDabaaLandDashboard;
   const landuseOptions = isPriceDashboard(app)
     ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option>${hasAgricultural ? `<option value="agricultural">الزراعي</option>` : ""}${hasIndustrial ? `<option value="industrial">الصناعي</option>` : ""}`
     : isDabaaLandDashboard
       ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option><option value="agricultural">الزراعي</option>`
-    : isAgricultureAndIndustry
-      ? (hasIndustrial
-          ? `<option value="all">الزراعة والصناعة</option>${hasAgricultural ? `<option value="agricultural">الزراعي</option>` : ""}<option value="industrial">الصناعي</option>`
-          : `<option value="all">الزراعة</option>`)
+    : isUrbanDashboard || isAgriculturalDashboard || isAgricultureAndIndustry
+      ? `<option value="all">كل الاستخدامات</option><option value="urban">العمران</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`
       : "";
   const landuseFilter = landuseOptions
     ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
@@ -356,6 +359,22 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
           <aside class="qena-support-panels"><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section></aside>
           ${comparisonPanel}
           <aside class="qena-gauge-panel">${rightPanels}</aside>
+        </section>
+      </div>
+    </main>`;
+  }
+  // Kalabsha keeps the paired evidence maps as the primary visual surface.
+  // Supporting crop, comparison and gauge panels share a compact lower band.
+  if (kalabsha) {
+    return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard kalabsha-map-first-dashboard ${group}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
+      ${dashboardHeader(app, group)}
+      <div class="dashboard-kpis south-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article></div>
+      <div class="kalabsha-map-first-layout">
+        <section class="kalabsha-map-pair">${corridorTemporalMapPair("agriculture", group)}</section>
+        <section class="kalabsha-lower-dashboard">
+          <aside class="kalabsha-support-panel"><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section></aside>
+          ${comparisonPanel}
+          <aside class="kalabsha-gauge-panel">${rightPanels}</aside>
         </section>
       </div>
     </main>`;
@@ -2256,30 +2275,54 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     }
     const landuseSelect = root.querySelector<HTMLSelectElement>("#dashboard-landuse-filter");
     if (landuseSelect) {
-      const allLandcoverCodesExceptUrban = new Set(["0", "1", "2", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "99"]);
-      const allLandcoverCodes = new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "99"]);
+      // Read the actual classified paths produced for this dashboard rather
+      // than treating a corridor title as evidence that a use exists. This
+      // keeps the menu useful for every corridor and includes classes such as
+      // vacant land, services and water whenever they are present.
+      const mappedLanduseCodes = new Set(Array.from(new Set(mapRoots.flatMap((map) =>
+        Array.from(map.querySelectorAll<SVGPathElement>("[data-landuse-code]")).map((path) => path.dataset.landuseCode || "")
+      ).filter(Boolean))));
+      const availableLanduseCodes = mappedLanduseCodes.size
+        ? mappedLanduseCodes
+        : new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "99"]);
+      const standardCodes: Record<string, string> = { urban: "3", agricultural: "0", industrial: "1" };
+      const englishLanduseNames: Record<string, string> = {
+        "0": "Agricultural land", "1": "Industrial areas", "2": "Vacant land", "3": "Urban land",
+        "4": "Military land", "5": "Services", "6": "Recreational areas", "7": "Cemeteries",
+        "8": "Water bodies", "9": "Road corridor", "10": "Roads", "11": "Religious use",
+        "12": "Educational land", "13": "Government land", "14": "Tourism land", "15": "Green areas", "99": "Unclassified",
+      };
+      const landuseLabel = (code: string) => document.documentElement.lang === "en"
+        ? (englishLanduseNames[code] || `Land use ${code}`)
+        : (ismailiaLanduseNames[code] || `استخدام أرض ${code}`);
+      const allLabel = document.documentElement.lang === "en" ? "All land uses" : "كل الاستخدامات";
+
+      // Leave the first option selected, remove unavailable categories, then
+      // append each remaining documented classification as a precise filter.
+      // `all` is deliberately retained even if a source has no coded layer.
+      if (root.dataset.mode !== "price") {
+        Array.from(landuseSelect.options).forEach((option) => {
+          const code = standardCodes[option.value];
+          if (code && !availableLanduseCodes.has(code)) option.remove();
+        });
+        if (landuseSelect.options[0]?.value !== "all") {
+          landuseSelect.insertAdjacentHTML("afterbegin", `<option value="all">${allLabel}</option>`);
+        } else {
+          landuseSelect.options[0].textContent = allLabel;
+        }
+        Array.from(mappedLanduseCodes).sort((a, b) => Number(a) - Number(b) || a.localeCompare(b)).forEach((code) => {
+          if (["0", "1", "3"].includes(code)) return;
+          const option = document.createElement("option");
+          option.value = `code:${code}`;
+          option.textContent = landuseLabel(code);
+          landuseSelect.append(option);
+        });
+        landuseSelect.value = "all";
+      }
 
       const getAcceptedLanduseForFilter = (selectedFilter: string): { codes: Set<string>; allowedLayers: Set<string> } => {
-        const title = app.title || "";
-        const isAgriInd = /الزراعية.*الصناعية|agricultural.*industrial/i.test(title) || group === "qus-axis" || group === "kalabsha-axis" || group === "qena-luxor-road";
-        // Dabaa has separate urban and agricultural gauges even on its urban dashboard.
-        // Do not force it back to urban when the user explicitly selects agriculture.
-        const isUrbanOnly = /العمرانية|urban/i.test(title) && !isAgriInd && root.dataset.mode !== "price" && group !== "dabaa-axis";
-
-        if (isUrbanOnly) {
-          return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
-        }
-        if (isAgriInd) {
-          if (selectedFilter === "agricultural") {
-            return { codes: new Set(["0"]), allowedLayers: new Set(["agricultural"]) };
-          }
-          if (selectedFilter === "industrial") {
-            return { codes: new Set(["1"]), allowedLayers: new Set(["industrial"]) };
-          }
-          if (selectedFilter === "urban") {
-            return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
-          }
-          return { codes: allLandcoverCodes, allowedLayers: new Set(["urban", "agricultural", "industrial"]) };
+        if (selectedFilter.startsWith("code:")) {
+          return { codes: new Set([selectedFilter.slice(5)]), allowedLayers: new Set() };
         }
         if (selectedFilter === "urban") {
           return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
@@ -2290,7 +2333,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         if (selectedFilter === "industrial") {
           return { codes: new Set(["1"]), allowedLayers: new Set(["industrial"]) };
         }
-        return { codes: allLandcoverCodes, allowedLayers: new Set(["urban", "agricultural", "industrial"]) };
+        return { codes: availableLanduseCodes, allowedLayers: new Set(["urban", "agricultural", "industrial"]) };
       };
 
       const applyLanduseFilter = () => {
