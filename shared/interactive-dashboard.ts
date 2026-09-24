@@ -217,24 +217,16 @@ export const renderSectorMapMarkup = mapMarkup;
 
 function dashboardHeader(app: TransportApp, group = ""): string {
   const isAgricultureAndIndustry = /الزراعية.*الصناعية|agricultural.*industrial/i.test(app.title) || group === "qus-axis" || group === "kalabsha-axis" || group === "qena-luxor-road";
-  // Only offer a land-use type when it belongs to this dashboard's subject.
-  // Cairo–Suez has both agricultural and industrial classified polygons, so
-  // excluding it here made its industrial filter inaccessible.
-  const hasIndustrial = !["kalabsha-axis", "qus-axis", "qena-luxor-road", "suez-ring-link", "dabaa-axis"].includes(group);
-  const hasAgricultural = !["suez-ring-link"].includes(group);
   const isDabaaLandDashboard = group === "dabaa-axis";
   const isAgriculturalDashboard = /الأراضي الزراعية|agricultural/i.test(app.title) && !isPriceDashboard(app);
-  // Land dashboards must always open on the complete mapped dataset.  The
-  // classification choices are refined from the loaded map geometry below;
-  // never use a dashboard title to force an initial land-use selection.
   const isUrbanDashboard = /العمرانية|urban/i.test(app.title) && !isPriceDashboard(app) && !isDabaaLandDashboard;
-  const landuseOptions = isPriceDashboard(app)
-    ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option>${hasAgricultural ? `<option value="agricultural">الزراعي</option>` : ""}${hasIndustrial ? `<option value="industrial">الصناعي</option>` : ""}`
-    : isDabaaLandDashboard
-      ? `<option value="all">كل الاستخدامات</option><option value="urban">العمراني</option><option value="agricultural">الزراعي</option>`
-    : isUrbanDashboard || isAgriculturalDashboard || isAgricultureAndIndustry
-      ? `<option value="all">كل الاستخدامات</option><option value="urban">العمران</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`
-      : "";
+  // Keep the filter intentionally limited to the three decision classes.
+  // Other documented codes remain visible on the map under the default
+  // "all" selection but are not promoted into ad-hoc filter choices.
+  const fixedLanduseOptions = `<option value="all">كل الاستخدامات</option><option value="urban">العمران</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`;
+  const landuseOptions = isPriceDashboard(app) || isDabaaLandDashboard || isUrbanDashboard || isAgriculturalDashboard || isAgricultureAndIndustry
+    ? fixedLanduseOptions
+    : "";
   const landuseFilter = landuseOptions
     ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
     : "";
@@ -2285,45 +2277,12 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const availableLanduseCodes = mappedLanduseCodes.size
         ? mappedLanduseCodes
         : new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "99"]);
-      const standardCodes: Record<string, string> = { urban: "3", agricultural: "0", industrial: "1" };
-      const englishLanduseNames: Record<string, string> = {
-        "0": "Agricultural land", "1": "Industrial areas", "2": "Vacant land", "3": "Urban land",
-        "4": "Military land", "5": "Services", "6": "Recreational areas", "7": "Cemeteries",
-        "8": "Water bodies", "9": "Road corridor", "10": "Roads", "11": "Religious use",
-        "12": "Educational land", "13": "Government land", "14": "Tourism land", "15": "Green areas", "99": "Unclassified",
-      };
-      const landuseLabel = (code: string) => document.documentElement.lang === "en"
-        ? (englishLanduseNames[code] || `Land use ${code}`)
-        : (ismailiaLanduseNames[code] || `استخدام أرض ${code}`);
-      const allLabel = document.documentElement.lang === "en" ? "All land uses" : "كل الاستخدامات";
-
-      // Leave the first option selected, remove unavailable categories, then
-      // append each remaining documented classification as a precise filter.
-      // `all` is deliberately retained even if a source has no coded layer.
-      if (root.dataset.mode !== "price") {
-        Array.from(landuseSelect.options).forEach((option) => {
-          const code = standardCodes[option.value];
-          if (code && !availableLanduseCodes.has(code)) option.remove();
-        });
-        if (landuseSelect.options[0]?.value !== "all") {
-          landuseSelect.insertAdjacentHTML("afterbegin", `<option value="all">${allLabel}</option>`);
-        } else {
-          landuseSelect.options[0].textContent = allLabel;
-        }
-        Array.from(mappedLanduseCodes).sort((a, b) => Number(a) - Number(b) || a.localeCompare(b)).forEach((code) => {
-          if (["0", "1", "3"].includes(code)) return;
-          const option = document.createElement("option");
-          option.value = `code:${code}`;
-          option.textContent = landuseLabel(code);
-          landuseSelect.append(option);
-        });
-        landuseSelect.value = "all";
-      }
+      // The header supplies the only four options: all + the three approved
+      // classes.  Start on "all" so every classified source feature remains
+      // visible until the user explicitly narrows the map.
+      landuseSelect.value = "all";
 
       const getAcceptedLanduseForFilter = (selectedFilter: string): { codes: Set<string>; allowedLayers: Set<string> } => {
-        if (selectedFilter.startsWith("code:")) {
-          return { codes: new Set([selectedFilter.slice(5)]), allowedLayers: new Set() };
-        }
         if (selectedFilter === "urban") {
           return { codes: new Set(["3"]), allowedLayers: new Set(["urban"]) };
         }
@@ -2463,26 +2422,33 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const selectedLanduse = landuseSelect?.value || "all";
       const gaugeRail = root.querySelector<HTMLElement>(".ismailia-agri-right");
       gaugeRail?.classList.toggle("single-gauge", selectedLanduse !== "all");
+      // Most urban dashboards have one gauge slot (`#urban-gauge`).  It is a
+      // summary slot, not an urban-only calculation: when the user explicitly
+      // selects agriculture or industry, reuse that visible slot for the
+      // selected class instead of hiding it and leaving an empty right rail.
+      const hasSingleSummaryGauge = Boolean(root.querySelector("#urban-gauge"))
+        && !root.querySelector("#agricultural-gauge, #industrial-gauge");
 
       (["urban", "agricultural", "industrial"] as const).forEach((kind) => {
         const gauge = root.querySelector<HTMLElement>(`#${kind}-gauge`);
         if (!gauge) return;
         const gaugeCard = gauge.closest<HTMLElement>(".gauge-card");
         if (!gaugeCard) return;
+        const effectiveKind = hasSingleSummaryGauge && selectedLanduse !== "all" ? selectedLanduse as "urban" | "agricultural" | "industrial" : kind;
 
-        if (selectedLanduse !== "all" && selectedLanduse !== kind) {
+        if (selectedLanduse !== "all" && selectedLanduse !== kind && !hasSingleSummaryGauge) {
           gaugeCard.setAttribute("hidden", "true");
           gaugeCard.hidden = true;
           return;
         }
 
-        const areas = statusAreaFor(selectedSector, kind);
+        const areas = statusAreaFor(selectedSector, effectiveKind);
         const total = statusTotalFor(areas);
         // A classified layer is a first-class source for a gauge even when a
         // summary KPI was not supplied in the report (as in Cairo–Suez).
         // Conversely, do not leave an empty industrial gauge in dashboards
         // that genuinely have no industrial polygons or documented metric.
-        if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, kind) && !total) {
+        if (group !== "ismailia" && !hasDocumentedLanduseKind(summary, effectiveKind) && !total) {
           gaugeCard.setAttribute("hidden", "true");
           gaugeCard.hidden = true;
           return;
@@ -2491,7 +2457,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         gaugeCard.removeAttribute("hidden");
         gaugeCard.hidden = false;
         const title = gaugeCard.querySelector<HTMLElement>("span");
-        if (title) title.textContent = statusTitle(kind, mode);
+        if (title) title.textContent = statusTitle(effectiveKind, mode);
         if (group === "western-upper-egypt") {
           if (mode === "all") {
             setGauge(gauge, 100);
