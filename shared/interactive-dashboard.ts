@@ -342,10 +342,28 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
       ? `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card ownership-card"><span>نسبة ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section>`
       : `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section>`);
   const urbanKpi = (kalabsha || qena) ? "" : `<article class="gold"><span>إجمالي مساحة الأراضي العمرانية (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article>`;
+  const comparisonPanel = `<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي لعامي <bdi class="map-year-start">${start}</bdi> - <bdi class="map-year-end">${end}</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section>`;
+  // Qena–Luxor is intentionally map-first: maps span the full top track and
+  // every supporting panel shares one compact lower track.  This preserves a
+  // complete desktop viewport instead of turning the gauge into a new page.
+  if (qena) {
+    return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard ${group} ${qenaLayoutClass}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
+      ${dashboardHeader(app, group)}
+      <div class="dashboard-kpis south-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>إجمالي مساحة التغير بالأراضي الزراعية (فدان)</span><strong data-metric="agriculturalChangeFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article></div>
+      <div class="south-agriculture-layout qena-map-first-layout">
+        <section class="qena-map-pair">${corridorTemporalMapPair("agriculture", group)}</section>
+        <section class="qena-lower-dashboard">
+          <aside class="qena-support-panels"><section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section></aside>
+          ${comparisonPanel}
+          <aside class="qena-gauge-panel">${rightPanels}</aside>
+        </section>
+      </div>
+    </main>`;
+  }
   return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard ${group} ${qenaLayoutClass}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
     <div class="dashboard-kpis south-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>${urbanKpi}</div>
-    <div class="south-agriculture-layout ${qena ? "qena-map-first-layout" : ""}"><aside class="south-agriculture-side">${leftPanels}</aside><section class="south-agriculture-center">${corridorTemporalMapPair("agriculture", group)}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي لعامي <bdi class="map-year-start">${start}</bdi> - <bdi class="map-year-end">${end}</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="south-agriculture-right">${rightPanels}</aside></div>
+    <div class="south-agriculture-layout"><aside class="south-agriculture-side">${leftPanels}</aside><section class="south-agriculture-center">${corridorTemporalMapPair("agriculture", group)}${comparisonPanel}</section><aside class="south-agriculture-right">${rightPanels}</aside></div>
   </main>`;
 }
 

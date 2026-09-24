@@ -424,8 +424,8 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .report-land-dashboard .land-center > .gis-map { min-height:0 !important; height: 100%; }
 .south-agriculture-kpis { grid-template-columns:repeat(5,minmax(0,1fr)); direction:ltr; flex: 0 0 auto; }
 .south-agriculture-kpis article { direction:rtl; min-height: 48px; padding: 4px 6px; }
-.southern-agriculture-dashboard.kalabsha-axis .south-agriculture-kpis,
-.southern-agriculture-dashboard.qena-luxor-road .south-agriculture-kpis { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.southern-agriculture-dashboard.kalabsha-axis .south-agriculture-kpis { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.southern-agriculture-dashboard.qena-luxor-road .south-agriculture-kpis { grid-template-columns:repeat(5,minmax(0,1fr)); }
 .south-agriculture-layout { height:calc(100vh - 52px); max-height:calc(100vh - 52px); min-height:0; display:grid; grid-template-columns:minmax(200px,23%) minmax(0,57%) minmax(180px,20%); direction:ltr; box-sizing: border-box; overflow: hidden; }
 .south-agriculture-side,.south-agriculture-center,.south-agriculture-right { min-width:0; height:100%; min-height:0; direction:rtl; overflow: hidden; }
 .south-agriculture-side,.south-agriculture-right { display:grid; grid-template-rows:repeat(2, minmax(0, 1fr)); }
@@ -867,4 +867,102 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
     min-height: 178px;
     border-bottom: 0;
   }
+}
+
+/* Qena–Luxor viewport refinement.  The maps own the full upper track; the
+   chart, gauge and supporting facts share a compact lower track.  These
+   overrides deliberately come last to replace the earlier open-height trial. */
+@media (min-width: 1100px) {
+  html:has(.qena-map-first-dashboard),
+  body:has(.qena-map-first-dashboard) {
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .qena-map-first-dashboard {
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  .qena-map-first-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1.62fr) minmax(174px, .84fr);
+    flex: 1 1 auto;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .qena-map-pair {
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .qena-map-pair > .temporal-map-pair,
+  .qena-map-pair .temporal-map,
+  .qena-map-pair .gis-map {
+    min-height: 0 !important;
+    height: 100%;
+  }
+
+  .qena-lower-dashboard {
+    min-width: 0;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(158px, 18%) minmax(0, 57%) minmax(220px, 25%);
+    direction: ltr;
+    overflow: hidden;
+    border-top: 2px solid #3d3d3d;
+  }
+
+  .qena-support-panels,
+  .qena-gauge-panel {
+    min-width: 0;
+    min-height: 0;
+    display: grid;
+    direction: rtl;
+    background: #252525;
+    overflow: hidden;
+  }
+
+  .qena-support-panels { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+  .qena-support-panels > :only-child { grid-row: 1 / -1; }
+  .qena-gauge-panel { grid-template-rows: minmax(0, 1fr); border-inline-start: 2px solid #3d3d3d; }
+  .qena-support-panels > section,
+  .qena-gauge-panel > section { min-width: 0; min-height: 0; border-bottom: 1px solid #414141; }
+  .qena-lower-dashboard > .comparison-card { min-width: 0; min-height: 0; height: 100%; direction: rtl; }
+  .qena-gauge-panel .gauge { width: min(210px, 88%); }
+  .qena-gauge-panel .gauge-card > span { font-size: 14px; }
+  .qena-support-panels .crop-card,
+  .qena-support-panels .agriculture-change { padding: 5px 7px; gap: 3px; }
+  .qena-support-panels .crop-donut { width: min(88px, 48%); }
+  .qena-support-panels .crop-card > span,
+  .qena-support-panels .agriculture-change span { font-size: 10px; line-height: 1.2; }
+  .qena-support-panels .agriculture-change strong { font-size: clamp(18px, 1.65vw, 25px); }
+  .qena-support-panels #crop-legend { gap: 2px 5px; }
+  .qena-support-panels #crop-legend span { font-size: 8px; }
+  .qena-support-panels #crop-legend i { width: 7px; height: 7px; }
+  .qena-lower-dashboard .comparison-card .card-title { font-size: 13px; }
+  .qena-lower-dashboard .comparison-row { margin: 4px 0; }
+  .qena-lower-dashboard .comparison-row > div { height: 27px; }
+  .qena-lower-dashboard .comparison-legend { padding-top: 2px; }
+  .qena-lower-dashboard .comparison-legend span { font-size: 10px; }
+  .qena-lower-dashboard .reset-landuse-btn { padding: 3px 7px; font-size: 9px; }
+}
+
+@media (max-width: 1099px) {
+  .qena-map-first-layout { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; }
+  .qena-map-pair > .temporal-map-pair { min-height: 570px; }
+  .qena-lower-dashboard { display:grid; grid-template-columns:minmax(0,1fr); }
+  .qena-support-panels { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .qena-gauge-panel { display:grid; grid-template-columns:minmax(260px,360px); justify-content:center; }
+  .qena-gauge-panel > section { min-height:208px; }
 }
