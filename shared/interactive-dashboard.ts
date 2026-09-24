@@ -162,6 +162,10 @@ const isImpactDashboard = (app: TransportApp) => impactDashboardSlugs.has(app.sl
 const isUrbanDashboard = (app: TransportApp) => /urban|العمرانية|العمراني/i.test(app.title);
 
 export function dashboardGroup(app: TransportApp): string {
+  // The Qena–Luxor agricultural dashboard has a dedicated map-first layout.
+  // Keep its corridor identity explicit so title localization can never route
+  // this specific application to the generic southern-dashboard layout.
+  if (app.slug === "dashboard-0c7d78be88") return "qena-luxor-road";
   const groupAliases: Record<string, string> = {
     dabaa: "dabaa-axis",
     dahshur: "dahshur-south-link",
@@ -323,6 +327,7 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
   const qena = group === "qena-luxor-road";
   const qus = group === "qus-axis";
   const kalabsha = group === "kalabsha-axis";
+  const qenaLayoutClass = qena ? "qena-map-first-dashboard" : "";
   const { start, end } = corridorYears(group);
   const rightPanels = qena
     ? `<section class="dark-card gauge-card"><span>نسبة مساحة الأراضي الزراعية من إجمالي مساحة الأراضي بالمنطقة</span><div class="gauge" id="agricultural-share-gauge"><strong>—</strong></div></section>`
@@ -337,10 +342,10 @@ function southernAgricultureMarkup(app: TransportApp, group: string): string {
       ? `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section><section class="dark-card ownership-card"><span>نسبة ملكية الأراضي الزراعية</span><div class="ownership-donut" id="ownership-donut"><strong>الملكية</strong></div><div id="ownership-legend"></div></section>`
       : `<section class="dark-card crop-card"><span>نسب أنواع محاصيل الأراضي الزراعية</span><div class="crop-donut" id="crop-donut"><strong>المحاصيل</strong></div><div id="crop-legend"></div></section>`);
   const urbanKpi = (kalabsha || qena) ? "" : `<article class="gold"><span>إجمالي مساحة الأراضي العمرانية (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article>`;
-  return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard ${group}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
+  return `<main class="interactive-dashboard agriculture-dashboard southern-agriculture-dashboard ${group} ${qenaLayoutClass}" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
     <div class="dashboard-kpis south-agriculture-kpis"><article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article><article class="lime"><span>العمالة الزراعية (بالألف)</span><strong data-metric="agriculturalWorkersThousands">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>${urbanKpi}</div>
-    <div class="south-agriculture-layout"><aside class="south-agriculture-side">${leftPanels}</aside><section class="south-agriculture-center">${corridorTemporalMapPair("agriculture", group)}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي لعامي <bdi class="map-year-start">${start}</bdi> - <bdi class="map-year-end">${end}</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="south-agriculture-right">${rightPanels}</aside></div>
+    <div class="south-agriculture-layout ${qena ? "qena-map-first-layout" : ""}"><aside class="south-agriculture-side">${leftPanels}</aside><section class="south-agriculture-center">${corridorTemporalMapPair("agriculture", group)}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي لعامي <bdi class="map-year-start">${start}</bdi> - <bdi class="map-year-end">${end}</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="south-agriculture-right">${rightPanels}</aside></div>
   </main>`;
 }
 

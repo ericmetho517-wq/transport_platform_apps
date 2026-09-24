@@ -705,3 +705,166 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .agriculture-center { grid-template-rows: auto 420px 320px; }
   .agriculture-right { grid-column: auto; grid-template-columns: 1fr; min-height: 650px; }
 }
+
+/* Qena–Luxor: maps are the primary evidence.  Remove the permanent side
+   rails so the before/after pair can occupy the full dashboard width, then
+   place the agricultural indicator directly after the comparison chart. */
+.qena-map-first-layout .south-agriculture-center { order: 1; }
+.qena-map-first-layout .south-agriculture-right { order: 2; }
+.qena-map-first-layout .south-agriculture-side { order: 3; }
+
+@media (min-width: 1100px) {
+  html:has(.qena-map-first-dashboard),
+  body:has(.qena-map-first-dashboard) {
+    height: auto;
+    min-height: 100dvh;
+    overflow-y: auto;
+  }
+
+  .qena-map-first-dashboard {
+    height: auto !important;
+    min-height: 100dvh;
+    max-height: none !important;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout .south-agriculture-center {
+    grid-column: 1;
+    grid-row: 1;
+    grid-template-rows: minmax(410px, 1fr) minmax(215px, auto);
+    min-height: 625px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout .south-agriculture-right {
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: minmax(280px, 390px);
+    grid-template-rows: auto;
+    justify-content: center;
+    min-height: 218px;
+    height: auto;
+    background: transparent;
+    border-top: 2px solid #3d3d3d;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout .south-agriculture-right > section {
+    min-height: 216px;
+    border-bottom: 0;
+  }
+
+  .qena-map-first-layout .south-agriculture-side {
+    grid-column: 1;
+    grid-row: 3;
+    grid-template-columns: repeat(2, minmax(250px, 360px));
+    grid-template-rows: auto;
+    justify-content: center;
+    min-height: 190px;
+    height: auto;
+    background: #252525;
+    border-top: 2px solid #3d3d3d;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout .south-agriculture-side > section {
+    min-height: 188px;
+    border-bottom: 0;
+  }
+}
+
+/* A tablet-sized control strip has insufficient room for the title and all
+   filters side-by-side.  Give the Qena header a full title row instead of
+   clipping the Arabic dashboard name. */
+@media (min-width: 721px) and (max-width: 1099px) {
+  .qena-map-first-dashboard .interactive-head {
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: 122px;
+    height: auto;
+  }
+
+  .qena-map-first-dashboard .interactive-head > div:first-child {
+    width: 100%;
+    max-width: none;
+    flex: 1 0 100%;
+  }
+
+  .qena-map-first-dashboard .interactive-head h1 {
+    display: block;
+    overflow: visible;
+    text-overflow: unset;
+    white-space: normal;
+  }
+
+  .qena-map-first-dashboard .dash-actions {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1099px) {
+  .qena-map-first-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout .south-agriculture-center {
+    grid-column: 1;
+    grid-row: 1;
+    grid-template-rows: minmax(360px, auto) minmax(210px, auto);
+    min-height: 570px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout .south-agriculture-right {
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: minmax(260px, 360px);
+    grid-template-rows: auto;
+    justify-content: center;
+    min-height: 210px;
+    height: auto;
+    background: transparent;
+    border-top: 2px solid #3d3d3d;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout .south-agriculture-right > section {
+    min-height: 208px;
+    border-bottom: 0;
+  }
+
+  .qena-map-first-layout .south-agriculture-side {
+    grid-column: 1;
+    grid-row: 3;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-rows: auto;
+    min-height: 180px;
+    height: auto;
+    background: #252525;
+    border-top: 2px solid #3d3d3d;
+    overflow: visible;
+  }
+
+  .qena-map-first-layout .south-agriculture-side > section {
+    min-height: 178px;
+    border-bottom: 0;
+  }
+}
