@@ -303,10 +303,14 @@ function landMarkup(app: TransportApp, group: string): string {
   const ismailiaJobs = group === "ismailia"
     ? `<article class="jobs-urban"><span>فرص العمل للأراضي العمرانية المستحدثة</span><strong data-metric="urbanJobs">—</strong></article><article class="jobs-services"><span>فرص العمل لأراضي الخدمات</span><strong data-metric="servicesJobs">—</strong></article>`
     : "";
+  const westernUrbanJobs = group === "western-upper-egypt"
+    ? `<article class="jobs-urban"><span>فرص العمل للأراضي العمرانية</span><strong data-metric="jobOpportunities">—</strong></article>`
+    : "";
+  const kpiLayoutClass = group === "ismailia" ? " ismailia-urban-kpis" : group === "western-upper-egypt" ? " western-urban-kpis" : "";
   return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
     ${dashboardHeader(app, group)}
     <div class="land-layout map-expanded">
-      <section class="land-center"><div class="dashboard-kpis${group === "ismailia" ? " ismailia-urban-kpis" : ""}">${ismailiaJobs}<article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><div class="land-bottom-row"><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section><section class="dark-card gauge-card inline-land-gauge"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section></div></section>
+      <section class="land-center"><div class="dashboard-kpis${kpiLayoutClass}">${ismailiaJobs}${westernUrbanJobs}<article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article></div><div class="temporal-map-pair">${mapMarkup("land-baseline", '<span class="map-year-start">2014</span>', false)}${mapMarkup("land-current", '<span class="map-year-end">2024</span>', true)}</div><div class="land-bottom-row"><section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي</span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section><section class="dark-card gauge-card inline-land-gauge"><span>نسبة مساحة التغير العمراني من منطقة الدراسة</span><div class="gauge" id="urban-gauge"><i></i><strong>—</strong></div><small>اضغط لعرض التغير العمراني فقط</small></section></div></section>
     </div>
   </main>`;
 }
@@ -2099,6 +2103,13 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       for (const name of ["urbanJobs", "agriculturalJobs", "industrialJobs", "servicesJobs"]) {
         const value = summary.metrics[name] ?? summary.profile?.metrics[name];
         if (typeof value === "number") setMetric(name, value); else hideUnavailableMetricPanel(name);
+      }
+    } else if (group === "western-upper-egypt") {
+      // These workforce and urban-job values are documented in the sector profile;
+      // use them directly rather than deriving values from the map feature counts.
+      for (const name of ["agriculturalWorkers", "industrialWorkers", "jobOpportunities"]) {
+        const value = summary.profile?.metrics[name];
+        if (typeof value === "number") setMetric(name, value);
       }
     } else if (summary.profile?.metrics.jobOpportunities !== undefined) {
       setMetric("jobOpportunities", summary.profile.metrics.jobOpportunities);
