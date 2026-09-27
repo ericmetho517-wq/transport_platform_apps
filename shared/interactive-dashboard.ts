@@ -306,13 +306,16 @@ function landMarkup(app: TransportApp, group: string): string {
   const westernUrbanJobs = group === "western-upper-egypt"
     ? `<article class="jobs-urban"><span>فرص العمل للأراضي العمرانية</span><strong data-metric="jobOpportunities">—</strong></article>`
     : "";
-  const kpiLayoutClass = group === "ismailia" ? " ismailia-urban-kpis" : group === "western-upper-egypt" ? " western-urban-kpis" : "";
+  const standardUrbanJobs = ["regional-ring-road", "dahshur-south-link", "suez-ring-link", "cairo-suez-road"].includes(group)
+    ? `<article class="jobs-urban"><span>فرص العمل للأراضي العمرانية</span><strong data-metric="jobOpportunities">—</strong></article>`
+    : "";
+  const kpiLayoutClass = group === "ismailia" ? " ismailia-urban-kpis" : group === "western-upper-egypt" ? " western-urban-kpis" : standardUrbanJobs ? " standard-urban-jobs-kpis" : "";
   const coreKpis = `<article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article>`;
   const ismailiaCoreKpis = `<article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>`;
   const westernCoreKpis = `<article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>`;
   const kpiCards = group === "ismailia"
     ? `${ismailiaCoreKpis}${ismailiaJobs}`
-    : group === "western-upper-egypt" ? `${westernCoreKpis}${westernUrbanJobs}` : coreKpis;
+    : group === "western-upper-egypt" ? `${westernCoreKpis}${westernUrbanJobs}` : standardUrbanJobs ? `${coreKpis}${standardUrbanJobs}` : coreKpis;
   return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
     ${dashboardHeader(app, group)}
     <div class="land-layout map-expanded">
