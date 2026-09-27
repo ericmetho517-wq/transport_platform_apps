@@ -309,9 +309,10 @@ function landMarkup(app: TransportApp, group: string): string {
   const kpiLayoutClass = group === "ismailia" ? " ismailia-urban-kpis" : group === "western-upper-egypt" ? " western-urban-kpis" : "";
   const coreKpis = `<article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article>`;
   const ismailiaCoreKpis = `<article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>`;
+  const westernCoreKpis = `<article class="gold"><span>${urbanMetricLabel}</span><strong data-metric="${urbanMetricKey}">—</strong></article><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>`;
   const kpiCards = group === "ismailia"
     ? `${ismailiaCoreKpis}${ismailiaJobs}`
-    : `${westernUrbanJobs}${coreKpis}`;
+    : group === "western-upper-egypt" ? `${westernCoreKpis}${westernUrbanJobs}` : coreKpis;
   return `<main class="interactive-dashboard land-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="land">
     ${dashboardHeader(app, group)}
     <div class="land-layout map-expanded">
