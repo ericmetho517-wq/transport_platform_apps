@@ -431,6 +431,8 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .report-land-dashboard .land-center > .gis-map { min-height:0 !important; height: 100%; }
 .south-agriculture-kpis { grid-template-columns:repeat(5,minmax(0,1fr)); direction:ltr; flex: 0 0 auto; }
 .south-agriculture-kpis article { direction:rtl; min-height: 48px; padding: 4px 6px; }
+.south-agriculture-kpis.projected-workforce-kpis { grid-template-columns:repeat(6,minmax(0,1fr)); }
+.southern-agriculture-dashboard.qus-axis .south-agriculture-kpis.projected-workforce-kpis { grid-template-columns:repeat(7,minmax(0,1fr)); }
 .southern-agriculture-dashboard.kalabsha-axis .south-agriculture-kpis { grid-template-columns:repeat(4,minmax(0,1fr)); }
 .southern-agriculture-dashboard.qena-luxor-road .south-agriculture-kpis { grid-template-columns:repeat(5,minmax(0,1fr)); }
 .south-agriculture-layout { height:calc(100vh - 52px); max-height:calc(100vh - 52px); min-height:0; display:grid; grid-template-columns:minmax(200px,23%) minmax(0,57%) minmax(180px,20%); direction:ltr; box-sizing: border-box; overflow: hidden; }
@@ -485,6 +487,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .western-agriculture-kpis article.grey strong { color:#000; }
 .western-agriculture-dashboard .agriculture-layout { height:calc(100vh - 120px); max-height:none; min-height:0; grid-template-columns:minmax(210px,22%) minmax(0,58%) minmax(200px,20%); box-sizing: border-box; overflow: hidden; }
 .general-agriculture-kpis { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.general-agriculture-kpis.projected-workforce-kpis { grid-template-columns:repeat(6,minmax(0,1fr)); }
 .general-agriculture-layout { display:grid; grid-template-columns:minmax(0,78%) minmax(210px,22%); direction:ltr; height:calc(100vh - 120px); min-height:570px; }
 .general-agriculture-center { display:grid; grid-template-rows:minmax(300px,1.5fr) minmax(220px,1fr); min-width:0; min-height:0; direction:rtl; }
 .general-agriculture-center > .gis-map, .general-agriculture-center > .temporal-map-pair { min-height:0 !important; height:100%; }

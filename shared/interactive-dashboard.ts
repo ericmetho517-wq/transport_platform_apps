@@ -590,6 +590,36 @@ function hideUnavailableMetricPanel(name: string): void {
   });
 }
 
+function renderProjectedWorkforceKpis(summary: DashboardSummary, group: string): void {
+  const dashboard = document.querySelector<HTMLElement>(".interactive-dashboard");
+  if (dashboard?.dataset.mode !== "agriculture") return;
+  const metrics = summary.metrics;
+  const cards: Array<{ metric: string; label: string; tone: string }> = [];
+  if (typeof metrics.agriculturalJobOpportunities === "number") {
+    cards.push({ metric: "agriculturalJobOpportunities", label: "فرص العمل الزراعية المتوقعة (2024–2053)", tone: "lime" });
+  }
+  if (typeof metrics.industrialJobOpportunities === "number") {
+    cards.push({
+      metric: "industrialJobOpportunities",
+      label: group === "qus-axis" ? "فرص العمل الصناعية والخدمية المتوقعة (2024–2053)" : "فرص العمل الصناعية المتوقعة (2024–2053)",
+      tone: "grey",
+    });
+  }
+  if (!cards.length) return;
+  const kpis = dashboard.querySelector<HTMLElement>(".dashboard-kpis");
+  if (!kpis) return;
+  kpis.classList.add("projected-workforce-kpis", `projected-workforce-kpis-${cards.length}`);
+  cards.forEach(({ metric, label, tone }) => {
+    let card = kpis.querySelector<HTMLElement>(`[data-metric="${metric}"]`)?.closest<HTMLElement>("article");
+    if (!card) {
+      kpis.insertAdjacentHTML("beforeend", `<article class="${tone} projected-job-card"><span>${label}</span><strong data-metric="${metric}">—</strong></article>`);
+      card = kpis.querySelector<HTMLElement>(`[data-metric="${metric}"]`)?.closest<HTMLElement>("article") || undefined;
+    }
+    if (card) card.querySelector<HTMLElement>("span")!.textContent = label;
+    setMetric(metric, metrics[metric]);
+  });
+}
+
 function ensureAgricultureFallbackCards(): void {
   if (document.querySelector(".ismailia-agriculture-dashboard")) return;
   const side = document.querySelector<HTMLElement>(".agriculture-dashboard:not(.western-agriculture-dashboard) .agriculture-side");
@@ -2098,6 +2128,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     }
     if (!summary.landUse.length) summary.landUse = await deriveLandUseFromLocalLayers(group, summary);
     Object.entries(summary.metrics).forEach(([name, value]) => setMetric(name, value));
+    renderProjectedWorkforceKpis(summary, group);
     setMetric("civilFeatures", summary.layerCounts?.civil || 0);
     ensureAgricultureFallbackCards();
     if (root.dataset.mode === "agriculture") renderChangeBars(summary);
@@ -2206,6 +2237,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const selected = event.detail;
         if (!selected) return;
         const view = { ...summary, metrics: { ...summary.metrics, ...selected.metrics }, profile: { ...summary.profile, ...selected } } as DashboardSummary;
+        Object.entries(view.metrics).forEach(([name, value]) => setMetric(name, value));
+        renderProjectedWorkforceKpis(view, group);
         if (selected.landUse?.length) view.landUse = selected.landUse;
         renderComparison(view);
         renderChangeBars(view);

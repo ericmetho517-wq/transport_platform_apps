@@ -1187,6 +1187,9 @@
       "studyAreaKm2": 1256,
       "axisLengthKm": 126.3,
       "urbanChangeKm2": 141.2,
+      "agriculturalJobOpportunities": 1485,
+      "industrialJobOpportunities": 510000,
+      "servicesJobOpportunities": 180000,
       "jobOpportunities": 346000,
       "urbanChangePercent": 69
     },
@@ -1643,6 +1646,9 @@
       "urbanChangeKm2": 26,
       "agriculturalAreaFeddan": 33814,
       "agriculturalWorkersThousands": 15,
+      "agriculturalJobOpportunities": 2834,
+      "industrialJobOpportunities": 24499,
+      "jobOpportunities": 6475,
       "agriculturalChangeFeddan": 2123,
       "urbanChangePercent": 6
     },
@@ -1717,6 +1723,10 @@
       "urbanChangeKm2": 20,
       "agriculturalAreaFeddan": 24672,
       "agriculturalWorkersThousands": 39,
+      "agriculturalJobOpportunities": 10876,
+      "industrialJobOpportunities": 48062,
+      "servicesJobOpportunities": 8583,
+      "jobOpportunities": 3845,
       "urbanChangePercent": 8.1,
       "industrialChangePercent": 8.1,
       "agriculturalSharePercent": 22.1
