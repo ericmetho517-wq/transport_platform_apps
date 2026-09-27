@@ -39,10 +39,10 @@ for (const app of priceDashboards) {
 const western = profiles["western-upper-egypt"];
 if (!western || western.yearEnd !== 2024) failures.push("western-upper-egypt: missing 2024 report profile");
 const expectedWesternMetrics = {
-  jobOpportunities: 50458,
+  jobOpportunities: 17100,
   agriculturalAreaFeddan: 1512791,
-  agriculturalWorkers: 206235,
-  industrialWorkers: 75459,
+  agriculturalWorkers: 900200,
+  industrialWorkers: 105000,
   industrialChangeKm2: 67.4,
 };
 for (const [metric, expected] of Object.entries(expectedWesternMetrics)) {
