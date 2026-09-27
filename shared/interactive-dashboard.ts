@@ -565,7 +565,8 @@ function setMetric(name: string, value: number): void {
   document.querySelectorAll<HTMLElement>(`[data-metric="${name}"]`).forEach((element) => {
     element.closest<HTMLElement>("article, .dark-card")?.removeAttribute("hidden");
     const scale = Number(element.dataset.metricScale || 1);
-    element.textContent = formatNumber(value / (Number.isFinite(scale) && scale > 0 ? scale : 1), 2);
+    const isJobsMetric = /(?:jobs|workers|jobopportunities)/i.test(name);
+    element.textContent = formatNumber(value / (Number.isFinite(scale) && scale > 0 ? scale : 1), isJobsMetric ? 0 : 2);
   });
 }
 
