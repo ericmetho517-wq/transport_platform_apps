@@ -1,0 +1,11 @@
+{
+  "applicationId": "dashboard-dabaa-development-impact",
+  "sourceDataRoot": "public/data/dashboard/dabaa-axis",
+  "copiedDataFiles": ["summary.json"],
+  "reportReferences": [
+    {
+      "projectGroup": "dabaa",
+      "caption": "الاثر التنموي-محور الضبعة-27-09-2026).pptx"
+    }
+  ]
+}

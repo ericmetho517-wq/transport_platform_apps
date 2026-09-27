@@ -18,9 +18,9 @@ const axisOptions = [
   ["ismailia", "طريق القاهرة–الإسماعيلية"], ["western-upper-egypt", "طريق الصعيد الغربي"],
   ["cairo-suez-road", "طريق القاهرة السويس"],
   ["regional-ring-road", "الدائري الإقليمي"],
-  ["kalabsha-axis", "طريق كلابشة"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
-  ["qus-axis", "طريق قوص"], ["qena-luxor-road", "طريق قنا الأقصر"],
-  ["dabaa-axis", "طريق الضبعة"],
+  ["kalabsha-axis", "محور كلابشة"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
+  ["qus-axis", "محور قوص"], ["qena-luxor-road", "طريق قنا الأقصر"],
+  ["dabaa-axis", "محور الضبعة"],
 ] as const;
 const axisOf = (app: TransportApp): string => dashboardGroup(app);
 const root = document.querySelector<HTMLDivElement>("#app");
@@ -71,12 +71,12 @@ const englishAxisLabels: Record<string, string> = {
   ismailia: "Cairo–Ismailia Road",
   "dahshur-south-link": "Dahshur South Link",
   "regional-ring-road": "Regional Ring Road",
-  "kalabsha-axis": "Kalabsha Road",
+  "kalabsha-axis": "Kalabsha Axis",
   "qena-luxor-road": "Qena–Luxor Road",
-  "qus-axis": "Qus Road",
+  "qus-axis": "Qus Axis",
   "cairo-suez-road": "Cairo–Suez Road",
   "suez-ring-link": "Suez Ring Link",
-  "dabaa-axis": "El Dabaa Road",
+  "dabaa-axis": "El Dabaa Axis",
 };
 const displayTitle = (app: TransportApp) => localizedAppTitle(app, platformLanguage);
 const t = (arabic: string, english: string) => platformLanguage === "en" ? english : arabic;

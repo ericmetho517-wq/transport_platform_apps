@@ -118,8 +118,8 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }
 
-if (dashboards.length !== 35) failures.push(`expected 35 dashboards, found ${dashboards.length}`);
-const expectedDashboardsBySector = { "western-upper-egypt":4, dahshur:3, "regional-ring":4, kalabsha:4, "qena-luxor":3, "suez-link":3, "suez-free":3, qus:4, dabaa:3, ismailia:4 };
+if (dashboards.length !== 36) failures.push(`expected 36 dashboards, found ${dashboards.length}`);
+const expectedDashboardsBySector = { "western-upper-egypt":4, dahshur:3, "regional-ring":4, kalabsha:4, "qena-luxor":3, "suez-link":3, "suez-free":3, qus:4, dabaa:4, ismailia:4 };
 for (const group of Object.keys(expectedDashboardsBySector)) {
   const suite = dashboards.filter((app) => app.reportReferenceGroup === group);
   const expectedCount = expectedDashboardsBySector[group];

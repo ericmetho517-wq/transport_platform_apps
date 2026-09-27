@@ -272,7 +272,7 @@
           "agriculturalWorkers": 34416.63,
           "industrialWorkers": 31380.63,
           "jobOpportunities": 8384.39,
-          "urbanChangePercent": 7.26
+          "urbanChangePercent": 70.3
         },
         "statusShares": {
           "existing": 90,
@@ -1481,7 +1481,7 @@
     }
   },
   "dabaa-axis": {
-    "title": "طريق الضبعة",
+    "title": "محور الضبعة",
     "report": "Nakl_Dabaa_30Dec2023.pptx",
     "pages": [
       4,
@@ -1628,7 +1628,7 @@
     ]
   },
   "qus-axis": {
-    "title": "طريق قوص",
+    "title": "محور قوص",
     "report": "Final Report 3-2024.pdf",
     "pages": [
       266,
@@ -1702,7 +1702,7 @@
     ]
   },
   "kalabsha-axis": {
-    "title": "طريق كلابشة",
+    "title": "محور كلابشة",
     "report": "Final Report 3-2024.pdf",
     "pages": [
       320,
@@ -1788,6 +1788,7 @@
       "axisLengthKm": 114.5,
       "urbanChangeKm2": 293.1,
       "industrialChangeKm2": 25,
+      "agriculturalChangeKm2": 7.37,
       "agriculturalWorkers": 4665.25,
       "industrialWorkers": 58662,
       "jobOpportunities": 14183,

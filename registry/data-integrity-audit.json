@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-09-21T18:44:31.005Z",
-  "applications": 61,
+  "generatedAt": "2026-09-27T14:35:27.011Z",
+  "applications": 67,
   "totals": {
-    "features": 79238,
-    "sourceFeatures": 212198,
-    "renderableFeatures": 79231,
-    "coordinatePairs": 2993102
+    "features": 79239,
+    "sourceFeatures": 212199,
+    "renderableFeatures": 79232,
+    "coordinatePairs": 2998123
   },
   "applicationCoverage": {
     "western-upper-egypt": {
-      "applications": 6,
+      "applications": 7,
       "activeFeatures": 3893,
       "activeLayers": 7,
       "verifiedLocalData": true
@@ -21,20 +21,20 @@
       "verifiedLocalData": true
     },
     "regional-ring-road": {
-      "applications": 7,
+      "applications": 8,
       "activeFeatures": 1845,
       "activeLayers": 11,
       "verifiedLocalData": true
     },
     "kalabsha-axis": {
-      "applications": 6,
+      "applications": 7,
       "activeFeatures": 1305,
       "activeLayers": 11,
       "verifiedLocalData": true
     },
     "qena-luxor-road": {
       "applications": 6,
-      "activeFeatures": 765,
+      "activeFeatures": 766,
       "activeLayers": 8,
       "verifiedLocalData": true
     },
@@ -51,19 +51,19 @@
       "verifiedLocalData": true
     },
     "qus-axis": {
-      "applications": 6,
+      "applications": 7,
       "activeFeatures": 2458,
       "activeLayers": 8,
       "verifiedLocalData": true
     },
     "dabaa-axis": {
-      "applications": 6,
+      "applications": 7,
       "activeFeatures": 885,
       "activeLayers": 6,
       "verifiedLocalData": true
     },
     "ismailia": {
-      "applications": 6,
+      "applications": 7,
       "activeFeatures": 63962,
       "activeLayers": 26,
       "verifiedLocalData": true
@@ -583,10 +583,10 @@
           "invalidCoordinates": 0
         },
         "study": {
-          "features": 0,
-          "representedSourceFeatures": 0,
-          "renderableFeatures": 0,
-          "coordinatePairs": 0,
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 5021,
           "invalidCoordinates": 0
         },
         "axis": {
@@ -622,10 +622,10 @@
       "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\قنا\\Database13022024.gdb",
       "undeclaredLayerFiles": [],
       "totals": {
-        "features": 765,
-        "sourceFeatures": 2265,
-        "coordinatePairs": 77452,
-        "renderableFeatures": 763
+        "features": 766,
+        "sourceFeatures": 2266,
+        "coordinatePairs": 82473,
+        "renderableFeatures": 764
       }
     },
     "qus-axis": {
@@ -917,6 +917,7 @@
   "errors": [],
   "warnings": [
     "dabaa-axis/study.geojson: 1 features are inactive because they are not declared for this sector",
+    "dahshur-south-link/study.geojson: 1 features are inactive because they are not declared for this sector",
     "ismailia/landcover-end: 1 source records have empty geometry and are excluded from rendering",
     "qena-luxor-road/baseline: 2 source records have empty geometry and are excluded from rendering",
     "suez-ring-link/landcover-start: 1 source records have empty geometry and are excluded from rendering",

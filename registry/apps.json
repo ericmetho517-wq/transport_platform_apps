@@ -675,11 +675,11 @@
   {
     "id": "064fecc5d9e4784db172821c100b52e0",
     "slug": "dashboard-064fecc5d9",
-    "title": "لوحة مؤشرات الأراضي العمرانية – طريق كلابشة",
+    "title": "لوحة مؤشرات الأراضي العمرانية – محور كلابشة",
     "alternateTitles": [
       "Urban Land Indicators Dashboard – Kalabsha Road"
     ],
-    "category": "تطبيقات طريق كلابشة",
+    "category": "تطبيقات محور كلابشة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -782,11 +782,11 @@
   {
     "id": "989c5ff2f91d44c096a1cb073358a4d3",
     "slug": "dashboard-989c5ff2f9",
-    "title": "لوحة مؤشرات الأراضي الزراعية – طريق كلابشة",
+    "title": "لوحة مؤشرات الأراضي الزراعية – محور كلابشة",
     "alternateTitles": [
       "Agricultural Land Indicators Dashboard – Kalabsha Road"
     ],
-    "category": "تطبيقات طريق كلابشة",
+    "category": "تطبيقات محور كلابشة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -814,11 +814,11 @@
   {
     "id": "2529bc0ae66a4f5f8e692c383d1d24ae",
     "slug": "dashboard-2529bc0ae6",
-    "title": "لوحة مؤشرات أسعار الأراضي – طريق كلابشة",
+    "title": "لوحة مؤشرات أسعار الأراضي – محور كلابشة",
     "alternateTitles": [
       "Land Price Indicators Dashboard – Kalabsha Road"
     ],
-    "category": "تطبيقات طريق كلابشة",
+    "category": "تطبيقات محور كلابشة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1286,11 +1286,11 @@
   {
     "id": "3e59ea73ec43a3289d6f09f607236912",
     "slug": "dashboard-3e59ea73ec",
-    "title": "لوحة مؤشرات الأراضي العمرانية – طريق قوص",
+    "title": "لوحة مؤشرات الأراضي العمرانية – محور قوص",
     "alternateTitles": [
       "Urban Land Indicators Dashboard – Qus Road"
     ],
-    "category": "تطبيقات طريق قوص",
+    "category": "تطبيقات محور قوص",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1393,11 +1393,11 @@
   {
     "id": "5a3aaa3b3a2647cc9280e4ee6ff5c1f6",
     "slug": "dashboard-5a3aaa3b3a",
-    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – طريق قوص",
+    "title": "لوحة مؤشرات الأراضي الزراعية – محور قوص",
     "alternateTitles": [
-      "Agricultural and Industrial Land Indicators Dashboard – Qus Road"
+      "Agricultural Land Indicators Dashboard – Qus Road"
     ],
-    "category": "تطبيقات طريق قوص",
+    "category": "تطبيقات محور قوص",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1425,11 +1425,11 @@
   {
     "id": "58fefdb551da441698ce9b40d9fccf80",
     "slug": "dashboard-58fefdb551",
-    "title": "لوحة مؤشرات أسعار الأراضي – طريق قوص",
+    "title": "لوحة مؤشرات أسعار الأراضي – محور قوص",
     "alternateTitles": [
       "Land Price Indicators Dashboard – Qus Road"
     ],
-    "category": "تطبيقات طريق قوص",
+    "category": "تطبيقات محور قوص",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1457,11 +1457,11 @@
   {
     "id": "c79fcd32aa7c12aa7095d68cd5c36ed6",
     "slug": "dashboard-c79fcd32aa",
-    "title": "لوحة مؤشرات الأراضي العمرانية و الزراعية – طريق الضبعة",
+    "title": "لوحة مؤشرات الأراضي العمرانية و الزراعية – محور الضبعة",
     "alternateTitles": [
       "Urban Land Indicators Dashboard – El Dabaa Road"
     ],
-    "category": "تطبيقات طريق الضبعة",
+    "category": "تطبيقات محور الضبعة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1551,11 +1551,11 @@
   {
     "id": "c1e29f0123aa40eda6791f0b3a81f62b",
     "slug": "dashboard-c1e29f0123",
-    "title": "لوحة مؤشرات الأراضي الزراعية – طريق الضبعة",
+    "title": "لوحة مؤشرات الأراضي الزراعية – محور الضبعة",
     "alternateTitles": [
       "Agricultural Land Indicators Dashboard – El Dabaa Road"
     ],
-    "category": "تطبيقات طريق الضبعة",
+    "category": "تطبيقات محور الضبعة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -1590,11 +1590,11 @@
   {
     "id": "594d7c7ff43e4e0f9fb3a2a65d1d8e62",
     "slug": "dashboard-594d7c7ff4",
-    "title": "لوحة مؤشرات أسعار الأراضي – طريق الضبعة",
+    "title": "لوحة مؤشرات أسعار الأراضي – محور الضبعة",
     "alternateTitles": [
       "Land Price Indicators Dashboard – El Dabaa Road"
     ],
-    "category": "تطبيقات طريق الضبعة",
+    "category": "تطبيقات محور الضبعة",
     "type": "Dashboard",
     "language": "ar",
     "direction": "rtl",
@@ -3086,5 +3086,24 @@
     "alternateTitles": ["Development Impact Dashboard – Kalabsha Road"],
     "category": "تطبيقات طريق كلابشة", "type": "Dashboard", "language": "ar", "direction": "rtl",
     "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "kalabsha"
+  },
+  {
+    "id": "dashboard-dabaa-development-impact",
+    "slug": "dashboard-dabaa-development-impact",
+    "title": "لوحة الأثر التنموي للجزء المطور – محور الضبعة",
+    "alternateTitles": ["Development Impact Dashboard – El Dabaa Axis"],
+    "category": "تطبيقات محور الضبعة",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "standardized-executive-dashboard",
+    "reportReferences": [
+      {
+        "projectGroup": "dabaa",
+        "caption": "الاثر التنموي-محور الضبعة-27-09-2026).pptx"
+      }
+    ],
+    "reportReferenceGroup": "dabaa"
   }
 ]

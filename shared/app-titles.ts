@@ -1,10 +1,10 @@
 import type { TransportApp } from "./project-runtime";
 
 const arabicTitles: Record<string, string> = {
-  "Dabaa axis": "طريق الضبعة",
-  "Development of the lands surrounding the Dabaa axis": "تطور الأراضي المحيطة بطريق الضبعة",
-  "Land Price Indicators Dashboard – El Dabaa Axis": "لوحة مؤشرات أسعار الأراضي – طريق الضبعة",
-  "Agricultural and Urban Land Indicators – El Dabaa Axis": "لوحة مؤشرات الأراضي الزراعية والعمرانية – طريق الضبعة",
+  "Dabaa axis": "محور الضبعة",
+  "Development of the lands surrounding the Dabaa axis": "تطور الأراضي المحيطة بمحور الضبعة",
+  "Land Price Indicators Dashboard – El Dabaa Axis": "لوحة مؤشرات أسعار الأراضي – محور الضبعة",
+  "Agricultural and Urban Land Indicators – El Dabaa Axis": "لوحة مؤشرات الأراضي الزراعية والعمرانية – محور الضبعة",
 };
 
 const englishTitles: Record<string, string> = {
@@ -23,9 +23,9 @@ const englishTitles: Record<string, string> = {
   "الدائري الإقليمي والروبيكي": "Regional Ring Road and Robeki Railway",
   "قياس الأثر التنموي في نطاق التأثير التنموي المباشر للقوس الشرقي للطريق الدائري خلال الـ 30 سنة القادمة": "Development Impact Assessment for the Eastern Arc of the Ring Road: Next 30 Years",
   "لوحة مؤشرات الأراضى الزراعية والعمرانية": "Agricultural and Urban Land Indicators Dashboard",
-  "تطور الاراضي المحيطة بطريق كلابشة": "Land Development Around Kalabsha Road",
+  "تطور الاراضي المحيطة بمحور كلابشة": "Land Development Around Kalabsha Axis",
   "لوحة مؤشرات أنماط و أسعار الأراضى": "Land Types and Prices Indicators Dashboard",
-  "منطقة دراسة طريق كلابشة": "Kalabsha Road Study Area",
+  "منطقة دراسة محور كلابشة": "Kalabsha Axis Study Area",
   "تطور الاراضي المحيطة بطريق قنا الأقصر": "Land Development Around Qena–Luxor Road",
   "لوحة مؤشرات الاسعار الأراضى": "Land Prices Indicators Dashboard",
   "منطقة الدراسة طريق قنا": "Qena Road Study Area",
@@ -37,9 +37,9 @@ const englishTitles: Record<string, string> = {
   "قياس الأثر التنموي في نطاق التأثير التنموي المباشر طريق السويس الحر خلال الـ 30 سنة القادمة": "Development Impact Assessment for Suez Free Road: Next 30 Years",
   "قياس الأثر الاقتصادي والتنموي طريق القاهرة - السويس الصحراوي - (السويس الحر) (2014-2024)": "Economic and Development Impact Assessment: Cairo–Suez Desert Road (2014–2024)",
   "طريق السويس": "Suez Road",
-  "تطور الاراضي المحيطة بطريق قوص": "Land Development Around Qus Road",
-  "تطبيق منطقة الدراسة طريق قوص": "Qus Road Study Area Application",
-  "طريق قوص": "Qus Road",
+  "تطور الاراضي المحيطة بمحور قوص": "Land Development Around Qus Axis",
+  "تطبيق منطقة الدراسة محور قوص": "Qus Axis Study Area Application",
+  "محور قوص": "Qus Axis",
   "لوحة مؤشرات الأراضي العمرانية – الإسماعيلية": "Urban Land Indicators Dashboard – Ismailia",
   "لوحة مؤشرات أسعار الأراضي – الإسماعيلية": "Land Prices Indicators Dashboard – Ismailia",
   "لوحة مؤشرات الأراضي الزراعية والصناعية – الإسماعيلية": "Agricultural and Industrial Land Indicators Dashboard – Ismailia",
@@ -59,14 +59,14 @@ export function localizedAppCategory(app: TransportApp, language: "ar" | "en"): 
     "western-upper-egypt": "Western Upper Egypt Road applications",
     dahshur: "Dahshur South Link applications",
     "regional-ring": "Eastern Regional Ring Road and Robeki Railway applications",
-    kalabsha: "Kalabsha Road applications",
+    kalabsha: "Kalabsha Axis applications",
     "qena-luxor": "Qena - Luxor Road applications",
     "suez-link": "Suez Ring Road Link applications",
     "suez-free": "Cairo - Suez Desert Road applications",
-    qus: "Qus Road applications",
-    dabaa: "El Dabaa Road applications",
+    qus: "Qus Axis applications",
+    dabaa: "El Dabaa Axis applications",
     ismailia: "Cairo - Ismailia Road applications",
   };
-  if (language === "ar") return /[A-Za-z]/.test(app.category) ? "تطبيقات طريق الضبعة" : app.category;
+  if (language === "ar") return /[A-Za-z]/.test(app.category) ? "تطبيقات محور الضبعة" : app.category;
   return englishCategories[app.reportReferenceGroup || ""] || "Ministry of Transport applications";
 }

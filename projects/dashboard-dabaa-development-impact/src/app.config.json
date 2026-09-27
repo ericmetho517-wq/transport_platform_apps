@@ -1,0 +1,19 @@
+{
+  "id": "dashboard-dabaa-development-impact",
+  "slug": "dashboard-dabaa-development-impact",
+  "title": "لوحة الأثر التنموي للجزء المطور – محور الضبعة",
+  "alternateTitles": ["Development Impact Dashboard – El Dabaa Axis"],
+  "category": "تطبيقات محور الضبعة",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "standardized-executive-dashboard",
+  "reportReferences": [
+    {
+      "projectGroup": "dabaa",
+      "caption": "الاثر التنموي-محور الضبعة-27-09-2026).pptx"
+    }
+  ],
+  "reportReferenceGroup": "dabaa"
+}
