@@ -60,7 +60,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .dashboard-kpis article.gold { background: #efbd49; color: #000; }
 .dashboard-kpis article.lime { background: #72e800; color: #000; }
 .dashboard-kpis.ismailia-urban-kpis article.jobs-urban { background: #efbd49; color: #000; }
-.dashboard-kpis.ismailia-urban-kpis article.jobs-services { background: #72e800; color: #000; }
+.dashboard-kpis.ismailia-urban-kpis article.jobs-services { background: #c6f5ad; color: #000; }
 .interactive-dashboard[data-dashboard-group="ismailia"] .agriculture-kpis article.orange { background:#9800c7; color:#000; }
 .dashboard-kpis span { height: 28px; min-height: 28px; max-height: 28px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 11px; font-weight: 700; line-height: 1.25; margin: 0; overflow: hidden; color: #000; }
 .dashboard-kpis strong { font-size: clamp(16px, 1.8vw, 24px); font-weight: 800; line-height: 1; margin-top: auto; white-space: nowrap; color: #000; }
