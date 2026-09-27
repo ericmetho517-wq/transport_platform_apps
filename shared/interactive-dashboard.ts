@@ -548,9 +548,9 @@ function corridorImpactMarkup(app: TransportApp, group: string): string {
     "regional-ring-road": { road: ["القوس الشرقي للطريق الدائري الإقليمي وخط الروبيكي", "Eastern Regional Ring Road and Robeki Railway"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [2150.6, 460.2, 975685, 533, 14483, 10571] },
     "kalabsha-axis": { road: ["محور كلابشة", "Kalabsha Axis"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [43.2, 34.3, 71366, 91.5, 337, 359] },
     "qus-axis": { road: ["محور قوص", "Qus Axis"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [597.2, 126.7, 33808, 24.6, 138, 131] },
-    // The approved Dabaa presentation documents the fuel-saving, investment,
-    // added-value and employment figures. No added-land total is reported.
-    "dabaa-axis": { road: ["محور الضبعة", "El Dabaa Axis"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [1.364, 0.322, 381000, 0, 5.3, 1.8] },
+    // Added land = (2023 agriculture 1,636 + urban 272) -
+    // (2014 agriculture 1,044 + urban 264) = 600 km².
+    "dabaa-axis": { road: ["محور الضبعة", "El Dabaa Axis"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [1.364, 0.322, 381000, 600, 5.3, 1.8] },
   };
   const profile = profiles[group];
   if (!profile) return "";
@@ -563,7 +563,7 @@ function corridorImpactMarkup(app: TransportApp, group: string): string {
     { color: "purple", icon: "map" as const, label: text("مساحة الأرض المضافة", "Added land area"), value: number(profile.values[3]), unit: text("( كم² )", "(km²)") },
     { color: "green", icon: "coins" as const, label: text("الاستثمارات", "Investments"), value: number(profile.values[4]), unit: text("( مليار جنيه )", "(EGP billion)") },
     { color: "blue", icon: "value" as const, label: text("القيمة المضافة", "Added value"), value: number(profile.values[5]), unit: text("( مليار جنيه )", "(EGP billion)") },
-  ].filter((_, index) => group !== "dabaa-axis" || [0, 1, 2, 4, 5].includes(index));
+  ].filter((_, index) => group !== "dabaa-axis" || [0, 1, 2, 3, 4, 5].includes(index));
   return `<main class="ismailia-impact-board corridor-impact-board" dir="${app.direction}" aria-labelledby="impact-board-title">
     <header class="impact-board-header"><div class="impact-brand"><b>${text("وزارة النقل", "Ministry of Transport")}</b><i></i></div><div class="impact-road-title">${profile.road[isEnglish ? 1 : 0]}</div><div class="impact-sector-title">${text("مؤشرات التنمية<br>البنية التحتية", "Development indicators<br>Infrastructure")}<i></i></div></header>
     <section class="impact-board-content"><h1 id="impact-board-title">${text("الأثر التنموي للجزء المطور من الطريق", "Development impact of the upgraded road segment")}</h1><h2>${profile.period[isEnglish ? 1 : 0]}</h2>
