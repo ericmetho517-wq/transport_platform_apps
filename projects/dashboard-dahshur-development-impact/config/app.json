@@ -1,7 +1,0 @@
-{
-  "applicationId": "dashboard-dahshur-development-impact",
-  "sourceDataRoot": "public/data/dashboard/dahshur-south-link",
-  "copiedDataFiles": [
-    "summary.json"
-  ]
-}

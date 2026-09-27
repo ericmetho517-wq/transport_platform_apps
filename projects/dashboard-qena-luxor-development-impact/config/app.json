@@ -1,7 +1,0 @@
-{
-  "applicationId": "dashboard-qena-luxor-development-impact",
-  "sourceDataRoot": "public/data/dashboard/qena-luxor-road",
-  "copiedDataFiles": [
-    "summary.json"
-  ]
-}

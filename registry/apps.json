@@ -3072,30 +3072,6 @@
     "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "regional-ring"
   },
   {
-    "id": "dashboard-dahshur-development-impact",
-    "slug": "dashboard-dahshur-development-impact",
-    "title": "لوحة الأثر التنموي للجزء المطور – وصلة دهشور الجنوبية",
-    "alternateTitles": ["Development Impact Dashboard – Dahshur South Link"],
-    "category": "تطبيقات وصلة دهشور الجنوبية", "type": "Dashboard", "language": "ar", "direction": "rtl",
-    "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "dahshur"
-  },
-  {
-    "id": "dashboard-suez-ring-link-development-impact",
-    "slug": "dashboard-suez-ring-link-development-impact",
-    "title": "لوحة الأثر التنموي للجزء المطور – وصلة طريق السويس من الطريق الدائري",
-    "alternateTitles": ["Development Impact Dashboard – Suez Ring Road Link"],
-    "category": "تطبيقات وصلة طريق السويس من الطريق الدائري", "type": "Dashboard", "language": "ar", "direction": "rtl",
-    "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "suez-link"
-  },
-  {
-    "id": "dashboard-qena-luxor-development-impact",
-    "slug": "dashboard-qena-luxor-development-impact",
-    "title": "لوحة الأثر التنموي للجزء المطور – طريق قنا–الأقصر",
-    "alternateTitles": ["Development Impact Dashboard – Qena–Luxor Road"],
-    "category": "تطبيقات طريق قنا–الأقصر", "type": "Dashboard", "language": "ar", "direction": "rtl",
-    "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "qena-luxor"
-  },
-  {
     "id": "dashboard-qus-development-impact",
     "slug": "dashboard-qus-development-impact",
     "title": "لوحة الأثر التنموي للجزء المطور – طريق قوص",
@@ -3110,15 +3086,5 @@
     "alternateTitles": ["Development Impact Dashboard – Kalabsha Road"],
     "category": "تطبيقات طريق كلابشة", "type": "Dashboard", "language": "ar", "direction": "rtl",
     "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "kalabsha"
-  },
-  {
-    "id": "676c18c4b7a04ae2ad1eba1bd5a255c3",
-    "slug": "dashboard-676c18c4b7",
-    "title": "لوحة الأثر الاقتصادي والتنموي للجزء المطور – طريق القاهرة–السويس الصحراوي",
-    "alternateTitles": ["Economic and Development Impact Dashboard – Cairo–Suez Desert Road"],
-    "category": "تطبيقات طريق القاهرة–السويس الصحراوي (السويس الحر)",
-    "type": "Dashboard", "language": "ar", "direction": "rtl",
-    "sourceUrl": "https://www.arcgis.com/apps/dashboards/676c18c4b7a04ae2ad1eba1bd5a255c3",
-    "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "suez-free"
   }
 ]
