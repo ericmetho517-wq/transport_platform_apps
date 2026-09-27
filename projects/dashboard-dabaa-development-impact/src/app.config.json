@@ -1,0 +1,16 @@
+{
+  "id": "dashboard-dabaa-development-impact",
+  "slug": "dashboard-dabaa-development-impact",
+  "title": "لوحة الأثر التنموي للجزء المطور – طريق الضبعة",
+  "alternateTitles": [
+    "Development Impact Dashboard – El Dabaa Road"
+  ],
+  "category": "تطبيقات dabaa",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "standardized-executive-dashboard",
+  "reportReferences": [],
+  "reportReferenceGroup": "dabaa"
+}

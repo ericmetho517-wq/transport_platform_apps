@@ -1,0 +1,7 @@
+{
+  "applicationId": "dashboard-qus-development-impact",
+  "sourceDataRoot": "public/data/dashboard/qus-axis",
+  "copiedDataFiles": [
+    "summary.json"
+  ]
+}

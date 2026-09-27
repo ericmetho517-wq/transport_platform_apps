@@ -1,0 +1,16 @@
+{
+  "id": "dashboard-suez-ring-link-development-impact",
+  "slug": "dashboard-suez-ring-link-development-impact",
+  "title": "لوحة الأثر التنموي للجزء المطور – وصلة طريق السويس من الطريق الدائري",
+  "alternateTitles": [
+    "Development Impact Dashboard – Suez Ring Road Link"
+  ],
+  "category": "تطبيقات suez-link",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "standardized-executive-dashboard",
+  "reportReferences": [],
+  "reportReferenceGroup": "suez-link"
+}

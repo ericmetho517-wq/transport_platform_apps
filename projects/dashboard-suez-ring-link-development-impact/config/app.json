@@ -1,0 +1,7 @@
+{
+  "applicationId": "dashboard-suez-ring-link-development-impact",
+  "sourceDataRoot": "public/data/dashboard/suez-ring-link",
+  "copiedDataFiles": [
+    "summary.json"
+  ]
+}

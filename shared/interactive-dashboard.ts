@@ -158,7 +158,7 @@ const isPriceDashboard = (app: TransportApp) => /سعر|أسعار|اسعار|pr
 const civilDashboardSlugs = new Set(["dashboard-4b68db62a1", "dashboard-48c0447e11", "dashboard-890d333abf", "dashboard-489e365131", "dashboard-37e01603d0", "dashboard-ba98b53679"]);
 const impactDashboardSlugs = new Set(["dashboard-35c11a505b", "dashboard-83f3738705", "dashboard-676c18c4b7", "dashboard-4138cfe326", "dashboard-f0a5bc623c"]);
 const isCivilDashboard = (app: TransportApp) => civilDashboardSlugs.has(app.slug) || /civil study/i.test(app.title);
-const isImpactDashboard = (app: TransportApp) => impactDashboardSlugs.has(app.slug) || /developmental impact|economic and developmental impact/i.test(app.title);
+const isImpactDashboard = (app: TransportApp) => impactDashboardSlugs.has(app.slug) || /developmental impact|economic and developmental impact|الأثر التنموي|الأثر الاقتصادي/i.test(app.title);
 const isUrbanDashboard = (app: TransportApp) => /urban|العمرانية|العمراني/i.test(app.title);
 
 export function dashboardGroup(app: TransportApp): string {
@@ -540,10 +540,60 @@ function westernUpperEgyptImpactMarkup(app: TransportApp): string {
   </main>`;
 }
 
+/**
+ * The executive impact treatment deliberately contains only reported, current
+ * corridor measurements.  In particular it does not turn the report's
+ * scenario/job-opportunity material into a headline projection.
+ */
+function corridorImpactMarkup(app: TransportApp, group: string): string {
+  const isEnglish = app.language === "en";
+  const profiles: Record<string, {
+    road: [string, string]; period: [string, string]; axis: number; area: number;
+    urban: number; agricultural?: { value: number; unit: "km2" | "feddan" }; industrial?: number;
+  }> = {
+    "regional-ring-road": { road: ["القوس الشرقي للطريق الدائري الإقليمي وخط الروبيكي", "Eastern Regional Ring Road and Robeki Railway"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], axis: 126.3, area: 1256, urban: 141.2 },
+    "dahshur-south-link": { road: ["وصلة دهشور الجنوبية", "Dahshur South Link"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], axis: 35.1, area: 350.5, urban: 92.6, agricultural: { value: 8674, unit: "feddan" }, industrial: 38.6 },
+    "suez-ring-link": { road: ["وصلة طريق السويس من الطريق الدائري", "Suez Ring Road Link"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], axis: 17.6, area: 154.3, urban: 87.2 },
+    "dabaa-axis": { road: ["طريق الضبعة", "El Dabaa Road"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], axis: 150, area: 4452, urban: 27.7, agricultural: { value: 826.9, unit: "km2" } },
+    "qena-luxor-road": { road: ["طريق قنا – الأقصر", "Qena–Luxor Road"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], axis: 31, area: 279.7, urban: 16.1, agricultural: { value: 2370, unit: "feddan" } },
+    "qus-axis": { road: ["طريق قوص", "Qus Road"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], axis: 19, area: 186.2, urban: 26, agricultural: { value: 2123, unit: "feddan" } },
+    "kalabsha-axis": { road: ["طريق كلابشة", "Kalabsha Road"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], axis: 23, area: 460.5, urban: 20, agricultural: { value: 24672, unit: "feddan" } },
+    "cairo-suez-road": { road: ["طريق القاهرة – السويس الصحراوي (السويس الحر)", "Cairo–Suez Desert Road (Suez Free Zone)"], period: ["خلال الفترة (2014 – 2024)", "During the period (2014 – 2024)"], axis: 114.5, area: 1613, urban: 293.1, agricultural: { value: 7.37, unit: "km2" }, industrial: 25 },
+  };
+  const profile = profiles[group];
+  if (!profile) return impactMarkup(app, group);
+  const text = (ar: string, en: string) => isEnglish ? en : ar;
+  const number = (value: number) => new Intl.NumberFormat(isEnglish ? "en-US" : "ar-EG", { maximumFractionDigits: 2 }).format(value);
+  const unavailable = text("لا توجد بيانات موثقة", "No documented data");
+  const agricultural = profile.agricultural
+    ? { value: number(profile.agricultural.value), unit: profile.agricultural.unit === "km2" ? text("(كم²)", "(km²)") : text("(فدان)", "(feddan)") }
+    : { value: unavailable, unit: "" };
+  const industrial = profile.industrial === undefined ? unavailable : number(profile.industrial);
+  const indicators = [
+    { color: "blue", icon: "map" as const, label: text("طول الطريق", "Road length"), value: number(profile.axis), unit: text("(كم)", "(km)") },
+    { color: "gold", icon: "map" as const, label: text("نطاق الدراسة", "Study area"), value: number(profile.area), unit: text("(كم²)", "(km²)") },
+    { color: "blue", icon: "value" as const, label: text("المساحة العمرانية المسجلة", "Reported urban area"), value: number(profile.urban), unit: text("(كم²)", "(km²)") },
+    { color: profile.agricultural ? "gold" : "red", icon: "map" as const, label: text("المؤشر الزراعي المسجل", "Reported agricultural indicator"), value: agricultural.value, unit: agricultural.unit },
+    { color: profile.industrial === undefined ? "red" : "blue", icon: "value" as const, label: text("المساحة الصناعية المسجلة", "Reported industrial area"), value: industrial, unit: profile.industrial === undefined ? "" : text("(كم²)", "(km²)") },
+    { color: "red", icon: "coins" as const, label: text("بيانات الأثر الاقتصادي", "Economic-impact data"), value: unavailable, unit: "" },
+  ];
+  const narrative = text(`يربط هذا العرض طول الجزء المطور ونطاق الدراسة بمؤشرات استخدامات الأرض الموثقة خلال فترة المقارنة. تُعرض المؤشرات التي لا يغطيها التقرير صراحةً كبيانات غير موثقة، دون استبدالها بتقديرات.`, `This view connects the upgraded segment and study extent to documented land-use indicators from the comparison period. Indicators not explicitly covered by the report remain unavailable rather than being estimated.`);
+  const visualCaption = text(`قراءة مقارنة: تبلغ المساحة العمرانية المسجلة ${number(profile.urban)} كم² ضمن نطاق الدراسة، بينما يوضح الاستكشاف المكاني أدناه طبقات المشروع المتاحة.`, `Comparison reading: reported urban area is ${number(profile.urban)} km² within the study extent; the spatial explorer below exposes the available project layers.`);
+  return `<main class="interactive-dashboard ismailia-impact-board corridor-impact-board" dir="${app.direction}" data-dashboard-group="${group}" data-mode="impact" aria-labelledby="impact-board-title">
+    <header class="impact-board-header"><div class="impact-brand"><b>${text("وزارة النقل", "Ministry of Transport")}</b><i></i></div><div class="impact-road-title">${profile.road[isEnglish ? 1 : 0]}</div><div class="impact-sector-title">${text("مؤشرات التنمية<br>البنية التحتية", "Development indicators<br>Infrastructure")}<i></i></div></header>
+    <section class="impact-board-content"><h1 id="impact-board-title">${text("الأثر التنموي للجزء المطور من الطريق", "Development impact of the upgraded road segment")}</h1><h2>${profile.period[isEnglish ? 1 : 0]}</h2>
+      <div class="impact-timeline" aria-label="${text("المؤشرات الرئيسية للأثر التنموي", "Key development-impact indicators")}">${indicators.map((item) => `<article class="impact-kpi ${item.color}" tabindex="0" aria-label="${item.label}: ${item.value} ${item.unit}"><div class="impact-orb">${ismailiaImpactIcon(item.icon)}<strong>${item.label}</strong></div><div class="impact-connector"></div><div class="impact-value"><bdi>${item.value}</bdi><small>${item.unit || "&nbsp;"}</small></div><div class="impact-node"></div></article>`).join("")}</div>
+      <section class="impact-evidence-grid" aria-label="${text("السياق والتحليل المكاني", "Context and spatial analysis")}"><article class="impact-narrative"><span>${text("السياق الموثق", "Documented context")}</span><p>${narrative}</p><small>${text("المصدر: التقرير الاقتصادي وملف القطاع المعتمد.", "Source: approved economic report and sector profile.")}</small></article><article class="impact-visual"><span>${text("قراءة المؤشر", "Indicator reading")}</span><strong>${number(profile.urban)} <small>${text("كم² عمراني", "km² urban")}</small></strong><div class="impact-bar"><i style="--impact-bar:${Math.min(100, profile.urban / profile.area * 100)}%"></i></div><p>${visualCaption}</p></article><section class="impact-map-panel"><div class="impact-map-heading"><span>${text("استكشاف الخريطة", "Map explorer")}</span><small>${text("تكبير، سحب، وتشغيل طبقات المشروع", "Zoom, pan and toggle project layers")}</small></div>${mapMarkup("impact-current")}</section></section>
+      <footer>${text("المؤشرات المعروضة قيم موثقة للفترة المقارنة؛ لا تتضمن فرص عمل متوقعة أو تقديرات مستقبلية.", "Indicators shown are documented values for the comparison period; no projected jobs or future estimates are included.")}</footer>
+    </section>
+  </main>`;
+}
+
 export function renderInteractiveDashboard(app: TransportApp): string {
   const group = dashboardGroup(app);
   if (app.slug === "dashboard-ismailia-development-impact") return ismailiaImpactMarkup(app);
   if (app.slug === "dashboard-western-upper-egypt-development-impact") return westernUpperEgyptImpactMarkup(app);
+  if (isImpactDashboard(app)) return corridorImpactMarkup(app, group);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
   if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
   if (isUrbanDashboard(app)) return landMarkup(app, group);

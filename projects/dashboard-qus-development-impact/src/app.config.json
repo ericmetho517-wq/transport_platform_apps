@@ -1,0 +1,16 @@
+{
+  "id": "dashboard-qus-development-impact",
+  "slug": "dashboard-qus-development-impact",
+  "title": "لوحة الأثر التنموي للجزء المطور – طريق قوص",
+  "alternateTitles": [
+    "Development Impact Dashboard – Qus Road"
+  ],
+  "category": "تطبيقات qus",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "standardized-executive-dashboard",
+  "reportReferences": [],
+  "reportReferenceGroup": "qus"
+}

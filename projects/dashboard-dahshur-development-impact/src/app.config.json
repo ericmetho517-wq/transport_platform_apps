@@ -1,0 +1,16 @@
+{
+  "id": "dashboard-dahshur-development-impact",
+  "slug": "dashboard-dahshur-development-impact",
+  "title": "لوحة الأثر التنموي للجزء المطور – وصلة دهشور الجنوبية",
+  "alternateTitles": [
+    "Development Impact Dashboard – Dahshur South Link"
+  ],
+  "category": "تطبيقات dahshur",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "standardized-executive-dashboard",
+  "reportReferences": [],
+  "reportReferenceGroup": "dahshur"
+}

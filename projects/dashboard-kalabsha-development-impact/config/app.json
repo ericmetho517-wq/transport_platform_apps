@@ -1,0 +1,7 @@
+{
+  "applicationId": "dashboard-kalabsha-development-impact",
+  "sourceDataRoot": "public/data/dashboard/kalabsha-axis",
+  "copiedDataFiles": [
+    "summary.json"
+  ]
+}

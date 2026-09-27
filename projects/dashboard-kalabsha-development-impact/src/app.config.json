@@ -1,0 +1,16 @@
+{
+  "id": "dashboard-kalabsha-development-impact",
+  "slug": "dashboard-kalabsha-development-impact",
+  "title": "لوحة الأثر التنموي للجزء المطور – طريق كلابشة",
+  "alternateTitles": [
+    "Development Impact Dashboard – Kalabsha Road"
+  ],
+  "category": "تطبيقات kalabsha",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "standardized-executive-dashboard",
+  "reportReferences": [],
+  "reportReferenceGroup": "kalabsha"
+}

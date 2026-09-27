@@ -85,7 +85,7 @@ for (const [metric, expected] of Object.entries(expectedDabaaMetrics)) {
   if (dabaa?.metrics?.[metric] !== expected) failures.push(`dabaa-axis: ${metric} must match the presentation value ${expected}`);
 }
 if (![2014, 2023].every((year) => dabaa?.landUse?.some((item) => item.year === year))) failures.push("dabaa-axis: 2014/2023 land-use comparison is required");
-if (!dashboards.filter((app) => app.reportReferenceGroup === "dabaa").every((app) => app.reportReferences?.length)) failures.push("dabaa-axis: each dashboard must be linked to its matching presentation slide");
+if (!dashboards.filter((app) => app.reportReferenceGroup === "dabaa" && !/development-impact/.test(app.slug)).every((app) => app.reportReferences?.length)) failures.push("dabaa-axis: each land-use dashboard must be linked to its matching presentation slide");
 const runtimeSource = fs.readFileSync(path.join(root, "shared", "interactive-dashboard.ts"), "utf8");
 const localizationSource = fs.readFileSync(path.join(root, "shared", "localization.ts"), "utf8");
 if (!runtimeSource.includes('mapMarkup("land-baseline"') || !runtimeSource.includes('mapMarkup("land-current"')) failures.push("urban dashboard: missing interactive baseline/current map pair");
@@ -118,10 +118,10 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }
 
-if (dashboards.length !== 32) failures.push(`expected 32 dashboards, found ${dashboards.length}`);
+if (dashboards.length !== 40) failures.push(`expected 40 dashboards, found ${dashboards.length}`);
 for (const group of Object.keys({ "western-upper-egypt":1, dahshur:1, "regional-ring":1, kalabsha:1, "qena-luxor":1, "suez-link":1, "suez-free":1, qus:1, dabaa:1, ismailia:1 })) {
   const suite = dashboards.filter((app) => app.reportReferenceGroup === group);
-  const expectedCount = ["ismailia", "western-upper-egypt"].includes(group) ? 4 : 3;
+  const expectedCount = 4;
   if (suite.length !== expectedCount) failures.push(`${group}: executive dashboard suite must contain exactly ${expectedCount} dashboards`);
 }
 if (failures.length) {

@@ -1,0 +1,8 @@
+{
+  "sourceDataRoot": "public/data/dashboard/qena-luxor-road",
+  "sources": [
+    "summary.json",
+    "sector-profiles.json"
+  ],
+  "purpose": "Documented current development-impact indicators"
+}

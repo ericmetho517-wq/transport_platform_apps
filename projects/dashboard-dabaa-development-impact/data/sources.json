@@ -1,0 +1,8 @@
+{
+  "sourceDataRoot": "public/data/dashboard/dabaa-axis",
+  "sources": [
+    "summary.json",
+    "sector-profiles.json"
+  ],
+  "purpose": "Documented current development-impact indicators"
+}
