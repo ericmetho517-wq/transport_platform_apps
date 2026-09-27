@@ -54,10 +54,13 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .price-dashboard .price-columns.price-filtered .price-column.is-selected { width:100%; height:100%; grid-template-rows:96px repeat(3,minmax(0,1fr)); }
 .price-temporal-map-pair { min-height: 420px; }
 .dashboard-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); flex: 0 0 auto; width: 100%; }
+.dashboard-kpis.ismailia-urban-kpis { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .dashboard-kpis article { min-width: 0; height: 68px; min-height: 68px; max-height: 68px; padding: 6px 8px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; align-items: center; background: #f6f3ed; color: #000; text-align: center; border-inline-end: 1px solid #d2d2d2; }
 .dashboard-kpis article.blue { background: #4f82e9; color: #000; }
 .dashboard-kpis article.gold { background: #efbd49; color: #000; }
 .dashboard-kpis article.lime { background: #72e800; color: #000; }
+.dashboard-kpis.ismailia-urban-kpis article.jobs-urban { background: #efbd49; color: #000; }
+.dashboard-kpis.ismailia-urban-kpis article.jobs-services { background: #72e800; color: #000; }
 .interactive-dashboard[data-dashboard-group="ismailia"] .agriculture-kpis article.orange { background:#9800c7; color:#000; }
 .dashboard-kpis span { height: 28px; min-height: 28px; max-height: 28px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 11px; font-weight: 700; line-height: 1.25; margin: 0; overflow: hidden; color: #000; }
 .dashboard-kpis strong { font-size: clamp(16px, 1.8vw, 24px); font-weight: 800; line-height: 1; margin-top: auto; white-space: nowrap; color: #000; }
@@ -683,6 +686,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .price-column header, .price-column > div { min-height: 130px; }
   .price-workspace { grid-template-rows: auto 360px 320px; }
   .dashboard-kpis { grid-template-columns: 1fr; }
+  .dashboard-kpis.ismailia-urban-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .south-agriculture-kpis { grid-template-columns:1fr 1fr; }
   .ismailia-reference-layout { grid-template-columns:1fr; grid-template-areas:"left-rail" "dashboard-main"; }
   .ismailia-left-rail { grid-template-columns:1fr 1fr; grid-template-rows:auto minmax(300px,auto); }
