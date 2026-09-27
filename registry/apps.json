@@ -3088,14 +3088,6 @@
     "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "suez-link"
   },
   {
-    "id": "dashboard-dabaa-development-impact",
-    "slug": "dashboard-dabaa-development-impact",
-    "title": "لوحة الأثر التنموي للجزء المطور – طريق الضبعة",
-    "alternateTitles": ["Development Impact Dashboard – El Dabaa Road"],
-    "category": "تطبيقات طريق الضبعة", "type": "Dashboard", "language": "ar", "direction": "rtl",
-    "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "dabaa"
-  },
-  {
     "id": "dashboard-qena-luxor-development-impact",
     "slug": "dashboard-qena-luxor-development-impact",
     "title": "لوحة الأثر التنموي للجزء المطور – طريق قنا–الأقصر",
