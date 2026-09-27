@@ -1788,6 +1788,8 @@
       "axisLengthKm": 114.5,
       "urbanChangeKm2": 293.1,
       "industrialChangeKm2": 25,
+      "agriculturalWorkers": 4665.25,
+      "industrialWorkers": 58662,
       "jobOpportunities": 14183,
       "urbanChangePercent": 100
     },
