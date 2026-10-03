@@ -2551,8 +2551,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const names = document.documentElement.lang === "en"
         ? { urban: "urban land", agricultural: "agricultural land", industrial: "industrial land" }
         : { urban: "العمران", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية" };
-      if (document.documentElement.lang === "en") return mode === "all" ? `Changed share of classified ${names[kind]}` : `${mode === "changed" ? "Changed" : "Unchanged"} among visible classified ${names[kind]}`;
-      return mode === "all" ? `نسبة المتغير من ${names[kind]} المصنفة` : `نسبة ${mode === "changed" ? "المتغير" : "غير المتغير"} من ${names[kind]} الظاهرة`;
+      if (document.documentElement.lang === "en") return mode === "all" ? `All classified ${names[kind]}` : `${mode === "changed" ? "Changed" : "Unchanged"} among visible classified ${names[kind]}`;
+      return mode === "all" ? `إجمالي ${names[kind]} المصنفة المعروضة` : `نسبة ${mode === "changed" ? "المتغير" : "غير المتغير"} من ${names[kind]} الظاهرة`;
     };
     const updateChangeStatusGauge = (mode: ChangeMode) => {
       const selectedSector = dashboardSectorFilter?.value || "all";
@@ -2598,11 +2598,15 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         gauge.removeAttribute("data-status-estimate");
         gauge.removeAttribute("title");
         if (!total) { setGaugeUnavailable(gauge); return; }
+        // "All elements" covers the entire documented classified set, so its
+        // gauge must always read 100%.  State-specific filters continue to
+        // show their true share against that same unchanged denominator.
+        if (mode === "all") { setGauge(gauge, 100); return; }
         // Always keep the original classified denominator.  Selecting a
         // state filters the map but must not turn the gauge into 100% merely
         // because only that state remains visible; changed + unchanged must
         // still reconcile to 100% of the same source feature set.
-        const displayedStatus: ChangeStatus = mode === "all" ? "changed" : mode;
+        const displayedStatus: ChangeStatus = mode;
         const share = statusShare(areas, displayedStatus);
         if (share === null || (areas?.[displayedStatus] || 0) <= 0) setGaugeUnavailable(gauge);
         else setGauge(gauge, share);
