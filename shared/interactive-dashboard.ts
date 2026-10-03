@@ -2404,6 +2404,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const landuseSelect = root.querySelector<HTMLSelectElement>("#dashboard-landuse-filter");
         if (landuseSelect) {
           landuseSelect.value = landuseSelect.dataset.defaultLanduse || "all";
+          root.dataset.resetLanduseFilter = "true";
           landuseSelect.dispatchEvent(new Event("change"));
         }
         const sectorSelect = root.querySelector<HTMLSelectElement>("#dashboard-sector-filter");
@@ -2478,10 +2479,11 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const availableLanduseCodes = mappedLanduseCodes.size
         ? mappedLanduseCodes
         : new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "99"]);
-      // Respect the dashboard's declared scope. A one-class dashboard starts
-      // with its sole class active; a mixed dashboard starts on its scoped
-      // "all" state rather than revealing unrelated land-use classes.
+      // The visible choice identifies the dashboard's scope, but every map
+      // starts with all source features shown. Filtering is applied only
+      // after the user changes this control.
       landuseSelect.value = dashboardDefaultLanduse;
+      let hasExplicitLanduseFilter = false;
 
       const getAcceptedLanduseForFilter = (selectedFilter: string): { codes: Set<string>; allowedLayers: Set<string> } => {
         if (selectedFilter === "urban") {
@@ -2493,17 +2495,11 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         if (selectedFilter === "industrial") {
           return { codes: new Set(["1"]), allowedLayers: new Set(["industrial"]) };
         }
-        const codes = new Set<string>();
-        dashboardLanduseKinds.forEach((kind) => {
-          if (kind === "urban") codes.add("3");
-          if (kind === "agricultural") codes.add("0");
-          if (kind === "industrial") codes.add("1");
-        });
-        return { codes: codes.size ? codes : availableLanduseCodes, allowedLayers: new Set(dashboardLanduseKinds) };
+        return { codes: availableLanduseCodes, allowedLayers: new Set(["urban", "agricultural", "industrial"]) };
       };
 
       const applyLanduseFilter = () => {
-        const selected = landuseSelect.value || "all";
+        const selected = hasExplicitLanduseFilter ? (landuseSelect.value || "all") : "all";
         const { codes, allowedLayers } = getAcceptedLanduseForFilter(selected);
 
         const priceColumns = root.querySelector<HTMLElement>("#price-columns");
@@ -2564,7 +2560,15 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         root.dataset.landuseFilter = selected;
         root.dispatchEvent(new CustomEvent("dashboard-landuse-filter", { detail: selected }));
       };
-      landuseSelect.addEventListener("change", applyLanduseFilter);
+      landuseSelect.addEventListener("change", () => {
+        if (root.dataset.resetLanduseFilter === "true") {
+          delete root.dataset.resetLanduseFilter;
+          hasExplicitLanduseFilter = false;
+        } else {
+          hasExplicitLanduseFilter = true;
+        }
+        applyLanduseFilter();
+      });
       applyLanduseFilter();
     }
     type ChangeStatus = "changed" | "unchanged";
