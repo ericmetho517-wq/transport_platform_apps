@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-29T13:18:31.619Z",
-  "applications": 71,
+  "generatedAt": "2026-10-03T10:48:11.975Z",
+  "applications": 73,
   "counts": {
-    "Dashboard": 40,
+    "Dashboard": 42,
     "StoryMap": 11,
     "Instant Filter Gallery": 10,
     "Web AppViewer": 10
@@ -18,11 +18,11 @@
     "qus": 7,
     "dabaa": 7,
     "ismailia": 7,
-    "metro-third-line": 2,
-    "kafr-dawood-sadat": 2
+    "metro-third-line": 3,
+    "kafr-dawood-sadat": 3
   },
   "checks": {
-    "projectEntrypoints": 71,
+    "projectEntrypoints": 73,
     "sectorSummaries": 12,
     "reportProfiles": 10,
     "crossSectorReferences": 0,
@@ -41,8 +41,10 @@
     "dashboard-35c11a505b: no embedded report screenshot; runtime remains data-driven",
     "dashboard-qus-development-impact: no embedded report screenshot; runtime remains data-driven",
     "dashboard-kalabsha-development-impact: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-d67b9ab1e0: no embedded report screenshot; runtime remains data-driven",
     "dashboard-64d581f5e6: no embedded report screenshot; runtime remains data-driven",
     "dashboard-78d4f75a91: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-4e09265d79: no embedded report screenshot; runtime remains data-driven",
     "dashboard-50863f6ddb: no embedded report screenshot; runtime remains data-driven",
     "dashboard-554ea99a90: no embedded report screenshot; runtime remains data-driven",
     "kalabsha-axis: urban exists in Data but contains zero source records",

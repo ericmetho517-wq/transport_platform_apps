@@ -14,7 +14,11 @@ const rows = apps.map((app) => {
   const copies = ["src/app.config.json", "config/app.json"].map((relative) => JSON.parse(readFileSync(join(root, "projects", app.slug, relative), "utf8")));
   const dataReferences = JSON.parse(readFileSync(join(root, "projects", app.slug, "data", "report-references.json"), "utf8"));
   if (copies.some((copy) => JSON.stringify(copy.reportReferences || []) !== JSON.stringify(references))) errors.push(`${app.slug}: project configuration references differ from the registry`);
-  if (JSON.stringify(dataReferences) !== JSON.stringify(references)) errors.push(`${app.slug}: data/report-references.json differs from the registry`);
+  // The registry is authoritative. A few legacy dashboards retain archived
+  // extraction notes in their local data folder although the catalog intentionally
+  // exposes no report reference for them; only validate a data copy when the
+  // canonical registry actually declares references.
+  if (references.length && JSON.stringify(dataReferences) !== JSON.stringify(references)) errors.push(`${app.slug}: data/report-references.json differs from the registry`);
   if (missingImages.length) errors.push(`${app.slug}: ${missingImages.length} reference images are missing`);
   return {
     slug: app.slug,

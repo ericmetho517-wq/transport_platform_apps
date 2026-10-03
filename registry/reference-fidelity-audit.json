@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-29T13:18:37.785Z",
-  "applications": 71,
+  "generatedAt": "2026-10-03T10:48:16.967Z",
+  "applications": 73,
   "fidelityCounts": {
     "sector-and-application-type-reference": 34,
     "exact-item-reference": 21,
-    "source-reference-unavailable": 16
+    "source-reference-unavailable": 18
   },
   "typeCoverage": {
     "Dashboard": {
-      "applications": 40,
+      "applications": 42,
       "withReferences": 28
     },
     "StoryMap": {
@@ -1141,6 +1141,18 @@
       "missingImages": []
     },
     {
+      "slug": "dashboard-d67b9ab1e0",
+      "title": "اللوحة التفاعلية لأسعار الأراضي – خط المترو الثالث",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "metro-third-line",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
       "slug": "dashboard-64d581f5e6",
       "title": "لوحة مؤشرات الأراضي العمرانية – خط المترو الثالث",
       "type": "Dashboard",
@@ -1158,6 +1170,18 @@
       "type": "Dashboard",
       "language": "ar",
       "sector": "metro-third-line",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-4e09265d79",
+      "title": "اللوحة التفاعلية لأسعار الأراضي – خط سكة حديد كفر داود–السادات",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "kafr-dawood-sadat",
       "referenceCount": 0,
       "fidelity": "source-reference-unavailable",
       "reports": [],

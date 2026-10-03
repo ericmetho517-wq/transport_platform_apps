@@ -11,12 +11,12 @@ const aliases = {
   "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
   "metro-third-line": "metro-third-line", "kafr-dawood-sadat": "kafr-dawood-sadat",
 };
-const expectedCounts = { Dashboard: 40, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
+const expectedCounts = { Dashboard: 42, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
 const expectedDashboardsBySector = {
   dabaa: 4, dahshur: 3, kalabsha: 4, "qena-luxor": 3, qus: 4,
   "regional-ring": 4, "suez-free": 3, "suez-link": 3,
   "western-upper-egypt": 4, ismailia: 4,
-  "metro-third-line": 2, "kafr-dawood-sadat": 2,
+  "metro-third-line": 3, "kafr-dawood-sadat": 3,
 };
 const localDataOnlyGroups = new Set(["metro-third-line", "kafr-dawood-sadat"]);
 const errors = [];

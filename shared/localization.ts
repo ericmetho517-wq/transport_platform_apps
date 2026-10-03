@@ -1,6 +1,9 @@
 import type { TransportApp } from "./project-runtime";
 
 const replacements: Array<[string, string]> = [
+  ["\u0625\u062c\u0645\u0627\u0644\u064a\u0627\u062a \u0645\u0648\u062b\u0642\u0629 \u0645\u0646 \u0645\u0635\u062f\u0631 \u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u0645\u0634\u0631\u0648\u0639 (\u062c\u0646\u064a\u0647 \u0645\u0635\u0631\u064a)", "Documented totals from the project data source (EGP)"],
+  ["\u0645\u0642\u0627\u0631\u0646\u0629 \u0625\u062c\u0645\u0627\u0644\u064a\u0627\u062a \u0623\u0633\u0639\u0627\u0631 \u0627\u0644\u0623\u0631\u0627\u0636\u064a \u0627\u0644\u0645\u0648\u062b\u0642\u0629 (\u062c\u0646\u064a\u0647 \u0645\u0635\u0631\u064a)", "Documented land-price totals comparison (EGP)"],
+  ["\u0646\u0648\u0639 \u0627\u0644\u0623\u0631\u0636", "Land type"],
   ["المؤشرات الرئيسية للأثر التنموي للجزء المطور من طريق القاهرة - الإسماعيلية", "Key development-impact indicators for the developed Cairo–Ismailia Road section"],
   ["الأثر التنموي للجزء المطور من الطريق", "Development impact of the developed road section"],
   ["خلال الفترة ( 2016 – 2026 )", "During the period (2016–2026)"],

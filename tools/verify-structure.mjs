@@ -14,7 +14,10 @@ for (const app of registry) {
 const counts = registry.reduce((acc, app) => ({...acc, [app.type]: (acc[app.type] || 0) + 1}), {});
 const withReportReferences = registry.filter((app) => app.reportReferences?.length).length;
 console.log(JSON.stringify({applications: registry.length, counts, withReportReferences, missingFiles: missing.length}, null, 2));
-if (registry.length !== 71 || missing.length) {
+// The catalog is intentionally expanded as new verified dashboard pairs are added.
+// Keep this baseline aligned with the checked-in registry so deployment validation
+// verifies structure rather than rejecting legitimate additions.
+if (registry.length !== 73 || missing.length) {
   console.error(missing.join("\n"));
   process.exit(1);
 }
