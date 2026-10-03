@@ -1439,6 +1439,17 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   if (!pairCount) {
     [minX, minY, maxX, maxY] = fallbackBounds[group] || [24, 22, 36, 32];
   }
+  // Fit the entire documented study extent on first load, with enough
+  // breathing room to keep its boundary and edge features visible.  The
+  // previous edge-to-edge fit (plus a special Ismailia zoom) clipped parts of
+  // several study areas as soon as a dashboard opened.
+  const initialExtentPadding = 0.14;
+  const sourceWidth = Math.max(maxX - minX, .00001);
+  const sourceHeight = Math.max(maxY - minY, .00001);
+  minX -= sourceWidth * initialExtentPadding;
+  maxX += sourceWidth * initialExtentPadding;
+  minY -= sourceHeight * initialExtentPadding;
+  maxY += sourceHeight * initialExtentPadding;
   let viewMinX = minX, viewMaxX = maxX, viewMinY = minY, viewMaxY = maxY;
   const rawWidth = Math.max(maxX - minX, .00001), rawHeight = Math.max(maxY - minY, .00001);
   const latitudeFactor = Math.max(Math.cos(((minY + maxY) / 2) * Math.PI / 180), .35);
@@ -1911,7 +1922,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
   }
 
-  const defaultZoom = group === "ismailia" ? 1.18 : 1;
+  // The expanded extent above is already the default fit; never apply a
+  // second group-specific zoom on top of it.
+  const defaultZoom = 1;
   const defaultTx = (1000 - 1000 * defaultZoom) / 2;
   const defaultTy = (520 - 520 * defaultZoom) / 2;
   let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
