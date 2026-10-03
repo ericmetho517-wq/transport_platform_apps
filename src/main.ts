@@ -179,6 +179,23 @@ if ("IntersectionObserver" in window) {
   }), { rootMargin: "0px 0px -40px", threshold: 0.08 });
 }
 
+// Keep every corridor's executive dashboards in the same RTL reading order:
+// urban first (right), agriculture/industry second, then land prices.  Other
+// application types retain their registry order after those dashboards.
+const cardRank = (app: TransportApp) => {
+  if (app.type !== "Dashboard") return 20;
+  const title = `${app.title} ${app.alternateTitles?.join(" ") || ""}`;
+  if (/العمرانية|urban/i.test(title)) return 0;
+  if (/الزراعية|الصناعية|agricultural|industrial/i.test(title)) return 1;
+  if (/أسعار|prices?|price/i.test(title)) return 2;
+  if (/الأثر التنموي|development impact/i.test(title)) return 3;
+  return 4;
+};
+const sortGroupCards = (items: TransportApp[]) => items
+  .map((app, index) => ({ app, index }))
+  .sort((left, right) => cardRank(left.app) - cardRank(right.app) || left.index - right.index)
+  .map(({ app }) => app);
+
 const render = () => {
   const query = search.value.trim().toLocaleLowerCase();
   const type = typeFilter.value;
@@ -199,7 +216,7 @@ const render = () => {
     (groups as [string, string, TransportApp[]][]).push(sharedGroup);
   }
   let cardIndex = 0;
-  grid.innerHTML = groups.map(([value, label, items]) => { const groupLabel = platformLanguage === "en" ? (englishAxisLabels[value] || label) : label; return `<section class="sector-group" aria-label="${groupLabel}"><div class="sector-group-heading"><div><span>${t("قطاع", "Sector")}</span><h3>${groupLabel}</h3></div></div><div class="sector-group-grid">${items.map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" target="_blank" rel="noopener noreferrer" dir="${platformLanguage === "en" ? "ltr" : "rtl"}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${displayTitle(app)}</h3><p>${platformLanguage === "en" ? groupLabel : localizedAppCategory(app, "ar")}</p><span class="card-language">${platformLanguage === "en" ? "EN" : "ع"}</span><span class="open">${t("فتح التطبيق", "Open application")} <b>${platformLanguage === "en" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${t("لا توجد نتائج مطابقة", "No matching applications")}</b><span>${t("جرّب تغيير خيارات البحث والتصفية.", "Try changing the filters.")}</span><button type="button" data-reset-empty>${t("عرض جميع التطبيقات", "View all applications")}</button></div>`;
+  grid.innerHTML = groups.map(([value, label, items]) => { const groupLabel = platformLanguage === "en" ? (englishAxisLabels[value] || label) : label; return `<section class="sector-group" aria-label="${groupLabel}"><div class="sector-group-heading"><div><span>${t("قطاع", "Sector")}</span><h3>${groupLabel}</h3></div></div><div class="sector-group-grid">${sortGroupCards(items).map((app) => `<a class="app-card type-${typeClass[app.type] || "default"}" href="./projects/${app.slug}/index.html?lang=${platformLanguage}" target="_blank" rel="noopener noreferrer" dir="${platformLanguage === "en" ? "ltr" : "rtl"}" style="--card-index:${cardIndex++ % 12}"><span class="card-type">${displayTypeLabels[app.type] || app.type}</span><span class="card-icon" aria-hidden="true">${typeIcon[app.type] || "·"}</span><h3>${displayTitle(app)}</h3><p>${platformLanguage === "en" ? groupLabel : localizedAppCategory(app, "ar")}</p><span class="card-language">${platformLanguage === "en" ? "EN" : "ع"}</span><span class="open">${t("فتح التطبيق", "Open application")} <b>${platformLanguage === "en" ? "→" : "←"}</b></span></a>`).join("")}</div></section>`; }).join("") || `<div class="empty"><b>${t("لا توجد نتائج مطابقة", "No matching applications")}</b><span>${t("جرّب تغيير خيارات البحث والتصفية.", "Try changing the filters.")}</span><button type="button" data-reset-empty>${t("عرض جميع التطبيقات", "View all applications")}</button></div>`;
   requestAnimationFrame(() => grid.querySelectorAll<HTMLElement>(".app-card").forEach((card) => cardObserver ? cardObserver.observe(card) : card.classList.add("is-visible")));
   syncFiltersToUrl();
 };
