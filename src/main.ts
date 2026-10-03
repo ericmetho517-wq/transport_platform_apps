@@ -184,6 +184,14 @@ if ("IntersectionObserver" in window) {
 // application types retain their registry order after those dashboards.
 const cardRank = (app: TransportApp) => {
   if (app.type !== "Dashboard") return 20;
+  // The Kafr Dawood–Sadat price entry retains an old alternate English title
+  // that mentions agriculture/industry, so rank these three dashboard cards
+  // explicitly instead of allowing that metadata to displace the land view.
+  if (app.reportReferenceGroup === "kafr-dawood-sadat") {
+    if (app.slug === "dashboard-50863f6ddb") return 0;
+    if (app.slug === "dashboard-554ea99a90") return 1;
+    if (app.slug === "dashboard-4e09265d79") return 2;
+  }
   const title = `${app.title} ${app.alternateTitles?.join(" ") || ""}`;
   if (/العمرانية|urban/i.test(title)) return 0;
   if (/الزراعية|الصناعية|agricultural|industrial/i.test(title)) return 1;
