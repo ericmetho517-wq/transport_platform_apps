@@ -1344,6 +1344,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       : imageryTiles.current;
   const temporalLayers: LayerName[] = ["landcover-start", "landcover-end"];
   const metroLine3 = group === "metro-third-line";
+  const dabaaDerivedChange = group === "dabaa-axis";
   const qenaCurrentFallback = group === "qena-luxor-road" && !summary.layers.includes("landcover-end") && summary.layers.includes("baseline");
   const suezTransport = group === "cairo-suez-road" || group === "suez-ring-link";
   const usableLayers = summary.layers
@@ -1366,7 +1367,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   // urban/agricultural/industrial files are summary overlays (and can use a
   // different colour convention), so rendering them together duplicates
   // geometry and bypasses the per-polygon change-status filter.
-  const temporalEndLayers: LayerName[] = ["study", "landcover-end", ...transportLayerNames, ...(metroLine3 ? ["Metro_Station"] : ["axis"])];
+  // Dabaa's authoritative presentation documents its urban and agricultural
+  // change shares at layer level (rather than a per-polygon status field).
+  // Keep those verified change overlays in the current pane so the status
+  // selector has a real visible result there.
+  const temporalEndLayers: LayerName[] = ["study", "landcover-end", ...(dabaaDerivedChange ? ["urban", "agricultural"] as LayerName[] : []), ...transportLayerNames, ...(metroLine3 ? ["Metro_Station"] : ["axis"])];
   const requestedLayers = (storyMode
     // Story maps always request the study footprint directly. Some legacy
     // summaries did not list it even though the sector's verified GeoJSON is
@@ -1517,7 +1522,14 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       // In the Ismailia data field «حالة التغير»: 1 = changed, 2 = unchanged.
       // Check the negative Arabic forms first because «غير متغير» also
       // contains the positive word «متغير».
-      const exactStatus = normalizeChangeStatus(sourceChangeStatus(feature.properties));
+      let exactStatus = normalizeChangeStatus(sourceChangeStatus(feature.properties));
+      // The Dabaa GDB has documented 2014/2023 change totals but no feature
+      // status field. Its two dedicated change layers are therefore the
+      // changed state; the period land-cover is the unchanged context layer.
+      if (exactStatus === "unknown" && dabaaDerivedChange) {
+        if (layer === "urban" || layer === "agricultural") exactStatus = "changed";
+        else if (layer === "landcover-start" || layer === "landcover-end") exactStatus = "unchanged";
+      }
       path.dataset.changeStatus = exactStatus;
       const featureSector = sectorOf(feature.properties);
       if (featureSector) {
@@ -2550,6 +2562,19 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         }
       });
     }
+    // The Dabaa source documents the share of changed urban and agricultural
+    // land in its 2014–2023 report, but does not include a feature-level
+    // `change_status` field.  Use those documented report shares as the
+    // gauge denominator so the status control remains meaningful: all = 100,
+    // changed = documented share, unchanged = remaining share.
+    if (group === "dabaa-axis" && !Object.values(statusAreas).some((areas) => areas.changed + areas.unchanged > 0)) {
+      (['urban', 'agricultural'] as const).forEach((kind) => {
+        const documentedShare = Number(summary.profile?.metrics[`${kind}ChangePercent`] ?? summary.metrics[`${kind}ChangePercent`] ?? 0);
+        if (!Number.isFinite(documentedShare) || documentedShare <= 0) return;
+        statusAreas[kind].changed = Math.min(documentedShare, 100);
+        statusAreas[kind].unchanged = Math.max(100 - documentedShare, 0);
+      });
+    }
     const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
       group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector]?.[kind] : statusAreas[kind];
     const statusTotalFor = (areas?: Record<ChangeStatus, number>) => (areas?.changed || 0) + (areas?.unchanged || 0);
@@ -2564,6 +2589,13 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const names = document.documentElement.lang === "en"
         ? { urban: "urban land", agricultural: "agricultural land", industrial: "industrial land" }
         : { urban: "العمران", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية" };
+      if (group === "dabaa-axis") {
+        const dabaaNames = document.documentElement.lang === "en"
+          ? { urban: "urban change", agricultural: "agricultural change", industrial: "industrial change" }
+          : { urban: "التغير العمراني", agricultural: "التغير الزراعي", industrial: "التغير الصناعي" };
+        if (document.documentElement.lang === "en") return mode === "all" ? `All classified land – ${dabaaNames[kind]}` : `${mode === "changed" ? dabaaNames[kind] : `Unchanged ${names[kind]}`} share`;
+        return mode === "all" ? `إجمالي العناصر المصنفة – ${dabaaNames[kind]}` : `نسبة ${mode === "changed" ? dabaaNames[kind] : `غير المتغير من ${names[kind]}`}`;
+      }
       if (document.documentElement.lang === "en") return mode === "all" ? `All classified ${names[kind]}` : `${mode === "changed" ? "Changed" : "Unchanged"} among visible classified ${names[kind]}`;
       return mode === "all" ? `إجمالي ${names[kind]} المصنفة المعروضة` : `نسبة ${mode === "changed" ? "المتغير" : "غير المتغير"} من ${names[kind]} الظاهرة`;
     };
