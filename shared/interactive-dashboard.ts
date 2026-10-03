@@ -229,25 +229,38 @@ function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): 
 
 export const renderSectorMapMarkup = mapMarkup;
 
+type LanduseKind = "urban" | "agricultural" | "industrial";
+
+function landuseKindsForDashboard(app: TransportApp): LanduseKind[] {
+  const title = app.title.toLowerCase();
+  const hasUrban = /العمرانية|العمراني|urban/.test(title);
+  const hasAgriculture = /الزراعية|الزراعي|agricultural/.test(title);
+  const hasIndustry = /الصناعية|الصناعي|industrial/.test(title);
+
+  if (hasUrban && hasAgriculture) return ["urban", "agricultural"];
+  if (hasUrban) return ["urban"];
+  if (hasAgriculture && hasIndustry) return ["agricultural", "industrial"];
+  if (hasAgriculture) return ["agricultural"];
+  return [];
+}
+
 function dashboardHeader(app: TransportApp, group = ""): string {
-  const isAgricultureAndIndustry = /الزراعية.*الصناعية|agricultural.*industrial/i.test(app.title) || group === "qus-axis" || group === "kalabsha-axis" || group === "qena-luxor-road";
-  const isDabaaLandDashboard = group === "dabaa-axis";
-  const isAgriculturalDashboard = /الأراضي الزراعية|agricultural/i.test(app.title) && !isPriceDashboard(app);
-  const isUrbanDashboard = /العمرانية|urban/i.test(app.title) && !isPriceDashboard(app) && !isDabaaLandDashboard;
-  // Price dashboards retain all documented price classes.  Land-indicator
-  // dashboards intentionally expose only the agricultural and industrial
-  // choices: urban land remains rendered on the map and in its indicators,
-  // but is not a selectable land-use filter.
+  const landuseKinds = landuseKindsForDashboard(app);
+  // Price dashboards compare all documented price classes. Land dashboards
+  // are deliberately scoped to the land-use classes named in their title.
+  // A single-class dashboard therefore starts on that class, while a mixed
+  // dashboard offers its named classes plus an "all" reset option.
   const fixedLanduseOptions = `<option value="all">كل الاستخدامات</option><option value="urban">العمران</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`;
-  const landIndicatorOptions = `<option value="all">كل الاستخدامات</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`;
-  const isLandIndicatorDashboard = isDabaaLandDashboard || isUrbanDashboard || isAgriculturalDashboard || isAgricultureAndIndustry;
+  const landuseLabels: Record<LanduseKind, string> = { urban: "العمران", agricultural: "الزراعي", industrial: "الصناعي" };
+  const landIndicatorOptions = `${landuseKinds.length > 1 ? `<option value="all">كل الاستخدامات</option>` : ""}${landuseKinds.map((kind) => `<option value="${kind}">${landuseLabels[kind]}</option>`).join("")}`;
   const landuseOptions = isPriceDashboard(app)
     ? fixedLanduseOptions
-    : isLandIndicatorDashboard
+    : landuseKinds.length
       ? landIndicatorOptions
       : "";
+  const landuseDefault = landuseKinds.length === 1 ? landuseKinds[0] : "all";
   const landuseFilter = landuseOptions
-    ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
+    ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select" data-landuse-kinds="${landuseKinds.join(",")}" data-default-landuse="${isPriceDashboard(app) ? "all" : landuseDefault}">${landuseOptions}</select></label>`
     : "";
   const sectorFilter = `<label class="dashboard-sector-filter" data-sector-group="${esc(group)}"><span>القطاعات</span><select id="dashboard-sector-filter"><option value="all">كل القطاعات</option></select></label>`;
   return `<header class="interactive-head"><div><a href="../../index.html" class="mot-badge">وزارة النقل</a><span>${esc(app.category)}</span><h1>${esc(app.title)}</h1></div><div class="dash-actions">${sectorFilter}${landuseFilter}<label class="dashboard-change-filter"><span>حالة التغير</span><select id="dashboard-change-filter"><option value="all">كل العناصر</option><option value="changed">متغير</option><option value="unchanged">غير متغير</option></select></label><button id="fullscreen-dashboard" type="button">ملء الشاشة</button></div></header>`;
@@ -594,11 +607,12 @@ function corridorImpactMarkup(app: TransportApp, group: string): string {
 
 export function renderInteractiveDashboard(app: TransportApp): string {
   const group = dashboardGroup(app);
+  const landuseKinds = landuseKindsForDashboard(app);
   if (app.slug === "dashboard-ismailia-development-impact") return ismailiaImpactMarkup(app);
   if (app.slug === "dashboard-western-upper-egypt-development-impact") return westernUpperEgyptImpactMarkup(app);
   if (isImpactDashboard(app)) return corridorImpactMarkup(app, group);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
-  if (group === "dabaa-axis") return dabaaLandMarkup(app, group);
+  if (group === "dabaa-axis" && landuseKinds.includes("urban") && landuseKinds.includes("agricultural")) return dabaaLandMarkup(app, group);
   if (isUrbanDashboard(app)) return landMarkup(app, group);
   if (group === "ismailia") return agriculturalMarkup(app, group);
   if (["qena-luxor-road", "qus-axis", "kalabsha-axis"].includes(group)) return southernAgricultureMarkup(app, group);
@@ -2389,7 +2403,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       resetLanduseBtn.addEventListener("click", () => {
         const landuseSelect = root.querySelector<HTMLSelectElement>("#dashboard-landuse-filter");
         if (landuseSelect) {
-          landuseSelect.value = "all";
+          landuseSelect.value = landuseSelect.dataset.defaultLanduse || "all";
           landuseSelect.dispatchEvent(new Event("change"));
         }
         const sectorSelect = root.querySelector<HTMLSelectElement>("#dashboard-sector-filter");
@@ -2441,7 +2455,19 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       });
     }
     const landuseSelect = root.querySelector<HTMLSelectElement>("#dashboard-landuse-filter");
+    const dashboardLanduseKinds = (landuseSelect?.dataset.landuseKinds || "urban,agricultural,industrial")
+      .split(",")
+      .filter((kind): kind is LanduseKind => ["urban", "agricultural", "industrial"].includes(kind));
+    // KPI cards follow the same scope as the filter. This prevents an
+    // agriculture-only board from retaining industrial (or urban) cards just
+    // because a shared layout template contains them.
+    root.querySelectorAll<HTMLElement>("[data-metric]").forEach((metric) => {
+      const key = metric.dataset.metric || "";
+      const kind = key.includes("urban") ? "urban" : key.includes("agricultural") ? "agricultural" : key.includes("industrial") ? "industrial" : null;
+      if (kind && !dashboardLanduseKinds.includes(kind)) metric.closest<HTMLElement>("article")?.setAttribute("hidden", "true");
+    });
     if (landuseSelect) {
+      const dashboardDefaultLanduse = landuseSelect.dataset.defaultLanduse || "all";
       // Read the actual classified paths produced for this dashboard rather
       // than treating a corridor title as evidence that a use exists. This
       // keeps the menu useful for every corridor and includes classes such as
@@ -2452,10 +2478,10 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const availableLanduseCodes = mappedLanduseCodes.size
         ? mappedLanduseCodes
         : new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "99"]);
-      // The header supplies the only four options: all + the three approved
-      // classes.  Start on "all" so every classified source feature remains
-      // visible until the user explicitly narrows the map.
-      landuseSelect.value = "all";
+      // Respect the dashboard's declared scope. A one-class dashboard starts
+      // with its sole class active; a mixed dashboard starts on its scoped
+      // "all" state rather than revealing unrelated land-use classes.
+      landuseSelect.value = dashboardDefaultLanduse;
 
       const getAcceptedLanduseForFilter = (selectedFilter: string): { codes: Set<string>; allowedLayers: Set<string> } => {
         if (selectedFilter === "urban") {
@@ -2467,7 +2493,13 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         if (selectedFilter === "industrial") {
           return { codes: new Set(["1"]), allowedLayers: new Set(["industrial"]) };
         }
-        return { codes: availableLanduseCodes, allowedLayers: new Set(["urban", "agricultural", "industrial"]) };
+        const codes = new Set<string>();
+        dashboardLanduseKinds.forEach((kind) => {
+          if (kind === "urban") codes.add("3");
+          if (kind === "agricultural") codes.add("0");
+          if (kind === "industrial") codes.add("1");
+        });
+        return { codes: codes.size ? codes : availableLanduseCodes, allowedLayers: new Set(dashboardLanduseKinds) };
       };
 
       const applyLanduseFilter = () => {
@@ -2526,7 +2558,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const gaugeRail = root.querySelector<HTMLElement>(".ismailia-agri-right");
         (["agricultural", "industrial", "urban"] as const).forEach((kind) => {
           const gaugeCard = root.querySelector<HTMLElement>(`#${kind}-gauge`)?.closest<HTMLElement>(".gauge-card");
-          if (gaugeCard) gaugeCard.hidden = selected !== "all" && selected !== kind;
+          if (gaugeCard) gaugeCard.hidden = !dashboardLanduseKinds.includes(kind) || (selected !== "all" && selected !== kind);
         });
         gaugeRail?.classList.toggle("single-gauge", selected !== "all");
         root.dataset.landuseFilter = selected;
@@ -2621,6 +2653,11 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         if (!gauge) return;
         const gaugeCard = gauge.closest<HTMLElement>(".gauge-card");
         if (!gaugeCard) return;
+        if (!dashboardLanduseKinds.includes(kind)) {
+          gaugeCard.setAttribute("hidden", "true");
+          gaugeCard.hidden = true;
+          return;
+        }
         const effectiveKind = hasSingleSummaryGauge && selectedLanduse !== "all" ? selectedLanduse as "urban" | "agricultural" | "industrial" : kind;
 
         if (selectedLanduse !== "all" && selectedLanduse !== kind && !hasSingleSummaryGauge) {
@@ -2674,7 +2711,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const syncChangeStatus = () => {
         const selectedSector = dashboardSectorFilter?.value || "all";
         const selectedLanduse = landuseSelect?.value || "all";
-        const applicableKinds = (selectedLanduse === "all" ? ["urban", "agricultural", "industrial"] : [selectedLanduse])
+        const applicableKinds = (selectedLanduse === "all" ? dashboardLanduseKinds : [selectedLanduse])
           .filter((kind): kind is "urban" | "agricultural" | "industrial" => ["urban", "agricultural", "industrial"].includes(kind));
         const hasStatusForSelection = applicableKinds.some((kind) => statusTotalFor(statusAreaFor(selectedSector, kind)) > 0);
         // Never offer a state that does not exist in the selected Landcover
