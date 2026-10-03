@@ -234,13 +234,18 @@ function dashboardHeader(app: TransportApp, group = ""): string {
   const isDabaaLandDashboard = group === "dabaa-axis";
   const isAgriculturalDashboard = /الأراضي الزراعية|agricultural/i.test(app.title) && !isPriceDashboard(app);
   const isUrbanDashboard = /العمرانية|urban/i.test(app.title) && !isPriceDashboard(app) && !isDabaaLandDashboard;
-  // Keep the filter intentionally limited to the three decision classes.
-  // Other documented codes remain visible on the map under the default
-  // "all" selection but are not promoted into ad-hoc filter choices.
+  // Price dashboards retain all documented price classes.  Land-indicator
+  // dashboards intentionally expose only the agricultural and industrial
+  // choices: urban land remains rendered on the map and in its indicators,
+  // but is not a selectable land-use filter.
   const fixedLanduseOptions = `<option value="all">كل الاستخدامات</option><option value="urban">العمران</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`;
-  const landuseOptions = isPriceDashboard(app) || isDabaaLandDashboard || isUrbanDashboard || isAgriculturalDashboard || isAgricultureAndIndustry
+  const landIndicatorOptions = `<option value="all">كل الاستخدامات</option><option value="agricultural">الزراعي</option><option value="industrial">الصناعي</option>`;
+  const isLandIndicatorDashboard = isDabaaLandDashboard || isUrbanDashboard || isAgriculturalDashboard || isAgricultureAndIndustry;
+  const landuseOptions = isPriceDashboard(app)
     ? fixedLanduseOptions
-    : "";
+    : isLandIndicatorDashboard
+      ? landIndicatorOptions
+      : "";
   const landuseFilter = landuseOptions
     ? `<label class="dashboard-landuse-filter"><span>استخدام الأرض</span><select id="dashboard-landuse-filter" class="price-landuse-select">${landuseOptions}</select></label>`
     : "";
