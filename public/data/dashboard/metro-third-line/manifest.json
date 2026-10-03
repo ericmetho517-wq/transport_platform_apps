@@ -1,0 +1,13 @@
+{
+  "group": "metro-third-line",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\all_metro_With_Eco.gdb\\all_metro.gdb",
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural",
+    "landcover-start",
+    "landcover-end",
+    "Metro_Station"
+  ]
+}

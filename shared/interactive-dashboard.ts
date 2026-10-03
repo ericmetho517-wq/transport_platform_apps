@@ -117,6 +117,9 @@ const esc = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp
 export function normalizeChangeStatus(value: unknown): "changed" | "unchanged" | "unknown" {
   const status = String(value ?? "").trim().toLowerCase();
   if (!status) return "unknown";
+  // The published comparison exports use 1 = changed and 2 = unchanged.
+  // Keep the Arabic text variants too: a few source GeoJSON files use words
+  // instead of the numeric domain values.
   if (status === "2" || status === "unchanged" || /غير\s*متغير|لا\s*تغي(?:ر|ير)|بدون\s*تغي(?:ر|ير)|لم\s*يتغي(?:ر|ير)|ثابت/.test(status)) return "unchanged";
   if (status === "1" || status === "changed" || /متغير|تغي(?:ر|ير)/.test(status)) return "changed";
   return "unknown";
@@ -145,13 +148,17 @@ const sourceProperty = (properties: Record<string, unknown> | undefined, aliases
 };
 
 const sourceChangeStatus = (properties: Record<string, unknown> | undefined) => sourceProperty(properties, [
-  "change_status_key", "change_status", "status", "حالة_التغير", "حالة التغير", "حالة_التغير_2", "حالة التغير 2",
+  // Prefer the actual 2016-vs-current comparison attribute.  The generated
+  // `change_status_key` is only a compatibility value and older exports set
+  // it to `unchanged` for every baseline-derived record.
+  "حالة_التغير", "حالة التغير", "حالة_التغير_2", "حالة التغير 2",
+  "change_status", "status", "change_status_key",
 ]);
 const sourceLanduse = (properties: Record<string, unknown> | undefined) => sourceProperty(properties, [
   "landuse_code", "landuse_value", "landuse_label", "استخدام_الأرض", "استخدام الأرض",
 ]);
 const sourceArea = (properties: Record<string, unknown> | undefined) => sourceProperty(properties, [
-  "مساحة_كم2", "مساحة كم2", "area_km2", "SHAPE_Area", "Shape_Area", "area",
+  "مساحة_كم2", "مساحة كم2", "المساحة_كم2", "المساحة كم2", "area_km2", "SHAPE_Area", "Shape_Area", "area",
 ]);
 
 const isPriceDashboard = (app: TransportApp) => /سعر|أسعار|اسعار|price/i.test(app.title);
@@ -176,6 +183,8 @@ export function dashboardGroup(app: TransportApp): string {
     "suez-free": "cairo-suez-road",
     "suez-link": "suez-ring-link",
     "western-upper-egypt": "western-upper-egypt",
+    "metro-third-line": "metro-third-line",
+    "kafr-dawood-sadat": "kafr-dawood-sadat",
   };
   if (app.reportReferenceGroup) return groupAliases[app.reportReferenceGroup] || app.reportReferenceGroup;
   const text = `${app.category} ${app.title}`.toLowerCase();
@@ -188,12 +197,17 @@ export function dashboardGroup(app: TransportApp): string {
   if (/الضبعة|دبعة|dabaa/.test(text)) return "dabaa-axis";
   if (/وصلة.*السويس|suez road link/.test(text)) return "suez-ring-link";
   if (/القاهرة.*السويس|cairo.suez|السويس الحر/.test(text)) return "cairo-suez-road";
+  if (/metro line 3/.test(text)) return "metro-third-line";
+  if (/kafr dawood|sadat/.test(text)) return "kafr-dawood-sadat";
   return "western-upper-egypt";
 }
 
 function mapMarkup(instance = "primary", yearLabel = "", dashboardSync = true): string {
   const suffix = instance.replace(/[^a-z0-9-]/gi, "-");
-  return `<section class="gis-map${yearLabel ? " temporal-map" : ""}" data-basemap="satellite" data-map-instance="${suffix}" data-dashboard-sync="${dashboardSync}" aria-label="خريطة تفاعلية">
+  const mapAriaLabel = yearLabel
+    ? `خريطة تفاعلية — ${yearLabel.replace(/<[^>]*>/g, "").trim()}`
+    : "خريطة تفاعلية";
+  return `<section class="gis-map${yearLabel ? " temporal-map" : ""}" data-basemap="satellite" data-map-instance="${suffix}" data-dashboard-sync="${dashboardSync}" aria-label="${mapAriaLabel}">
     ${yearLabel ? `<div class="temporal-year">${yearLabel}<small>عرض تفاعلي مترابط</small></div>` : ""}
     <div class="map-status"><span class="live-dot"></span><span class="map-status-text">جارٍ تحميل طبقات المشروع المحلية…</span></div>
     <label class="map-sector-filter" hidden><span>نطاق العرض</span><select class="map-sector-select"><option value="all">كل القطاعات</option></select></label>
@@ -236,6 +250,7 @@ function dashboardHeader(app: TransportApp, group = ""): string {
 
 function corridorYears(group: string): { start: number; end: number } {
   if (group === "ismailia") return { start: 2016, end: 2026 };
+  if (["metro-third-line", "kafr-dawood-sadat"].includes(group)) return { start: 2016, end: 2026 };
   if (["dabaa-axis", "qena-luxor-road", "qus-axis", "kalabsha-axis", "dahshur-south-link", "regional-ring-road"].includes(group)) {
     return { start: 2014, end: 2023 };
   }
@@ -250,12 +265,11 @@ function corridorTemporalMapPair(prefix: string, group: string): string {
 function priceMarkup(app: TransportApp, group: string): string {
   const westernComparison = true;
   const isIsmailia = group === "ismailia";
-  const priceStartYear = group === "ismailia" ? 2016 : 2014;
-  const priceEndYear = group === "ismailia" ? 2026 : 2024;
+  const { start: priceStartYear, end: priceEndYear } = corridorYears(group);
   const mapArea = westernComparison
     ? `<div class="temporal-map-pair price-temporal-map-pair${group === "ismailia" ? " ismailia-temporal-map-pair" : ""}">${mapMarkup("price-baseline", `<span class="map-year-start">${priceStartYear}</span>`, false)}${mapMarkup("price-current", `<span class="map-year-end">${priceEndYear}</span>`, true)}</div>`
     : mapMarkup();
-  const trendArea = westernComparison ? "" : `<section class="dark-card line-chart-card"><div class="card-title"><div><span>التغير السنوي لأسعار الأراضي</span><small id="chart-year-label">اضغط على أي نقطة لاستعراض السنة</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div></section>`;
+  const trendArea = group === "metro-third-line" ? "" : `<section class="dark-card line-chart-card price-comparison-card"><div class="card-title"><div><span>مقارنة إجمالي أسعار الأراضي: ${priceStartYear} و${priceEndYear}</span><small id="chart-year-label">إجماليات موثقة من مصدر بيانات المشروع (جنيه مصري)</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div><div id="price-comparison-table" class="price-comparison-table" aria-live="polite"></div></section>`;
   const workspaceSummary = true
     ? `<div class="dashboard-kpis ismailia-map-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article></div>`
     : `<div class="dashboard-kpis"><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article class="gold"><span>سنة القياس</span><strong id="active-year">—</strong></article></div>`;
@@ -656,6 +670,7 @@ function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): vo
   const labels: Record<string, string> = { urban: "أراضي المباني", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية", ...(summary.profile?.priceLabels || {}) };
   const colors: Record<string, string> = { urban: "#ffbc25", agricultural: "#72e800", industrial: "#c334ef" };
   const group = summary.slug || document.querySelector<HTMLElement>(".interactive-dashboard")?.dataset.dashboardGroup;
+  const metroLine3 = group === "metro-third-line";
   // Price dashboards retain documented land-use price comparison columns.
   const kinds = ["urban", "industrial", "agricultural"].filter((key) => {
     if (["kalabsha-axis", "qus-axis", "qena-luxor-road", "dabaa-axis"].includes(group || "") && key === "industrial") return false;
@@ -666,9 +681,9 @@ function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): vo
   container.style.setProperty("--price-columns", String(selectedKind !== "all" ? 1 : kinds.length));
   const agriculturalFeddan = isIsmailia ? undefined : (summary.metrics.agriculturalAreaFeddan || summary.profile?.metrics.agriculturalAreaFeddan);
   const areaMetrics: Record<string, number | undefined> = {
-    urban: summary.metrics.urbanTotalKm2 ?? summary.metrics.urbanAreaKm2 ?? summary.metrics.urbanChangeKm2 ?? summary.profile?.metrics.urbanChangeKm2,
-    agricultural: summary.metrics.agriculturalTotalKm2 ?? summary.metrics.agriculturalAreaKm2 ?? agriculturalFeddan ?? summary.metrics.agriculturalChangeKm2 ?? summary.profile?.metrics.agriculturalChangeKm2,
-    industrial: summary.metrics.industrialTotalKm2 ?? summary.metrics.industrialAreaKm2 ?? summary.metrics.industrialChangeKm2 ?? summary.profile?.metrics.industrialChangeKm2,
+    urban: metroLine3 ? summary.metrics.urbanAreaFeddan : summary.metrics.urbanTotalKm2 ?? summary.metrics.urbanAreaKm2 ?? summary.metrics.urbanChangeKm2 ?? summary.profile?.metrics.urbanChangeKm2,
+    agricultural: metroLine3 ? summary.metrics.agriculturalAreaFeddan : summary.metrics.agriculturalTotalKm2 ?? summary.metrics.agriculturalAreaKm2 ?? agriculturalFeddan ?? summary.metrics.agriculturalChangeKm2 ?? summary.profile?.metrics.agriculturalChangeKm2,
+    industrial: metroLine3 ? summary.metrics.industrialAreaFeddan : summary.metrics.industrialTotalKm2 ?? summary.metrics.industrialAreaKm2 ?? summary.metrics.industrialChangeKm2 ?? summary.profile?.metrics.industrialChangeKm2,
   };
   const isChangeArea: Record<string, boolean> = {
     urban: !(summary.metrics.urbanTotalKm2 || summary.metrics.urbanAreaKm2),
@@ -680,13 +695,21 @@ function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): vo
     agricultural: isIsmailia ? "إجمالي مساحة الأراضي الزراعية (كم²)" : agriculturalFeddan ? "إجمالي مساحة الأراضي الزراعية (فدان)" : "مساحة التغير الزراعي (كم²)",
     industrial: "إجمالي مساحة الأراضي الصناعية (كم²)",
   };
+  if (metroLine3) {
+    Object.assign(areaLabels, {
+      urban: "\u0625\u062c\u0645\u0627\u0644\u064a \u0645\u0633\u0627\u062d\u0629 \u0623\u0631\u0627\u0636\u064a \u0627\u0644\u0645\u0628\u0627\u0646\u064a (\u0641\u062f\u0627\u0646)",
+      agricultural: "\u0625\u062c\u0645\u0627\u0644\u064a \u0645\u0633\u0627\u062d\u0629 \u0627\u0644\u0623\u0631\u0627\u0636\u064a \u0627\u0644\u0632\u0631\u0627\u0639\u064a\u0629 (\u0641\u062f\u0627\u0646)",
+      industrial: "\u0625\u062c\u0645\u0627\u0644\u064a \u0645\u0633\u0627\u062d\u0629 \u0627\u0644\u0623\u0631\u0627\u0636\u064a \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629 (\u0641\u062f\u0627\u0646)",
+    });
+  }
   container.innerHTML = kinds.map((key) => {
     const item = summary.prices[key];
     const hasPrice = Boolean(item && (item.start > 0 || item.end > 0));
     const difference = hasPrice ? Math.max(item.end - item.start, 0) : 0;
     const areaVal = areaMetrics[key];
+    const metroAreaText = areaVal !== undefined ? formatNumber(areaVal, 2) : "—";
     const areaText = areaVal !== undefined ? formatNumber(areaVal, agriculturalFeddan && key === "agricultural" && !isIsmailia ? 0 : 1) : "—";
-    const areaHeader = `<div class="price-column-top-card price-area-${key}"><span>${areaLabels[key]}</span><strong>${areaText}</strong></div>`;
+    const areaHeader = `<div class="price-column-top-card price-area-${key}"><span>${areaLabels[key]}</span><strong>${metroLine3 ? metroAreaText : areaText}</strong></div>`;
     const detail = hasPrice
       ? `<header><span>فرق سعر ${labels[key]}</span><strong>${formatMoney(difference, true)}</strong></header><div><span>سعر ${labels[key]} عام ${summary.yearEnd}</span><b>${formatMoney(item.end, true)}</b></div><div><span>سعر ${labels[key]} عام ${summary.yearStart}</span><b>${formatMoney(item.start, true)}</b></div>`
       : `<header><span>تفصيل سعر ${labels[key]}</span><strong>—</strong></header><div class="price-value-pending"><span>${document.documentElement.lang === "en" ? "Not available" : "&#x63A;&#x64A;&#x631; &#x645;&#x62A;&#x627;&#x62D;"}</span></div>`;
@@ -738,6 +761,21 @@ function renderLineChart(summary: DashboardSummary, visible: Set<string>): void 
     if (activeYear) activeYear.textContent = dot.dataset.chartYear || "";
     container.querySelectorAll("circle").forEach((item) => item.classList.toggle("selected", item === dot));
   }));
+}
+
+function renderPriceComparisonTable(summary: DashboardSummary, visible: Set<string>): void {
+  const container = document.querySelector<HTMLElement>("#price-comparison-table");
+  if (!container) return;
+  const labels: Record<string, string> = { urban: "العمرانية", agricultural: "الزراعية", industrial: "الصناعية", ...(summary.profile?.priceLabels || {}) };
+  const rows = ["urban", "agricultural", "industrial"]
+    .filter((key) => visible.has(key) && summary.prices[key]?.start > 0 && summary.prices[key]?.end > 0)
+    .map((key) => {
+      const pair = summary.prices[key];
+      return `<tr><th scope="row">${labels[key]}</th><td>${formatMoney(pair.start, true)}</td><td>${formatMoney(pair.end, true)}</td><td>${formatMoney(pair.end - pair.start, true)}</td></tr>`;
+    }).join("");
+  container.innerHTML = rows
+    ? `<table><caption>مقارنة إجماليات أسعار الأراضي الموثقة (جنيه مصري)</caption><thead><tr><th>نوع الأرض</th><th>${summary.yearStart}</th><th>${summary.yearEnd}</th><th>التغير</th></tr></thead><tbody>${rows}</tbody></table>`
+    : "";
 }
 
 function renderChangeBars(summary: DashboardSummary): void {
@@ -1175,6 +1213,31 @@ function coordinatePairs(coordinates: Coordinates, result: number[][] = []): num
   return result;
 }
 
+/**
+ * The Metro Line 3 FileGDB's Axis_Road_Sector record has its geometry in a
+ * different corridor (around 30E/31N), despite carrying the Line 3 length
+ * attribute.  Metro_Stations is the valid, authoritative geography.  Build
+ * the two Line 3 branches directly from those source station coordinates so
+ * the operational map remains geographically truthful without publishing the
+ * malformed axis feature.
+ */
+function metroLine3RouteFromStations(collection: GeoJsonCollection): GeoJsonCollection | null {
+  const stations = collection.features
+    .map((feature) => feature.geometry?.type === "Point" ? feature.geometry.coordinates as number[] : null)
+    .filter((point): point is number[] => Boolean(point) && point.length >= 2);
+  if (stations.length < 34) return null;
+  const main = [...stations.slice(0, 16), stations[33], ...stations.slice(16, 21)].filter(Boolean);
+  const rodElFaragBranch = [stations[20], ...stations.slice(21, 27)].filter(Boolean);
+  const cairoUniversityBranch = [stations[20], stations[27], stations[28], stations[29], stations[32], stations[30]].filter(Boolean);
+  return {
+    features: [{
+      type: "Feature",
+      properties: { source: "Metro_Stations", change_status_key: "unchanged" },
+      geometry: { type: "MultiLineString", coordinates: [main, rodElFaragBranch, cairoUniversityBranch] },
+    }],
+  };
+}
+
 function polygonAreaKm2(coordinates: number[][][]): number {
   const radiusKm = 6371.0088;
   const ringArea = (ring: number[][]): number => {
@@ -1280,6 +1343,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     : mapInstance.includes("current") ? imageryTiles[2024]
       : imageryTiles.current;
   const temporalLayers: LayerName[] = ["landcover-start", "landcover-end"];
+  const metroLine3 = group === "metro-third-line";
   const qenaCurrentFallback = group === "qena-luxor-road" && !summary.layers.includes("landcover-end") && summary.layers.includes("baseline");
   const suezTransport = group === "cairo-suez-road" || group === "suez-ring-link";
   const usableLayers = summary.layers
@@ -1296,20 +1360,26 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   // Keep the study layer last so its outline remains legible above the colours.
   const storyStudyLayers: LayerName[] = ["landcover-end", "study"];
   const baselineTransportNames: LayerName[] = suezTransport ? transportLayerNames : ["Road_CairoRing"];
-  const temporalStartLayers: LayerName[] = ["study", "landcover-start", ...baselineTransportNames, "axis"];
+  const temporalStartLayers: LayerName[] = ["study", "landcover-start", ...baselineTransportNames, ...(metroLine3 ? ["Metro_Station"] : ["axis"])];
   // Temporal maps must draw their current land-use colours and change state
   // from the documented end-year land-cover layer only. The standalone
   // urban/agricultural/industrial files are summary overlays (and can use a
   // different colour convention), so rendering them together duplicates
   // geometry and bypasses the per-polygon change-status filter.
-  const temporalEndLayers: LayerName[] = ["study", "landcover-end", ...transportLayerNames, "axis"];
+  const temporalEndLayers: LayerName[] = ["study", "landcover-end", ...transportLayerNames, ...(metroLine3 ? ["Metro_Station"] : ["axis"])];
   const requestedLayers = (storyMode
     // Story maps always request the study footprint directly. Some legacy
     // summaries did not list it even though the sector's verified GeoJSON is
     // present, which left the "study area" chapter without its boundary.
     ? storyStudyLayers
     : temporalMap
-    ? (mapInstance.includes("baseline") ? temporalStartLayers.filter((layer) => usableLayers.includes(layer)) : temporalEndLayers.filter((layer) => usableLayers.includes(layer)))
+    ? (mapInstance.includes("baseline")
+      // A baseline pane always renders the complete source Land_Cover2016
+      // geometry.  Price attributes may be retained on 2026 features, but
+      // borrowing that geometry makes the 2016 view incomplete and breaks
+      // the temporal comparison for Metro Line 3.
+      ? temporalStartLayers.filter((layer) => usableLayers.includes(layer))
+      : temporalEndLayers.filter((layer) => usableLayers.includes(layer)))
     : mapInstance.includes("baseline")
     ? [...regularLayers, ...(summary.layers.includes("landcover-start") ? ["landcover-start" as LayerName] : [])]
     : mapInstance.includes("current")
@@ -1341,9 +1411,17 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       return { layer, error } as const;
     }
   }));
-  const loaded = layerResults
+  let loaded = layerResults
     .filter((result): result is { layer: LayerName; collection: GeoJsonCollection } => "collection" in result)
     .map(({ layer, collection }) => [layer, collection] as const);
+  // Do not render Axis_Road_Sector for Metro Line 3: its FileGDB coordinates
+  // point to an unrelated coastal corridor.  The station geography is valid;
+  // use it to draw the real line and its two branches in every dashboard mode.
+  if (metroLine3) {
+    const stationCollection = loaded.find(([layer]) => layer === "Metro_Station")?.[1];
+    const route = stationCollection && metroLine3RouteFromStations(stationCollection);
+    if (route) loaded = [["axis", route], ...loaded] as Array<[LayerName, GeoJsonCollection]>;
+  }
   const failedLayers = layerResults.filter((result) => "error" in result).map(({ layer }) => layer);
   let pairCount = 0, minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
   const scanCoordinates = (value: Coordinates): void => {
@@ -2177,6 +2255,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const renderActivePrices = () => {
         renderPriceColumns(activePriceSummary, selectedLanduse);
         renderLineChart(activePriceSummary, visible);
+        renderPriceComparisonTable(activePriceSummary, visible);
       };
       renderActivePrices();
       root.addEventListener("dashboard-landuse-filter", ((event: CustomEvent<string>) => {
@@ -2191,6 +2270,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         // The cards are filtered in place by the select handler; redraw only
         // the lightweight chart here instead of rebuilding every card.
         renderLineChart(activePriceSummary, visible);
+        renderPriceComparisonTable(activePriceSummary, visible);
       }) as EventListener);
       root.addEventListener("dashboard-sector-price", ((event: CustomEvent<{ metrics: Record<string, number>; prices: Record<string, { start: number; end: number }>; yearEnd: number; sectorTitle?: string }>) => {
         const years = group === "ismailia"
@@ -2460,17 +2540,9 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
       group === "western-upper-egypt" && selectedSector !== "all" ? statusAreasBySector[selectedSector]?.[kind] : statusAreas[kind];
     const statusTotalFor = (areas?: Record<ChangeStatus, number>) => (areas?.changed || 0) + (areas?.unchanged || 0);
-    // The supplied western-corridor export is pre-aggregated. These sectors
-    // retain their land-use geometry but have no status field after export,
-    // so use the approved presentation split rather than leaving a blank
-    // gauge. Each complement is calculated from 100%, by design.
-    const westernEstimatedChangedShare: Record<string, number> = {
-      "1": 45.6, "2": 58.2, "4": 63.7, "6": 31.5, "9": 72.4,
-    };
-    const westernEstimateFor = (selectedSector: string) => group === "western-upper-egypt" ? westernEstimatedChangedShare[selectedSector] : undefined;
-    // The status gauge is a distribution of the Landcover end-year features.
-    // Hence all = 100%, and changed + unchanged = 100% for the very same
-    // documented features that are displayed by the map filter.
+    // The status gauge always uses the end-year features with a documented
+    // 2016-vs-current status.  Never substitute a presentation estimate for
+    // source records that do not have one.
     const statusShare = (areas: Record<ChangeStatus, number> | undefined, mode: ChangeStatus) => {
       const total = statusTotalFor(areas);
       return total > 0 ? Math.min(Math.max(((areas?.[mode] || 0) / total) * 100, 0), 100) : null;
@@ -2479,8 +2551,8 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
       const names = document.documentElement.lang === "en"
         ? { urban: "urban land", agricultural: "agricultural land", industrial: "industrial land" }
         : { urban: "العمران", agricultural: "الأراضي الزراعية", industrial: "الأراضي الصناعية" };
-      if (document.documentElement.lang === "en") return mode === "all" ? `Change-status distribution for classified ${names[kind]}` : `${mode === "changed" ? "Changed" : "Unchanged"} share of classified ${names[kind]}`;
-      return mode === "all" ? `توزيع حالة التغير للعناصر المصنفة: ${names[kind]}` : `نسبة ${mode === "changed" ? "المتغير" : "غير المتغير"} من إجمالي ${names[kind]} المصنفة`;
+      if (document.documentElement.lang === "en") return mode === "all" ? `Changed share of classified ${names[kind]}` : `${mode === "changed" ? "Changed" : "Unchanged"} among visible classified ${names[kind]}`;
+      return mode === "all" ? `نسبة المتغير من ${names[kind]} المصنفة` : `نسبة ${mode === "changed" ? "المتغير" : "غير المتغير"} من ${names[kind]} الظاهرة`;
     };
     const updateChangeStatusGauge = (mode: ChangeMode) => {
       const selectedSector = dashboardSectorFilter?.value || "all";
@@ -2523,40 +2595,17 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         gaugeCard.hidden = false;
         const title = gaugeCard.querySelector<HTMLElement>("span");
         if (title) title.textContent = statusTitle(effectiveKind, mode);
-        if (group === "western-upper-egypt") {
-          if (mode === "all") {
-            setGauge(gauge, 100);
-            gauge.removeAttribute("data-status-estimate");
-            gauge.removeAttribute("title");
-            return;
-          }
-          if (!total) {
-            const estimatedChanged = westernEstimateFor(selectedSector);
-            if (estimatedChanged === undefined) { setGaugeUnavailable(gauge); return; }
-            const value = mode === "changed" ? estimatedChanged : 100 - estimatedChanged;
-            setGauge(gauge, value);
-            gauge.dataset.statusEstimate = "true";
-            gauge.title = document.documentElement.lang === "en" ? "Presentation estimate for a sector without exported change-status values" : "نسبة تقديرية للعرض لقطاع لا يحتوي على قيم حالة تغير في التصدير";
-            return;
-          }
-          gauge.removeAttribute("data-status-estimate");
-          gauge.removeAttribute("title");
-          const share = statusShare(areas, mode);
-          if (share === null) setGaugeUnavailable(gauge); else setGauge(gauge, share);
-          return;
-        }
-        if (mode === "all") {
-          setGauge(gauge, 100);
-          gauge.removeAttribute("data-status-estimate");
-          gauge.removeAttribute("title");
-        } else if (total) {
-          gauge.removeAttribute("data-status-estimate");
-          gauge.removeAttribute("title");
-          const share = statusShare(areas, mode);
-          if (share === null) setGaugeUnavailable(gauge); else setGauge(gauge, share);
-        } else {
-          setGaugeUnavailable(gauge);
-        }
+        gauge.removeAttribute("data-status-estimate");
+        gauge.removeAttribute("title");
+        if (!total) { setGaugeUnavailable(gauge); return; }
+        // Always keep the original classified denominator.  Selecting a
+        // state filters the map but must not turn the gauge into 100% merely
+        // because only that state remains visible; changed + unchanged must
+        // still reconcile to 100% of the same source feature set.
+        const displayedStatus: ChangeStatus = mode === "all" ? "changed" : mode;
+        const share = statusShare(areas, displayedStatus);
+        if (share === null || (areas?.[displayedStatus] || 0) <= 0) setGaugeUnavailable(gauge);
+        else setGauge(gauge, share);
       });
     };
     const dashboardSectorFilter = document.querySelector<HTMLSelectElement>("#dashboard-sector-filter");
@@ -2573,8 +2622,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         const selectedLanduse = landuseSelect?.value || "all";
         const applicableKinds = (selectedLanduse === "all" ? ["urban", "agricultural", "industrial"] : [selectedLanduse])
           .filter((kind): kind is "urban" | "agricultural" | "industrial" => ["urban", "agricultural", "industrial"].includes(kind));
-        const hasStatusForSelection = applicableKinds.some((kind) => statusTotalFor(statusAreaFor(selectedSector, kind)) > 0)
-          || westernEstimateFor(selectedSector) !== undefined;
+        const hasStatusForSelection = applicableKinds.some((kind) => statusTotalFor(statusAreaFor(selectedSector, kind)) > 0);
         // Never offer a state that does not exist in the selected Landcover
         // records. This occurs in a few pre-aggregated corridor sectors where
         // the source export has no change_status field for that sector.

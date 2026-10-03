@@ -1,6 +1,7 @@
 :root { color-scheme: dark; }
-body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; background: #171717; color: #f3f3f3; overflow-x: hidden; box-sizing: border-box; }
-.interactive-dashboard { min-height: 100vh; display: flex; flex-direction: column; background: #1b1b1b; color: #f3f3f3; font-family: "Segoe UI", Tahoma, Arial, sans-serif; box-sizing: border-box; }
+html:has(.interactive-dashboard), body:has(.interactive-dashboard) { max-width:100%; overflow-x:hidden; }
+body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; background: #171717; color: #f3f3f3; box-sizing: border-box; }
+.interactive-dashboard { width:100%; max-width:100%; min-height: 100vh; display: flex; flex-direction: column; background: #1b1b1b; color: #f3f3f3; font-family: "Segoe UI", Tahoma, Arial, sans-serif; box-sizing: border-box; overflow-x:clip; }
 .interactive-head { flex: 0 0 auto; min-height: 64px; padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #272727; border-bottom: 3px solid #393939; box-sizing: border-box; }
 .interactive-head > div:first-child { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 12px; min-width: 0; flex: 1 1 auto; }
 .interactive-head h1 { grid-column: 1 / -1; margin: 4px 0 0; font-size: clamp(16px, 1.8vw, 24px); line-height: 1.25; }
@@ -22,7 +23,8 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .data-badge i, .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #61e315; box-shadow: 0 0 0 4px #61e31522; animation: pulse 2s infinite; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 7px #61e31508; } }
 
-.price-layout { flex: 1 1 auto; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(330px, 37%) minmax(0, 1fr); direction: ltr; box-sizing: border-box; }
+.price-layout { width:100%; max-width:100%; min-width:0; flex: 1 1 auto; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(330px, 37%) minmax(0, 1fr); direction: ltr; box-sizing: border-box; overflow-x:clip; }
+.price-layout > * { min-width:0; max-width:100%; }
 .price-columns { display: grid; grid-template-columns: repeat(var(--price-columns, 3), minmax(0, 1fr)); direction: ltr; border-inline-end: 2px solid #3c3c3c; background: #262626; overflow-y: auto; scrollbar-width: thin; }
 .price-no-data { grid-column: 1 / -1; min-height: 350px; align-content: center; line-height: 1.8; }
 .price-column { min-width: 0; display: grid; grid-template-rows: auto 1.08fr 1fr 1fr; border-inline-end: 1px solid #3e3e3e; text-align: center; direction: rtl; }
@@ -351,7 +353,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .interactive-dashboard[data-dashboard-group="ismailia"].land-dashboard .temporal-map-pair { min-height:240px; }
 .interactive-dashboard[data-dashboard-group="ismailia"].land-dashboard .temporal-map { min-height:220px; }
 .interactive-dashboard[data-dashboard-group="ismailia"].land-dashboard .comparison-card { min-height:0; overflow:auto; }
-.temporal-map-pair { min-width: 0; min-height: 320px; flex: 1 1 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; background: #353535; direction: rtl; }
+.temporal-map-pair { width:100%; max-width:100%; min-width: 0; min-height: 320px; flex: 1 1 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; background: #353535; direction: rtl; box-sizing:border-box; overflow:hidden; }
 .temporal-map { min-width: 0; min-height: 300px; padding-top: 42px; position: relative; }
 .temporal-map .temporal-year { position: absolute; z-index: 6; inset: 0 0 auto; height: 42px; display: flex; align-items:center; justify-content:center; gap:10px; background: #17293a; color: #fff; font-size: 22px; font-weight: 800; border-bottom: 2px solid #4f82e9; }
 .temporal-map .temporal-year small { padding:3px 7px; border-radius:10px; background:#0d68ad; color:#dff3ff; font-size:8px; font-weight:700; }
@@ -731,6 +733,56 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .agriculture-right { grid-column: auto; grid-template-columns: 1fr; min-height: 650px; }
 }
 
+/* Transit price dashboards: compact comparison card at phone widths and a
+   bounded three-stage workspace at desktop widths. These rules intentionally
+   sit after the older executive-board overrides. */
+.price-comparison-card { min-width:0; padding:10px 14px; overflow:auto; }
+.price-comparison-card .card-title { align-items:flex-start; gap:10px; }
+.price-comparison-card .card-title small { display:block; margin-top:3px; color:#d8d8d8; font-size:11px; line-height:1.35; }
+.price-comparison-card .svg-chart { min-height:150px; height:150px; }
+.price-comparison-table { margin-top:7px; overflow-x:auto; }
+.price-comparison-table table { width:100%; border-collapse:collapse; color:#f5f5f5; font-size:12px; text-align:right; }
+.price-comparison-table caption { padding:4px 0 7px; color:#ffcb56; font-weight:800; text-align:right; }
+.price-comparison-table th,.price-comparison-table td { padding:6px 8px; border-top:1px solid #ffffff24; white-space:nowrap; }
+.price-comparison-table thead th { color:#9fd8ff; font-weight:800; }
+.price-comparison-table tbody th { color:#ffcb56; }
+
+@media (min-width:1100px) {
+  .interactive-dashboard.price-dashboard { width:100%; max-width:100vw; overflow-x:clip; }
+  .price-dashboard .price-layout { width:100%; max-width:100%; grid-template-columns:minmax(300px,34%) minmax(0,1fr); overflow:hidden; }
+  .price-dashboard .price-workspace { grid-template-rows:108px minmax(280px,1fr) 250px !important; min-width:0; overflow:hidden; }
+  .price-dashboard .price-columns { min-width:0; overflow:auto; }
+  .price-dashboard .price-comparison-card { min-height:0; height:250px; overflow:auto; }
+  .price-dashboard .price-temporal-map-pair { min-width:0; }
+  .interactive-head { width:100%; max-width:100vw; }
+  .interactive-head > div:first-child { max-width:none; }
+  .dash-actions { min-width:0; }
+  /* Metro Line 3 intentionally ends with the paired temporal maps.  Do not
+     reserve the generic price-dashboard chart track when no comparison panel
+     is rendered. */
+  .interactive-dashboard.price-dashboard[data-dashboard-group="metro-third-line"] .price-workspace { grid-template-rows:108px minmax(0,1fr) !important; }
+}
+
+@media (max-width:480px) {
+  .price-dashboard .price-columns { display:grid; grid-template-columns:1fr; gap:10px; padding:10px; background:#1d1d1d; }
+  .price-dashboard .price-column { display:block; min-width:0; border:1px solid #4a4a4a; border-top:4px solid var(--accent); border-radius:8px; overflow:hidden; background:#242424; }
+  .price-dashboard .price-column > .price-column-top-card { min-height:0; height:auto; padding:9px; }
+  .price-dashboard .price-column > .price-column-top-card span { min-height:0; font-size:13px; }
+  .price-dashboard .price-column > .price-column-top-card strong { font-size:23px; }
+  .price-dashboard .price-column header,
+  .price-dashboard .price-column > div { min-height:0; height:auto; padding:10px 12px; }
+  .price-dashboard .price-column header { border-top:0; }
+  .price-dashboard .price-column header strong { font-size:19px; }
+  .price-dashboard .price-column > div b { font-size:17px; }
+  .price-dashboard .price-workspace { grid-template-rows:auto 400px auto; }
+  .price-dashboard .price-comparison-card { padding:10px; }
+  .price-comparison-card .card-title { display:block; }
+  .price-comparison-card .series-toggles { margin-top:8px; }
+  .price-comparison-card .svg-chart { height:135px; min-height:135px; }
+  .price-comparison-table table { font-size:11px; }
+  .price-comparison-table th,.price-comparison-table td { padding:6px 4px; }
+}
+
 /* Qena–Luxor: maps are the primary evidence.  Remove the permanent side
    rails so the before/after pair can occupy the full dashboard width, then
    place the agricultural indicator directly after the comparison chart. */
@@ -812,6 +864,40 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
    filters side-by-side.  Give the Qena header a full title row instead of
    clipping the Arabic dashboard name. */
 @media (min-width: 721px) and (max-width: 1099px) {
+  /* Transit dashboard titles are longer than the available tablet toolbar
+     width.  Keep the complete Arabic title on its own row, then place the
+     filters beneath it instead of compressing the title into a thin column. */
+  .interactive-dashboard[data-dashboard-group="metro-third-line"] .interactive-head,
+  .interactive-dashboard[data-dashboard-group="kafr-dawood-sadat"] .interactive-head {
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: 122px;
+    height: auto;
+  }
+
+  .interactive-dashboard[data-dashboard-group="metro-third-line"] .interactive-head > div:first-child,
+  .interactive-dashboard[data-dashboard-group="kafr-dawood-sadat"] .interactive-head > div:first-child {
+    width: 100%;
+    max-width: none;
+    flex: 1 0 100%;
+  }
+
+  .interactive-dashboard[data-dashboard-group="metro-third-line"] .interactive-head h1,
+  .interactive-dashboard[data-dashboard-group="kafr-dawood-sadat"] .interactive-head h1 {
+    display: block;
+    overflow: visible;
+    text-overflow: unset;
+    white-space: normal;
+  }
+
+  .interactive-dashboard[data-dashboard-group="metro-third-line"] .dash-actions,
+  .interactive-dashboard[data-dashboard-group="kafr-dawood-sadat"] .dash-actions {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
   .qena-map-first-dashboard .interactive-head {
     align-items: stretch;
     flex-wrap: wrap;
@@ -1112,4 +1198,19 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .kalabsha-support-panel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kalabsha-gauge-panel { display: grid; grid-template-columns: minmax(250px, 350px); justify-content: center; }
   .kalabsha-gauge-panel > section { min-height: 205px; }
+}
+
+/* Final narrow-screen override: the legacy three-cell price strip is useful
+   on wide screens, but unusable on a 375px analyst handset. */
+@media (max-width:480px) {
+  .interactive-dashboard.price-dashboard .price-column {
+    display:block !important;
+    grid-template-columns:none !important;
+    grid-template-rows:none !important;
+  }
+  .interactive-dashboard.price-dashboard .price-column header,
+  .interactive-dashboard.price-dashboard .price-column > div {
+    min-height:0 !important;
+    height:auto !important;
+  }
 }

@@ -1,0 +1,762 @@
+{
+  "type": "FeatureCollection",
+  "name": "Metro_Stations",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "xy_coordinate_resolution": 8.98315e-10,
+  "z_coordinate_resolution": 0.0001,
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "الهايكستب",
+        "GlobalID": "{5DDB25D8-01F1-4C04-97D7-42216915F2A0}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.4048414996,
+          30.1439091001,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "عمر بن الخطاب",
+        "GlobalID": "{787034F6-EE20-4853-9125-3E698286599B}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3944754003,
+          30.1404325999,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "قباء",
+        "GlobalID": "{55EFDBEA-7666-4876-872D-1774516C5070}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3840518997,
+          30.1347813002,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "هشام بركات",
+        "GlobalID": "{28FE4821-EF12-410C-B38A-340C52DD28FB}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3730790002,
+          30.1309896,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "النزهة",
+        "GlobalID": "{8513ADFB-2031-4374-8FE0-18413B353F4E}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3605164002,
+          30.1281362003,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "نادي الشمس",
+        "GlobalID": "{31CE6E24-293A-4F88-9086-8D6ECC93A531}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3439452005,
+          30.1223388999,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "ألف مسكن",
+        "GlobalID": "{F5FCADD0-62C4-4551-8C10-658B9A193703}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3397765002,
+          30.1180753002,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "ميدان هليوبليس",
+        "GlobalID": "{2BC74EE8-876F-4CEB-865F-6A04F6D6B9FB}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3381059416,
+          30.1079690032,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "هارون",
+        "GlobalID": "{CCFEC597-A789-4591-B682-3995D046245E}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3327239577,
+          30.1011392274,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "الاهرام",
+        "GlobalID": "{13D32B98-9C95-47D3-BDF9-59CA2A85EAA5}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3264769009,
+          30.0913002993,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "كلية البنات",
+        "GlobalID": "{17A54207-D137-4762-8753-63F564D26DD3}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3292341651,
+          30.0843979627,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "الاستاد",
+        "GlobalID": "{9A9A9FA6-EE29-423A-A6F9-1D1A1EE9BE0E}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3173864003,
+          30.0729601999,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "ارض المعارض",
+        "GlobalID": "{AB2F3B22-9C9D-4A6C-8B46-D1483F751B38}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3011434998,
+          30.0733413001,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "العباسية",
+        "GlobalID": "{BC0E99B2-361C-4168-9019-93AA5C8FD944}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2840707254,
+          30.0727893437,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "عبده باشا",
+        "GlobalID": "{89E52F47-B256-40E2-BBBE-E5D9CF1B84B4}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2764414,
+          30.0653632992,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "الجيش",
+        "GlobalID": "{7861BEF7-D279-4DCC-90A6-075B57343815}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2679582002,
+          30.0622815997,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "باب الشعرية",
+        "GlobalID": "{403C0F77-E0CE-41F7-85DF-59458EACFB5C}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2575948998,
+          30.0551420004,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "ناصر",
+        "GlobalID": "{F6324E28-DF28-40B3-8622-BC4B4009D6A6}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.238794653,
+          30.0534724476,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "ماسبيرو",
+        "GlobalID": "{CA00CDF9-C0B2-4621-95B9-E886BA234741}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2322399003,
+          30.0555439001,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "صفاء حجازي",
+        "GlobalID": "{2B7D2DD3-63D4-4A8D-8AF0-888254A55FD7}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2225309999,
+          30.0624379002,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "الكيت كات",
+        "GlobalID": "{B1F3357F-EAA3-4CE8-A5DB-282F30B8914C}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2129970005,
+          30.0668280999,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "السودان",
+        "GlobalID": "{FAD17DE7-5A2F-4AD2-92C6-7D15AE2162A2}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2053457996,
+          30.0697980997,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "امبابة",
+        "GlobalID": "{3A207BED-CDD9-47A0-AD3F-DEB315CE76B2}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2075704003,
+          30.0759373993,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "البوهي",
+        "GlobalID": "{EC1F71F8-75EB-4CA4-B19D-415B9C117BC7}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2105088994,
+          30.0821107006,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "القومية العربية",
+        "GlobalID": "{7E74A352-85C3-404B-9AB1-7F9FD056DD62}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2088939005,
+          30.0932302001,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "الطريق الدائري",
+        "GlobalID": "{A59C1710-9F03-4CD2-ACE1-EF915FD0EE21}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.1995924997,
+          30.0964429004,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "روض الفرج",
+        "GlobalID": "{CEE45064-0CA4-4071-8D3B-7DF5BA571B3C}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.184189,
+          30.1018799002,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "التوفيقية",
+        "GlobalID": "{C85B1CB7-E0F7-447A-8BF9-2EA90AB67641}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2021314376,
+          30.0650971484,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "وادي النيل",
+        "GlobalID": "{2E668156-05C3-4498-A0A5-3901276086C7}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2009903005,
+          30.0584593999,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "جامعة الدول",
+        "GlobalID": "{40A5BE70-B284-4D6A-A1C2-6B45A7BF31A6}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.1996699999,
+          30.0509632999,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "جامعة القاهرة",
+        "GlobalID": "{FAAF4F2F-7F79-45B0-AE79-3406515B2CEE}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2013382004,
+          30.0248922998,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "عدلي منصور",
+        "GlobalID": "{89089D45-8627-4546-8E81-FFE695B13AF4}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.4215953003,
+          30.1469763,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "بولاق الدكرور",
+        "GlobalID": "{2ECEAA3C-A460-4622-907D-97D63419F9DB}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.1954863995,
+          30.0375352003,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "اسم_المحطة": "العتبة",
+        "GlobalID": "{478A2C93-0442-4F38-A23A-85408C8ED7FD}",
+        "created_user": "MOSTAFA.NASER",
+        "created_date": "2026-07-13T14:47:29Z",
+        "last_edited_user": "MOSTAFA.NASER",
+        "last_edited_date": "2026-07-13T14:47:29Z",
+        "landuse_code": "",
+        "landuse_label": "",
+        "change_status_key": "unchanged"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.246896251,
+          30.0534633024,
+          0
+        ]
+      }
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-27T14:35:22.501Z",
-  "applications": 67,
+  "generatedAt": "2026-09-29T13:18:31.619Z",
+  "applications": 71,
   "counts": {
-    "Dashboard": 36,
+    "Dashboard": 40,
     "StoryMap": 11,
     "Instant Filter Gallery": 10,
     "Web AppViewer": 10
@@ -17,11 +17,13 @@
     "suez-free": 6,
     "qus": 7,
     "dabaa": 7,
-    "ismailia": 7
+    "ismailia": 7,
+    "metro-third-line": 2,
+    "kafr-dawood-sadat": 2
   },
   "checks": {
-    "projectEntrypoints": 67,
-    "sectorSummaries": 10,
+    "projectEntrypoints": 71,
+    "sectorSummaries": 12,
     "reportProfiles": 10,
     "crossSectorReferences": 0,
     "storyReportImages": 296,
@@ -39,6 +41,10 @@
     "dashboard-35c11a505b: no embedded report screenshot; runtime remains data-driven",
     "dashboard-qus-development-impact: no embedded report screenshot; runtime remains data-driven",
     "dashboard-kalabsha-development-impact: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-64d581f5e6: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-78d4f75a91: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-50863f6ddb: no embedded report screenshot; runtime remains data-driven",
+    "dashboard-554ea99a90: no embedded report screenshot; runtime remains data-driven",
     "kalabsha-axis: urban exists in Data but contains zero source records",
     "kalabsha-axis: buildings exists in Data but contains zero source records",
     "kalabsha-axis: landmarks exists in Data but contains zero source records",

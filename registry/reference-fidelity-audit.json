@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-27T14:35:28.581Z",
-  "applications": 67,
+  "generatedAt": "2026-09-29T13:18:37.785Z",
+  "applications": 71,
   "fidelityCounts": {
     "sector-and-application-type-reference": 34,
     "exact-item-reference": 21,
-    "source-reference-unavailable": 12
+    "source-reference-unavailable": 16
   },
   "typeCoverage": {
     "Dashboard": {
-      "applications": 36,
+      "applications": 40,
       "withReferences": 28
     },
     "StoryMap": {
@@ -1138,6 +1138,54 @@
       "pages": [
         null
       ],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-64d581f5e6",
+      "title": "لوحة مؤشرات الأراضي العمرانية – خط المترو الثالث",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "metro-third-line",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-78d4f75a91",
+      "title": "لوحة مؤشرات الأراضي الزراعية – خط المترو الثالث",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "metro-third-line",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-50863f6ddb",
+      "title": "لوحة مؤشرات الأراضي العمرانية – خط سكة حديد كفر داود–السادات",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "kafr-dawood-sadat",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-554ea99a90",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – خط سكة حديد كفر داود–السادات",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "kafr-dawood-sadat",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
       "missingImages": []
     }
   ]

@@ -1,0 +1,17 @@
+{
+  "id": "d67b9ab1e0011c4a560dfe5456735eb5",
+  "slug": "dashboard-d67b9ab1e0",
+  "title": "اللوحة التفاعلية لأسعار الأراضي – خط المترو الثالث",
+  "alternateTitles": [
+    "Agricultural Land Indicators Dashboard – Metro Line 3"
+  ],
+  "category": "تطبيقات خط المترو الثالث",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-filegdb",
+  "reportReferences": [],
+  "reportReferenceGroup": "metro-third-line",
+  "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\all_metro_With_Eco.gdb\\all_metro.gdb"
+}

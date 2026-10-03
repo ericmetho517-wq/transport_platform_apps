@@ -1,0 +1,13 @@
+{
+  "group": "kafr-dawood-sadat",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\elsadat_final_With_Eco\\elsadat_final\\elsadat.gdb",
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural",
+    "industrial",
+    "landcover-start",
+    "landcover-end"
+  ]
+}

@@ -3065,33 +3065,57 @@
     "id": "35c11a505b5d468bb56db1059041e177",
     "slug": "dashboard-35c11a505b",
     "title": "لوحة الأثر التنموي للجزء المطور – القوس الشرقي للطريق الدائري الإقليمي",
-    "alternateTitles": ["Development Impact Dashboard – Eastern Regional Ring Road"],
+    "alternateTitles": [
+      "Development Impact Dashboard – Eastern Regional Ring Road"
+    ],
     "category": "تطبيقات الطريق الدائري الإقليمي وخط الروبيكي",
-    "type": "Dashboard", "language": "ar", "direction": "rtl",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
     "sourceUrl": "https://www.arcgis.com/apps/dashboards/35c11a505b5d468bb56db1059041e177",
-    "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "regional-ring"
+    "status": "standardized-executive-dashboard",
+    "reportReferences": [],
+    "reportReferenceGroup": "regional-ring"
   },
   {
     "id": "dashboard-qus-development-impact",
     "slug": "dashboard-qus-development-impact",
     "title": "لوحة الأثر التنموي للجزء المطور – طريق قوص",
-    "alternateTitles": ["Development Impact Dashboard – Qus Road"],
-    "category": "تطبيقات طريق قوص", "type": "Dashboard", "language": "ar", "direction": "rtl",
-    "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "qus"
+    "alternateTitles": [
+      "Development Impact Dashboard – Qus Road"
+    ],
+    "category": "تطبيقات طريق قوص",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "standardized-executive-dashboard",
+    "reportReferences": [],
+    "reportReferenceGroup": "qus"
   },
   {
     "id": "dashboard-kalabsha-development-impact",
     "slug": "dashboard-kalabsha-development-impact",
     "title": "لوحة الأثر التنموي للجزء المطور – طريق كلابشة",
-    "alternateTitles": ["Development Impact Dashboard – Kalabsha Road"],
-    "category": "تطبيقات طريق كلابشة", "type": "Dashboard", "language": "ar", "direction": "rtl",
-    "sourceUrl": "", "status": "standardized-executive-dashboard", "reportReferences": [], "reportReferenceGroup": "kalabsha"
+    "alternateTitles": [
+      "Development Impact Dashboard – Kalabsha Road"
+    ],
+    "category": "تطبيقات طريق كلابشة",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "standardized-executive-dashboard",
+    "reportReferences": [],
+    "reportReferenceGroup": "kalabsha"
   },
   {
     "id": "dashboard-dabaa-development-impact",
     "slug": "dashboard-dabaa-development-impact",
     "title": "لوحة الأثر التنموي للجزء المطور – محور الضبعة",
-    "alternateTitles": ["Development Impact Dashboard – El Dabaa Axis"],
+    "alternateTitles": [
+      "Development Impact Dashboard – El Dabaa Axis"
+    ],
     "category": "تطبيقات محور الضبعة",
     "type": "Dashboard",
     "language": "ar",
@@ -3105,5 +3129,107 @@
       }
     ],
     "reportReferenceGroup": "dabaa"
+  },
+  {
+    "id": "d67b9ab1e0011c4a560dfe5456735eb5",
+    "slug": "dashboard-d67b9ab1e0",
+    "title": "اللوحة التفاعلية لأسعار الأراضي – خط المترو الثالث",
+    "alternateTitles": [
+      "Agricultural Land Indicators Dashboard – Metro Line 3"
+    ],
+    "category": "تطبيقات خط المترو الثالث",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-filegdb",
+    "reportReferences": [],
+    "reportReferenceGroup": "metro-third-line",
+    "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\all_metro_With_Eco.gdb\\all_metro.gdb"
+  },
+  {
+    "id": "64d581f5e64b65ef8174c6be0ee8697d",
+    "slug": "dashboard-64d581f5e6",
+    "title": "لوحة مؤشرات الأراضي العمرانية – خط المترو الثالث",
+    "alternateTitles": [
+      "Urban Land Indicators Dashboard – Metro Line 3"
+    ],
+    "category": "تطبيقات خط المترو الثالث",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-filegdb",
+    "reportReferences": [],
+    "reportReferenceGroup": "metro-third-line",
+    "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\all_metro_With_Eco.gdb\\all_metro.gdb"
+  },
+  {
+    "id": "78d4f75a9173feb409323d0165751066",
+    "slug": "dashboard-78d4f75a91",
+    "title": "لوحة مؤشرات الأراضي الزراعية – خط المترو الثالث",
+    "alternateTitles": [
+      "Agricultural Land Indicators Dashboard – Metro Line 3"
+    ],
+    "category": "تطبيقات خط المترو الثالث",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-filegdb",
+    "reportReferences": [],
+    "reportReferenceGroup": "metro-third-line",
+    "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\all_metro_With_Eco.gdb\\all_metro.gdb"
+  },
+  {
+    "id": "4e09265d79233b24f16db550a0bba224",
+    "slug": "dashboard-4e09265d79",
+    "title": "اللوحة التفاعلية لأسعار الأراضي – خط سكة حديد كفر داود–السادات",
+    "alternateTitles": [
+      "Agricultural and Industrial Land Indicators Dashboard – Kafr Dawood–Sadat Railway Line"
+    ],
+    "category": "تطبيقات خط سكة حديد كفر داود–السادات",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-filegdb",
+    "reportReferences": [],
+    "reportReferenceGroup": "kafr-dawood-sadat",
+    "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\elsadat_final_With_Eco\\elsadat_final\\elsadat.gdb"
+  },
+  {
+    "id": "50863f6ddbc914a5d7463064f211e8ce",
+    "slug": "dashboard-50863f6ddb",
+    "title": "لوحة مؤشرات الأراضي العمرانية – خط سكة حديد كفر داود–السادات",
+    "alternateTitles": [
+      "Urban Land Indicators Dashboard – Kafr Dawood–Sadat Railway Line"
+    ],
+    "category": "تطبيقات خط سكة حديد كفر داود–السادات",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-filegdb",
+    "reportReferences": [],
+    "reportReferenceGroup": "kafr-dawood-sadat",
+    "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\elsadat_final_With_Eco\\elsadat_final\\elsadat.gdb"
+  },
+  {
+    "id": "554ea99a9016b69c56618feb4b198269",
+    "slug": "dashboard-554ea99a90",
+    "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – خط سكة حديد كفر داود–السادات",
+    "alternateTitles": [
+      "Agricultural and Industrial Land Indicators Dashboard – Kafr Dawood–Sadat Railway Line"
+    ],
+    "category": "تطبيقات خط سكة حديد كفر داود–السادات",
+    "type": "Dashboard",
+    "language": "ar",
+    "direction": "rtl",
+    "sourceUrl": "",
+    "status": "generated-from-local-filegdb",
+    "reportReferences": [],
+    "reportReferenceGroup": "kafr-dawood-sadat",
+    "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\elsadat_final_With_Eco\\elsadat_final\\elsadat.gdb"
   }
 ]

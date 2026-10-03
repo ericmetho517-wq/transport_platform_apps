@@ -1,0 +1,159 @@
+{
+  "slug": "kafr-dawood-sadat",
+  "projectTitle": "خط سكة حديد كفر داود–السادات",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\elsadat_final_With_Eco\\elsadat_final\\elsadat.gdb",
+  "authoritativeSource": "وزارة النقل/Data",
+  "verifiedLocalData": true,
+  "yearStart": 2016,
+  "yearEnd": 2026,
+  "metrics": {
+    "studyAreaKm2": 501.995,
+    "axisLengthKm": 35.591,
+    "urbanChangeKm2": 18.636,
+    "agriculturalChangeKm2": 85.934,
+    "industrialChangeKm2": 10.954,
+    "agriculturalAreaFeddan": 69387,
+    "urbanFeatures": 371,
+    "agriculturalFeatures": 263,
+    "industrialFeatures": 222
+  },
+  "prices": {
+    "agricultural": {
+      "start": 69385514907.6763,
+      "end": 208156544723.029
+    },
+    "urban": {
+      "start": 117947517346.513,
+      "end": 589737586732.565
+    },
+    "industrial": {
+      "start": 15389836633.5158,
+      "end": 48734482672.7999
+    },
+    "services": {
+      "start": 21304383598.0389,
+      "end": 106521917990.194
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2016,
+      2026
+    ],
+    "urban": [
+      117947517346.513,
+      589737586732.565
+    ],
+    "agricultural": [
+      69385514907.6763,
+      208156544723.029
+    ],
+    "industrial": [
+      15389836633.5158,
+      48734482672.7999
+    ],
+    "services": [
+      21304383598.0389,
+      106521917990.194
+    ]
+  },
+  "priceAggregation": "official-workbook-total-by-landuse; individual map popups retain FileGDB attributes",
+  "priceFields": {
+    "start": "سعر_الأرض_2016",
+    "end": "سعر_الأرض_2026"
+  },
+  "landUse": [
+    {
+      "category": "Urban",
+      "year": 2016,
+      "area": 20.679421366
+    },
+    {
+      "category": "Agriculture",
+      "year": 2016,
+      "area": 205.491631036
+    },
+    {
+      "category": "Vacant Lands",
+      "year": 2016,
+      "area": 252.749703
+    },
+    {
+      "category": "Other",
+      "year": 2016,
+      "area": 5.702174
+    },
+    {
+      "category": "Water Bodies",
+      "year": 2016,
+      "area": 0.604233
+    },
+    {
+      "category": "Industrial",
+      "year": 2016,
+      "area": 14.6955181857
+    },
+    {
+      "category": "Services",
+      "year": 2016,
+      "area": 3.2024120563
+    },
+    {
+      "category": "Urban",
+      "year": 2026,
+      "area": 39.3158391155
+    },
+    {
+      "category": "Vacant Lands",
+      "year": 2026,
+      "area": 132.707931
+    },
+    {
+      "category": "Other",
+      "year": 2026,
+      "area": 9.349857
+    },
+    {
+      "category": "Agriculture",
+      "year": 2026,
+      "area": 291.4255739749
+    },
+    {
+      "category": "Industrial",
+      "year": 2026,
+      "area": 25.6497277225
+    },
+    {
+      "category": "Services",
+      "year": 2026,
+      "area": 7.1014611993
+    },
+    {
+      "category": "Water Bodies",
+      "year": 2026,
+      "area": 0.602904
+    }
+  ],
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural",
+    "industrial",
+    "landcover-start",
+    "landcover-end"
+  ],
+  "layerCounts": {
+    "study": 1,
+    "axis": 1,
+    "urban": 371,
+    "agricultural": 263,
+    "industrial": 222,
+    "landcover-start": 3533,
+    "landcover-end": 4807
+  },
+  "sourceLayerCounts": {
+    "landcover-start": 3533,
+    "landcover-end": 4807
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "slug": "metro-third-line",
+  "projectTitle": "خط المترو الثالث",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\all_metro_With_Eco.gdb\\all_metro.gdb",
+  "authoritativeSource": "وزارة النقل/Data",
+  "verifiedLocalData": true,
+  "yearStart": 2016,
+  "yearEnd": 2026,
+  "metrics": {
+    "studyAreaKm2": 72.406,
+    "axisLengthKm": 46.865,
+    "urbanChangeKm2": 0.164,
+    "agriculturalChangeKm2": -0.197,
+    "industrialChangeKm2": -0.08,
+    "agriculturalAreaFeddan": 312,
+    "urbanFeatures": 48,
+    "agriculturalFeatures": 3,
+    "industrialFeatures": 0
+  },
+  "prices": {
+    "agricultural": {
+      "start": 312318983.870774,
+      "end": 936956951.612322
+    },
+    "urban": {
+      "start": 267821259719.334,
+      "end": 1290415683002.67
+    },
+    "industrial": {
+      "start": 86279652.8225802,
+      "end": 273218900.604837
+    },
+    "services": {
+      "start": 108630017300.871,
+      "end": 313820049980.294
+    }
+  },
+  "priceSeries": {
+    "years": [
+      2016,
+      2026
+    ],
+    "urban": [
+      267821259719.334,
+      1290415683002.67
+    ],
+    "agricultural": [
+      312318983.870774,
+      936956951.612322
+    ],
+    "industrial": [
+      86279652.8225802,
+      273218900.604837
+    ],
+    "services": [
+      108630017300.871,
+      313820049980.294
+    ]
+  },
+  "priceAggregation": "official-workbook-total-by-landuse; individual map popups retain FileGDB attributes",
+  "priceFields": {
+    "start": "سعر_الأرض_2016",
+    "end": "سعر_الأرض_2026"
+  },
+  "landUse": [
+    {
+      "category": "Urban",
+      "year": 2016,
+      "area": 42.1693621346
+    },
+    {
+      "category": "Vacant Lands",
+      "year": 2016,
+      "area": 2.830465
+    },
+    {
+      "category": "Agriculture",
+      "year": 2016,
+      "area": 1.5082852015
+    },
+    {
+      "category": "Services",
+      "year": 2016,
+      "area": 11.4570280748
+    },
+    {
+      "category": "Other",
+      "year": 2016,
+      "area": 22.133012
+    },
+    {
+      "category": "Industrial",
+      "year": 2016,
+      "area": 0.2242388887
+    },
+    {
+      "category": "Water Bodies",
+      "year": 2016,
+      "area": 1.2695
+    },
+    {
+      "category": "Urban",
+      "year": 2026,
+      "area": 42.3330493274
+    },
+    {
+      "category": "Vacant Lands",
+      "year": 2026,
+      "area": 2.124717
+    },
+    {
+      "category": "Agriculture",
+      "year": 2026,
+      "area": 1.3117685912
+    },
+    {
+      "category": "Services",
+      "year": 2026,
+      "area": 12.0700019223
+    },
+    {
+      "category": "Other",
+      "year": 2026,
+      "area": 22.209708
+    },
+    {
+      "category": "Industrial",
+      "year": 2026,
+      "area": 0.1437994214
+    },
+    {
+      "category": "Water Bodies",
+      "year": 2026,
+      "area": 1.2695
+    }
+  ],
+  "layers": [
+    "study",
+    "axis",
+    "urban",
+    "agricultural",
+    "landcover-start",
+    "landcover-end",
+    "Metro_Station"
+  ],
+  "layerCounts": {
+    "study": 1,
+    "axis": 1,
+    "urban": 48,
+    "agricultural": 3,
+    "landcover-start": 549,
+    "landcover-end": 728,
+    "Metro_Station": 34
+  },
+  "sourceLayerCounts": {
+    "landcover-start": 549,
+    "landcover-end": 728
+  }
+}

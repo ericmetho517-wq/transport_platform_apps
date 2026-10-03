@@ -1,0 +1,17 @@
+{
+  "id": "64d581f5e64b65ef8174c6be0ee8697d",
+  "slug": "dashboard-64d581f5e6",
+  "title": "لوحة مؤشرات الأراضي العمرانية – خط المترو الثالث",
+  "alternateTitles": [
+    "Urban Land Indicators Dashboard – Metro Line 3"
+  ],
+  "category": "تطبيقات خط المترو الثالث",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-filegdb",
+  "reportReferences": [],
+  "reportReferenceGroup": "metro-third-line",
+  "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\all_metro_With_Eco.gdb\\all_metro.gdb"
+}

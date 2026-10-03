@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-27T14:35:27.011Z",
-  "applications": 67,
+  "generatedAt": "2026-09-30T07:45:54.916Z",
+  "applications": 73,
   "totals": {
-    "features": 79239,
-    "sourceFeatures": 212199,
-    "renderableFeatures": 79232,
-    "coordinatePairs": 2998123
+    "features": 89801,
+    "sourceFeatures": 222761,
+    "renderableFeatures": 89794,
+    "coordinatePairs": 3471900
   },
   "applicationCoverage": {
     "western-upper-egypt": {
@@ -66,6 +66,18 @@
       "applications": 7,
       "activeFeatures": 63962,
       "activeLayers": 26,
+      "verifiedLocalData": true
+    },
+    "metro-third-line": {
+      "applications": 3,
+      "activeFeatures": 1364,
+      "activeLayers": 7,
+      "verifiedLocalData": true
+    },
+    "kafr-dawood-sadat": {
+      "applications": 3,
+      "activeFeatures": 9198,
+      "activeLayers": 7,
       "verifiedLocalData": true
     }
   },
@@ -469,6 +481,68 @@
         "renderableFeatures": 63961
       }
     },
+    "kafr-dawood-sadat": {
+      "layers": {
+        "study": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 907,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 595,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 371,
+          "representedSourceFeatures": 371,
+          "renderableFeatures": 371,
+          "coordinatePairs": 5827,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 263,
+          "representedSourceFeatures": 263,
+          "renderableFeatures": 263,
+          "coordinatePairs": 22383,
+          "invalidCoordinates": 0
+        },
+        "industrial": {
+          "features": 222,
+          "representedSourceFeatures": 222,
+          "renderableFeatures": 222,
+          "coordinatePairs": 1921,
+          "invalidCoordinates": 0
+        },
+        "landcover-start": {
+          "features": 3533,
+          "representedSourceFeatures": 3533,
+          "renderableFeatures": 3533,
+          "coordinatePairs": 126731,
+          "invalidCoordinates": 0
+        },
+        "landcover-end": {
+          "features": 4807,
+          "representedSourceFeatures": 4807,
+          "renderableFeatures": 4807,
+          "coordinatePairs": 184709,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\elsadat_final_With_Eco\\elsadat_final\\elsadat.gdb",
+      "undeclaredLayerFiles": [],
+      "totals": {
+        "features": 9198,
+        "sourceFeatures": 9198,
+        "coordinatePairs": 343073,
+        "renderableFeatures": 9198
+      }
+    },
     "kalabsha-axis": {
       "layers": {
         "study": {
@@ -557,6 +631,70 @@
         "sourceFeatures": 1305,
         "coordinatePairs": 28604,
         "renderableFeatures": 1305
+      }
+    },
+    "metro-third-line": {
+      "layers": {
+        "study": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 726,
+          "invalidCoordinates": 0
+        },
+        "axis": {
+          "features": 1,
+          "representedSourceFeatures": 1,
+          "renderableFeatures": 1,
+          "coordinatePairs": 341,
+          "invalidCoordinates": 0
+        },
+        "urban": {
+          "features": 48,
+          "representedSourceFeatures": 48,
+          "renderableFeatures": 48,
+          "coordinatePairs": 1036,
+          "invalidCoordinates": 0
+        },
+        "agricultural": {
+          "features": 3,
+          "representedSourceFeatures": 3,
+          "renderableFeatures": 3,
+          "coordinatePairs": 36,
+          "invalidCoordinates": 0
+        },
+        "landcover-start": {
+          "features": 549,
+          "representedSourceFeatures": 549,
+          "renderableFeatures": 549,
+          "coordinatePairs": 60855,
+          "invalidCoordinates": 0
+        },
+        "landcover-end": {
+          "features": 728,
+          "representedSourceFeatures": 728,
+          "renderableFeatures": 728,
+          "coordinatePairs": 67676,
+          "invalidCoordinates": 0
+        },
+        "Metro_Station": {
+          "features": 34,
+          "representedSourceFeatures": 34,
+          "renderableFeatures": 34,
+          "coordinatePairs": 34,
+          "invalidCoordinates": 0
+        }
+      },
+      "verifiedLocalData": true,
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\all_metro_With_Eco.gdb\\all_metro.gdb",
+      "undeclaredLayerFiles": [
+        "industrial.geojson"
+      ],
+      "totals": {
+        "features": 1364,
+        "sourceFeatures": 1364,
+        "coordinatePairs": 130704,
+        "renderableFeatures": 1364
       }
     },
     "qena-luxor-road": {

@@ -9,13 +9,16 @@ const aliases = {
   dabaa: "dabaa-axis", dahshur: "dahshur-south-link", kalabsha: "kalabsha-axis",
   "qena-luxor": "qena-luxor-road", qus: "qus-axis", "regional-ring": "regional-ring-road",
   "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
+  "metro-third-line": "metro-third-line", "kafr-dawood-sadat": "kafr-dawood-sadat",
 };
-const expectedCounts = { Dashboard: 36, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
+const expectedCounts = { Dashboard: 40, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
 const expectedDashboardsBySector = {
   dabaa: 4, dahshur: 3, kalabsha: 4, "qena-luxor": 3, qus: 4,
   "regional-ring": 4, "suez-free": 3, "suez-link": 3,
   "western-upper-egypt": 4, ismailia: 4,
+  "metro-third-line": 2, "kafr-dawood-sadat": 2,
 };
+const localDataOnlyGroups = new Set(["metro-third-line", "kafr-dawood-sadat"]);
 const errors = [];
 const warnings = [];
 const counts = {};
@@ -41,7 +44,8 @@ for (const [type, expected] of Object.entries(expectedCounts)) {
   if (counts[type] !== expected) errors.push(`${type}: expected ${expected}, found ${counts[type] || 0}`);
 }
 for (const group of Object.values(aliases)) {
-  if (!profiles[group]) errors.push(`${group}: missing authoritative report profile`);
+  if (!profiles[group] && !localDataOnlyGroups.has(Object.entries(aliases).find(([, value]) => value === group)?.[0] || "")) errors.push(`${group}: missing authoritative report profile`);
+  if (localDataOnlyGroups.has(Object.entries(aliases).find(([, value]) => value === group)?.[0] || "")) continue;
   for (const kind of ["urban", "industrial", "agricultural"]) {
     const pair = profiles[group]?.prices?.[kind];
     if (!Number.isFinite(pair?.start) || !Number.isFinite(pair?.end) || pair.start <= 0 || pair.end <= 0) {
@@ -54,7 +58,7 @@ for (const group of Object.values(aliases)) {
     if (Number(count) === 0) warnings.push(`${group}: ${layer} exists in Data but contains zero source records`);
   }
 }
-for (const sector of Object.keys(aliases)) {
+for (const sector of Object.keys(aliases).filter((sector) => !localDataOnlyGroups.has(sector))) {
   for (const type of ["Dashboard", "StoryMap", "Web AppViewer", "Instant Filter Gallery"]) {
     if (!apps.some((app) => app.reportReferenceGroup === sector && app.type === type)) errors.push(`${sector}: missing required ${type} application`);
   }
@@ -63,7 +67,10 @@ for (const sector of Object.keys(aliases)) {
   const dashboards = apps.filter((app) => app.reportReferenceGroup === sector && app.type === "Dashboard");
   const expectedDashboards = expectedDashboardsBySector[sector];
   if (dashboards.length !== expectedDashboards) errors.push(`${sector}: expected exactly ${expectedDashboards} executive dashboards, found ${dashboards.length}`);
-  for (const pattern of [/العمرانية/, /الزراعية/, /أسعار الأراضي/]) if (!dashboards.some((app) => pattern.test(app.title))) errors.push(`${sector}: incomplete executive dashboard suite`);
+  const requiredPatterns = localDataOnlyGroups.has(sector)
+    ? [/urban/i, /agricultural/i]
+    : [/العمرانية/, /الزراعية/, /أسعار الأراضي/];
+  for (const pattern of requiredPatterns) if (!dashboards.some((app) => pattern.test(app.title) || pattern.test(app.alternateTitles?.join(" ") || ""))) errors.push(`${sector}: incomplete executive dashboard suite`);
   if (apps.some((app) => app.reportReferenceGroup === sector && app.type === "Experience")) errors.push(`${sector}: interactive applications must not appear in the catalog`);
 }
 

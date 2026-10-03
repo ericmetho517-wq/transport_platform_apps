@@ -14,6 +14,8 @@ const aliases = {
   "suez-free": "cairo-suez-road",
   "suez-link": "suez-ring-link",
   "western-upper-egypt": "western-upper-egypt",
+  "metro-third-line": "metro-third-line",
+  "kafr-dawood-sadat": "kafr-dawood-sadat",
 };
 const failures = [];
 const dashboards = registry.filter((app) => app.type === "Dashboard");
@@ -118,8 +120,8 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }
 
-if (dashboards.length !== 36) failures.push(`expected 36 dashboards, found ${dashboards.length}`);
-const expectedDashboardsBySector = { "western-upper-egypt":4, dahshur:3, "regional-ring":4, kalabsha:4, "qena-luxor":3, "suez-link":3, "suez-free":3, qus:4, dabaa:4, ismailia:4 };
+if (dashboards.length !== 42) failures.push(`expected 42 dashboards, found ${dashboards.length}`);
+const expectedDashboardsBySector = { "western-upper-egypt":4, dahshur:3, "regional-ring":4, kalabsha:4, "qena-luxor":3, "suez-link":3, "suez-free":3, qus:4, dabaa:4, ismailia:4, "metro-third-line":3, "kafr-dawood-sadat":3 };
 for (const group of Object.keys(expectedDashboardsBySector)) {
   const suite = dashboards.filter((app) => app.reportReferenceGroup === group);
   const expectedCount = expectedDashboardsBySector[group];

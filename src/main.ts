@@ -20,6 +20,7 @@ const axisOptions = [
   ["regional-ring-road", "الدائري الإقليمي"],
   ["kalabsha-axis", "محور كلابشة"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
   ["qus-axis", "محور قوص"], ["qena-luxor-road", "طريق قنا الأقصر"],
+  ["metro-third-line", "خط المترو الثالث"], ["kafr-dawood-sadat", "خط سكة حديد كفر داود–السادات"],
   ["dabaa-axis", "محور الضبعة"],
 ] as const;
 const axisOf = (app: TransportApp): string => dashboardGroup(app);
@@ -77,6 +78,8 @@ const englishAxisLabels: Record<string, string> = {
   "cairo-suez-road": "Cairo–Suez Road",
   "suez-ring-link": "Suez Ring Link",
   "dabaa-axis": "El Dabaa Axis",
+  "metro-third-line": "Metro Line 3",
+  "kafr-dawood-sadat": "Kafr Dawood–Sadat Railway Line",
 };
 const displayTitle = (app: TransportApp) => localizedAppTitle(app, platformLanguage);
 const t = (arabic: string, english: string) => platformLanguage === "en" ? english : arabic;

@@ -1,0 +1,17 @@
+{
+  "id": "4e09265d79233b24f16db550a0bba224",
+  "slug": "dashboard-4e09265d79",
+  "title": "اللوحة التفاعلية لأسعار الأراضي – خط سكة حديد كفر داود–السادات",
+  "alternateTitles": [
+    "Agricultural and Industrial Land Indicators Dashboard – Kafr Dawood–Sadat Railway Line"
+  ],
+  "category": "تطبيقات خط سكة حديد كفر داود–السادات",
+  "type": "Dashboard",
+  "language": "ar",
+  "direction": "rtl",
+  "sourceUrl": "",
+  "status": "generated-from-local-filegdb",
+  "reportReferences": [],
+  "reportReferenceGroup": "kafr-dawood-sadat",
+  "localDataSource": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\elsadat_final_With_Eco\\elsadat_final\\elsadat.gdb"
+}
