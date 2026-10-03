@@ -15,12 +15,14 @@ const registry = (apps as TransportApp[]).filter((app) =>
   && app.slug !== "web-viewer-b0ababe3e4",
 );
 const axisOptions = [
-  ["ismailia", "طريق القاهرة–الإسماعيلية"], ["western-upper-egypt", "طريق الصعيد الغربي"],
+  ["ismailia", "طريق القاهرة–الإسماعيلية"],
+  ["kafr-dawood-sadat", "خط سكة حديد كفر داود–السادات"],
+  ["metro-third-line", "خط المترو الثالث"],
+  ["western-upper-egypt", "طريق الصعيد الغربي"],
   ["cairo-suez-road", "طريق القاهرة السويس"],
   ["regional-ring-road", "الدائري الإقليمي"],
   ["kalabsha-axis", "محور كلابشة"], ["dahshur-south-link", "وصلة دهشور الجنوبية"],
   ["qus-axis", "محور قوص"], ["qena-luxor-road", "طريق قنا الأقصر"],
-  ["metro-third-line", "خط المترو الثالث"], ["kafr-dawood-sadat", "خط سكة حديد كفر داود–السادات"],
   ["dabaa-axis", "محور الضبعة"],
 ] as const;
 const axisOf = (app: TransportApp): string => dashboardGroup(app);
