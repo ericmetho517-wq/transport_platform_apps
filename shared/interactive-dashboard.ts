@@ -1956,7 +1956,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const defaultZoom = 1;
   const defaultTx = (1000 - 1000 * defaultZoom) / 2;
   const defaultTy = (520 - 520 * defaultZoom) / 2;
-  let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, pointerIsDown = false, dragging = false, pointerStartX = 0, pointerStartY = 0, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
+  let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, pointerIsDown = false, dragging = false, pointerStartX = 0, pointerStartY = 0, lastX = 0, lastY = 0, panFrame = 0, pairSyncPending = false, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const inverseProject = (x: number, y: number): [number, number] => [
     viewMinX + (x - (1000 - width * scale) / 2) / scale,
@@ -2095,7 +2095,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       panFrame = requestAnimationFrame(() => {
         panFrame = 0;
         viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
-        if (linkedPair) linkedPair.dispatchEvent(new CustomEvent("linked-map-view", { detail: { source: mapInstance, zoom, tx, ty } }));
+        // Rendering a second high-density SVG on every pointer frame makes
+        // panning feel heavy. Synchronise the companion map once on release.
+        pairSyncPending = Boolean(linkedPair);
       });
     }
   });
@@ -2105,6 +2107,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (!dragging) return;
     dragging = false;
     endInteraction(120);
+    if (pairSyncPending && linkedPair) {
+      pairSyncPending = false;
+      linkedPair.dispatchEvent(new CustomEvent("linked-map-view", { detail: { source: mapInstance, zoom, tx, ty } }));
+    }
   };
   svg.addEventListener("pointerup", finishDrag);
   svg.addEventListener("pointercancel", finishDrag);
