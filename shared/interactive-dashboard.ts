@@ -1945,7 +1945,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     status.textContent = pairCount
       ? (isEnglish
         ? `${featureCount.toLocaleString(locale)} features · ${pairCount.toLocaleString(locale)} coordinate pairs · ${loaded.length} layers${failureNote}`
-        : `${featureCount.toLocaleString(locale)} معلم · ${pairCount.toLocaleString(locale)} نقطة هندسية · ${loaded.length.toLocaleString(locale)} طبقات${failureNote}`)
+        : `${featureCount.toLocaleString(locale)} معلم · ${pairCount.toLocaleString(locale)} نقطة هندسية · اضغط على أي معلم لعرض بياناته${failureNote}`)
       : (isEnglish
         ? `No matching local geometry · ${tileCount} reference satellite tiles${failureNote}`
         : `لا توجد هندسة محلية مطابقة · ${tileCount.toLocaleString(locale)} صورة قمر صناعي مرجعية${failureNote}`);
