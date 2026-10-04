@@ -1694,34 +1694,6 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           popup.style.right = "auto";
           popup.style.insetInlineEnd = "auto";
         };
-        let activeHoverKey = "";
-        path.addEventListener("pointermove", (event) => {
-          const target = hitTestFeature(event);
-          if (!target) {
-            featureHover.setAttribute("hidden", "true");
-            const popup = scope.querySelector<HTMLElement>(".feature-popup");
-            if (popup) popup.hidden = true;
-            return;
-          }
-          featureHover.setAttribute("d", target.pathData);
-          featureHover.dataset.geometry = bucketIsLine ? "MultiLineString" : bucketIsPoint ? "MultiPoint" : "MultiPolygon";
-          featureHover.removeAttribute("hidden");
-          content.appendChild(featureHover);
-          const hoverKey = `${bucketFeatures.indexOf(target.feature)}:${target.componentIndex}`;
-          if (hoverKey !== activeHoverKey) {
-            activeHoverKey = hoverKey;
-            showPopup(event);
-          } else {
-            positionPopupNearCursor(event);
-          }
-        });
-        path.addEventListener("pointerleave", () => {
-          activeHoverKey = "";
-          featureHover.setAttribute("hidden", "true");
-          featureSelection.setAttribute("hidden", "true");
-          const popup = scope.querySelector<HTMLElement>(".feature-popup");
-          if (popup) popup.hidden = true;
-        });
         const showPopup = (event: Event) => {
           event.stopPropagation();
           scope.querySelectorAll<SVGPathElement>(".map-content path").forEach((p) => p.classList.remove("feature-selected"));
@@ -1750,9 +1722,28 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
             featureSelection.removeAttribute("hidden");
             content.appendChild(featureSelection);
           }
-          const hiddenPopupFields = new Set(["landuse_value", "landuse_code", "landuse_label", "change_status_key", "source_feature_count", "GlobalID", "OBJECTID", "FID", "SHAPE_Length", "SHAPE_Area"]);
-          const rows = Object.entries(targetProperties || {}).filter(([key, value]) => !hiddenPopupFields.has(key) && value !== null && value !== "");
-          const aggregateFieldLabels: Record<string, string> = { landuse_value: "استخدام الأرض", landuse_code: "كود استخدام الأرض", landuse_label: "وصف الاستخدام", source_feature_count: "عدد المعالم الأصلية", area_km2: "المساحة (كم²)", sector: "القطاع" };
+          // The popup is intentionally brief: map clicks identify one feature,
+          // rather than exposing every raw database field.
+          const hiddenPopupFields = new Set(["landuse_value", "landuse_code", "landuse_label", "change_status_key", "source_feature_count", "GlobalID", "OBJECTID", "FID", "SHAPE_Length", "SHAPE_Area", "Shape_Length", "Shape_Area"]);
+          const popupPriority = (key: string): number => {
+            const normalized = key.toLowerCase().replace(/[\s_-]/g, "");
+            if (/^(name|title|station|roadname|axisname|اسم|محطة|طريق|محور)/.test(normalized)) return 1;
+            if (/(area|مساحة)/.test(normalized)) return 2;
+            if (/(length|طول)/.test(normalized)) return 3;
+            if (/(changestatus|حالةالتغير|status)/.test(normalized)) return 4;
+            if (/(sector|قطاع)/.test(normalized)) return 5;
+            if (/(price|سعر)/.test(normalized)) return 6;
+            return 99;
+          };
+          const rows = Object.entries(targetProperties || {})
+            .filter(([key, value]) => !hiddenPopupFields.has(key) && value !== null && value !== "" && popupPriority(key) < 99)
+            .sort(([first], [second]) => popupPriority(first) - popupPriority(second))
+            .slice(0, 3);
+          const aggregateFieldLabels: Record<string, string> = {
+            name: "الاسم", Name: "الاسم", NAME: "الاسم", station_name: "المحطة", road_name: "الطريق",
+            area_km2: "المساحة (كم²)", Area_KM2: "المساحة (كم²)", "مساحة_كم2": "المساحة (كم²)",
+            length: "الطول", Length: "الطول", change_status: "حالة التغير", status: "الحالة", sector: "القطاع",
+          };
           const landuseTitle = landuseNames[bucket.code] || labels[layer];
           const popupValue = (key: string, value: unknown): string => {
             if (key === "change_status" || key === "حالة_التغير") {
