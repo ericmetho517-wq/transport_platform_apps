@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T15:17:21.226Z",
+  "generatedAt": "2026-10-04T07:54:36.797Z",
   "applications": 73,
   "fidelityCounts": {
     "sector-and-application-type-reference": 34,
@@ -1166,7 +1166,7 @@
     },
     {
       "slug": "dashboard-78d4f75a91",
-      "title": "لوحة مؤشرات الأراضي الزراعية – خط المترو الثالث",
+      "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – خط المترو الثالث",
       "type": "Dashboard",
       "language": "ar",
       "sector": "metro-third-line",
