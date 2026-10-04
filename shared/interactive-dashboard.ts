@@ -1956,7 +1956,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const defaultZoom = 1;
   const defaultTx = (1000 - 1000 * defaultZoom) / 2;
   const defaultTy = (520 - 520 * defaultZoom) / 2;
-  let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, dragging = false, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
+  let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, pointerIsDown = false, dragging = false, pointerStartX = 0, pointerStartY = 0, lastX = 0, lastY = 0, panFrame = 0, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const inverseProject = (x: number, y: number): [number, number] => [
     viewMinX + (x - (1000 - width * scale) / 2) / scale,
@@ -2067,15 +2067,24 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     });
   }, { passive: false });
   svg.addEventListener("pointerdown", (event) => {
-    dragging = true;
-    scope.classList.add("map-interacting");
-    window.clearTimeout(interactionTimer);
+    pointerIsDown = true;
+    dragging = false;
+    pointerStartX = event.clientX;
+    pointerStartY = event.clientY;
     lastX = event.clientX;
     lastY = event.clientY;
-    svg.setPointerCapture(event.pointerId);
   });
   svg.addEventListener("pointermove", (event) => {
-    if (!dragging) return;
+    if (!pointerIsDown) return;
+    // Do not capture a simple press. Capturing it at pointerdown retargets the
+    // ensuing click to the SVG, so a feature's own click handler never runs.
+    if (!dragging) {
+      if (Math.hypot(event.clientX - pointerStartX, event.clientY - pointerStartY) < 4) return;
+      dragging = true;
+      scope.classList.add("map-interacting");
+      window.clearTimeout(interactionTimer);
+      svg.setPointerCapture(event.pointerId);
+    }
     const dx = event.clientX - lastX;
     const dy = event.clientY - lastY;
     lastX = event.clientX;
@@ -2091,6 +2100,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     }
   });
   const finishDrag = () => {
+    if (!pointerIsDown) return;
+    pointerIsDown = false;
     if (!dragging) return;
     dragging = false;
     endInteraction(120);
