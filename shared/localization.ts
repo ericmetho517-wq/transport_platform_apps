@@ -220,6 +220,7 @@ const replacements: Array<[string, string]> = [
   ["اختر طبقة لإظهارها منفردة وفحص بياناتها.", "Select a layer to isolate it and inspect its data."],
   ["عرض تفاصيل التطبيق", "View application details"],
   ["إجمالي مساحة الأراضي الزراعية (فدان)", "Total agricultural land area (feddans)"],
+  ["إجمالي مساحة الأراضي الصناعية (فدان)", "Total industrial land area (feddans)"],
   ["مساحة التغير الزراعي المحصورة (فدان)", "Mapped agricultural change area (feddans)"],
   ["إجمالي مساحة الأراضي العمرانية (كم²)", "Total urban land area (km²)"],
   ["مساحة التغير العمراني المحصورة (كم²)", "Mapped urban change area (km²)"],

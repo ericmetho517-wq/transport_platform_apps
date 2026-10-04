@@ -12,7 +12,9 @@
     "urbanChangeKm2": 0.164,
     "agriculturalChangeKm2": -0.197,
     "industrialChangeKm2": -0.08,
-    "agriculturalAreaFeddan": 312,
+    "agriculturalAreaFeddan": 312.318983878808,
+    "industrialAreaFeddan": 34.237204241126,
+    "urbanAreaFeddan": 10079.075714360666,
     "urbanFeatures": 48,
     "agriculturalFeatures": 3,
     "industrialFeatures": 0

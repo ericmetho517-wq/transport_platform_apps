@@ -470,6 +470,13 @@ function westernAgricultureMarkup(app: TransportApp, group: string): string {
 
 function generalAgricultureMarkup(app: TransportApp, group: string): string {
   const { start, end } = corridorYears(group);
+  const metroLine3 = group === "metro-third-line";
+  const agriculturalAreaCard = metroLine3
+    ? `<article class="lime"><span>إجمالي مساحة الأراضي الزراعية (فدان)</span><strong data-metric="agriculturalAreaFeddan">—</strong></article>`
+    : `<article class="lime"><span>مساحة التغير الزراعي (كم²)</span><strong data-metric="agriculturalChangeKm2">—</strong></article>`;
+  const industrialAreaCard = metroLine3
+    ? `<article class="industrial"><span>إجمالي مساحة الأراضي الصناعية (فدان)</span><strong data-metric="industrialAreaFeddan">—</strong></article>`
+    : `<article class="industrial"><span>مساحة التغير الصناعي (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article>`;
   // The Cairo–Suez sector report documents the agricultural and industrial
   // workforces separately, so expose both on the agriculture/industry view.
   // Other corridors do not get an invented workforce card when their report
@@ -479,7 +486,7 @@ function generalAgricultureMarkup(app: TransportApp, group: string): string {
     : "";
   return `<main class="interactive-dashboard agriculture-dashboard general-agriculture-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="agriculture">
     ${dashboardHeader(app, group)}
-    <div class="dashboard-kpis general-agriculture-kpis"><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="lime"><span>مساحة التغير الزراعي (كم²)</span><strong data-metric="agriculturalChangeKm2">—</strong></article><article class="industrial"><span>مساحة التغير الصناعي (كم²)</span><strong data-metric="industrialChangeKm2">—</strong></article>${cairoSuezWorkforce}</div>
+    <div class="dashboard-kpis general-agriculture-kpis"><article class="blue"><span>طول الطريق (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article>${agriculturalAreaCard}${industrialAreaCard}${cairoSuezWorkforce}</div>
     <div class="general-agriculture-layout"><section class="general-agriculture-center">${corridorTemporalMapPair("agriculture", group)}<section class="dark-card comparison-card"><div class="card-title"><span>مقارنة مساحات استخدامات الأراضي: <bdi class="map-year-start">${start}</bdi> / <bdi class="map-year-end">${end}</bdi></span><button type="button" id="reset-landuse-filter" class="reset-landuse-btn">إعادة ضبط التصنيفات</button></div><div id="comparison-chart" class="loading-panel">جارٍ إنشاء المقارنة…</div></section></section><aside class="general-agriculture-side"><section class="dark-card gauge-card"><span>نسبة مساحة التغير الزراعي بمنطقة الدراسة</span><div class="gauge" id="agricultural-gauge"><strong>—</strong></div></section><section class="dark-card gauge-card"><span>نسبة مساحة التغير الصناعي بمنطقة الدراسة</span><div class="gauge" id="industrial-gauge"><strong>—</strong></div></section></aside></div>
   </main>`;
 }
