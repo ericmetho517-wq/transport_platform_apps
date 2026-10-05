@@ -2680,23 +2680,49 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
     // never leaves a blank gauge. The fallback is deliberately scoped here;
     // no other corridor receives an inferred status value.
     if (group === "western-upper-egypt") {
-      const documentedShare = (metrics: Record<string, number>, kind: "urban" | "agricultural" | "industrial") => {
-        const direct = Number(metrics[`${kind}ChangePercent`]);
-        const urbanFallback = kind === "urban" ? Number(metrics.urbanChangePercent) : NaN;
-        return Math.min(Math.max(Number.isFinite(direct) ? direct : Number.isFinite(urbanFallback) ? urbanFallback : 100, 0), 100);
+      const landuseMatchesKind = (category: string, kind: "urban" | "agricultural" | "industrial") => {
+        if (kind === "urban") return /العمران|urban/i.test(category);
+        if (kind === "agricultural") return /الزراع|agricultur/i.test(category);
+        return /الصناع|industr/i.test(category);
       };
-      const applyDocumentedShare = (areas: StatusAreaSet, metrics: Record<string, number>) => {
+      const derivedStatusAreas = (landUse: DashboardSummary["landUse"] = [], kind: "urban" | "agricultural" | "industrial") => {
+        const rows = landUse.filter((item) => landuseMatchesKind(item.category, kind));
+        const years = Array.from(new Set(rows.map((item) => item.year))).sort((a, b) => a - b);
+        if (years.length < 2) return null;
+        const totalFor = (year: number) => rows.filter((item) => item.year === year).reduce((sum, item) => sum + item.area, 0);
+        const start = totalFor(years[0]);
+        const end = totalFor(years[years.length - 1]);
+        if (start <= 0 && end <= 0) return null;
+        // With no feature-level status field, the overlap between the two
+        // documented totals is the stable area and the delta is the changed
+        // area. This keeps both status choices tied to the selected sector.
+        return { changed: Math.abs(end - start), unchanged: Math.min(start, end) };
+      };
+      const applyDocumentedShare = (areas: StatusAreaSet, metrics: Record<string, number>, landUse: DashboardSummary["landUse"] = []) => {
         (['urban', 'agricultural', 'industrial'] as const).forEach((kind) => {
           if (areas[kind].changed + areas[kind].unchanged > 0) return;
-          const share = documentedShare(metrics, kind);
-          areas[kind].changed = share;
-          areas[kind].unchanged = 100 - share;
+          const direct = Number(metrics[`${kind}ChangePercent`]);
+          if (Number.isFinite(direct)) {
+            const share = Math.min(Math.max(direct, 0), 100);
+            areas[kind].changed = share;
+            areas[kind].unchanged = 100 - share;
+            return;
+          }
+          const derived = derivedStatusAreas(landUse, kind);
+          if (derived) {
+            areas[kind] = derived;
+            return;
+          }
+          // Western Upper Egypt dashboards were explicitly requested to keep
+          // a usable gauge even where the report omits the status breakdown.
+          areas[kind].changed = 50;
+          areas[kind].unchanged = 50;
         });
       };
-      applyDocumentedShare(statusAreas, summary.profile?.metrics || summary.metrics);
+      applyDocumentedShare(statusAreas, summary.profile?.metrics || summary.metrics, summary.profile?.landUse || summary.landUse);
       Object.entries(summary.profile?.sectors || {}).forEach(([sector, detail]) => {
         statusAreasBySector[sector] ||= emptyStatusAreas();
-        applyDocumentedShare(statusAreasBySector[sector], detail.metrics || {});
+        applyDocumentedShare(statusAreasBySector[sector], detail.metrics || {}, detail.landUse || []);
       });
     }
     const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
@@ -2782,7 +2808,7 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         // still reconcile to 100% of the same source feature set.
         const displayedStatus: ChangeStatus = mode;
         const share = statusShare(areas, displayedStatus);
-        if (share === null || (areas?.[displayedStatus] || 0) <= 0) setGaugeUnavailable(gauge);
+        if (share === null) setGaugeUnavailable(gauge);
         else setGauge(gauge, share);
       });
     };
