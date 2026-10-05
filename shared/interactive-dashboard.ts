@@ -1911,9 +1911,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       }
       const comparison = document.querySelector<HTMLElement>("#comparison-chart");
       if (comparison) {
-        // Sector reports carry the complete 2014/2024 comparison. Prefer it
-        // to the rendered layer when an export contains only one survey year.
-        const sectorLandUse = reportSector?.landUse?.length ? reportSector.landUse : westernSectorLandUse();
+        // Western Upper Egypt now has a complete 2014/2024 geodatabase. Use
+        // its selected-sector totals before the older report transcription.
+        const mappedSectorLandUse = westernSectorLandUse();
+        const sectorLandUse = mappedSectorLandUse?.length ? mappedSectorLandUse : reportSector?.landUse;
         renderComparison(sectorLandUse?.length ? { ...summary, landUse: sectorLandUse } : summary);
       }
       const dashboardRoot = document.querySelector<HTMLElement>(".interactive-dashboard");
@@ -1926,7 +1927,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         } }));
       }
       if (scope.dataset.dashboardSync !== "false") {
-        const sectorLandUse = reportSector?.landUse?.length ? reportSector.landUse : westernSectorLandUse();
+        const mappedSectorLandUse = westernSectorLandUse();
+        const sectorLandUse = mappedSectorLandUse?.length ? mappedSectorLandUse : reportSector?.landUse;
         const sectorView = selected === "all" ? summary.profile : reportSector ? { ...reportSector, landUse: sectorLandUse?.length ? sectorLandUse : reportSector.landUse } : undefined;
         dashboardRoot?.dispatchEvent(new CustomEvent("dashboard-sector-view", { detail: sectorView }));
       }

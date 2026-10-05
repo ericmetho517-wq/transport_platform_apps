@@ -8,7 +8,8 @@
       "landcover-start",
       "landcover-end",
       "water",
-      "field-survey"
+      "field-survey",
+      "study"
     ]
   },
   "dahshur-south-link": {

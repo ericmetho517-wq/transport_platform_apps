@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-10-05T09:42:07.842Z",
+  "generatedAt": "2026-10-05T13:24:23.113Z",
   "applications": 73,
   "totals": {
-    "features": 89801,
-    "sourceFeatures": 222761,
-    "renderableFeatures": 89794,
-    "coordinatePairs": 3471900
+    "features": 95721,
+    "sourceFeatures": 226776,
+    "renderableFeatures": 95716,
+    "coordinatePairs": 3599226
   },
   "applicationCoverage": {
     "western-upper-egypt": {
       "applications": 7,
-      "activeFeatures": 3893,
-      "activeLayers": 7,
+      "activeFeatures": 9813,
+      "activeLayers": 8,
       "verifiedLocalData": true
     },
     "dahshur-south-link": {
@@ -993,62 +993,67 @@
           "features": 10,
           "representedSourceFeatures": 10,
           "renderableFeatures": 10,
-          "coordinatePairs": 790,
+          "coordinatePairs": 888,
           "invalidCoordinates": 0
         },
         "urban": {
-          "features": 646,
-          "representedSourceFeatures": 646,
-          "renderableFeatures": 646,
-          "coordinatePairs": 3758,
+          "features": 1346,
+          "representedSourceFeatures": 1346,
+          "renderableFeatures": 1346,
+          "coordinatePairs": 12369,
           "invalidCoordinates": 0
         },
         "agricultural": {
-          "features": 2874,
-          "representedSourceFeatures": 2874,
-          "renderableFeatures": 2874,
-          "coordinatePairs": 50041,
+          "features": 6632,
+          "representedSourceFeatures": 6632,
+          "renderableFeatures": 6632,
+          "coordinatePairs": 145517,
           "invalidCoordinates": 0
         },
         "landcover-start": {
-          "features": 129,
-          "representedSourceFeatures": 33335,
-          "renderableFeatures": 129,
-          "coordinatePairs": 758353,
+          "features": 150,
+          "representedSourceFeatures": 30929,
+          "renderableFeatures": 150,
+          "coordinatePairs": 650123,
           "invalidCoordinates": 0
         },
         "landcover-end": {
-          "features": 170,
-          "representedSourceFeatures": 34444,
-          "renderableFeatures": 170,
-          "coordinatePairs": 772632,
+          "features": 242,
+          "representedSourceFeatures": 39605,
+          "renderableFeatures": 242,
+          "coordinatePairs": 908802,
           "invalidCoordinates": 0
         },
         "water": {
-          "features": 55,
-          "representedSourceFeatures": 55,
-          "renderableFeatures": 53,
-          "coordinatePairs": 20962,
+          "features": 58,
+          "representedSourceFeatures": 58,
+          "renderableFeatures": 58,
+          "coordinatePairs": 14455,
           "invalidCoordinates": 0
         },
         "field-survey": {
-          "features": 9,
-          "representedSourceFeatures": 4576,
-          "renderableFeatures": 9,
-          "coordinatePairs": 4576,
+          "features": 1365,
+          "representedSourceFeatures": 1365,
+          "renderableFeatures": 1365,
+          "coordinatePairs": 1365,
+          "invalidCoordinates": 0
+        },
+        "study": {
+          "features": 10,
+          "representedSourceFeatures": 10,
+          "renderableFeatures": 10,
+          "coordinatePairs": 4919,
           "invalidCoordinates": 0
         }
       },
       "verifiedLocalData": true,
-      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
-      "undeclaredLayerFiles": [
-        "study.geojson"
-      ],
+      "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\Upper Egypt Western Desert Road.gdb\\Upper Egypt Western Desert Road.gdb",
+      "undeclaredLayerFiles": [],
       "totals": {
-        "features": 3893,
-        "sourceFeatures": 75940,
-        "coordinatePairs": 1611112,
-        "renderableFeatures": 3891
+        "features": 9813,
+        "sourceFeatures": 79955,
+        "coordinatePairs": 1738438,
+        "renderableFeatures": 9813
       }
     }
   },
@@ -1059,9 +1064,7 @@
     "ismailia/landcover-end: 1 source records have empty geometry and are excluded from rendering",
     "qena-luxor-road/baseline: 2 source records have empty geometry and are excluded from rendering",
     "suez-ring-link/landcover-start: 1 source records have empty geometry and are excluded from rendering",
-    "suez-ring-link/landcover-end: 1 source records have empty geometry and are excluded from rendering",
-    "western-upper-egypt/water: 2 source records have empty geometry and are excluded from rendering",
-    "western-upper-egypt/study.geojson: 10 features are inactive because they are not declared for this sector"
+    "suez-ring-link/landcover-end: 1 source records have empty geometry and are excluded from rendering"
   ],
   "result": "PASSED"
 }

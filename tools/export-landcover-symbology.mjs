@@ -10,11 +10,12 @@ const ogr2ogr = "C:\\Program Files\\QGIS 4.0.3\\bin\\ogr2ogr.exe";
 const tempRoot = mkdtempSync(join(tmpdir(), "transport-landcover-export-"));
 const outputRoot = join(repo, "public", "data", "dashboard");
 const westernEndOnly = process.argv.includes("--western-end-only");
+const westernOnly = process.argv.includes("--western-only");
 
 if (!existsSync(ogr2ogr)) throw new Error(`QGIS ogr2ogr was not found: ${ogr2ogr}`);
 
 const sources = {
-  "western-upper-egypt": { gdb: "طريق الصعيد الغربي\\New File Geodatabase.gdb", start: "Land_Cover2014", end: "Land_Cover2024", statusCodes: { "1": "changed", "2": "unchanged" } },
+  "western-upper-egypt": { gdb: "Upper Egypt Western Desert Road.gdb\\Upper Egypt Western Desert Road.gdb", start: "Land_Cover2014", end: "Land_Cover2024", statusCodes: { "1": "changed", "2": "unchanged" } },
   "dahshur-south-link": { gdb: "دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
   "regional-ring-road": { gdb: "الاقليمي\\DataBase_Schema.gdb", start: "Land_Cover2014", end: "Land_Cover2023" },
   "kalabsha-axis": { gdb: "كلابشة\\3113ddd5-1016-4cd8-9089-64eddef7e4c1.gdb", start: "Land_Cover2014", end: "Land_Cover2023", statusCodes: { "1": "changed", "2": "unchanged" } },
@@ -25,9 +26,13 @@ const sources = {
 const suezSource = { gdb: "السويس\\السويس\\New File Geodatabase.gdb", start: "Land_Cover2014", end: "Land_Cover2024", statusCodes: { "1": "changed", "2": "unchanged" } };
 const thematicSources = {
   "western-upper-egypt": {
-    gdb: "طريق الصعيد الغربي\\New File Geodatabase.gdb",
+    gdb: "Upper Egypt Western Desert Road.gdb\\Upper Egypt Western Desert Road.gdb",
+    study: ["Study_Area"],
+    axis: ["Axis_Road"],
+    urban: ["Urban_Changes"],
+    agricultural: ["Agricultural_Changes"],
     water: ["Water_Changes"],
-    "field-survey": ["Abo_Simple", "Asiot", "Aswan", "Bni_Sweif", "Fayoum", "Giza", "Luxor", "Minia", "Qena"],
+    "field-survey": ["Abo_simple", "Asiot", "Aswan", "Bani_Soif", "Fayoum_survey", "Giza", "Luxor", "Minia", "Qena"],
   },
   "dahshur-south-link": {
     gdb: "دهشور\\6c1b3da6-172b-4665-bcaf-ca19d4ec3219.gdb",
@@ -86,7 +91,7 @@ function featureCenter(feature) {
   return [(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2];
 }
 
-function aggregate(collection, statusCodes = {}, useSourceShapeArea = false) {
+function aggregate(collection, statusCodes = {}, useSourceShapeArea = false, groupByChangePercent = true) {
   const grouped = new Map();
   for (const feature of collection.features || []) {
     const polygons = polygonsOf(feature.geometry);
@@ -97,8 +102,8 @@ function aggregate(collection, statusCodes = {}, useSourceShapeArea = false) {
     const sector = first(properties, sectorFields);
     const changeStatus = first(properties, changeStatusFields);
     const changePercent = first(properties, changePercentFields);
-    const key = `${String(value).trim().toLowerCase()}|${String(label ?? "").trim().toLowerCase()}|${String(sector ?? "")}|${String(changeStatus ?? "").trim().toLowerCase()}|${String(changePercent ?? "")}`;
-    if (!grouped.has(key)) grouped.set(key, { value, label, sector, changeStatus, changePercent, polygons: [], count: 0, area: 0 });
+    const key = `${String(value).trim().toLowerCase()}|${String(label ?? "").trim().toLowerCase()}|${String(sector ?? "")}|${String(changeStatus ?? "").trim().toLowerCase()}${groupByChangePercent ? `|${String(changePercent ?? "")}` : ""}`;
+    if (!grouped.has(key)) grouped.set(key, { value, label, sector, changeStatus, changePercent: groupByChangePercent ? changePercent : null, polygons: [], count: 0, area: 0 });
     const target = grouped.get(key);
     target.polygons.push(...polygons);
     target.count += 1;
@@ -140,9 +145,9 @@ function geometryParts(geometry) {
   return null;
 }
 
-function prepareThematic(collections) {
+function prepareThematic(collections, preserveFeatures = false) {
   const features = collections.flatMap(({ layer, collection }) => (collection.features || []).filter((feature) => feature.geometry).map((feature) => ({ ...feature, properties: { source_layer: layer, source_feature_count: 1, ...(feature.properties || {}) } })));
-  if (features.length <= 1500) return { type: "FeatureCollection", features };
+  if (preserveFeatures || features.length <= 1500) return { type: "FeatureCollection", features };
   const groups = new Map();
   for (const feature of features) {
     const parsed = geometryParts(feature.geometry);
@@ -180,7 +185,11 @@ function exportRaw(gdbRelative, layer, key) {
 function writeLayer(group, layerName, collection, sourceCount, statusCodes = {}) {
   const folder = join(outputRoot, group);
   mkdirSync(folder, { recursive: true });
-  const aggregated = aggregate(collection, statusCodes, group === "western-upper-egypt");
+  // Western Upper Egypt stores a per-polygon percentage. Grouping by that
+  // floating-point value creates tens of thousands of SVG paths and makes
+  // panning unusable. The map and gauge only need class, sector, status and
+  // summed source area, so omit that field from this display aggregation.
+  const aggregated = aggregate(collection, statusCodes, group === "western-upper-egypt", group !== "western-upper-egypt");
   writeFileSync(join(folder, `${layerName}.geojson`), JSON.stringify(aggregated), "utf8");
   if (westernEndOnly) return;
   const summaryPath = join(folder, "summary.json");
@@ -209,6 +218,76 @@ function writePreparedLayer(group, layerName, collection, sourceCount) {
   console.log(`${group}/${layerName}: ${sourceCount} source features -> ${collection.features.length} browser features`);
 }
 
+function synchronizeWesternSummary() {
+  const group = "western-upper-egypt";
+  const folder = join(outputRoot, group);
+  const summaryPath = join(folder, "summary.json");
+  const summary = JSON.parse(readFileSync(summaryPath, "utf8"));
+  const readLayer = (name) => JSON.parse(readFileSync(join(folder, `${name}.geojson`), "utf8")).features || [];
+  const numeric = (properties, names) => {
+    for (const name of names) {
+      const value = Number(properties?.[name]);
+      if (Number.isFinite(value) && value > 0) return value;
+    }
+    return 0;
+  };
+  const sum = (features, names) => features.reduce((total, feature) => total + numeric(feature.properties, names), 0);
+  const study = readLayer("study");
+  const axis = readLayer("axis");
+  const urban = readLayer("urban");
+  const agricultural = readLayer("agricultural");
+  const landcoverStart = readLayer("landcover-start");
+  const landcoverEnd = readLayer("landcover-end");
+  const totalByCode = (features, code) => features
+    .filter((feature) => Number(feature.properties?.landuse_code ?? feature.properties?.landuse_value) === code)
+    .reduce((total, feature) => total + Number(feature.properties?.area_km2 || 0), 0);
+  const sourceCountByCode = (features, code) => features
+    .filter((feature) => Number(feature.properties?.landuse_code ?? feature.properties?.landuse_value) === code)
+    .reduce((total, feature) => total + Number(feature.properties?.source_feature_count || 0), 0);
+  const rawAxisLength = sum(axis, ["طول_المحور_كم", "Shape_Length", "SHAPE_Length"]);
+  const categories = new Map([
+    [0, "الأراضي الزراعية"], [1, "الأراضي الصناعية"], [2, "أراضي الفضاء"],
+    [3, "الأراضي العمرانية"], [4, "أراضي القوات المسلحة"], [5, "الخدمات"],
+    [6, "المناطق الترفيهية"], [7, "المقابر"], [8, "مسطحات مائية"],
+    [9, "حرم الطريق"], [10, "طرق"], [11, "ديني"], [12, "الأراضي التعليمية"],
+    [13, "الأراضي الحكومية"], [14, "الأراضي السياحية"], [15, "مساحات خضراء"],
+  ]);
+  const landUse = [];
+  for (const [year, features] of [[2014, landcoverStart], [2024, landcoverEnd]]) {
+    for (const [code, category] of categories) {
+      const area = totalByCode(features, code);
+      if (area > 0) landUse.push({ category, year, area: Number(area.toFixed(3)) });
+    }
+  }
+  summary.metrics = {
+    ...summary.metrics,
+    studyAreaKm2: Number(sum(study, ["مساحة_المنطقة_كم2", "Shape_Area", "SHAPE_Area"]).toFixed(3)),
+    axisLengthKm: Number((rawAxisLength > 5_000 ? rawAxisLength / 1_000 : rawAxisLength).toFixed(3)),
+    urbanChangeKm2: Number(sum(urban, ["مساحة_التغير_كم2", "Shape_Area", "SHAPE_Area"]).toFixed(3)),
+    agriculturalChangeKm2: Number(sum(agricultural, ["المساحة_كم2", "Shape_Area", "SHAPE_Area"]).toFixed(3)),
+    industrialChangeKm2: Number(totalByCode(landcoverEnd, 1).toFixed(3)),
+    agriculturalAreaFeddan: Number(sum(agricultural, ["المساحة_فدان"]).toFixed(3)),
+    urbanWorkers: Number(sum(study, ["EMP_Urban"]).toFixed(0)),
+    agriculturalWorkers: Number(sum(study, ["EMP_Agri"]).toFixed(0)),
+    industrialWorkers: Number(sum(study, ["EMP_Industry"]).toFixed(0)),
+    urbanFeatures: urban.length,
+    agriculturalFeatures: agricultural.length,
+    industrialFeatures: sourceCountByCode(landcoverEnd, 1),
+  };
+  summary.landUse = landUse;
+  summary.landUseDataStatus = "Complete 2014/2024 land-cover totals exported from the authoritative geodatabase";
+  summary.priceDataStatus = "Verified 2014 and 2024 land-price fields are present in Land_Cover2024";
+  summary.layerCounts.old = summary.sourceLayerCounts?.["landcover-start"] || landcoverStart.length;
+  summary.layerCounts.latest = summary.sourceLayerCounts?.["landcover-end"] || landcoverEnd.length;
+  writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + "\n", "utf8");
+}
+
+if (process.argv.includes("--western-summary-only")) {
+  synchronizeWesternSummary();
+  rmSync(tempRoot, { recursive: true, force: true });
+  process.exit(0);
+}
+
 function stampAuthoritativeSource(group, gdbRelative) {
   const summaryPath = join(outputRoot, group, "summary.json");
   const summary = JSON.parse(readFileSync(summaryPath, "utf8"));
@@ -218,7 +297,7 @@ function stampAuthoritativeSource(group, gdbRelative) {
 }
 
 for (const [group, source] of Object.entries(sources)) {
-  if (westernEndOnly && group !== "western-upper-egypt") continue;
+  if ((westernEndOnly || westernOnly) && group !== "western-upper-egypt") continue;
   if (!westernEndOnly) stampAuthoritativeSource(group, source.gdb);
   for (const [period, layer] of [["start", source.start], ["end", source.end]]) {
     if (!layer) continue;
@@ -234,47 +313,55 @@ if (westernEndOnly) {
 }
 
 const suezGroups = ["cairo-suez-road", "suez-ring-link"];
-for (const group of suezGroups) stampAuthoritativeSource(group, suezSource.gdb);
-const studyCenters = Object.fromEntries(suezGroups.map((group) => {
-  const study = JSON.parse(readFileSync(join(outputRoot, group, "study.geojson"), "utf8"));
-  return [group, featureCenter(study.features[0])];
-}));
-for (const [period, layer] of [["start", suezSource.start], ["end", suezSource.end]]) {
-  const raw = exportRaw(suezSource.gdb, layer, "suez");
-  const split = Object.fromEntries(suezGroups.map((group) => [group, { type: "FeatureCollection", features: [] }]));
-  for (const feature of raw.features) {
+const studyCenters = {};
+if (!westernOnly) {
+  for (const group of suezGroups) stampAuthoritativeSource(group, suezSource.gdb);
+  Object.assign(studyCenters, Object.fromEntries(suezGroups.map((group) => {
+    const study = JSON.parse(readFileSync(join(outputRoot, group, "study.geojson"), "utf8"));
+    return [group, featureCenter(study.features[0])];
+  })));
+  for (const [period, layer] of [["start", suezSource.start], ["end", suezSource.end]]) {
+    const raw = exportRaw(suezSource.gdb, layer, "suez");
+    const split = Object.fromEntries(suezGroups.map((group) => [group, { type: "FeatureCollection", features: [] }]));
+    for (const feature of raw.features) {
+      const [x, y] = featureCenter(feature);
+      const nearest = suezGroups.toSorted((a, b) => {
+        const da = (x - studyCenters[a][0]) ** 2 + (y - studyCenters[a][1]) ** 2;
+        const db = (x - studyCenters[b][0]) ** 2 + (y - studyCenters[b][1]) ** 2;
+        return da - db;
+      })[0];
+      split[nearest].features.push(feature);
+    }
+    for (const group of suezGroups) writeLayer(group, `landcover-${period}`, split[group], split[group].features.length, suezSource.statusCodes);
+  }
+}
+
+for (const [group, source] of Object.entries(thematicSources)) {
+  if (westernOnly && group !== "western-upper-egypt") continue;
+  for (const [targetLayer, sourceLayers] of Object.entries(source)) {
+    if (targetLayer === "gdb") continue;
+    const collections = sourceLayers.map((layer) => ({ layer, collection: exportRaw(source.gdb, layer, `${group}-${targetLayer}`) }));
+    const sourceCount = collections.reduce((sum, item) => sum + item.collection.features.length, 0);
+    writePreparedLayer(group, targetLayer, prepareThematic(collections, group === "western-upper-egypt"), sourceCount);
+  }
+}
+
+synchronizeWesternSummary();
+
+if (!westernOnly) {
+  const suezSurvey = exportRaw(suezSource.gdb, "survey", "suez-survey");
+  const surveySplit = Object.fromEntries(suezGroups.map((group) => [group, { type: "FeatureCollection", features: [] }]));
+  for (const feature of suezSurvey.features) {
     const [x, y] = featureCenter(feature);
     const nearest = suezGroups.toSorted((a, b) => {
       const da = (x - studyCenters[a][0]) ** 2 + (y - studyCenters[a][1]) ** 2;
       const db = (x - studyCenters[b][0]) ** 2 + (y - studyCenters[b][1]) ** 2;
       return da - db;
     })[0];
-    split[nearest].features.push(feature);
+    surveySplit[nearest].features.push(feature);
   }
-  for (const group of suezGroups) writeLayer(group, `landcover-${period}`, split[group], split[group].features.length, suezSource.statusCodes);
+  for (const group of suezGroups) writePreparedLayer(group, "field-survey", prepareThematic([{ layer: "survey", collection: surveySplit[group] }]), surveySplit[group].features.length);
 }
-
-for (const [group, source] of Object.entries(thematicSources)) {
-  for (const [targetLayer, sourceLayers] of Object.entries(source)) {
-    if (targetLayer === "gdb") continue;
-    const collections = sourceLayers.map((layer) => ({ layer, collection: exportRaw(source.gdb, layer, `${group}-${targetLayer}`) }));
-    const sourceCount = collections.reduce((sum, item) => sum + item.collection.features.length, 0);
-    writePreparedLayer(group, targetLayer, prepareThematic(collections), sourceCount);
-  }
-}
-
-const suezSurvey = exportRaw(suezSource.gdb, "survey", "suez-survey");
-const surveySplit = Object.fromEntries(suezGroups.map((group) => [group, { type: "FeatureCollection", features: [] }]));
-for (const feature of suezSurvey.features) {
-  const [x, y] = featureCenter(feature);
-  const nearest = suezGroups.toSorted((a, b) => {
-    const da = (x - studyCenters[a][0]) ** 2 + (y - studyCenters[a][1]) ** 2;
-    const db = (x - studyCenters[b][0]) ** 2 + (y - studyCenters[b][1]) ** 2;
-    return da - db;
-  })[0];
-  surveySplit[nearest].features.push(feature);
-}
-for (const group of suezGroups) writePreparedLayer(group, "field-survey", prepareThematic([{ layer: "survey", collection: surveySplit[group] }]), surveySplit[group].features.length);
 
 const manifestPath = join(outputRoot, "manifest.json");
 const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));

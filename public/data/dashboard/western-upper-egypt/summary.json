@@ -1,20 +1,24 @@
 {
   "slug": "western-upper-egypt",
   "projectTitle": "محور الصعيد الغربي",
-  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\طريق الصعيد الغربي\\New File Geodatabase.gdb",
+  "source": "C:\\Geoinformatics for Information Systems\\وزارة النقل\\Data\\Upper Egypt Western Desert Road.gdb\\Upper Egypt Western Desert Road.gdb",
   "verifiedLocalData": true,
-  "priceDataStatus": "No verified price fields were found in the exported sector layers; zero values mean unavailable, not zero land price",
+  "priceDataStatus": "Verified 2014 and 2024 land-price fields are present in Land_Cover2024",
   "yearStart": 2014,
   "yearEnd": 2024,
   "metrics": {
-    "studyAreaKm2": 23141.64,
-    "axisLengthKm": 1182.66,
-    "urbanChangeKm2": 36.22,
-    "agriculturalChangeKm2": 852.69,
-    "industrialChangeKm2": 0,
-    "urbanFeatures": 646,
-    "agriculturalFeatures": 2874,
-    "industrialFeatures": 0
+    "studyAreaKm2": 25125.703,
+    "axisLengthKm": 1175.001,
+    "urbanChangeKm2": 104.032,
+    "agriculturalChangeKm2": 1698.096,
+    "industrialChangeKm2": 67.357,
+    "urbanFeatures": 1346,
+    "agriculturalFeatures": 6632,
+    "industrialFeatures": 395,
+    "agriculturalAreaFeddan": 419616.594,
+    "urbanWorkers": 50458,
+    "agriculturalWorkers": 206235,
+    "industrialWorkers": 75459
   },
   "prices": {
     "urban": {
@@ -88,135 +92,145 @@
     {
       "category": "الأراضي الزراعية",
       "year": 2014,
-      "area": 2342.8
+      "area": 4688.78
     },
     {
-      "category": "المناطق الصناعية",
+      "category": "الأراضي الصناعية",
       "year": 2014,
-      "area": 4606.6
+      "area": 51.101
     },
     {
       "category": "أراضي الفضاء",
       "year": 2014,
-      "area": 716.1
+      "area": 19116.056
     },
     {
       "category": "الأراضي العمرانية",
       "year": 2014,
-      "area": 419.1
+      "area": 677.469
     },
     {
       "category": "أراضي القوات المسلحة",
       "year": 2014,
-      "area": 4.4
+      "area": 19.753
     },
     {
-      "category": "أراضي خدمات",
+      "category": "الخدمات",
       "year": 2014,
-      "area": 7418.2
+      "area": 16.787
     },
     {
       "category": "المناطق الترفيهية",
       "year": 2014,
-      "area": 7599.6
+      "area": 4.23
     },
     {
       "category": "المقابر",
       "year": 2014,
-      "area": 14.6
+      "area": 31.228
     },
     {
       "category": "مسطحات مائية",
       "year": 2014,
-      "area": 57.7
+      "area": 402.598
     },
     {
       "category": "حرم الطريق",
       "year": 2014,
-      "area": 14.6
+      "area": 34.84
     },
     {
       "category": "طرق",
       "year": 2014,
-      "area": 24.2
+      "area": 79.562
+    },
+    {
+      "category": "ديني",
+      "year": 2014,
+      "area": 0.764
     },
     {
       "category": "الأراضي التعليمية",
       "year": 2014,
-      "area": 0.8
+      "area": 1.201
     },
     {
       "category": "الأراضي الحكومية",
       "year": 2014,
-      "area": 0.8
+      "area": 1.343
     },
     {
       "category": "الأراضي الزراعية",
       "year": 2024,
-      "area": 3758.8
+      "area": 6353.729
+    },
+    {
+      "category": "الأراضي الصناعية",
+      "year": 2024,
+      "area": 67.357
     },
     {
       "category": "أراضي الفضاء",
       "year": 2024,
-      "area": 6573.8
-    },
-    {
-      "category": "أراضي خدمات",
-      "year": 2024,
-      "area": 7420.8
+      "area": 17254.419
     },
     {
       "category": "الأراضي العمرانية",
       "year": 2024,
-      "area": 2914.8
-    },
-    {
-      "category": "المناطق الصناعية",
-      "year": 2024,
-      "area": 23.6
-    },
-    {
-      "category": "مسطحات مائية",
-      "year": 2024,
-      "area": 322.5
-    },
-    {
-      "category": "الأراضي الحكومية",
-      "year": 2024,
-      "area": 14334.5
-    },
-    {
-      "category": "المناطق الترفيهية",
-      "year": 2024,
-      "area": 3.7
-    },
-    {
-      "category": "الأراضي التعليمية",
-      "year": 2024,
-      "area": 1.5
-    },
-    {
-      "category": "المقابر",
-      "year": 2024,
-      "area": 19.4
+      "area": 714.056
     },
     {
       "category": "أراضي القوات المسلحة",
       "year": 2024,
-      "area": 5.4
+      "area": 21.168
+    },
+    {
+      "category": "الخدمات",
+      "year": 2024,
+      "area": 63.313
+    },
+    {
+      "category": "المناطق الترفيهية",
+      "year": 2024,
+      "area": 4.848
+    },
+    {
+      "category": "المقابر",
+      "year": 2024,
+      "area": 35.117
+    },
+    {
+      "category": "مسطحات مائية",
+      "year": 2024,
+      "area": 492.171
     },
     {
       "category": "حرم الطريق",
       "year": 2024,
-      "area": 22
+      "area": 35.196
     },
     {
       "category": "طرق",
       "year": 2024,
-      "area": 31.9
+      "area": 79.624
+    },
+    {
+      "category": "ديني",
+      "year": 2024,
+      "area": 0.789
+    },
+    {
+      "category": "الأراضي التعليمية",
+      "year": 2024,
+      "area": 2.608
+    },
+    {
+      "category": "الأراضي الحكومية",
+      "year": 2024,
+      "area": 1.425
     }
   ],
-  "landUseDataStatus": "The exported 2014 layer does not contain a complete area series comparable with 2024; the chart is intentionally unavailable",
+  "landUseDataStatus": "Complete 2014/2024 land-cover totals exported from the authoritative geodatabase",
   "layers": [
     "axis",
     "urban",
@@ -224,27 +238,32 @@
     "landcover-start",
     "landcover-end",
     "water",
-    "field-survey"
+    "field-survey",
+    "study"
   ],
   "layerCounts": {
     "axis": 10,
     "study": 10,
-    "urban": 646,
-    "agricultural": 2874,
+    "urban": 1346,
+    "agricultural": 6632,
     "industrial": 0,
-    "old": 33335,
-    "latest": 34444,
+    "old": 30929,
+    "latest": 39605,
     "civil": 0,
-    "landcover-start": 129,
-    "landcover-end": 170,
-    "water": 55,
-    "field-survey": 9
+    "landcover-start": 150,
+    "landcover-end": 242,
+    "water": 58,
+    "field-survey": 1365
   },
   "sourceLayerCounts": {
-    "landcover-start": 33335,
-    "landcover-end": 34444,
-    "water": 55,
-    "field-survey": 4576
+    "landcover-start": 30929,
+    "landcover-end": 39605,
+    "water": 58,
+    "field-survey": 1365,
+    "study": 10,
+    "axis": 10,
+    "urban": 1346,
+    "agricultural": 6632
   },
   "authoritativeSource": "وزارة النقل/Data"
 }
