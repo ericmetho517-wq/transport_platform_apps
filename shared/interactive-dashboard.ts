@@ -1911,7 +1911,9 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       }
       const comparison = document.querySelector<HTMLElement>("#comparison-chart");
       if (comparison) {
-        const sectorLandUse = westernSectorLandUse();
+        // Sector reports carry the complete 2014/2024 comparison. Prefer it
+        // to the rendered layer when an export contains only one survey year.
+        const sectorLandUse = reportSector?.landUse?.length ? reportSector.landUse : westernSectorLandUse();
         renderComparison(sectorLandUse?.length ? { ...summary, landUse: sectorLandUse } : summary);
       }
       const dashboardRoot = document.querySelector<HTMLElement>(".interactive-dashboard");
@@ -1924,7 +1926,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         } }));
       }
       if (scope.dataset.dashboardSync !== "false") {
-        const sectorLandUse = westernSectorLandUse();
+        const sectorLandUse = reportSector?.landUse?.length ? reportSector.landUse : westernSectorLandUse();
         const sectorView = selected === "all" ? summary.profile : reportSector ? { ...reportSector, landUse: sectorLandUse?.length ? sectorLandUse : reportSector.landUse } : undefined;
         dashboardRoot?.dispatchEvent(new CustomEvent("dashboard-sector-view", { detail: sectorView }));
       }
