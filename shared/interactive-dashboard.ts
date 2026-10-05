@@ -2013,8 +2013,14 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       refreshBasemap();
     }, delay);
   };
+  // A CSS transform lets the browser composite the already-painted map as one
+  // surface. Updating the SVG transform attribute forces dense polygon layers
+  // to be repainted on every pointer frame and makes dragging visibly stall.
+  const paintViewport = () => {
+    viewport.style.transform = `translate(${tx}px, ${ty}px) scale(${zoom})`;
+  };
   const apply = (broadcast = true) => {
-    viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
+    paintViewport();
     // Satellite tiles are expensive to rebuild. During wheel/pan interaction
     // only move the already-rendered SVG; refresh imagery once interaction ends.
     if (!scope.classList.contains("map-interacting")) refreshBasemap();
@@ -2126,7 +2132,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (!panFrame) {
       panFrame = requestAnimationFrame(() => {
         panFrame = 0;
-        viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${zoom})`);
+        paintViewport();
         // Rendering a second high-density SVG on every pointer frame makes
         // panning feel heavy. Synchronise the companion map once on release.
         pairSyncPending = Boolean(linkedPair);

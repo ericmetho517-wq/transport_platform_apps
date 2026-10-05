@@ -76,23 +76,16 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .gis-map { position: relative; min-height: 300px; height: 100%; overflow: hidden; background: #0c2132; isolation: isolate; contain: layout paint; }
 .gis-map svg { display: block; width: 100%; height: 100%; min-height: 300px; touch-action: none; cursor: grab; shape-rendering: optimizeSpeed; }
 .gis-map svg:active { cursor: grabbing; }
-.map-viewport { transform-origin: 0 0; will-change: transform; }
-.map-viewport { will-change: transform; }
+.map-viewport { transform-box: view-box; transform-origin: 0 0; will-change: transform; }
 .map-content { contain: paint; }
 .satellite-tile { opacity: 1; filter: saturate(1.12) contrast(1.08) brightness(.92); }
 .map-content path { cursor: pointer; paint-order: stroke fill markers; }
 .map-content path[data-geometry="LineString"], .map-content path[data-geometry="MultiLineString"] { fill:none !important; }
 .gis-map.map-interacting .map-content {
-  /* Western Upper Egypt alone can carry tens of thousands of polygon rings.
-     Hiding vectors only while a drag is in progress leaves the satellite
-     surface responsive, then restores exact layers immediately on release. */
-  visibility:hidden;
+  /* Keep every feature visible while panning. Disabling hit-testing on the
+     parent group is cheap and prevents hover/popup work during a real drag. */
   pointer-events:none !important;
-  will-change:transform;
-  shape-rendering:optimizeSpeed;
 }
-.gis-map.map-interacting .map-study path { filter:none !important; animation:none !important; }
-.gis-map.map-interacting .map-content path { filter:none !important; transition:none !important; stroke-width: 0.5px !important; }
 .map-content path[hidden] { display: none; }
 .map-content .change-hidden { display: none; }
 .map-content path.change-match { opacity:1; stroke-width:2.4!important; filter:brightness(1.18) drop-shadow(0 0 2px #fff7); }
