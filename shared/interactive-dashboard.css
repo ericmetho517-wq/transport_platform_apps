@@ -82,7 +82,15 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .satellite-tile { opacity: 1; filter: saturate(1.12) contrast(1.08) brightness(.92); }
 .map-content path { cursor: pointer; paint-order: stroke fill markers; }
 .map-content path[data-geometry="LineString"], .map-content path[data-geometry="MultiLineString"] { fill:none !important; }
-.gis-map.map-interacting .map-content { pointer-events:none !important; will-change:transform; shape-rendering:optimizeSpeed; }
+.gis-map.map-interacting .map-content {
+  /* Western Upper Egypt alone can carry tens of thousands of polygon rings.
+     Hiding vectors only while a drag is in progress leaves the satellite
+     surface responsive, then restores exact layers immediately on release. */
+  visibility:hidden;
+  pointer-events:none !important;
+  will-change:transform;
+  shape-rendering:optimizeSpeed;
+}
 .gis-map.map-interacting .map-study path { filter:none !important; animation:none !important; }
 .gis-map.map-interacting .map-content path { filter:none !important; transition:none !important; stroke-width: 0.5px !important; }
 .map-content path[hidden] { display: none; }
