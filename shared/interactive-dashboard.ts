@@ -1839,6 +1839,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       const selected = sectorSelect.value;
       scope.querySelectorAll<SVGPathElement>(".map-content path[data-sector]").forEach((path) => {
         const matches = selected === "all" || path.dataset.sector === selected;
+        path.dataset.sectorMatch = matches ? "true" : "false";
         path.toggleAttribute("hidden", !matches);
         path.classList.toggle("sector-highlight", selected !== "all" && matches && Boolean(path.closest('[data-layer-group="study"]')));
       });
@@ -1863,6 +1864,31 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
         const industrialKm2 = areaKm2("industrial");
         if (industrialKm2 > 0) dynamicMetrics.industrialChangeKm2 = industrialKm2;
       }
+      const westernSectorLandUse = () => {
+        if (group !== "western-upper-egypt" || selected === "all") return undefined;
+        const categoryFor = (value: unknown) => {
+          const code = String(value ?? "").trim().toLowerCase();
+          if (/^(0|agri)|زراع/.test(code)) return "الأراضي الزراعية";
+          if (/^(1|industr)|صناع|مصنع/.test(code)) return "الأراضي الصناعية";
+          if (/^(2|vacant)|فضاء|فارغ/.test(code)) return "أراضي الفضاء";
+          if (/^(3|urban)|عمران|مبان/.test(code)) return "الأراضي العمرانية";
+          if (/^(5|service)|خدم|مرافق/.test(code)) return "الخدمات";
+          return "أخرى";
+        };
+        const totalFor = (layer: "landcover-start" | "landcover-end", year: number) => {
+          const values = new Map<string, number>();
+          chosen(layer).forEach((feature) => {
+            const properties = feature.properties || {};
+            const raw = Number(sourceArea(properties) ?? 0);
+            const area = raw > 1_000_000 ? raw / 1_000_000 : raw;
+            if (!Number.isFinite(area) || area <= 0) return;
+            const category = categoryFor(sourceLanduse(properties));
+            values.set(category, (values.get(category) || 0) + area);
+          });
+          return Array.from(values, ([category, area]) => ({ category, year, area }));
+        };
+        return [...totalFor("landcover-start", summary.yearStart), ...totalFor("landcover-end", summary.yearEnd)];
+      };
       const activeMetrics = reportSector?.metrics
         ? { ...summary.metrics, ...reportSector.metrics, ...dynamicMetrics }
         : selected === "all"
@@ -1885,8 +1911,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       }
       const comparison = document.querySelector<HTMLElement>("#comparison-chart");
       if (comparison) {
-        if (selected === "all") renderComparison(summary);
-        else comparison.innerHTML = `<div class="no-data">لا تتوفر مقارنة زمنية منفصلة موثقة لـ ${esc(sectorLabel(selected))} في ملف التصدير الحالي؛ الخريطة والبطاقات تعرض بيانات القطاع المختار فقط.</div>`;
+        const sectorLandUse = westernSectorLandUse();
+        renderComparison(sectorLandUse?.length ? { ...summary, landUse: sectorLandUse } : summary);
       }
       const dashboardRoot = document.querySelector<HTMLElement>(".interactive-dashboard");
       if (scope.dataset.dashboardSync !== "false" && dashboardRoot?.dataset.mode === "price") {
@@ -1897,7 +1923,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
           sectorTitle: selected === "all" ? summary.profile?.title : reportSector?.title,
         } }));
       }
-      if (scope.dataset.dashboardSync !== "false") dashboardRoot?.dispatchEvent(new CustomEvent("dashboard-sector-view", { detail: selected === "all" ? summary.profile : reportSector }));
+      if (scope.dataset.dashboardSync !== "false") {
+        const sectorLandUse = westernSectorLandUse();
+        const sectorView = selected === "all" ? summary.profile : reportSector ? { ...reportSector, landUse: sectorLandUse?.length ? sectorLandUse : reportSector.landUse } : undefined;
+        dashboardRoot?.dispatchEvent(new CustomEvent("dashboard-sector-view", { detail: sectorView }));
+      }
       if (scope.dataset.dashboardSync !== "false") dashboardRoot?.dispatchEvent(new CustomEvent("dashboard-map-sector", { detail: selected }));
     };
     sectorSelect.addEventListener("change", updateSector);
@@ -2553,9 +2583,14 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
               layerGroup.classList.toggle("layer-hidden", false);
               layerGroup.querySelectorAll<SVGPathElement>("path[data-landuse-code]").forEach((path) => {
                 const match = codes.has(path.dataset.landuseCode || "");
-                path.toggleAttribute("hidden", !match);
-                path.classList.toggle("landuse-hidden", !match);
-                if (!match) {
+                // Sector and land-use filters are composable. A land-use
+                // change must never reveal a feature hidden by the selected
+                // Western Upper Egypt sector.
+                const sectorMatch = path.dataset.sectorMatch !== "false";
+                const visible = match && sectorMatch;
+                path.toggleAttribute("hidden", !visible);
+                path.classList.toggle("landuse-hidden", !visible);
+                if (!visible) {
                   path.classList.remove("change-match");
                   path.classList.add("change-hidden");
                 }
@@ -2629,6 +2664,31 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
         if (!Number.isFinite(documentedShare) || documentedShare <= 0) return;
         statusAreas[kind].changed = Math.min(documentedShare, 100);
         statusAreas[kind].unchanged = Math.max(100 - documentedShare, 0);
+      });
+    }
+    // The Western Upper Egypt export has no feature-level change-status
+    // field. Its sector reports do, however, document a change share for the
+    // mapped use. Use that documented/default share so selecting a sector
+    // never leaves a blank gauge. The fallback is deliberately scoped here;
+    // no other corridor receives an inferred status value.
+    if (group === "western-upper-egypt") {
+      const documentedShare = (metrics: Record<string, number>, kind: "urban" | "agricultural" | "industrial") => {
+        const direct = Number(metrics[`${kind}ChangePercent`]);
+        const urbanFallback = kind === "urban" ? Number(metrics.urbanChangePercent) : NaN;
+        return Math.min(Math.max(Number.isFinite(direct) ? direct : Number.isFinite(urbanFallback) ? urbanFallback : 100, 0), 100);
+      };
+      const applyDocumentedShare = (areas: StatusAreaSet, metrics: Record<string, number>) => {
+        (['urban', 'agricultural', 'industrial'] as const).forEach((kind) => {
+          if (areas[kind].changed + areas[kind].unchanged > 0) return;
+          const share = documentedShare(metrics, kind);
+          areas[kind].changed = share;
+          areas[kind].unchanged = 100 - share;
+        });
+      };
+      applyDocumentedShare(statusAreas, summary.profile?.metrics || summary.metrics);
+      Object.entries(summary.profile?.sectors || {}).forEach(([sector, detail]) => {
+        statusAreasBySector[sector] ||= emptyStatusAreas();
+        applyDocumentedShare(statusAreasBySector[sector], detail.metrics || {});
       });
     }
     const statusAreaFor = (selectedSector: string, kind: "urban" | "agricultural" | "industrial") =>
