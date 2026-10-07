@@ -287,7 +287,6 @@ function priceMarkup(app: TransportApp, group: string): string {
   const mapArea = westernComparison
     ? `<div class="temporal-map-pair price-temporal-map-pair${group === "ismailia" ? " ismailia-temporal-map-pair" : ""}">${mapMarkup("price-baseline", `<span class="map-year-start">${priceStartYear}</span>`, false)}${mapMarkup("price-current", `<span class="map-year-end">${priceEndYear}</span>`, true)}</div>`
     : mapMarkup();
-  const trendArea = group === "metro-third-line" ? "" : `<section class="dark-card line-chart-card price-comparison-card"><div class="card-title"><div><span>مقارنة إجمالي أسعار الأراضي: ${priceStartYear} و${priceEndYear}</span><small id="chart-year-label">إجماليات موثقة من مصدر بيانات المشروع (جنيه مصري)</small></div><div class="series-toggles"><button class="active" data-series="urban">العمرانية</button><button class="active" data-series="agricultural">الزراعية</button><button class="active" data-series="industrial">الصناعية</button></div></div><div id="line-chart" class="svg-chart loading-panel">جارٍ إنشاء الرسم البياني…</div><div id="price-comparison-table" class="price-comparison-table" aria-live="polite"></div></section>`;
   const workspaceSummary = true
     ? `<div class="dashboard-kpis ismailia-map-kpis"><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article></div>`
     : `<div class="dashboard-kpis"><article><span>مساحة منطقة الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="blue"><span>طول محور الدراسة (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article class="gold"><span>سنة القياس</span><strong id="active-year">—</strong></article></div>`;
@@ -298,7 +297,6 @@ function priceMarkup(app: TransportApp, group: string): string {
       <section class="price-workspace">
         ${workspaceSummary}
         ${mapArea}
-        ${trendArea}
       </section>
     </div>
   </main>`;
@@ -743,65 +741,6 @@ function renderPriceColumns(summary: DashboardSummary, selectedKind = "all"): vo
     return `<article class="price-column${selectedKind !== "all" && selectedKind === key ? " is-selected" : ""}" data-price-kind="${key}" style="--accent:${colors[key]}"${isHidden ? " hidden" : ""}>${areaHeader}${detail}</article>`;
   }).join("");
   container.classList.toggle("price-filtered", selectedKind !== "all");
-}
-
-function renderLineChart(summary: DashboardSummary, visible: Set<string>): void {
-  const container = document.querySelector<HTMLElement>("#line-chart");
-  if (!container) return;
-  const width = 1000, height = 300, left = 70, right = 30, top = 22, bottom = 45;
-  const keys = ["urban", "agricultural", "industrial"].filter((key) => visible.has(key) && summary.prices[key] && (summary.prices[key].start > 0 || summary.prices[key].end > 0));
-  document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((button) => {
-    const pair = summary.prices[button.dataset.series || ""];
-    button.hidden = !(pair && (pair.start > 0 || pair.end > 0));
-  });
-  if (!keys.length) {
-    container.innerHTML = '<div class="no-data">لا توجد سلسلة أسعار موثقة للقطاع المحدد.</div>';
-    return;
-  }
-  const all = keys.flatMap((key) => summary.priceSeries[key as keyof typeof summary.priceSeries] as number[]);
-  const max = Math.max(...all, 1);
-  const scale = max >= 1_000_000_000 ? 1_000_000_000 : max >= 1_000_000 ? 1_000_000 : 1;
-  const scaleLabel = scale === 1_000_000_000 ? (document.documentElement.lang === "en" ? "EGP billion" : "مليار ج.م") : scale === 1_000_000 ? (document.documentElement.lang === "en" ? "EGP million" : "مليون ج.م") : (document.documentElement.lang === "en" ? "EGP" : "ج.م");
-  const x = (index: number) => left + index * (width - left - right) / Math.max(summary.priceSeries.years.length - 1, 1);
-  const y = (value: number) => top + (max - value) * (height - top - bottom) / max;
-  const colors: Record<string, string> = { urban: "#ffb400", agricultural: "#6be500", industrial: "#e4e4e4" };
-  const labels: Record<string, string> = { urban: "العمرانية", agricultural: "الزراعية", industrial: "الصناعية", ...(summary.profile?.priceLabels || {}) };
-  const grid = Array.from({ length: 5 }, (_, index) => {
-    const yy = top + index * (height - top - bottom) / 4;
-    const value = max * (4 - index) / 4;
-    return `<line x1="${left}" y1="${yy}" x2="${width - right}" y2="${yy}"/><text x="${left - 10}" y="${yy + 4}">${formatNumber(value / scale, scale === 1 ? 0 : 1)}</text>`;
-  }).join("");
-  const lines = keys.map((key) => {
-    const vals = summary.priceSeries[key as "urban" | "agricultural" | "industrial"];
-    const points = vals.map((value, index) => `${x(index)},${y(value)}`).join(" ");
-    const dots = vals.map((value, index) => `<circle data-chart-kind="${key}" data-chart-year="${summary.priceSeries.years[index]}" data-chart-value="${value}" cx="${x(index)}" cy="${y(value)}" r="6"><title>${labels[key]} · ${summary.priceSeries.years[index]} · ${formatMoney(value)}</title></circle>`).join("");
-    return `<polyline points="${points}" stroke="${colors[key]}"/><g fill="${colors[key]}">${dots}</g>`;
-  }).join("");
-  const years = summary.priceSeries.years.map((year, index) => `<text x="${x(index)}" y="${height - 12}" class="year-label">${year}</text>`).join("");
-  container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" aria-label="الرسم البياني التفاعلي لأسعار الأراضي"><text class="chart-unit" x="${left}" y="14">${scaleLabel}</text><g class="chart-grid">${grid}</g>${lines}<g class="chart-years">${years}</g></svg>`;
-  container.querySelectorAll<SVGCircleElement>("circle[data-chart-year]").forEach((dot) => dot.addEventListener("click", () => {
-    const label = document.querySelector<HTMLElement>("#chart-year-label");
-    const activeYear = document.querySelector<HTMLElement>("#active-year");
-    const key = dot.dataset.chartKind || "urban";
-    if (label) label.textContent = `${labels[key]} · ${dot.dataset.chartYear} · ${formatMoney(Number(dot.dataset.chartValue))}`;
-    if (activeYear) activeYear.textContent = dot.dataset.chartYear || "";
-    container.querySelectorAll("circle").forEach((item) => item.classList.toggle("selected", item === dot));
-  }));
-}
-
-function renderPriceComparisonTable(summary: DashboardSummary, visible: Set<string>): void {
-  const container = document.querySelector<HTMLElement>("#price-comparison-table");
-  if (!container) return;
-  const labels: Record<string, string> = { urban: "العمرانية", agricultural: "الزراعية", industrial: "الصناعية", ...(summary.profile?.priceLabels || {}) };
-  const rows = ["urban", "agricultural", "industrial"]
-    .filter((key) => visible.has(key) && summary.prices[key]?.start > 0 && summary.prices[key]?.end > 0)
-    .map((key) => {
-      const pair = summary.prices[key];
-      return `<tr><th scope="row">${labels[key]}</th><td>${formatMoney(pair.start, true)}</td><td>${formatMoney(pair.end, true)}</td><td>${formatMoney(pair.end - pair.start, true)}</td></tr>`;
-    }).join("");
-  container.innerHTML = rows
-    ? `<table><caption>مقارنة إجماليات أسعار الأراضي الموثقة (جنيه مصري)</caption><thead><tr><th>نوع الأرض</th><th>${summary.yearStart}</th><th>${summary.yearEnd}</th><th>التغير</th></tr></thead><tbody>${rows}</tbody></table>`
-    : "";
 }
 
 function renderChangeBars(summary: DashboardSummary): void {
@@ -1991,6 +1930,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const defaultTx = (1000 - 1000 * defaultZoom) / 2;
   const defaultTy = (520 - 520 * defaultZoom) / 2;
   let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, pointerIsDown = false, dragging = false, pointerStartX = 0, pointerStartY = 0, lastX = 0, lastY = 0, panFrame = 0, pairSyncPending = false, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
+  // SVG groups with many compound polygons are not reliably composited by all
+  // browsers. At a close zoom some engines repaint every path on each pointer
+  // move, even when the group only receives a CSS transform. Keep a temporary
+  // bitmap-like SVG image while the mouse is down, then immediately restore
+  // the original vector map on release. This preserves the visual map (rather
+  // than hiding it) while reducing a drag frame to one image transform.
+  let dragPreview: SVGImageElement | null = null;
+  let dragPreviewUrl = "";
+  let dragPreviewStartTx = 0;
+  let dragPreviewStartTy = 0;
   const linkedPair = scope.closest<HTMLElement>(".temporal-map-pair");
   const inverseProject = (x: number, y: number): [number, number] => [
     viewMinX + (x - (1000 - width * scale) / 2) / scale,
@@ -2019,7 +1968,53 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   // surface. Updating the SVG transform attribute forces dense polygon layers
   // to be repainted on every pointer frame and makes dragging visibly stall.
   const paintViewport = () => {
+    if (dragPreview && scope.classList.contains("map-drag-preview-ready")) {
+      dragPreview.setAttribute("transform", `translate(${tx - dragPreviewStartTx} ${ty - dragPreviewStartTy})`);
+      return;
+    }
     viewport.style.transform = `translate(${tx}px, ${ty}px) scale(${zoom})`;
+  };
+  const clearDragPreview = () => {
+    if (dragPreview) dragPreview.remove();
+    if (dragPreviewUrl) URL.revokeObjectURL(dragPreviewUrl);
+    dragPreview = null;
+    dragPreviewUrl = "";
+    viewport.style.visibility = "";
+    scope.classList.remove("map-drag-preview-ready");
+  };
+  const activateDragPreview = () => {
+    if (!dragging || !dragPreview || dragPreview.dataset.ready !== "true") return;
+    viewport.style.visibility = "hidden";
+    dragPreview.style.opacity = "1";
+    scope.classList.add("map-drag-preview-ready");
+    paintViewport();
+  };
+  const prepareDragPreview = () => {
+    // Small maps already pan smoothly as native vectors. Creating a preview
+    // there would just add a needless serialization cost.
+    if (content.querySelectorAll("path").length < 80 || dragPreview) return;
+    const clonedSvg = svg.cloneNode(true) as SVGSVGElement;
+    const snapshotStyle = document.createElementNS("http://www.w3.org/2000/svg", "style");
+    snapshotStyle.textContent = ".satellite-tile{opacity:1;filter:saturate(1.12) contrast(1.08) brightness(.92)}.map-study path{fill:#00c8ff18;stroke:#fff;stroke-width:4;filter:drop-shadow(0 0 3px #007acb)}.map-axis path{fill:none;stroke:#e60000;stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 2px #fff8)}.map-urban path{fill:#f6a900e8;stroke:#ffe47d;stroke-width:.75}.map-agricultural path{fill:#16c51be8;stroke:#d9ff9b;stroke-width:.75}.map-industrial path{fill:#9800c7e8;stroke:#f2c7ff;stroke-width:.75}.change-hidden,[hidden]{display:none}.change-match{opacity:1;stroke-width:2.4}.map-content path[data-geometry=LineString],.map-content path[data-geometry=MultiLineString]{fill:none}";
+    clonedSvg.insertBefore(snapshotStyle, clonedSvg.firstChild);
+    const preview = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    preview.classList.add("map-drag-preview");
+    preview.setAttribute("x", "0"); preview.setAttribute("y", "0");
+    preview.setAttribute("width", "1000"); preview.setAttribute("height", "520");
+    preview.setAttribute("preserveAspectRatio", "xMidYMid slice");
+    preview.setAttribute("pointer-events", "none");
+    preview.style.opacity = "0";
+    dragPreviewStartTx = tx;
+    dragPreviewStartTy = ty;
+    dragPreview = preview;
+    dragPreviewUrl = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clonedSvg)], { type: "image/svg+xml" }));
+    preview.addEventListener("load", () => {
+      if (dragPreview !== preview || !preview.isConnected) return;
+      preview.dataset.ready = "true";
+      activateDragPreview();
+    }, { once: true });
+    preview.setAttribute("href", dragPreviewUrl);
+    svg.appendChild(preview);
   };
   const apply = (broadcast = true) => {
     paintViewport();
@@ -2107,12 +2102,16 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     });
   }, { passive: false });
   svg.addEventListener("pointerdown", (event) => {
+    clearDragPreview();
     pointerIsDown = true;
     dragging = false;
     pointerStartX = event.clientX;
     pointerStartY = event.clientY;
     lastX = event.clientX;
     lastY = event.clientY;
+    // Start decoding before the drag threshold is crossed. On a normal human
+    // drag this makes the preview ready by the first meaningful movement.
+    prepareDragPreview();
   });
   svg.addEventListener("pointermove", (event) => {
     if (!pointerIsDown) return;
@@ -2124,6 +2123,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       scope.classList.add("map-interacting");
       window.clearTimeout(interactionTimer);
       svg.setPointerCapture(event.pointerId);
+      activateDragPreview();
     }
     const dx = event.clientX - lastX;
     const dy = event.clientY - lastY;
@@ -2146,6 +2146,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     pointerIsDown = false;
     if (!dragging) return;
     dragging = false;
+    clearDragPreview();
+    paintViewport();
     endInteraction(120);
     if (pairSyncPending && linkedPair) {
       pairSyncPending = false;
@@ -2349,68 +2351,27 @@ export async function initInteractiveDashboard(app: TransportApp): Promise<void>
 
     if (root.dataset.mode === "price") {
       let activePriceSummary = summary;
-      const visible = new Set(["urban", "agricultural", "industrial"]);
       let selectedLanduse = "all";
       const renderActivePrices = () => {
         renderPriceColumns(activePriceSummary, selectedLanduse);
-        renderLineChart(activePriceSummary, visible);
-        renderPriceComparisonTable(activePriceSummary, visible);
       };
       renderActivePrices();
       root.addEventListener("dashboard-landuse-filter", ((event: CustomEvent<string>) => {
         selectedLanduse = event.detail || "all";
-        visible.clear();
-        if (selectedLanduse === "all") {
-          ["urban", "agricultural", "industrial"].forEach((key) => visible.add(key));
-        } else {
-          visible.add(selectedLanduse);
-        }
-        document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((toggle) => toggle.classList.toggle("active", selectedLanduse === "all" || toggle.dataset.series === selectedLanduse));
-        // The cards are filtered in place by the select handler; redraw only
-        // the lightweight chart here instead of rebuilding every card.
-        renderLineChart(activePriceSummary, visible);
-        renderPriceComparisonTable(activePriceSummary, visible);
+        renderActivePrices();
       }) as EventListener);
       root.addEventListener("dashboard-sector-price", ((event: CustomEvent<{ metrics: Record<string, number>; prices: Record<string, { start: number; end: number }>; yearEnd: number; sectorTitle?: string }>) => {
-        const years = group === "ismailia"
-          ? Array.from({ length: event.detail.yearEnd - summary.yearStart + 1 }, (_, index) => summary.yearStart + index)
-          : [summary.yearStart, event.detail.yearEnd];
         const prices = completePriceSet(event.detail.prices, summary.prices);
         activePriceSummary = {
           ...summary,
           metrics: { ...summary.metrics, ...event.detail.metrics },
           prices,
           yearEnd: event.detail.yearEnd,
-          priceSeries: {
-            years,
-            urban: years.map((_, index) => { const pair = prices.urban || { start: 0, end: 0 }; return Math.round(pair.start + (pair.end - pair.start) * index / Math.max(years.length - 1, 1)); }),
-            agricultural: years.map((_, index) => { const pair = prices.agricultural || { start: 0, end: 0 }; return Math.round(pair.start + (pair.end - pair.start) * index / Math.max(years.length - 1, 1)); }),
-            industrial: years.map((_, index) => { const pair = prices.industrial || { start: 0, end: 0 }; return Math.round(pair.start + (pair.end - pair.start) * index / Math.max(years.length - 1, 1)); }),
-          },
         };
         Object.entries(activePriceSummary.metrics).forEach(([name, value]) => setMetric(name, value));
         if (activeYear) activeYear.textContent = String(activePriceSummary.yearEnd);
-        visible.clear();
-        (["urban", "agricultural", "industrial"] as const).forEach((key) => {
-          const pair = prices[key];
-          if (pair && (pair.start > 0 || pair.end > 0)) visible.add(key);
-        });
         renderActivePrices();
       }) as EventListener);
-      document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((button) => button.addEventListener("click", () => {
-        const key = button.dataset.series || "";
-        button.classList.toggle("active");
-        if (button.classList.contains("active")) visible.add(key); else visible.delete(key);
-        renderLineChart(activePriceSummary, visible);
-      }));
-      document.querySelector<HTMLElement>("#price-columns")?.addEventListener("click", (event) => {
-        const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-price-kind] button");
-        if (!button) return;
-        const kind = button.closest<HTMLElement>("[data-price-kind]")?.dataset.priceKind || "urban";
-        visible.clear(); visible.add(kind);
-        document.querySelectorAll<HTMLButtonElement>("[data-series]").forEach((toggle) => toggle.classList.toggle("active", toggle.dataset.series === kind));
-        renderLineChart(activePriceSummary, visible);
-      });
     } else if (root.dataset.mode === "agriculture") {
       renderComparison(summary);
       renderGaugeAndDonut(summary);

@@ -44,7 +44,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .price-column > .price-column-top-card.price-area-industrial { background:#9800c7; color:#fff; box-shadow:inset 0 -3px 0 #650087; }
 .price-column > .price-column-top-card span { min-height:26px; display:flex; align-items:center; justify-content:center; color:inherit; font-size:clamp(11px,.9vw,12px); font-weight:800; line-height:1.2; }
 .price-column > .price-column-top-card strong { color:inherit; font-size:clamp(22px,2vw,30px); font-weight:800; line-height:1; white-space:nowrap; }
-.price-workspace { min-width: 0; display: grid; grid-template-rows: auto minmax(320px, 1fr) minmax(220px, auto); direction: rtl; }
+.price-workspace { min-width: 0; display: grid; grid-template-rows: auto minmax(320px, 1fr); direction: rtl; }
 .western-price-dashboard .price-workspace { grid-template-rows: auto minmax(420px, 1fr); }
 .price-dashboard .price-layout { min-height:calc(100vh - 64px); grid-template-columns:minmax(330px,37%) minmax(0,1fr); }
 .price-dashboard .price-column { grid-template-rows:96px 1.08fr 1fr 1fr; }
@@ -86,6 +86,15 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
      parent group is cheap and prevents hover/popup work during a real drag. */
   pointer-events:none !important;
 }
+/* During a drag, strip the costly visual effects until the pointer is
+   released. The geometry stays visible; the temporary preview in the runtime
+   is used for dense maps, while this keeps the initial few drag frames light. */
+.gis-map.map-interacting .satellite-tile,
+.gis-map.map-interacting .map-study path,
+.gis-map.map-interacting .map-axis path,
+.gis-map.map-interacting .map-content path.change-match { filter:none !important; }
+.gis-map.map-interacting .map-content path { shape-rendering:optimizeSpeed; }
+.map-drag-preview { pointer-events:none; image-rendering:auto; }
 .map-content path[hidden] { display: none; }
 .map-content .change-hidden { display: none; }
 .map-content path.change-match { opacity:1; stroke-width:2.4!important; filter:brightness(1.18) drop-shadow(0 0 2px #fff7); }
@@ -290,21 +299,9 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
 .english-ui .interactive-head,.english-ui .dashboard-kpis,.english-ui .card-title,.english-ui .feature-popup { text-align:left; }
 
 .dark-card { min-width: 0; background: #252525; border-top: 2px solid #363636; }
-.line-chart-card { padding: 10px 16px 4px; min-height: 280px; }
 .card-title { min-height: 36px; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #fff; font-size: 13px; font-weight: 800; }
 .card-title > div:first-child { display: grid; gap: 3px; }
 .card-title small { color: #969696; font-size: 9px; font-weight: 400; }
-.series-toggles { display: flex; gap: 5px; }
-.series-toggles button { padding: 5px 7px; border: 1px solid #565656; background: #303030; color: #888; font-size: 10px; cursor: pointer; }
-.series-toggles button.active { border-color: #ffc126; color: #fff; }
-.svg-chart { height: calc(100% - 42px); min-height: 210px; }
-.svg-chart svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.svg-chart polyline { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-.svg-chart circle { cursor: pointer; stroke: #252525; stroke-width: 3; transition: r .15s; }
-.svg-chart circle:hover, .svg-chart circle.selected { r: 10; stroke: #fff; }
-.chart-grid line { stroke: #525252; stroke-width: 1; }
-.chart-grid text, .chart-years text { fill: #a7a7a7; font-size: 10px; text-anchor: middle; }
-.chart-unit { fill: #d7d7d7; font-size: 11px; text-anchor: start; }
 .loading-panel, .no-data { min-height: 120px; display: grid; place-items: center; padding: 20px; color: #aaa; font-size: 12px; text-align: center; }
 
 .land-layout { flex: 1 1 auto; min-height: calc(100vh - 64px); display: grid; grid-template-columns: minmax(240px, 27%) minmax(0, 50%) minmax(210px, 23%); direction: ltr; box-sizing: border-box; }
@@ -709,7 +706,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .price-columns { grid-template-columns: 1fr; min-height: auto; }
   .price-column { grid-template-columns: 1.1fr 1fr 1fr; grid-template-rows: 1fr; }
   .price-column header, .price-column > div { min-height: 130px; }
-  .price-workspace { grid-template-rows: auto 360px 320px; }
+  .price-workspace { grid-template-rows: auto 360px; }
   .dashboard-kpis { grid-template-columns: 1fr; }
   .dashboard-kpis.ismailia-urban-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .dashboard-kpis.western-urban-kpis { grid-template-columns: 1fr; }
@@ -737,34 +734,15 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .agriculture-right { grid-column: auto; grid-template-columns: 1fr; min-height: 650px; }
 }
 
-/* Transit price dashboards: compact comparison card at phone widths and a
-   bounded three-stage workspace at desktop widths. These rules intentionally
-   sit after the older executive-board overrides. */
-.price-comparison-card { min-width:0; padding:10px 14px; overflow:auto; }
-.price-comparison-card .card-title { align-items:flex-start; gap:10px; }
-.price-comparison-card .card-title small { display:block; margin-top:3px; color:#d8d8d8; font-size:11px; line-height:1.35; }
-.price-comparison-card .svg-chart { min-height:150px; height:150px; }
-.price-comparison-table { margin-top:7px; overflow-x:auto; }
-.price-comparison-table table { width:100%; border-collapse:collapse; color:#f5f5f5; font-size:12px; text-align:right; }
-.price-comparison-table caption { padding:4px 0 7px; color:#ffcb56; font-weight:800; text-align:right; }
-.price-comparison-table th,.price-comparison-table td { padding:6px 8px; border-top:1px solid #ffffff24; white-space:nowrap; }
-.price-comparison-table thead th { color:#9fd8ff; font-weight:800; }
-.price-comparison-table tbody th { color:#ffcb56; }
-
 @media (min-width:1100px) {
   .interactive-dashboard.price-dashboard { width:100%; max-width:100vw; overflow-x:clip; }
   .price-dashboard .price-layout { width:100%; max-width:100%; grid-template-columns:minmax(300px,34%) minmax(0,1fr); overflow:hidden; }
-  .price-dashboard .price-workspace { grid-template-rows:108px minmax(280px,1fr) 250px !important; min-width:0; overflow:hidden; }
+  .price-dashboard .price-workspace { grid-template-rows:108px minmax(280px,1fr) !important; min-width:0; overflow:hidden; }
   .price-dashboard .price-columns { min-width:0; overflow:auto; }
-  .price-dashboard .price-comparison-card { min-height:0; height:250px; overflow:auto; }
   .price-dashboard .price-temporal-map-pair { min-width:0; }
   .interactive-head { width:100%; max-width:100vw; }
   .interactive-head > div:first-child { max-width:none; }
   .dash-actions { min-width:0; }
-  /* Metro Line 3 intentionally ends with the paired temporal maps.  Do not
-     reserve the generic price-dashboard chart track when no comparison panel
-     is rendered. */
-  .interactive-dashboard.price-dashboard[data-dashboard-group="metro-third-line"] .price-workspace { grid-template-rows:108px minmax(0,1fr) !important; }
 }
 
 @media (max-width:480px) {
@@ -778,13 +756,7 @@ body:has(.interactive-dashboard) { margin: 0; padding: 0; min-height: 100vh; bac
   .price-dashboard .price-column header { border-top:0; }
   .price-dashboard .price-column header strong { font-size:19px; }
   .price-dashboard .price-column > div b { font-size:17px; }
-  .price-dashboard .price-workspace { grid-template-rows:auto 400px auto; }
-  .price-dashboard .price-comparison-card { padding:10px; }
-  .price-comparison-card .card-title { display:block; }
-  .price-comparison-card .series-toggles { margin-top:8px; }
-  .price-comparison-card .svg-chart { height:135px; min-height:135px; }
-  .price-comparison-table table { font-size:11px; }
-  .price-comparison-table th,.price-comparison-table td { padding:6px 4px; }
+  .price-dashboard .price-workspace { grid-template-rows:auto 400px; }
 }
 
 /* Qena–Luxor: maps are the primary evidence.  Remove the permanent side
