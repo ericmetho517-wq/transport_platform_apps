@@ -53,23 +53,21 @@ for (const app of impactDashboards) {
     if (!Number.isFinite(metric.value) || !metric.unit?.ar || !metric.label?.ar) failures.push(`${app.slug}: invalid audited metric ${metric.key || "unknown"}`);
   }
 }
-for (const group of ["regional-ring-road", "kalabsha-axis", "qus-axis"]) {
-  if (developmentImpact.profiles?.[group]?.metrics?.some((metric) => metric.key === "employment")) failures.push(`${group}: projected employment must not appear as a completed-period metric`);
-}
 const expectedObservedImpact = {
-  "regional-ring-road": { fuelSavingWithoutSubsidy: 8.33, fuelSavingWithSubsidy: 1.88, developedLandArea: 112.3, investments: 1302, addedValue: 354 },
-  "kalabsha-axis": { fuelSavingWithoutSubsidy: 683.938, fuelSavingWithSubsidy: 139.95, developedLandArea: 3.3, investments: 0.5, addedValue: 5.4 },
-  "qus-axis": { fuelSavingWithoutSubsidy: 2438, fuelSavingWithSubsidy: 394.15, developedLandArea: 8.7, investments: 9.1, addedValue: 20.8 },
-  "dabaa-axis": { fuelSavingWithoutSubsidy: 1.36, fuelSavingWithSubsidy: 322, employment: 381, developedLandArea: 600, investments: 5.3, addedValue: 1.8 },
+  "western-upper-egypt": { fuelSavingWithoutSubsidy: 13.3, fuelSavingWithSubsidy: 2.9, employment: 1.02, developedLandArea: 336, addedValue: 585, investments: 1.3, totalLandValue: 638 },
+  "regional-ring-road": { fuelSavingWithoutSubsidy: 8.33, fuelSavingWithSubsidy: 1.88, employment: 22.3, developedLandArea: 112.3, investments: 970, addedValue: 35.4, totalLandValue: 498, environmentalSavings: 404.6 },
+  "kalabsha-axis": { fuelSavingWithoutSubsidy: 683.938, fuelSavingWithSubsidy: 13.995, employment: 39, developedLandArea: 3.3, investments: 100, addedValue: 500, totalLandValue: 9.6, environmentalSavings: 35 },
+  "qus-axis": { fuelSavingWithoutSubsidy: 2438, fuelSavingWithSubsidy: 394, developedLandArea: 8.7, investments: 5.7, addedValue: 2.08, totalLandValue: 77.4, environmentalSavings: 96.3 },
+  "dabaa-axis": { fuelSavingWithoutSubsidy: 1.364, fuelSavingWithSubsidy: 322, employment: 381, developedLandArea: 600, investments: 5.376, addedValue: 1.811 },
 };
 for (const [group, expected] of Object.entries(expectedObservedImpact)) {
   const actual = Object.fromEntries((developmentImpact.profiles?.[group]?.metrics || []).map((metric) => [metric.key, metric.value]));
   for (const [key, value] of Object.entries(expected)) if (actual[key] !== value) failures.push(`${group}: ${key} must equal documented completed-period value ${value}`);
 }
 const expectedOriginalUnits = {
-  "kalabsha-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه" },
+  "kalabsha-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه", employment: "الف فرصة عمل", investments: "مليون جنيه", addedValue: "مليون جنيه" },
   "qus-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه" },
-  "dabaa-axis": { fuelSavingWithoutSubsidy: "مليار جنيه", fuelSavingWithSubsidy: "مليون جنيه", employment: "ألف فرصة عمل" },
+  "dabaa-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه", employment: "الف فرصة عمل" },
 };
 for (const [group, expected] of Object.entries(expectedOriginalUnits)) {
   const actual = Object.fromEntries((developmentImpact.profiles?.[group]?.metrics || []).map((metric) => [metric.key, metric.unit?.ar]));

@@ -1,12 +1,21 @@
 {
-  "version": "2026-10-15",
+  "version": "2026-10-15-workbook-sync",
   "scope": "قيم موثقة للفترة المكتملة فقط.",
   "profiles": {
     "ismailia": {
       "appSlug": "dashboard-ismailia-development-impact",
-      "road": { "ar": "طريق القاهرة - الإسماعيلية", "en": "Cairo–Ismailia Road" },
-      "heading": { "ar": "الأثر التنموي للجزء المطور من الطريق", "en": "Development impact of the upgraded road segment" },
-      "period": { "start": 2016, "end": 2026 },
+      "road": {
+        "ar": "طريق القاهرة - الإسماعيلية",
+        "en": "Cairo–Ismailia Road"
+      },
+      "heading": {
+        "ar": "الأثر التنموي للجزء المطور من الطريق",
+        "en": "Development impact of the upgraded road segment"
+      },
+      "period": {
+        "start": 2016,
+        "end": 2026
+      },
       "source": "لوحة الأثر التنموي المعتمدة لطريق القاهرة–الإسماعيلية ونتائج استخدامات الأراضي 2016–2026",
       "sourceFile": "التوثيق/قطاع_الاسماعيلية.docx",
       "sourceLocator": "الفترة 2016–2026؛ انخفاض الأراضي الفضاء 335.99 كم² يدعم مساحة الأرض المضافة المعروضة 336 كم²",
@@ -15,19 +24,112 @@
         "en": "Documented completed-period development-impact indicators for the upgraded Cairo–Ismailia Road segment"
       },
       "metrics": [
-        { "key": "fuelSavingWithoutSubsidy", "label": { "ar": "الوفر في الوقود بدون الدعم", "en": "Fuel saving without subsidy" }, "value": 20.371, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 3, "color": "red", "icon": "fuel" },
-        { "key": "fuelSavingWithSubsidy", "label": { "ar": "الوفر في الوقود بوجود الدعم", "en": "Fuel saving with subsidy" }, "value": 4.818, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 3, "color": "orange", "icon": "fuel" },
-        { "key": "employment", "label": { "ar": "العمالة", "en": "Employment" }, "value": 765636, "unit": { "ar": "فرصة عمل", "en": "job opportunities" }, "decimals": 0, "color": "gold", "icon": "people" },
-        { "key": "developedLandArea", "label": { "ar": "مساحة الأرض المضافة", "en": "Added land area" }, "value": 336, "unit": { "ar": "كم²", "en": "km²" }, "decimals": 0, "color": "purple", "icon": "map" },
-        { "key": "investments", "label": { "ar": "الاستثمارات", "en": "Investments" }, "value": 16.268, "unit": { "ar": "تريليون جنيه", "en": "EGP trillion" }, "decimals": 3, "color": "green", "icon": "coins" },
-        { "key": "addedValue", "label": { "ar": "القيمة المضافة", "en": "Added value" }, "value": 8.725, "unit": { "ar": "تريليون جنيه", "en": "EGP trillion" }, "decimals": 3, "color": "blue", "icon": "value" }
+        {
+          "key": "fuelSavingWithoutSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بدون الدعم",
+            "en": "Fuel saving without subsidy"
+          },
+          "value": 20.371,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 3,
+          "color": "red",
+          "icon": "fuel"
+        },
+        {
+          "key": "fuelSavingWithSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بوجود الدعم",
+            "en": "Fuel saving with subsidy"
+          },
+          "value": 4.818,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 3,
+          "color": "orange",
+          "icon": "fuel"
+        },
+        {
+          "key": "employment",
+          "label": {
+            "ar": "العمالة",
+            "en": "Employment"
+          },
+          "value": 765636,
+          "unit": {
+            "ar": "فرصة عمل",
+            "en": "job opportunities"
+          },
+          "decimals": 0,
+          "color": "gold",
+          "icon": "people"
+        },
+        {
+          "key": "developedLandArea",
+          "label": {
+            "ar": "مساحة الأرض المنماة",
+            "en": "Developed land area"
+          },
+          "value": 336,
+          "unit": {
+            "ar": "كم²",
+            "en": "km²"
+          },
+          "decimals": 0,
+          "color": "purple",
+          "icon": "map"
+        },
+        {
+          "key": "investments",
+          "label": {
+            "ar": "الاستثمارات",
+            "en": "Investments"
+          },
+          "value": 16.268,
+          "unit": {
+            "ar": "تريليون جنيه",
+            "en": "EGP trillion"
+          },
+          "decimals": 3,
+          "color": "green",
+          "icon": "coins"
+        },
+        {
+          "key": "addedValue",
+          "label": {
+            "ar": "متوسط  القيمة المضافة للاستثمارات المتوطنة للناتج المحلي سنويا ",
+            "en": "Average annual added value"
+          },
+          "value": 8.725,
+          "unit": {
+            "ar": "تريليون جنيه",
+            "en": "EGP trillion"
+          },
+          "decimals": 3,
+          "color": "blue",
+          "icon": "value"
+        }
       ]
     },
     "western-upper-egypt": {
       "appSlug": "dashboard-western-upper-egypt-development-impact",
-      "road": { "ar": "محور الصعيد الصحراوي الغربي – طريق الجيزة / أبو سمبل", "en": "Western Upper Egypt Corridor – Giza / Abu Simbel" },
-      "heading": { "ar": "الأثر الاقتصادي والتنموي لمحور الصعيد الغربي", "en": "Economic and development impact of the Western Upper Egypt Corridor" },
-      "period": { "start": 2014, "end": 2024 },
+      "road": {
+        "ar": "محور الصعيد الصحراوي الغربي – طريق الجيزة / أبو سمبل",
+        "en": "Western Upper Egypt Corridor – Giza / Abu Simbel"
+      },
+      "heading": {
+        "ar": "الأثر الاقتصادي والتنموي لمحور الصعيد الغربي",
+        "en": "Economic and development impact of the Western Upper Egypt Corridor"
+      },
+      "period": {
+        "start": 2014,
+        "end": 2024
+      },
       "source": "لوحة الأثر الاقتصادي والتنموي المعتمدة لمحور الصعيد الصحراوي الغربي",
       "sourceFile": "بيانات اللوحة المعتمدة بالمشروع",
       "sourceLocator": "المؤشرات الإجمالية للفترة 2014–2024",
@@ -36,81 +138,544 @@
         "en": "The corridor's contribution to economic output equals EGP 585 billion in added value"
       },
       "metrics": [
-        { "key": "fuelSavingWithoutSubsidy", "label": { "ar": "الوفر في الوقود بدون الدعم", "en": "Fuel saving without subsidy" }, "value": 13.3, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 1, "color": "red", "icon": "fuel" },
-        { "key": "fuelSavingWithSubsidy", "label": { "ar": "الوفر في الوقود بوجود الدعم", "en": "Fuel saving with subsidy" }, "value": 2.9, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 1, "color": "orange", "icon": "fuel" },
-        { "key": "employment", "label": { "ar": "العمالة", "en": "Employment" }, "value": 1.02, "unit": { "ar": "مليون فرصة عمل", "en": "million job opportunities" }, "decimals": 2, "color": "gold", "icon": "people" },
-        { "key": "investments", "label": { "ar": "الاستثمارات", "en": "Investments" }, "value": 1.3, "unit": { "ar": "تريليون جنيه", "en": "EGP trillion" }, "decimals": 1, "color": "green", "icon": "coins" },
-        { "key": "addedValue", "label": { "ar": "القيمة المضافة", "en": "Added value" }, "value": 585, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 0, "color": "blue", "icon": "value" }
+        {
+          "key": "fuelSavingWithoutSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بدون الدعم",
+            "en": "Fuel saving without subsidy"
+          },
+          "value": 13.3,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 1,
+          "color": "red",
+          "icon": "fuel"
+        },
+        {
+          "key": "fuelSavingWithSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بوجود الدعم",
+            "en": "Fuel saving with subsidy"
+          },
+          "value": 2.9,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 1,
+          "color": "orange",
+          "icon": "fuel"
+        },
+        {
+          "key": "employment",
+          "label": {
+            "ar": "العمالة",
+            "en": "Employment"
+          },
+          "value": 1.02,
+          "unit": {
+            "ar": "مليون فرصة عمل",
+            "en": "million job opportunities"
+          },
+          "decimals": 2,
+          "color": "gold",
+          "icon": "people"
+        },
+        {
+          "key": "developedLandArea",
+          "label": {
+            "ar": "مساحة الأرض المنماة",
+            "en": "Developed land area"
+          },
+          "value": 336,
+          "unit": {
+            "ar": "كم²",
+            "en": "km²"
+          },
+          "decimals": 0,
+          "color": "purple",
+          "icon": "map"
+        },
+        {
+          "key": "addedValue",
+          "label": {
+            "ar": "القيمة المضافة",
+            "en": "Added value"
+          },
+          "value": 585,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 0,
+          "color": "blue",
+          "icon": "value"
+        },
+        {
+          "key": "investments",
+          "label": {
+            "ar": "الاستثمارات",
+            "en": "Investments"
+          },
+          "value": 1.3,
+          "unit": {
+            "ar": "تريليون جنيه",
+            "en": "EGP trillion"
+          },
+          "decimals": 1,
+          "color": "green",
+          "icon": "coins"
+        },
+        {
+          "key": "totalLandValue",
+          "label": {
+            "ar": "اجمالي قيمه الأرض خلال الفترة ",
+            "en": "Total land value during the period"
+          },
+          "value": 638,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 0,
+          "color": "gold",
+          "icon": "coins"
+        }
       ]
     },
     "regional-ring-road": {
       "appSlug": "dashboard-35c11a505b",
-      "road": { "ar": "القوس الشرقي للطريق الدائري الإقليمي وخط الروبيكي", "en": "Eastern Regional Ring Road and Robeki Railway" },
-      "heading": { "ar": "الأثر التنموي للجزء المطور من الطريق", "en": "Development impact of the upgraded road segment" },
-      "period": { "start": 2014, "end": 2023 },
+      "road": {
+        "ar": "القوس الشرقي للطريق الدائري الإقليمي وخط الروبيكي",
+        "en": "Eastern Regional Ring Road and Robeki Railway"
+      },
+      "heading": {
+        "ar": "الأثر التنموي للجزء المطور من الطريق",
+        "en": "Development impact of the upgraded road segment"
+      },
+      "period": {
+        "start": 2014,
+        "end": 2023
+      },
       "source": "معدل التقرير الاقتصادي 13-7-2024.docx",
       "sourceFile": "التوثيق/معدل التقرير الاقتصادي 13-7-2024.docx",
       "sourceLocator": "القوس الشرقي: الجداول 2 و5 و7 و8 للفترة 2014–2023",
-      "auditNote": "لا تعرض اللوحة العمالة لأن التقرير لا يقدم قيمة عمالة فعلية للفترة المنتهية 2023.",
       "footer": {
         "ar": "المؤشرات الفعلية الموثقة للفترة 2014–2023 فقط",
         "en": "Documented completed-period indicators for 2014–2023 only"
       },
       "metrics": [
-        { "key": "fuelSavingWithoutSubsidy", "label": { "ar": "الوفر السنوي في الوقود بدون الدعم", "en": "Annual fuel saving without subsidy" }, "value": 8.33, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 2, "color": "red", "icon": "fuel" },
-        { "key": "fuelSavingWithSubsidy", "label": { "ar": "الوفر السنوي في الوقود بوجود الدعم", "en": "Annual fuel saving with subsidy" }, "value": 1.88, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 2, "color": "orange", "icon": "fuel" },
-        { "key": "developedLandArea", "label": { "ar": "مساحة الأرض المنماة", "en": "Developed land area" }, "value": 112.3, "unit": { "ar": "كم²", "en": "km²" }, "decimals": 1, "color": "purple", "icon": "map" },
-        { "key": "investments", "label": { "ar": "إجمالي الاستثمارات", "en": "Total investments" }, "value": 1302, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 0, "color": "green", "icon": "coins" },
-        { "key": "addedValue", "label": { "ar": "إجمالي القيمة المضافة", "en": "Total added value" }, "value": 354, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 0, "color": "blue", "icon": "value" }
+        {
+          "key": "fuelSavingWithoutSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بدون الدعم",
+            "en": "Fuel saving without subsidy"
+          },
+          "value": 8.33,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 2,
+          "color": "red",
+          "icon": "fuel"
+        },
+        {
+          "key": "fuelSavingWithSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بوجود الدعم",
+            "en": "Fuel saving with subsidy"
+          },
+          "value": 1.88,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 2,
+          "color": "orange",
+          "icon": "fuel"
+        },
+        {
+          "key": "employment",
+          "label": {
+            "ar": "العمالة",
+            "en": "Employment"
+          },
+          "value": 22.3,
+          "unit": {
+            "ar": "الف فرصة عمل",
+            "en": "thousand job opportunities"
+          },
+          "decimals": 1,
+          "color": "gold",
+          "icon": "people"
+        },
+        {
+          "key": "developedLandArea",
+          "label": {
+            "ar": "مساحة الأرض المنماة",
+            "en": "Developed land area"
+          },
+          "value": 112.3,
+          "unit": {
+            "ar": " كم²",
+            "en": "km²"
+          },
+          "decimals": 1,
+          "color": "purple",
+          "icon": "map"
+        },
+        {
+          "key": "investments",
+          "label": {
+            "ar": "الاستثمارات",
+            "en": "Investments"
+          },
+          "value": 970,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 0,
+          "color": "green",
+          "icon": "coins"
+        },
+        {
+          "key": "addedValue",
+          "label": {
+            "ar": "متوسط  القيمة المضافة للاستثمارات المتوطنة للناتج المحلي سنويا ",
+            "en": "Average annual added value"
+          },
+          "value": 35.4,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 1,
+          "color": "blue",
+          "icon": "value"
+        },
+        {
+          "key": "totalLandValue",
+          "label": {
+            "ar": "اجمالي قيمه الأرض خلال الفترة ",
+            "en": "Total land value during the period"
+          },
+          "value": 498,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 0,
+          "color": "gold",
+          "icon": "coins"
+        },
+        {
+          "key": "environmentalSavings",
+          "label": {
+            "ar": "قيمه الحفاظ علي البيئه بتخفييض الانبعاثات ",
+            "en": "Environmental value of reduced emissions"
+          },
+          "value": 404.6,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 1,
+          "color": "green",
+          "icon": "value"
+        }
       ]
     },
     "kalabsha-axis": {
       "appSlug": "dashboard-kalabsha-development-impact",
-      "road": { "ar": "محور كلابشة", "en": "Kalabsha Axis" },
-      "heading": { "ar": "الأثر التنموي للجزء المطور من الطريق", "en": "Development impact of the upgraded road segment" },
-      "period": { "start": 2014, "end": 2023 },
+      "road": {
+        "ar": "محور كلابشة",
+        "en": "Kalabsha Axis"
+      },
+      "heading": {
+        "ar": "الأثر التنموي للجزء المطور من الطريق",
+        "en": "Development impact of the upgraded road segment"
+      },
+      "period": {
+        "start": 2014,
+        "end": 2023
+      },
       "source": "معدل التقرير الاقتصادي 13-7-2024.docx",
       "sourceFile": "التوثيق/معدل التقرير الاقتصادي 13-7-2024.docx",
       "sourceLocator": "محور كلابشة: الجداول 2 و5 و7 و8 للفترة 2014–2023",
-      "auditNote": "لا تعرض اللوحة العمالة لأن التقرير لا يقدم قيمة عمالة فعلية للفترة المنتهية 2023.",
       "footer": {
         "ar": "المؤشرات الفعلية الموثقة للفترة 2014–2023 فقط",
         "en": "Documented completed-period indicators for 2014–2023 only"
       },
       "metrics": [
-        { "key": "fuelSavingWithoutSubsidy", "label": { "ar": "الوفر السنوي في الوقود بدون الدعم", "en": "Annual fuel saving without subsidy" }, "value": 683.938, "unit": { "ar": "مليون جنيه", "en": "EGP million" }, "decimals": 3, "color": "red", "icon": "fuel" },
-        { "key": "fuelSavingWithSubsidy", "label": { "ar": "الوفر السنوي في الوقود بوجود الدعم", "en": "Annual fuel saving with subsidy" }, "value": 139.95, "unit": { "ar": "مليون جنيه", "en": "EGP million" }, "decimals": 2, "color": "orange", "icon": "fuel" },
-        { "key": "developedLandArea", "label": { "ar": "مساحة الأرض المنماة", "en": "Developed land area" }, "value": 3.3, "unit": { "ar": "كم²", "en": "km²" }, "decimals": 1, "color": "purple", "icon": "map" },
-        { "key": "investments", "label": { "ar": "إجمالي الاستثمارات", "en": "Total investments" }, "value": 0.5, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 1, "color": "green", "icon": "coins" },
-        { "key": "addedValue", "label": { "ar": "إجمالي القيمة المضافة", "en": "Total added value" }, "value": 5.4, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 1, "color": "blue", "icon": "value" }
+        {
+          "key": "fuelSavingWithoutSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بدون الدعم",
+            "en": "Fuel saving without subsidy"
+          },
+          "value": 683.938,
+          "unit": {
+            "ar": "مليون جنيه",
+            "en": "EGP million"
+          },
+          "decimals": 3,
+          "color": "red",
+          "icon": "fuel"
+        },
+        {
+          "key": "fuelSavingWithSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بوجود الدعم",
+            "en": "Fuel saving with subsidy"
+          },
+          "value": 13.995,
+          "unit": {
+            "ar": "مليون جنيه",
+            "en": "EGP million"
+          },
+          "decimals": 3,
+          "color": "orange",
+          "icon": "fuel"
+        },
+        {
+          "key": "employment",
+          "label": {
+            "ar": "العمالة",
+            "en": "Employment"
+          },
+          "value": 39,
+          "unit": {
+            "ar": "الف فرصة عمل",
+            "en": "thousand job opportunities"
+          },
+          "decimals": 0,
+          "color": "gold",
+          "icon": "people"
+        },
+        {
+          "key": "developedLandArea",
+          "label": {
+            "ar": "مساحة الأرض المنماة",
+            "en": "Developed land area"
+          },
+          "value": 3.3,
+          "unit": {
+            "ar": "كم²",
+            "en": "km²"
+          },
+          "decimals": 1,
+          "color": "purple",
+          "icon": "map"
+        },
+        {
+          "key": "investments",
+          "label": {
+            "ar": "الاستثمارات",
+            "en": "Investments"
+          },
+          "value": 100,
+          "unit": {
+            "ar": "مليون جنيه",
+            "en": "EGP million"
+          },
+          "decimals": 0,
+          "color": "green",
+          "icon": "coins"
+        },
+        {
+          "key": "addedValue",
+          "label": {
+            "ar": "متوسط  القيمة المضافة للاستثمارات المتوطنة للناتج المحلي سنويا ",
+            "en": "Average annual added value"
+          },
+          "value": 500,
+          "unit": {
+            "ar": "مليون جنيه",
+            "en": "EGP million"
+          },
+          "decimals": 0,
+          "color": "blue",
+          "icon": "value"
+        },
+        {
+          "key": "totalLandValue",
+          "label": {
+            "ar": "اجمالي قيمه الأرض خلال الفترة ",
+            "en": "Total land value during the period"
+          },
+          "value": 9.6,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 1,
+          "color": "gold",
+          "icon": "coins"
+        },
+        {
+          "key": "environmentalSavings",
+          "label": {
+            "ar": "قيمه الحفاظ علي البيئه بتخفييض الانبعاثات ",
+            "en": "Environmental value of reduced emissions"
+          },
+          "value": 35,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 0,
+          "color": "green",
+          "icon": "value"
+        }
       ]
     },
     "qus-axis": {
       "appSlug": "dashboard-qus-development-impact",
-      "road": { "ar": "محور قوص", "en": "Qus Axis" },
-      "heading": { "ar": "الأثر التنموي للجزء المطور من الطريق", "en": "Development impact of the upgraded road segment" },
-      "period": { "start": 2014, "end": 2023 },
+      "road": {
+        "ar": "محور قوص",
+        "en": "Qus Axis"
+      },
+      "heading": {
+        "ar": "الأثر التنموي للجزء المطور من الطريق",
+        "en": "Development impact of the upgraded road segment"
+      },
+      "period": {
+        "start": 2014,
+        "end": 2023
+      },
       "source": "معدل التقرير الاقتصادي 13-7-2024.docx",
       "sourceFile": "التوثيق/معدل التقرير الاقتصادي 13-7-2024.docx",
       "sourceLocator": "محور قوص: الجداول 2 و5 و7 و8 للفترة 2014–2023",
-      "auditNote": "لا تعرض اللوحة العمالة لأن التقرير لا يقدم قيمة عمالة فعلية للفترة المنتهية 2023.",
       "footer": {
         "ar": "المؤشرات الفعلية الموثقة للفترة 2014–2023 فقط",
         "en": "Documented completed-period indicators for 2014–2023 only"
       },
       "metrics": [
-        { "key": "fuelSavingWithoutSubsidy", "label": { "ar": "الوفر السنوي في الوقود بدون الدعم", "en": "Annual fuel saving without subsidy" }, "value": 2438, "unit": { "ar": "مليون جنيه", "en": "EGP million" }, "decimals": 0, "color": "red", "icon": "fuel" },
-        { "key": "fuelSavingWithSubsidy", "label": { "ar": "الوفر السنوي في الوقود بوجود الدعم", "en": "Annual fuel saving with subsidy" }, "value": 394.15, "unit": { "ar": "مليون جنيه", "en": "EGP million" }, "decimals": 2, "color": "orange", "icon": "fuel" },
-        { "key": "developedLandArea", "label": { "ar": "مساحة الأرض المنماة", "en": "Developed land area" }, "value": 8.7, "unit": { "ar": "كم²", "en": "km²" }, "decimals": 1, "color": "purple", "icon": "map" },
-        { "key": "investments", "label": { "ar": "إجمالي الاستثمارات", "en": "Total investments" }, "value": 9.1, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 1, "color": "green", "icon": "coins" },
-        { "key": "addedValue", "label": { "ar": "إجمالي القيمة المضافة", "en": "Total added value" }, "value": 20.8, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 1, "color": "blue", "icon": "value" }
+        {
+          "key": "fuelSavingWithoutSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بدون الدعم",
+            "en": "Fuel saving without subsidy"
+          },
+          "value": 2438,
+          "unit": {
+            "ar": "مليون جنيه",
+            "en": "EGP million"
+          },
+          "decimals": 0,
+          "color": "red",
+          "icon": "fuel"
+        },
+        {
+          "key": "fuelSavingWithSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بوجود الدعم",
+            "en": "Fuel saving with subsidy"
+          },
+          "value": 394,
+          "unit": {
+            "ar": "مليون جنيه",
+            "en": "EGP million"
+          },
+          "decimals": 0,
+          "color": "orange",
+          "icon": "fuel"
+        },
+        {
+          "key": "developedLandArea",
+          "label": {
+            "ar": "مساحة الأرض المنماة",
+            "en": "Developed land area"
+          },
+          "value": 8.7,
+          "unit": {
+            "ar": "كم²",
+            "en": "km²"
+          },
+          "decimals": 1,
+          "color": "purple",
+          "icon": "map"
+        },
+        {
+          "key": "investments",
+          "label": {
+            "ar": "الاستثمارات",
+            "en": "Investments"
+          },
+          "value": 5.7,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 1,
+          "color": "green",
+          "icon": "coins"
+        },
+        {
+          "key": "addedValue",
+          "label": {
+            "ar": "متوسط  القيمة المضافة للاستثمارات المتوطنة للناتج المحلي سنويا ",
+            "en": "Average annual added value"
+          },
+          "value": 2.08,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 2,
+          "color": "blue",
+          "icon": "value"
+        },
+        {
+          "key": "totalLandValue",
+          "label": {
+            "ar": "اجمالي قيمه الأرض خلال الفترة ",
+            "en": "Total land value during the period"
+          },
+          "value": 77.4,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 1,
+          "color": "gold",
+          "icon": "coins"
+        },
+        {
+          "key": "environmentalSavings",
+          "label": {
+            "ar": "قيمه الحفاظ علي البيئه بتخفييض الانبعاثات ",
+            "en": "Environmental value of reduced emissions"
+          },
+          "value": 96.3,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 1,
+          "color": "green",
+          "icon": "value"
+        }
       ]
     },
     "dabaa-axis": {
       "appSlug": "dashboard-dabaa-development-impact",
-      "road": { "ar": "محور الضبعة", "en": "El Dabaa Axis" },
-      "heading": { "ar": "الأثر التنموي للجزء المطور من الطريق", "en": "Development impact of the upgraded road segment" },
-      "period": { "start": 2014, "end": 2023 },
+      "road": {
+        "ar": "محور الضبعة",
+        "en": "El Dabaa Axis"
+      },
+      "heading": {
+        "ar": "الأثر التنموي للجزء المطور من الطريق",
+        "en": "Development impact of the upgraded road segment"
+      },
+      "period": {
+        "start": 2014,
+        "end": 2023
+      },
       "source": "الاثر التنموي-محور الضبعة-27-09-2026).pptx",
       "sourceFile": "التوثيق/الاثر التنموي-محور الضبعة-27-09-2026).pptx",
       "sourceLocator": "الشرائح 2–5؛ مساحة الأرض المضافة محسوبة من إجمالي العمران والزراعة لعامي 2014 و2023",
@@ -119,12 +684,96 @@
         "en": "Documented completed-period indicators for 2014–2023 only"
       },
       "metrics": [
-        { "key": "fuelSavingWithoutSubsidy", "label": { "ar": "الوفر السنوي في الوقود بدون الدعم", "en": "Annual fuel saving without subsidy" }, "value": 1.36, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 2, "color": "red", "icon": "fuel" },
-        { "key": "fuelSavingWithSubsidy", "label": { "ar": "الوفر السنوي في الوقود بوجود الدعم", "en": "Annual fuel saving with subsidy" }, "value": 322, "unit": { "ar": "مليون جنيه", "en": "EGP million" }, "decimals": 0, "color": "orange", "icon": "fuel" },
-        { "key": "employment", "label": { "ar": "العمالة", "en": "Employment" }, "value": 381, "unit": { "ar": "ألف فرصة عمل", "en": "thousand job opportunities" }, "decimals": 0, "color": "gold", "icon": "people" },
-        { "key": "developedLandArea", "label": { "ar": "مساحة الأرض المنماة", "en": "Developed land area" }, "value": 600, "unit": { "ar": "كم²", "en": "km²" }, "decimals": 0, "color": "purple", "icon": "map" },
-        { "key": "investments", "label": { "ar": "إجمالي الاستثمارات", "en": "Total investments" }, "value": 5.3, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 1, "color": "green", "icon": "coins" },
-        { "key": "addedValue", "label": { "ar": "إجمالي القيمة المضافة", "en": "Total added value" }, "value": 1.8, "unit": { "ar": "مليار جنيه", "en": "EGP billion" }, "decimals": 1, "color": "blue", "icon": "value" }
+        {
+          "key": "fuelSavingWithoutSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بدون الدعم",
+            "en": "Fuel saving without subsidy"
+          },
+          "value": 1.364,
+          "unit": {
+            "ar": "مليون جنيه",
+            "en": "EGP million"
+          },
+          "decimals": 3,
+          "color": "red",
+          "icon": "fuel"
+        },
+        {
+          "key": "fuelSavingWithSubsidy",
+          "label": {
+            "ar": "الوفر في الوقود بوجود الدعم",
+            "en": "Fuel saving with subsidy"
+          },
+          "value": 322,
+          "unit": {
+            "ar": "مليون جنيه",
+            "en": "EGP million"
+          },
+          "decimals": 0,
+          "color": "orange",
+          "icon": "fuel"
+        },
+        {
+          "key": "employment",
+          "label": {
+            "ar": "العمالة",
+            "en": "Employment"
+          },
+          "value": 381,
+          "unit": {
+            "ar": "الف فرصة عمل",
+            "en": "thousand job opportunities"
+          },
+          "decimals": 0,
+          "color": "gold",
+          "icon": "people"
+        },
+        {
+          "key": "developedLandArea",
+          "label": {
+            "ar": "مساحة الأرض المنماة",
+            "en": "Developed land area"
+          },
+          "value": 600,
+          "unit": {
+            "ar": "كم²",
+            "en": "km²"
+          },
+          "decimals": 0,
+          "color": "purple",
+          "icon": "map"
+        },
+        {
+          "key": "investments",
+          "label": {
+            "ar": "الاستثمارات",
+            "en": "Investments"
+          },
+          "value": 5.376,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 3,
+          "color": "green",
+          "icon": "coins"
+        },
+        {
+          "key": "addedValue",
+          "label": {
+            "ar": "اجمالي القيمه المضافة",
+            "en": "Total added value"
+          },
+          "value": 1.811,
+          "unit": {
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
+          },
+          "decimals": 3,
+          "color": "blue",
+          "icon": "value"
+        }
       ]
     }
   }
