@@ -692,8 +692,8 @@
           },
           "value": 1.364,
           "unit": {
-            "ar": "مليون جنيه",
-            "en": "EGP million"
+            "ar": "مليار جنيه",
+            "en": "EGP billion"
           },
           "decimals": 3,
           "color": "red",

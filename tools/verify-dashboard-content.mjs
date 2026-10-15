@@ -67,7 +67,7 @@ for (const [group, expected] of Object.entries(expectedObservedImpact)) {
 const expectedOriginalUnits = {
   "kalabsha-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه", employment: "الف فرصة عمل", investments: "مليون جنيه", addedValue: "مليون جنيه" },
   "qus-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه" },
-  "dabaa-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه", employment: "الف فرصة عمل" },
+  "dabaa-axis": { fuelSavingWithoutSubsidy: "مليار جنيه", fuelSavingWithSubsidy: "مليون جنيه", employment: "الف فرصة عمل" },
 };
 for (const [group, expected] of Object.entries(expectedOriginalUnits)) {
   const actual = Object.fromEntries((developmentImpact.profiles?.[group]?.metrics || []).map((metric) => [metric.key, metric.unit?.ar]));
