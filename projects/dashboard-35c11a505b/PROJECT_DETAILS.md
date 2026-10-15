@@ -1,11 +1,11 @@
-# قياس الأثر التنموي في نطاق التأثير التنموي المباشر للقوس الشرقي للطريق الدائري خلال الـ 30 سنة القادمة
+# لوحة الأثر التنموي للجزء المطور – القوس الشرقي للطريق الدائري الإقليمي
 
 - Application ID: `35c11a505b5d468bb56db1059041e177`
 - Type: `Dashboard`
 - Category: `القوس الشرقى للدائرى الأقليمى و خط الروبيكى باللغة الانجليزية`
 - Language: `ar`
 - Original ArcGIS URL: https://www.arcgis.com/apps/dashboards/35c11a505b5d468bb56db1059041e177
-- Alternate titles: Measuring the developmental impact within the direct developmental impact range of the eastern arc of the ring road over the next 30 years
+- Alternate titles: Development impact of the upgraded Eastern Regional Ring Road segment
 
 ## Included implementation
 

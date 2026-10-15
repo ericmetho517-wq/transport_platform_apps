@@ -4,6 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const registry = JSON.parse(fs.readFileSync(path.join(root, "registry", "apps.json"), "utf8"));
 const profiles = JSON.parse(fs.readFileSync(path.join(root, "public", "data", "sector-profiles.json"), "utf8"));
+const developmentImpact = JSON.parse(fs.readFileSync(path.join(root, "shared", "development-impact-data.json"), "utf8"));
 const aliases = {
   dabaa: "dabaa-axis",
   dahshur: "dahshur-south-link",
@@ -20,6 +21,7 @@ const aliases = {
 const failures = [];
 const dashboards = registry.filter((app) => app.type === "Dashboard");
 const priceDashboards = dashboards.filter((app) => /سعر|أسعار|اسعار|price/i.test(app.title));
+const impactDashboards = dashboards.filter((app) => /الأثر التنموي|الأثر الاقتصادي|development impact/i.test(app.title));
 
 for (const app of dashboards) {
   const group = aliases[app.reportReferenceGroup] || app.reportReferenceGroup;
@@ -36,6 +38,42 @@ for (const app of priceDashboards) {
   for (const pair of valid) {
     if (!Number.isFinite(pair.start) || !Number.isFinite(pair.end) || pair.start < 0 || pair.end < pair.start) failures.push(`${app.slug}: invalid price range for ${group}`);
   }
+}
+
+const impactSerialized = JSON.stringify(developmentImpact);
+if (/2030|2053|30 سنة|30 years|future projections/i.test(impactSerialized)) failures.push("development impact: future-scenario content is forbidden in the audited dataset");
+if (impactDashboards.length !== 6) failures.push(`development impact: expected 6 published dashboards, found ${impactDashboards.length}`);
+for (const app of impactDashboards) {
+  const group = aliases[app.reportReferenceGroup] || app.reportReferenceGroup;
+  const profile = developmentImpact.profiles?.[group];
+  if (!profile) failures.push(`${app.slug}: missing audited completed-period profile`);
+  if (!profile?.period?.start || !profile?.period?.end || profile.period.end <= profile.period.start) failures.push(`${app.slug}: invalid audited period`);
+  if (!profile?.sourceFile || !profile?.sourceLocator) failures.push(`${app.slug}: missing source citation`);
+  for (const metric of profile?.metrics || []) {
+    if (!Number.isFinite(metric.value) || !metric.unit?.ar || !metric.label?.ar) failures.push(`${app.slug}: invalid audited metric ${metric.key || "unknown"}`);
+  }
+}
+for (const group of ["regional-ring-road", "kalabsha-axis", "qus-axis"]) {
+  if (developmentImpact.profiles?.[group]?.metrics?.some((metric) => metric.key === "employment")) failures.push(`${group}: projected employment must not appear as a completed-period metric`);
+}
+const expectedObservedImpact = {
+  "regional-ring-road": { fuelSavingWithoutSubsidy: 8.33, fuelSavingWithSubsidy: 1.88, developedLandArea: 112.3, investments: 1302, addedValue: 354 },
+  "kalabsha-axis": { fuelSavingWithoutSubsidy: 683.938, fuelSavingWithSubsidy: 139.95, developedLandArea: 3.3, investments: 0.5, addedValue: 5.4 },
+  "qus-axis": { fuelSavingWithoutSubsidy: 2438, fuelSavingWithSubsidy: 394.15, developedLandArea: 8.7, investments: 9.1, addedValue: 20.8 },
+  "dabaa-axis": { fuelSavingWithoutSubsidy: 1.36, fuelSavingWithSubsidy: 322, employment: 381, developedLandArea: 600, investments: 5.3, addedValue: 1.8 },
+};
+for (const [group, expected] of Object.entries(expectedObservedImpact)) {
+  const actual = Object.fromEntries((developmentImpact.profiles?.[group]?.metrics || []).map((metric) => [metric.key, metric.value]));
+  for (const [key, value] of Object.entries(expected)) if (actual[key] !== value) failures.push(`${group}: ${key} must equal documented completed-period value ${value}`);
+}
+const expectedOriginalUnits = {
+  "kalabsha-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه" },
+  "qus-axis": { fuelSavingWithoutSubsidy: "مليون جنيه", fuelSavingWithSubsidy: "مليون جنيه" },
+  "dabaa-axis": { fuelSavingWithoutSubsidy: "مليار جنيه", fuelSavingWithSubsidy: "مليون جنيه", employment: "ألف فرصة عمل" },
+};
+for (const [group, expected] of Object.entries(expectedOriginalUnits)) {
+  const actual = Object.fromEntries((developmentImpact.profiles?.[group]?.metrics || []).map((metric) => [metric.key, metric.unit?.ar]));
+  for (const [key, unit] of Object.entries(expected)) if (actual[key] !== unit) failures.push(`${group}: ${key} must retain source unit ${unit}`);
 }
 
 const western = profiles["western-upper-egypt"];
@@ -100,6 +138,7 @@ if (runtimeSource.includes("open-reference") || runtimeSource.includes("referenc
 if (!runtimeSource.includes("ismailia-agriculture-dashboard") || !runtimeSource.includes("ismailia-reference-layout")) failures.push("dashboard layouts: the standard agricultural and industrial template is missing");
 if (!runtimeSource.includes("dabaaLandMarkup") || runtimeSource.includes("classdark-card")) failures.push("dashboard layouts: Dabaa must use the documented four-KPI dashboard without malformed card markup");
 if (!runtimeSource.includes("normalizeChangeStatus") || !runtimeSource.includes("غير\\s*متغير") || runtimeSource.includes('mode === "unchanged" && status === "unknown"')) failures.push("dashboard change filter: changed, unchanged and unknown values are not classified safely");
+if (!runtimeSource.includes('development-impact-data.json') || runtimeSource.includes('id="impact-year"') || runtimeSource.includes("2030") || runtimeSource.includes("2053")) failures.push("development impact: dashboards must render only the audited completed-period dataset");
 if (!runtimeSource.includes("const palette = ismailiaLanduseSymbols") || !runtimeSource.includes("const landuseNames = ismailiaLanduseNames") || runtimeSource.includes("const defaultPalette")) failures.push("dashboard maps: renderer, popup and legend must use the same approved land-use symbology");
 if (!runtimeSource.includes('hiddenPopupFields') || !runtimeSource.includes('rawArea / 1_000_000') || !runtimeSource.includes('normalizeChangeStatus(value)')) failures.push("dashboard maps: feature popup must normalize source codes, areas and change status");
 for (const legendCode of ['[9, "حرم الطريق"]', '[12, "الأراضي التعليمية"]', '[15, "مساحات خضراء"]', '[99, "غير مصنف"]']) {

@@ -271,7 +271,6 @@ const replacements: Array<[string, string]> = [
   ["طبقات المشروع المتاحة", "Available project layers"],
   ["العناصر العمرانية", "Urban features"],
   ["العناصر الزراعية", "Agricultural features"],
-  ["سيناريو الأثر التنموي حتى 2053", "Development impact scenario through 2053"],
   ["المساحة العمرانية التقديرية", "Estimated urban area"],
   ["فرص العمل المرتبطة بالقطاع", "Sector-related jobs"],
   ["مؤشر التطور الزمني", "Timeline progress"],

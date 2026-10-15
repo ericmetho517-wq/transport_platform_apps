@@ -1,4 +1,5 @@
 import type { TransportApp } from "./project-runtime";
+import developmentImpactData from "./development-impact-data.json";
 
 type LayerName = "study" | "axis" | "urban" | "agricultural" | "industrial" | "baseline" | "civil" | "landcover-start" | "landcover-end" | "buildings" | "parcels" | "landmarks" | "water" | "field-survey" | "transport" | "governorates" | "LRT_Line" | "lRT_Station" | "Metro_Line" | "Metro_Station" | "Road_CairoRing" | "Road_MiddleRing" | "Road_RegionalRing" | "Transit_GreenLine" | "Transit_KafrDawoodSadat" | "Transit_LRT" | "Transit_Metro1" | "Transit_Metro2" | "Transit_Metro3" | "Transit_Metro4" | "Transit_Metro6" | "Transit_MonorailCapital" | "Transit_MonorailOctober" | "Transit_RobikiBelbeis";
 
@@ -499,16 +500,6 @@ function civilMarkup(app: TransportApp, group: string): string {
   </main>`;
 }
 
-function impactMarkup(app: TransportApp, group: string): string {
-  return `<main class="interactive-dashboard impact-dashboard" dir="${app.direction}" data-dashboard-group="${group}" data-mode="impact">
-    ${dashboardHeader(app, group)}
-    <div class="specialized-layout">
-      <section class="specialized-kpis dashboard-kpis"><article class="blue"><span>طول المحور (كم)</span><strong data-metric="axisLengthKm">—</strong></article><article><span>نطاق الدراسة (كم²)</span><strong data-metric="studyAreaKm2">—</strong></article><article class="gold"><span>مساحة التغير العمراني (كم²)</span><strong data-metric="urbanChangeKm2">—</strong></article></section>
-      <section class="specialized-body impact-body"><aside class="dark-card impact-controls"><h2>سيناريو الأثر التنموي حتى 2053</h2><label for="impact-year">سنة العرض <strong id="impact-year-label">2024</strong></label><input id="impact-year" type="range" min="2024" max="2053" value="2024" step="1"/><div class="impact-results"><span>مؤشر التطور الزمني <b id="impact-progress">0٪</b></span><span>المساحة العمرانية التقديرية* <b id="impact-area">—</b></span><span>فرص العمل المرتبطة بالقطاع <b data-metric="jobOpportunities">—</b></span></div><small>* محاكاة خطية تفاعلية للعرض وليست قيمة تقريرية جديدة؛ القيم الأصلية المعتمدة معروضة في البطاقات والمراجع.</small></aside>${corridorTemporalMapPair("impact", group)}</section>
-    </div>
-  </main>`;
-}
-
 function ismailiaImpactIcon(kind: "fuel" | "people" | "map" | "coins" | "value"): string {
   const icons: Record<typeof kind, string> = {
     fuel: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 12h22v40H18zM22 17h14v15H22zM40 23h5l6 7v15c0 4-3 7-7 7h-4v-6h4c1 0 2-1 2-2V33l-4-4z"/><path d="M27 39h7"/></svg>`,
@@ -520,92 +511,48 @@ function ismailiaImpactIcon(kind: "fuel" | "people" | "map" | "coins" | "value")
   return icons[kind];
 }
 
-function ismailiaImpactMarkup(app: TransportApp): string {
-  const indicators = [
-    { color: "red", icon: "fuel" as const, label: "الوفر في الوقود بدون الدعم", value: "20,371", unit: "( مليار جنيه )" },
-    { color: "orange", icon: "fuel" as const, label: "الوفر في الوقود بوجود الدعم", value: "4,818", unit: "( مليار جنيه )" },
-    { color: "gold", icon: "people" as const, label: "العمالة", value: "765,636", unit: "" },
-    { color: "purple", icon: "map" as const, label: "مساحة الأرض المضافة", value: "336", unit: "( كم² )" },
-    { color: "green", icon: "coins" as const, label: "الاستثمارات", value: "16,268", unit: "( تريليون جنيه )" },
-    { color: "blue", icon: "value" as const, label: "القيمة المضافة", value: "8,725", unit: "( تريليون جنيه )" },
-  ];
-  return `<main class="ismailia-impact-board" dir="${app.direction}" aria-labelledby="impact-board-title">
-    <header class="impact-board-header"><div class="impact-brand"><b>وزارة النقل</b><i></i></div><div class="impact-road-title">طريق القاهرة - الإسماعيلية</div><div class="impact-sector-title">مؤشرات التنمية<br>البنية التحتية<i></i></div></header>
-    <section class="impact-board-content"><h1 id="impact-board-title">الأثر التنموي للجزء المطور من الطريق</h1><h2>خلال الفترة ( 2016 – 2026 )</h2>
-      <div class="impact-timeline" aria-label="المؤشرات الرئيسية للأثر التنموي">${indicators.map((item) => `<article class="impact-kpi ${item.color}"><div class="impact-orb">${ismailiaImpactIcon(item.icon)}<strong>${item.label}</strong></div><div class="impact-connector"></div><div class="impact-value"><bdi>${item.value}</bdi><small>${item.unit || "&nbsp;"}</small></div><div class="impact-node"></div></article>`).join("")}</div>
-      <footer>المؤشرات الرئيسية للأثر التنموي للجزء المطور من طريق القاهرة - الإسماعيلية</footer>
-    </section>
-  </main>`;
-}
+type ImpactIcon = "fuel" | "people" | "map" | "coins" | "value";
+type ImpactProfile = {
+  road: { ar: string; en: string };
+  heading: { ar: string; en: string };
+  period: { start: number; end: number };
+  footer: { ar: string; en: string };
+  metrics: Array<{
+    key: string;
+    label: { ar: string; en: string };
+    value: number;
+    unit: { ar: string; en: string };
+    decimals: number;
+    color: string;
+    icon: ImpactIcon;
+  }>;
+};
 
-/** Executive, source-image-backed impact board for the Western Upper Egypt axis. */
-function westernUpperEgyptImpactMarkup(app: TransportApp): string {
+/** Render every published development-impact dashboard from the audited,
+ * completed-period dataset shared with the client workbook. */
+function auditedImpactMarkup(app: TransportApp, group: string): string {
   const isEnglish = app.language === "en";
-  const copy = isEnglish ? {
-    ministry: "Ministry of Transport", road: "Western Upper Egypt Corridor – Giza / Abu Simbel",
-    sector: "Development indicators<br>Infrastructure", heading: "Economic and development impact of the Western Upper Egypt Corridor",
-    period: "During the period (2014 – 2024)", aria: "Key economic and development indicators",
-    footer: "The corridor's contribution to stimulating gross domestic product in economic sectors equals an added value of EGP 585 billion.",
-    indicators: [
-      { color: "red", icon: "fuel" as const, label: "Fuel saving without subsidy", value: "13.3", unit: "(EGP billion)" },
-      { color: "orange", icon: "fuel" as const, label: "Fuel saving with subsidy", value: "2.9", unit: "(EGP billion)" },
-      { color: "gold", icon: "people" as const, label: "Employment", value: "1.02", unit: "(million opportunities)" },
-      { color: "green", icon: "coins" as const, label: "Investments", value: "1.3", unit: "(EGP trillion)" },
-      { color: "blue", icon: "value" as const, label: "Added value", value: "585", unit: "(EGP billion)" },
-    ],
-  } : {
-    ministry: "وزارة النقل", road: "محور الصعيد الصحراوي الغربي – طريق الجيزة / أبو سمبل",
-    sector: "مؤشرات التنمية<br>البنية التحتية", heading: "الأثر الاقتصادي والتنموي لمحور الصعيد الغربي",
-    period: "خلال الفترة ( 2014 – 2024 )", aria: "المؤشرات الرئيسية للأثر الاقتصادي والتنموي",
-    footer: "قيمة مساهمة المحور في تحفيز توليد الناتج المحلي الإجمالي في القطاعات الاقتصادية = القيمة المضافة 585 مليار جنيه مصري",
-    indicators: [
-      { color: "red", icon: "fuel" as const, label: "الوفر في الوقود بدون الدعم", value: "13.3", unit: "(مليار جنيه)" },
-      { color: "orange", icon: "fuel" as const, label: "الوفر في الوقود بوجود الدعم", value: "2.9", unit: "(مليار جنيه)" },
-      { color: "gold", icon: "people" as const, label: "العمالة", value: "1.02", unit: "(مليون فرصة عمل)" },
-      { color: "green", icon: "coins" as const, label: "الاستثمارات", value: "1.3", unit: "(تريليون جنيه)" },
-      { color: "blue", icon: "value" as const, label: "القيمة المضافة", value: "585", unit: "(مليار جنيه)" },
-    ],
-  };
-  return `<main class="ismailia-impact-board western-upper-egypt-impact-board" dir="${app.direction}" aria-labelledby="impact-board-title">
-    <header class="impact-board-header"><div class="impact-brand"><b>${copy.ministry}</b><i></i></div><div class="impact-road-title">${copy.road}</div><div class="impact-sector-title">${copy.sector}<i></i></div></header>
-    <section class="impact-board-content"><h1 id="impact-board-title">${copy.heading}</h1><h2>${copy.period}</h2>
-      <div class="impact-timeline" aria-label="${copy.aria}">${copy.indicators.map((item) => `<article class="impact-kpi ${item.color}" tabindex="0" aria-label="${item.label.replace("<br>", " ")}: ${item.value} ${item.unit}"><div class="impact-orb">${ismailiaImpactIcon(item.icon)}<strong>${item.label}</strong></div><div class="impact-connector"></div><div class="impact-value"><bdi>${item.value}</bdi><small>${item.unit}</small></div><div class="impact-node"></div></article>`).join("")}</div>
-      <footer>${copy.footer}</footer>
-    </section>
-  </main>`;
-}
-
-/**
- * The executive impact treatment contains only the six documented economic
- * indicators available for each corridor in the approved economic report.
- */
-function corridorImpactMarkup(app: TransportApp, group: string): string {
-  const isEnglish = app.language === "en";
-  const profiles: Record<string, { road: [string, string]; period: [string, string]; values: [number, number, number, number, number, number] }> = {
-    "regional-ring-road": { road: ["القوس الشرقي للطريق الدائري الإقليمي وخط الروبيكي", "Eastern Regional Ring Road and Robeki Railway"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [2150.6, 460.2, 975685, 533, 14483, 10571] },
-    "kalabsha-axis": { road: ["محور كلابشة", "Kalabsha Axis"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [43.2, 34.3, 71366, 91.5, 337, 359] },
-    "qus-axis": { road: ["محور قوص", "Qus Axis"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [597.2, 126.7, 33808, 24.6, 138, 131] },
-    // Added land = (2023 agriculture 1,636 + urban 272) -
-    // (2014 agriculture 1,044 + urban 264) = 600 km².
-    "dabaa-axis": { road: ["محور الضبعة", "El Dabaa Axis"], period: ["خلال الفترة (2014 – 2023)", "During the period (2014 – 2023)"], values: [1.364, 0.322, 381000, 600, 5.3, 1.8] },
-  };
+  const profiles = developmentImpactData.profiles as Record<string, ImpactProfile>;
   const profile = profiles[group];
   if (!profile) return "";
-  const text = (ar: string, en: string) => isEnglish ? en : ar;
-  const number = (value: number) => new Intl.NumberFormat(isEnglish ? "en-US" : "ar-EG", { maximumFractionDigits: 2 }).format(value);
-  const indicators = [
-    { color: "red", icon: "fuel" as const, label: text("الوفر في الوقود بدون الدعم", "Fuel saving without subsidy"), value: number(profile.values[0]), unit: text("( مليار جنيه )", "(EGP billion)") },
-    { color: "orange", icon: "fuel" as const, label: text("الوفر في الوقود بوجود الدعم", "Fuel saving with subsidy"), value: number(profile.values[1]), unit: text("( مليار جنيه )", "(EGP billion)") },
-    { color: "gold", icon: "people" as const, label: text("العمالة", "Employment"), value: number(profile.values[2]), unit: text("( فرصة عمل )", "(job opportunities)") },
-    { color: "purple", icon: "map" as const, label: text("مساحة الأرض المضافة", "Added land area"), value: number(profile.values[3]), unit: text("( كم² )", "(km²)") },
-    { color: "green", icon: "coins" as const, label: text("الاستثمارات", "Investments"), value: number(profile.values[4]), unit: text("( مليار جنيه )", "(EGP billion)") },
-    { color: "blue", icon: "value" as const, label: text("القيمة المضافة", "Added value"), value: number(profile.values[5]), unit: text("( مليار جنيه )", "(EGP billion)") },
-  ].filter((_, index) => group !== "dabaa-axis" || [0, 1, 2, 3, 4, 5].includes(index));
-  return `<main class="ismailia-impact-board corridor-impact-board" dir="${app.direction}" aria-labelledby="impact-board-title">
-    <header class="impact-board-header"><div class="impact-brand"><b>${text("وزارة النقل", "Ministry of Transport")}</b><i></i></div><div class="impact-road-title">${profile.road[isEnglish ? 1 : 0]}</div><div class="impact-sector-title">${text("مؤشرات التنمية<br>البنية التحتية", "Development indicators<br>Infrastructure")}<i></i></div></header>
-    <section class="impact-board-content"><h1 id="impact-board-title">${text("الأثر التنموي للجزء المطور من الطريق", "Development impact of the upgraded road segment")}</h1><h2>${profile.period[isEnglish ? 1 : 0]}</h2>
-      <div class="impact-timeline" style="grid-template-columns:repeat(${indicators.length},minmax(115px,1fr))" aria-label="${text("المؤشرات الرئيسية للأثر التنموي", "Key development-impact indicators")}">${indicators.map((item) => `<article class="impact-kpi ${item.color}" tabindex="0" aria-label="${item.label}: ${item.value} ${item.unit}"><div class="impact-orb">${ismailiaImpactIcon(item.icon)}<strong>${item.label}</strong></div><div class="impact-connector"></div><div class="impact-value"><bdi>${item.value}</bdi><small>${item.unit || "&nbsp;"}</small></div><div class="impact-node"></div></article>`).join("")}</div>
-      <footer>${text("المؤشرات الرئيسية للأثر التنموي للجزء المطور من الطريق", "Key development-impact indicators for the upgraded road segment")}</footer>
+  const language = isEnglish ? "en" : "ar";
+  const text = (value: { ar: string; en: string }) => value[language];
+  const indicators = profile.metrics.map((metric) => ({
+    ...metric,
+    labelText: text(metric.label),
+    unitText: text(metric.unit),
+    valueText: new Intl.NumberFormat(isEnglish ? "en-US" : "ar-EG", {
+      minimumFractionDigits: metric.decimals,
+      maximumFractionDigits: metric.decimals,
+    }).format(metric.value),
+  }));
+  const period = isEnglish
+    ? `During the period (${profile.period.start} – ${profile.period.end})`
+    : `خلال الفترة (${profile.period.start} – ${profile.period.end})`;
+  return `<main class="ismailia-impact-board audited-impact-board ${group === "western-upper-egypt" ? "western-upper-egypt-impact-board" : "corridor-impact-board"}" dir="${app.direction}" aria-labelledby="impact-board-title" data-impact-source="audited-completed-period">
+    <header class="impact-board-header"><div class="impact-brand"><b>${isEnglish ? "Ministry of Transport" : "وزارة النقل"}</b><i></i></div><div class="impact-road-title">${text(profile.road)}</div><div class="impact-sector-title">${isEnglish ? "Development indicators<br>Infrastructure" : "مؤشرات التنمية<br>البنية التحتية"}<i></i></div></header>
+    <section class="impact-board-content"><h1 id="impact-board-title">${text(profile.heading)}</h1><h2>${period}</h2>
+      <div class="impact-timeline" style="grid-template-columns:repeat(${indicators.length},minmax(115px,1fr))" aria-label="${isEnglish ? "Key documented development-impact indicators" : "المؤشرات الفعلية الموثقة للأثر التنموي"}">${indicators.map((item) => `<article class="impact-kpi ${item.color}" tabindex="0" aria-label="${item.labelText}: ${item.valueText} ${item.unitText}"><div class="impact-orb">${ismailiaImpactIcon(item.icon)}<strong>${item.labelText}</strong></div><div class="impact-connector"></div><div class="impact-value"><bdi>${item.valueText}</bdi><small>( ${item.unitText} )</small></div><div class="impact-node"></div></article>`).join("")}</div>
     </section>
   </main>`;
 }
@@ -613,9 +560,7 @@ function corridorImpactMarkup(app: TransportApp, group: string): string {
 export function renderInteractiveDashboard(app: TransportApp): string {
   const group = dashboardGroup(app);
   const landuseKinds = landuseKindsForDashboard(app);
-  if (app.slug === "dashboard-ismailia-development-impact") return ismailiaImpactMarkup(app);
-  if (app.slug === "dashboard-western-upper-egypt-development-impact") return westernUpperEgyptImpactMarkup(app);
-  if (isImpactDashboard(app)) return corridorImpactMarkup(app, group);
+  if (isImpactDashboard(app)) return auditedImpactMarkup(app, group);
   if (isPriceDashboard(app)) return priceMarkup(app, group);
   if (group === "dabaa-axis" && landuseKinds.includes("urban") && landuseKinds.includes("agricultural")) return dabaaLandMarkup(app, group);
   if (isUrbanDashboard(app)) return landMarkup(app, group);
