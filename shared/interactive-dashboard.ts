@@ -1341,6 +1341,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     const stationCollection = loaded.find(([layer]) => layer === "Metro_Station")?.[1];
     const route = stationCollection && metroLine3RouteFromStations(stationCollection);
     if (route) loaded = [["axis", route], ...loaded] as Array<[LayerName, GeoJsonCollection]>;
+    // Stations are needed only as source coordinates for the verified Line 3
+    // route above.  Their large blue point symbols obscure the land-use data
+    // in the Web AppViewer, so keep the derived route but omit the source
+    // station overlay from that viewer's initial map and layer controls.
+    if (viewerMode) loaded = loaded.filter(([layer]) => layer !== "Metro_Station");
   }
   const failedLayers = layerResults.filter((result) => "error" in result).map(({ layer }) => layer);
   let pairCount = 0, minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
@@ -1895,6 +1900,13 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     viewMinX + (x - (1000 - width * scale) / 2) / scale,
     viewMaxY - (y - (520 - height * scale) / 2) / scale,
   ];
+  // Viewer measurement tools operate in the SVG's 1000×520 drawing space,
+  // while the map itself is geographic. Expose the current inverse projection
+  // so the tool can report physical units instead of screen units.
+  scope.addEventListener("map-coordinate-query", ((event: CustomEvent<{ x: number; y: number; coordinate?: [number, number] }>) => {
+    const detail = event.detail;
+    if (detail) detail.coordinate = inverseProject((detail.x - tx) / zoom, (detail.y - ty) / zoom);
+  }) as EventListener);
   const refreshBasemap = () => {
     window.clearTimeout(basemapRefreshTimer);
     basemapRefreshTimer = window.setTimeout(() => {

@@ -629,27 +629,93 @@ function setupViewerMeasurementTools(root: HTMLElement, app: TransportApp): void
   svg.append(overlay);
   const result = tools.querySelector<HTMLOutputElement>(".viewer-measure-result")!;
   let mode: "distance" | "area" | "" = "";
-  let points: Array<{ x: number; y: number }> = [];
+  let drawnMode: "distance" | "area" | "" = "";
+  type MeasurePoint = { x: number; y: number; longitude: number; latitude: number };
+  let points: MeasurePoint[] = [];
+  const geographicCoordinate = (x: number, y: number): [number, number] => {
+    const query = new CustomEvent<{ x: number; y: number; coordinate?: [number, number] }>("map-coordinate-query", { detail: { x, y } });
+    map.dispatchEvent(query);
+    return query.detail.coordinate || [x, y];
+  };
+  const distanceMetres = (first: MeasurePoint, second: MeasurePoint) => {
+    const radians = Math.PI / 180;
+    const dLat = (second.latitude - first.latitude) * radians;
+    const dLon = (second.longitude - first.longitude) * radians;
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(first.latitude * radians) * Math.cos(second.latitude * radians) * Math.sin(dLon / 2) ** 2;
+    return 12_742_017.6 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  };
+  const areaSquareMetres = (vertices: MeasurePoint[]) => {
+    if (vertices.length < 3) return 0;
+    const meanLatitude = vertices.reduce((sum, point) => sum + point.latitude, 0) / vertices.length * Math.PI / 180;
+    const metresPerDegree = 111_320;
+    return Math.abs(vertices.reduce((sum, point, index) => {
+      const next = vertices[(index + 1) % vertices.length];
+      const x1 = point.longitude * metresPerDegree * Math.cos(meanLatitude), y1 = point.latitude * metresPerDegree;
+      const x2 = next.longitude * metresPerDegree * Math.cos(meanLatitude), y2 = next.latitude * metresPerDegree;
+      return sum + x1 * y2 - x2 * y1;
+    }, 0) / 2);
+  };
+  const physicalDistance = (metres: number) => metres >= 1000
+    ? `${format(metres / 1000)} ${english ? "km" : "\u0643\u0645"}`
+    : `${format(metres)} ${english ? "m" : "\u0645"}`;
+  const physicalArea = (squareMetres: number) => squareMetres >= 1_000_000
+    ? `${format(squareMetres / 1_000_000)} ${english ? "km\u00b2" : "\u0643\u0645\u00b2"}`
+    : `${format(squareMetres)} ${english ? "m\u00b2" : "\u0645\u00b2"}`;
+  const snapToVisibleGeometry = (candidate: { x: number; y: number }) => {
+    const mapContent = map.querySelector<SVGGElement>(".map-content");
+    const bounds = svg.getBoundingClientRect();
+    let nearest: { x: number; y: number; distance: number } | undefined;
+    mapContent?.querySelectorAll<SVGGeometryElement>("path:not([hidden])").forEach((path) => {
+      if (path.closest(".layer-hidden")) return;
+      let length = 0;
+      try { length = path.getTotalLength(); } catch { return; }
+      if (!Number.isFinite(length) || length <= 0) return;
+      const matrix = path.getScreenCTM();
+      if (!matrix) return;
+      const samples = Math.min(360, Math.max(2, Math.ceil(length / 10)));
+      for (let index = 0; index <= samples; index += 1) {
+        const nativePoint = path.getPointAtLength(length * index / samples);
+        const screenPoint = new DOMPoint(nativePoint.x, nativePoint.y).matrixTransform(matrix);
+        const x = (screenPoint.x - bounds.left) * 1000 / Math.max(bounds.width, 1);
+        const y = (screenPoint.y - bounds.top) * 520 / Math.max(bounds.height, 1);
+        const distance = Math.hypot(x - candidate.x, y - candidate.y);
+        if (distance <= 14 && (!nearest || distance < nearest.distance)) nearest = { x, y, distance };
+      }
+    });
+    return nearest ? { x: nearest.x, y: nearest.y, snapped: true } : { ...candidate, snapped: false };
+  };
+  const appendMapLabel = (value: string) => {
+    if (!points.length) return;
+    const anchor = drawnMode === "area" && points.length > 2
+      ? points.reduce((sum, point) => ({ x: sum.x + point.x / points.length, y: sum.y + point.y / points.length }), { x: 0, y: 0 })
+      : points[points.length - 1];
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    label.setAttribute("class", "viewer-measure-label");
+    label.setAttribute("x", String(anchor.x)); label.setAttribute("y", String(anchor.y - 12));
+    label.setAttribute("text-anchor", "middle"); label.textContent = value;
+    overlay.append(label);
+  };
   const render = () => {
     overlay.replaceChildren();
     if (!points.length) return;
     const ns = "http://www.w3.org/2000/svg";
     const polyline = document.createElementNS(ns, "polyline");
-    polyline.setAttribute("points", points.map((point) => `${point.x},${point.y}`).join(" "));
-    polyline.setAttribute("fill", mode === "area" && points.length > 2 ? "#0bb7d133" : "none");
+    polyline.setAttribute("points", `${points.map((point) => `${point.x},${point.y}`).join(" ")}${drawnMode === "area" && points.length > 2 ? ` ${points[0].x},${points[0].y}` : ""}`);
+    polyline.setAttribute("fill", drawnMode === "area" && points.length > 2 ? "#0bb7d133" : "none");
     polyline.setAttribute("stroke", "#08b9d6"); polyline.setAttribute("stroke-width", "3");
     overlay.append(polyline);
     points.forEach((point, index) => { const dot = document.createElementNS(ns, "circle"); dot.setAttribute("cx", String(point.x)); dot.setAttribute("cy", String(point.y)); dot.setAttribute("r", index === 0 ? "6" : "4"); overlay.append(dot); });
+    if (drawnMode === "area" && points.length >= 3) appendMapLabel(physicalArea(areaSquareMetres(points)));
+    if (drawnMode === "distance" && points.length === 2) appendMapLabel(physicalDistance(distanceMetres(points[0], points[1])));
   };
-  const clear = () => { points = []; overlay.replaceChildren(); result.value = copy.idle; result.textContent = copy.idle; };
+  const clear = () => { points = []; drawnMode = ""; overlay.replaceChildren(); result.value = copy.idle; result.textContent = copy.idle; };
   const finishArea = () => {
     if (points.length < 3) return;
-    const area = Math.abs(points.reduce((sum, point, index) => { const next = points[(index + 1) % points.length]; return sum + point.x * next.y - next.x * point.y; }, 0) / 2);
-    result.value = `${copy.areaResult}: ${format(area)} ${copy.units}²`; result.textContent = result.value;
+    result.value = `${copy.areaResult}: ${physicalArea(areaSquareMetres(points))}`; result.textContent = result.value;
     mode = ""; render();
   };
   tools.querySelectorAll<HTMLButtonElement>("[data-measure-mode]").forEach((button) => button.addEventListener("click", () => {
-    mode = button.dataset.measureMode as "distance" | "area"; points = []; render();
+    mode = button.dataset.measureMode as "distance" | "area"; drawnMode = mode; points = []; render();
     tools.querySelectorAll("[data-measure-mode]").forEach((item) => item.classList.toggle("active", item === button));
     const hint = mode === "distance" ? copy.distanceHint : copy.areaHint; result.value = hint; result.textContent = hint;
   }));
@@ -660,10 +726,13 @@ function setupViewerMeasurementTools(root: HTMLElement, app: TransportApp): void
     const screenPoint = svg.createSVGPoint();
     screenPoint.x = event.clientX; screenPoint.y = event.clientY;
     const transformed = screenPoint.matrixTransform(svg.getScreenCTM()?.inverse());
-    const point = { x: transformed.x, y: transformed.y };
+    const snapped = snapToVisibleGeometry({ x: transformed.x, y: transformed.y });
+    const [longitude, latitude] = geographicCoordinate(snapped.x, snapped.y);
+    const point: MeasurePoint = { x: snapped.x, y: snapped.y, longitude, latitude };
     if (mode === "area" && points.length >= 3 && Math.hypot(point.x - points[0].x, point.y - points[0].y) < 16) { finishArea(); return; }
     points.push(point); render();
-    if (mode === "distance" && points.length === 2) { const distance = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y); result.value = `${copy.distanceResult}: ${format(distance)} ${copy.units}`; result.textContent = result.value; mode = ""; tools.querySelectorAll("[data-measure-mode]").forEach((item) => item.classList.remove("active")); }
+    if (mode === "area" && points.length >= 3) { const value = `${copy.areaResult}: ${physicalArea(areaSquareMetres(points))}`; result.value = value; result.textContent = value; }
+    if (mode === "distance" && points.length === 2) { const value = `${copy.distanceResult}: ${physicalDistance(distanceMetres(points[0], points[1]))}`; result.value = value; result.textContent = value; mode = ""; tools.querySelectorAll("[data-measure-mode]").forEach((item) => item.classList.remove("active")); }
   });
 }
 
