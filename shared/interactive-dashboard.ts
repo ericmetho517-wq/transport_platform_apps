@@ -1247,6 +1247,11 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const toggles = scope.querySelector<HTMLElement>(".map-layer-toggles");
   const status = scope.querySelector<HTMLElement>(".map-status-text");
   if (!svg || !viewport || !satellite || !content || !toggles) return;
+  // A Viewer can be initialized through both its app runtime and an embedded
+  // map lifecycle. Keep one interaction controller per SVG: duplicate pointer
+  // listeners turn every drag into repeated viewport work.
+  if (scope.dataset.mapInitialized === "true") return;
+  scope.dataset.mapInitialized = "true";
   const labels: Record<LayerName, string> = { study: "منطقة الدراسة", axis: "مسار الطريق", urban: "تغير عمراني", agricultural: "تغير زراعي", industrial: "تغير صناعي", baseline: "استخدامات الأراضي المرجعية", civil: "الدراسة المدنية", "landcover-start": `استخدامات الأراضي ${summary.yearStart}`, "landcover-end": `استخدامات الأراضي ${summary.yearEnd}`, buildings: "المباني", parcels: "قطع الأراضي", landmarks: "المعالم والخدمات", water: "المسطحات المائية", "field-survey": "الرفع الميداني", transport: "شبكة النقل", governorates: "حدود المحافظات", LRT_Line: "خط القطار الكهربائي الخفيف", lRT_Station: "محطات القطار الكهربائي الخفيف", Metro_Line: "خطوط المترو", Metro_Station: "محطات المترو", Road_CairoRing: "الطريق الدائري حول القاهرة", Road_MiddleRing: "الطريق الدائري الأوسط", Road_RegionalRing: "الدائري الإقليمي", Transit_GreenLine: "الخط الأخضر", Transit_KafrDawoodSadat: "وصلة كفر داوود–السادات", Transit_LRT: "القطار الكهربائي الخفيف", Transit_Metro1: "الخط الأول للمترو", Transit_Metro2: "الخط الثاني للمترو", Transit_Metro3: "الخط الثالث للمترو", Transit_Metro4: "الخط الرابع للمترو", Transit_Metro6: "الخط السادس للمترو", Transit_MonorailCapital: "المونوريل – العاصمة", Transit_MonorailOctober: "المونوريل – أكتوبر", Transit_RobikiBelbeis: "وصلة الروبيكي–بلبيس" };
   const mapInstance = scope.dataset.mapInstance || "primary";
   const tileTemplate = mapInstance.includes("baseline") ? imageryTiles[2014]
@@ -2054,9 +2059,6 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     pointerStartY = event.clientY;
     lastX = event.clientX;
     lastY = event.clientY;
-    // Start decoding before the drag threshold is crossed. On a normal human
-    // drag this makes the preview ready by the first meaningful movement.
-    prepareDragPreview();
   });
   svg.addEventListener("pointermove", (event) => {
     if (!pointerIsDown) return;
@@ -2065,10 +2067,19 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
     if (!dragging) {
       if (Math.hypot(event.clientX - pointerStartX, event.clientY - pointerStartY) < 4) return;
       dragging = true;
-      scope.classList.add("map-interacting");
-      window.clearTimeout(interactionTimer);
+      beginInteraction();
       svg.setPointerCapture(event.pointerId);
-      activateDragPreview();
+      // Avoid cloning/serialising a dense SVG on every press; it blocks a
+      // simple click and is especially noticeable at a close zoom. Small maps
+      // remain compositor-driven vectors, while dense maps create their
+      // lightweight drag preview only after a real pan has begun.
+      if (content.querySelectorAll("path").length >= 180) {
+        window.setTimeout(() => {
+          if (!dragging) return;
+          prepareDragPreview();
+          activateDragPreview();
+        }, 0);
+      }
     }
     const dx = event.clientX - lastX;
     const dy = event.clientY - lastY;

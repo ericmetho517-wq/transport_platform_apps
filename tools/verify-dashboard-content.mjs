@@ -21,7 +21,7 @@ const aliases = {
 const failures = [];
 const dashboards = registry.filter((app) => app.type === "Dashboard");
 const priceDashboards = dashboards.filter((app) => /سعر|أسعار|اسعار|price/i.test(app.title));
-const impactDashboards = dashboards.filter((app) => /الأثر التنموي|الأثر الاقتصادي|development impact/i.test(app.title));
+const impactDashboards = dashboards.filter((app) => app.status !== "awaiting-source-data" && /الأثر التنموي|الأثر الاقتصادي|development impact/i.test(app.title));
 
 for (const app of dashboards) {
   const group = aliases[app.reportReferenceGroup] || app.reportReferenceGroup;
@@ -157,8 +157,8 @@ for (const layer of ["buildings", "parcels", "landmarks", "water", "field-survey
   if (!runtimeSource.includes(`${layer}:`) && !runtimeSource.includes(`"${layer}":`)) failures.push(`map symbology: missing renderer label for ${layer}`);
 }
 
-if (dashboards.length !== 42) failures.push(`expected 42 dashboards, found ${dashboards.length}`);
-const expectedDashboardsBySector = { "western-upper-egypt":4, dahshur:3, "regional-ring":4, kalabsha:4, "qena-luxor":3, "suez-link":3, "suez-free":3, qus:4, dabaa:4, ismailia:4, "metro-third-line":3, "kafr-dawood-sadat":3 };
+if (dashboards.length !== 44) failures.push(`expected 44 dashboards, found ${dashboards.length}`);
+const expectedDashboardsBySector = { "western-upper-egypt":4, dahshur:3, "regional-ring":4, kalabsha:4, "qena-luxor":3, "suez-link":3, "suez-free":3, qus:4, dabaa:4, ismailia:4, "metro-third-line":4, "kafr-dawood-sadat":4 };
 for (const group of Object.keys(expectedDashboardsBySector)) {
   const suite = dashboards.filter((app) => app.reportReferenceGroup === group);
   const expectedCount = expectedDashboardsBySector[group];

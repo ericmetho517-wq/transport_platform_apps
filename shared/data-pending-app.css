@@ -1,0 +1,22 @@
+:root { --pending-deep:#092f55; --pending-blue:#177fc4; --pending-mist:#eef6fb; --pending-ink:#173a55; --pending-line:#c9dfef; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--pending-mist); color:var(--pending-ink); font-family:"Segoe UI",Tahoma,Arial,sans-serif; }
+.pending-app { min-height:100vh; background:radial-gradient(circle at 12% 18%,#d6ecfa 0 2px,transparent 2px 100%),linear-gradient(135deg,#f8fcff 0%,#e8f4fc 100%); background-size:28px 28px,auto; }
+.pending-topbar { height:76px; padding-inline:clamp(20px,5vw,84px); display:flex; align-items:center; justify-content:space-between; background:var(--pending-deep); color:#fff; border-bottom:4px solid #e5ac22; }
+.pending-brand { display:flex; align-items:center; gap:13px; color:inherit; font-weight:800; text-decoration:none; }
+.pending-brand-mark { padding:7px 10px; border:1px solid #ffffff55; color:#f7c447; font-size:11px; font-weight:900; }
+.pending-topbar button { border:1px solid #85badb; border-radius:7px; background:#ffffff10; color:#fff; padding:8px 14px; font-weight:800; cursor:pointer; }
+.pending-topbar button:focus-visible,.pending-back:focus-visible { outline:3px solid #f7c447; outline-offset:3px; }
+.pending-hero { width:min(860px,calc(100% - 40px)); min-height:calc(100vh - 76px); margin:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:72px 20px; }
+.pending-breadcrumb { color:#51748d; font-weight:800; font-size:14px; margin-bottom:22px; }
+.pending-status { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid #a4cde9; background:#fff; color:#126fad; font-size:13px; font-weight:900; }
+.pending-status i { width:8px; height:8px; border-radius:50%; background:#e7ab18; box-shadow:0 0 0 4px #e7ab1830; }
+.pending-icon { width:92px; height:92px; display:grid; place-items:center; margin:26px 0 18px; border:1px solid #9dcced; border-radius:50%; background:#fff; color:#1676b5; font-size:52px; line-height:1; box-shadow:0 12px 32px #0b4c7520; }
+.pending-hero h1 { max-width:780px; margin:0; font-size:clamp(28px,4vw,49px); line-height:1.35; color:#07345f; }
+.pending-hero > p { max-width:600px; margin:16px 0 0; font-size:18px; line-height:1.9; color:#45657c; }
+.pending-divider { width:min(370px,90%); height:1px; margin:28px 0 0; background:#b8d4e8; position:relative; }
+.pending-divider span { width:62px; height:4px; position:absolute; left:calc(50% - 31px); top:-2px; background:#e7ab18; }
+.pending-hero .pending-detail { font-size:14px; margin-top:22px; }
+.pending-back { margin-top:30px; display:inline-flex; gap:12px; align-items:center; padding:12px 17px; border:1px solid #1676b5; color:#0f639d; background:#fff; text-decoration:none; font-weight:900; }
+.pending-back:hover { background:#0f6fae; color:#fff; transform:translateY(-2px); }
+@media (max-width:620px) { .pending-topbar { height:auto; min-height:68px; padding-block:10px; } .pending-brand > span:last-child { display:none; } .pending-hero { min-height:calc(100vh - 68px); padding-block:48px; } .pending-hero > p { font-size:16px; } }

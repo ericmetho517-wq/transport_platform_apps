@@ -6,15 +6,11 @@ import { localizedAppCategory, localizedAppTitle } from "../shared/app-titles";
 
 const registry = (apps as TransportApp[]).filter((app) =>
   dashboardGroup(app) !== "suez-ring-link"
-  && app.slug !== "web-viewer-30ddd4974b"
   // Keep the agricultural dashboard available as a project, but remove its
   // standalone card from the El Dabaa Road application catalog.
-  && app.slug !== "dashboard-c1e29f0123"
-  // Keep the Western Upper Egypt study-area viewer in its project while
-  // removing this card from the public application catalog.
-  && app.slug !== "web-viewer-b0ababe3e4",
+  && app.slug !== "dashboard-c1e29f0123",
 );
-const axisOptions = [
+const baseAxisOptions = [
   ["ismailia", "طريق القاهرة–الإسماعيلية"],
   ["kafr-dawood-sadat", "خط سكة حديد كفر داود–السادات"],
   ["metro-third-line", "خط المترو الثالث"],
@@ -25,6 +21,7 @@ const axisOptions = [
   ["qus-axis", "محور قوص"], ["qena-luxor-road", "طريق قنا الأقصر"],
   ["dabaa-axis", "محور الضبعة"],
 ] as const;
+const axisOptions = baseAxisOptions;
 const axisOf = (app: TransportApp): string => dashboardGroup(app);
 const root = document.querySelector<HTMLDivElement>("#app");
 if (!root) throw new Error("Missing #app root");

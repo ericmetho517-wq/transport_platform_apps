@@ -17,7 +17,7 @@ console.log(JSON.stringify({applications: registry.length, counts, withReportRef
 // The catalog is intentionally expanded as new verified dashboard pairs are added.
 // Keep this baseline aligned with the checked-in registry so deployment validation
 // verifies structure rather than rejecting legitimate additions.
-if (registry.length !== 73 || missing.length) {
+if (registry.length !== 81 || missing.length) {
   console.error(missing.join("\n"));
   process.exit(1);
 }

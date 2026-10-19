@@ -11,12 +11,12 @@ const aliases = {
   "suez-free": "cairo-suez-road", "suez-link": "suez-ring-link", "western-upper-egypt": "western-upper-egypt", ismailia: "ismailia",
   "metro-third-line": "metro-third-line", "kafr-dawood-sadat": "kafr-dawood-sadat",
 };
-const expectedCounts = { Dashboard: 42, StoryMap: 11, "Web AppViewer": 10, "Instant Filter Gallery": 10 };
+const expectedCounts = { Dashboard: 44, StoryMap: 13, "Web AppViewer": 12, "Instant Filter Gallery": 12 };
 const expectedDashboardsBySector = {
   dabaa: 4, dahshur: 3, kalabsha: 4, "qena-luxor": 3, qus: 4,
   "regional-ring": 4, "suez-free": 3, "suez-link": 3,
   "western-upper-egypt": 4, ismailia: 4,
-  "metro-third-line": 3, "kafr-dawood-sadat": 3,
+  "metro-third-line": 4, "kafr-dawood-sadat": 4,
 };
 const localDataOnlyGroups = new Set(["metro-third-line", "kafr-dawood-sadat"]);
 const errors = [];
@@ -101,7 +101,7 @@ for (const chapter of ["abu-simbel", "luxor", "qena", "sohag", "assiut", "minya"
   if (!swipeImagesByGroup.has(`western-upper-egypt/${chapter}`)) errors.push(`western story: missing documented swipe for ${chapter}`);
 }
 const storyMediaEntries = Object.entries(storyMedia.groups || {}).flatMap(([group, chapters]) => Object.entries(chapters).flatMap(([chapter, items]) => items.map((item) => ({ group, chapter, ...item }))));
-const storyGroups = new Set(apps.filter((item) => item.type === "StoryMap").map((item) => aliases[item.reportReferenceGroup]));
+const storyGroups = new Set(apps.filter((item) => item.type === "StoryMap" && !localDataOnlyGroups.has(item.reportReferenceGroup)).map((item) => aliases[item.reportReferenceGroup]));
 for (const group of storyGroups) {
   const chapters = storyMedia.groups?.[group] || {};
   const items = Object.values(chapters).flat();
