@@ -1885,12 +1885,10 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
   const defaultTx = (1000 - 1000 * defaultZoom) / 2;
   const defaultTy = (520 - 520 * defaultZoom) / 2;
   let zoom = defaultZoom, tx = defaultTx, ty = defaultTy, pointerIsDown = false, dragging = false, pointerStartX = 0, pointerStartY = 0, lastX = 0, lastY = 0, panFrame = 0, pairSyncPending = false, zoomFrame = 0, wheelDelta = 0, viewAnimation = 0, basemapRefreshTimer = 0, interactionTimer = 0;
-  // SVG groups with many compound polygons are not reliably composited by all
-  // browsers. At a close zoom some engines repaint every path on each pointer
-  // move, even when the group only receives a CSS transform. Keep a temporary
-  // bitmap-like SVG image while the mouse is down, then immediately restore
-  // the original vector map on release. This preserves the visual map (rather
-  // than hiding it) while reducing a drag frame to one image transform.
+  // Keep the map as a single compositor layer while panning. Earlier builds
+  // serialised a full SVG into a temporary image at the beginning of each
+  // drag; with detailed land-use data that work itself caused a visible hitch.
+  // The native CSS transform below is cheaper and preserves live geometry.
   let dragPreview: SVGImageElement | null = null;
   let dragPreviewUrl = "";
   let dragPreviewStartTx = 0;
@@ -1934,7 +1932,7 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       dragPreview.setAttribute("transform", `translate(${tx - dragPreviewStartTx} ${ty - dragPreviewStartTy})`);
       return;
     }
-    viewport.style.transform = `translate(${tx}px, ${ty}px) scale(${zoom})`;
+    viewport.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${zoom})`;
   };
   const clearDragPreview = () => {
     if (dragPreview) dragPreview.remove();
@@ -2081,17 +2079,8 @@ export async function initializeMap(group: string, summary: DashboardSummary, ma
       dragging = true;
       beginInteraction();
       svg.setPointerCapture(event.pointerId);
-      // Avoid cloning/serialising a dense SVG on every press; it blocks a
-      // simple click and is especially noticeable at a close zoom. Small maps
-      // remain compositor-driven vectors, while dense maps create their
-      // lightweight drag preview only after a real pan has begun.
-      if (content.querySelectorAll("path").length >= 180) {
-        window.setTimeout(() => {
-          if (!dragging) return;
-          prepareDragPreview();
-          activateDragPreview();
-        }, 0);
-      }
+      // Do not rasterise or serialise the map at drag start. That synchronous
+      // work was the source of the pause users felt before the map moved.
     }
     const dx = event.clientX - lastX;
     const dy = event.clientY - lastY;
