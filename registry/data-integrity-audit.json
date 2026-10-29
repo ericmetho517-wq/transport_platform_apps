@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-07T07:17:34.616Z",
-  "applications": 73,
+  "generatedAt": "2026-10-29T07:52:14.101Z",
+  "applications": 81,
   "totals": {
     "features": 95721,
     "sourceFeatures": 226776,
@@ -69,13 +69,13 @@
       "verifiedLocalData": true
     },
     "metro-third-line": {
-      "applications": 3,
+      "applications": 7,
       "activeFeatures": 1364,
       "activeLayers": 7,
       "verifiedLocalData": true
     },
     "kafr-dawood-sadat": {
-      "applications": 3,
+      "applications": 7,
       "activeFeatures": 9198,
       "activeLayers": 7,
       "verifiedLocalData": true

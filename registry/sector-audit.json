@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T20:29:09.635Z",
+  "generatedAt": "2026-10-29T07:52:09.621Z",
   "applications": 81,
   "counts": {
     "Dashboard": 44,
@@ -47,11 +47,9 @@
     "dashboard-4e09265d79: no embedded report screenshot; runtime remains data-driven",
     "dashboard-50863f6ddb: no embedded report screenshot; runtime remains data-driven",
     "dashboard-554ea99a90: no embedded report screenshot; runtime remains data-driven",
-    "storymap-metro-third-line: no embedded report screenshot; runtime remains data-driven",
     "web-viewer-metro-third-line: no embedded report screenshot; runtime remains data-driven",
     "instant-filter-gallery-metro-third-line: no embedded report screenshot; runtime remains data-driven",
     "dashboard-metro-third-line-development-impact: no embedded report screenshot; runtime remains data-driven",
-    "storymap-kafr-dawood-sadat: no embedded report screenshot; runtime remains data-driven",
     "web-viewer-kafr-dawood-sadat: no embedded report screenshot; runtime remains data-driven",
     "instant-filter-gallery-kafr-dawood-sadat: no embedded report screenshot; runtime remains data-driven",
     "dashboard-kafr-dawood-sadat-development-impact: no embedded report screenshot; runtime remains data-driven",

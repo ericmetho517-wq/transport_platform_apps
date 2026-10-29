@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-10-07T07:17:36.342Z",
-  "applications": 73,
+  "generatedAt": "2026-10-29T07:52:15.451Z",
+  "applications": 81,
   "fidelityCounts": {
-    "sector-and-application-type-reference": 34,
+    "sector-and-application-type-reference": 36,
     "exact-item-reference": 21,
-    "source-reference-unavailable": 18
+    "source-reference-unavailable": 24
   },
   "typeCoverage": {
     "Dashboard": {
-      "applications": 42,
+      "applications": 44,
       "withReferences": 28
     },
     "StoryMap": {
-      "applications": 11,
-      "withReferences": 9
+      "applications": 13,
+      "withReferences": 11
     },
     "Instant Filter Gallery": {
-      "applications": 10,
+      "applications": 12,
       "withReferences": 9
     },
     "Web AppViewer": {
-      "applications": 10,
+      "applications": 12,
       "withReferences": 9
     }
   },
@@ -1203,6 +1203,110 @@
     {
       "slug": "dashboard-554ea99a90",
       "title": "لوحة مؤشرات الأراضي الزراعية والصناعية – خط سكة حديد كفر داود–السادات",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "kafr-dawood-sadat",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-metro-third-line",
+      "title": "القصة المكانية – خط المترو الثالث",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "metro-third-line",
+      "referenceCount": 12,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Metro Line 3 local imagery"
+      ],
+      "pages": [
+        0
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-metro-third-line",
+      "title": "مستعرض منطقة الدراسة – خط المترو الثالث",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "metro-third-line",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-metro-third-line",
+      "title": "مركز البيانات والتطبيقات – خط المترو الثالث",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "metro-third-line",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-metro-third-line-development-impact",
+      "title": "لوحة الأثر التنموي – خط المترو الثالث",
+      "type": "Dashboard",
+      "language": "ar",
+      "sector": "metro-third-line",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "storymap-kafr-dawood-sadat",
+      "title": "القصة المكانية – خط سكة حديد كفر داود–السادات",
+      "type": "StoryMap",
+      "language": "ar",
+      "sector": "kafr-dawood-sadat",
+      "referenceCount": 18,
+      "fidelity": "sector-and-application-type-reference",
+      "reports": [
+        "Kafr Dawood–Sadat local imagery"
+      ],
+      "pages": [
+        0
+      ],
+      "missingImages": []
+    },
+    {
+      "slug": "web-viewer-kafr-dawood-sadat",
+      "title": "مستعرض منطقة الدراسة – خط سكة حديد كفر داود–السادات",
+      "type": "Web AppViewer",
+      "language": "ar",
+      "sector": "kafr-dawood-sadat",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "instant-filter-gallery-kafr-dawood-sadat",
+      "title": "مركز البيانات والتطبيقات – خط سكة حديد كفر داود–السادات",
+      "type": "Instant Filter Gallery",
+      "language": "ar",
+      "sector": "kafr-dawood-sadat",
+      "referenceCount": 0,
+      "fidelity": "source-reference-unavailable",
+      "reports": [],
+      "pages": [],
+      "missingImages": []
+    },
+    {
+      "slug": "dashboard-kafr-dawood-sadat-development-impact",
+      "title": "لوحة الأثر التنموي – خط سكة حديد كفر داود–السادات",
       "type": "Dashboard",
       "language": "ar",
       "sector": "kafr-dawood-sadat",
